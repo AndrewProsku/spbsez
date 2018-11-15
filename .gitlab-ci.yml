@@ -1,0 +1,41 @@
+deploy-master:
+  stage: deploy
+  environment:
+    name: master
+    url: http://oez.ksdev.ru
+  variables:
+    DEPLOY_PATH : "~/oez.ksdev.ru/master/"
+  script:
+  - echo "Deploy master"
+  - echo $DEPLOY_PATH
+  - ssh -T ksdev "cd $DEPLOY_PATH && git pull"
+  only:
+  - master
+
+deploy-dev:
+  stage: deploy
+  environment:
+    name: dev
+    url: http://oez-d.ksdev.ru
+  variables:
+    DEPLOY_PATH : "~/oez.ksdev.ru/dev/"
+  script:
+  - echo "Deploy dev"
+  - echo $DEPLOY_PATH
+  - ssh -T ksdev "cd $DEPLOY_PATH && git pull"
+  only:
+  - dev
+
+deploy-test:
+  stage: deploy
+  environment:
+    name: test
+    url: http://oez-t.ksdev.ru
+  variables:
+    DEPLOY_PATH : "~/oez.ksdev.ru/test/"
+  script:
+  - echo "Deploy test"
+  - echo $DEPLOY_PATH
+  - ssh -T ksdev "cd $DEPLOY_PATH && git pull"
+  only:
+  - test
