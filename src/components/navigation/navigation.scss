@@ -1,0 +1,35 @@
+// Версия - 1.0
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/navigation.html
+
+// Зависимости
+@import "../../common/styles/colors";
+@import "../../common/styles/mixins";
+
+// Настройки
+$navigation-link-color: $black;
+$navigation-link-color-hover: rgba($black, 0.5);
+$navigation-link-color-active: $red;
+
+// Компонент
+.b-navigation__list {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.b-navigation__link {
+    @include transition(color);
+    color: $navigation-link-color;
+    text-decoration: none;
+    display: block;
+
+    @media #{$laptop} {
+        &:hover {
+            color: $navigation-link-color-hover;
+        }
+    }
+}
+
+// STATE
+.b-navigation__link_is_active {
+    color: $navigation-link-color-active;
+}

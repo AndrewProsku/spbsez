@@ -1,0 +1,49 @@
+// Версия - 1.0
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/breadcrumbs.html
+
+// Зависимости
+@import "../../common/styles/font-sizes";
+@import "../../common/styles/mixins";
+@import "../../common/styles/colors";
+
+// Настройки
+$breadcrumbs-color: inherit;
+$breadcrumbs-color-hover: rgba($red, 0.5);
+$breadcrumbs-last-item-color: rgba($black, 0.5);
+
+// Компонент
+.b-breadcrumbs {
+    @include font-size("p3");
+    @include reset-list();
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.b-breadcrumbs__item {
+    margin-right: 10px;
+
+    &:after {
+        content: "/";
+    }
+
+    &:last-child:after {
+        content: "";
+    }
+}
+
+.b-breadcrumbs__link {
+    @include transition(color);
+    margin-right: 8px;
+    text-decoration: none;
+    color: $breadcrumbs-color;
+
+    @media #{$laptop} {
+        &:hover {
+            color: $breadcrumbs-color-hover;
+        }
+    }
+}
+
+.b-breadcrumbs__text {
+    color: $breadcrumbs-last-item-color;
+}

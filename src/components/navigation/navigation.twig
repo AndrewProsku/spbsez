@@ -1,0 +1,13 @@
+<nav class="b-navigation {% if modify %}{{ modify }}{% endif %}">
+    <ul class="b-navigation__list">
+        {% for item in items %}
+            <li class="b-navigation__item">
+                <a
+                    class="b-navigation__link {% if item.active %}b-navigation__link_is_active{% endif %}"
+                    href="{{ item.href }}">
+                        {{ item.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

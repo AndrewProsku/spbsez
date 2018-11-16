@@ -1,0 +1,18 @@
+<div class="b-accordion j-accordion {% if modify %}{{ modify }}{% endif %}">
+    <header class="b-accordion__header">
+        <div class="b-accordion__title">{{ title }}</div>
+
+        <div class="b-accordion__arrow">
+            {% include "media/accordion-arrow.svg" %}
+        </div>
+    </header>
+
+    <div class="b-accordion__content-wrapper">
+        <div class="b-accordion__content">
+            {% block content %}
+                <div>Контента нет</div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+

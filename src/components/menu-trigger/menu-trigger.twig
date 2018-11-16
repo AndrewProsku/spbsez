@@ -1,0 +1,11 @@
+<button
+    class="
+        b-menu-trigger j-menu-trigger
+        {% if modify %}{{ modify }}{% endif %}
+        {% if state == "close" %}b-menu-trigger_theme_close{% endif %}
+    "
+    {% if dynamic %}data-dynamic="true"{% endif %}
+>
+    <span class="b-menu-trigger__icon {% if modify %}{{ modify }}{% endif %}"></span>
+    <span class="b-menu-trigger__text">показать или скрыть мобильное меню</span>
+</button>

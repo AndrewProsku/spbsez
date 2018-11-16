@@ -1,0 +1,22 @@
+// Версия - 1.0
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/kelnik-logo.html
+
+// Зависимости
+@import "../../common/styles/colors";
+@import "../../common/styles/mixins";
+
+// Настройки
+$kelnik-logo-color: black;
+$kelnik-logo-color-hover: rgba($kelnik-logo-color, 0.5);
+
+// Компонент
+.b-kelnik {
+    @include transition(fill);
+    fill: $kelnik-logo-color;
+
+    @media #{$laptop} {
+        &:hover {
+            fill: $kelnik-logo-color-hover;
+        }
+    }
+}

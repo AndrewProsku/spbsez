@@ -1,0 +1,45 @@
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/button.html
+// Версия 1.0
+
+// Зависимости
+@import "../../common/styles/colors";
+@import "../../common/styles/mixins";
+
+// Настройки
+// цвета
+$button-color: $black;
+$button-color-hover: $white;
+$button-color-active: $red;
+
+$button-bg-color: $white;
+$button-bg-color-hover: $black;
+
+// Компонент
+.b-button {
+    @include reset-button();
+    @include transition(color, background-color);
+    background-color: $button-bg-color;
+    color: $button-color;
+    height: 44px;
+    line-height: 44px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+
+    @media #{$tablet-landscape} {
+        @media #{$laptop} {
+            &:hover,
+            &:focus {
+                color: $button-color-hover;
+                background-color: $button-bg-color-hover;
+            }
+        }
+
+        &:active {
+            color: $button-color-active;
+        }
+    }
+}
+
+// STATE

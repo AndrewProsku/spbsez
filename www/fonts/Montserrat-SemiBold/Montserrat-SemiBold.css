@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "Montserrat-SemiBold";
+    src: url("Montserrat-SemiBold/Montserrat-SemiBold.eot");
+    src: url("Montserrat-SemiBold/Montserrat-SemiBold.eot?#iefix") format("embedded-opentype"),
+         url("Montserrat-SemiBold/Montserrat-SemiBold.woff2") format("woff2"),
+         url("Montserrat-SemiBold/Montserrat-SemiBold.woff") format("woff"),
+         url("Montserrat-SemiBold/Montserrat-SemiBold.ttf") format("ttf"),
+         url("Montserrat-SemiBold/Montserrat-SemiBold.svg#Montserrat-SemiBold") format("svg");
+    font-style: normal;
+    font-weight: demi;
+}

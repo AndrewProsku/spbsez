@@ -1,0 +1,209 @@
+// Version - 1.1
+// Documentation - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/parametric/parametric-filter.html
+// Dependecies
+@import "../../../common/styles/mixins";
+@import "../../../common/styles/breakpoints";
+
+$parametric-filter-block-background-color: #e1edf6;
+$parametric-filter-checkbox-background-color: #ffffff;
+$parametric-filter-checkbox-active-background-color: #004391;
+$parametric-filter-checkbox-disable-background-color: #e4e5e4;
+$parametric-filter-accept-color: #004391;
+
+$parametric-filter-hover-shadow: 0 4px 8px rgba(104, 144, 187, .3);
+
+$parametric-filter-font-size: 14px;
+$parametric-filter-font-color: #000000;
+$parametric-filter-font-checkbox: #ffffff;
+
+.b-parametric-filter {
+    overflow: hidden;
+    font-size: $parametric-filter-font-size;
+    background-color: $parametric-filter-block-background-color;
+    padding: {
+        top: 30px;
+        bottom: 30px;
+        left: 20px;
+        right: 20px;
+    }
+
+    @media #{$laptop} {
+        width: 60%;
+        margin: 0 auto;
+    }
+}
+
+.b-parametric-filter__row {
+    margin-bottom: 20px;
+}
+
+.b-parametric-filter__title {
+    margin-bottom: 5px;
+    color: $parametric-filter-font-color;
+
+    sup {
+        font-size: 8px;
+    }
+}
+
+.b-parametric-filter__content {
+    @media #{$tablet-landscape} {
+        display: flex;
+    }
+}
+
+.b-parametric-filter__building,
+.b-parametric-filter__apart {
+    display: flex;
+    margin-bottom: 10px;
+
+    @media #{$tablet-landscape} {
+        margin-bottom: 0;
+        flex: 1 1 0;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.b-parametric-filter__price,
+.b-parametric-filter__floors {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    @media #{$tablet-landscape} {
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
+}
+
+.b-parametric-filter__floors-sub {
+    display: flex;
+    align-items: flex-end;
+}
+
+.b-parametric-filter__floors-sub-item {
+    margin-right: 10px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.b-parametric-filter__checkbox {
+    @include visually-hidden();
+}
+
+.b-parametric-filter__checkbox:checked + .b-parametric-filter__label {
+    @include transition(background-color, color);
+    background-color: $parametric-filter-accept-color;
+    color: $parametric-filter-font-checkbox;
+}
+
+.b-parametric-filter__checkbox:disabled + .b-parametric-filter__label {
+    cursor: default;
+    background-color: $parametric-filter-checkbox-disable-background-color;
+
+    @media #{$laptop} {
+        &:hover {
+            box-shadow: none;
+        }
+    }
+}
+
+.b-parametric-filter__checkbox:focus + .b-parametric-filter__label {
+    @media #{$laptop} {
+        opacity: .8;
+    }
+}
+
+.b-parametric-filter__label {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    background-color: $parametric-filter-checkbox-background-color;
+    border-left: 1px solid $parametric-filter-block-background-color;
+    padding: {
+        top: 20px;
+        bottom: 20px;
+    }
+
+    @media #{$laptop} {
+        &:hover {
+            box-shadow: $parametric-filter-hover-shadow;
+        }
+    }
+}
+
+.b-parametric-filter__input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: {
+        top: 10px;
+        bottom: 10px;
+        left: 10px;
+    }
+    border: 0;
+    border-left: 1px solid $parametric-filter-block-background-color;
+    color: $parametric-filter-font-color;
+
+    @media #{$tablet-landscape} {
+        width: auto;
+        margin-bottom: 0;
+    }
+
+    @media #{$laptop} {
+        &:hover {
+            box-shadow: $parametric-filter-hover-shadow;
+        }
+    }
+}
+
+.b-parametric-filter__submit-button,
+.b-parametric-filter__reset-button {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: $parametric-filter-accept-color;
+    cursor: pointer;
+    border: 0;
+    border-radius: 3px;
+    padding: {
+        top: 15px;
+        bottom: 15px;
+    }
+    color: white;
+
+    @media #{$tablet-landscape} {
+        width: auto;
+        margin-bottom: 0;
+        margin-right: 10px;
+    }
+
+    @media #{$laptop} {
+        &:hover {
+            @include transition(opacity);
+            opacity: .8;
+        }
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.b-parametric-filter__sub-item {
+    margin-right: 10px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.b-parametric-filter__row_display_flex {
+    display: flex;
+    flex-direction: column;
+
+    @media #{$tablet-landscape} {
+        flex-direction: row;
+    }
+}

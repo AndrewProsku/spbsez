@@ -1,0 +1,13 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Главная страница</title> {% endblock %}
+
+{% block content %}
+
+    {% include '../components/menu-trigger/menu-trigger.twig' with {
+        state: 'open',
+        modify: 'b-menu-trigger_theme_open',
+        dynamic: true
+    } %}
+    {% include '../components/mobile-menu/mobile-menu.twig' %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/social-list-and-link.html
+// Версия - 1.0
+
+// Зависимости
+@import "../../common/styles/mixins";
+
+.b-social-list {
+    display: flex;
+}
+
+.b-social-list__social {
+    margin-right: 20px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}

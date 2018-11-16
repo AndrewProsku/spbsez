@@ -1,0 +1,11 @@
+<ul class="b-breadcrumbs">
+    {% for breadcrumb in breadcrumbs %}
+        <li class="b-breadcrumbs__item">
+            {% if not loop.last %}
+                <a class="b-breadcrumbs__link" href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+            {% else %}
+                <span class="b-breadcrumbs__text">{{ breadcrumb.text }}</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

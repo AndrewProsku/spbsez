@@ -1,0 +1,9 @@
+<a
+    href="tel:{{ phone|default("8-800-555-35-35") }}"
+    class="
+        b-phone
+        {% if comagicClass %}{{ comagicClass }}{% endif %}
+        {% if modify %}{{ modify }}{% endif %}"
+>
+        <span class="b-phone__number">{{ phone|default("8-800-555-35-35") }}</span>
+</a>
