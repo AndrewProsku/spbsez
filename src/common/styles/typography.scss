@@ -20,13 +20,12 @@
 }
 
 // Добавление шрифтов
-@include font(Montserrat, "Montserrat-Regular", 400);
-@include font(Montserrat, "Montserrat-Medium", 500);
-@include font(Montserrat, "Montserrat-SemiBold", 600);
-@include font(Montserrat, "Montserrat-Bold", 700);
+@include font(Brutal-bold, "Brutal-Type-Bold", 700);
+@include font(Brutal, "Brutal-Type-Regular", 400);
 
 // Переменные
-$font: "Montserrat", sans-serif;
+$font: "Brutal", sans-serif;
+$font-brutal-bold: "Brutal-bold", sans-serif;
 
 // Основные элементы
 html {

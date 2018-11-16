@@ -3,11 +3,98 @@
 
 {% block content %}
 
-    {% include '../components/menu-trigger/menu-trigger.twig' with {
-        state: 'open',
-        modify: 'b-menu-trigger_theme_open',
-        dynamic: true
-    } %}
-    {% include '../components/mobile-menu/mobile-menu.twig' %}
+    <header class="l-home__header">
+        <div class="l-home__header-left">
+            <a href="/" class="b-logo__link" title="Вернуться на главную">
+                <img src="../images/home/logo.svg" alt="Особая Экономическая зона">
+            </a>
+        </div>
+        <div class="l-home__header-center">
+            <nav class="b-nav">
+                <ul class="b-nav__list">
+                    <li class="b-nav__item">
+                        <a href="#" class="b-nav__link">
+                            Об ОЭЗ
+                        </a>
+                    </li>
+
+                    <li class="b-nav__item">
+                        <a href="#" class="b-nav__link">
+                            Инфраструктура
+                        </a>
+                    </li>
+
+                    <li class="b-nav__item">
+                        <a href="#" class="b-nav__link">
+                            Услуги
+                        </a>
+                    </li>
+
+                    <li class="b-nav__item">
+                        <a href="#" class="b-nav__link">
+                            Резиденты
+                        </a>
+                    </li>
+
+                    <li class="b-nav__item">
+                        <a href="#" class="b-nav__link">
+                            Инвесторам
+                        </a>
+                    </li>
+
+                    <li class="b-nav__item">
+                        <a href="#" class="b-nav__link">
+                            Медиа
+                        </a>
+                    </li>
+
+                    <li class="b-nav__item">
+                        <a href="#" class="b-nav__link">
+                            Контакты
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="l-home__header-right">
+            <div class="b-account">
+                <a href="#" class="b-account__link">
+                    Личный кабинет
+                </a>
+            </div>
+            <div class="b-language">
+                <a href="#" class="b-language__link">
+                    Ru
+                </a>
+            </div>
+            <div class="b-burger">
+                <div class="b-burger__line"></div>
+                <div class="b-burger__line"></div>
+                <div class="b-burger__line"></div>
+            </div>
+        </div>
+    </header>
+
+    {# Главный экран #}
+
+    <div class="l-home__main-screen">
+        <div class="b-social">
+            <a href="#" class="b-social__link">
+                {% include "../sprites/svg/instagram.svg.twig" %}
+            </a>
+            <a href="#" class="b-social__link">
+                {% include "../sprites/svg/facebook.svg.twig" %}
+            </a>
+        </div>
+        <div class="b-main-screen-text">
+            <h3>
+                Территория инноваций
+            </h3>
+            <h1>
+                Особая экономическая зона «Санкт-Петербург»
+            </h1>
+        </div>
+    </div>
+
 
 {% endblock %}
