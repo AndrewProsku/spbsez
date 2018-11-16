@@ -1,0 +1,141 @@
+// Версия - 2.5
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/vertical-indents.html
+
+// ПЕРЕМЕННЫЕ
+// Значения уровней.
+$levels: (
+    //       320   670   960   1280  1440   1920   2560
+    blue:   (4px,  4px,  4px,  4px,  4px,   12px,  12px), /*2xs*/
+    red:    (8px,  16px, 16px, 16px, 16px,  24px,  24px), /*xs*/
+    orange: (12px, 24px, 24px, 24px, 24px,  32px,  32px), /*s*/
+    yellow: (16px, 32px, 32px, 32px, 32px,  40px,  40px), /*m*/
+    green:  (20px, 40px, 40px, 40px, 48px,  56px,  56px), /*l*/
+    cyan:   (28px, 48px, 48px, 48px, 64px,  80px,  80px), /*xl*/
+    violet: (36px, 72px, 72px, 72px, 96px,  120px, 120px), /*2xl*/
+    pink:   (56px, 96px, 96px, 96px, 120px, 152px, 152px), /*3xl*/
+);
+
+// FUNCTION
+// $outer - {List} - внешний отступ, число в пикселях
+// $inner - {List} - внутренний отступ, число в пикселях
+// @return - {List} - разница между внешним и внтуренним отступов. Из внешнего вычитается внутренний отступ
+@function indent-calc($outer, $inner) {
+    $mobile-indent: nth($outer, 1) - nth($inner, 1);
+    $tablet-portrait-indent: nth($outer, 2) - nth($inner, 2);
+    $tablet-landscape-indent: nth($outer, 3) - nth($inner, 3);
+    $laptop-indent: nth($outer, 4) - nth($inner, 4);
+    $laptop-wide-indent: nth($outer, 5) - nth($inner, 5);
+    $fullhd-indent: nth($outer, 6) - nth($inner, 6);
+    $ultra-indent: nth($outer, 7) - nth($inner, 7);
+
+    @return $mobile-indent $tablet-portrait-indent $tablet-landscape-indent $laptop-indent $laptop-wide-indent $fullhd-indent $ultra-indent;
+}
+
+// MIXINS
+// Создает отступы для разных брейкпоинтов
+// $direction-value - {String} - направление, пример 'both' or 'top' or 'bottom'
+// $level-list - {List} - уровень отступа из списка отступов
+// $indent - {String} - тип отступа, либо margin, либо padding
+@mixin indent-media($direction-value, $level-list, $indent) {
+    @if length($level-list) == 7 {
+        $mobile-margin: nth($level-list, 1);
+        $tablet-portrait-margin: nth($level-list, 2);
+        $tablet-landscape-margin: nth($level-list, 3);
+        $laptop-margin: nth($level-list, 4);
+        $laptop-wide-margin: nth($level-list, 5);
+        $fullhd-margin: nth($level-list, 6);
+        $ultra-margin: nth($level-list, 7);
+
+        $direction-list: $direction-value;
+
+        @if $direction-value == "both" {
+            $direction-list: top bottom;
+        }
+
+        @each $direction in $direction-list {
+            #{$indent}-#{$direction}: $mobile-margin;
+
+            @media #{$tablet-portrait} {
+                #{$indent}-#{$direction}: $tablet-portrait-margin;
+            }
+
+            @media #{$tablet-landscape} {
+                #{$indent}-#{$direction}: $tablet-landscape-margin;
+            }
+
+            @media #{$laptop} {
+                #{$indent}-#{$direction}: $laptop-margin;
+            }
+
+            @media #{$laptop-wide} {
+                #{$indent}-#{$direction}: $laptop-wide-margin;
+            }
+
+            @media #{$fullhd} {
+                #{$indent}-#{$direction}: $fullhd-margin;
+            }
+
+            @media #{$ultra} {
+                #{$indent}-#{$direction}: $ultra-margin;
+            }
+        }
+    } @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$level-list}`."
+            + "Please make sure the length of this `$level` is less than 7";
+    }
+}
+
+// Создаёт отступы
+// $indent - {String} - тип отступа, либо magin, либо padding
+// $direction - {String} - направление, пример 'both' or 'top' or 'bottom'
+// $level - {Number} - уровень отступа из списка отступов
+// $inner - {Number} - внутреннний отступ, вычитается из внегнего, default = 0
+@mixin generateIndent($indent, $direction, $level, $inner: 0) {
+    @if map-has-key($levels, $level) {
+        @if $levels != 0 {
+            $level-list: map-get($levels, $level);
+
+            @if $inner != 0 {
+                @if map-has-key($levels, $inner) {
+                    $inner-list: map-get($levels, $inner);
+                    $level-calc: indent-calc($level-list, $inner-list);
+                    @include indent-media($direction, $level-calc, $indent);
+                } @else {
+                    @warn "Unfortunately, no value could be retrieved from `#{$inner}`. "
+                        + "Please make sure it is defined in `$levels` map.";
+                }
+            } @else {
+                @include indent-media($direction, $level-list, $indent);
+            }
+        } @else {
+            @warn "Unfortunately, no value could be retrieved from `#{$level}`. "
+                + "Please make sure it is defined in `$levels` map.";
+        }
+    } @else {
+        @if $direction == "both" {
+            $direction-list: top bottom;
+
+            @each $direction in $direction-list {
+                #{$indent}-#{$direction}: 0;
+            }
+        } @else {
+            #{$indent}-#{$direction}: 0;
+        }
+    }
+}
+
+// Создает отступы для margin
+// $direction - {String} - направление для margin, пример 'both' or 'top' or 'bottom'
+// $level - {Number} - уровень отступа из списка отступов
+// $inner - {Number} - внутреннний отступ, вычитается из внегнего, default = 0
+@mixin margin-level($direction, $level, $inner: 0) {
+    @include generateIndent(margin, $direction, $level, $inner);
+}
+
+// Создает отступы для padding
+// $direction - {String} - направление для margin, пример 'both' or 'top' or 'bottom'
+// $level - {Number} - уровень отступа из списка отступов
+// $inner - {Number} - внутреннний отступ, вычитается из внегнего, default = 0
+@mixin padding-level($direction, $level, $inner: 0) {
+    @include generateIndent(padding, $direction, $level, $inner);
+}

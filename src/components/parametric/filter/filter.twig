@@ -1,0 +1,146 @@
+<div class="b-parametric-filter">
+    <form action="/tests/search.json" method="post">
+        <div class="b-parametric-filter__row b-parametric-filter__buildings">
+            <div class="b-parametric-filter__title">Проекты/корпуса в продаже</div>
+            <div class="b-parametric-filter__content">
+                {% for building in buildings %}
+                    <div class="b-parametric-filter__building">
+                        <input id="build-{{ loop.index }}"
+                               class="b-parametric-filter__checkbox"
+                               type="checkbox"
+                               name="project[{{ loop.index }}]">
+                        <label for="build-{{ loop.index }}"
+                               class="b-parametric-filter__label">
+                            ЖК {{ loop.index }} / Корпус {{ loop.index }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="b-parametric-filter__row b-parametric-filter__aparts">
+            <div class="b-parametric-filter__title">Комнатность</div>
+            <div class="b-parametric-filter__content">
+                {% for room in rooms %}
+                    {% if room == "0" %}
+                        <div class="b-parametric-filter__apart">
+                            <input id="apart-{{ loop.index }}"
+                                   class="b-parametric-filter__checkbox"
+                                   type="checkbox"
+                                   name="apart[{{ loop.index }}]">
+                            <label for="apart-{{ loop.index }}"
+                                   class="b-parametric-filter__label">
+                                Студия
+                            </label>
+                        </div>
+                    {% else %}
+                        <div class="b-parametric-filter__apart">
+                            <input id="apart-{{ loop.index }}"
+                                   class="b-parametric-filter__checkbox"
+                                   type="checkbox"
+                                   name="apart[{{ loop.index }}]">
+                            <label for="apart-{{ loop.index }}"
+                                   class="b-parametric-filter__label">
+                                {{ room }}-комнатная
+                            </label>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if minPrice not in ["0"] or maxPrice not in ["0"] %}
+            <div class="b-parametric-filter__price">
+                <div class="b-parametric-filter__title">Cтоимость, млн руб.</div>
+                <input class="b-parametric-filter__input"
+                       type="tel"
+                       name="price[min]"
+                       min="{{ minPrice }}"
+                       max="{{ maxPrice }}"
+                       maxlength="5"
+                       placeholder="от 2.2">
+                <input class="b-parametric-filter__input"
+                       type="tel"
+                       name="price[max]"
+                       min="{{ minPrice }}"
+                       max="{{ maxPrice }}"
+                       maxlength="5"
+                       placeholder="до 123.5">
+            </div>
+        {% endif %}
+
+        {% if minArea not in ["0"] or maxArea not in ["0"] %}
+            <div class="b-parametric-filter__area">
+                <div class="b-parametric-filter__title">Общая площадь, м<sup>2</sup>.</div>
+                <input class="b-parametric-filter__input"
+                       type="tel"
+                       name="area[min]"
+                       min="{{ minArea }}"
+                       max="{{ maxArea }}"
+                       maxlength="5"
+                       placeholder="от 30">
+                <input class="b-parametric-filter__input"
+                       type="tel"
+                       name="area[max]"
+                       min="{{ minArea }}"
+                       max="{{ maxArea }}"
+                       maxlength="5"
+                       placeholder="до 270">
+            </div>
+        {% endif %}
+
+        {% if minFloor not in ["0"] and maxFloor not in ["0"] %}
+            <div class="b-parametric-filter__floors">
+                <div class="b-parametric-filter__title">Этаж</div>
+                <input class="b-parametric-filter__input"
+                       type="tel"
+                       name="floor[min]"
+                       min="{{ minFloor }}"
+                       max="{{ maxFloor }}"
+                       maxlength="2"
+                       placeholder="от 1">
+                <input class="b-parametric-filter__input"
+                       type="tel" name="floor[max]"
+                       min="{{ minFloor }}"
+                       max="{{ maxFloor }}"
+                       maxlength="2"
+                       placeholder="до 25">
+
+                <div class="b-parametric-filter__floors-sub">
+                    {% for floorType in floorTypes %}
+                        <div class="b-parametric-filter__floors-sub-item">
+                            {% include '../../forms/checkbox/checkbox.twig' with {
+                                id: "floor-sub-1"~loop.index,
+                                text: floorType,
+                                value: "value",
+                                name: "floor-sub["~loop.index~"]"
+                            } %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="b-parametric-filter__row b-parametric-filter__sub">
+            <div class="b-parametric-filter__title">Особенности</div>
+            <div class="b-parametric-filter__content">
+                {% for feature in features %}
+                    <div class="b-parametric-filter__sub-item">
+                        {% include '../../forms/checkbox/checkbox.twig' with {
+                            id: "feature-"~loop.index,
+                            text: feature,
+                            value: "value",
+                            name: "feature["~loop.index~"]"
+                        } %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="b-parametric-filter__row b-parametric-filter__submit">
+            <button class="b-btn b-parametric-filter__submit-button" type="submit">Показать 200 вариантов</button>
+            <button class="b-btn b-parametric-filter__reset-button" type="reset">Cбросить фильтр</button>
+        </div>
+
+    </form>
+</div>

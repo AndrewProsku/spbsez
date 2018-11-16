@@ -1,0 +1,18 @@
+// Версия - 1.0
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/phone.html
+
+// Зависимости
+@import "../../common/styles/colors";
+@import "../../common/styles/font-sizes";
+
+// Настройки
+$phone-color: $black;
+
+// Компонент
+.b-phone {
+    @include font-size("h4");
+    color: $phone-color;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}

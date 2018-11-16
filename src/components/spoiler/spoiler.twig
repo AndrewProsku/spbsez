@@ -1,0 +1,19 @@
+<div class="b-spoiler j-spoiler">
+    <div class="b-spoiler__wrap">
+        <div class="b-spoiler__content">
+            {{ content }}
+        </div>
+    </div>
+
+    <button class="b-spoiler__button">
+        <span
+                class="b-spoiler__button-name"
+                data-hide-name="{{ buttonHideName|default('Cкрыть') }}">
+            Показать еще
+        </span>
+
+        <div class="b-spoiler__button-icon">
+            {% include "arrow.svg" %}
+        </div>
+    </button>
+</div>

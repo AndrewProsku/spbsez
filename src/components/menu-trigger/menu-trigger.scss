@@ -1,0 +1,92 @@
+// Зависимости
+@import "../../common/styles/colors";
+@import "../../common/styles/mixins";
+
+// Настройки
+$menu-trigger-color: red;
+$menu-trigger-color-hover: black;
+$menu-trigger-size: 44px;
+
+
+// Компонент
+.b-menu-trigger {
+    @include transition(border);
+    @include reset-button();
+    position: relative;
+    width: $menu-trigger-size;
+    height: $menu-trigger-size;
+    border: 1px solid $menu-trigger-color;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.b-menu-trigger__icon {
+    @include transition(background-color);
+    position: relative;
+    background: $menu-trigger-color;
+    width: 16px;
+    height: 2px;
+
+    &:before,
+    &:after {
+        @include transition(transform, top, bottom, background-color);
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $menu-trigger-color;
+    }
+
+    &:before {
+        bottom: 6px;
+    }
+
+    &:after {
+        top: 6px;
+    }
+}
+
+.b-menu-trigger__text {
+    @include visually-hidden();
+}
+
+// STATE
+.b-menu-trigger_theme_close {
+    .b-menu-trigger__icon {
+        background-color: transparent;
+    }
+
+    .b-menu-trigger__icon:before {
+        transform: rotate(45deg);
+        bottom: 0;
+    }
+
+    .b-menu-trigger__icon:after {
+        transform: rotate(-45deg);
+        top: 0;
+    }
+
+    &:hover {
+        .b-menu-trigger__icon {
+            background-color: transparent;
+        }
+    }
+}
+
+.b-menu-trigger:hover {
+    @media #{$laptop} {
+        border-color: $menu-trigger-color-hover;
+
+        .b-menu-trigger__icon {
+            background-color: $menu-trigger-color-hover;
+
+            &:before,
+            &:after {
+                background-color: $menu-trigger-color-hover;
+            }
+        }
+    }
+}

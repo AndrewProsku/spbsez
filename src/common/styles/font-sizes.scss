@@ -1,0 +1,51 @@
+// Версия - 1.2
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/font-sizes.html
+// ЗАВИСИМОСТИ
+@import "./breakpoints";
+
+// НАСТРОЙКИ
+$font-sizes: (
+    h1: (30, 30, 40, 54, 54, 72, 95, 1.125),
+    h2: (26, 26, 32, 44, 44, 44, 44, 1.125),
+    h3: (20, 20, 22, 24, 24, 32, 42, 1.5),
+    h4: (16, 16, 18, 20, 20, 26, 32, 1.5),
+    menu: (14, 14, 14, 14, 14, 18, 20, (36px, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5)),
+    p1: (16, 16, 16, 18, 18, 22, 30, 1.5),
+    p2: (14, 14, 14, 14, 14, 18, 24, 1.5),
+    p3: (11, 11, 12, 12, 12, 16, 20, 1.5)
+);
+
+$breakpoints: (
+    $mobile,
+    $tablet-portrait,
+    $tablet-landscape,
+    $laptop,
+    $laptop-wide,
+    $fullhd,
+    $ultra
+);
+
+$line-heights-amount: length(map-get($font-sizes, h1));
+
+// МИКСИНЫ
+// Генерирует font-size и line-height для брекпоинта
+@mixin generateFontSize($font-size, $i) {
+    font-size: #{nth(nth(map-get($font-sizes, $font-size), $i), 1)}px;
+
+    @if length(nth(map-get($font-sizes, $font-size), $line-heights-amount)) > 1 {
+        line-height: #{nth(nth(map-get($font-sizes, $font-size), $line-heights-amount), $i)};
+    } @else {
+        line-height: #{nth(nth(map-get($font-sizes, $font-size), $line-heights-amount), 1)};
+    }
+}
+
+// Создает всю струтктуру размеров шрифта со всеми брейкпоинтами
+@mixin font-size($font-size) {
+    @for $i from 1 through length($breakpoints) {
+        @if nth($breakpoints, $i) == "only screen" {
+            @include generateFontSize($font-size, $i); } @else {
+            @media #{nth($breakpoints, $i)} {
+                @include generateFontSize($font-size, $i); }
+        }
+    }
+}

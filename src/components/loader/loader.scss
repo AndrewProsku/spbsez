@@ -1,0 +1,24 @@
+// Версия - 1.1
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/loader.html
+.b-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    transform-origin: 50% 50%;
+    animation-name: rotate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-play-state: paused;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

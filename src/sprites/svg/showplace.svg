@@ -1,0 +1,5 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <title>showplace</title>
+    <circle cx="12" cy="12" r="12" fill="#fff"/>
+    <path d="M17.5,16.5H17V10a.5.5,0,0,0-.5-.5v-2h1a.5.5,0,0,0,0-1H6.5a.5.5,0,0,0,0,1h1v2A.5.5,0,0,0,7,10v6.5H6.5a.5.5,0,0,0,0,1h4a.5.5,0,0,0,0-1H10v-3a2,2,0,0,1,4,0v3h-.5a.5.5,0,0,0,0,1h4a.5.5,0,0,0,0-1Zm-2-7h-1v-2h1Zm-7-2h1v2h-1Zm2,2v-2h1v2Zm2,0v-2h1v2Z"/>
+</svg>

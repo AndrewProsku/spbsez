@@ -1,0 +1,95 @@
+// Зависимости
+@import "../../common/styles/mixins";
+
+$slider-trs-function: "ease";
+$slider-dot-background-color: #000000;
+$slider-dot-active-background-color: #0000ff;
+$slider-arrow-width: 20px;
+$slider-arrow-height: 30px;
+$slider-arrow-color: #ffffff;
+
+// Компонент
+.b-slider {
+    overflow: hidden;
+    opacity: 0;
+    position: relative;
+}
+
+.b-slider__wrapper {
+    transition-property: transform;
+    transition-timing-function: $slider-trs-function;
+    transform: translateZ(0); // хак, чтобы не прыгал текст
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.b-slider__item {
+    flex: 0 0 100%;
+    align-self: center;
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.b-slider__arrows {
+    padding-right: column(1);
+    padding-left: column(1);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 0; // хак для svg, чтобы они занимали пространство иконки внутри
+}
+
+.b-slider__arrow {
+    @include reset-button();
+    line-height: 0; // хак для svg, чтобы они занимали пространство иконки внутри
+
+    svg {
+        width: $slider-arrow-width;
+        height: $slider-arrow-height;
+        fill: $slider-arrow-color;
+    }
+}
+
+.b-slider__dots {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.b-slider__dot {
+    @include reset-button();
+    width: 8px;
+    height: 8px;
+    margin-right: 17px;
+    border-radius: 50%;
+    background-color: $slider-dot-background-color;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    @media #{$fullhd} {
+        width: 11px;
+        height: 11px;
+    }
+
+    @media #{$ultra} {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+// STATE
+.b-slider_is_ready {
+    opacity: 1;
+}
+
+.b-slider__dot_is_active {
+    background-color: $slider-dot-active-background-color;
+}

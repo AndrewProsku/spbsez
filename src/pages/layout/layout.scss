@@ -1,0 +1,7 @@
+.l-layout {
+    @include row();
+}
+
+.l-layout__content {
+    @include column(36, 36);
+}

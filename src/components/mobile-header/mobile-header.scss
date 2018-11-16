@@ -1,0 +1,145 @@
+// Documentation - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/mobile-header.html
+// Version - 1.1alpha
+// Dependencies
+@import "../../common/styles/mixins";
+@import "../../common/styles/breakpoints";
+
+// Settings
+$header-padding: 15px;
+$header-menu-padding: 20px;
+$header-button-width: 45px;
+$header-button-height: 45px;
+$header-button-icon-width: 32px;
+$header-button-icon-height: 32px;
+$header-open-position-menu: 100%, 0;
+
+// Component
+.body-fixed {
+    overflow: hidden;
+    position: fixed;
+}
+
+.l-header {
+    background-color: deepskyblue;
+}
+
+.b-header {
+    width: 100%;
+}
+
+.b-header__wrap {
+    width: 100%;
+    padding: $header-padding;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: deepskyblue;
+}
+
+.b-header__menu {
+    display: none;
+
+    @media #{$laptop} {
+        display: block;
+    }
+}
+
+.b-header__mobile-menu {
+    @include transition(transform);
+    display: block;
+    transform: translate($header-open-position-menu);
+    padding: $header-menu-padding;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth; // эксперемантальное свойство плавной прокрутки ( Поддерживается в Chrome и Opera при включенном параметре "Smooth Scrolling" )
+    background-color: brown;
+
+    @media #{$laptop} {
+        display: none;
+    }
+}
+
+.b-header__open-menu,
+.b-header__mobile-menu-close {
+    width: $header-button-width;
+    height: $header-button-height;
+    border: 1px solid black;
+    cursor: pointer;
+    outline: none;
+    box-sizing: border-box;
+
+    svg {
+        width: $header-button-icon-width;
+        height: $header-button-icon-height;
+    }
+}
+
+.b-header__open-menu {
+    display: block;
+
+    @media #{$laptop} {
+        display: none;
+    }
+}
+
+.b-header__mobile-menu-close {
+    position: absolute;
+}
+
+// STATE
+.b-header_position_fixed {
+    @include transition(transform);
+    transform: translateY(0);
+    position: fixed;
+}
+
+.b-header_position_hide {
+    transform: translateY(-100%);
+}
+
+.b-header_position_show {
+    transform: translateY(0);
+}
+
+.b-header__mobile-menu_state_open {
+    transform: translate(0, 0);
+}
+
+// // тестовые стили для страницы, что-бы была видна работа модуля
+.l-main {
+    display: block;
+    width: 100%;
+    height: 2000px;
+    background-color: darkgoldenrod;
+}
+
+.b-main {
+    margin: 0 auto;
+    font-size: 20px;
+    width: 80%;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+button {
+    background-color: transparent;
+    border: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 700;
+}

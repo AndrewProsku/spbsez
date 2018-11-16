@@ -1,0 +1,69 @@
+{# Verson 1.4 #}
+{# Documentation - https://kelnik.gitbooks.io/kelnik-documentation/content/front-end/picture.html #}
+{% set sourcePathFormat = source|split('.') %}
+{% set sourcePathName = sourcePathFormat[0] %}
+{% set sourceName = sourcePathName|split('/')|last %}
+{% set sourceFormat = sourcePathFormat|last %}
+{% set counter = 0 %}
+
+{% set breakpoints = [321, 670, 960, 1280, 1920, 2560] %}
+
+{% if not alt %}
+    <h1 style="color: red; font-size: 100px">Укажи, пожалуйста, alt у тега picture. Спасибо.</h1>
+{% else %}
+    <picture {% if class %}class="{{ class }}"{% endif %}>
+        {# Если указана максимальная ширина#}
+        {% if maxwidth %}
+            {% for breakpoint in breakpoints|reverse %}
+                {% if breakpoint <= maxwidth %}
+                    {# у source который ближе к максимальной ширине убираем из названия брейкпоинт #}
+                    {% if counter == 0 %}
+                        {% set counter = 1 %}
+
+                        {% if webp %}
+                            <source
+                                    media="(min-width: {{ breakpoint }}px)"
+                                    srcset="{{ sourcePathName }}.webp"
+                                    type="image/webp">
+                        {% endif %}
+                        <source
+                                media="(min-width: {{ breakpoint }}px)"
+                                srcset="{{ sourcePathName }}.{{ sourceFormat }}"
+                                type="image/jpeg">
+
+                        {# у остальных source проставляем брейкпоинт #}
+                    {% else %}
+                        {% if webp %}
+                            <source
+                                    media="(min-width: {{ breakpoint }}px)"
+                                    srcset="{{ sourcePathName }}-{{ breakpoints[loop.index0 - 1] }}.webp"
+                                    type="image/webp">
+                        {% endif %}
+                        <source
+                                media="(min-width: {{ breakpoint }}px)"
+                                srcset="{{ sourcePathName }}-{{ breakpoints[loop.index0 - 1] }}.{{ sourceFormat }}"
+                                type="image/jpeg">
+
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {% for breakpoint in breakpoints|reverse %}
+                {% if breakpoint < breakpoints|first %}
+                    <source
+                            media="(min-width: {{ breakpoint }}px)"
+                            srcset="{{ sourcePathName }}-{{ breakpoints[loop.index0 - 1] }}.{{ sourceFormat }}"
+                            type="image/jpeg">
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if webp %}
+            <source media="(min-width: 320px)" srcset="{{ sourcePathName }}-320.webp" type="image/webp">
+        {% endif %}
+        <source media="(min-width: 320px)" srcset="{{ sourcePathName }}-320.{{ sourceFormat }}" type="image/jpeg">
+
+
+        <img src="{{ sourcePathName }}.{{ sourceFormat }}" alt="{{ alt|default(sourceName) }}">
+    </picture>
+{% endif %}

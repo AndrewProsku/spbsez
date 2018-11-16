@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "SpaceAge";
+    src: url("space age/space age.eot");
+    src: url("space age/space age.eot?#iefix") format("embedded-opentype"),
+         url("space age/space age.woff2") format("woff2"),
+         url("space age/space age.woff") format("woff"),
+         url("space age/space age.ttf") format("ttf"),
+         url("space age/space age.svg#SpaceAge") format("svg");
+    font-style: normal;
+    font-weight: normal;
+}

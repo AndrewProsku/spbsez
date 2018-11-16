@@ -1,0 +1,78 @@
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/maps.html
+// Версия 2.0
+
+// Зависимости
+@import "../../common/styles/mixins";
+
+// Компонент
+.b-map {
+    background-color: #cccccc;
+    position: relative;
+}
+
+.b-map__routes {
+    position: absolute;
+    top: column(1);
+    left: column(1);
+    z-index: 2;
+}
+
+.b-map__content {
+    width: 100%;
+    height: 100%;
+}
+
+.b-map__spacer {
+    padding-bottom: 56.25%; // для пропорции 16/9
+}
+
+// Fullscreen кнопка
+.b-map__fullsreen-button {
+    @include reset-button();
+    position: absolute;
+    top: 32px;
+    right: 41px;
+    z-index: 2;
+}
+
+.b-map__fullsreen-button-close {
+    display: none;
+}
+
+// Кнопки zoom
+.b-map__zoom {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 39px;
+    z-index: 2;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.b-map__zoom-button {
+    @include reset-button();
+    line-height: 0;
+}
+
+.b-map__zoom-button-plus {
+    margin-bottom: 10px;
+}
+
+// STATE
+// Fullscreen кнопка
+.b-map__fullsreen-button_is_active {
+    .b-map__fullsreen-button-open {
+        display: none;
+    }
+
+    .b-map__fullsreen-button-close {
+        display: block;
+    }
+}
+
+// Кнопки zoom
+.b-map__zoom-button_is_hidden {
+    opacity: 0;
+    pointer-events: none;
+}

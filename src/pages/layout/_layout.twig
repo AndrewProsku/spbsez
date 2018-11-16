@@ -1,0 +1,26 @@
+{#variables#}
+{% set color = '#000000' %}
+
+{#component#}
+<!doctype html>
+<html lang="ru">
+<head>
+    {% include '_head.twig' %}
+    {% block title %}{% endblock %}
+</head>
+<body>
+
+{% include "../../components/alert-old-browser/alert-old-browser.twig" %}
+
+<div class="l-layout">
+    <main class="l-layout__content">
+        {% block content %}{% endblock %}
+    </main>
+</div>
+
+<!--[if IE 8 ]>
+    <script src="/alert-old-browser/ie-8-browser.js" async></script>
+<![endif]-->
+<script async src="/scripts/app.js"></script>
+</body>
+</html>

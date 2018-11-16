@@ -1,0 +1,43 @@
+// DEPENDENCIES
+@import "../../common/styles/mixins";
+
+// Settings
+$button-up-margin-top: 0;
+$button-up-margin-bottom: 20px;
+$button-up-margin-left: 0;
+$button-up-margin-right: 20px;
+$button-up-background-color: red;
+$button-up-arrow-background-color: white;
+$button-up-width: 60px;
+$button-up-height: 60px;
+
+.b-button-up {
+    @include transition(transform);
+    transform: translateX(200%);
+    margin: $button-up-margin-top $button-up-margin-right $button-up-margin-bottom $button-up-margin-left;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: none;
+    cursor: pointer;
+
+    svg {
+        width: $button-up-width;
+        height: $button-up-height;
+
+        circle {
+            fill: $button-up-background-color;
+        }
+
+        polygon {
+            fill: $button-up-arrow-background-color;
+        }
+    }
+}
+
+.b-button-up.is-visible {
+    transform: translateX(0);
+}

@@ -1,0 +1,9 @@
+/* stylelint-disable declaration-no-important  */
+body {
+    &.disable-hover,
+    &.disable-hover * {
+        // very important to override pointer-events: auto on child elements
+        pointer-events: none !important;
+    }
+}
+/* stylelint-enable */
