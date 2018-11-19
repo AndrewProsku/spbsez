@@ -7,12 +7,13 @@ $violet: #662d91;
 $dark-grey: #b4b7d0;
 $grey: #d3d4e0;
 $light-grey: #e2e3ed;
-$white: #efeff4;
+$dark-white: #efeff4;
+$white: #ffffff;
 $black: #292f30;
 
 // Brand color
 
 // gradient
 
-$gradient-linear: to right $blue, $violet;
-$gradient-30deg: 30deg $blue, $violet;
+$gradient-linear: to right, $blue 0%, $violet 51%, $blue 100%;
+$gradient-30deg: 30deg, $blue, $violet;

@@ -59,7 +59,10 @@
         <div class="l-home__header-right">
             <div class="b-account">
                 <a href="#" class="b-account__link">
-                    Личный кабинет
+                    <span class="b-account__link-icon">
+                        {% include "../sprites/svg/account.svg.twig" %}
+                    </span>
+                    <span class="b-account__link-text">Личный кабинет</span>
                 </a>
             </div>
             <div class="b-language">
@@ -91,8 +94,158 @@
                 Территория инноваций
             </h3>
             <h1>
-                Особая экономическая зона «Санкт-Петербург»
+                Особая экономическая&nbsp;зона «Санкт&nbsp;-&nbsp;Петербург»
             </h1>
+        </div>
+    </div>
+
+    {# Льготы и преференции #}
+
+    <div class="l-home__privileges l-home__block">
+        <h2>Льготы и преференции</h2>
+        <div class="l-home__privileges-list">
+            <div class="l-home__privileges-item">
+                <div class="l-home__privileges-icon" style="background-image:url('/images/home/icon-1.svg')"></div>
+                <div class="l-home__privileges-text">
+                    <a href="#" class="l-home__privileges-text-title b-link-line">
+                        Налоговые преференции
+                    </a>
+                    <p class="l-home__privileges-text-block">
+                        Для резидентов установлены льготные ставки по налогам на прибыль, землю, имущество и транспорт
+                    </p>
+                </div>
+            </div>
+            <div class="l-home__privileges-item">
+                <div class="l-home__privileges-icon" style="background-image:url('/images/home/icon-2.svg')"></div>
+                <div class="l-home__privileges-text">
+                    <a href="#" class="l-home__privileges-text-title b-link-line">
+                        Таможенные льготы
+                    </a>
+                    <p class="l-home__privileges-text-block">
+                        Режим свободной таможенной зоны позволяет выгодно размещать высокотехнологичные предприятия
+                    </p>
+                </div>
+            </div>
+            <div class="l-home__privileges-item">
+                <div class="l-home__privileges-icon" style="background-image:url('/images/home/icon-3.svg')"></div>
+                <div class="l-home__privileges-text">
+                    <a href="#" class="l-home__privileges-text-title b-link-line">
+                        Льготная стоимость земельного участка
+                    </a>
+                    <p class="l-home__privileges-text-block">
+                        Плата за выкуп земельного участка составляет 25%, аренда — 2% от кадастровой стоимости земельного участка
+                    </p>
+                </div>
+            </div>
+            <div class="l-home__privileges-item">
+                <div class="l-home__privileges-icon" style="background-image:url('/images/home/icon-4.svg')"></div>
+                <div class="l-home__privileges-text">
+                    <a href="#" class="l-home__privileges-text-title b-link-line">
+                        Упрощенное взаимодействие с государством
+                    </a>
+                    <p class="l-home__privileges-text-block">
+                        Взаимодействие с государственными регулирующими органами становится максимально простым и прозрачным
+                    </p>
+                </div>
+            </div>
+            <div class="l-home__privileges-item">
+                <div class="l-home__privileges-icon" style="background-image:url('/images/home/icon-5.svg')"></div>
+                <div class="l-home__privileges-text">
+                    <a href="#" class="l-home__privileges-text-title b-link-line">
+                        Готовая инженерная инфраструктура
+                    </a>
+                    <p class="l-home__privileges-text-block">
+                        Электроснабжение, теплоснабжение, водоснабжение и водоотведение            газоснабжение (при технической возможности)
+                    </p>
+                </div>
+            </div>
+            <div class="l-home__privileges-item">
+                <div class="l-home__privileges-icon" style="background-image:url('/images/home/icon-6.svg')"></div>
+                <div class="l-home__privileges-text">
+                    <a href="#" class="l-home__privileges-text-title b-link-line">
+                        Гарантия стабильной и безопасной работы инвесторов
+                    </a>
+                    <p class="l-home__privileges-text-block">
+                        Проект ОЭЗ на федеральном уровне курирует Министерство экономического развития Российской Федерации
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="l-home__more">
+            <a href="#" class="button">Узнать больше</a>
+        </div>
+    </div>
+
+    {# Блок новостей #}
+
+    <div class="l-home__news l-home__block">
+        <h2>Новости</h2>
+        <div class="l-home__news-block">
+            <div class="l-home__news-main">
+                <a href="#" class="l-home__news-main-img" style="background-image:url('/images/home/news.jpg');"></a>
+                <div class="l-home__news-main-content">
+                    <div class="l-home__news-main-title">
+                        <a href="#">
+                            Сегодня на площадке «Нойдорф» открылось инновационное предприятие резидента ОЭЗ «Санкт-Петербург» — ООО «ТР Инжиниринг»
+                        </a>
+                    </div>
+                    <time class="l-home__news-date">
+                        5 октября
+                    </time>
+                    <a href="#" class="l-home__news-subsection">
+                        Анонс
+                    </a>
+                </div>
+            </div>
+
+            <div class="l-home__news-list">
+                <div class="l-home__news-item">
+                    <div class="l-home__news-title">
+                        <a href="#">
+                            ОЭЗ «Санкт-Петербург» впервые вошла в рейтинг лучших экономических зон мира!
+                        </a>
+                    </div>
+                    <time class="l-home__news-date">
+                        5 октября
+                    </time>
+                    <a href="#" class="l-home__news-subsection">
+                        Анонс
+                    </a>
+                </div>
+
+                <div class="l-home__news-item">
+                    <div class="l-home__news-title">
+                        <a href="#">
+                            Студенты факультета государственного и муниципального управления @sziu_ranepa посетили площадку «Новоорловская»
+                        </a>
+                    </div>
+                    <time class="l-home__news-date">
+                        5 октября
+                    </time>
+                    <a href="#" class="l-home__news-subsection">
+                        Анонс
+                    </a>
+                </div>
+
+                <div class="l-home__news-item">
+                    <div class="l-home__news-title">
+                        <a href="#">
+                            В этом месяце ОЭЗ «Санкт-Петербург» получила 1,15 млрд руб. от АО «ОЭЗ» на строительство инженерной и транспортной инфраструктуры
+                        </a>
+                    </div>
+                    <time class="l-home__news-date">
+                        5 октября
+                    </time>
+                    <a href="#" class="l-home__news-subsection">
+                        Анонс
+                    </a>
+                </div>
+            </div>
+
+            <div class="l-home__more">
+                <a href="#" class="button">Все новости</a>
+            </div>
+
         </div>
     </div>
 
