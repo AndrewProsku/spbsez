@@ -2,15 +2,18 @@
 // Documentation - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/colors.html
 
 // Default Colors
-$violet: #9400d3;
-$indigo: #4b0082;
-$blue: #0000ff;
-$green: #00ff00;
-$yellow: #ffff00;
-$orange: #ff7f00;
-$red: #ff0000;
-$black: #000000;
+$blue: #30409a;
+$violet: #662d91;
+$dark-grey: #b4b7d0;
+$grey: #d3d4e0;
+$light-grey: #e2e3ed;
+$dark-white: #efeff4;
 $white: #ffffff;
-$gray: #cccccc;
+$black: #292f30;
 
 // Brand color
+
+// gradient
+
+$gradient-linear: to right, $blue 0%, $violet 51%, $blue 100%;
+$gradient-30deg: 30deg, $blue, $violet;
