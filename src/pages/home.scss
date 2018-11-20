@@ -15,6 +15,19 @@ a {
         padding-bottom: 2px;
         padding-right: 3px;
     }
+
+    &.b-link-line-two {
+        background-image: linear-gradient(to top, rgba($white, 0.12) 10%, rgba($white, 0.12) 50%, rgba($white, 0) 30%);
+        position: relative;
+        padding-bottom: 2px;
+        padding-right: 3px;
+    }
+}
+
+button {
+    &:focus {
+        outline: 0;
+    }
 }
 
 .button {
@@ -954,8 +967,427 @@ a {
     p {
         font-size: inherit;
     }
+}
 
-    .b-link-line {
-        background-image: linear-gradient(to top, rgba($white, 0.12) 10%, rgba($white, 0.12) 50%, rgba($white, 0) 30%);
+/*====================================
+  Блок слайдер резиденты
+ =====================================*/
+
+.b-slider__wrapper {
+    position: relative;
+
+    @media #{$laptop} {
+        @include column(30, 32);
+        @include push(1, 32);
+        @include post(2, 32);
     }
+
+    @media #{$laptop-wide} {
+        @include push(2.2, 32);
+        @include post(3.4, 32);
+    }
+}
+
+.b-slider__block-wrapper {
+    width: 288px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+
+    @media #{$tablet-portrait} {
+        width: 576px;
+    }
+
+    @media #{$laptop} {
+        width: 100%;
+    }
+}
+
+.b-slider__block {
+    display: flex;
+    width: 3000px;
+    @include margin-level(bottom, orange);
+
+    @media #{$laptop} {
+        width: 100%;
+        margin-bottom: 0;
+    }
+}
+
+.b-slider__item {
+    width: 288px;
+    border: 1px solid $grey;
+    border-radius: 4px;
+    padding-bottom: 24px;
+
+    @media #{$laptop} {
+        @include column(10, 30);
+    }
+
+    @media #{$laptop-wide} {
+        padding-bottom: 45px;
+    }
+}
+
+.b-slider__item-logo {
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    img {
+        height:58px;
+    }
+
+    @media #{$laptop-wide} {
+        padding-bottom: 40px;
+    }
+}
+
+.b-slider__item-desc {
+    text-align: center;
+}
+
+.b-slider__item-title {
+    @include font-size('p3');
+}
+
+.b-slider__item-text {
+    @include font-size('p4');
+    color: $black;
+    opacity: 0.48;
+}
+
+.b-slider__arrows {
+    @include margin-level(bottom, blue);
+    display: none;
+
+    @media #{$laptop} {
+        display: block;
+    }
+}
+
+.b-slider__arrow {
+    width: 80px;
+    height: 80px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    margin-top: -40px;
+    opacity: .5;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    svg {
+        width: inherit;
+        height: inherit;
+    }
+}
+
+.slider__arrow-left {
+    left: 0;
+    transform: rotate(180deg);
+    @include push(-3, 30);
+}
+
+.slider__arrow-right {
+    right: 0;
+    @include post(-3, 30);
+}
+
+.b-slider__dots {
+    text-align: center;
+    @include margin-level(bottom, green);
+
+    @media #{$laptop} {
+        display: none;
+    }
+}
+
+.b-slider__dot{
+    display: inline-block;
+    vertical-align: middle;
+    width: 9px;
+    height: 9px;
+    background-color: $violet;
+    border: 2px solid $violet;
+    border-radius: 50%;
+}
+
+.b-slider__dot_is_active {
+    background-color: $white;
+}
+
+/*====================================
+  Блок слайдер отзывы
+ =====================================*/
+
+.b-slider-reviews__wrapper {
+    position: relative;
+
+    .b-slider__dots {
+        margin-top: -45px;
+        margin-bottom: 0;
+    }
+
+    .b-slider__dot {
+        background-color: $white;
+        border-color: $white;
+    }
+    .b-slider__dot_is_active {
+        background-color: $blue;
+    }
+
+    @media #{$tablet-portrait} {
+        .b-slider__dots {
+            display: none;
+        }
+
+    }
+}
+
+.b-slider-reviews__item {
+    @media #{$tablet-portrait} {
+        @include row();
+    }
+}
+
+.b-slider-reviews__item-image {
+    @include column(18, 36);
+    display: none;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    @media #{$tablet-portrait} {
+        display: block;
+    }
+
+    @media #{$laptop} {
+        @include column(36, 36);
+        min-height: 750px;
+    }
+
+    @media #{$laptop-wide} {
+        min-height: 885px;
+    }
+}
+
+.b-slider-reviews__person {
+    @media #{$tablet-portrait} {
+        @include column(18, 36);
+    }
+
+    @media #{$laptop} {
+        @include column(13.5, 36);
+        @include post(2, 36);
+        position: absolute;
+        top: 30px;
+        right: 0;
+        bottom: 30px;
+    }
+
+    @media #{$laptop-wide} {
+        @include column(10, 36);
+    }
+
+    @media #{$fullhd} {
+        @include column(9, 36);
+    }
+}
+
+.b-slider-reviews__person-img {
+    position: relative;
+    min-height: 220px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    img {
+        width: 100%;
+        margin-bottom: -5px;
+    }
+
+    @media #{$laptop} {
+        max-height: 320px;
+        overflow: hidden;
+    }
+
+    @media #{$laptop-wide} {
+        max-height: 360px;
+    }
+}
+
+.b-slider-reviews__person-name-wrap {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(bottom, dark-yellow);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 16px;
+    color: $white;
+
+    p {
+        @include column(24, 36);
+        font-size: 16px;
+    }
+
+    @media #{$tablet-portrait} {
+        @include prefix(2, 18);
+        @include suffix(2, 18);
+        font-size: 14px;
+
+        p {
+            @include column(18, 18);
+        }
+    }
+
+    @media #{$laptop-wide} {
+        @include prefix(1, 10);
+        @include suffix(1, 10);
+
+        p {
+            font-size: 16px;
+        }
+    }
+}
+
+.b-slider-reviews__person-name {
+    font-family: $font-brutal-bold;
+    font-size: 24px;
+    margin-bottom: 5px;
+
+    @media #{$tablet-portrait} {
+        font-size: 26px;
+    }
+
+    @media #{$laptop-wide} {
+        font-size: 36px;
+    }
+}
+
+.b-slider-reviews__person-content {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(bottom, blue);
+    background-image: linear-gradient($gradient-30deg);
+    color: $white;
+
+    @media #{$tablet-portrait} {
+        @include prefix(2, 18);
+        @include suffix(2, 18);
+    }
+
+    @media #{$laptop} {
+        height: 54%;
+        @include prefix(1, 18);
+        @include suffix(1, 18);
+    }
+}
+
+.b-slider-reviews__person-text {
+    @include font-size('p3');
+    @include padding-level(top, blue);
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    margin-bottom: 5px;
+
+    &:before, &:after {
+        font-size: 120px;
+        color: $white;
+        line-height: 0.6;
+        opacity: 0.16;
+        position: absolute;
+    }
+
+    &:before {
+        content: '«';
+        top: 5px;
+        left: 0;
+    }
+
+    &:after {
+        content: '»';
+        bottom: -5px;
+        right: 0;
+    }
+
+    @media #{$tablet-portrait} {
+        height: 250px;
+
+        &:before {
+            top: 12px;
+        }
+
+        &:after {
+            bottom: 0;
+        }
+    }
+
+    @media #{$laptop} {
+        padding-top: 35px;
+        @include prefix(1, 18);
+        @include suffix(1, 18);
+    }
+
+    @media #{$laptop-wide} {
+        height: 354px;
+    }
+}
+
+.b-slider-reviews__person-link {
+    @include margin-level(bottom, dark-yellow);
+    display: inline-block;
+    color: $white;
+    @include font-size('p2');
+
+    @media #{$tablet-portrait} {
+        margin-bottom: 0;
+    }
+
+    @media #{$laptop} {
+        @include push(1, 18);
+    }
+}
+
+.b-slider-reviews__arrows {
+    @include push(4, 36);
+    @include padding-level(bottom, blue);
+    position: absolute;
+    bottom: 0;
+}
+
+.b-slider-reviews__arrow {
+    display: none;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    img {
+        width: inherit;
+        height: inherit;
+    }
+
+    @media #{$tablet-portrait} {
+        display: inline-block;
+        vertical-align: top;
+    }
+}
+
+.slider-reviews__arrow-left {
+    transform: rotate(180deg);
+    margin-right: 30px;
 }

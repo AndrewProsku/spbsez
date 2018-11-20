@@ -302,7 +302,7 @@
         <div class="l-home-resident__more-about">
             <div class="l-home-resident__more-about-text">
                 <p>
-                    Стать резидентом Особой экономической зоны технико-внедренческого типа «Санкт-Петербург» могут как индивидуальные предприниматели, так и коммерческие организации, зарегистрированные <a href="#" class="b-link-line">в соответствии с законодательством Российской&nbsp;Федерации</a>
+                    Стать резидентом Особой экономической зоны технико-внедренческого типа «Санкт-Петербург» могут как индивидуальные предприниматели, так и коммерческие организации, зарегистрированные <a href="#" class="b-link-line-two">в соответствии с законодательством Российской&nbsp;Федерации</a>
                 </p>
             </div>
             {#Для заблоченной кнопки добавить класс is_disabled#}
@@ -312,5 +312,130 @@
         </div>
     </div>
 
+    {# Блок наши резиденты #}
+
+    <div class="l-home-our-resident l-home__block">
+        <h2>Резиденты</h2>
+        {#{% include "../components/slider/slider.twig" with %}#}
+        <div class="b-slider__wrapper">
+            <div class="b-slider__block-wrapper">
+                <div class="b-slider__block">
+                    <div class="b-slider__item">
+                        <div class="b-slider__item-logo">
+                            <img src="/images/home/biocad.jpg" alt="Биокад">
+                        </div>
+                        <div class="b-slider__item-desc">
+                            <p class="b-slider__item-title">
+                                Биокад
+                            </p>
+                            <p class="b-slider__item-text">
+                                Фармацевтика и биотехнологии
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="b-slider__item">
+                        <div class="b-slider__item-logo">
+                            <img src="/images/home/laser-sistem.jpg" alt="Лазерные системы">
+                        </div>
+                        <div class="b-slider__item-desc">
+                            <p class="b-slider__item-title">
+                                Лазерные системы
+                            </p>
+                            <p class="b-slider__item-text">
+                                Приборостроение
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="b-slider__item">
+                        <div class="b-slider__item-logo">
+                            <img src="/images/home/racurs.jpg" alt="Ракурс-инжиниринг">
+                        </div>
+                        <div class="b-slider__item-desc">
+                            <p class="b-slider__item-title">
+                                Ракурс-инжиниринг
+                            </p>
+                            <p class="b-slider__item-text">
+                                Микроэлектроника
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="b-slider__arrows">
+                <button class="b-slider__arrow slider__arrow-left">
+                    <img src="/images/home/slide-arrow.svg" alt="стрелка влево">
+                </button>
+                <button class="b-slider__arrow slider__arrow-right">
+                    <img src="/images/home/slide-arrow.svg" alt="стрелка вправо">
+                </button>
+            </div>
+
+            <div class="b-slider__dots">
+                <div class="b-slider__dot b-slider__dot_is_active"></div>
+                <div class="b-slider__dot"></div>
+                <div class="b-slider__dot"></div>
+            </div>
+
+        </div>
+
+        <div class="l-home__more">
+            <a href="#" class="button">Все резиденты</a>
+        </div>
+    </div>
+
+    {#Блок отзывы#}
+
+    <div class="l-home-reviews">
+        <div class="b-slider-reviews__wrapper">
+            <div class="b-slider-reviews__block-wrapper">
+                <div class="b-slider-reviews__block">
+                    <div class="b-slider-reviews__item">
+                        <div class="b-slider-reviews__item-image" style="background-image:url('/images/home/review-img.jpg')"></div>
+                        <div class="b-slider-reviews__person">
+                            <div class="b-slider-reviews__person-img">
+                                <img src="/images/home/review-person.png" alt="картинка">
+                                <div class="b-slider-reviews__person-name-wrap">
+                                    <div class="b-slider-reviews__person-name">
+                                        Георгий Побелянский
+                                    </div>
+                                    <p>
+                                        генеральный директор фармацевтической
+                                        компании «ВЕРТЕКС»
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="b-slider-reviews__person-content">
+                                <div class="b-slider-reviews__person-text">
+                                    Очевидные преимущества для резидентов ОЭЗ «Санкт-Петербург» — преференции и льготы, стоимость земельного участка ниже среднерыночной стоимости, создание инженерной инфраструктуры на территории зоны за счет городских ресурсов, продление срока действия особой экономической зоны до 2054 года.
+                                </div>
+                                <a href="#" class="b-slider-reviews__person-link b-link-line-two">
+                                    Отзыв полностью
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="b-slider-reviews__arrows">
+                <button class="b-slider-reviews__arrow slider-reviews__arrow-left">
+                    <img src="/images/home/slide-arrow-white.svg" alt="стрелка влево">
+                </button>
+                <button class="b-slider-reviews__arrow slider-reviews__arrow-right">
+                    <img src="/images/home/slide-arrow-white.svg" alt="стрелка вправо">
+                </button>
+            </div>
+
+            <div class="b-slider__dots">
+                <div class="b-slider__dot b-slider__dot_is_active"></div>
+                <div class="b-slider__dot"></div>
+                <div class="b-slider__dot"></div>
+            </div>
+        </div>
+
+    </div>
 
 {% endblock %}
