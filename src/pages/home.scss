@@ -1610,3 +1610,203 @@ button {
         }
     }
 }
+
+/*====================================
+  Блок Подвал
+ =====================================*/
+
+.b-footer {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(top, green);
+    @include padding-level(bottom, cyan);
+    position: relative;
+    background-image: linear-gradient(to right, $blue 0%, $violet 100%);
+
+    @media #{$laptop} {
+        @include row();
+        @include prefix(1, 36);
+        @include suffix(1, 36);
+        padding-bottom: 0;
+    }
+}
+
+.b-footer__left {
+    display: none;
+
+    @media #{$laptop} {
+        display: block;
+        @include column(7, 34);
+        @include prefix(1, 34);
+        @include suffix(1, 34);
+    }
+
+    @media #{$fullhd} {
+        @include suffix(2, 34);
+        margin-top: -15px;
+    }
+}
+
+.b-footer__logo {
+    display: block;
+
+    @media #{$fullhd} {
+        max-width: 225px;
+    }
+}
+
+.b-footer__center {
+    @media #{$laptop} {
+        @include column(21, 34);
+        @include padding-level(bottom, cyan);
+    }
+
+    @media #{$laptop-wide} {
+        @include column(18, 34);
+    }
+
+    @media #{$fullhd} {
+        @include column(15, 34);
+    }
+}
+
+.b-footer__nav-list {
+    @include row();
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.b-footer__nav {
+    display: none;
+
+
+    @media #{$tablet-portrait} {
+        display: block;
+    }
+}
+
+.b-footer__nav-item {
+    @include font-size('p3');
+    font-family: $font-brutal-bold;
+    color: $white;
+}
+
+.b-footer__nav-link {
+    font-size: inherit;
+    color: inherit;
+}
+
+.b-footer__copyright {
+    @include margin-level(bottom, green);
+    @include font-size('p3');
+    color: $white;
+
+    @media #{$tablet-portrait} {
+        margin-bottom: 0;
+    }
+}
+
+.b-footer__copyright-text {
+    display: block;
+    margin-bottom: 10px;
+
+    @media #{$laptop} {
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 0;
+        margin-right: 30px;
+    }
+}
+
+.b-footer__copyright-link {
+    display: block;
+    color: inherit;
+    font-size: inherit;
+    opacity: .48;
+    margin-bottom: 10px;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+
+    @media #{$laptop} {
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 0;
+        margin-right: 30px;
+
+        &:last-of-type {
+            margin-right: 0;
+        }
+    }
+}
+
+.b-footer__right {
+    position: relative;
+
+    @media #{$laptop} {
+        @include column(6, 34);
+    }
+
+    @media #{$laptop-wide} {
+        @include column(9, 34);
+        @include suffix(1, 34);
+    }
+
+    @media #{$fullhd} {
+        @include column(12, 34);
+    }
+}
+
+.b-footer__right-wrap {
+    &:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    @media #{$tablet-portrait} {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        text-align: right;
+    }
+
+    @media #{$laptop} {
+        position: static;
+    }
+}
+.b-footer__social {
+    float: left;
+
+    @media #{$tablet-portrait} {
+        float: none;
+    }
+
+    @media #{$laptop} {
+        margin-top: -10px;
+    }
+}
+
+.b-footer__social-link {
+    fill: $white;
+    width: 40px;
+    height: 40px;
+    margin-right: 13px;
+}
+
+.b-footer__kelnik {
+    display: block;
+    float: right;
+    padding-top: 10px;
+
+    @media #{$tablet-portrait} {
+        float: none;
+        padding-top: 5px;
+    }
+
+    @media #{$laptop} {
+        padding-top: 15px;
+    }
+
+}
