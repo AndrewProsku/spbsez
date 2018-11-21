@@ -1391,3 +1391,197 @@ button {
     transform: rotate(180deg);
     margin-right: 30px;
 }
+
+/*====================================
+  Блок участки
+ =====================================*/
+
+.l-home-plots {
+    @include padding-level(top, pink);
+
+    @media #{$laptop} {
+        @include padding-level(top, violet);
+    }
+}
+
+.l-home-plots__title-mobile {
+    @include margin-level(bottom, blue);
+    font-size: 26px;
+
+    @media #{$tablet-portrait} {
+        font-size: 40px;
+    }
+
+    @media #{$laptop} {
+        display: none;
+    }
+}
+
+.l-home-plots__list {
+    @include push(2, 36);
+    @include post(2, 36);
+
+    @media #{$laptop} {
+        @include row();
+        @include push(3, 36);
+        @include post(3, 36);
+    }
+
+    @media #{$laptop-wide} {
+        @include push(5, 36);
+        @include post(5, 36);
+    }
+}
+
+.l-home-plots__item {
+    @media #{$tablet-portrait} {
+        &:last-child {
+            .l-home-plots__link {
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    @media #{$laptop} {
+        @include column(15, 30);
+        @include prefix(1, 30);
+
+        .l-home-plots__link {
+            margin-bottom: 20px;
+        }
+    }
+
+    @media #{$laptop-wide} {
+        @include column(13, 26);
+        @include prefix(1, 26);
+    }
+}
+
+.l-home-plots__content {
+    @include push(3, 32);
+    @include post(3, 32);
+
+    @media #{$tablet-portrait} {
+        @include push(2, 32);
+        @include post(2, 32);
+    }
+
+    @media #{$laptop} {
+        @include push(0, 32);
+        @include post(0, 32);
+    }
+}
+
+.l-home-plots__map {
+    @include margin-level(bottom, blue);
+    width: 100%;
+    height: 240px;
+    border: 1px solid $light-grey;
+    background-color: $light-grey;
+    
+    @media #{$tablet-portrait} {
+        display: none;
+    }
+}
+
+.l-home-plots__title {
+    @include font-size('h3');
+    @include margin-level(bottom, orange);
+
+    @media #{$tablet-portrait} {
+        @include margin-level(bottom, yellow);
+    }
+}
+
+.l-home-plots__desc {
+    @include font-size('p3');
+    @include margin-level(bottom, orange);
+    color: $black;
+
+    p {
+        font-size: inherit;
+    }
+
+    strong {
+        @include font-size('p1');
+
+        @media #{$tablet-portrait} {
+            display: block;
+        }
+    }
+
+    span {
+        opacity: .48;
+
+        @media #{$laptop-wide} {
+            display: block;
+            max-width: 130px;
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        @include margin-level(bottom, yellow);
+    }
+
+    @media #{$laptop} {
+        @include row();
+        flex-wrap: nowrap;
+    }
+}
+
+.l-home-plots__desc-item {
+    margin-bottom: 10px;
+
+    @media #{$tablet-portrait} {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+        margin-bottom: 0;
+    }
+
+    @media #{$laptop-wide} {
+        margin-right: 20px;
+    }
+}
+
+.l-home-plots__text {
+    @include font-size('p2');
+    @include margin-level(bottom, orange);
+
+    @media #{$tablet-portrait} {
+        @include margin-level(bottom, yellow);
+    }
+
+    @media #{$laptop-wide} {
+        min-height: 120px;
+    }
+
+    @media #{$fullhd} {
+        min-height: 90px;
+    }
+}
+
+.l-home-plots__link {
+    @include font-size('p3');
+    @include margin-level(bottom, blue);
+}
+
+
+.l-home-plots__all-map {
+    display: none;
+    width: 100%;
+    height: 460px;
+    background-color: #cecece;
+
+    @media #{$tablet-portrait} {
+        display: block;
+    }
+
+    @media #{$laptop} {
+        height: 790px;
+    }
+
+    @media #{$laptop-wide} {
+        height: 840px;
+    }
+}
