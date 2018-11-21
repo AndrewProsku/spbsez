@@ -5,9 +5,7 @@
 
     <header class="l-home__header">
         <div class="l-home__header-left">
-            <a href="/" class="b-logo__link" title="Вернуться на главную">
-                <img src="../images/home/logo.svg" alt="Особая Экономическая зона">
-            </a>
+            <a href="/" class="b-logo__link" title="Вернуться на главную"></a>
         </div>
         <div class="l-home__header-center">
             <nav class="b-nav">
@@ -81,6 +79,9 @@
     {# Главный экран #}
 
     <div class="l-home__main-screen">
+        <video class="l-home__main-screen-video" width="100%" height="auto" poster="/images/home/mainScreen_bg.jpg" autoplay loop >
+            <source src="/video/movie_1920.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        </video>
         <div class="b-social">
             <a href="#" class="b-social__link">
                 {% include "../sprites/svg/instagram.svg.twig" %}
@@ -316,61 +317,41 @@
 
     <div class="l-home-our-resident l-home__block">
         <h2>Резиденты</h2>
-        {#{% include "../components/slider/slider.twig" with %}#}
         <div class="b-slider__wrapper">
             <div class="b-slider__block-wrapper">
-                <div class="b-slider__block">
-                    <div class="b-slider__item">
-                        <div class="b-slider__item-logo">
-                            <img src="/images/home/biocad.jpg" alt="Биокад">
-                        </div>
-                        <div class="b-slider__item-desc">
-                            <p class="b-slider__item-title">
-                                Биокад
-                            </p>
-                            <p class="b-slider__item-text">
-                                Фармацевтика и биотехнологии
-                            </p>
-                        </div>
-                    </div>
+                <div class="b-slider__block  j-residents-slider">
+                    {% include "../components/slider/slider.twig" with {
+                        items: [{
+                            picture: {
+                                source : "/images/home/biocad.jpg",
+                                alt: "BioCAD",
+                            },
+                            title: "Биокад",
+                            text : "Фармацевтика и биотехнологии"
+                        },{
+                            picture: {
+                                source : "/images/home/laser-sistem.jpg",
+                                alt: "BioCAD",
+                            },
+                            title: "Лазерные системы",
+                            text : "Приборостроение"
+                        },{
+                            picture: {
+                                source : "/images/home/racurs.jpg",
+                                alt: "BioCAD",
+                            },
+                            title: "Ракурс-инжиниринг",
+                            text : "Микроэлектроника"
+                        },
+                        ]
+                    }%}
 
-                    <div class="b-slider__item">
-                        <div class="b-slider__item-logo">
-                            <img src="/images/home/laser-sistem.jpg" alt="Лазерные системы">
-                        </div>
-                        <div class="b-slider__item-desc">
-                            <p class="b-slider__item-title">
-                                Лазерные системы
-                            </p>
-                            <p class="b-slider__item-text">
-                                Приборостроение
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="b-slider__item">
-                        <div class="b-slider__item-logo">
-                            <img src="/images/home/racurs.jpg" alt="Ракурс-инжиниринг">
-                        </div>
-                        <div class="b-slider__item-desc">
-                            <p class="b-slider__item-title">
-                                Ракурс-инжиниринг
-                            </p>
-                            <p class="b-slider__item-text">
-                                Микроэлектроника
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="b-slider__arrows">
-                <button class="b-slider__arrow slider__arrow-left">
-                    <img src="/images/home/slide-arrow.svg" alt="стрелка влево">
-                </button>
-                <button class="b-slider__arrow slider__arrow-right">
-                    <img src="/images/home/slide-arrow.svg" alt="стрелка вправо">
-                </button>
+                <button class="b-slider__arrow slider__arrow-left"></button>
+                <button class="b-slider__arrow slider__arrow-right"></button>
             </div>
 
             <div class="b-slider__dots">
@@ -378,7 +359,6 @@
                 <div class="b-slider__dot"></div>
                 <div class="b-slider__dot"></div>
             </div>
-
         </div>
 
         <div class="l-home__more">
@@ -437,7 +417,7 @@
         </div>
     </div>
 
-    {#Блок участки#}
+    {# Блок участки #}
 
     <div class="l-home-plots">
         <div class="l-home-plots__title-mobile">
@@ -522,7 +502,49 @@
             </div>
         </div>
 
-        <div class="l-home-plots__all-map"></div>
+        <div class="l-home-plots__all-map">
+            <div class="l-home-plots__all-map-images">
+                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
+                    <span class="b-tooltip">
+                        Новоорловская
+                    </span>
+                </a>
+                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
+                    <span class="b-tooltip">
+                        Нойдорф
+                    </span>
+                </a>
+                <div class="l-home-plots__all-map-icon icon-port">
+                    <div class="b-tooltip">
+                        Порт
+                    </div>
+                </div>
+
+                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-one">
+                    <div class="b-tooltip">
+                        Вокзал
+                    </div>
+                </div>
+
+                <div class="l-home-plots__all-map-icon icon-center-city">
+                    <div class="b-tooltip">
+                        Центр&nbsp;города
+                    </div>
+                </div>
+
+                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
+                    <div class="b-tooltip">
+                        Ладожский&nbsp;вокзал
+                    </div>
+                </div>
+
+                <div class="l-home-plots__all-map-icon icon-airport">
+                    <div class="b-tooltip">
+                        Аэропорт
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     {# Блок партнеры #}
@@ -554,12 +576,8 @@
             </div>
 
             <div class="b-slider__arrows">
-                <button class="b-slider__arrow slider__arrow-left">
-                    <img src="/images/home/slide-arrow.svg" alt="стрелка влево">
-                </button>
-                <button class="b-slider__arrow slider__arrow-right">
-                    <img src="/images/home/slide-arrow.svg" alt="стрелка вправо">
-                </button>
+                <button class="b-slider__arrow slider__arrow-left"></button>
+                <button class="b-slider__arrow slider__arrow-right"></button>
             </div>
 
             <div class="b-slider__dots">

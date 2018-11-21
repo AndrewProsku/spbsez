@@ -195,7 +195,30 @@ button {
     }
 
     @media #{$fullhd} {
-    height: 100px;
+        height: 100px;
+    }
+
+    &.is-scroll {
+        background-color: $white;
+        box-shadow: 0 1px 0 $dark-white, 0 2px 6px $dark-white;
+
+        .b-logo__link {
+            background-image: url($path + 'logo-color.svg');
+        }
+
+        .b-nav__link,
+        .b-account__link,
+        .b-language__link {
+            color: $blue;
+        }
+
+        .b-account__link-icon {
+            fill: $blue;
+        }
+
+        .b-burger__line {
+            background-image: linear-gradient($gradient-linear);
+        }
     }
 }
 
@@ -215,7 +238,13 @@ button {
 
 .b-logo__link {
     display: block;
+    width: 100%;
+    height: 97px;
     max-width: 210px;
+    background-image: url($path + 'logo.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
 
     @media #{$laptop} {
         max-width: 100%;
@@ -377,6 +406,50 @@ button {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+
+    @media #{$laptop} {
+        background-image: none;
+    }
+}
+
+.l-home__main-screen-video {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -100;
+
+    @media #{$laptop} {
+        display: block;
+    }
+}
+
+
+@media (min-aspect-ratio: 16/9) {
+    .l-home__main-screen-video {
+        height: 300%;
+        top: -100%;
+    }
+}
+@media (max-aspect-ratio: 16/9) {
+    .l-home__main-screen-video {
+        width: 300%;
+        left: -200%;
+    }
+}
+/* Если есть поддержка object-fit (Chrome/Chrome для Android, Safari в iOS 8 и Opera), используем его: */
+@supports (object-fit: cover) {
+    .l-home__main-screen-video {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 .b-social {
@@ -969,157 +1042,6 @@ button {
     }
 }
 
-/*====================================
-  Блок слайдер резиденты
- =====================================*/
-
-.b-slider__wrapper {
-    position: relative;
-
-    @media #{$laptop} {
-        @include column(30, 32);
-        @include push(1, 32);
-        @include post(2, 32);
-    }
-
-    @media #{$laptop-wide} {
-        @include push(2.2, 32);
-        @include post(3.4, 32);
-    }
-}
-
-.b-slider__block-wrapper {
-    width: 288px;
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden;
-
-    @media #{$tablet-portrait} {
-        width: 576px;
-    }
-
-    @media #{$laptop} {
-        width: 100%;
-    }
-}
-
-.b-slider__block {
-    display: flex;
-    width: 3000px;
-    @include margin-level(bottom, orange);
-
-    @media #{$laptop} {
-        width: 100%;
-        margin-bottom: 0;
-    }
-}
-
-.b-slider__item {
-    width: 288px;
-    border: 1px solid $grey;
-    border-radius: 4px;
-    padding-bottom: 24px;
-
-    @media #{$laptop} {
-        @include column(10, 30);
-    }
-
-    @media #{$laptop-wide} {
-        padding-bottom: 45px;
-    }
-}
-
-.b-slider__item-logo {
-    text-align: center;
-    padding-top: 60px;
-    padding-bottom: 60px;
-
-    img {
-        height:58px;
-    }
-
-    @media #{$laptop-wide} {
-        padding-bottom: 40px;
-    }
-}
-
-.b-slider__item-desc {
-    text-align: center;
-}
-
-.b-slider__item-title {
-    @include font-size('p3');
-}
-
-.b-slider__item-text {
-    @include font-size('p4');
-    color: $black;
-    opacity: 0.48;
-}
-
-.b-slider__arrows {
-    @include margin-level(bottom, blue);
-    display: none;
-
-    @media #{$laptop} {
-        display: block;
-    }
-}
-
-.b-slider__arrow {
-    width: 80px;
-    height: 80px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    margin-top: -40px;
-    opacity: .5;
-
-    &:hover {
-        opacity: 1;
-    }
-
-    svg {
-        width: inherit;
-        height: inherit;
-    }
-}
-
-.slider__arrow-left {
-    left: 0;
-    transform: rotate(180deg);
-    @include push(-3, 30);
-}
-
-.slider__arrow-right {
-    right: 0;
-    @include post(-3, 30);
-}
-
-.b-slider__dots {
-    text-align: center;
-    @include margin-level(bottom, green);
-
-    @media #{$laptop} {
-        display: none;
-    }
-}
-
-.b-slider__dot{
-    display: inline-block;
-    vertical-align: middle;
-    width: 9px;
-    height: 9px;
-    background-color: $violet;
-    border: 2px solid $violet;
-    border-radius: 50%;
-}
-
-.b-slider__dot_is_active {
-    background-color: $white;
-}
 
 /*====================================
   Блок слайдер отзывы
@@ -1572,6 +1494,7 @@ button {
     width: 100%;
     height: 460px;
     background-color: #cecece;
+    overflow: auto;
 
     @media #{$tablet-portrait} {
         display: block;
@@ -1584,7 +1507,309 @@ button {
     @media #{$laptop-wide} {
         height: 840px;
     }
+
+    @media #{$laptop} {
+        overflow: hidden;
+    }
+
+    @media #{$fullhd} {
+        height: 800px;
+    }
 }
+
+.l-home-plots__all-map-images {
+    position: relative;
+    width: 960px;
+    height: 100%;
+    background-image: url($path + 'Map@2x-8.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    @media #{$tablet-landscape} {
+        width: 1280px;
+    }
+
+    @media #{$laptop} {
+        width: 1600px;
+        background-position: center right;
+    }
+
+    @media #{$laptop-wide} {
+        width: 1920px;
+    }
+
+    @media #{$fullhd} {
+        width: 100%;
+        background-position: top right;
+    }
+}
+
+.l-home-plots__all-map-build {
+    display: block;
+    position: absolute;
+
+    .b-tooltip {
+        position: absolute;
+        top: -30px;
+        color: $white;
+        background-color: $blue;
+        border-radius: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+}
+
+.l-home-plots__all-map-build-one {
+    width: 50px;
+    height: 35px;
+    left: 56%;
+    top: 12%;
+
+    .b-tooltip {
+        left: -100%;
+    }
+
+    @media #{$tablet-landscape} {
+        left: 55.5%;
+        top: 6%;
+    }
+
+    @media #{$laptop} {
+        width: 65px;
+        height: 50px;
+        left: 48.5%;
+        top: 13%;
+
+        .b-tooltip {
+            left: -60%;
+        }
+    }
+
+    @media #{$laptop-wide} {
+        width: 75px;
+        left: 54%;
+    }
+
+    @media #{$fullhd} {
+        left: 55%;
+        width: 90px;
+        height: 90px;
+    }
+}
+
+.l-home-plots__all-map-build-two {
+    width: 50px;
+    height: 50px;
+    top: 65%;
+    left: 27%;
+
+    .b-tooltip {
+        left: -50%;
+    }
+
+    @media #{$tablet-landscape} {
+        top: 69%;
+        left: 30%;
+    }
+
+    @media #{$laptop} {
+        width: 70px;
+        height: 88px;
+        top: 65%;
+        left: 18%;
+
+        .b-tooltip {
+            left: -15%;
+        }
+    }
+
+    @media #{$laptop-wide} {
+        left: 28%;
+    }
+
+    @media #{$fullhd} {
+        top: 67%;
+        left: 30%;
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.l-home-plots__all-map-icon {
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: absolute;
+    z-index: 1;
+
+    &.icon-port {
+        background-image: url($path + 'port.svg');
+        top: 36%;
+        left: 42%;
+
+        @media #{$tablet-landscape} {
+            top: 32%;
+            left: 43%;
+        }
+
+        @media #{$laptop} {
+            top: 37%;
+            left: 35%;
+        }
+
+        @media #{$laptop-wide} {
+            left: 41%;
+        }
+
+        @media #{$fullhd} {
+            left: 43%;
+        }
+    }
+
+    &.icon-rialway-station {
+        background-image: url($path + 'train.svg');
+
+        &.icon-rialway-station-one {
+            top: 44%;
+            left: 61%;
+            z-index: 3;
+
+            @media #{$tablet-landscape} {
+                top: 42%;
+            }
+
+            @media #{$laptop} {
+                top: 43%;
+                left: 56%;
+            }
+
+            @media #{$laptop-wide} {
+                left: 59%;
+            }
+
+            @media #{$fullhd} {
+                top: 45%;
+                left: 61%;
+            }
+        }
+
+        &.icon-rialway-station-two {
+            top: 35%;
+            left: 75%;
+            z-index: 1;
+
+            @media #{$tablet-landscape} {
+                top: 34%;
+                left: 72%;
+            }
+
+            @media #{$laptop} {
+                top: 35%;
+                left: 68%;
+            }
+
+            @media #{$laptop-wide} {
+                left: 72%;
+            }
+
+            @media #{$fullhd} {
+                top: 37%;
+                left: 73%;
+            }
+        }
+    }
+
+    &.icon-center-city {
+        background-image: url($path + 'center-city.svg');
+        top: 37%;
+        left: 67%;
+        z-index: 2;
+
+        @media #{$tablet-landscape} {
+            top: 34%;
+            left: 65%;
+        }
+
+        @media #{$laptop} {
+            top: 36%;
+            left: 60%;
+        }
+
+        @media #{$laptop-wide} {
+            left: 64%;
+        }
+
+        @media #{$fullhd} {
+            top: 37%;
+            left: 65%;
+        }
+    }
+
+    &.icon-airport {
+        background-image: url($path + 'airport.svg');
+        top: 65%;
+        left: 76%;
+
+        @media #{$tablet-landscape} {
+            top: 68%;
+            left: 72%;
+        }
+
+        @media #{$laptop} {
+            top: 65%;
+            left: 67%;
+        }
+
+        @media #{$laptop-wide} {
+            top: 66%;
+            left: 71%;
+        }
+
+        @media #{$fullhd} {
+            top: 68%;
+            left: 72%;
+        }
+    }
+
+    &:hover {
+        .b-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    .b-tooltip {
+        @include transition(all);
+        display: block;
+        position: absolute;
+        top: -15px;
+        left: 100%;
+        z-index: 2;
+        background-color:$white;
+        border-radius: 20px;
+        box-shadow: 0 2px 3px $grey, 0 4px 20px $dark-white;
+        padding: 5px 25px;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    @media #{$tablet-landscape} {
+        width: 60px;
+        height: 60px;
+    }
+
+    @media #{$laptop} {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
 
 /*====================================
   Блок Партнеры

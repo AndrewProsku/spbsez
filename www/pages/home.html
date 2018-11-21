@@ -35,9 +35,7 @@
 
     <header class="l-home__header">
         <div class="l-home__header-left">
-            <a href="/" class="b-logo__link" title="Вернуться на главную">
-                <img src="../images/home/logo.svg" alt="Особая Экономическая зона">
-            </a>
+            <a href="/" class="b-logo__link" title="Вернуться на главную"></a>
         </div>
         <div class="l-home__header-center">
             <nav class="b-nav">
@@ -108,6 +106,9 @@
     </header>
 
     <div class="l-home__main-screen">
+        <video class="l-home__main-screen-video" width="100%" height="auto" poster="/images/home/mainScreen_bg.jpg" autoplay loop >
+            <source src="/video/movie_1920.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        </video>
         <div class="b-social">
             <a href="#" class="b-social__link">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="47" height="48" viewBox="0 0 47 48"><defs><path id="sthka" d="M1867.32 116.342c11.345 0 20.576 9.231 20.576 20.577 0 11.346-9.23 20.577-20.577 20.577-11.346 0-20.576-9.23-20.576-20.577 0-11.346 9.23-20.577 20.576-20.577m-.005-2.742c-12.876 0-23.314 10.437-23.314 23.314s10.438 23.315 23.314 23.315c12.877 0 23.315-10.438 23.315-23.315s-10.438-23.314-23.315-23.314"/><path id="sthkb" d="M1873.293 127.47a3.467 3.467 0 0 1 3.463 3.463v11.959a3.468 3.468 0 0 1-3.463 3.464h-11.962a3.466 3.466 0 0 1-3.461-3.464v-11.96a3.464 3.464 0 0 1 3.461-3.462h11.962m-5.977 15.66c3.43 0 6.223-2.79 6.223-6.218a6.227 6.227 0 0 0-6.223-6.218c-3.43 0-6.222 2.79-6.222 6.218s2.792 6.219 6.222 6.219m6.415-11.144a1.476 1.476 0 0 0 0-2.95 1.475 1.475 0 0 0 0 2.95m-2.828 4.925a3.597 3.597 0 0 1-3.592 3.594 3.597 3.597 0 0 1-3.59-3.594 3.596 3.596 0 0 1 3.59-3.592 3.597 3.597 0 0 1 3.592 3.592"/></defs><g><g opacity=".48" transform="translate(-1844 -113)"><use  xlink:href="#sthka"/></g><g opacity=".48" transform="translate(-1844 -113)"><use xlink:href="#sthkb"/></g></g></svg> </a>
@@ -333,61 +334,55 @@
 
     <div class="l-home-our-resident l-home__block">
         <h2>Резиденты</h2>
-
         <div class="b-slider__wrapper">
             <div class="b-slider__block-wrapper">
-                <div class="b-slider__block">
-                    <div class="b-slider__item">
-                        <div class="b-slider__item-logo">
-                            <img src="/images/home/biocad.jpg" alt="Биокад">
-                        </div>
-                        <div class="b-slider__item-desc">
-                            <p class="b-slider__item-title">
-                                Биокад
-                            </p>
-                            <p class="b-slider__item-text">
-                                Фармацевтика и биотехнологии
-                            </p>
-                        </div>
-                    </div>
+                <div class="b-slider__block  j-residents-slider">
+                        <div class="b-slider__item">
+        <div class="b-slider__item-logo">
+            <img src="/images/home/biocad.jpg" alt="BioCAD">
+        </div>
+        <div class="b-slider__item-desc">
+            <p class="b-slider__item-title">
+                Биокад
+            </p>
+            <p class="b-slider__item-text">
+                Фармацевтика и биотехнологии
+            </p>
+        </div>
+    </div>
+    <div class="b-slider__item">
+        <div class="b-slider__item-logo">
+            <img src="/images/home/laser-sistem.jpg" alt="BioCAD">
+        </div>
+        <div class="b-slider__item-desc">
+            <p class="b-slider__item-title">
+                Лазерные системы
+            </p>
+            <p class="b-slider__item-text">
+                Приборостроение
+            </p>
+        </div>
+    </div>
+    <div class="b-slider__item">
+        <div class="b-slider__item-logo">
+            <img src="/images/home/racurs.jpg" alt="BioCAD">
+        </div>
+        <div class="b-slider__item-desc">
+            <p class="b-slider__item-title">
+                Ракурс-инжиниринг
+            </p>
+            <p class="b-slider__item-text">
+                Микроэлектроника
+            </p>
+        </div>
+    </div>
 
-                    <div class="b-slider__item">
-                        <div class="b-slider__item-logo">
-                            <img src="/images/home/laser-sistem.jpg" alt="Лазерные системы">
-                        </div>
-                        <div class="b-slider__item-desc">
-                            <p class="b-slider__item-title">
-                                Лазерные системы
-                            </p>
-                            <p class="b-slider__item-text">
-                                Приборостроение
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="b-slider__item">
-                        <div class="b-slider__item-logo">
-                            <img src="/images/home/racurs.jpg" alt="Ракурс-инжиниринг">
-                        </div>
-                        <div class="b-slider__item-desc">
-                            <p class="b-slider__item-title">
-                                Ракурс-инжиниринг
-                            </p>
-                            <p class="b-slider__item-text">
-                                Микроэлектроника
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="b-slider__arrows">
-                <button class="b-slider__arrow slider__arrow-left">
-                    <img src="/images/home/slide-arrow.svg" alt="стрелка влево">
-                </button>
-                <button class="b-slider__arrow slider__arrow-right">
-                    <img src="/images/home/slide-arrow.svg" alt="стрелка вправо">
-                </button>
+                <button class="b-slider__arrow slider__arrow-left"></button>
+                <button class="b-slider__arrow slider__arrow-right"></button>
             </div>
 
             <div class="b-slider__dots">
@@ -395,7 +390,6 @@
                 <div class="b-slider__dot"></div>
                 <div class="b-slider__dot"></div>
             </div>
-
         </div>
 
         <div class="l-home__more">
@@ -535,7 +529,49 @@
             </div>
         </div>
 
-        <div class="l-home-plots__all-map"></div>
+        <div class="l-home-plots__all-map">
+            <div class="l-home-plots__all-map-images">
+                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
+                    <span class="b-tooltip">
+                        Новоорловская
+                    </span>
+                </a>
+                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
+                    <span class="b-tooltip">
+                        Нойдорф
+                    </span>
+                </a>
+                <div class="l-home-plots__all-map-icon icon-port">
+                    <div class="b-tooltip">
+                        Порт
+                    </div>
+                </div>
+
+                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-one">
+                    <div class="b-tooltip">
+                        Вокзал
+                    </div>
+                </div>
+
+                <div class="l-home-plots__all-map-icon icon-center-city">
+                    <div class="b-tooltip">
+                        Центр города
+                    </div>
+                </div>
+
+                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
+                    <div class="b-tooltip">
+                        Ладожский вокзал
+                    </div>
+                </div>
+
+                <div class="l-home-plots__all-map-icon icon-airport">
+                    <div class="b-tooltip">
+                        Аэропорт
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="l-home-partners l-home__block">
@@ -565,12 +601,8 @@
             </div>
 
             <div class="b-slider__arrows">
-                <button class="b-slider__arrow slider__arrow-left">
-                    <img src="/images/home/slide-arrow.svg" alt="стрелка влево">
-                </button>
-                <button class="b-slider__arrow slider__arrow-right">
-                    <img src="/images/home/slide-arrow.svg" alt="стрелка вправо">
-                </button>
+                <button class="b-slider__arrow slider__arrow-left"></button>
+                <button class="b-slider__arrow slider__arrow-right"></button>
             </div>
 
             <div class="b-slider__dots">
