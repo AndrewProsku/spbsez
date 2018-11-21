@@ -84,6 +84,7 @@
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
+    "array-includes": "^3.0.3",
     "chosen-js": "^1.8.7",
     "detect-browser": "^3.0.1",
     "gmaps": "^0.4.24",

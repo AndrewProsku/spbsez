@@ -1,95 +1,181 @@
 // Зависимости
 @import "../../common/styles/mixins";
 
-$slider-trs-function: "ease";
-$slider-dot-background-color: #000000;
-$slider-dot-active-background-color: #0000ff;
-$slider-arrow-width: 20px;
-$slider-arrow-height: 30px;
-$slider-arrow-color: #ffffff;
-
-// Компонент
-.b-slider {
-    overflow: hidden;
-    opacity: 0;
-    position: relative;
-}
-
 .b-slider__wrapper {
-    transition-property: transform;
-    transition-timing-function: $slider-trs-function;
-    transform: translateZ(0); // хак, чтобы не прыгал текст
-    display: flex;
-    flex-flow: row nowrap;
-}
+    position: relative;
 
-.b-slider__item {
-    flex: 0 0 100%;
-    align-self: center;
-    cursor: grab;
+    @media #{$laptop} {
+        @include column(30, 32);
+        @include push(1, 32);
+        @include post(2, 32);
+    }
 
-    &:active {
-        cursor: grabbing;
+    @media #{$laptop-wide} {
+        @include push(2.2, 32);
+        @include post(3.4, 32);
     }
 }
 
-.b-slider__arrows {
-    padding-right: column(1);
-    padding-left: column(1);
-    width: 100%;
+.b-slider__block-wrapper {
+    width: 288px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+
+    @media #{$tablet-portrait} {
+        width: 576px;
+    }
+
+    @media #{$laptop} {
+        width: 100%;
+    }
+}
+
+.b-slider__block {
     display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    line-height: 0; // хак для svg, чтобы они занимали пространство иконки внутри
+    width: 3000px;
+    @include margin-level(bottom, orange);
+
+    @media #{$laptop} {
+        width: 100%;
+        margin-bottom: 0;
+    }
+}
+
+.b-slider__item {
+    width: 288px;
+    border: 1px solid $grey;
+    border-radius: 4px;
+    padding-bottom: 24px;
+
+    @media #{$laptop} {
+        @include column(10, 30);
+    }
+
+    @media #{$laptop-wide} {
+        padding-bottom: 45px;
+    }
+}
+
+.b-slider__item-logo {
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    img {
+        height: 58px;
+    }
+
+    @media #{$laptop-wide} {
+        padding-bottom: 40px;
+    }
+}
+
+.b-slider__item-desc {
+    text-align: center;
+}
+
+.b-slider__item-title {
+    @include font-size("p3");
+}
+
+.b-slider__item-text {
+    @include font-size("p4");
+    color: $black;
+    opacity: 0.48;
+}
+
+.b-slider__arrows {
+    @include margin-level(bottom, blue);
+    display: none;
+
+    @media #{$laptop} {
+        display: block;
+    }
 }
 
 .b-slider__arrow {
-    @include reset-button();
-    line-height: 0; // хак для svg, чтобы они занимали пространство иконки внутри
+    @include transition(all);
+    width: 80px;
+    height: 80px;
+    background: none;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    margin-top: -40px;
 
     svg {
-        width: $slider-arrow-width;
-        height: $slider-arrow-height;
-        fill: $slider-arrow-color;
+        width: inherit;
+        height: inherit;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+
+        &:hover {
+            background-image: url("/images/home/slider-arrow-left.svg");
+            cursor: default;
+        }
+    }
+}
+
+.slider__arrow-left {
+    @include push(-3, 30);
+    left: 0;
+    background-image: url("/images/home/slider-arrow-left.svg");
+
+    &:hover {
+        background-image: url("/images/home/slider-arrow-left_hover.svg");
+    }
+
+    &:disabled {
+        &:hover {
+            background-image: url("/images/home/slider-arrow-left.svg");
+            cursor: default;
+        }
+    }
+}
+
+.slider__arrow-right {
+    @include post(-3, 30);
+    right: 0;
+    background-image: url("/images/home/slider-arrow-right.svg");
+
+    &:hover {
+        background-image: url("/images/home/slider-arrow-right_hover.svg");
+    }
+
+    &:disabled {
+        &:hover {
+            background-image: url("/images/home/slider-arrow-right.svg");
+            cursor: default;
+        }
     }
 }
 
 .b-slider__dots {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
+    text-align: center;
+    @include margin-level(bottom, green);
+
+    @media #{$laptop} {
+        display: none;
+    }
 }
 
 .b-slider__dot {
-    @include reset-button();
-    width: 8px;
-    height: 8px;
-    margin-right: 17px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 9px;
+    height: 9px;
+    background-color: $violet;
+    border: 2px solid $violet;
     border-radius: 50%;
-    background-color: $slider-dot-background-color;
-
-    &:last-child {
-        margin-right: 0;
-    }
-
-    @media #{$fullhd} {
-        width: 11px;
-        height: 11px;
-    }
-
-    @media #{$ultra} {
-        width: 14px;
-        height: 14px;
-    }
-}
-
-// STATE
-.b-slider_is_ready {
-    opacity: 1;
 }
 
 .b-slider__dot_is_active {
-    background-color: $slider-dot-active-background-color;
+    background-color: $white;
 }
