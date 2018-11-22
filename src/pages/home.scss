@@ -187,6 +187,7 @@ button {
     justify-content: space-between;
     align-items: center;
     padding-right: 4%;
+    padding-bottom: 7px;
 
     @media #{$laptop} {
         height: 80px;
@@ -210,6 +211,12 @@ button {
         .b-account__link,
         .b-language__link {
             color: $blue;
+        }
+
+        .b-nav__link {
+            &:hover {
+                border-color: $blue;
+            }
         }
 
         .b-account__link-icon {
@@ -399,51 +406,63 @@ button {
  =====================================*/
 
 .l-home__main-screen {
+    @include transition(background-color);
     position: relative;
     width: 100%;
-    height: 100vh;
     background-image: url($path + 'mainScreen_bg.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    overflow: hidden;
 
     @media #{$laptop} {
         background-image: none;
     }
+
+    &.is-active-overlay {
+        background-color: rgba($dark-black, 0.3);
+
+        .b-main-screen-text-desc {
+            opacity: 1;
+        }
+    }
+}
+
+.l-home__main-screen-video-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -100;
 }
 
 .l-home__main-screen-video {
     display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
     width: auto;
     height: auto;
     min-width: 100%;
     min-height: 100%;
-    z-index: -100;
 
     @media #{$laptop} {
         display: block;
     }
-}
 
-
-@media (min-aspect-ratio: 16/9) {
-    .l-home__main-screen-video {
+    @media (min-aspect-ratio: 16/9) {
         height: 300%;
         top: -100%;
     }
-}
-@media (max-aspect-ratio: 16/9) {
-    .l-home__main-screen-video {
+
+    @media (max-aspect-ratio: 16/9) {
         width: 300%;
-        left: -200%;
+        left: -100%;
     }
-}
-/* Если есть поддержка object-fit (Chrome/Chrome для Android, Safari в iOS 8 и Opera), используем его: */
-@supports (object-fit: cover) {
-    .l-home__main-screen-video {
+
+    /* Если есть поддержка object-fit (Chrome/Chrome для Android, Safari в iOS 8 и Opera), используем его: */
+    @supports (object-fit: cover) {
         top: 0;
         left: 0;
         width: 100%;
@@ -451,6 +470,11 @@ button {
         object-fit: cover;
     }
 }
+
+
+
+
+
 
 .b-social {
     display: none;
@@ -487,18 +511,40 @@ button {
     }
 }
 
+.b-main-screen-content {
+    padding-top: 100vh;
+    margin-top: -162px;
+
+    @media #{$tablet-portrait} {
+        margin-top: -180px;
+    }
+
+    @media #{$laptop} {
+        margin-top: -240px;
+    }
+
+    @media #{$laptop-wide} {
+        margin-top: -305px;
+    }
+}
+
 .b-main-screen-text {
     @include row();
     @include padding-level(bottom, blue);
     @include prefix(2, 36);
     @include suffix(2, 36);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     max-width: 600px;
     color: $white;
 
+    h1 {
+        span {
+            display: block;
+
+            @media #{$tablet-portrait} {
+                display: inline;
+            }
+        }
+    }
 
     @media #{$tablet-portrait} {
         max-width: 920px;
@@ -506,16 +552,84 @@ button {
 
     @media #{$laptop} {
         @include prefix(3, 36);
-        max-width: 1300px;
+        max-width: 1070px;
     }
 
     @media #{$laptop-wide} {
         @include prefix(4, 36);
-        max-width: 100%;
+        max-width: 1450px;
     }
 
     @media #{$fullhd} {
-        max-width: 1550px;
+        max-width: 1600px;
+    }
+}
+
+.b-main-screen-text-desc {
+    @include font-size("h3");
+    @include margin-level(top, green);
+    @include transition(opacity);
+    transition-duration: 3s;
+    opacity: 0.4;
+}
+
+.b-main-screen__list {
+    @include row();
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    position: relative;
+    background-color: rgba($dark-black, 0.3);
+
+    &:before {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: rgba($white, 0.16);
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+}
+
+.b-main-screen__item {
+    @include column(30, 30);
+    @include prefix(1, 30);
+    @include padding-level(top, green);
+    @include padding-level(bottom, green);
+    color: $white;
+    border-top: 1px solid rgba($white, 0.3);
+    border-left: 1px solid rgba($white, 0.16);
+    border-right: 1px solid rgba($white, 0.16);
+
+    p {
+        @include font-size("p2");
+    }
+
+    strong {
+        display: block;
+        @include font-size("p1");
+    }
+
+    @media #{$tablet-portrait} {
+        @include column(15, 30);
+
+        &:first-child,
+        &:nth-child(3) {
+            border-right: 0;
+        }
+    }
+
+    @media #{$laptop} {
+        @include column(7.5, 30);
+
+        &:nth-child(2) {
+            border-right: 0;
+        }
     }
 }
 
@@ -524,8 +638,17 @@ button {
   Блок Льготы и преференции
  =====================================*/
 
-.l-home__block {
+/* фиксированный background */
+.l-home__block_bg_fixed {
     background-color: $white;
+    background-image: url($path + 'line-bg2.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.l-home__block {
     @include padding-level(top, pink);
     @include padding-level(bottom, pink);
     @include suffix(2, 36);
@@ -648,10 +771,7 @@ button {
  =====================================*/
 
 .l-home__news {
-    background-image: url($path + 'line-bg.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+
 }
 
 .l-home__news-main {
@@ -1042,6 +1162,13 @@ button {
     }
 }
 
+/*====================================
+  Блок слайдер резиденты
+ =====================================*/
+
+.l-home-our-resident {
+    background-color: $white;
+}
 
 /*====================================
   Блок слайдер отзывы
@@ -1286,6 +1413,7 @@ button {
 }
 
 .b-slider-reviews__arrow {
+    @include transition(opacity);
     display: none;
     width: 48px;
     height: 48px;
@@ -1295,7 +1423,11 @@ button {
     padding: 0;
 
     &:hover {
-        opacity: 1;
+        opacity: 0.7;
+    }
+
+    &:disabled {
+        opacity: 0.4;
     }
 
     img {
@@ -1320,6 +1452,7 @@ button {
 
 .l-home-plots {
     @include padding-level(top, pink);
+    background-color: $white;
 
     @media #{$laptop} {
         @include padding-level(top, violet);
@@ -1985,9 +2118,12 @@ button {
  =====================================*/
 
 .l-home-partners {
+    background-color: $white;
+
     .b-slider__item {
         padding-bottom: 0;
     }
+
     .b-slider__item-logo {
         padding-top: 80px;
         padding-bottom: 80px;
@@ -2016,6 +2152,7 @@ button {
     @include padding-level(bottom, cyan);
     position: relative;
     background-image: linear-gradient(to right, $blue 0%, $violet 100%);
+    overflow: hidden;
 
     @media #{$laptop} {
         @include row();
@@ -2187,6 +2324,10 @@ button {
     width: 40px;
     height: 40px;
     margin-right: 13px;
+
+    &:last-child {
+        margin-right: 0;
+    }
 }
 
 .b-footer__kelnik {
