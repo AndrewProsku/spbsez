@@ -657,9 +657,13 @@ button {
     background-color: $white;
     background-image: url($path + 'line-bg2.svg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-attachment: fixed;
+
+    @media #{$laptop} {
+        background-size: cover;
+    }
 }
 
 .l-home__block {
