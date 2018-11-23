@@ -10,8 +10,12 @@
 
 // Layout's
 @import "../../pages/layout/layout";
+@import "../../pages/layout/_header";
+@import "../../pages/layout/_footer";
 @import "../../pages/home";
+@import "../../pages/contacts";
 
 // Components
 
 @import "../../components/slider/slider"
+
