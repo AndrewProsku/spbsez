@@ -3,27 +3,34 @@
  =====================================*/
 $path: '/images/home/';
 
+body {
+    color: $black;
+}
 
 a {
     position: relative;
     color: $blue;
     text-decoration: none;
-    background-image: linear-gradient(to top, rgba(63, 63, 153, 0.12) 0%, rgba(127, 81, 163, 0.12) 40%, rgba(127, 81, 163, 0) 30%);
-    padding-bottom: 2px;
-    padding-right: 3px;
 
     &.b-link-line {
-        background-image: linear-gradient(to top, rgba(63, 63, 153, 0.12) 0%, rgba(127, 81, 163, 0.12) 40%, rgba(127, 81, 163, 0) 30%);
-        position: relative;
-        padding-bottom: 2px;
+        background-image: linear-gradient(to top, rgba($blue, 0.12) 0%, rgba($violet, 0.12) 40%, rgba($violet, 0) 30%);
+        padding-bottom: 3px;
         padding-right: 3px;
+
+        &:hover {
+            background-image: linear-gradient(to top, rgba($blue, 1) 2px, rgba($violet, 0) 10%, rgba(127, 81, 163, 0) 70%);
+        }
     }
 
     &.b-link-line-two {
         background-image: linear-gradient(to top, rgba($white, 0.12) 10%, rgba($white, 0.12) 50%, rgba($white, 0) 30%);
         position: relative;
-        padding-bottom: 2px;
+        padding-bottom: 3px;
         padding-right: 3px;
+
+        &:hover {
+            background-image: linear-gradient(to top, rgba($white, 0.6) 2px, rgba($blue, 0) 10%, rgba(127, 81, 163, 0) 70%);
+        }
     }
 }
 
@@ -34,7 +41,7 @@ button {
 }
 
 .button {
-    @include transition(all);
+    @include transition(background);
     position: relative;
     display: block;
     width: 100%;
@@ -51,6 +58,7 @@ button {
     cursor: pointer;
 
     &:after {
+        @include transition(right);
         content: '';
         width: 18px;
         height: 9px;
@@ -59,7 +67,6 @@ button {
         top: 50%;
         right: 9%;
         margin-top: -5px;
-        @include transition(right);
     }
 
     &:active {
@@ -68,6 +75,7 @@ button {
 
     &:hover {
         background-position: right center;
+
         &:after {
             width: 9px;
             height: 9px;
@@ -76,8 +84,8 @@ button {
         }
     }
 
-    // Для заблоченной кнопки добавить класс is_disable
-    &.is_disabled {
+    // Для заблоченной кнопки добавить класс is-disable
+    &.is-disabled {
         background: $grey;
         color: rgba($blue, 0.48);
         cursor: default;
@@ -104,7 +112,7 @@ button {
 }
 
 .button_theme_white {
-    @include transition(all);
+    @include transition(color);
     position: relative;
     display: block;
     width: 100%;
@@ -120,6 +128,7 @@ button {
     cursor: pointer;
 
     &:after {
+        @include transition(right);
         content: '';
         width: 18px;
         height: 9px;
@@ -128,7 +137,6 @@ button {
         top: 50%;
         right: 9%;
         margin-top: -5px;
-        @include transition(right);
     }
 
     &:hover {
@@ -174,6 +182,32 @@ button {
     }
 }
 
+.label-bg {
+    @include transition(background);
+    @include font-size("p4");
+    display: inline-block;
+    vertical-align: top;
+    background-color: $bg-grey;
+    background-image: none;
+    border-radius: 20px;
+    padding-top: 5px;
+    padding-right: 13px;
+    padding-bottom: 5px;
+    padding-left: 13px;
+
+    &:hover {
+        background-color: $light-grey;
+    }
+
+    &:active {
+        box-shadow: inset 0 1px 2px rgba($blue, 0.32);
+    }
+
+    @media #{$laptop} {
+        padding-right: 22px;
+        padding-left: 22px;
+    }
+}
 
 
 
@@ -185,10 +219,6 @@ button {
     @include transition(background-color);
     position: relative;
     width: 100%;
-    background-image: url($path + 'mainScreen_bg.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     overflow: hidden;
 
     @media #{$laptop} {
@@ -212,8 +242,16 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
+    background-image: url($path + 'mainScreen_bg.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
     overflow: hidden;
     z-index: -100;
+
+    @media #{$laptop} {
+        background-image: none;
+    }
 }
 
 .l-home__main-screen-video {
@@ -227,15 +265,13 @@ button {
         display: block;
     }
 
-    @media (min-aspect-ratio: 16/9) {
+    @media (min-aspect-ratio: 16/9) and (max-aspect-ratio: 16/9) {
+        width: 300%;
         height: 300%;
         top: -100%;
-    }
-
-    @media (max-aspect-ratio: 16/9) {
-        width: 300%;
         left: -100%;
     }
+
 
     /* Если есть поддержка object-fit (Chrome/Chrome для Android, Safari в iOS 8 и Opera), используем его: */
     @supports (object-fit: cover) {
@@ -248,10 +284,14 @@ button {
 }
 
 .b-social {
+    @include column(2, 36);
     display: none;
-    position: absolute;
+    width: 100%;
+    position: fixed;
     top: 88px;
-    right: 1.5%;
+    right: 0;
+    text-align: center;
+    z-index: 0;
 
     @media #{$laptop} {
         display: block;
@@ -259,7 +299,6 @@ button {
 
     @media #{$fullhd} {
         top: 113px;
-        right: 1.4%;
     }
 }
 .b-social__link {
@@ -337,6 +376,10 @@ button {
     }
 }
 
+.b-main-screen-text-title-label {
+    opacity: 0.72;
+}
+
 .b-main-screen-text-desc {
     @include font-size("h3");
     @include margin-level(top, green);
@@ -383,8 +426,8 @@ button {
     }
 
     strong {
-        display: block;
         @include font-size("p1");
+        display: block;
     }
 
     @media #{$tablet-portrait} {
@@ -425,6 +468,7 @@ button {
 }
 
 .l-home__block {
+    @include column(36, 36);
     @include padding-level(top, pink);
     @include padding-level(bottom, pink);
     @include suffix(2, 36);
@@ -436,19 +480,20 @@ button {
     }
 
     @media #{$laptop} {
-        @include suffix(2, 36);
         @include prefix(3, 36);
+        @include suffix(3, 36);
     }
 
     @media #{$laptop-wide} {
-        @include suffix(3, 36);
         @include prefix(4, 36);
-    }
-
-    @media #{$fullhd} {
         @include suffix(4, 36);
     }
 
+}
+
+.l-home__privileges {
+    position: relative;
+    z-index: 1;
 }
 
 .l-home__privileges-list {
@@ -470,6 +515,11 @@ button {
 
 .l-home__privileges-item {
     @include margin-level(bottom, green);
+
+    &:last-child,
+    &:nth-child(5) {
+        margin-bottom: 0;
+    }
 
     @media #{$tablet-portrait} {
         @include column(half);
@@ -520,12 +570,12 @@ button {
 }
 
 .l-home__privileges-text-title {
-      @include font-size('p1');
-      margin-bottom: 3px;
+    @include font-size('p1');
 }
 
 .l-home__privileges-text-block {
     @include font-size('p2');
+    padding-top: 16px;
 }
 
 .l-home__more {
@@ -534,11 +584,11 @@ button {
     }
 
     @media #{$laptop} {
-        @include prefix(1, 32);
+        @include prefix(1, 30);
     }
 
     @media #{$laptop-wide} {
-        @include prefix(2, 30);
+        @include prefix(2, 28);
     }
 }
 
@@ -547,27 +597,41 @@ button {
  =====================================*/
 
 .l-home__news {
+    position: relative;
+    z-index: 1;
+    background-color: $bg-grey;
+    background-image: url($path + 'line-bg2.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-attachment: fixed;
 
+    @media #{$laptop} {
+        background-size: cover;
+    }
 }
 
 .l-home__news-main {
     @media #{$tablet-portrait} {
         @include row();
         @include push(2, 32);
+        @include post(2, 32);
         @include margin-level(bottom, yellow);
     }
 
     @media #{$laptop} {
         @include push(1, 32);
+        @include post(1, 32);
       }
 
     @media #{$laptop-wide} {
         @include push(2, 28);
+        @include post(2, 28);
     }
 }
 
 .l-home__news-main-img {
-      @include column(36, 36);
+      @include column(32, 32);
       display: block;
       height: 210px;
       background-repeat: no-repeat;
@@ -575,16 +639,13 @@ button {
       background-position: center center;
 
     @media #{$tablet-portrait} {
-        @include column(10, 30);
+        @include column(9.4, 28);
         height: auto;
-    }
-
-    @media #{$laptop} {
-        @include column(9.4, 30);
+        border-radius: 4px 0 0 4px;
     }
 
     @media #{$laptop-wide} {
-        @include column(8, 27);
+        @include column(8, 24);
     }
 }
 
@@ -599,20 +660,17 @@ button {
       background-color: $white;
 
     @media #{$tablet-portrait} {
-        @include column(18, 30);
-        @include prefix(1.5, 32);
-        @include suffix(1.5, 32);
+        @include column(18.6, 28);
+        @include prefix(1.5, 28);
+        @include suffix(1.5, 28);
         border-top: 1px solid $light-grey;
-    }
-
-    @media #{$laptop} {
-        @include column(18.7, 30);
+        border-radius: 0 4px 4px 0;
     }
 
     @media #{$laptop-wide} {
-        @include column(17.7, 30);
-        @include prefix(2, 32);
-        @include suffix(2, 32);
+        @include column(16, 24);
+        @include prefix(2, 24);
+        @include suffix(2, 24);
     }
 }
 
@@ -632,11 +690,11 @@ button {
 }
 
 .l-home__news-date {
-      position: relative;
-      display: inline-block;
-      vertical-align: middle;
-      padding-left: 20px;
-      margin-right: 20%;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 28px;
+    margin-right: 8px;
 
     &:before {
         content: '';
@@ -648,15 +706,16 @@ button {
         background-position: center center;
         position: absolute;
         top: 50%;
-        left: 3px;
+        left: 10px;
         margin-top: -6px;
     }
 
     @media #{$laptop} {
         padding-left: 30px;
+        margin-right: 16px;
 
         &:before {
-            left: 5px;
+            left: 10px;
         }
     }
 }
@@ -667,17 +726,21 @@ button {
 
     @media #{$tablet-portrait} {
         @include row();
-        @include prefix(2, 32);
-        @include suffix(2, 32);
+        @include push(2, 32);
+        @include post(2, 32);
+        border: 1px solid $light-grey;
+        border-radius: 4px;
+        overflow: hidden;
     }
 
     @media #{$laptop} {
-        @include prefix(1, 32);
+        @include push(1, 30);
+        @include post(1, 30);
     }
 
     @media #{$laptop-wide} {
-        @include column(34.5, 36);
-        @include prefix(2, 28);
+        @include push(2, 28);
+        @include post(2, 28);
     }
 }
 
@@ -694,7 +757,12 @@ button {
         @include column(half);
         @include prefix(2, 32);
         @include suffix(2, 32);
-        border-top: 1px solid $light-grey;
+        border-bottom: 0;
+        border-right: 0;
+
+        &:first-child {
+            border-left: 0;
+        }
 
         &:nth-child(3) {
             display: none;
@@ -703,12 +771,17 @@ button {
 
     @media #{$laptop} {
         @include column(thrid);
-        @include prefix(1, 32);
-        @include suffix(1, 32);
+        @include prefix(1, 28);
+        @include suffix(1, 28);
 
         &:nth-child(3) {
             display: block;
         }
+    }
+
+    @media #{$laptop-wide} {
+        @include prefix(1, 24);
+        @include suffix(1, 24);
     }
 }
 
@@ -735,9 +808,12 @@ button {
  =====================================*/
 
 .l-home-resident {
-    @include padding-level(top, violet);
-    @include padding-level(bottom, violet);
+    @include padding-level(top, pink);
+    @include padding-level(bottom, pink);
+    position: relative;
+    z-index: 1;
     background-image: linear-gradient($gradient-0deg);
+
 
     h2 {
         max-width: 350px;
@@ -786,7 +862,7 @@ button {
     color: $white;
 
     &:before {
-        font-family: $font-brutal-bold;
+        font-family: $font-bold;
         font-size: 90px;
         color: $white;
         line-height: 1;
@@ -841,7 +917,7 @@ button {
 
 .l-home-resident__item-title {
     @include margin-level(bottom, orange);
-    font-family: $font-brutal-bold;
+    font-family: $font-bold;
     font-size: 24px;
     padding-top: 15px;
 
@@ -943,18 +1019,27 @@ button {
  =====================================*/
 
 .l-home-our-resident {
-    background-color: $white;
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
 }
 
 /*====================================
   Блок слайдер отзывы
  =====================================*/
 
+.l-home-reviews {
+    position: relative;
+    z-index: 1;
+}
+
 .b-slider-reviews__wrapper {
     position: relative;
 
     .b-slider__dots {
-        margin-top: -45px;
+        position: relative;
+        top: -20px;
+        margin-top: -25px;
         margin-bottom: 0;
     }
 
@@ -978,6 +1063,11 @@ button {
     @media #{$tablet-portrait} {
         @include row();
     }
+
+    @media #{$laptop} {
+        height: 100vh;
+        align-items: center;
+    }
 }
 
 .b-slider-reviews__item-image {
@@ -993,11 +1083,12 @@ button {
 
     @media #{$laptop} {
         @include column(36, 36);
-        min-height: 750px;
-    }
-
-    @media #{$laptop-wide} {
-        min-height: 885px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -1008,19 +1099,21 @@ button {
 
     @media #{$laptop} {
         @include column(13.5, 36);
+        @include push(20.5, 36);
         @include post(2, 36);
-        position: absolute;
-        top: 30px;
-        right: 0;
-        bottom: 30px;
+        background-color: $blue;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
 
     @media #{$laptop-wide} {
         @include column(10, 36);
+        @include push(24, 36);
     }
 
     @media #{$fullhd} {
         @include column(9, 36);
+        @include push(25, 36);
     }
 }
 
@@ -1060,6 +1153,8 @@ button {
     p {
         @include column(24, 36);
         font-size: 16px;
+        line-height: 21px;
+        opacity: 0.8;
     }
 
     @media #{$tablet-portrait} {
@@ -1069,21 +1164,24 @@ button {
 
         p {
             @include column(18, 18);
+            font-size: 14px;
+        }
+    }
+
+    @media #{$laptop} {
+        p {
+            font-size: 16px;
         }
     }
 
     @media #{$laptop-wide} {
         @include prefix(1, 10);
         @include suffix(1, 10);
-
-        p {
-            font-size: 16px;
-        }
     }
 }
 
 .b-slider-reviews__person-name {
-    font-family: $font-brutal-bold;
+    font-family: $font-bold;
     font-size: 24px;
     margin-bottom: 5px;
 
@@ -1109,7 +1207,6 @@ button {
     }
 
     @media #{$laptop} {
-        height: 54%;
         @include prefix(1, 18);
         @include suffix(1, 18);
     }
@@ -1123,7 +1220,8 @@ button {
     overflow: hidden;
     margin-bottom: 5px;
 
-    &:before, &:after {
+    &:before,
+    &:after {
         font-size: 120px;
         color: $white;
         line-height: 0.6;
@@ -1156,21 +1254,27 @@ button {
     }
 
     @media #{$laptop} {
-        padding-top: 35px;
         @include prefix(1, 18);
         @include suffix(1, 18);
+        height: auto;
+        max-height: 347px;
+        padding-top: 35px;
     }
 
     @media #{$laptop-wide} {
-        height: 354px;
+        max-height: 518px;
+    }
+
+    @media #{$fullhd} {
+        max-height: 572px;
     }
 }
 
 .b-slider-reviews__person-link {
     @include margin-level(bottom, dark-yellow);
+    @include font-size('p2');
     display: inline-block;
     color: $white;
-    @include font-size('p2');
 
     @media #{$tablet-portrait} {
         margin-bottom: 0;
@@ -1215,6 +1319,11 @@ button {
         display: inline-block;
         vertical-align: top;
     }
+
+    @media #{$laptop} {
+        width: 64px;
+        height: 64px;
+    }
 }
 
 .slider-reviews__arrow-left {
@@ -1228,7 +1337,9 @@ button {
 
 .l-home-plots {
     @include padding-level(top, pink);
-    background-color: $white;
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
 
     @media #{$laptop} {
         @include padding-level(top, violet);
@@ -1344,7 +1455,7 @@ button {
     }
 }
 
-.l-home-plots__map-one {
+.l-home-plots__map-neudorf {
     .l-home-plots__all-map-images {
         height: 300px;
     }
@@ -1376,7 +1487,7 @@ button {
     }
 }
 
-.l-home-plots__map-two {
+.l-home-plots__map-novoorlovskaya {
     .l-home-plots__all-map-images {
         width: 460px;
         height: 238px;
@@ -1489,6 +1600,11 @@ button {
     @include font-size('p2');
     @include margin-level(bottom, orange);
 
+    p {
+        font-size: inherit;
+        line-height: inherit;
+    }
+
     @media #{$tablet-portrait} {
         @include margin-level(bottom, yellow);
     }
@@ -1512,7 +1628,7 @@ button {
     display: none;
     width: 100%;
     height: 460px;
-    background-color: #cecece;
+    background-color: $grey;
     overflow: auto;
 
     @media #{$tablet-portrait} {
@@ -1521,18 +1637,19 @@ button {
 
     @media #{$laptop} {
         height: 790px;
+        overflow: hidden;
     }
 
     @media #{$laptop-wide} {
         height: 840px;
     }
 
-    @media #{$laptop} {
-        overflow: hidden;
-    }
-
     @media #{$fullhd} {
         height: 1000px;
+    }
+
+    @media only screen and (min-width: 2330px) {
+        height: 1070px;
     }
 }
 
@@ -1576,21 +1693,29 @@ button {
 .l-home-plots__all-map-build {
     display: block;
     position: absolute;
+    background-image: none;
 
     .b-tooltip {
         position: absolute;
         top: -30px;
+        font-family: $font-bold;
+        font-size: 16px;
         color: $white;
         background-color: $blue;
         border-radius: 30px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 3px;
-        padding-bottom: 3px;
+        padding: 3px 10px;
+    }
+
+    @media #{$laptop} {
+        .b-tooltip {
+            font-size: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
     }
 }
 
-.l-home-plots__all-map-build-one {
+.l-home-plots__all-map-build-novoorlovskaya {
     width: 50px;
     height: 35px;
     left: 56%;
@@ -1606,10 +1731,10 @@ button {
     }
 
     @media #{$laptop} {
-        width: 65px;
-        height: 50px;
-        left: 48.5%;
-        top: 13%;
+        width: 87px;
+        height: 69px;
+        left: 47.5%;
+        top: 11%;
 
         .b-tooltip {
             left: -60%;
@@ -1619,13 +1744,14 @@ button {
     @media #{$laptop-wide} {
         width: 75px;
         left: 54%;
+        top: 11%;
     }
 
     @media #{$fullhd} {
         left: 58%;
-        top: 10%;
-        width: 90px;
-        height: 90px;
+        top: 11%;
+        width: 110px;
+        height: 78px;
 
         .b-tooltip {
             left: -35%;
@@ -1633,7 +1759,7 @@ button {
     }
 }
 
-.l-home-plots__all-map-build-two {
+.l-home-plots__all-map-build-neudorf {
     width: 50px;
     height: 50px;
     top: 65%;
@@ -1649,9 +1775,9 @@ button {
     }
 
     @media #{$laptop} {
-        width: 70px;
+        width: 85px;
         height: 88px;
-        top: 65%;
+        top: 64%;
         left: 18%;
 
         .b-tooltip {
@@ -1660,7 +1786,10 @@ button {
     }
 
     @media #{$laptop-wide} {
-        left: 28%;
+        left: 27%;
+        top: 64%;
+        width: 95px;
+        height: 100px;
     }
 
     @media #{$fullhd} {
@@ -1668,6 +1797,10 @@ button {
         left: 20%;
         width: 100px;
         height: 100px;
+    }
+
+    @media only screen and (min-width: 2330px) {
+        left: 18%;
     }
 }
 
@@ -1681,7 +1814,6 @@ button {
     z-index: 1;
 
     &:after {
-        @include transition(all);
         content: "";
         width: 30px;
         height: 8px;
@@ -1691,8 +1823,8 @@ button {
         right: 0;
         margin: auto;
         border-radius: 50%;
-        border: 3px solid rgba(48, 64, 154, 0.04);
-        background-color: rgba(48, 64, 154, 0.1);
+        border: 3px solid rgba($blue, 0.04);
+        background-color: rgba($blue, 0.1);
         visibility: hidden;
         opacity: 0;
 
@@ -1861,7 +1993,6 @@ button {
     }
 
     .b-tooltip {
-        @include transition(all);
         display: block;
         position: absolute;
         top: -15px;
@@ -1881,7 +2012,6 @@ button {
     }
 
     @media #{$laptop} {
-        @include transition(background);
         width: 80px;
         height: 80px;
     }
@@ -1894,25 +2024,25 @@ button {
  =====================================*/
 
 .l-home-partners {
-    background-color: $white;
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
 
     .b-slider__item {
+        @include row();
+        justify-content: center;
+        align-items: center;
         padding-bottom: 0;
     }
 
     .b-slider__item-logo {
-        padding-top: 80px;
-        padding-bottom: 80px;
+        padding-top: 0;
+        padding-bottom: 0;
         padding-left: 15px;
         padding-right: 15px;
 
         img {
             height: auto;
-        }
-
-        @media #{$laptop} {
-            padding-top: 105px;
-            padding-bottom: 105px;
         }
     }
 }
