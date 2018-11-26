@@ -1,3 +1,11 @@
+.l-contacts {
+    background-image: url($path + 'line-bg2.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
 .l-contacts__map-wrapper {
     position: relative;
     margin-top: 60px;
@@ -37,9 +45,8 @@
 }
 
 .l-contacts__map-text {
-    @include prefix(2, 36);
-    @include suffix(2, 36);
     background-color: $white;
+    box-shadow: 0 20px 40px rgba($dark-grey, 0.4);
 
     p {
         font-size: inherit;
@@ -52,44 +59,58 @@
     @media #{$laptop} {
         @include column(12, 36);
         @include post(2, 36);
-        @include prefix(1.5, 36);
-        @include suffix(1.5, 36);
         @include margin-level(top, cyan);
         position: absolute;
         top: 0;
         right: 0;
         display: block;
-        box-shadow: 0 20px 40px rgba($dark-grey, 0.4);
         border-radius: 4px;
     }
 
     @media #{$fullhd} {
         @include column(8, 36);
-        @include prefix(1, 36);
-        @include suffix(1, 36);
     }
 }
 
 .l-contacts__map-text-item {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
     @include padding-level(top, yellow);
     @include padding-level(bottom, green);
 
+    &:first-child {
+        border-bottom: 1px solid $grey;
+    }
+
     @media #{$tablet-portrait} {
         @include column(16, 32);
+
+        &:first-child {
+            border-right: 1px solid $grey;
+            border-bottom: 0;
+        }
     }
 
     @media #{$laptop} {
         @include column(12, 12);
+        @include prefix(1.5, 11.5);
+        @include suffix(1.5, 11.5);
+
+        &:first-child {
+            border-bottom: 1px solid $grey;
+        }
     }
 
     @media #{$fullhd} {
         @include column(8, 8);
+        @include prefix(1, 8);
+        @include suffix(1, 8);
     }
 }
 
 .l-contacts__map-text-title {
     @include font-size("p2");
-    font-family: $font-brutal-bold;
+    font-family: $font-bold;
     color: $black;
     margin-bottom: 8px;
 }
@@ -112,7 +133,6 @@
     @include padding-level(bottom, pink);
     @include prefix(2, 36);
     @include suffix(2, 36);
-    background-color: $white;
 
     @media #{$laptop} {
         @include prefix(3, 36);
@@ -133,17 +153,52 @@
     color: $black;
 }
 
-.l-contacts__block_width_half {
+.l-contacts__block_width_half-left {
+    @media #{$tablet-portrait} {
+        @include column(26, 30);
+
+        .l-contacts__block-item {
+            @include column(24, 26);
+        }
+    }
+
     @media #{$laptop} {
-        @include column(15, 30);
+        @include column(14, 30);
+        @include post(1, 30);
 
         .l-contacts__block-list {
-            @include push(2, 15);
+            @include prefix(2, 15);
         }
 
         .l-contacts__block-item {
             @include column(15, 15);
-            @include suffix(1, 15);
+            @include suffix(0, 15);
+            @include post(1, 15);
+        }
+    }
+}
+
+.l-contacts__block_width_half-right {
+    @media #{$tablet-portrait} {
+        @include column(26, 30);
+
+        .l-contacts__block-item {
+            @include column(24, 26);
+        }
+    }
+
+    @media #{$laptop} {
+        @include column(14, 30);
+        @include push(1, 30);
+
+        .l-contacts__block-list {
+            @include prefix(2, 15);
+        }
+
+        .l-contacts__block-item {
+            @include column(15, 15);
+            @include suffix(0, 15);
+            @include post(1, 15);
         }
     }
 }
@@ -175,19 +230,21 @@
 }
 
 .l-contacts__block-list {
-    @include push(2, 32);
+    @include prefix(2, 32);
     @include padding-level(bottom, blue);
+    background-color: $bg-grey;
+    border-radius: 4px;
 
     @media #{$tablet-portrait} {
         @include row();
     }
 
     @media #{$laptop} {
-        @include push(2, 30);
+        @include prefix(2, 30);
     }
 
     @media #{$fullhd} {
-        @include push(2, 28);
+        @include prefix(2, 28);
     }
 }
 
@@ -215,7 +272,7 @@
     }
 }
 
-.l-contacts__block-item-name {
+p.l-contacts__block-item-name {
     @include font-size("p2");
     margin-bottom: 6px;
 }
@@ -223,6 +280,10 @@
 .l-contacts__block-item-work {
     margin-bottom: 16px;
     opacity: 0.72;
+
+    @media #{$laptop} {
+        min-height: 55px;
+    }
 }
 
 p.l-contacts__block-item-phone {

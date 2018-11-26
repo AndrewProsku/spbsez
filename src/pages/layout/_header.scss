@@ -1,4 +1,8 @@
 .l-home__header {
+    @include row();
+    @include suffix(1, 36);
+    justify-content: space-between;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -6,16 +10,11 @@
     z-index: 10;
     width: 100%;
     height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 4%;
-    padding-bottom: 7px;
 
     @media #{$laptop} {
+        @include prefix(1, 36);
+        @include suffix(0, 36);
         height: 80px;
-        padding-left: 2.5%;
-        padding-right: 2%;
     }
 
     @media #{$fullhd} {
@@ -32,7 +31,11 @@
             background-image: url("/images/home/logo-color.svg");
 
             @media #{$laptop} {
-                height: 97px;
+                height: 67px;
+            }
+
+            @media #{$fullhd} {
+                height: 90px;
             }
         }
 
@@ -53,7 +56,16 @@
         }
 
         .b-burger__line {
+            height: 2px;
             background-image: linear-gradient($gradient-linear);
+        }
+
+        .b-account,
+        .b-language,
+        .b-burger-wrap {
+            @media #{$laptop} {
+                box-shadow: -1px 0 0 #efeff4;
+            }
         }
     }
 
@@ -67,7 +79,11 @@
             background-image: url("/images/home/logo-color.svg");
 
             @media #{$laptop} {
-                height: 97px;
+                height: 67px;
+            }
+
+            @media #{$fullhd} {
+                height: 90px;
             }
         }
 
@@ -88,7 +104,16 @@
         }
 
         .b-burger__line {
+            height: 2px;
             background-image: linear-gradient($gradient-linear);
+        }
+
+        .b-account,
+        .b-language,
+        .b-burger-wrap {
+            @media #{$laptop} {
+                box-shadow: -1px 0 0 #efeff4;
+            }
         }
     }
 }
@@ -104,11 +129,14 @@
 }
 
 .l-home__header-left {
-    width: 70%;
+    @include column(26, 36);
+    height: 100%;
 
     @media #{$laptop} {
+        @include column(6, 35);
         width: 210px;
         min-width: 210px;
+        height: 100%;
     }
 
     @media #{$fullhd} {
@@ -138,39 +166,28 @@
 }
 
 .l-home__header-center {
+    @include column(23, 35);
+    @include prefix(1, 35);
+    @include suffix(0.5, 35);
     display: none;
-    width: 71%;
-    padding-top: 1%;
 
     @media #{$laptop} {
         display: block;
     }
 
     @media #{$laptop-wide} {
-        width: 66%;
-    }
-
-    @media #{$fullhd} {
-        width: 64%;
+        @include column(20, 35);
     }
 }
 
 .b-nav__list {
-    display: flex;
-    justify-content: flex-start;
+    @include row();
+    @include post(1, 36);
+    justify-content: space-between;
+    align-items: center;
 }
 
 .b-nav__item {
-    padding-right: 2%;
-
-    &:first-child {
-        padding-left: 5%;
-    }
-
-    &:last-child {
-        padding-right: 0;
-    }
-
     &.is-active {
         .b-nav__link {
             &:hover {
@@ -183,7 +200,7 @@
 .b-nav__link {
     @include font-size("p2");
     @include transition(border);
-    font-family: $font-brutal-bold;
+    font-family: $font-bold;
     color: $white;
     text-decoration: none;
     border-bottom: 2px solid transparent;
@@ -195,32 +212,37 @@
 }
 
 .l-home__header-right {
-    width: 30%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 4%;
-
-    @media #{$tablet-portrait} {
-        padding-top: 1%;
-    }
+    @include column(9, 35);
+    text-align: right;
 
     @media #{$laptop} {
-        width: 13%;
+        @include row();
+        @include column(6, 35);
+        justify-content: space-between;
+        align-items: streth;
+        height: 100%;
     }
 
     @media #{$laptop-wide} {
-        width: 20%;
-    }
-
-    @media #{$fullhd} {
-        width: 19%;
+        @include column(9, 35);
     }
 }
 
 .b-account {
-    display: inline-block;
-    vertical-align: middle;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    @media #{$laptop} {
+        @include row();
+        @include column(2, 6);
+    }
+
+    @media #{$laptop-wide} {
+        @include column(5, 9);
+        text-align: left;
+    }
 }
 
 .b-account__link {
@@ -232,7 +254,8 @@
     background-image: none;
 
     @media #{$laptop} {
-        display: block;
+        display: inline-block;
+        vertical-align: top;
     }
 }
 
@@ -247,15 +270,24 @@
         display: inline-block;
         vertical-align: top;
         padding-top: 5px;
-        margin-left: 18px;
+        margin-left: 13px;
     }
 }
 
 .b-language {
+    @include column(2, 6);
     display: none;
+    text-align: center;
 
     @media #{$laptop} {
-        display: block;
+        @include row();
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media #{$laptop-wide} {
+        @include column(2, 9);
+        text-align: left;
     }
 }
 
@@ -266,7 +298,29 @@
     background-image: none;
 }
 
+.b-burger-wrap {
+    @include column(2, 6);
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+    padding-top: 15px;
+
+    @media #{$laptop} {
+        @include row();
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding-top: 0;
+    }
+
+    @media #{$laptop-wide} {
+        @include column(2, 9);
+    }
+}
+
 .b-burger {
+    display: inline-block;
+    vertical-align: top;
     width: 16px;
     cursor: pointer;
 
