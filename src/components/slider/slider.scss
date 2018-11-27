@@ -215,8 +215,8 @@
     background-color: $violet;
     border: 2px solid $violet;
     border-radius: 50%;
-}
 
-.b-slider__dot_is_active {
-    background-color: $white;
+    &.is-active {
+        background-color: $white;
+    }
 }

@@ -30,6 +30,93 @@
          <title>Главная страница</title> </head>
     <body>
 
+        <div class="b-alert-old-browser is-hidden">
+    <div class="b-alert-old-browser__content">
+        <button class="b-alert-old-browser__close">
+            <!--[if IE 8 ]>
+                <img src="/images/alert-old-browser/close.png" alt="close">
+            <![endif]-->
+            <!--[if (gt IE 9)|!(IE)]><!-->
+                <img src="/images/alert-old-browser/close.svg" alt="close">
+            <!--<![endif]-->
+        </button>
+
+        <div class="b-alert-old-browser__icon">
+            <!--[if IE 8 ]>
+                <img src="/images/alert-old-browser/bike.png" alt="bike">
+            <![endif]-->
+            <!--[if (gt IE 9)|!(IE)]><!-->
+                <img src="/images/alert-old-browser/bike.svg" alt="bike">
+            <!--<![endif]-->
+        </div>
+
+        <h2 class="b-alert-old-browser__title">
+            Упс! Сайт может работать некорректно
+        </h2>
+
+        <div class="b-alert-old-browser__text">
+            <p>
+                Ваш браузер устарел и не поддерживает некоторые современные технологии сайта. Чтобы работали все
+                функции,
+                обновите браузер или скачайте другой из проверенных:
+            </p>
+        </div>
+
+        <ul class="b-alert-old-browser__browsers">
+            <li class="b-alert-old-browser__browser">
+                <a class="b-alert-old-browser__browser-link" href="https://browser.yandex.ru/" target="_blank">
+                    <!--[if IE 8 ]>
+                        <img src="/images/alert-old-browser/yandex.png" alt="yandex">
+                    <![endif]-->
+                    <!--[if (gt IE 9)|!(IE)]><!-->
+                        <img src="/images/alert-old-browser/yandex.svg" alt="yandex">
+                    <!--<![endif]-->
+                    <p class="b-alert-old-browser__browser-name">Яндекс.Браузер</p>
+                </a>
+            </li>
+            <li class="b-alert-old-browser__browser">
+                <a class="b-alert-old-browser__browser-link"
+                   href="https://www.google.ru/chrome/browser/desktop/index.html" target="_blank">
+                    <!--[if IE 8 ]>
+                        <img src="/images/alert-old-browser/chrome.png" alt="chrome">
+                    <![endif]-->
+                    <!--[if (gt IE 9)|!(IE)]><!-->
+                        <img src="/images/alert-old-browser/chrome.svg" alt="chrome">
+                    <!--<![endif]-->
+                    <p class="b-alert-old-browser__browser-name">Google Chrome</p>
+                </a>
+            </li>
+            <li class="b-alert-old-browser__browser">
+                <a class="b-alert-old-browser__browser-link" href="https://www.mozilla.org/ru/firefox/new/"
+                   target="_blank">
+                    <!--[if IE 8 ]>
+                        <img src="/images/alert-old-browser/firefox.png" alt="firefox">
+                    <![endif]-->
+                    <!--[if (gt IE 9)|!(IE)]><!-->
+                        <img src="/images/alert-old-browser/firefox.svg" alt="firefox">
+                    <!--<![endif]-->
+                    <p class="b-alert-old-browser__browser-name">Mozilla Firefox</p>
+                </a>
+            </li>
+            <li class="b-alert-old-browser__browser">
+                <a class="b-alert-old-browser__browser-link" href="http://www.opera.com/ru/download" target="_blank">
+                    <!--[if IE 8 ]>
+                        <img src="/images/alert-old-browser/opera.png" alt="opera">
+                    <![endif]-->
+                    <!--[if (gt IE 9)|!(IE)]><!-->
+                        <img src="/images/alert-old-browser/opera.svg" alt="opera">
+                    <!--<![endif]-->
+                    <p class="b-alert-old-browser__browser-name"> Opera Browser</p>
+                </a>
+            </li>
+        </ul>
+
+        <button class="b-alert-old-browser__ignore-button">
+            Все равно перейти на сайт
+        </button>
+    </div>
+</div>
+
         <div class="l-layout">
             <header class="l-home__header j-home__header">
                 <div class="l-home__header-left">
@@ -133,7 +220,7 @@
                 <div class="b-main-screen-text-desc">
                     ОЭЗ «Санкт-Петербург» — это эффективный государственный проект, инновационная площадка для
                     реализации крупных бизнес-проектов по разработке и производству высокотехнологичной продукции,
-                    предлагающая выгодные льготы, преференции и поддержку государства.
+                    предлагающая выгодные льготы, преференции и поддержку государства.
                 </div>
             </div>
             <div class="b-main-screen__list">
@@ -171,7 +258,8 @@
                             Налоговые преференции
                         </a>
                         <p class="l-home__privileges-text-block">
-                            Для резидентов установлены льготные ставки по налогам на прибыль, землю, имущество и транспорт
+                            Для резидентов установлены льготные ставки по налогам на прибыль,
+                            землю, имущество и транспорт
                         </p>
                     </div>
                 </div>
@@ -193,8 +281,8 @@
                             Льготная стоимость земельного участка
                         </a>
                         <p class="l-home__privileges-text-block">
-                            Плата за выкуп земельного участка составляет 25%, аренда — 2% от кадастровой
-                            стоимости земельного участка
+                            Плата за выкуп земельного участка составляет 25%, аренда —
+                            2% от кадастровой стоимости земельного участка
                         </p>
                     </div>
                 </div>
@@ -230,7 +318,7 @@
                         </a>
                         <p class="l-home__privileges-text-block">
                             Проект ОЭЗ на федеральном уровне курирует Министерство экономического развития
-                            Российской Федерации
+                            Российской Федерации
                         </p>
                     </div>
                 </div>
@@ -249,8 +337,9 @@
                     <div class="l-home__news-main-content">
                         <div class="l-home__news-main-title">
                             <a href="#" class="b-link-line">
-                                Сегодня на площадке «Нойдорф» открылось инновационное предприятие резидента
-                                ОЭЗ «Санкт-Петербург» — ООО «ТР Инжиниринг»
+                                Сегодня на площадке «Нойдорф» открылось инновационное
+                                предприятие резидента ОЭЗ «Санкт-Петербург» —
+                                ООО «ТР Инжиниринг»
                             </a>
                         </div>
                         <time class="l-home__news-date label-bg">
@@ -266,7 +355,8 @@
                     <div class="l-home__news-item">
                         <div class="l-home__news-title">
                             <a href="#" class="b-link-line">
-                                ОЭЗ «Санкт-Петербург» впервые вошла в рейтинг лучших экономических зон мира!
+                                ОЭЗ «Санкт-Петербург» впервые вошла в рейтинг лучших экономических
+                                зон мира!
                             </a>
                         </div>
                         <time class="l-home__news-date label-bg">
@@ -295,8 +385,8 @@
                     <div class="l-home__news-item">
                         <div class="l-home__news-title">
                             <a href="#" class="b-link-line">
-                                В этом месяце ОЭЗ «Санкт-Петербург» получила 1,15 млрд руб. от АО «ОЭЗ» на
-                                строительство инженерной и транспортной инфраструктуры
+                                В этом месяце ОЭЗ «Санкт-Петербург» получила 1,15 млрд руб. 
+                                от АО «ОЭЗ» на строительство инженерной и транспортной инфраструктуры
                             </a>
                         </div>
                         <time class="l-home__news-date label-bg">
@@ -324,8 +414,8 @@
                     </div>
                     <div class="l-home-resident__item-desc">
                         <div class="l-home-resident__item-desc-text">
-                            Подача заявки и пакета документов в Комитет по промышленной политике и инновациям
-                            Санкт-Петербурга
+                            Подача заявки и пакета документов в Комитет по промышленной политике
+                            и инновациям Санкт — Петербурга
                         </div>
                         <span class="l-home-resident__item-desc-time">
                             40 рабочих дней
@@ -432,7 +522,7 @@
                 </div>
 
                 <div class="b-slider__dots">
-                    <div class="b-slider__dot b-slider__dot_is_active"></div>
+                    <div class="b-slider__dot is-active"></div>
                     <div class="b-slider__dot"></div>
                     <div class="b-slider__dot"></div>
                 </div>
@@ -464,10 +554,10 @@
                                 </div>
                                 <div class="b-slider-reviews__person-content">
                                     <div class="b-slider-reviews__person-text">
-                                        Очевидные преимущества для резидентов ОЭЗ «Санкт-Петербург» — преференции
-                                        и льготы, стоимость земельного участка ниже среднерыночной стоимости,
+                                        Очевидные преимущества для резидентов ОЭЗ «Санкт-Петербург» —
+                                        преференции и льготы, стоимость земельного участка ниже среднерыночной стоимости,
                                         создание инженерной инфраструктуры на территории зоны за счет городских
-                                        ресурсов, продление срока действия особой экономической зоны до 2054 года.
+                                        ресурсов, продление срока действия особой экономической зоны до 2054 года.
                                     </div>
                                     <a href="#" class="b-slider-reviews__person-link b-link-line-two">
                                         Отзыв полностью
@@ -488,7 +578,7 @@
                 </div>
 
                 <div class="b-slider__dots">
-                    <div class="b-slider__dot b-slider__dot_is_active"></div>
+                    <div class="b-slider__dot is-active"></div>
                     <div class="b-slider__dot"></div>
                     <div class="b-slider__dot"></div>
                 </div>
@@ -575,7 +665,7 @@
                         <div class="l-home-plots__text">
                             <p>
                                 В окружении развитой городской инфраструктуры и культурного наследия. Менее
-                                10 минут до выезда на КАД. 20 минут на автотранспорте до аэропорта
+                                10 минут до выезда на КАД. 20 минут на автотранспорте до аэропорта
                             </p>
                         </div>
                         <div class="l-home-plots__link">
@@ -659,8 +749,9 @@
                         </div>
                         <div class="l-home-plots__text">
                             <p>
-                                Развитая транспортная инфраструктура. Менее 10 минут до выезда на КАД.
-                                30 минут до центра города на автотранспорте. 20 минут до метро на автотранспорте
+                                Развитая транспортная инфраструктура. Менее 10 минут до выезда на КАД.
+                                30 минут до центра города на автотранспорте. 20 минут
+                                до метро на автотранспорте
                             </p>
                         </div>
                         <div class="l-home-plots__link">
@@ -750,7 +841,7 @@
                 </div>
 
                 <div class="b-slider__dots">
-                    <div class="b-slider__dot b-slider__dot_is_active"></div>
+                    <div class="b-slider__dot is-active"></div>
                     <div class="b-slider__dot"></div>
                     <div class="b-slider__dot"></div>
                 </div>
