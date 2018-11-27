@@ -3,7 +3,7 @@ import '../styles/app.scss';
 const getBodyScrollTop = function() {
     const header = document.querySelector('.j-home__header');
     const yOffset = self.pageYOffset;
-    const maxYOffset = 100;
+    const maxYOffset = 700;
     const offset = yOffset ||
         (document.documentElement && document.documentElement.scrollTop) ||
         (document.body && document.body.scrollTop);

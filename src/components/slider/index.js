@@ -246,7 +246,7 @@ class Slider {
      */
     dotActivate() {
         this.allDots = Array.from(this.gallery.querySelectorAll('.b-slider__dot'));
-        const activeDotClass = 'b-slider__dot_is_active';
+        const activeDotClass = 'is-active';
 
         this.allDots.forEach((element, index) => {
             if (this.activeSlide - 1 === index) {

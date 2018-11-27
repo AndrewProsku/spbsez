@@ -55,6 +55,10 @@
             fill: $blue;
         }
 
+        .b-burger-wrap {
+            padding-top: 5px;
+        }
+
         .b-burger__line {
             height: 2px;
             background-image: linear-gradient($gradient-linear);
@@ -103,6 +107,10 @@
             fill: $blue;
         }
 
+        .b-burger-wrap {
+            padding-top: 5px;
+        }
+
         .b-burger__line {
             height: 2px;
             background-image: linear-gradient($gradient-linear);
@@ -133,7 +141,7 @@
     height: 100%;
 
     @media #{$laptop} {
-        @include column(6, 35);
+        @include column(5, 36);
         width: 210px;
         min-width: 210px;
         height: 100%;
@@ -161,14 +169,18 @@
 
     @media #{$laptop} {
         max-width: 100%;
+        height: 72px;
+    }
+
+    @media #{$fullhd} {
         height: 97px;
     }
 }
 
 .l-home__header-center {
-    @include column(23, 35);
-    @include prefix(1, 35);
-    @include suffix(0.5, 35);
+    @include column(23, 36);
+    @include prefix(1, 36);
+    @include suffix(0.5, 36);
     display: none;
 
     @media #{$laptop} {

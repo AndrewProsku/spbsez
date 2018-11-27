@@ -1011,6 +1011,7 @@ button {
 
     p {
         font-size: inherit;
+        line-height: inherit;
     }
 }
 
@@ -1046,9 +1047,10 @@ button {
     .b-slider__dot {
         background-color: $white;
         border-color: $white;
-    }
-    .b-slider__dot_is_active {
-        background-color: $blue;
+
+        &.is-active {
+            background-color: $blue;
+        }
     }
 
     @media #{$tablet-portrait} {
@@ -1339,7 +1341,7 @@ button {
     @include padding-level(top, pink);
     position: relative;
     z-index: 1;
-    background-color: transparent;
+    background-color: $bg-map;
 
     @media #{$laptop} {
         @include padding-level(top, violet);
