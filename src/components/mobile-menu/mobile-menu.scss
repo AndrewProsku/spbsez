@@ -188,6 +188,11 @@
         @include suffix(3, 36);
     }
 
+    @media #{$tablet-landscape} {
+        @include row();
+        align-items: center;
+    }
+
     @media #{$laptop} {
         height: calc(100% - 170px);
     }

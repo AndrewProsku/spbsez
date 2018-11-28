@@ -13,7 +13,7 @@
 .b-account__tooltip-block {
     @include prefix(3, 36);
     @include suffix(3, 36);
-    @include push(3, 36);
+    @include push(2, 36);
     position: relative;
     background-color: $white;
     text-align: left;

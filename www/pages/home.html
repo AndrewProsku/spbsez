@@ -170,53 +170,15 @@
     </nav>
 </div>
 <div class="l-home__header-right">
-    <!--
-
-    Для авторизованного пользователя
-    Добавляем на класс b-account
-        1. b-account_hover - появится всплывашка
-    Добавляем на класс b-account__link
-        1. is-auth - сменится иконка на авторизованную
-        2. j-account-auth - Нужен для запрета перехода по ссылке,
-            что бы появился тултип а не переход произошел
-
-    -->
     <div class="b-account">
+        <!--
+        Добавляем на класс b-account__link
+            1. is-auth - сменится иконка на авторизованную
+        -->
         <a href="#" class="b-account__link">
             <span class="b-account__link-icon"></span>
             <span class="b-account__link-text">Личный кабинет</span>
         </a>
-
-        <div class="b-account__tooltip">
-    <div class="b-account__tooltip__block">
-        <ul class="b-account__tooltip-list">
-            <li class="b-account__tooltip-item">
-                <a href="#" class="b-account__tooltip-link">
-                    Профиль
-                </a>
-            </li>
-
-            <li class="b-account__tooltip-item">
-                <a href="#" class="b-account__tooltip-link">
-                    Подача отчета
-                </a>
-            </li>
-
-            <li class="b-account__tooltip-item">
-                <a href="#" class="b-account__tooltip-link">
-                    Сообщение от ОЭЗ
-                </a>
-            </li>
-
-            <li class="b-account__tooltip-item">
-                <a href="#" class="b-account__tooltip-link">
-                    Подать заявку
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
-
     </div>
     <div class="b-language">
         <a href="#" class="b-language__link">
@@ -899,28 +861,18 @@
             </a>
         </div>
         <div class="b-mobile-menu__header-right">
-
-            <!--
-
-            Для авторизованного пользователя
-            Добавляем на класс b-account
-                1. b-account_hover - появится всплывашка
-            Добавляем на класс b-account__link
-                1. is-auth - сменится иконка на авторизованную
-                2. j-account-auth - Нужен для запрета перехода по ссылке,
-                    что бы появился тултип а не переход произошел
-
-            -->
-
             <div class="b-account">
-
+                <!--
+                Добавляем на класс b-account__link
+                    1. is-auth - сменится иконка на авторизованную
+                -->
                 <a href="#" class="b-account__link">
                     <span class="b-account__link-icon"></span>
                     <span class="b-account__link-text">Личный кабинет</span>
                 </a>
 
                 <div class="b-account__tooltip">
-    <div class="b-account__tooltip__block">
+    <div class="b-account__tooltip-block">
         <ul class="b-account__tooltip-list">
             <li class="b-account__tooltip-item">
                 <a href="#" class="b-account__tooltip-link">
@@ -965,147 +917,148 @@
     </div>
 
     <nav class="b-mobile-menu__nav">
-        <div class="b-mobile-menu__nav-block">
-            <div class="b-mobile-menu__nav-header">
-                <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
-                    Об ОЭЗ
-                </a>
+        <div class="b-mobile-menu__nav-wrap">
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Об ОЭЗ
+                    </a>
+                </div>
+                <ul class="b-mobile-menu__nav-body">
+                    <li class="b-mobile-menu__nav-item">
+                       <a href="#" class="b-mobile-menu__nav-link">
+                           Особая экономичкская зона
+                       </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Управляющая компания
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Вакансии
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Раскрытие информации
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="b-mobile-menu__nav-body">
-                <li class="b-mobile-menu__nav-item">
-                   <a href="#" class="b-mobile-menu__nav-link">
-                       Особая экономичкская зона
-                   </a>
-                </li>
 
-                <li class="b-mobile-menu__nav-item">
-                    <a href="#" class="b-mobile-menu__nav-link">
-                        Управляющая компания
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Инфраструктура
                     </a>
-                </li>
+                </div>
+                <ul class="b-mobile-menu__nav-body">
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Площадка «Нойдорф»
+                        </a>
+                    </li>
 
-                <li class="b-mobile-menu__nav-item">
-                    <a href="#" class="b-mobile-menu__nav-link">
-                        Вакансии
-                    </a>
-                </li>
-
-                <li class="b-mobile-menu__nav-item">
-                    <a href="#" class="b-mobile-menu__nav-link">
-                        Раскрытие информации
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="b-mobile-menu__nav-block">
-            <div class="b-mobile-menu__nav-header">
-                <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
-                    Инфраструктура
-                </a>
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Площадка «Новоорловская»
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="b-mobile-menu__nav-body">
-                <li class="b-mobile-menu__nav-item">
-                    <a href="#" class="b-mobile-menu__nav-link">
-                        Площадка «Нойдорф»
-                    </a>
-                </li>
 
-                <li class="b-mobile-menu__nav-item">
-                    <a href="#" class="b-mobile-menu__nav-link">
-                        Площадка «Новоорловская»
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Услуги
                     </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="b-mobile-menu__nav-block">
-            <div class="b-mobile-menu__nav-header">
-                <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
-                    Услуги
-                </a>
+                </div>
             </div>
-        </div>
 
-        <div class="b-mobile-menu__nav-block">
-            <div class="b-mobile-menu__nav-header">
-                <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
-                    Резиденты
-                </a>
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Резиденты
+                    </a>
+                </div>
             </div>
-        </div>
 
-        <div class="b-mobile-menu__nav-block">
-            <div class="b-mobile-menu__nav-header">
-                <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
-                    Инвесторам
-                </a>
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Инвесторам
+                    </a>
+                </div>
             </div>
-        </div>
 
-        <div class="b-mobile-menu__nav-block">
-            <div class="b-mobile-menu__nav-header">
-                <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
-                    Медиа
-                </a>
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Медиа
+                    </a>
+                </div>
+                <ul class="b-mobile-menu__nav-body">
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Новости
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Полезная информация
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Презентации
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Контакты пресс-службы
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="b-mobile-menu__nav-body">
-                <li class="b-mobile-menu__nav-item">
-                    <a href="#" class="b-mobile-menu__nav-link">
-                        Новости
-                    </a>
-                </li>
 
-                <li class="b-mobile-menu__nav-item">
-                    <a href="#" class="b-mobile-menu__nav-link">
-                        Полезная информация
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Контакты
                     </a>
-                </li>
-
-                <li class="b-mobile-menu__nav-item">
-                    <a href="#" class="b-mobile-menu__nav-link">
-                        Презентации
-                    </a>
-                </li>
-
-                <li class="b-mobile-menu__nav-item">
-                    <a href="#" class="b-mobile-menu__nav-link">
-                        Контакты пресс-службы
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="b-mobile-menu__nav-block">
-            <div class="b-mobile-menu__nav-header">
-                <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
-                    Контакты
-                </a>
+                </div>
             </div>
         </div>
     </nav>
 
     <div class="b-mobile-menu__footer">
-        <div class="b-account">
+        <!--
 
-            <!--
+        Для авторизованного пользователя
+        Добавляем на класс b-account
+            1. b-account_is_hover - появится всплывашка
+        Добавляем на класс b-account__link
+            1. is-auth - сменится иконка на авторизованную
+            2. j-account-auth - Нужен для запрета перехода по ссылке,
+                что бы появился тултип а не переход произошел
 
-            Для авторизованного пользователя
-            Добавляем на класс b-account__link
-                1. b-account__link-auth - появится всплывашка
-                2. is-auth - сменится иконка на авторизованную
-                3. j-account-auth - Нужен для запрета перехода по ссылке,
-                    что бы появился тултип а не переход произошел
-
-            -->
-
-            <a href="#" class="b-account__link">
+        -->
+        <div class="b-account b-account_is_hover">
+            <a href="#" class="b-account__link is-auth j-account-auth">
                 <span class="b-account__link-icon"></span>
                 <span class="b-account__link-text">Личный кабинет</span>
             </a>
 
             <div class="b-account__tooltip">
-    <div class="b-account__tooltip__block">
+    <div class="b-account__tooltip-block">
         <ul class="b-account__tooltip-list">
             <li class="b-account__tooltip-item">
                 <a href="#" class="b-account__tooltip-link">
