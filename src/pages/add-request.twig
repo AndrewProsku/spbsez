@@ -1,0 +1,39 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Подать заявку</title> {% endblock %}
+
+{% block content %}
+    {% include '../components/lk-nav/lk-nav.twig' %}
+
+    <div class="l-add-request">
+        <div class="b-title b-add-request-title">
+            <h1>Подать заявку</h1>
+        </div>
+        <div class="b-add-request__links">
+            <div class="b-add-request__links-mobile">
+                <div class="b-add-request__links-mobile-header">
+                    <a href="#" class="b-add-request__link-mobile">
+                        Пропуск на временный въезд <br/> на территорию Нойдорф
+                    </a>
+                    <span class="b-add-request__link-icon">
+                        {% include '../sprites/svg/arrow-down.svg.twig' %}
+                    </span>
+                </div>
+                <ul class="b-add-request__links-mobile-body">
+                    <li class="b-add-request__links-mobile-item">
+                        <a href="#" class="b-add-request__links-mobile-link">
+                            Стандартная
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="b-add-request__links-desctop">
+                <a href="#" class="b-add-request__link is-active">
+                    Стандартная
+                </a>
+                <a href="#" class="b-add-request__link is-active">
+                    Пропуск на временный въезд
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

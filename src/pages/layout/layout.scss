@@ -5,3 +5,20 @@
 .l-layout__content {
     @include column(36, 36);
 }
+
+.l-layout__content-inner {
+    position: relative;
+    margin-top: 60px;
+
+    h1 {
+        @include font-size("h1-inner");
+    }
+
+    @media #{$laptop} {
+        margin-top: 80px;
+    }
+
+    @media #{$fullhd} {
+        margin-top: 100px;
+    }
+}

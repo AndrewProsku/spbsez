@@ -6,19 +6,6 @@
     background-attachment: fixed;
 }
 
-.l-contacts__map-wrapper {
-    position: relative;
-    margin-top: 60px;
-
-    @media #{$laptop} {
-        margin-top: 80px;
-    }
-
-    @media #{$fullhd} {
-        margin-top: 100px;
-    }
-}
-
 .l-contacts__map {
     @include padding-level(top, cyan);
     @include prefix(2, 36);
