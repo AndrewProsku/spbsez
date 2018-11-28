@@ -71,6 +71,16 @@
                 box-shadow: -1px 0 0 #efeff4;
             }
         }
+
+        .b-account__tooltip-block {
+            box-shadow: 0 20px 40px rgba($dark-grey, 0.4);
+            border: 1px solid $dark-grey;
+
+            &:after {
+                border-top: 1px solid $dark-grey;
+                border-left: 1px solid $dark-grey;
+            }
+        }
     }
 
     // внутренние страницы
@@ -121,6 +131,16 @@
         .b-burger-wrap {
             @media #{$laptop} {
                 box-shadow: -1px 0 0 #efeff4;
+            }
+        }
+
+        .b-account__tooltip-block {
+            box-shadow: 0 20px 40px rgba($dark-grey, 0.4);
+            border: 1px solid $dark-grey;
+
+            &:after {
+                border-top: 1px solid $dark-grey;
+                border-left: 1px solid $dark-grey;
             }
         }
     }
@@ -245,6 +265,15 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    position: relative;
+
+    .is-auth {
+        .b-account__link-icon {
+            background-image: url("/images/home/user-auth.svg");
+            border: 1px solid $grey;
+            border-radius: 50%;
+        }
+    }
 
     @media #{$laptop} {
         @include row();
@@ -272,7 +301,14 @@
 }
 
 .b-account__link-icon {
-    fill: $white;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    background-image: url("/images/home/user-not-auth.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
 }
 
 .b-account__link-text {
