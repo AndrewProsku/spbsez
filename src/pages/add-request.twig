@@ -12,16 +12,14 @@
             <div class="b-add-request__links-mobile">
                 <div class="b-add-request__links-mobile-header">
                     <a href="#" class="b-add-request__link-mobile">
-                        Пропуск на временный въезд <br/> на территорию Нойдорф
+                        Стандартная
                     </a>
-                    <span class="b-add-request__link-icon">
-                        {% include '../sprites/svg/arrow-down.svg.twig' %}
-                    </span>
+                    <span class="b-add-request__link-icon"></span>
                 </div>
                 <ul class="b-add-request__links-mobile-body">
                     <li class="b-add-request__links-mobile-item">
                         <a href="#" class="b-add-request__links-mobile-link">
-                            Стандартная
+                            Пропуск на временный въезд
                         </a>
                     </li>
                 </ul>
@@ -30,10 +28,61 @@
                 <a href="#" class="b-add-request__link is-active">
                     Стандартная
                 </a>
-                <a href="#" class="b-add-request__link is-active">
+                <a href="#" class="b-add-request__link">
                     Пропуск на временный въезд
                 </a>
             </div>
         </div>
+        <div class="b-add-request__content">
+            <h4>Заявка</h4>
+            <form action="" method="post" enctype="multipart/form-data" class="b-add-request__form">
+                <div class="b-form-block b-form-block-success">
+                    <input type="text" name="theme-request" class="b-form-block__input" required>
+                    <label for="theme-request" class="b-form-block__label">
+                        Тема заявки
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+                <div class="b-form-block">
+                    {% embed "../components/forms/select/select.twig" with {
+                        id: "b-form-block__select",
+                        name: "b-form-block__select",
+                        options: [{
+                            value: 'Администрации ОЭЗ',
+                            text: 'Администрации ОЭЗ',
+                            selected: true
+                        },{
+                            value: 'В ЦОД',
+                            text: 'В ЦОД',
+                        },{
+                            value: 'Вопросы и предложения',
+                            text: 'Вопросы и предложения',
+                        },{
+                            value: 'Жалобы',
+                            text: 'Жалобы',
+                        }]
+                    } %}
+                    {% endembed %}
+                    <label for="appeal" class="b-form-block__label">
+                        Причина обращения
+                    </label>
+                </div>
+                <div class="b-form-block b-form-block_padding_0">
+                    <textarea name="request-message" id="" class="b-form-block__message" required></textarea>
+                    <label for="request-message" class="b-form-block__label">
+                        Сообщение
+                    </label>
+                </div>
+                <button type="submit" class="button b-add-request__form-button">
+                    Подать заявку
+                </button>
+            </form>
+        </div>
     </div>
+
+    {# Мобильное меню #}
+
+    {% include '../components/mobile-menu/mobile-menu.twig' %}
 {% endblock %}

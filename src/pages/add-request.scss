@@ -24,7 +24,7 @@
 }
 
 .b-add-request__links {
-    @include margin-level(bottom, dark-yellow);
+    @include margin-level(bottom, cyan);
 }
 
 .b-add-request__links-mobile {
@@ -50,16 +50,23 @@
     color: $black;
     background-color: $white;
     border-radius: 8px;
-    padding: 7px 15px 15px 15px;
+    padding: 9px 15px 9px 15px;
     box-shadow: 0 1px 2px $dark-grey;
 }
 
 .b-add-request__link-icon {
     @include post(2, 32);
     display: block;
+    width: 12px;
+    height: 7px;
+    background-image: url("/images/home/arrow-down.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
     position: absolute;
-    top: 33%;
+    top: 50%;
     right: 0;
+    margin-top: -3.5px;
 
 }
 
@@ -70,7 +77,7 @@
 }
 
 .b-add-request__links-mobile-item {
-    @include prefix(2, 36);
+    padding-left: 15px;
 }
 
 .b-add-request__links-mobile-link {
@@ -119,4 +126,162 @@
         background-color: $white;
         box-shadow: 0 1px 2px $dark-grey;
     }
+}
+
+.b-add-request__content {
+    @include padding-level(bottom, pink);
+
+    h4 {
+        @include margin-level(bottom, dark-yellow);
+    }
+}
+
+.b-form-block {
+    position: relative;
+    border: 1px solid $grey;
+    border-bottom: 0;
+    background-color: $white;
+    padding: 30px 0 12px 0;
+
+    &:first-of-type {
+        border-radius: 4px 4px 0 0;
+    }
+
+    &:last-of-type {
+        border-radius: 0 0 4px 4px;
+        border-bottom: 1px solid $grey;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    select,
+    textarea {
+        @include font-size("p2");
+        font-family: inherit;
+        color: $black;
+        padding-left: 16px;
+        padding-right: 16px;
+
+        &:focus {
+            outline: 0;
+
+            + .b-form-block__label {
+                opacity: 1;
+            }
+        }
+    }
+
+    textarea {
+        resize: none;
+        padding: 30px 16px 12px 16px;
+        margin-bottom: -4px;
+
+        &:valid {
+            background-color: $bg-select;
+        }
+    }
+}
+
+.b-form-block-error {
+    padding-bottom: 0;
+
+    .b-form-block__label {
+        color: red;
+        opacity: 1;
+    }
+
+    .b-form-block__error-text {
+        display: block;
+    }
+}
+
+.b-form-block-success {
+    .b-form-block__label {
+        opacity: 0.48;
+    }
+}
+
+.b-form-block_padding_0 {
+    padding: 0;
+}
+
+.b-form-block__label {
+    @include font-size("p4");
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    opacity: 0.72;
+}
+
+.b-form-block__input {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+.b-form-block__error-text {
+    @include font-size("p4");
+    display: none;
+    position: relative;
+    width: 100%;
+    background-color: $dark-white;
+    border-top: 1px solid $grey;
+    padding: 3px 0 11px 16px;
+    margin-top: 10px;
+
+    &:before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: -5px;
+        left: 16px;
+        background-color: $dark-white;
+        border-top: 1px solid $grey;
+        border-left: 1px solid $grey;
+        transform: rotate(45deg);
+    }
+}
+
+.b-form-block__select-wrapper {
+    position: relative;
+
+    &:after {
+        content: "";
+        width: 12px;
+        height: 7px;
+        background-image: url("/images/home/arrow-down.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        position: absolute;
+        top: 50%;
+        right: 13px;
+        margin-top: -3.5px;
+    }
+}
+
+.b-form-block__select {
+    display: block;
+    width: 100%;
+    background-color: $white;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.b-form-block__message {
+    width: 100%;
+    height: 240px;
+    border: none;
+    padding: 30px 0 12px 0;
+}
+
+
+
+
+.b-add-request__form-button {
+    @include margin-level(top, green);
 }
