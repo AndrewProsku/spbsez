@@ -66,6 +66,10 @@
     text-align: right;
     padding-top: 30px;
 
+    .b-account {
+        display: none;
+    }
+
     .b-language {
         @include column(4, 8);
         display: block;
@@ -88,6 +92,7 @@
         @include prefix(1, 36);
 
         .b-account {
+            display: block;
             @include column(18, 24);
             @include suffix(1, 24);
             margin-top: -5px;

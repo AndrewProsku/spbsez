@@ -39,6 +39,12 @@
             }
         }
 
+        .l-home__header-right {
+            @media #{$laptop} {
+                align-items: streth;
+            }
+        }
+
         .b-nav__link,
         .b-account__link,
         .b-language__link {
@@ -67,6 +73,8 @@
         .b-account,
         .b-language,
         .b-burger-wrap {
+            height: 100%;
+
             @media #{$laptop} {
                 box-shadow: -1px 0 0 #efeff4;
             }
@@ -101,6 +109,12 @@
             }
         }
 
+        .l-home__header-right {
+            @media #{$laptop} {
+                align-items: streth;
+            }
+        }
+
         .b-nav__link,
         .b-account__link,
         .b-language__link {
@@ -129,6 +143,8 @@
         .b-account,
         .b-language,
         .b-burger-wrap {
+            height: 100%;
+
             @media #{$laptop} {
                 box-shadow: -1px 0 0 #efeff4;
             }
@@ -157,7 +173,7 @@
 }
 
 .l-home__header-left {
-    @include column(26, 36);
+    @include column(27, 36);
     height: 100%;
 
     @media #{$laptop} {
@@ -244,11 +260,12 @@
 }
 
 .l-home__header-right {
-    @include column(9, 35);
+    @include row();
+    @include column(8, 35);
+    align-items: center;
     text-align: right;
 
     @media #{$laptop} {
-        @include row();
         @include column(6, 35);
         justify-content: space-between;
         align-items: streth;
@@ -261,10 +278,10 @@
 }
 
 .b-account {
-    display: none;
+    @include column(4, 8);
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-align: right;
     position: relative;
 
     .is-auth {
@@ -273,6 +290,10 @@
             border: 1px solid $grey;
             border-radius: 50%;
         }
+    }
+
+    @media #{$tablet-portrait} {
+        @include column(6, 8);
     }
 
     @media #{$laptop} {
@@ -288,7 +309,6 @@
 
 .b-account__link {
     position: relative;
-    display: none;
     color: $white;
     font-size: 17px;
     text-decoration: none;
@@ -301,6 +321,7 @@
 }
 
 .b-account__link-icon {
+    position: relative;
     display: inline-block;
     vertical-align: middle;
     width: 30px;
@@ -309,6 +330,23 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
+}
+
+.b-account__messages {
+    display: block;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    color: $white;
+    text-align: center;
+    line-height: 18px;
+    font-weight: 700;
+    background-color: $blue;
+    border: 2px solid $white;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    right: -10px;
 }
 
 .b-account__link-text {
@@ -347,14 +385,19 @@
 }
 
 .b-burger-wrap {
-    @include column(2, 6);
+    @include column(4, 8);
     display: inline-block;
     vertical-align: top;
     text-align: right;
     padding-top: 15px;
 
+    @media #{$tablet-portrait} {
+        @include column(2, 8);
+    }
+
     @media #{$laptop} {
         @include row();
+        @include column(2, 6);
         justify-content: center;
         align-items: center;
         text-align: center;

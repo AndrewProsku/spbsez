@@ -1,4 +1,5 @@
 import '../styles/app.scss';
+import Select from '../../components/forms/select/';
 
 /**
  * Добавляем класс на шапку при прокрутке.
@@ -86,4 +87,21 @@ if (authBlock) {
     };
 
     auth();
+}
+
+
+/**
+ * Обычный селект
+ */
+
+const selectDomItem = document.querySelector('.j-select');
+
+if (selectDomItem) {
+    const select = new Select({
+        element: '.j-select',
+
+        disableSearch: true
+    });
+
+    select.init();
 }

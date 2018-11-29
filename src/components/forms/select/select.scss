@@ -2,40 +2,50 @@
 // Documentation - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/forms/select.html
 
 // Dependencies
-@import "../../../common/styles/mixins";
-@import "../../../common/styles/breakpoints";
+//@import "../../../common/styles/mixins";
+//@import "../../../common/styles/breakpoints";
+//@import "../../../common/styles/colors";
+//@import "../../../common/styles/font-sizes";
+//@import "../../../common/styles/typography";
 
+@import "../../../common/styles/breakpoints";
+@import "../../../common/styles/colors";
+@import "../../../common/styles/common";
+@import "../../../common/styles/mixins";
+@import "../../../common/styles/font-sizes";
+@import "../../../common/styles/vertical-indent";
+@import "../../../common/styles/typography";
 // Settings
 // Select
 $select-font-size: 16px;
-$select-font-family: Arial;
-$select-height: 25px;
-$select-padding: 0 0 0 10px;
+$select-font-family: $font;
+$select-height: 54px;
+$select-padding: 0 16px 0 16px;
 $select-brd-radius: 0;
-$select-brd-width: 1px;
-$select-brd-color: #aaa;
-$select-bg-color: #fff;
-$select-color: #000;
-$select-placeholder-color: #999;
+$select-brd-width: 0;
+$select-brd-color: transparent;
+$select-bg-color: $white;
+$select-color: $black;
+$select-placeholder-color: $black;
 $select-shadow: none;
 
 // Options list
 $select-list-max-height: 240px;
-$select-list-padding: 5px 10px;
+$select-list-padding: 15px 16px 15px 16px;
 $select-list-bg-color: #fff;
 $select-list-color: #000;
-$select-list-shadow: none;
-$select-list-hover-bg: #3875d7;
-$select-list-hover-color: #fff;
+$select-list-shadow: 0 10px 20px #d3d4e0;
+$select-list-hover-bg: #f9f9fb;
+$select-list-hover-color: $blue;
 
 // Arrow
 $select-arrow-width: 4px;
-$select-arrow-height: 7px;
+$select-arrow-height: 13px;
 $select-arrow-color: #aaa;
-$select-arrow-custom: false;
-$select-arrow-image: '/images/select.svg';
-$select-arrow-container-width: 18px;
-$select-arrow-right-padding: 10px;
+$select-arrow-custom: true;
+$select-arrow-image: "/images/home/arrow-down.svg";
+$select-arrow-container-width: 12px;
+$select-arrow-right-padding: 13px;
 
 // States
 $select-disabled-opacity: .5 !important;
@@ -64,7 +74,7 @@ $select-multi-results-bg: transparent;
 // Component
 .b-select {
     .chosen-container {
-        font-size: $select-font-size;
+        @include font-size("p2");
 
         // Состояния для закрытого селекта
         &:focus {
@@ -81,7 +91,8 @@ $select-multi-results-bg: transparent;
         // Фокус для закрытого селекта
         &.chosen-container-active {
             .chosen-single {
-                box-shadow: $select-multi-shadow;
+                border-color: $blue;
+                box-shadow: none;
             }
         }
 
@@ -95,6 +106,7 @@ $select-multi-results-bg: transparent;
 
             li {
                 padding: $select-list-padding;
+                border-top: 1px solid $light-grey;
             }
 
             // Задизайбленная опция в списке
@@ -136,8 +148,8 @@ $select-multi-results-bg: transparent;
         // Внешний вид закрытого селекта
         .chosen-single {
             @include transition(border-color);
-            height: $select-height;
-            line-height: $select-height - 1px;
+            height: 21px;
+            line-height: inherit;
             box-shadow: $select-shadow;
             background-image: none;
             background-color: $select-bg-color;
@@ -146,7 +158,8 @@ $select-multi-results-bg: transparent;
             border-width: $select-brd-width;
             border-color: $select-brd-color;
             border-style: solid;
-            font-family: $select-font-family;
+
+            min-width: 220px;
 
             // Стрелочка справа у селекта
             div b {
@@ -181,6 +194,14 @@ $select-multi-results-bg: transparent;
                     right: $select-arrow-right-padding;
                 }
             }
+
+            @media #{$tablet-portrait} {
+                height: 25px;
+            }
+
+            @media #{$tablet-portrait} {
+                height: 30px;
+            }
         }
 
         // Плейсхолдер для закрытого селекта
@@ -203,12 +224,13 @@ $select-multi-results-bg: transparent;
 
     // Открытый селект с одним вариантом
     .chosen-container-active.chosen-with-drop .chosen-single {
-        background-image: $select-active-bg-image;
-        box-shadow: none;
+        //background-image: $select-active-bg-image;
+        background: $white;
+        //box-shadow: none;
         border-width: $select-brd-width;
-        border-color: $select-brd-color;
-        border-style: solid;
-        border-bottom-width: 0;
+        //border-color: $select-brd-color;
+        //border-style: solid;
+        //border-bottom-width: 0;
 
         // Стрелочка у открытого селекта
         div b {
@@ -266,7 +288,7 @@ $select-multi-results-bg: transparent;
             // Опция в мультиселекте
             li.search-choice {
                 background-image: none;
-                box-shadow: none;
+                //box-shadow: none;
                 background-color: $select-multi-bg-color;
                 color: $select-multi-color;
                 border: $select-multi-brd-width solid $select-multi-brd-color;
@@ -300,7 +322,7 @@ $select-multi-results-bg: transparent;
     // Активное состояние закрытого мультиселекта
     .chosen-container-active .chosen-choices {
         border-color: $select-brd-color;
-        box-shadow: $select-multi-shadow;
+        //box-shadow: $select-multi-shadow;
     }
 }
 
@@ -342,7 +364,7 @@ $select-multi-results-bg: transparent;
     @media #{$mobile-only} {
         height: $select-height;
         line-height: $select-height - 1px;
-        box-shadow: $select-shadow;
+        //box-shadow: $select-shadow;
         background-image: none;
         background-color: $select-bg-color;
         padding: $select-padding;

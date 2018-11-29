@@ -10,10 +10,11 @@
  * Dependencies
  */
 import './select.scss';
-import 'chosen-js/chosen.min.css';
-import 'chosen-js/chosen.jquery';
+import './chosen/chosen.css';
+import './chosen';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 import $ from 'jquery';
+import Mediator from '../../../common/scripts/mediator';
 import PerfectScrollbar from 'perfect-scrollbar';
 
 class Index {
@@ -22,6 +23,7 @@ class Index {
          * @constructor
          * @param {Object} options - outer options
          */
+        this.mediator = new Mediator();
         this.select = options.element;
         this.search = options.disableSearch;
         this.placeholder = options.placeholderTextSingle;
@@ -35,8 +37,6 @@ class Index {
         this.connectedSelects = options.connectedSelects;
         this.firstConnectedSelectId = $(options.firstConnectedSelectId);
         this.secondConnectedSelectId = $(options.secondConnectedSelectId);
-
-        this.init();
     }
 
     /**
@@ -55,6 +55,9 @@ class Index {
                 display_selected_options : this.showSelected,
                 no_results_text          : this.noResultsText
                 /* eslint-enable camelcase */
+            })
+            .change(() => {
+                this.mediator.publish('chosen-select-change');
             });
 
         this.bindEvents();
