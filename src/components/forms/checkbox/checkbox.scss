@@ -7,9 +7,10 @@
 
 // Settings
 // Checkbox
-$checkbox-color-check: #2962ff;
-$checkbox-color-notcheck: #e4e5e4;
-$checkbox-color-mark: #fff;
+$checkbox-color-check: #efeff4;
+$checkbox-color-notcheck: #efeff4;
+$checkbox-color-mark: #30409a;
+$checkbox-color-stroke: #b4b7d0;
 $checkbox-color-hover: #82b1ff;
 $checkbox-color-disable: $checkbox-color-notcheck;
 $checkbox-opacity-disable: .7;
@@ -25,85 +26,66 @@ $checkbox-text-opacity-hover: 1;
 $checkbox-text-decoration-hover: none;
 
 // Icon
-$checkbox-svg-width: 36px;
-$checkbox-svg-height: 36px;
+$checkbox-svg-width: 24px;
+$checkbox-svg-height: 24px;
 
 // Component
 .b-form__checkbox {
     svg {
         width: $checkbox-svg-width;
         height: $checkbox-svg-height;
+        stroke: $checkbox-color-stroke;
     }
 }
 
-.b-form__checkbox-input {
+.b-checkbox-input {
     // Cкрытие дефолтного инпута. Использование миксина обусловлено потребностью сохранения переключаемости TABом.
     @include visually-hidden();
 }
 
-.b-form__checkbox-label {
+.b-checkbox-label {
     cursor: pointer;
     display: flex;
-    align-items: center;
 }
 
-.b-form__checkbox-box {
+.b-checkbox-box {
     @include transition(fill);
     fill: $checkbox-color-notcheck;
 }
 
-.b-form__checkbox-mark {
+.b-checkbox-mark {
     @include transition(fill-opacity);
     fill: $checkbox-color-mark;
     fill-opacity: 0;
+    stroke: transparent;
+}
+
+.b-checkbox-text {
+    @include font-size("p3");
+    margin-left: 8px;
 }
 
 // Checked
-.b-form__checkbox-input:checked + .b-form__checkbox-label {
-    .b-form__checkbox-mark {
+.b-checkbox-input:checked + .b-checkbox-label {
+    .b-checkbox-mark {
         fill-opacity: 1;
     }
 
-    .b-form__checkbox-box {
+    .b-checkbox-box {
         fill: $checkbox-color-check;
     }
 }
 
-// Hover
-.b-form__checkbox:hover .b-form__checkbox-label {
-    @media #{$laptop} {
-        .b-form__checkbox-box {
-            fill: $checkbox-color-hover;
-        }
-
-        .b-form__checkbox-text {
-            @include transition(color, opacity);
-            color: $checkbox-text-color-hover;
-            opacity: $checkbox-text-opacity-hover;
-            text-decoration: $checkbox-text-decoration-hover;
-        }
-    }
-}
-
-// Focus
-.b-form__checkbox-input:focus + .b-form__checkbox-label .b-form__checkbox-box {
-    @media #{$laptop} {
-        fill-opacity: $checkbox-opacity-focus;
-        fill: $checkbox-color-focus;
-        outline: $checkbox-outline-focus;
-    }
-}
-
 // Disabled
-.b-form__checkbox-input:disabled + .b-form__checkbox-label {
+.b-checkbox-input:disabled + .b-checkbox-label {
     cursor: default;
 
-    .b-form__checkbox-box {
+    .b-checkbox-box {
         fill: $checkbox-color-disable;
         opacity: $checkbox-opacity-disable;
     }
 
-    .b-form__checkbox-text {
+    .b-checkbox-text {
         color: $checkbox-text-color-disable;
         opacity: $checkbox-text-opacity-disable;
     }

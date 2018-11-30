@@ -36,8 +36,17 @@
         <div class="b-add-request__content">
             <h4>Заявка</h4>
             <form action="" method="post" enctype="multipart/form-data" class="b-add-request__form">
-                <div class="b-form-block b-form-block-success">
-                    <input type="text" name="theme-request" class="b-form-block__input" required>
+                <!--
+                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+                 -->
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "theme-request",
+                        name: "b-form-block__text",
+                        required: "true"
+                    } %}
+
                     <label for="theme-request" class="b-form-block__label">
                         Тема заявки
                     </label>
@@ -46,8 +55,8 @@
                     </span>
                 </div>
                 <div class="b-form-block">
-                    {% embed "../components/forms/select/select.twig" with {
-                        id: "b-form-block__select",
+                    {% include "../components/forms/select/select.twig" with {
+                        id: "appeal",
                         name: "b-form-block__select",
                         options: [{
                             value: 'Администрации ОЭЗ',
@@ -64,13 +73,12 @@
                             text: 'Жалобы',
                         }]
                     } %}
-                    {% endembed %}
                     <label for="appeal" class="b-form-block__label">
                         Причина обращения
                     </label>
                 </div>
-                <div class="b-form-block b-form-block_padding_0">
-                    <textarea name="request-message" id="" class="b-form-block__message" required></textarea>
+                <div class="b-form-block b-form-block-textarea">
+                    <textarea name="request-message" id="request-message" class="b-form-block__message" required></textarea>
                     <label for="request-message" class="b-form-block__label">
                         Сообщение
                     </label>
@@ -81,8 +89,4 @@
             </form>
         </div>
     </div>
-
-    {# Мобильное меню #}
-
-    {% include '../components/mobile-menu/mobile-menu.twig' %}
 {% endblock %}

@@ -35,29 +35,18 @@ $input-bd-color-disabled: #cccccc;
 
 // Placeholder
 $input-placeholder-color: #000000;
-$input-placeholder-color-valid: #00ff00;
-$input-placeholder-color-invalid: #ff0000;
+$input-placeholder-color-valid: #000000;
+$input-placeholder-color-invalid: #000000;
 $input-placeholder-color-disabled: #cccccc;
 $input-placeholder-font-style: normal;
-$input-placeholder-font-size: $input-font-size;
+$input-placeholder-font-size: inherit;
 $input-placeholder-opacity: 1;
 
 .b-input-email {
-    @include transition(border-color);
-    font-family: $input-font-family;
-    color: $input-color;
-    background-color: $input-bg-color;
-    border: $input-bd-width solid $input-bd-color;
-    font-size: $input-font-size;
-    line-height: $input-line-height;
+    display: block;
     width: 100%;
-    border-radius: $input-border-radius;
-    padding: {
-        top: 0;
-        bottom: 0;
-        left: 20px;
-        right: 20px;
-    }
+    border: none;
+
 
     // Отключаем стандартный крестик в полях в IE
     &::-ms-clear {
@@ -74,30 +63,20 @@ $input-placeholder-opacity: 1;
 
     // При фокусе
     &:focus {
-        color: $input-color-focus;
-        border-color: $input-bd-color-focus;
-        background-color: $input-bg-color-focus;
+
     }
 
     // Ошибка
     // &:invalid,
     &.is-invalid,
     &.is-error {
-        color: $input-color-invalid;
-        border-color: $input-bd-color-invalid;
-        background-color: $input-bg-color-invalid;
 
-        &::placeholder {
-            color: $input-placeholder-color-invalid;
-        }
     }
 
     // Успех
     &.is-valid,
     &.is-success {
-        color: $input-color-valid;
-        border-color: $input-bd-color-valid;
-        background-color: $input-bg-color-valid;
+
     }
 
     // отключенный инпут

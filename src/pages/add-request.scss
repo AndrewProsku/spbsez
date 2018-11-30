@@ -86,8 +86,8 @@
 }
 
 .b-add-request__links-desctop {
-    @include column(20, 32);
     display: none;
+    max-width: 377px;
     background-color: $bg-grey;
     border-radius: 8px;
     padding: 4px;
@@ -97,34 +97,38 @@
     }
 
     @media #{$laptop} {
-        @include column(12.5, 30);
+        max-width: 451px;
     }
 
-    @media #{$fullhd} {
-        @include column(10, 28);
+    @media #{$laptop-wide} {
+        max-width: 491px;
     }
 }
 
 .b-add-request__link {
     @include font-size("p3");
     display: block;
+    color: $blue;
     text-align: center;
     border-radius: 4px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding: 8px 16px;
 
     &:first-child {
-        @include column(6.5, 20);
-        @include post(1, 20);
+        margin-right: 16px;
     }
 
     &:last-child {
-        @include column(12.5, 20);
     }
 
     &.is-active {
+        color: $black;
         background-color: $white;
         box-shadow: 0 1px 2px $dark-grey;
+    }
+
+    @media #{$laptop} {
+        padding-left: 24px;
+        padding-right: 24px;
     }
 }
 
@@ -134,10 +138,19 @@
     h4 {
         @include margin-level(bottom, dark-yellow);
     }
+
+    @media #{$laptop} {
+        @include column(19, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(18, 28);
+    }
 }
 
 .b-form-block {
     position: relative;
+    height: 64px;
     border: 1px solid $grey;
     border-bottom: 0;
     background-color: $white;
@@ -172,6 +185,14 @@
         }
     }
 
+    select {
+        background-color: transparent;
+        border: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
     textarea {
         resize: none;
         padding: 30px 16px 12px 16px;
@@ -181,13 +202,33 @@
             background-color: $bg-select;
         }
     }
+
+    @media #{$tablet-portrait} {
+        padding-top: 28px;
+    }
+
+    @media #{$laptop} {
+        height: 72px;
+        padding-top: 32px;
+    }
+
+    @media #{$laptop-wide} {
+        height: 80px;
+        padding-top: 36px;
+    }
 }
 
 .b-form-block-error {
+    height: auto;
+    border-color: $red;
     padding-bottom: 0;
 
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+        color: $red;
+    }
     .b-form-block__label {
-        color: red;
         opacity: 1;
     }
 
@@ -202,7 +243,8 @@
     }
 }
 
-.b-form-block_padding_0 {
+.b-form-block-textarea {
+    height: auto;
     padding: 0;
 }
 
@@ -214,20 +256,16 @@
     opacity: 0.72;
 }
 
-.b-form-block__input {
-    display: block;
-    width: 100%;
-    border: none;
-}
-
 .b-form-block__error-text {
     @include font-size("p4");
     display: none;
     position: relative;
-    width: 100%;
+    left: -1px;
+    width: calc(100% + 2px);
     background-color: $dark-white;
-    border-top: 1px solid $grey;
-    padding: 3px 0 11px 16px;
+    border: 1px solid $grey;
+    border-bottom: 0;
+    padding: 5px 0 5px 16px;
     margin-top: 10px;
 
     &:before {
@@ -267,9 +305,6 @@
     width: 100%;
     background-color: $white;
     border: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
 }
 
 .b-form-block__message {

@@ -15,6 +15,7 @@
 @import "../../pages/home";
 @import "../../pages/contacts";
 @import "../../pages/add-request";
+@import "../../pages/login";
 
 // Components
 
@@ -24,3 +25,12 @@
 
 @import "../../components/account-tooltip/account-tooltip";
 @import "../../components/lk-nav/lk-nav";
+@import "../../components/lk-login-nav/lk-login-nav";
+@import "../../components/forms/input-text/input-text";
+@import "../../components/forms/email/email";
+@import "../../components/forms/password/password";
+@import "../../components/forms/checkbox/checkbox";
+@import "../../pages/password-recovery";
+@import "../../pages/password-recovery-step2";
+@import "../../pages/password-recovery-step3";
+@import "../../pages/password-recovery-step4";

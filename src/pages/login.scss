@@ -1,0 +1,50 @@
+.l-login {
+    @include padding-level(bottom, pink);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-login-title {
+    @include padding-level(bottom, green);
+}
+
+.b-login-form {
+    @media #{$laptop} {
+        @include column(19, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(18, 28);
+    }
+}
+
+.b-form-block-wrap {
+    margin-bottom: 8px;
+}
+
+.b-remember-passsword {
+    @include font-size("p4");
+    margin-bottom: 20px;
+}
+
+p.b-checkbox-text {
+    @include font-size("p3");
+
+    a {
+        color: $black;
+    }
+}
+
+.b-login-form__button-block {
+    @include padding-level(top, green);
+}
