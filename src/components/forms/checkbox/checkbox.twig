@@ -2,7 +2,7 @@
     <div class="b-form__checkbox">
         <input
             id="{{ id }}"
-            class="b-form__checkbox-input"
+            class="b-checkbox-input"
             type="checkbox"
             value="{{ value }}"
             name="{{ name }}"
@@ -10,9 +10,9 @@
             {% if disabled %} disabled {% endif %}
             {% if required %} required {% endif %}
         >
-        <label for="{{ id }}" class="b-form__checkbox-label">
+        <label for="{{ id }}" class="b-checkbox-label">
             {% include './checkbox.svg.twig' %}
-            <span class="b-form__checkbox-text">{{ text }}</span>
+            <p class="b-checkbox-text">{{ text }}</p>
         </label>
     </div>
 {% else %}

@@ -1,24 +1,27 @@
 .l-layout {
     @include row();
+    min-height: 100%;
 }
 
 .l-layout__content {
     @include column(36, 36);
+    min-height: 100vh;
+    padding-bottom: 197px;
 }
 
 .l-layout__content-inner {
     position: relative;
-    margin-top: 60px;
+    padding-top: 60px;
 
     h1 {
         @include font-size("h1-inner");
     }
 
     @media #{$laptop} {
-        margin-top: 80px;
+        padding-top: 80px;
     }
 
     @media #{$fullhd} {
-        margin-top: 100px;
+        padding-top: 100px;
     }
 }

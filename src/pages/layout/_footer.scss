@@ -5,8 +5,10 @@
     @include padding-level(top, green);
     @include padding-level(bottom, cyan);
     position: relative;
+    height: 197px;
     background-image: linear-gradient(to right, $blue 0%, $violet 100%);
     overflow: hidden;
+    margin-top: -197px;
 
     @media #{$laptop} {
         @include row();

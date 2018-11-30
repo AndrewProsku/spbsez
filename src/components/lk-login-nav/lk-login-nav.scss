@@ -1,0 +1,69 @@
+.b-lk-login-nav {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    display: none;
+    background-color: $bg-grey;
+
+    @media #{$tablet-portrait} {
+        display: block;
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-lk-login-nav__list {
+    @include row();
+    @include column(32, 36);
+}
+
+.b-lk-login-nav__item {
+    @include post(1, 32);
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 14px;
+
+    &:after {
+        content: "";
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    &.is-active {
+        &:after {
+            background-image: linear-gradient($gradient-linear);
+        }
+
+        .b-lk-login-nav__link {
+            color: $black;
+            background-image: none;
+        }
+    }
+
+    @media #{$laptop} {
+        padding-top: 15px;
+        padding-bottom: 22px;
+    }
+
+    @media #{$fullhd} {
+        padding-top: 23px;
+        padding-bottom: 26px;
+    }
+}
+
+.b-lk-login-nav__link {
+    @include font-size("p3");
+    display: block;
+    color: $blue;
+}
