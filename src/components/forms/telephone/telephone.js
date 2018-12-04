@@ -14,7 +14,7 @@ import inputmask from 'inputmask';
  * Модуль ввешает маску на input типом tel
  */
 class InputTelephone {
-    constructor(options) {
+    init(options) {
         this.input = options.input;
         this.mask = options.mask || '+7(999) 999-99-99';
 

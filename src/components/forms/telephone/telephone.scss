@@ -9,24 +9,9 @@ $input-color-disable: #777;
 $input-padding: 10px;
 
 // Component
-.b-input-telephone {
+.b-input-phone {
     display: block;
-    padding: $input-padding;
-    border: 1px solid $input-border-color;
+    width: 100%;
+    border: none;
     outline: none;
-
-    @media #{$laptop} {
-        &:hover {
-            border-bottom-color: $input-border-color-hover;
-        }
-    }
-
-    &:focus {
-        border-bottom-color: $input-border-color-hover;
-    }
-
-    &:disabled {
-        border-bottom-color: $input-color-disable;
-    }
-
 }

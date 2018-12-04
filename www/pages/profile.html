@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/alert-old-browser/ie-8-browser.css">
 <![endif]-->
 
-         <title>Подать заявку</title> </head>
+         <title>Заголовок</title> </head>
     <body>
 
         <div class="b-alert-old-browser is-hidden">
@@ -219,107 +219,394 @@
         </li>
     </ul>
 </div>
-    <div class="l-add-request">
+    <div class="l-profile">
+
         <div class="b-title b-add-request-title">
-            <h1>Подать заявку</h1>
+            <h1>Профиль</h1>
         </div>
 
-        <div class="b-links">
+        <div class="b-links l-profile__links">
             <div class="b-links-mobile">
                 <div class="b-links-mobile-header">
                     <a href="#" class="b-links__link-mobile">
-                        Стандартная
+                        Личные данные
                     </a>
                     <span class="b-links__link-icon"></span>
                 </div>
                 <ul class="b-links-mobile-body">
                     <li class="b-links-mobile-item">
                         <a href="#" class="b-links-mobile-link">
-                            Пропуск на временный въезд
+                            Документы
+                        </a>
+                    </li>
+                    <li class="b-links-mobile-item">
+                        <a href="#" class="b-links-mobile-link">
+                            Администраторы
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="b-links-desctop">
                 <a href="#" class="b-links__link is-active">
-                    Стандартная
+                    Личные данные
                 </a>
                 <a href="#" class="b-links__link">
-                    Пропуск на временный въезд
+                    Документы
+                </a>
+                <a href="#" class="b-links__link">
+                    Администраторы
                 </a>
             </div>
         </div>
 
-        <div class="b-add-request__content">
-            <h4>Заявка</h4>
-            <form action="" method="post" enctype="multipart/form-data" class="b-add-request__form">
+        <div class="l-profile-block">
+            <div class="l-profile-block__title">
+                <h4>Администратор</h4>
+            </div>
+            <div class="l-profile-block__input-wrap">
                 <!--
                  Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
                  Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
                  -->
+
                 <div class="b-form-block">
                         <input
-        id="theme-request"
+        id="profile-name"
         class="b-input-text"
         type="text"
-        name="b-form-block__text"
+        name="profile-name"
+        maxlength=""
+        autocomplete=""
+        value="Иванов Сергей Константинович"
+        placeholder=""
+                 required                             >
+
+                    <label for="profile-name" class="b-form-block__label">
+                        ФИО
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+        id="profile-email"
+        class="b-input-email"
+        type="email"
+        name="profile-email"
+                    value="ivanov.sergey@biocad.ru"
+        
+        
+                         required     >
+
+                    <label for="profile-email" class="b-form-block__label">
+                        Эл.почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+            id="profile-phone"
+            class="b-input-phone"
+            type="tel"
+            name="profile-phone"
+            autocomplete="tel"
+            placeholder="+7(___) ___-__-__"
+                                     required     >
+
+                    <label for="profile-phone" class="b-form-block__label">
+                        Телефон
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+        id="profile-status"
+        class="b-input-text"
+        type="text"
+        name="profile-status"
+        maxlength=""
+        autocomplete=""
+        value="Супер-Администратор"
+        placeholder=""
+                 required                             >
+
+                    <label for="profile-status" class="b-form-block__label">
+                        Статус
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="l-profile-block">
+            <div class="l-profile-block__title">
+                <h4>Компания</h4>
+            </div>
+            <div class="l-profile-block__input-wrap">
+
+                <div class="b-form-block">
+                        <input
+        id="company-resident"
+        class="b-input-text"
+        type="text"
+        name="company-resident"
+        maxlength=""
+        autocomplete=""
+        value="ООО «Биокад»"
+        placeholder=""
+                 required                             >
+
+                    <label for="company-resident" class="b-form-block__label">
+                        Резидент
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+        id="company-inn"
+        class="b-input-text"
+        type="text"
+        name="company-inn"
+        maxlength=""
+        autocomplete=""
+        value="5024048000"
+        placeholder=""
+                 required                             >
+
+                    <label for="company-inn" class="b-form-block__label">
+                        ИНН
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+        id="company-legal-address"
+        class="b-input-text"
+        type="text"
+        name="company-legal-address"
+        maxlength=""
+        autocomplete=""
+        value="198515, город Санкт-Петербург, поселок Стрельна, улица Связи, 34 лит. а"
+        placeholder=""
+                 required                             >
+
+                    <label for="company-legal-address" class="b-form-block__label">
+                        Юр.адрес
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+        id="company-mailing-address"
+        class="b-input-text"
+        type="text"
+        name="profile-mailing-address"
+        maxlength=""
+        autocomplete=""
+        value="198515, город Санкт-Петербург, поселок Стрельна, улица Связи, 34 лит. а"
+        placeholder=""
+                 required                             >
+
+                    <label for="company-mailing-address" class="b-form-block__label">
+                        Почтовый адрес
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+            id="company-phone"
+            class="b-input-phone"
+            type="tel"
+            name="company-phone"
+            autocomplete="tel"
+            placeholder="+7(___) ___-__-__"
+             value="+7 812 657-78-12"                          required     >
+
+                    <label for="company-phone" class="b-form-block__label">
+                        Телефон
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+            id="company-fax"
+            class="b-input-phone"
+            type="tel"
+            name="company-fax"
+            autocomplete="tel"
+            placeholder="+7(___) ___-__-__"
+             value="8 812 657-78-12"                          required     >
+
+                    <label for="company-fax" class="b-form-block__label">
+                        Факс
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+        id="company-email"
+        class="b-input-email"
+        type="email"
+        name="company-email"
+                    value="info@biocad.ru"
+        
+        
+                         required     >
+
+                    <label for="company-email" class="b-form-block__label">
+                        Электронная почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <!--
+                    Для добавления полоски вверху блока и инпутом добавить класс b-form-block_theme_grey
+                    к классу b-form-block
+                -->
+                <div class="b-form-block b-form-block_theme_grey">
+                        <input
+        id="company-director"
+        class="b-input-text"
+        type="text"
+        name="company-director"
+        maxlength=""
+        autocomplete=""
+        value="Дмитрий Анатольевич Морозов"
+        placeholder=""
+                 required                             >
+
+                    <label for="company-director" class="b-form-block__label">
+                        ФИО генерального директора
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-profile-block">
+            <div class="l-profile-block__title">
+                <h4>Контактное лицо проекта</h4>
+            </div>
+            <div class="l-profile-block__input-wrap">
+
+                <div class="b-form-block">
+                        <input
+        id="person-name"
+        class="b-input-text"
+        type="text"
+        name="person-name"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
                  required                             >
 
-                    <label for="theme-request" class="b-form-block__label">
-                        Тема заявки
+                    <label for="person-name" class="b-form-block__label">
+                        ФИО
                     </label>
                     <span class="b-form-block__error-text">
                         Текст подсказки
                     </span>
                 </div>
-                <div class="b-form-block">
-                        <div class="b-select">
-        <div class="b-select__wrapper">
-            <select
-                id="appeal"
-                class="b-select__list j-select"
-                name="b-form-block__select"
-                data-placeholder=""
-                                                            >
 
-                                    <option value="Администрации ОЭЗ"
-                                                         selected                     >
-                        Администрации ОЭЗ
-                    </option>
-                                    <option value="В ЦОД"
-                                                                            >
-                        В ЦОД
-                    </option>
-                                    <option value="Вопросы и предложения"
-                                                                            >
-                        Вопросы и предложения
-                    </option>
-                                    <option value="Жалобы"
-                                                                            >
-                        Жалобы
-                    </option>
-                            </select>
-        </div>
-    </div>
-                    <label for="appeal" class="b-form-block__label">
-                        Причина обращения
+                <div class="b-form-block">
+                        <input
+        id="person-post"
+        class="b-input-text"
+        type="text"
+        name="person-post"
+        maxlength=""
+        autocomplete=""
+        value=""
+        placeholder=""
+                 required                             >
+
+                    <label for="person-post" class="b-form-block__label">
+                        Должность
                     </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
                 </div>
-                <div class="b-form-block b-form-block-textarea">
-                    <textarea name="request-message" id="request-message" class="b-form-block__message" required></textarea>
-                    <label for="request-message" class="b-form-block__label">
-                        Сообщение
+
+                <div class="b-form-block">
+                        <input
+            id="person-phone"
+            class="b-input-phone"
+            type="tel"
+            name="person-phone"
+            autocomplete="tel"
+            placeholder="+7(___) ___-__-__"
+                                     required     >
+
+                    <label for="person-phone" class="b-form-block__label">
+                        Телефон
                     </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
                 </div>
-                <button type="submit" class="button b-add-request__form-button">
-                    Подать заявку
-                </button>
-            </form>
+
+                <div class="b-form-block">
+                        <input
+        id="person-email"
+        class="b-input-email"
+        type="email"
+        name="person-email"
+        
+        
+                         required     >
+
+                    <label for="person-email" class="b-form-block__label">
+                        Эл.почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+            </div>
         </div>
+
+        <div class="l-profile-add">
+            <a href="#" class="button-add">
+                Добавить еще
+            </a>
+        </div>
+
     </div>
             </main>
 

@@ -8,31 +8,37 @@
         <div class="b-title b-add-request-title">
             <h1>Подать заявку</h1>
         </div>
-        <div class="b-add-request__links">
-            <div class="b-add-request__links-mobile">
-                <div class="b-add-request__links-mobile-header">
-                    <a href="#" class="b-add-request__link-mobile">
+
+        {# Блок ссылок #}
+
+        <div class="b-links">
+            <div class="b-links-mobile">
+                <div class="b-links-mobile-header">
+                    <a href="#" class="b-links__link-mobile">
                         Стандартная
                     </a>
-                    <span class="b-add-request__link-icon"></span>
+                    <span class="b-links__link-icon"></span>
                 </div>
-                <ul class="b-add-request__links-mobile-body">
-                    <li class="b-add-request__links-mobile-item">
-                        <a href="#" class="b-add-request__links-mobile-link">
+                <ul class="b-links-mobile-body">
+                    <li class="b-links-mobile-item">
+                        <a href="#" class="b-links-mobile-link">
                             Пропуск на временный въезд
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="b-add-request__links-desctop">
-                <a href="#" class="b-add-request__link is-active">
+            <div class="b-links-desctop">
+                <a href="#" class="b-links__link is-active">
                     Стандартная
                 </a>
-                <a href="#" class="b-add-request__link">
+                <a href="#" class="b-links__link">
                     Пропуск на временный въезд
                 </a>
             </div>
         </div>
+
+        {# Форма #}
+
         <div class="b-add-request__content">
             <h4>Заявка</h4>
             <form action="" method="post" enctype="multipart/form-data" class="b-add-request__form">

@@ -76,7 +76,7 @@ $input-placeholder-opacity: 1;
     // Успех
     &.is-valid,
     &.is-success {
-
+        color: $blue;
     }
 
     // отключенный инпут
