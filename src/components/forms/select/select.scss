@@ -24,7 +24,7 @@ $select-padding: 0 16px 0 16px;
 $select-brd-radius: 0;
 $select-brd-width: 0;
 $select-brd-color: transparent;
-$select-bg-color: $white;
+$select-bg-color: transparent;
 $select-color: $black;
 $select-placeholder-color: $black;
 $select-shadow: none;
@@ -55,14 +55,14 @@ $select-hover-brd-color: #ccc;
 
 // Multiselect
 $select-multi-brd-radius: 3px;
-$select-multi-brd-width: 1px;
-$select-multi-brd-color: #aaa;
+$select-multi-brd-width: 0;
+$select-multi-brd-color: transparent;
 $select-multi-bg-color: #eee;
 $select-multi-color: #000;
-$select-multi-shadow: 0 0 5px rgba(0, 0, 0, .3);
+$select-multi-shadow: none;
 $select-multi-font-size: 13px;
-$select-multi-padding: 1px 20px 1px 5px;
-$select-multi-margin: 4px 5px 0 0;
+$select-multi-padding: 0 20px 0 0;
+$select-multi-margin: 0;
 $select-multi-chosen-color: #ccc;
 $select-multi-chosen-bg: #f6f8f8;
 $select-multi-chosen-cursor: true;
@@ -224,13 +224,8 @@ $select-multi-results-bg: transparent;
 
     // Открытый селект с одним вариантом
     .chosen-container-active.chosen-with-drop .chosen-single {
-        //background-image: $select-active-bg-image;
-        background: $white;
-        //box-shadow: none;
+        background: transparent;
         border-width: $select-brd-width;
-        //border-color: $select-brd-color;
-        //border-style: solid;
-        //border-bottom-width: 0;
 
         // Стрелочка у открытого селекта
         div b {
@@ -246,7 +241,7 @@ $select-multi-results-bg: transparent;
         // Стрелочка справа для мультиселекта
         &:after {
             @include transition(transform);
-            content: '';
+            content: "";
             position: absolute;
             right: $select-arrow-right-padding;
             background-color: red;
@@ -276,7 +271,6 @@ $select-multi-results-bg: transparent;
         .chosen-choices {
             background-image: none;
             outline: none;
-            height: $select-height;
             padding: $select-padding;
 
             // Инпут для поиска вариантов
@@ -287,9 +281,10 @@ $select-multi-results-bg: transparent;
 
             // Опция в мультиселекте
             li.search-choice {
+                @include font-size("p2");
                 background-image: none;
-                //box-shadow: none;
-                background-color: $select-multi-bg-color;
+                box-shadow: none;
+                background-color: transparent;
                 color: $select-multi-color;
                 border: $select-multi-brd-width solid $select-multi-brd-color;
                 border-radius: $select-multi-brd-radius;
@@ -321,8 +316,8 @@ $select-multi-results-bg: transparent;
 
     // Активное состояние закрытого мультиселекта
     .chosen-container-active .chosen-choices {
-        border-color: $select-brd-color;
-        //box-shadow: $select-multi-shadow;
+        border: none;
+        box-shadow: none;
     }
 }
 
@@ -332,30 +327,30 @@ $select-multi-results-bg: transparent;
         position: relative;
 
         // Стрелочка справа у мобильного селекта
-        &:before {
-            content: '';
-            position: absolute;
-            right: $select-arrow-right-padding;
-
-            @if ($select-arrow-custom) {
-                background-image: url($select-arrow-image);
-                background-position: 0 50%;
-                background-repeat: no-repeat;
-                background-color: transparent;
-                background-size: contain;
-                width: $select-arrow-container-width;
-                height: 100%;
-                top: 0;
-            } @else {
-                top: 35%;
-                background: none;
-                width: 0;
-                height: 0;
-                border-left: $select-arrow-width solid transparent;
-                border-right: $select-arrow-width solid transparent;
-                border-top: $select-arrow-height solid $select-arrow-color;
-            }
-        }
+        //&:before {
+        //    content: '';
+        //    position: absolute;
+        //    right: $select-arrow-right-padding;
+        //
+        //    @if ($select-arrow-custom) {
+        //        background-image: url($select-arrow-image);
+        //        background-position: 0 50%;
+        //        background-repeat: no-repeat;
+        //        background-color: transparent;
+        //        background-size: contain;
+        //        width: $select-arrow-container-width;
+        //        height: 100%;
+        //        top: 0;
+        //    } @else {
+        //        top: 35%;
+        //        background: none;
+        //        width: 0;
+        //        height: 0;
+        //        border-left: $select-arrow-width solid transparent;
+        //        border-right: $select-arrow-width solid transparent;
+        //        border-top: $select-arrow-height solid $select-arrow-color;
+        //    }
+        //}
     }
 }
 
@@ -380,3 +375,12 @@ $select-multi-results-bg: transparent;
         -moz-appearance: none;
     }
 }
+
+// Переопределение select при hover
+
+//.b-form-block {
+//    .b-select .chosen-single {
+//        background-color: transparent;
+//    }
+//}
+//.chosen-container-active.chosen-with-drop

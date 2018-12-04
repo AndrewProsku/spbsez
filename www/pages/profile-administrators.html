@@ -219,49 +219,62 @@
         </li>
     </ul>
 </div>
-    <div class="l-profile">
+    <div class="l-profile-administrators">
 
         <div class="b-title b-add-request-title">
             <h1>Профиль</h1>
         </div>
 
-        <div class="b-links b-profile__links">
+        <div class="b-links l-profile__links">
             <div class="b-links-mobile">
                 <div class="b-links-mobile-header">
                     <a href="#" class="b-links__link-mobile">
-                        Личные данные
+                        Администраторы
                     </a>
                     <span class="b-links__link-icon"></span>
                 </div>
                 <ul class="b-links-mobile-body">
                     <li class="b-links-mobile-item">
                         <a href="#" class="b-links-mobile-link">
-                            Документы
+                            Личные данные
                         </a>
                     </li>
                     <li class="b-links-mobile-item">
                         <a href="#" class="b-links-mobile-link">
-                            Администраторы
+                            Документы
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="b-links-desctop">
-                <a href="#" class="b-links__link is-active">
+                <a href="#" class="b-links__link">
                     Личные данные
                 </a>
                 <a href="#" class="b-links__link">
                     Документы
                 </a>
-                <a href="#" class="b-links__link">
+                <a href="#" class="b-links__link is-active">
                     Администраторы
                 </a>
             </div>
         </div>
 
+        <div class="b-empty-page">
+            <p>
+                Администраторов пока нет
+            </p>
+
+            <div class="b-profile-add">
+                <a href="#" class="button-add">
+                    Добавить администратора
+                </a>
+            </div>
+        </div>
+
         <div class="b-profile-block">
-            <div class="b-profile-block__title">
-                <h4>Администратор</h4>
+            <button type="button" class="b-profile-block__delete"></button>
+            <div class="b-profile-block__title b-profile-admin-title">
+                <h4>Вознесенский Алексей</h4>
             </div>
             <div class="b-profile-block__input-wrap">
                 <!--
@@ -271,17 +284,17 @@
 
                 <div class="b-form-block">
                         <input
-        id="profile-name"
+        id="admin1-name"
         class="b-input-text"
         type="text"
-        name="profile-name"
+        name="admin1-name"
         maxlength=""
         autocomplete=""
-        value="Иванов Сергей Константинович"
+        value="Вознесенский Алексей"
         placeholder=""
                  required                             >
 
-                    <label for="profile-name" class="b-form-block__label">
+                    <label for="admin1-name" class="b-form-block__label">
                         ФИО
                     </label>
                     <span class="b-form-block__error-text">
@@ -291,16 +304,16 @@
 
                 <div class="b-form-block">
                         <input
-        id="profile-email"
+        id="admin1-email"
         class="b-input-email"
         type="email"
-        name="profile-email"
-                    value="ivanov.sergey@biocad.ru"
+        name="admin1-email"
+                    value="voznesenskiy.alex@biocad.ru"
         
         
                          required     >
 
-                    <label for="profile-email" class="b-form-block__label">
+                    <label for="admin1-email" class="b-form-block__label">
                         Эл.почта
                     </label>
                     <span class="b-form-block__error-text">
@@ -310,15 +323,15 @@
 
                 <div class="b-form-block">
                         <input
-            id="profile-phone"
+            id="admin1-phone"
             class="b-input-phone"
             type="tel"
-            name="profile-phone"
+            name="admin1-phone"
             autocomplete="tel"
             placeholder="+7(___) ___-__-__"
-                                     required     >
+             value="+7 921 549-98-78"                          required     >
 
-                    <label for="profile-phone" class="b-form-block__label">
+                    <label for="admin1-phone" class="b-form-block__label">
                         Телефон
                     </label>
                     <span class="b-form-block__error-text">
@@ -327,18 +340,36 @@
                 </div>
 
                 <div class="b-form-block">
-                        <input
-        id="profile-status"
-        class="b-input-text"
-        type="text"
-        name="profile-status"
-        maxlength=""
-        autocomplete=""
-        value="Супер-Администратор"
-        placeholder=""
-                 required                             >
+                        <div class="b-select">
+        <div class="b-select__wrapper">
+            <select
+                id="admin1-status"
+                class="b-select__list j-select"
+                name="admin1-status"
+                data-placeholder=""
+                 required                                             >
 
-                    <label for="profile-status" class="b-form-block__label">
+                                    <option value="Супер-Администратор"
+                                                         selected                     >
+                        Супер-Администратор
+                    </option>
+                                    <option value="Администратор"
+                                                                            >
+                        Администратор
+                    </option>
+                                    <option value="Супер-Администратор 2"
+                                                                            >
+                        Супер-Администратор 2
+                    </option>
+                                    <option value="Супер-Администратор 3"
+                                                                            >
+                        Супер-Администратор 3
+                    </option>
+                            </select>
+        </div>
+    </div>
+
+                    <label for="admin1-status" class="b-form-block__label">
                         Статус
                     </label>
                     <span class="b-form-block__error-text">
@@ -346,195 +377,67 @@
                     </span>
                 </div>
 
+                <div class="b-form-block">
+                        <div class="b-select">
+        <div class="b-select__wrapper">
+            <select
+                id="admin1-access"
+                class="b-select__list j-select"
+                name="admin1-access"
+                data-placeholder=""
+                 required                  multiple                             >
+
+                                    <option value="Подача отчета"
+                                                         selected                     >
+                        Подача отчета
+                    </option>
+                                    <option value="Сообщения от ОЭЗ"
+                                                                            >
+                        Сообщения от ОЭЗ
+                    </option>
+                                    <option value="Подача заявки"
+                                                                            >
+                        Подача заявки
+                    </option>
+                            </select>
+        </div>
+    </div>
+
+                    <label for="admin1-access" class="b-form-block__label">
+                        Доступ
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
             </div>
         </div>
 
         <div class="b-profile-block">
-            <div class="b-profile-block__title">
-                <h4>Компания</h4>
+            <button type="button" class="b-profile-block__delete"></button>
+            <div class="b-profile-block__title b-profile-admin-title">
+                <h4>Панарин Артемий</h4>
             </div>
             <div class="b-profile-block__input-wrap">
-
-                <div class="b-form-block">
-                        <input
-        id="company-resident"
-        class="b-input-text"
-        type="text"
-        name="company-resident"
-        maxlength=""
-        autocomplete=""
-        value="ООО «Биокад»"
-        placeholder=""
-                 required                             >
-
-                    <label for="company-resident" class="b-form-block__label">
-                        Резидент
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <input
-        id="company-inn"
-        class="b-input-text"
-        type="text"
-        name="company-inn"
-        maxlength=""
-        autocomplete=""
-        value="5024048000"
-        placeholder=""
-                 required                             >
-
-                    <label for="company-inn" class="b-form-block__label">
-                        ИНН
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <input
-        id="company-legal-address"
-        class="b-input-text"
-        type="text"
-        name="company-legal-address"
-        maxlength=""
-        autocomplete=""
-        value="198515, город Санкт-Петербург, поселок Стрельна, улица Связи, 34 лит. а"
-        placeholder=""
-                 required                             >
-
-                    <label for="company-legal-address" class="b-form-block__label">
-                        Юр.адрес
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <input
-        id="company-mailing-address"
-        class="b-input-text"
-        type="text"
-        name="profile-mailing-address"
-        maxlength=""
-        autocomplete=""
-        value="198515, город Санкт-Петербург, поселок Стрельна, улица Связи, 34 лит. а"
-        placeholder=""
-                 required                             >
-
-                    <label for="company-mailing-address" class="b-form-block__label">
-                        Почтовый адрес
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <input
-            id="company-phone"
-            class="b-input-phone"
-            type="tel"
-            name="company-phone"
-            autocomplete="tel"
-            placeholder="+7(___) ___-__-__"
-             value="+7 812 657-78-12"                          required     >
-
-                    <label for="company-phone" class="b-form-block__label">
-                        Телефон
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <input
-            id="company-fax"
-            class="b-input-phone"
-            type="tel"
-            name="company-fax"
-            autocomplete="tel"
-            placeholder="+7(___) ___-__-__"
-             value="8 812 657-78-12"                          required     >
-
-                    <label for="company-fax" class="b-form-block__label">
-                        Факс
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <input
-        id="company-email"
-        class="b-input-email"
-        type="email"
-        name="company-email"
-                    value="info@biocad.ru"
-        
-        
-                         required     >
-
-                    <label for="company-email" class="b-form-block__label">
-                        Электронная почта
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
                 <!--
-                    Для добавления полоски вверху блока и инпутом добавить класс b-form-block_theme_grey
-                    к классу b-form-block
-                -->
-                <div class="b-form-block b-form-block_theme_grey">
-                        <input
-        id="company-director"
-        class="b-input-text"
-        type="text"
-        name="company-director"
-        maxlength=""
-        autocomplete=""
-        value="Дмитрий Анатольевич Морозов"
-        placeholder=""
-                 required                             >
-
-                    <label for="company-director" class="b-form-block__label">
-                        ФИО генерального директора
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="b-profile-block">
-            <div class="b-profile-block__title">
-                <h4>Контактное лицо проекта</h4>
-            </div>
-            <div class="b-profile-block__input-wrap">
+                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+                 -->
 
                 <div class="b-form-block">
                         <input
-        id="person-name"
+        id="admin2-name"
         class="b-input-text"
         type="text"
-        name="person-name"
+        name="admin2-name"
         maxlength=""
         autocomplete=""
-        value=""
+        value="Панарин Артемий"
         placeholder=""
                  required                             >
 
-                    <label for="person-name" class="b-form-block__label">
+                    <label for="admin2-name" class="b-form-block__label">
                         ФИО
                     </label>
                     <span class="b-form-block__error-text">
@@ -544,18 +447,17 @@
 
                 <div class="b-form-block">
                         <input
-        id="person-post"
-        class="b-input-text"
-        type="text"
-        name="person-post"
-        maxlength=""
-        autocomplete=""
-        value=""
-        placeholder=""
-                 required                             >
+        id="admin2-email"
+        class="b-input-email"
+        type="email"
+        name="admin2-email"
+                    value="panarin.artemiy@biocad.ru"
+        
+        
+                         required     >
 
-                    <label for="person-post" class="b-form-block__label">
-                        Должность
+                    <label for="admin2-email" class="b-form-block__label">
+                        Эл.почта
                     </label>
                     <span class="b-form-block__error-text">
                         Текст подсказки
@@ -564,15 +466,15 @@
 
                 <div class="b-form-block">
                         <input
-            id="person-phone"
+            id="admin2-phone"
             class="b-input-phone"
             type="tel"
-            name="person-phone"
+            name="admin2-phone"
             autocomplete="tel"
             placeholder="+7(___) ___-__-__"
-                                     required     >
+             value="+7 952 654-89-42"                          required     >
 
-                    <label for="person-phone" class="b-form-block__label">
+                    <label for="admin2-phone" class="b-form-block__label">
                         Телефон
                     </label>
                     <span class="b-form-block__error-text">
@@ -581,17 +483,214 @@
                 </div>
 
                 <div class="b-form-block">
+                        <div class="b-select">
+        <div class="b-select__wrapper">
+            <select
+                id="admin2-status"
+                class="b-select__list j-select"
+                name="admin2-status"
+                data-placeholder=""
+                 required                                             >
+
+                                    <option value="Супер-Администратор"
+                                                                            >
+                        Супер-Администратор
+                    </option>
+                                    <option value="Администратор"
+                                                         selected                     >
+                        Администратор
+                    </option>
+                                    <option value="Супер-Администратор 2"
+                                                                            >
+                        Супер-Администратор 2
+                    </option>
+                                    <option value="Супер-Администратор 3"
+                                                                            >
+                        Супер-Администратор 3
+                    </option>
+                            </select>
+        </div>
+    </div>
+
+                    <label for="admin2-status" class="b-form-block__label">
+                        Статус
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <div class="b-select">
+        <div class="b-select__wrapper">
+            <select
+                id="admin2-access"
+                class="b-select__list j-select"
+                name="admin2-access"
+                data-placeholder=""
+                 required                  multiple                             >
+
+                                    <option value="Подача отчета"
+                                                         selected                     >
+                        Подача отчета
+                    </option>
+                                    <option value="Сообщения от ОЭЗ"
+                                                                            >
+                        Сообщения от ОЭЗ
+                    </option>
+                                    <option value="Подача заявки"
+                                                                            >
+                        Подача заявки
+                    </option>
+                            </select>
+        </div>
+    </div>
+
+                    <label for="admin2-access" class="b-form-block__label">
+                        Доступ
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="b-profile-block">
+            <button type="button" class="b-profile-block__delete"></button>
+            <div class="b-profile-block__title b-profile-admin-title">
+                <h4>Афиногенов Максим Леонидович</h4>
+            </div>
+            <div class="b-profile-block__input-wrap">
+                <!--
+                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+                 -->
+
+                <div class="b-form-block">
                         <input
-        id="person-email"
+        id="admin2-name"
+        class="b-input-text"
+        type="text"
+        name="admin2-name"
+        maxlength=""
+        autocomplete=""
+        value="Афиногенов Максим Леонидович"
+        placeholder=""
+                 required                             >
+
+                    <label for="admin2-name" class="b-form-block__label">
+                        ФИО
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+        id="admin2-email"
         class="b-input-email"
         type="email"
-        name="person-email"
+        name="admin2-email"
+                    value="afinogenov.max@biocad.ru"
         
         
                          required     >
 
-                    <label for="person-email" class="b-form-block__label">
+                    <label for="admin2-email" class="b-form-block__label">
                         Эл.почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <input
+            id="admin2-phone"
+            class="b-input-phone"
+            type="tel"
+            name="admin2-phone"
+            autocomplete="tel"
+            placeholder="+7(___) ___-__-__"
+             value="+7 952 654-89-43"                          required     >
+
+                    <label for="admin2-phone" class="b-form-block__label">
+                        Телефон
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <div class="b-select">
+        <div class="b-select__wrapper">
+            <select
+                id="admin2-status"
+                class="b-select__list j-select"
+                name="admin2-status"
+                data-placeholder=""
+                 required                                             >
+
+                                    <option value="Супер-Администратор"
+                                                                            >
+                        Супер-Администратор
+                    </option>
+                                    <option value="Администратор"
+                                                         selected                     >
+                        Администратор
+                    </option>
+                                    <option value="Супер-Администратор 2"
+                                                                            >
+                        Супер-Администратор 2
+                    </option>
+                                    <option value="Супер-Администратор 3"
+                                                                            >
+                        Супер-Администратор 3
+                    </option>
+                            </select>
+        </div>
+    </div>
+
+                    <label for="admin2-status" class="b-form-block__label">
+                        Статус
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                        <div class="b-select">
+        <div class="b-select__wrapper">
+            <select
+                id="admin2-access"
+                class="b-select__list j-select"
+                name="admin2-access"
+                data-placeholder=""
+                 required                  multiple                             >
+
+                                    <option value="Подача отчета"
+                                                         selected                     >
+                        Подача отчета
+                    </option>
+                                    <option value="Сообщения от ОЭЗ"
+                                                                            >
+                        Сообщения от ОЭЗ
+                    </option>
+                                    <option value="Подача заявки"
+                                                                            >
+                        Подача заявки
+                    </option>
+                            </select>
+        </div>
+    </div>
+
+                    <label for="admin2-access" class="b-form-block__label">
+                        Доступ
                     </label>
                     <span class="b-form-block__error-text">
                         Текст подсказки
@@ -603,7 +702,7 @@
 
         <div class="b-profile-add">
             <a href="#" class="button-add">
-                Добавить еще
+                Добавить еще администратора
             </a>
         </div>
 

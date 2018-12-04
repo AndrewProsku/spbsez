@@ -14,13 +14,14 @@
     }
 }
 
-.l-profile__links {
+.b-profile__links {
     @include margin-level(bottom, green);
 }
 
-.l-profile-block {
+.b-profile-block {
     @include column(32, 32);
     @include margin-level(bottom, green);
+    position: relative;
 
     @media #{$tablet-portrait} {
         @include column(20, 32);
@@ -35,7 +36,7 @@
     }
 }
 
-.l-profile-block__title {
+.b-profile-block__title {
     font-weight: 700;
     margin-bottom: 20px;
 

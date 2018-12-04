@@ -1,5 +1,5 @@
 {% extends "./layout/_layout.twig" %}
-{% block title %} <title>Заголовок</title> {% endblock %}
+{% block title %} <title>Профиль</title> {% endblock %}
 
 {% block content %}
     {% include '../components/lk-nav/lk-nav.twig' %}
@@ -12,7 +12,7 @@
 
         {# Блок ссылок #}
 
-        <div class="b-links l-profile__links">
+        <div class="b-links b-profile__links">
             <div class="b-links-mobile">
                 <div class="b-links-mobile-header">
                     <a href="#" class="b-links__link-mobile">
@@ -48,11 +48,11 @@
 
         {# Блок администратор #}
 
-        <div class="l-profile-block">
-            <div class="l-profile-block__title">
+        <div class="b-profile-block">
+            <div class="b-profile-block__title">
                 <h4>Администратор</h4>
             </div>
-            <div class="l-profile-block__input-wrap">
+            <div class="b-profile-block__input-wrap">
                 <!--
                  Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
                  Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
@@ -126,11 +126,11 @@
 
         {# Блок Компания #}
 
-        <div class="l-profile-block">
-            <div class="l-profile-block__title">
+        <div class="b-profile-block">
+            <div class="b-profile-block__title">
                 <h4>Компания</h4>
             </div>
-            <div class="l-profile-block__input-wrap">
+            <div class="b-profile-block__input-wrap">
 
                 <div class="b-form-block">
                     {% include "../components/forms/input-text/input-text.twig" with {
@@ -268,11 +268,11 @@
 
         {# Блок Контактное лицо проекта #}
 
-        <div class="l-profile-block">
-            <div class="l-profile-block__title">
+        <div class="b-profile-block">
+            <div class="b-profile-block__title">
                 <h4>Контактное лицо проекта</h4>
             </div>
-            <div class="l-profile-block__input-wrap">
+            <div class="b-profile-block__input-wrap">
 
                 <div class="b-form-block">
                     {% include "../components/forms/input-text/input-text.twig" with {
@@ -337,7 +337,7 @@
             </div>
         </div>
 
-        <div class="l-profile-add">
+        <div class="b-profile-add">
             <a href="#" class="button-add">
                 Добавить еще
             </a>

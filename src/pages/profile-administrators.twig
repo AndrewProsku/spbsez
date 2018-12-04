@@ -1,0 +1,431 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Профиль</title> {% endblock %}
+
+{% block content %}
+    {% include '../components/lk-nav/lk-nav.twig' %}
+
+    <div class="l-profile-administrators">
+
+        <div class="b-title b-add-request-title">
+            <h1>Профиль</h1>
+        </div>
+
+        {# Блок ссылок #}
+
+        <div class="b-links l-profile__links">
+            <div class="b-links-mobile">
+                <div class="b-links-mobile-header">
+                    <a href="#" class="b-links__link-mobile">
+                        Администраторы
+                    </a>
+                    <span class="b-links__link-icon"></span>
+                </div>
+                <ul class="b-links-mobile-body">
+                    <li class="b-links-mobile-item">
+                        <a href="#" class="b-links-mobile-link">
+                            Личные данные
+                        </a>
+                    </li>
+                    <li class="b-links-mobile-item">
+                        <a href="#" class="b-links-mobile-link">
+                            Документы
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="b-links-desctop">
+                <a href="#" class="b-links__link">
+                    Личные данные
+                </a>
+                <a href="#" class="b-links__link">
+                    Документы
+                </a>
+                <a href="#" class="b-links__link is-active">
+                    Администраторы
+                </a>
+            </div>
+        </div>
+
+        {# Для отображения блока добавить класс is-active
+            к классу b-empty-page #}
+
+        <div class="b-empty-page">
+            <p>
+                Администраторов пока нет
+            </p>
+
+            <div class="b-profile-add">
+                <a href="#" class="button-add">
+                    Добавить администратора
+                </a>
+            </div>
+        </div>
+
+        {# Блок с администратором #}
+
+        <div class="b-profile-block">
+            <button type="button" class="b-profile-block__delete"></button>
+            <div class="b-profile-block__title b-profile-admin-title">
+                <h4>Вознесенский Алексей</h4>
+            </div>
+            <div class="b-profile-block__input-wrap">
+                <!--
+                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+                 -->
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "admin1-name",
+                        name: "admin1-name",
+                        value: "Вознесенский Алексей",
+                        required: "true"
+                    } %}
+
+                    <label for="admin1-name" class="b-form-block__label">
+                        ФИО
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/email/email.twig" with {
+                        id: "admin1-email",
+                        name: "admin1-email",
+                        value: "voznesenskiy.alex@biocad.ru",
+                        required: "true"
+                    } %}
+
+                    <label for="admin1-email" class="b-form-block__label">
+                        Эл.почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/telephone/telephone.twig" with {
+                        id: "admin1-phone",
+                        name: "admin1-phone",
+                        value: "+7 921 549-98-78",
+                        required: "true"
+                    } %}
+
+                    <label for="admin1-phone" class="b-form-block__label">
+                        Телефон
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/select/select.twig" with {
+                        id: "admin1-status",
+                        name: "admin1-status",
+                        required: "true",
+                        options: [{
+                            value: 'Супер-Администратор',
+                            text: 'Супер-Администратор',
+                            selected: true
+                        },{
+                            value: 'Администратор',
+                            text: 'Администратор',
+                        },{
+                            value: 'Супер-Администратор 2',
+                            text: 'Супер-Администратор 2',
+                        },{
+                            value: 'Супер-Администратор 3',
+                            text: 'Супер-Администратор 3',
+                        }]
+                    } %}
+
+                    <label for="admin1-status" class="b-form-block__label">
+                        Статус
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/select/select.twig" with {
+                        id: "admin1-access",
+                        name: "admin1-access",
+                        required: "true",
+                        multiple: "true",
+                        options: [{
+                            value: 'Подача отчета',
+                            text: 'Подача отчета',
+                            selected: true
+                        },{
+                            value: 'Сообщения от ОЭЗ',
+                            text: 'Сообщения от ОЭЗ',
+                        },{
+                            value: 'Подача заявки',
+                            text: 'Подача заявки',
+                        }]
+                    } %}
+
+                    <label for="admin1-access" class="b-form-block__label">
+                        Доступ
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        {# Блок с администратором #}
+
+        <div class="b-profile-block">
+            <button type="button" class="b-profile-block__delete"></button>
+            <div class="b-profile-block__title b-profile-admin-title">
+                <h4>Панарин Артемий</h4>
+            </div>
+            <div class="b-profile-block__input-wrap">
+                <!--
+                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+                 -->
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "admin2-name",
+                        name: "admin2-name",
+                        value: "Панарин Артемий",
+                        required: "true"
+                    } %}
+
+                    <label for="admin2-name" class="b-form-block__label">
+                        ФИО
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/email/email.twig" with {
+                        id: "admin2-email",
+                        name: "admin2-email",
+                        value: "panarin.artemiy@biocad.ru",
+                        required: "true"
+                    } %}
+
+                    <label for="admin2-email" class="b-form-block__label">
+                        Эл.почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/telephone/telephone.twig" with {
+                        id: "admin2-phone",
+                        name: "admin2-phone",
+                        value: "+7 952 654-89-42",
+                        required: "true"
+                    } %}
+
+                    <label for="admin2-phone" class="b-form-block__label">
+                        Телефон
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/select/select.twig" with {
+                        id: "admin2-status",
+                        name: "admin2-status",
+                        required: "true",
+                        options: [{
+                            value: 'Супер-Администратор',
+                            text: 'Супер-Администратор'
+                        },{
+                            value: 'Администратор',
+                            text: 'Администратор',
+                            selected: true
+                        },{
+                            value: 'Супер-Администратор 2',
+                            text: 'Супер-Администратор 2',
+                        },{
+                            value: 'Супер-Администратор 3',
+                            text: 'Супер-Администратор 3',
+                        }]
+                    } %}
+
+                    <label for="admin2-status" class="b-form-block__label">
+                        Статус
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/select/select.twig" with {
+                        id: "admin2-access",
+                        name: "admin2-access",
+                        required: "true",
+                        multiple: "true",
+                        options: [{
+                            value: 'Подача отчета',
+                            text: 'Подача отчета',
+                            selected: true
+                        },{
+                            value: 'Сообщения от ОЭЗ',
+                            text: 'Сообщения от ОЭЗ',
+                        },{
+                            value: 'Подача заявки',
+                            text: 'Подача заявки',
+                        }]
+                    } %}
+
+                    <label for="admin2-access" class="b-form-block__label">
+                        Доступ
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        {# Блок с администратором #}
+
+        <div class="b-profile-block">
+            <button type="button" class="b-profile-block__delete"></button>
+            <div class="b-profile-block__title b-profile-admin-title">
+                <h4>Афиногенов Максим Леонидович</h4>
+            </div>
+            <div class="b-profile-block__input-wrap">
+                <!--
+                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+                 -->
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "admin2-name",
+                        name: "admin2-name",
+                        value: "Афиногенов Максим Леонидович",
+                        required: "true"
+                    } %}
+
+                    <label for="admin2-name" class="b-form-block__label">
+                        ФИО
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/email/email.twig" with {
+                        id: "admin2-email",
+                        name: "admin2-email",
+                        value: "afinogenov.max@biocad.ru",
+                        required: "true"
+                    } %}
+
+                    <label for="admin2-email" class="b-form-block__label">
+                        Эл.почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/telephone/telephone.twig" with {
+                        id: "admin2-phone",
+                        name: "admin2-phone",
+                        value: "+7 952 654-89-43",
+                        required: "true"
+                    } %}
+
+                    <label for="admin2-phone" class="b-form-block__label">
+                        Телефон
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/select/select.twig" with {
+                        id: "admin2-status",
+                        name: "admin2-status",
+                        required: "true",
+                        options: [{
+                            value: 'Супер-Администратор',
+                            text: 'Супер-Администратор'
+                        },{
+                            value: 'Администратор',
+                            text: 'Администратор',
+                            selected: true
+                        },{
+                            value: 'Супер-Администратор 2',
+                            text: 'Супер-Администратор 2',
+                        },{
+                            value: 'Супер-Администратор 3',
+                            text: 'Супер-Администратор 3',
+                        }]
+                    } %}
+
+                    <label for="admin2-status" class="b-form-block__label">
+                        Статус
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/select/select.twig" with {
+                        id: "admin2-access",
+                        name: "admin2-access",
+                        required: "true",
+                        multiple: "true",
+                        options: [{
+                            value: 'Подача отчета',
+                            text: 'Подача отчета',
+                            selected: true
+                        },{
+                            value: 'Сообщения от ОЭЗ',
+                            text: 'Сообщения от ОЭЗ',
+                        },{
+                            value: 'Подача заявки',
+                            text: 'Подача заявки',
+                        }]
+                    } %}
+
+                    <label for="admin2-access" class="b-form-block__label">
+                        Доступ
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="b-profile-add">
+            <a href="#" class="button-add">
+                Добавить еще администратора
+            </a>
+        </div>
+
+    </div>
+{% endblock %}
