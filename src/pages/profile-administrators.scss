@@ -1,0 +1,67 @@
+.l-profile-administrators {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(bottom, pink);
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-empty-page {
+    display: none;
+    @include font-size("p1");
+    @include margin-level(bottom, green);
+
+    &.is-active {
+        display: block;
+    }
+
+    p {
+        font-size: inherit;
+    }
+
+    .b-profile-add {
+        @include padding-level(top, green);
+    }
+}
+
+.b-profile-admin-title {
+    padding-right: 25px;
+
+    @media #{$tablet-portrait} {
+        padding-right: 35px;
+    }
+}
+
+.b-profile-block__delete {
+    @include transition(border);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 21px;
+    height: 21px;
+    background-image: url("/images/home/delete-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    background-color: $white;
+    border: 1px solid $grey;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+        border-color: $blue;
+    }
+
+    @media #{$tablet-portrait} {
+        width: 31px;
+        height: 31px;
+    }
+}
