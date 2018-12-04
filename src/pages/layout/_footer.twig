@@ -6,41 +6,23 @@
 <div class="b-footer__center">
     <nav class="b-footer__nav">
         <ul class="b-footer__nav-list">
-            <li class="b-footer__nav-item">
-                <a href="#" class="b-footer__nav-link">
-                    Об ОЭЗ
-                </a>
-            </li>
-            <li class="b-footer__nav-item">
-                <a href="#" class="b-footer__nav-link">
-                    Инфраструктура
-                </a>
-            </li>
-            <li class="b-footer__nav-item">
-                <a href="#" class="b-footer__nav-link">
-                    Услуги
-                </a>
-            </li>
-            <li class="b-footer__nav-item">
-                <a href="#" class="b-footer__nav-link">
-                    Резиденты
-                </a>
-            </li>
-            <li class="b-footer__nav-item">
-                <a href="#" class="b-footer__nav-link">
-                    Инвесторам
-                </a>
-            </li>
-            <li class="b-footer__nav-item">
-                <a href="#" class="b-footer__nav-link">
-                    Медиа
-                </a>
-            </li>
-            <li class="b-footer__nav-item">
-                <a href="#" class="b-footer__nav-link">
-                    Контакты
-                </a>
-            </li>
+            {% set footerMenuItems = [
+                'Об ОЭЗ',
+                'Инфраструктура',
+                'Услуги',
+                'Резиденты',
+                'Инвесторам',
+                'Медиа',
+                'Контакты'
+            ] %}
+
+            {% for footerMenuItem in footerMenuItems %}
+                <li class="b-footer__nav-item">
+                    <a href="#" class="b-footer__nav-link">
+                        {{ footerMenuItem }}
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </nav>
     <div class="b-footer__copyright">
