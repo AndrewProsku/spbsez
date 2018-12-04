@@ -4,47 +4,23 @@
 <div class="l-home__header-center">
     <nav class="b-nav">
         <ul class="b-nav__list">
-            <li class="b-nav__item">
-                <a href="#" class="b-nav__link">
-                    Об ОЭЗ
-                </a>
-            </li>
+            {% set menuItems = [
+                'Об ОЭЗ',
+                'Инфраструктура',
+                'Услуги',
+                'Резиденты',
+                'Инвесторам',
+                'Медиа',
+                'Контакты'
+            ] %}
 
-            <li class="b-nav__item">
-                <a href="#" class="b-nav__link">
-                    Инфраструктура
-                </a>
-            </li>
-
-            <li class="b-nav__item">
-                <a href="#" class="b-nav__link">
-                    Услуги
-                </a>
-            </li>
-
-            <li class="b-nav__item">
-                <a href="#" class="b-nav__link">
-                    Резиденты
-                </a>
-            </li>
-
-            <li class="b-nav__item">
-                <a href="#" class="b-nav__link">
-                    Инвесторам
-                </a>
-            </li>
-
-            <li class="b-nav__item">
-                <a href="#" class="b-nav__link">
-                    Медиа
-                </a>
-            </li>
-
-            <li class="b-nav__item is-active">
-                <a href="#" class="b-nav__link">
-                    Контакты
-                </a>
-            </li>
+            {% for menuItem in menuItems  %}
+                <li class="b-nav__item {% if menuItem == 'Об ОЭЗ' %} is-active {% endif %} ">
+                    <a href="#" class="b-nav__link">
+                        {{ menuItem }}
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </nav>
 </div>

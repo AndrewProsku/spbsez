@@ -30,6 +30,10 @@
 
 .b-form-block-wrap {
     margin-bottom: 8px;
+
+    @media #{$tablet-portrait} {
+        max-width: 480px;
+    }
 }
 
 .b-remember-passsword {

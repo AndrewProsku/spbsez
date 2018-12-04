@@ -23,11 +23,11 @@
 
 }
 
-.b-add-request__links {
+.b-links {
     @include margin-level(bottom, cyan);
 }
 
-.b-add-request__links-mobile {
+.b-links-mobile {
     background-color: $bg-grey;
     border-radius: 8px;
     padding-left: 4px;
@@ -39,11 +39,11 @@
     }
 }
 
-.b-add-request__links-mobile-header {
+.b-links-mobile-header {
     position: relative;
 }
 
-.b-add-request__link-mobile {
+.b-links__link-mobile {
     @include column(26.5, 32);
     @include font-size("p3");
     display: block;
@@ -54,7 +54,7 @@
     box-shadow: 0 1px 2px $dark-grey;
 }
 
-.b-add-request__link-icon {
+.b-links__link-icon {
     @include post(2, 32);
     display: block;
     width: 12px;
@@ -70,54 +70,52 @@
 
 }
 
-.b-add-request__links-mobile-body {
+.b-links-mobile-body {
     //display: none;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
-.b-add-request__links-mobile-item {
+.b-links-mobile-item {
     padding-left: 15px;
+    margin-bottom: 5px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
-.b-add-request__links-mobile-link {
+.b-links-mobile-link {
     @include font-size("p3");
     color: $blue;
 }
 
-.b-add-request__links-desctop {
+.b-links-desctop {
     display: none;
-    max-width: 377px;
     background-color: $bg-grey;
     border-radius: 8px;
     padding: 4px;
+    padding-bottom: 0;
 
     @media #{$tablet-portrait} {
-        @include row();
-    }
-
-    @media #{$laptop} {
-        max-width: 451px;
-    }
-
-    @media #{$laptop-wide} {
-        max-width: 491px;
+        display: inline-block;
+        vertical-align: top;
     }
 }
 
-.b-add-request__link {
+.b-links__link {
     @include font-size("p3");
-    display: block;
+    display: inline-block;
+    vertical-align: top;
     color: $blue;
     text-align: center;
     border-radius: 4px;
     padding: 8px 16px;
-
-    &:first-child {
-        margin-right: 16px;
-    }
+    margin-right: 16px;
+    margin-bottom: 4px;
 
     &:last-child {
+        margin-right: 0;
     }
 
     &.is-active {
@@ -149,6 +147,7 @@
 }
 
 .b-form-block {
+    @include transition(background);
     position: relative;
     height: 64px;
     border: 1px solid $grey;
@@ -164,15 +163,21 @@
         border-radius: 0 0 4px 4px;
         border-bottom: 1px solid $grey;
     }
+    
+    &:hover {
+        background-color: $bg-select;
+    }
 
     input[type="text"],
     input[type="password"],
     input[type="email"],
+    input[type="tel"],
     select,
     textarea {
         @include font-size("p2");
         font-family: inherit;
         color: $black;
+        background-color: transparent;
         padding-left: 16px;
         padding-right: 16px;
 
@@ -182,6 +187,11 @@
             + .b-form-block__label {
                 opacity: 1;
             }
+        }
+
+        &.is-valid,
+        &.is-success {
+            color: $blue;
         }
     }
 
@@ -218,6 +228,43 @@
     }
 }
 
+.b-form-block_theme_grey {
+    position: relative;
+    padding-top: 32px;
+    
+    &:before {
+        content: "";
+        width: calc(100% + 2px);
+        height: 4px;
+        background-color: rgba($grey, 0.4);
+        border-bottom: 1px solid $grey;
+        border-left: 1px solid rgba($white, 0.5);
+        border-right: 1px solid rgba($white, 0.5);
+        position: absolute;
+        top: 0;
+        left: -1px;
+        right: 0;
+    }
+
+    .b-form-block__label {
+        top: 12px;
+    }
+
+    @media #{$tablet-portrait} {
+        padding-top: 30px;
+    }
+
+    @media #{$laptop} {
+        height: 72px;
+        padding-top: 34px;
+    }
+
+    @media #{$laptop-wide} {
+        height: 80px;
+        padding-top: 38px;
+    }
+}
+
 .b-form-block-error {
     height: auto;
     border-color: $red;
@@ -240,6 +287,13 @@
 .b-form-block-success {
     .b-form-block__label {
         opacity: 0.48;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"] {
+        color: $blue;
     }
 }
 

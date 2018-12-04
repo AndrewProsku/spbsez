@@ -1,5 +1,7 @@
 import '../styles/app.scss';
+import InputTel from '../../components/forms/telephone/telephone';
 import Select from '../../components/forms/select/';
+
 
 /**
  * Добавляем класс на шапку при прокрутке.
@@ -87,6 +89,18 @@ if (authBlock) {
     };
 
     auth();
+}
+
+/**
+ * Подключение маски телефона
+ */
+const phoneInputs = Array.from(document.querySelectorAll('input[type="tel"]'));
+let inputTel = {};
+
+if (phoneInputs.length) {
+    inputTel = new InputTel();
+
+    inputTel.init({input: phoneInputs});
 }
 
 
