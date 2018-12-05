@@ -152,23 +152,42 @@
                 </div>
 
                 <div class="b-form-block">
-                    {% include "../components/forms/select/select.twig" with {
-                        id: "admin1-access",
-                        name: "admin1-access",
-                        required: "true",
-                        multiple: "true",
-                        options: [{
-                            value: 'Подача отчета',
-                            text: 'Подача отчета',
-                            selected: true
-                        },{
-                            value: 'Сообщения от ОЭЗ',
-                            text: 'Сообщения от ОЭЗ',
-                        },{
-                            value: 'Подача заявки',
-                            text: 'Подача заявки',
-                        }]
-                    } %}
+                    <div class="b-select-accordion">
+                        {% include "../components/forms/input-text/input-text.twig" with {
+                            id: "admin1-access-text",
+                            name: "admin1-access-text",
+                            value: "Подача отчета, Сообщения от ОЭЗ, Подача заявки",
+                            required: "true",
+                            disabled: "true"
+                        } %}
+                        <div class="b-select-accordion__list">
+                            <div class="b-select-accordion__list-title">
+                                <p>Доступ к разделам сайта</p>
+                            </div>
+                            <div class="b-select-accordion__list-item">
+                                {% include "../components/forms/checkbox/checkbox.twig" with {
+                                    id: "admin1-access1",
+                                    name: "admin1-access1",
+                                    text: "Подача отчета"
+                                } %}
+                            </div>
+                            <div class="b-select-accordion__list-item">
+                                {% include "../components/forms/checkbox/checkbox.twig" with {
+                                    id: "admin1-access2",
+                                    name: "admin1-access2",
+                                    text: "Сообщения от ОЭЗ"
+                                } %}
+                            </div>
+                            <div class="b-select-accordion__list-item">
+                                {% include "../components/forms/checkbox/checkbox.twig" with {
+                                    id: "admin1-access3",
+                                    name: "admin1-access3",
+                                    text: "Подача заявки"
+                                } %}
+                            </div>
+                            <button type="button" class="button b-select-accordion__button">OK</button>
+                        </div>
+                    </div>
 
                     <label for="admin1-access" class="b-form-block__label">
                         Доступ
@@ -272,23 +291,42 @@
                 </div>
 
                 <div class="b-form-block">
-                    {% include "../components/forms/select/select.twig" with {
-                        id: "admin2-access",
-                        name: "admin2-access",
-                        required: "true",
-                        multiple: "true",
-                        options: [{
-                            value: 'Подача отчета',
-                            text: 'Подача отчета',
-                            selected: true
-                        },{
-                            value: 'Сообщения от ОЭЗ',
-                            text: 'Сообщения от ОЭЗ',
-                        },{
-                            value: 'Подача заявки',
-                            text: 'Подача заявки',
-                        }]
-                    } %}
+                    <div class="b-select-accordion">
+                        {% include "../components/forms/input-text/input-text.twig" with {
+                            id: "admin2-access-text",
+                            name: "admin2-access-text",
+                            value: "Подача отчета, Сообщения от ОЭЗ, Подача заявки",
+                            required: "true",
+                            disabled: "true"
+                        } %}
+                        <div class="b-select-accordion__list">
+                            <div class="b-select-accordion__list-title">
+                                <p>Доступ к разделам сайта</p>
+                            </div>
+                            <div class="b-select-accordion__list-item">
+                                {% include "../components/forms/checkbox/checkbox.twig" with {
+                                    id: "admin2-access1",
+                                    name: "admin1-access1",
+                                    text: "Подача отчета"
+                                } %}
+                            </div>
+                            <div class="b-select-accordion__list-item">
+                                {% include "../components/forms/checkbox/checkbox.twig" with {
+                                    id: "admin2-access2",
+                                    name: "admin2-access2",
+                                    text: "Сообщения от ОЭЗ"
+                                } %}
+                            </div>
+                            <div class="b-select-accordion__list-item">
+                                {% include "../components/forms/checkbox/checkbox.twig" with {
+                                    id: "admin2-access3",
+                                    name: "admin2-access3",
+                                    text: "Подача заявки"
+                                } %}
+                            </div>
+                            <button type="button" class="button b-select-accordion__button">OK</button>
+                        </div>
+                    </div>
 
                     <label for="admin2-access" class="b-form-block__label">
                         Доступ
@@ -392,23 +430,42 @@
                 </div>
 
                 <div class="b-form-block">
-                    {% include "../components/forms/select/select.twig" with {
-                        id: "admin2-access",
-                        name: "admin2-access",
-                        required: "true",
-                        multiple: "true",
-                        options: [{
-                            value: 'Подача отчета',
-                            text: 'Подача отчета',
-                            selected: true
-                        },{
-                            value: 'Сообщения от ОЭЗ',
-                            text: 'Сообщения от ОЭЗ',
-                        },{
-                            value: 'Подача заявки',
-                            text: 'Подача заявки',
-                        }]
-                    } %}
+                    <div class="b-select-accordion">
+                        {% include "../components/forms/input-text/input-text.twig" with {
+                            id: "admin3-access-text",
+                            name: "admin3-access-text",
+                            value: "Подача отчета, Сообщения от ОЭЗ, Подача заявки",
+                            required: "true",
+                            disabled: "true"
+                        } %}
+                        <div class="b-select-accordion__list">
+                            <div class="b-select-accordion__list-title">
+                                <p>Доступ к разделам сайта</p>
+                            </div>
+                            <div class="b-select-accordion__list-item">
+                                {% include "../components/forms/checkbox/checkbox.twig" with {
+                                    id: "admin3-access1",
+                                    name: "admin3-access1",
+                                    text: "Подача отчета"
+                                } %}
+                            </div>
+                            <div class="b-select-accordion__list-item">
+                                {% include "../components/forms/checkbox/checkbox.twig" with {
+                                    id: "admin3-access2",
+                                    name: "admin3-access2",
+                                    text: "Сообщения от ОЭЗ"
+                                } %}
+                            </div>
+                            <div class="b-select-accordion__list-item">
+                                {% include "../components/forms/checkbox/checkbox.twig" with {
+                                    id: "admin3-access3",
+                                    name: "admin3-access3",
+                                    text: "Подача заявки"
+                                } %}
+                            </div>
+                            <button type="button" class="button b-select-accordion__button">OK</button>
+                        </div>
+                    </div>
 
                     <label for="admin2-access" class="b-form-block__label">
                         Доступ
