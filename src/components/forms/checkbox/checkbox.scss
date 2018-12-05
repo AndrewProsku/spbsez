@@ -36,6 +36,10 @@ $checkbox-svg-height: 24px;
         height: $checkbox-svg-height;
         stroke: $checkbox-color-stroke;
     }
+
+    &:focus {
+        outline: 0;
+    }
 }
 
 .b-checkbox-input {
@@ -46,6 +50,10 @@ $checkbox-svg-height: 24px;
 .b-checkbox-label {
     cursor: pointer;
     display: flex;
+
+    &:focus {
+        outline: 0;
+    }
 }
 
 .b-checkbox-box {
