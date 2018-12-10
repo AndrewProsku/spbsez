@@ -7,9 +7,9 @@ return array (
       'default' => 
       array (
         'host' => 'ksdev.ru',
-        'database' => 'oez',
-        'login' => 'oez',
-        'password' => 'Jhu6a13#',
+        'database' => 'oez-d',
+        'login' => 'oez-d',
+        'password' => 'q3rSx#16',
         'className' => '\\Bitrix\\Main\\DB\\MysqliConnection',
         'options' => 2,
       ),
