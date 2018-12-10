@@ -6,5 +6,4 @@ www/upload
 *.idea
 *.sublime-project
 *.sublime-workspace
-composer.lock
 env.lock
