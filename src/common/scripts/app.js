@@ -119,3 +119,30 @@ if (selectDomItem) {
 
     select.init();
 }
+
+
+/**
+ * Открытие и закрытие подменю в мобильной навигации.
+ */
+const openSubmenu = function() {
+    const navHeaders = Array.from(document.querySelectorAll('.j-mobile-menu-accordion'));
+
+    navHeaders.forEach((element) => {
+        element.addEventListener('click', (event) => {
+            const laptopWidth = 670;
+
+            if (document.documentElement.clientWidth < laptopWidth) {
+                event.preventDefault();
+                element.classList.toggle('is-open');
+
+                navHeaders.forEach((header) => {
+                    if (header !== element) {
+                        header.classList.remove('is-open');
+                    }
+                });
+            }
+        });
+    });
+};
+
+openSubmenu();
