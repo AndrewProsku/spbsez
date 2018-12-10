@@ -217,20 +217,46 @@
     color: $white;
 }
 
-.b-mobile-menu__nav-header-icon {
-    position: absolute;
-    top: 50%;
-    right: 0;
+.b-mobile-menu__nav-header_action_accordion {
+    cursor: pointer;
 
     @media #{$tablet-portrait} {
-        display: none;
+        cursor: default;
+    }
+
+    &:after {
+        content: "";
+        display: block;
+        width: 13px;
+        height: 8px;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        background-image: url("/images/home/accordion-arrow-down.svg");
+        background-repeat: no-repeat;
+        @include transition(transform);
+
+        @media #{$tablet-portrait} {
+            display: none;
+        }
+    }
+
+    &.is-open:after {
+        transform: rotate(180deg);
     }
 }
 
 .b-mobile-menu__nav-body {
+    display: none;
+
     @media #{$tablet-portrait} {
+        display: block;
         @include column(26, 30);
     }
+}
+
+.b-mobile-menu__nav-header_action_accordion.is-open + .b-mobile-menu__nav-body {
+    display: block;
 }
 
 .b-mobile-menu__nav-item {
