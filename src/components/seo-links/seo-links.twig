@@ -1,0 +1,12 @@
+<div class="b-seo-links">
+    <h4 class="b-seo-links__title">{{ title }}</h4>
+
+    <ul class="b-seo-links__list">
+        {% for item in items %}
+            <li class="b-seo-links__item">
+                <a class="b-seo-links__link" href="{{ item.href }}">{{ item.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+

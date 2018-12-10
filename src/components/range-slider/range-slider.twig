@@ -1,0 +1,25 @@
+<div
+    class="b-range-slider j-range-slider"
+    data-min="{{ min }}"
+    data-max="{{ max }}"
+    data-from="{{ from|default(min) }}"
+    data-to="{{ to|default(max) }}"
+    data-type="{{ type|default('single') }}"
+    data-postfix=" {{ postfix|default() }}"
+    data-shortformat="{{ shortformat|default() }}"
+>
+    <input
+        class="b-range-slider__input j-range-slider-from"
+        type="text"
+        value="{{ from }}"
+        name="{{ name }}-from"
+    >
+    {% if type == 'double' %}
+        <input
+            class="b-range-slider__input j-range-slider-to"
+            type="text"
+            value="{{ to|default(max) }}"
+            name="{{ name }}-to"
+        >
+    {% endif %}
+</div>

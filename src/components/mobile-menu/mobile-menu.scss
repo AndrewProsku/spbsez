@@ -1,0 +1,336 @@
+.b-mobile-menu {
+    @include transition(visibility, opacity);
+    transition-duration: 0.5s;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient($gradient-30deg);
+    visibility: hidden;
+    opacity: 0;
+
+    &.is-open {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    @media #{$tablet-portrait} {
+        .b-account,
+        .b-account__link-text {
+            display: block;
+        }
+    }
+
+    @media #{$laptop} {
+        background-image: linear-gradient(80deg, $blue 10%, $violet 80%);
+    }
+}
+
+.b-mobile-menu__header {
+    @include row();
+    @include column(36, 36);
+
+    @media #{$fullhd} {
+        padding-top: 8px;
+    }
+}
+
+.b-mobile-menu__header-left {
+    @include column(24, 36);
+
+    @media #{$tablet-portrait} {
+        @include column(12, 36);
+    }
+
+    @media #{$laptop} {
+        @include column(14, 36);
+        @include prefix(1, 36);
+    }
+}
+
+.b-mobile-menu__header-logo {
+    display: block;
+    max-width: 232px;
+    width: 100%;
+}
+
+.b-mobile-menu__header-right {
+    @include row();
+    @include column(12, 36);
+    @include prefix(4, 36);
+    height: 100%;
+    text-align: right;
+    padding-top: 30px;
+
+    .b-account {
+        display: none;
+    }
+
+    .b-language {
+        @include column(4, 8);
+        display: block;
+
+        @media #{$tablet-portrait} {
+            @include column(3, 24);
+        }
+
+        @media #{$laptop} {
+            @include column(2, 21);
+        }
+
+        @media #{$laptop-wide} {
+            text-align: center;
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        @include column(24, 36);
+        @include prefix(1, 36);
+
+        .b-account {
+            display: block;
+            @include column(18, 24);
+            @include suffix(1, 24);
+            margin-top: -5px;
+        }
+
+        .b-account__link {
+            @include row();
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .b-account__link-icon {
+            @include post(1, 24);
+            width: 30px;
+            height: 30px;
+
+            @media #{$laptop} {
+                margin-right: 15px;
+            }
+        }
+
+        .b-account__link-text {
+            @include font-size("p3");
+        }
+    }
+
+    @media #{$laptop} {
+        @include column(22, 36);
+
+        .b-account {
+            @include column(17, 21);
+            @include suffix(1, 21);
+            margin-top: -3px;
+        }
+    }
+
+    @media #{$laptop-wide} {
+        .b-account {
+            margin-top: -5px;
+        }
+    }
+}
+
+.b-close-menu-warp {
+    @include column(4, 8);
+    text-align: center;
+
+    @media #{$tablet-portrait} {
+        @include column(3, 24);
+    }
+
+    @media #{$laptop} {
+        @include column(2, 21);
+    }
+}
+
+.b-close-menu {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    @media #{$laptop} {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.b-close-menu__line {
+    width: 100%;
+    height: 2px;
+    background-color: $white;
+    position: absolute;
+    top: 9px;
+
+    &:first-child {
+        transform: rotate(45deg);
+    }
+
+    &:last-child {
+        transform: rotate(-45deg);
+    }
+}
+
+.b-mobile-menu__nav {
+    @include column(36, 36);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    height: calc(100% - 160px);
+    padding-top: 20px;
+    margin-bottom: 90px;
+    overflow-y: auto;
+
+    @media #{$tablet-portrait} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$tablet-landscape} {
+        @include row();
+        align-items: center;
+    }
+
+    @media #{$laptop} {
+        height: calc(100% - 170px);
+    }
+}
+
+.b-mobile-menu__nav-block {
+    margin-bottom: 14px;
+}
+
+.b-mobile-menu__nav-header {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.b-mobile-menu__nav-header-link {
+    @include font-size("p1");
+    color: $white;
+}
+
+.b-mobile-menu__nav-header-icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    @media #{$tablet-portrait} {
+        display: none;
+    }
+}
+
+.b-mobile-menu__nav-body {
+    @media #{$tablet-portrait} {
+        @include column(26, 30);
+    }
+}
+
+.b-mobile-menu__nav-item {
+    margin-bottom: 5px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+    
+    @media #{$tablet-portrait} {
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
+}
+
+.b-mobile-menu__nav-link {
+    @include font-size("p3");
+    color: $white;
+    opacity: 0.72;
+}
+
+.b-mobile-menu__footer {
+    @include row();
+    @include column(36, 36);
+    height: 90px;
+    margin-top: -90px;
+    padding-top: 30px;
+
+    .b-account {
+        @include column(25, 36);
+        @include prefix(2, 36);
+        display: block;
+        height: 53px;
+        text-align: left;
+
+        @media #{$tablet-portrait} {
+            display: none;
+        }
+    }
+
+    .b-account__link {
+        width: 100%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .b-account__link-icon {
+        @include post(1, 25);
+        width: 32px;
+        height: 32px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .b-account__link-text {
+        width: 76%;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 14px;
+        line-height: 21px;
+    }
+
+    .b-footer__social {
+        @include column(11, 36);
+        @include prefix(1, 36);
+        @include suffix(1, 36);
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+
+        @media #{$tablet-portrait} {
+            @include column(36, 36);
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    .b-footer__social-link {
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media #{$laptop} {
+            svg {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$laptop} {
+        height: 100px;
+        margin-top: -100px;
+    }
+}

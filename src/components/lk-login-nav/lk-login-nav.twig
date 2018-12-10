@@ -1,0 +1,13 @@
+<div class="b-lk-login-nav">
+    <ul class="b-lk-login-nav__list">
+        {% set users = ['Вход в личный кабинет', 'Восстановление пароля'] %}
+
+        {% for user in users %}
+            <li class="b-lk-login-nav__item {% if user == 'Восстановление пароля' %} is-active {% endif %}">
+                <a href="#" class="b-lk-login-nav__link b-link-line">
+                    {{ user }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,6 @@
+// DEPENDENCIES
+@import "../../common/styles/mixins";
+
+.b-screenreader-text {
+    @include visually-hidden();
+}

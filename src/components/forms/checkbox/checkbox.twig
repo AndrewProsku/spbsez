@@ -1,0 +1,20 @@
+{% if id %}
+    <div class="b-form__checkbox">
+        <input
+            id="{{ id }}"
+            class="b-checkbox-input"
+            type="checkbox"
+            value="{{ value }}"
+            name="{{ name }}"
+            {% if checked %} checked {% endif %}
+            {% if disabled %} disabled {% endif %}
+            {% if required %} required {% endif %}
+        >
+        <label for="{{ id }}" class="b-checkbox-label">
+            {% include './checkbox.svg.twig' %}
+            <p class="b-checkbox-text">{{ text }}</p>
+        </label>
+    </div>
+{% else %}
+    <p>Пожалуйста, укажи уникальный id для инпута</p>
+{% endif %}

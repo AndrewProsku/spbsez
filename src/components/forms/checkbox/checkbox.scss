@@ -1,0 +1,100 @@
+// Version - 1.1
+// Documentation - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/forms/checkbox-radio.html
+
+// Dependecies
+@import "../../../common/styles/mixins";
+@import "../../../common/styles/breakpoints";
+
+// Settings
+// Checkbox
+$checkbox-color-check: #efeff4;
+$checkbox-color-notcheck: #efeff4;
+$checkbox-color-mark: #30409a;
+$checkbox-color-stroke: #b4b7d0;
+$checkbox-color-hover: #82b1ff;
+$checkbox-color-disable: $checkbox-color-notcheck;
+$checkbox-opacity-disable: .7;
+$checkbox-color-focus: 0;
+$checkbox-opacity-focus: .7;
+$checkbox-outline-focus: 0;
+
+// Text
+$checkbox-text-color-hover: #000000;
+$checkbox-text-color-disable: $checkbox-color-notcheck;
+$checkbox-text-opacity-disable: $checkbox-opacity-disable;
+$checkbox-text-opacity-hover: 1;
+$checkbox-text-decoration-hover: none;
+
+// Icon
+$checkbox-svg-width: 24px;
+$checkbox-svg-height: 24px;
+
+// Component
+.b-form__checkbox {
+    svg {
+        width: $checkbox-svg-width;
+        height: $checkbox-svg-height;
+        stroke: $checkbox-color-stroke;
+    }
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+.b-checkbox-input {
+    // Cкрытие дефолтного инпута. Использование миксина обусловлено потребностью сохранения переключаемости TABом.
+    @include visually-hidden();
+}
+
+.b-checkbox-label {
+    cursor: pointer;
+    display: flex;
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+.b-checkbox-box {
+    @include transition(fill);
+    fill: $checkbox-color-notcheck;
+}
+
+.b-checkbox-mark {
+    @include transition(fill-opacity);
+    fill: $checkbox-color-mark;
+    fill-opacity: 0;
+    stroke: transparent;
+}
+
+.b-checkbox-text {
+    @include font-size("p3");
+    margin-left: 8px;
+}
+
+// Checked
+.b-checkbox-input:checked + .b-checkbox-label {
+    .b-checkbox-mark {
+        fill-opacity: 1;
+    }
+
+    .b-checkbox-box {
+        fill: $checkbox-color-check;
+    }
+}
+
+// Disabled
+.b-checkbox-input:disabled + .b-checkbox-label {
+    cursor: default;
+
+    .b-checkbox-box {
+        fill: $checkbox-color-disable;
+        opacity: $checkbox-opacity-disable;
+    }
+
+    .b-checkbox-text {
+        color: $checkbox-text-color-disable;
+        opacity: $checkbox-text-opacity-disable;
+    }
+}

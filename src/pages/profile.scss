@@ -1,0 +1,46 @@
+.l-profile {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(bottom, pink);
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-profile__links {
+    @include margin-level(bottom, green);
+}
+
+.b-profile-block {
+    @include column(32, 32);
+    @include margin-level(bottom, green);
+    position: relative;
+
+    @media #{$tablet-portrait} {
+        @include column(20, 32);
+    }
+
+    @media #{$laptop} {
+        @include column(18, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(18, 28);
+    }
+}
+
+.b-profile-block__title {
+    font-weight: 700;
+    margin-bottom: 20px;
+
+    h2, h3, h4 {
+        margin: 0;
+    }
+}

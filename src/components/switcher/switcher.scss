@@ -1,0 +1,41 @@
+// Версия - 1.0
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/switcher.html
+
+// Зависимости
+@import "../../common/styles/colors";
+
+// Настройки
+$swither-track-height: 20px;
+$swither-track-color: $gray;
+
+$switcher-handler-size: 40px;
+$switcher-handler-color: $red;
+
+.b-switcher {
+    position: relative;
+    cursor: pointer;
+}
+
+.b-switcher__track {
+    width: 100%;
+    height: $swither-track-height;
+    border-radius: $swither-track-height / 2;
+    background-color: $swither-track-color;
+}
+
+.b-switcher__handler {
+    @include transition(transform);
+    width: $switcher-handler-size;
+    height: $switcher-handler-size;
+    border-radius: $switcher-handler-size / 2;
+    background-color: $switcher-handler-color;
+    transform-origin: 50% 50%;
+    position: absolute;
+    top: - $switcher-handler-size / 4;
+    left: - $switcher-handler-size / 2;
+    z-index: 1;
+}
+
+.b-switcher__checkbox {
+    display: none;
+}

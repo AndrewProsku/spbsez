@@ -1,0 +1,9 @@
+*.DS_Store
+vendor
+node_modules
+www/bitrix
+www/upload
+*.idea
+*.sublime-project
+*.sublime-workspace
+env.lock

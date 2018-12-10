@@ -1,0 +1,347 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Профиль</title> {% endblock %}
+
+{% block content %}
+    {% include '../components/lk-nav/lk-nav.twig' %}
+
+    <div class="l-profile">
+
+        <div class="b-title b-add-request-title">
+            <h1>Профиль</h1>
+        </div>
+
+        {# Блок ссылок #}
+
+        <div class="b-links b-profile__links">
+            <div class="b-links-mobile">
+                <div class="b-links-mobile-header">
+                    <a href="#" class="b-links__link-mobile">
+                        Личные данные
+                    </a>
+                    <span class="b-links__link-icon"></span>
+                </div>
+                <ul class="b-links-mobile-body">
+                    <li class="b-links-mobile-item">
+                        <a href="#" class="b-links-mobile-link">
+                            Документы
+                        </a>
+                    </li>
+                    <li class="b-links-mobile-item">
+                        <a href="#" class="b-links-mobile-link">
+                            Администраторы
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="b-links-desctop">
+                <a href="#" class="b-links__link is-active">
+                    Личные данные
+                </a>
+                <a href="#" class="b-links__link">
+                    Документы
+                </a>
+                <a href="#" class="b-links__link">
+                    Администраторы
+                </a>
+            </div>
+        </div>
+
+        {# Блок администратор #}
+
+        <div class="b-profile-block">
+            <div class="b-profile-block__title">
+                <h4>Администратор</h4>
+            </div>
+            <div class="b-profile-block__input-wrap">
+                <!--
+                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+                 -->
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "profile-name",
+                        name: "profile-name",
+                        value: "Иванов Сергей Константинович",
+                        required: "true"
+                    } %}
+
+                    <label for="profile-name" class="b-form-block__label">
+                        ФИО
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/email/email.twig" with {
+                        id: "profile-email",
+                        name: "profile-email",
+                        value: "ivanov.sergey@biocad.ru",
+                        required: "true"
+                    } %}
+
+                    <label for="profile-email" class="b-form-block__label">
+                        Эл.почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/telephone/telephone.twig" with {
+                        id: "profile-phone",
+                        name: "profile-phone",
+                        required: "true"
+                    } %}
+
+                    <label for="profile-phone" class="b-form-block__label">
+                        Телефон
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "profile-status",
+                        name: "profile-status",
+                        required: "true",
+                        value: "Супер-Администратор"
+                    } %}
+
+                    <label for="profile-status" class="b-form-block__label">
+                        Статус
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        {# Блок Компания #}
+
+        <div class="b-profile-block">
+            <div class="b-profile-block__title">
+                <h4>Компания</h4>
+            </div>
+            <div class="b-profile-block__input-wrap">
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "company-resident",
+                        name: "company-resident",
+                        required: "true",
+                        value: "ООО «Биокад»"
+                    } %}
+
+                    <label for="company-resident" class="b-form-block__label">
+                        Резидент
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "company-inn",
+                        name: "company-inn",
+                        value: "5024048000",
+                        required: "true"
+                    } %}
+
+                    <label for="company-inn" class="b-form-block__label">
+                        ИНН
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "company-legal-address",
+                        name: "company-legal-address",
+                        value: "198515, город Санкт-Петербург, поселок Стрельна, улица Связи, 34 лит. а",
+                        required: "true"
+                    } %}
+
+                    <label for="company-legal-address" class="b-form-block__label">
+                        Юр.адрес
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "company-mailing-address",
+                        name: "profile-mailing-address",
+                        value: "198515, город Санкт-Петербург, поселок Стрельна, улица Связи, 34 лит. а",
+                        required: "true"
+                    } %}
+
+                    <label for="company-mailing-address" class="b-form-block__label">
+                        Почтовый адрес
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/telephone/telephone.twig" with {
+                        id: "company-phone",
+                        name: "company-phone",
+                        value: "+7 812 657-78-12",
+                        required: "true"
+                    } %}
+
+                    <label for="company-phone" class="b-form-block__label">
+                        Телефон
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/telephone/telephone.twig" with {
+                        id: "company-fax",
+                        name: "company-fax",
+                        value: "8 812 657-78-12",
+                        required: "true"
+                    } %}
+
+                    <label for="company-fax" class="b-form-block__label">
+                        Факс
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/email/email.twig" with {
+                        id: "company-email",
+                        name: "company-email",
+                        value: "info@biocad.ru",
+                        required: "true"
+                    } %}
+
+                    <label for="company-email" class="b-form-block__label">
+                        Электронная почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <!--
+                    Для добавления полоски вверху блока и инпутом добавить класс b-form-block_theme_grey
+                    к классу b-form-block
+                -->
+                <div class="b-form-block b-form-block_theme_grey">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "company-director",
+                        name: "company-director",
+                        value: "Дмитрий Анатольевич Морозов",
+                        required: "true"
+                    } %}
+
+                    <label for="company-director" class="b-form-block__label">
+                        ФИО генерального директора
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        {# Блок Контактное лицо проекта #}
+
+        <div class="b-profile-block">
+            <div class="b-profile-block__title">
+                <h4>Контактное лицо проекта</h4>
+            </div>
+            <div class="b-profile-block__input-wrap">
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "person-name",
+                        name: "person-name",
+                        required: "true"
+                    } %}
+
+                    <label for="person-name" class="b-form-block__label">
+                        ФИО
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "person-post",
+                        name: "person-post",
+                        required: "true"
+                    } %}
+
+                    <label for="person-post" class="b-form-block__label">
+                        Должность
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/telephone/telephone.twig" with {
+                        id: "person-phone",
+                        name: "person-phone",
+                        required: "true"
+                    } %}
+
+                    <label for="person-phone" class="b-form-block__label">
+                        Телефон
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+                <div class="b-form-block">
+                    {% include "../components/forms/email/email.twig" with {
+                        id: "person-email",
+                        name: "person-email",
+                        required: "true"
+                    } %}
+
+                    <label for="person-email" class="b-form-block__label">
+                        Эл.почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="b-profile-add">
+            <a href="#" class="button-add">
+                Добавить еще
+            </a>
+        </div>
+
+    </div>
+{% endblock %}

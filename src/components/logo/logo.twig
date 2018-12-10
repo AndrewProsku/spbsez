@@ -1,0 +1,26 @@
+{#
+    Версия - 1.3
+    Документация - https://kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/logo.html
+#}
+
+{#Переменные
+определяем формат файла - svg, png, jpg, webp
+#}
+{% set sourcePathFormat = file|split('.') %}
+{% set sourceFormat = sourcePathFormat|last %}
+
+{#Компонент#}
+{% if name %}
+    <a
+        href="{{ href|default('/pages/home.html') }}"
+        class="b-logo {% if modify %}{{ modify }}{% endif %}"
+        title="{{ name }}">
+            {% if sourceFormat == 'svg' %}
+                {% include file %}
+            {% else %}
+                <img src="{{file}}" alt="{{ name }}">
+            {% endif %}
+    </a>
+{% else %}
+    <h2 style="color: red">Введи название ЖК - name: название жк</h2>
+{% endif %}

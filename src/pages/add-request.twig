@@ -1,0 +1,98 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Подать заявку</title> {% endblock %}
+
+{% block content %}
+    {% include '../components/lk-nav/lk-nav.twig' %}
+
+    <div class="l-add-request">
+        <div class="b-title b-add-request-title">
+            <h1>Подать заявку</h1>
+        </div>
+
+        {# Блок ссылок #}
+
+        <div class="b-links">
+            <div class="b-links-mobile">
+                <div class="b-links-mobile-header">
+                    <a href="#" class="b-links__link-mobile">
+                        Стандартная
+                    </a>
+                    <span class="b-links__link-icon"></span>
+                </div>
+                <ul class="b-links-mobile-body">
+                    <li class="b-links-mobile-item">
+                        <a href="#" class="b-links-mobile-link">
+                            Пропуск на временный въезд
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="b-links-desctop">
+                <a href="#" class="b-links__link is-active">
+                    Стандартная
+                </a>
+                <a href="#" class="b-links__link">
+                    Пропуск на временный въезд
+                </a>
+            </div>
+        </div>
+
+        {# Форма #}
+
+        <div class="b-add-request__content">
+            <h4>Заявка</h4>
+            <form action="" method="post" enctype="multipart/form-data" class="b-add-request__form">
+                <!--
+                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+                 -->
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "theme-request",
+                        name: "b-form-block__text",
+                        required: "true"
+                    } %}
+
+                    <label for="theme-request" class="b-form-block__label">
+                        Тема заявки
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+                <div class="b-form-block">
+                    {% include "../components/forms/select/select.twig" with {
+                        id: "appeal",
+                        name: "b-form-block__select",
+                        options: [{
+                            value: 'Администрации ОЭЗ',
+                            text: 'Администрации ОЭЗ',
+                            selected: true
+                        },{
+                            value: 'В ЦОД',
+                            text: 'В ЦОД',
+                        },{
+                            value: 'Вопросы и предложения',
+                            text: 'Вопросы и предложения',
+                        },{
+                            value: 'Жалобы',
+                            text: 'Жалобы',
+                        }]
+                    } %}
+                    <label for="appeal" class="b-form-block__label">
+                        Причина обращения
+                    </label>
+                </div>
+                <div class="b-form-block b-form-block-textarea">
+                    <textarea name="request-message" id="request-message" class="b-form-block__message" required></textarea>
+                    <label for="request-message" class="b-form-block__label">
+                        Сообщение
+                    </label>
+                </div>
+                <button type="submit" class="button b-add-request__form-button">
+                    Подать заявку
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+<div class="b-footer__left">
+    <a href="/" class="b-footer__logo">
+        <img src="../images/home/logo-white.svg" alt="Особая Экономическая зона">
+    </a>
+</div>
+<div class="b-footer__center">
+    <nav class="b-footer__nav">
+        <ul class="b-footer__nav-list">
+            {% set footerMenuItems = [
+                'Об ОЭЗ',
+                'Инфраструктура',
+                'Услуги',
+                'Резиденты',
+                'Инвесторам',
+                'Медиа',
+                'Контакты'
+            ] %}
+
+            {% for footerMenuItem in footerMenuItems %}
+                <li class="b-footer__nav-item">
+                    <a href="#" class="b-footer__nav-link">
+                        {{ footerMenuItem }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+    <div class="b-footer__copyright">
+        <span class="b-footer__copyright-text">&copy; 2018, ОЭЗ &laquo;Санкт-Петербург&raquo;</span>
+        <a href="#" class="b-footer__copyright-link">
+            Раскрытие информации
+        </a>
+        <a href="#" class="b-footer__copyright-link">
+            Написать сообщение
+        </a>
+    </div>
+</div>
+<div class="b-footer__right">
+    <div class="b-footer__right-wrap">
+        <div class="b-footer__social">
+            <a href="#" class="b-footer__social-link">
+                {% include "../../sprites/svg/instagram.svg.twig" %}
+            </a>
+            <a href="#" class="b-footer__social-link">
+                {% include "../../sprites/svg/facebook.svg.twig" %}
+            </a>
+        </div>
+        <a href="#" class="b-footer__kelnik">
+            {% include "../../sprites/svg/kelnik.svg.twig" %}
+        </a>
+    </div>
+</div>

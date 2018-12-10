@@ -1,0 +1,67 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Вход в личный кабинет</title> {% endblock %}
+
+{% block content %}
+    {% include "../components/lk-login-nav/lk-login-nav.twig" %}
+
+    <div class="l-login">
+
+        <div class="b-title b-login-title">
+            <h1>Вход в личный кабинет</h1>
+        </div>
+
+        <form action="" method="post" enctype="multipart/form-data" class="b-login-form">
+            <div class="b-form-block-wrap">
+                <!--
+                     Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+                     Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+                     -->
+                <div class="b-form-block">
+                    {% include "../components/forms/email/email.twig" with {
+                        id: "email",
+                        name: "email",
+                        required: "true"
+                    } %}
+                    <label for="email" class="b-form-block__label">
+                        Эл. почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+                <div class="b-form-block">
+                    {% include "../components/forms/password/password.twig" with {
+                        id: "password",
+                        name: "password",
+                        required: "true"
+                    } %}
+                    <label for="password" class="b-form-block__label">
+                        Пароль
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
+                </div>
+            </div>
+            <div class="b-remember-passsword">
+                <a href="#" class="b-link-line">
+                    Я не помню пароль
+                </a>
+            </div>
+            <div class="b-personal-information">
+                {% include "../components/forms/checkbox/checkbox.twig" with {
+                    id: "personal-information",
+                    name: "personal-information",
+                    required: "true",
+                    text: "Даю согласие на обработку <a href='#' class='b-link-line'>персональных данных</a>"
+                } %}
+            </div>
+            <div class="b-login-form__button-block">
+                <button type="submit" class="button b-login-form__button">
+                    Войдите в личный кабинет
+                </button>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

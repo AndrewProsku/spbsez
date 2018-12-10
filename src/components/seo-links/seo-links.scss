@@ -1,0 +1,32 @@
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/seo-links.html
+// Версия - 1.0
+
+// Зависимости
+@import "../../common/styles/colors";
+@import "../../common/styles/font-sizes";
+@import "../../common/styles/vertical-indent";
+
+// Настройки
+$seo-link-color: inherit;
+$seo-link-color-hover: rgba($black, 0.8);
+
+.b-seo-links__title {
+    @include font-size("h4");
+    @include margin-level(bottom, orange);
+    color: $seo-link-color;
+    display: inline-block;
+}
+
+.b-seo-links__link {
+    @include transition(color);
+    @include padding-level(both, purple);
+    text-decoration: none;
+    display: inline-block;
+    color: $seo-link-color;
+
+    @media #{$laptop} {
+        &:hover {
+            color: $seo-link-color-hover;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+// Z-INDEX MANAGEMENT
+$z-layers: (
+    "hide": -1,
+    "zero": 0,
+    "default": 1,
+    "nav": 2,
+    "popup": 3
+);
+
+// management z-index
+@function z($layer) {
+    @if not map-has-key($z-layers, $layer) {
+        @warn "Такого слоя не существует, попробуйте проверить $z-layers в файле _settings.scss";
+    } @else {
+        @return map-get($z-layers, $layer);
+    }
+}

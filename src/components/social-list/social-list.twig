@@ -1,0 +1,13 @@
+<ul class="b-social-list">
+    {% for social in socials %}
+        <li class="b-social-list__social">
+            {% include "../../components/social-link/social-link.twig" with {
+                href : social.href,
+                title: social.title,
+                file: social.file,
+                modify: social.modify
+            } %}
+        </li>
+    {% endfor %}
+
+</ul>

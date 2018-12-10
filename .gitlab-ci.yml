@@ -8,7 +8,7 @@ deploy-master:
   script:
   - echo "Deploy master"
   - echo $DEPLOY_PATH
-  - ssh -T ksdev "cd $DEPLOY_PATH && git pull"
+  - ssh -T ksdev "cd $DEPLOY_PATH && git pull && /opt/plesk/php/7.1/bin/php composer.phar install -n --no-dev"
   only:
   - master
 
@@ -22,7 +22,7 @@ deploy-dev:
   script:
   - echo "Deploy dev"
   - echo $DEPLOY_PATH
-  - ssh -T ksdev "cd $DEPLOY_PATH && git pull"
+  - ssh -T ksdev "cd $DEPLOY_PATH && git pull && /opt/plesk/php/7.1/bin/php composer.phar install -n"
   only:
   - dev
 
@@ -36,6 +36,6 @@ deploy-test:
   script:
   - echo "Deploy test"
   - echo $DEPLOY_PATH
-  - ssh -T ksdev "cd $DEPLOY_PATH && git pull"
+  - ssh -T ksdev "cd $DEPLOY_PATH && git pull && /opt/plesk/php/7.1/bin/php composer.phar install -n --no-dev"
   only:
   - test

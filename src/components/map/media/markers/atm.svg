@@ -1,0 +1,6 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <title>ATM</title>
+    <circle cx="12" cy="12" r="12" fill="#fff"/>
+    <path d="M17.5,7.5H6.5a1,1,0,0,0-1,1v1h13v-1A1,1,0,0,0,17.5,7.5Z"/>
+    <path d="M5.5,15.5a1,1,0,0,0,1,1h11a1,1,0,0,0,1-1v-4H5.5Zm1-1h2v1h-2Z"/>
+</svg>

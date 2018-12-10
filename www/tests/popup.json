@@ -1,0 +1,13 @@
+{
+  "request": {
+    "result": 1,
+    "errors": [
+      "error text 1",
+      "error text 2",
+      "error text 3"
+    ]
+  },
+  "data": {
+    "content": "<h1>Контент из popup.json</h1>"
+  }
+}

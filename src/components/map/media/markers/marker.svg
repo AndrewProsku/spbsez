@@ -1,0 +1,20 @@
+<svg id="SVGDoc" width="24" height="24" xmlns="http://www.w3.org/2000/svg" version="1.1"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:avocode="https://avocode.com/" viewBox="0 0 24 24">
+    <defs>
+        <path d="M978,650c0,-6.62742 5.37258,-12 12,-12c6.62742,0 12,5.37258 12,12c0,6.62742 -5.37258,12 -12,12c-6.62742,0 -12,-5.37258 -12,-12z"
+              id="Path-0"/>
+        <path d="M989.92258,650.58111c-0.87249,0 -1.57971,-0.69854 -1.57971,-1.56031c0,-0.86176 0.70722,-1.5603 1.57971,-1.5603c0.87274,0 1.57972,0.69854 1.57972,1.5603c0,0.86177 -0.70698,1.56031 -1.57972,1.56031zM989.92258,644.86c-2.32663,0 -4.21258,1.88915 -4.21258,4.21935c0,2.3302 4.21258,7.22286 4.21258,7.22286c0,0 4.21259,-4.89283 4.21259,-7.22303c0,-2.3302 -1.88595,-4.21918 -4.21259,-4.21918z"
+              id="Path-1"/>
+    </defs>
+    <desc>Generated with Avocode.</desc>
+    <g transform="matrix(1,0,0,1,-978,-638)">
+        <g>
+            <title>Oval 3 Copy</title>
+            <use xlink:href="#Path-0" fill="#383855" fill-opacity="1"/>
+        </g>
+        <g>
+            <title>Shape</title>
+            <use xlink:href="#Path-1" fill="#ffffff" fill-opacity="1"/>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,8 @@
+<article class="b-screenreader-text" aria-hidden="{{ screenHidden|default(false) }}" role="complementary">
+    <p class="b-screenreader-text__content">
+        Здравствуйте! Увы, сайт не&nbsp;очень адаптирован под программы для чтения с&nbsp;экрана.
+        Информацию о&nbsp;жилом комплексе и&nbsp;застройщике быстрее узнать по&nbsp;телефону отдела продаж:
+        <span class="b-screenreader-text__tel {% if phoneClass %} {{ phoneClass }} {% endif %}">{{ phone }}</span>
+        Спасибо!
+    </p>
+</article>

@@ -1,0 +1,103 @@
+// Version - 1.0
+// Documentation - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/forms/input-email.html
+
+// Dependecies
+@import "../../../common/styles/mixins";
+@import "../../../common/styles/breakpoints";
+
+// Settings
+$input-font-size: 20px;
+$input-line-height: 1;
+$input-font-family: inherit;
+
+// Fields
+$input-color: #000000;
+$input-color-focus: #000000;
+$input-color-valid: #00ff00;
+$input-color-invalid: #ff0000;
+$input-color-disabled: #cccccc;
+
+// Background
+$input-bg-color: #ffffff;
+$input-bg-color-focus: rgba(#0000ff, .5);
+$input-bg-color-valid: rgba(#00ff00, .5);
+$input-bg-color-invalid: rgba(#ff0000, .5);
+$input-bg-color-disabled: rgba(#cccccc, .5);
+
+// Border
+$input-bd-width: 1px;
+$input-border-radius: 4px;
+$input-bd-color: #cccccc;
+$input-bd-color-focus: #0000ff;
+$input-bd-color-valid: #00ff00;
+$input-bd-color-invalid: #ff0000;
+$input-bd-color-disabled: #cccccc;
+
+// Placeholder
+$input-placeholder-color: #000000;
+$input-placeholder-color-valid: #000000;
+$input-placeholder-color-invalid: #000000;
+$input-placeholder-color-disabled: #cccccc;
+$input-placeholder-font-style: normal;
+$input-placeholder-font-size: inherit;
+$input-placeholder-opacity: 1;
+
+.b-input-email {
+    display: block;
+    width: 100%;
+    border: none;
+
+
+    // Отключаем стандартный крестик в полях в IE
+    &::-ms-clear {
+        display: none;
+    }
+
+    // Стили плейсходлера
+    &::placeholder {
+        color: $input-placeholder-color;
+        font-style: $input-placeholder-font-style;
+        font-size: $input-placeholder-font-size;
+        opacity: $input-placeholder-opacity;
+    }
+
+    // При фокусе
+    &:focus {
+
+    }
+
+    // Ошибка
+    // &:invalid,
+    &.is-invalid,
+    &.is-error {
+
+    }
+
+    // Успех
+    &.is-valid,
+    &.is-success {
+        color: $blue;
+    }
+
+    // отключенный инпут
+    &:disabled,
+    &.is-disabled,
+    &[disabled] {
+        color: $input-color-disabled;
+        border-color: $input-bd-color-disabled;
+        background-color: $input-bg-color-disabled;
+        cursor: default;
+
+        &::placeholder {
+            color: $input-color-disabled;
+        }
+    }
+
+    @media #{$laptop} {
+        // Наведение
+        &:hover {
+            border-color: rgba($input-bd-color, .5);
+            background-color: rgba($input-bg-color, .5);
+        }
+    }
+}

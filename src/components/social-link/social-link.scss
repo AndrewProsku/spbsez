@@ -1,0 +1,24 @@
+// Документация - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/social-list-and-link.html
+// Версия - 1.0
+
+// Зависимости
+@import "../../common/styles/colors";
+
+// Настройки
+$social-link-fill: rgba($black, 0.8);
+
+.b-social-link {
+    @include transition(fill);
+    fill: $social-link-fill;
+
+    @media #{$laptop} {
+        &:hover {
+            fill: $black;
+        }
+    }
+}
+
+
+.b-social-link_fill_red {
+    fill: red;
+}

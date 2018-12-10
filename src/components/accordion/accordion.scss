@@ -1,0 +1,70 @@
+// Версия - 1.0
+
+// Зависимости
+@import "../../common/styles/colors";
+@import "../../common/styles/font-sizes";
+
+// Настройки
+$accordion-border-color: $gray;
+
+// для заголовка
+$header-font-size: "p1";
+$header-font-weight: 500;
+$header-letter-spacing: 0.07px;
+$header-padding-direction: both;
+$header-padding-level: red;
+
+// для контента
+$content-wrapper-background-color: $white;
+$content-wrapper-box-shadow: none;
+$content-font-size: "p2";
+$content-font-weight: 400;
+$content-padding-level: orange;
+$content-padding-direction: bottom;
+
+.b-accordion {
+    border-bottom: 1px solid $accordion-border-color;
+}
+
+.b-accordion__header {
+    @include padding-level($header-padding-direction, $header-padding-level);
+    @include font-size($header-font-size);
+    font-weight: $header-font-weight;
+    letter-spacing: $header-letter-spacing;
+    display: flex;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.b-accordion__arrow {
+    @include transition(transform);
+    margin-left: auto;
+}
+
+.b-accordion__content-wrapper {
+    @include transition(height);
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    height: 0;
+    box-shadow: $content-wrapper-box-shadow;
+    background-color: $content-wrapper-background-color;
+}
+
+.b-accordion__content {
+    @include padding-level($content-padding-direction, $content-padding-level);
+    @include font-size($content-font-size);
+    font-weight: $content-font-weight;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+}
+
+// state
+.b-accordion_is_open {
+    .b-accordion__arrow {
+        transform: rotate(180deg);
+    }
+}
