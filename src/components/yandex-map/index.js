@@ -157,7 +157,7 @@ class YandexMap {
             zoom                   : defaultZoom,
             minZoom                : 8,
             maxZoom                : 18,
-            zoomStep               : .5,
+            zoomStep               : 1,
             controls               : [],
             zoomControl            : true,
             customZoomControl      : false,
