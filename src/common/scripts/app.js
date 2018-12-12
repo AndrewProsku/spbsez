@@ -1,6 +1,8 @@
 import '../styles/app.scss';
 import InputTel from '../../components/forms/telephone/telephone';
 import Select from '../../components/forms/select/';
+import YandexMap from 'components/yandex-map';
+import yandexMapLoad from 'components/yandex-map/load';
 
 
 /**
@@ -146,3 +148,20 @@ const openSubmenu = function() {
 };
 
 openSubmenu();
+
+
+/* eslint-disable */
+const mapWrapper = document.querySelector('.j-yandex-map');
+
+if (mapWrapper) {
+    yandexMapLoad()
+        .then((ymaps) => {
+            const yandexMap = new YandexMap(ymaps);
+
+            yandexMap.init({wrapper: mapWrapper});
+        })
+        .catch((error) => {
+            console.error(`При загрузке яндекс карт произошла ошибка: ${error}`);
+        });
+}
+/* eslint-enable */

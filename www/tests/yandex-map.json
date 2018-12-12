@@ -1,0 +1,30 @@
+{
+  "request": {
+    "result": 1,
+    "errors": [
+      "error text 1",
+      "error text 2",
+      "error text 3"
+    ]
+  },
+  "data": {
+    "zoom"   : "9",
+    "center" : [59.942099, 30.186182],
+    "scrollwheel": false,
+    "fullScreenControl": false,
+    "customZoomControl": true,
+    "htmlMarkers": [
+      {
+        "title": "Новоорловская",
+        "layout": "secondary",
+        "coords": [60.053400, 30.231714]
+      },
+      {
+        "title": "Нойдорф",
+        "layout": "secondary",
+        "coords": [59.840573, 30.005940]
+      }
+    ],
+    "markers": []
+  }
+}

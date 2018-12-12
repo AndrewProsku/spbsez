@@ -1,0 +1,16 @@
+<ul class="b-yandex-map__tabs">
+    <li class="b-yandex-map__tab-item is-active">
+        <a class="b-yandex-map__tab-link" data-type="0">Все</a>
+    </li>
+
+    {% for item in items %}
+        <li class="b-yandex-map__tab-item">
+
+            <a class="b-yandex-map__tab-link" data-type="{{ item.type }}">
+                <img src="{{ item.icon.src }}" alt="{{ item.icon.alt }}" class="b-yandex-map__tab-icon">
+                    {{ item.name }}
+            </a>
+        </li>
+    {% endfor %}
+
+</ul>
