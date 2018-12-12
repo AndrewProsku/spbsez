@@ -8,7 +8,6 @@
     ]
   },
   "data": {
-    "zoom"   : "9",
     "center" : [59.942099, 30.186182],
     "scrollwheel": false,
     "fullScreenControl": false,

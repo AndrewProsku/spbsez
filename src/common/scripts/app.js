@@ -157,6 +157,7 @@ if (mapWrapper) {
     yandexMapLoad()
         .then((ymaps) => {
             const yandexMap = new YandexMap(ymaps);
+            const documentWidth = document.documentElement.clientWidth;
 
             yandexMap.init({wrapper: mapWrapper});
         })

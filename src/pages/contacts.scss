@@ -12,6 +12,14 @@
     @include prefix(2, 36);
     @include suffix(2, 36);
     @include font-size("h3");
+    background-color: $white;
+
+    @media #{$tablet-portrait}  {
+        @include padding-level(top, cyan);
+        position: absolute;
+        z-index: 1;
+        background-color: transparent;
+    }
 
     @media #{$laptop} {
         @include prefix(3, 36);
