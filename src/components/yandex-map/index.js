@@ -82,6 +82,16 @@ class YandexMap {
      */
     initYandexMap(initMapCallback = function() {}) {
         this.map = new this.ymaps.Map(this.id, this.settings, {suppressMapOpenBlock: true});
+
+        // Если необходимо изменять зум карты при переходе от мобилок к планшету и наоборот
+        // window.addEventListener('resize', (e) => {
+        //     if (this.settings.wrapper.offsetWidth <= 669) {
+        //         this.map.setZoom(9);
+        //     } else {
+        //         console.log('here');
+        //         this.map.setZoom(10);
+        //     }
+        // });
         initMapCallback();
     }
 
@@ -139,12 +149,13 @@ class YandexMap {
 
         // высчитываем высоту обертки карты, а равно высоту карты, для позиционирования элементов управления
         const heightMap = this.content.offsetHeight;
+        const defaultZoom = document.documentElement.clientWidth > 669 ? 10 : 9;
 
         return {
             center                 : [latCenter, lngCenter],
             mapTypeControl         : false,
-            zoom                   : 12,
-            minZoom                : 10,
+            zoom                   : defaultZoom,
+            minZoom                : 8,
             maxZoom                : 18,
             zoomStep               : 1,
             controls               : [],
@@ -171,7 +182,6 @@ class YandexMap {
     initControls() {
         this.addZoomControl();
         this.addFullScreenControl();
-        console.log(this.map);
     }
 
     /**
@@ -244,7 +254,6 @@ class YandexMap {
                     this.zoomInCallback = ymaps.util.bind(this.zoomIn, this);
                     this.zoomOutCallback = ymaps.util.bind(this.zoomOut, this);
 
-                    console.log(document.getElementById(`${mapId}-in`));
                     // Начинаем слушать клики на кнопках макета.
                     document.getElementById(`${mapId}-in`).addEventListener('click', this.zoomInCallback);
                     document.getElementById(`${mapId}-out`).addEventListener('click', this.zoomOutCallback);
