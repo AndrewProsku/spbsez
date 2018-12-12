@@ -71,6 +71,7 @@ class YandexMap {
                 this.initTabs();
                 this.initCircles();
                 this.disableMobileDrag();
+                this.handleLocationLinks();
             });
         });
 
@@ -614,6 +615,41 @@ class YandexMap {
     }
 
     /**
+     * Инициализируем ссылки на локации
+     */
+    handleLocationLinks() {
+        const classLocationLink = `.j-contacts-location`;
+        const locationLinks = Array.from(document.querySelectorAll(classLocationLink));
+
+        // Проверяем ссылок на локации
+        if (!locationLinks.length) {
+            return;
+        }
+
+        locationLinks.forEach((link) => {
+            if (link.dataset.coordinates) {
+                const locationCoordinates = JSON.parse(link.dataset.coordinates);
+
+                link.addEventListener(`click`, (event) => {
+                    event.preventDefault();
+                    this.centerOnCoordinates(locationCoordinates)
+                });
+            }
+        });
+    }
+
+    /**
+     * Центрируем карту на координатах
+     * @param {array} coordinates - массив с координами маста
+     */
+    centerOnCoordinates(coordinates) {
+        this.map.setCenter(coordinates, 11, {
+            duration: 300,
+            timingFunction: 'ease'
+        });
+    }
+
+    /**
      * Показываем/скрываем маркеры на карте
      * @param {node} tab - нода таба по которому произошол клик
      */
@@ -686,7 +722,6 @@ class YandexMap {
             });
         }
     }
-
 
     /**
      * Отключаем перетаскивание карты при прокрутке одним пальцем на мобилке
