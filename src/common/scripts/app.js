@@ -1,4 +1,5 @@
 import '../styles/app.scss';
+import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
 import Select from '../../components/forms/select/';
 import YandexMap from 'components/yandex-map';
@@ -165,3 +166,84 @@ if (mapWrapper) {
         });
 }
 /* eslint-enable */
+
+
+/**
+ * Добавляем слайдеры на главной странице.
+ */
+
+const defaultCarouselSettings = {
+    type       : 'carousel',
+    startAt    : 0,
+    perView    : 3,
+    gap        : 0,
+    breakpoints: {
+        1279: {
+            perView: 2
+        },
+        668: {
+            perView: 1
+        }
+    },
+    classes: {
+        activeNav  : 'b-carousel__dot_is_active',
+        activeSlide: 'b-carousel__slide_is_active'
+    }
+};
+
+
+const residentsCarouselEl = document.querySelector('.j-residents-carousel');
+
+if (residentsCarouselEl) {
+    const residentsCarousel = new Glide('.j-residents-carousel', defaultCarouselSettings);
+
+    residentsCarousel.on('swipe.start', () => {
+        const carouselActiveSlide = residentsCarouselEl.querySelector('.b-carousel__slide_is_active');
+
+        carouselActiveSlide.classList.add('b-carousel__slide_is_swiping');
+    });
+    residentsCarousel.on('swipe.end', () => {
+        const carouselActiveSlide = residentsCarouselEl.querySelector('.b-carousel__slide_is_active');
+
+        carouselActiveSlide.classList.remove('b-carousel__slide_is_swiping');
+    });
+
+    residentsCarousel.mount();
+}
+
+
+const partnersCarouselEl = document.querySelector('.j-partners-carousel');
+
+if (partnersCarouselEl) {
+    const partnersCarousel = new Glide('.j-partners-carousel', defaultCarouselSettings);
+
+    partnersCarousel.on('swipe.start', () => {
+        const carouselActiveSlide = partnersCarouselEl.querySelector('.b-carousel__slide_is_active');
+
+        carouselActiveSlide.classList.add('b-carousel__slide_is_swiping');
+    });
+    partnersCarousel.on('swipe.end', () => {
+        const carouselActiveSlide = partnersCarouselEl.querySelector('.b-carousel__slide_is_active');
+
+        carouselActiveSlide.classList.remove('b-carousel__slide_is_swiping');
+    });
+
+    partnersCarousel.mount();
+}
+
+
+const reviewsCarouselEl = document.querySelector('.j-reviews-carousel');
+
+if (reviewsCarouselEl) {
+    const reviewsCarousel = new Glide('.j-reviews-carousel', {
+        type   : 'carousel',
+        startAt: 0,
+        perView: 1,
+        gap    : 0,
+        classes: {
+            activeNav: 'b-slider-reviews__dot_is_active'
+        }
+    });
+
+    reviewsCarousel.mount();
+}

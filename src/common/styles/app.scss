@@ -21,9 +21,12 @@
 
 // Components
 
+@import "../../../node_modules/@glidejs/glide/src/assets/sass/glide.core";
 @import "../../components/alert-old-browser/alert-old-browser";
 @import "../../components/mobile-menu/mobile-menu";
-@import "../../components/slider/slider";
+// @import "../../components/slider/slider";
+@import "../../components/carousel/carousel";
+@import "../../components/reviews/reviews";
 
 @import "../../components/account-tooltip/account-tooltip";
 @import "../../components/lk-nav/lk-nav";
