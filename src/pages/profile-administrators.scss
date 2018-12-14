@@ -32,6 +32,12 @@
     }
 }
 
+.b-profile-add {
+    .b-profile-add__input-file {
+        display: none;
+    }
+}
+
 .b-empty-page_padding_top {
     @include margin-level(top, green);
 }
