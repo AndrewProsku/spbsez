@@ -32,6 +32,10 @@
     }
 }
 
+.b-empty-page_padding_top {
+    @include margin-level(top, green);
+}
+
 .b-profile-admin-title {
     padding-right: 25px;
 
