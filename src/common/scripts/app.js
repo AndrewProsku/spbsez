@@ -2,9 +2,9 @@ import '../styles/app.scss';
 import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
 import Select from '../../components/forms/select/';
+import Utils from './utils';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
-
 
 /**
  * Добавляем класс на шапку при прокрутке.
@@ -12,12 +12,15 @@ import yandexMapLoad from 'components/yandex-map/load';
 const getBodyScrollTop = function() {
     const header = document.querySelector('.j-home__header');
     const yOffset = self.pageYOffset;
-    const maxYOffset = 700;
+    const maxYOffset = 600;
+    const mainScreenText = document.querySelector('.b-main-screen-content');
+    const windowHeight = document.documentElement.clientHeight;
     const offset = yOffset ||
         (document.documentElement && document.documentElement.scrollTop) ||
         (document.body && document.body.scrollTop);
+    const isTextVisible = (-mainScreenText.getBoundingClientRect().top + header.clientHeight) < windowHeight;
 
-    if (offset > maxYOffset) {
+    if (offset > maxYOffset || !isTextVisible) {
         header.classList.add('is-scroll');
     } else {
         header.classList.remove('is-scroll');
@@ -268,3 +271,17 @@ if (reviewsCarouselEl) {
 
     reviewsCarousel.mount();
 }
+
+
+/**
+ * Добавляем класс для контена главного экрана,
+ * чтобы увеличить значение отступа на величну панелей управления в мобильных браузерах
+ */
+const mainScreenContent = document.querySelector('.b-main-screen-content');
+
+if (mainScreenContent) {
+    if (Utils.isMobile()) {
+        mainScreenContent.classList.add('b-main-screen-content_is_mobile');
+    }
+}
+

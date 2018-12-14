@@ -160,6 +160,22 @@ $path: '/images/home/';
     }
 }
 
+.b-main-screen-content_is_mobile {
+    margin-top: -222px;
+
+    @media #{$tablet-portrait} {
+        margin-top: -240px;
+    }
+
+    @media #{$laptop} {
+        margin-top: -300px;
+    }
+
+    @media #{$laptop-wide} {
+        margin-top: -365px;
+    }
+}
+
 .b-main-screen-text {
     @include row();
     @include padding-level(bottom, blue);
