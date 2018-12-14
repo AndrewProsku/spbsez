@@ -28,6 +28,7 @@
 
         .b-logo__link {
             height: 55px;
+            margin-top: 0;
             background-image: url("/images/home/logo-color.svg");
 
             @media #{$laptop} {
