@@ -1,0 +1,156 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Особая экономическая зона</title> {% endblock %}
+
+{% block content %}
+    {% include '../components/page-submenu/page-submenu.twig' with {
+        subitems: [{
+                href: '#',
+                name: 'Особая&nbsp;экономичкская&nbsp;зона',
+                active: true
+            },{
+                href: '#',
+                name: 'Управляющая&nbsp;компания'
+            },{
+                href: '#',
+                name: 'Вакансии'
+            },{
+                href: '#',
+                name: 'Раскрытие&nbsp;информации'
+            }
+        ]
+
+    } %}
+
+    <div class="l-about">
+
+        <div class="b-title b-about-title">
+            <h1>Особая экономическая зона</h1>
+        </div>
+
+        <div class="b-about-desc">
+            <div class="b-about-desc__img">
+                <img src="/images/about/about_UK-mission.png" alt="картинка">
+            </div>
+            <div class="b-about-desc__content">
+                <div class="b-about-desc__title">
+                    <h3>Высокотехнологичный бизнес в черте города</h3>
+                </div>
+                <div class="b-about-desc__text">
+                    <p>
+                        Особая экономическая зона «Санкт–Петербург» — это территория новых возможностей для развития высокотехнологичного бизнеса в черте города при поддержке органов власти. ОЭЗ создает благоприятные условия и инфраструктуру, при которых резиденты смогут успешно вести разработки и производство инновационной продукции в Санкт-Петербурге.
+                    </p>
+                </div>
+                <div class="b-about-desc__links">
+                    {% set abLinks = [
+                        'Как&nbsp;стать&nbsp;резиденотм',
+                        'Льготы&nbsp;и&nbsp;преференции',
+                        'Участки',
+                        'Органы&nbsp;власти'
+                    ] %}
+
+                    {% for abLink in abLinks %}
+                        <a href="#" class="b-about-desc__link b-link-line">
+                            {{ abLink }}
+                        </a>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+
+        <div class="b-about-info">
+            <div class="b-about-info__item">
+                <div class="b-about-info__text">
+                    <div class="b-about-info__text-title">
+                        182,32 га
+                    </div>
+                    <div class="b-about-info__text-desc">
+                        Готовая инфраструктура
+                    </div>
+                </div>
+            </div>
+            <div class="b-about-info__item">
+                <div class="b-about-info__item-block">
+                    <div class="b-about-info__text">
+                        <div class="b-about-info__text-title">
+                            50
+                        </div>
+                        <div class="b-about-info__text-desc">
+                            резидентов
+                        </div>
+                    </div>
+                </div>
+                <div class="b-about-info__item-block"></div>
+                <div class="b-about-info__item-block"></div>
+                <div class="b-about-info__item-block">
+                    <div class="b-about-info__text">
+                        <div class="b-about-info__text-title">
+                            42 га
+                        </div>
+                        <div class="b-about-info__text-desc">
+                            свободной <br/> площади
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="b-about-info__item" style="background-image:url('/images/about/about-info-img.jpg');">
+                <div class="b-about-info__text">
+                    <div class="b-about-info__text-title">
+                        Более 2966
+                    </div>
+                    <div class="b-about-info__text-desc">
+                        рабочих мест
+                    </div>
+                </div>
+            </div>
+            <div class="b-about-info__item">
+                <div class="b-about-info__item-block"></div>
+                <div class="b-about-info__item-block">
+                    <div class="b-about-info__text">
+                        <div class="b-about-info__text-title">
+                            более 35 млрд
+                        </div>
+                        <div class="b-about-info__text-desc">
+                            частных инвестиции
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="b-about-info__item" style="background-image:url('/images/about/about-info-img2.jpg');">
+                <div class="b-about-info__item-block">
+                    <div class="b-about-info__text">
+                        <div class="b-about-info__text-title">
+                            11 млрд ₽
+                        </div>
+                        <div class="b-about-info__text-desc">
+                            налоговые поступления <br/>
+                            резидентов в бюджет
+                        </div>
+                    </div>
+                </div>
+                <div class="b-about-info__item-block"></div>
+                <div class="b-about-info__item-block"></div>
+            </div>
+            <div class="b-about-info__item">
+                <div class="b-about-info__text">
+                    <div class="b-about-info__text-title">
+                        50 млрд ₽
+                    </div>
+                    <div class="b-about-info__text-desc">
+                        суммарная выручка <br/>
+                        резидентов ОЭЗ
+                    </div>
+                </div>
+            </div>
+            <div class="b-about-info__item">
+                <div class="b-about-info__text">
+                    <a href="#" class="b-about-info__text-link b-link-line">
+                        Как стать резидентом
+                    </a>
+                    <a href="#" class="b-about-info__text-link-button"></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

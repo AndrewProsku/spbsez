@@ -1,0 +1,344 @@
+.l-about {
+    background-image: url("/images/home/line-bg2.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.b-about-title {
+    @include padding-level(top, blue);
+    @include padding-level(bottom, blue);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+
+    @media #{$laptop} {
+        @include padding-level(bottom, dark-yellow);
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-about-desc {
+    @include padding-level(bottom, violet);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    position: relative;
+
+    @media #{$laptop} {
+        @include row();
+        @include padding-level(top, blue);
+        @include padding-level(top, blue);
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-about-desc__img {
+    @include padding-level(bottom, blue);
+
+    @media #{$tablet-portrait} {
+        @include column(22, 32);
+    }
+
+    @media #{$laptop} {
+        @include column(11, 30);
+        @include post(-2, 30);
+        order: 2;
+        padding-bottom: 0;
+        margin-top: -64px;
+    }
+
+    @media #{$fullhd} {
+        @include column(11, 28);
+        @include post(-3, 28);
+    }
+}
+
+.b-about-desc__content {
+    @media #{$laptop} {
+        @include column(21, 30);
+        @include suffix(2, 30);
+        order: 1;
+    }
+
+    @media #{$fullhd} {
+        @include column(20, 28);
+        @include suffix(2, 28);
+    }
+}
+
+.b-about-desc__title {
+    @include margin-level(bottom, green);
+    font-weight: 700;
+}
+
+.b-about-desc__text {
+    @include prefix(3, 32);
+    @include font-size('p2');
+    @include margin-level(bottom, green);
+    position: relative;
+
+    &:before {
+        @include column(2, 32);
+        content: "";
+        width: 100%;
+        height: 2px;
+        background-image: linear-gradient($gradient-linear);
+        position: absolute;
+        top: 12px;
+        left: 0;
+    }
+
+    p {
+        @include font-size('p2');
+    }
+
+    @media #{$tablet-portrait} {
+        &:before {
+            top: 14px;
+        }
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 19);
+
+        &:before {
+            @include column(2, 19);
+        }
+    }
+
+    @media #{$fullhd} {
+        @include prefix(3, 18);
+
+        &:before {
+            @include column(2, 18);
+            top: 16px;
+        }
+    }
+}
+
+.b-about-desc__links {
+    @include prefix(3, 32);
+    max-width: 250px;
+    position: relative;
+
+    &:before {
+        content: "";
+        width: 18px;
+        height: 8px;
+        background-image: url("/images/about/links-icon@2x.png");
+        background-repeat: no-repeat;
+        background-position: center right;
+        background-size: contain;
+        position: absolute;
+        top: 4px;
+        left: 0;
+    }
+
+    @media #{$tablet-portrait} {
+        max-width: 100%;
+
+        &:before {
+            @include column(1, 32);
+            @include push(1, 32);
+            width: 21px;
+            height: 10px;
+        }
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 19);
+
+        &:before {
+            @include column(1, 19);
+            @include push(1, 19);
+            width: 100%;
+            height: 14px;
+            top: 6px;
+        }
+    }
+
+    @media #{$fullhd} {
+        @include prefix(3, 18);
+
+        &:before {
+            @include column(1, 18);
+            @include push(1, 18);
+            top: 8px;
+        }
+    }
+}
+
+.b-about-desc__link {
+    @include font-size('p2');
+    margin-right: 32px;
+    margin-bottom: 6px;
+
+    @media #{$tablet-portrait} {
+        margin-bottom: 14px;
+    }
+}
+
+.b-about-info {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(bottom, pink);
+
+    @media #{$tablet-portrait} {
+        @include row();
+        @include suffix(4, 36);
+    }
+
+    @media #{$laptop} {
+        @include suffix(2, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-about-info__item {
+    @include column(32, 32);
+    @include row();
+    justify-content: center;
+    align-items: center;
+    height: 104px;
+    color: $black;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border: 1px solid $grey;
+    border-bottom: 0;
+
+    &:last-child {
+        border-bottom: 1px solid $grey;
+    }
+
+    &:nth-child(1),
+    &:nth-child(3),
+    &:nth-child(6) {
+        .b-about-info__text-title {
+            @include font-size('h3');
+            font-weight: 700;
+        }
+
+        .b-about-info__text-desc {
+            @include font-size('p2');
+        }
+    }
+
+    &:nth-child(2),
+    &:nth-child(4),
+    &:nth-child(5) {
+        .b-about-info__text-title {
+            @include font-size('p1');
+            font-weight: 700;
+        }
+
+        .b-about-info__text-desc {
+            @include font-size('p3');
+        }
+    }
+
+    &:nth-child(1),
+    &:nth-child(3),
+    &:nth-child(6),
+    &:nth-child(7) {
+        background-color: $white;
+    }
+
+    &:nth-child(3),
+    &:nth-child(5) {
+        color: $white;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    &:nth-child(2) {
+        .b-about-info__item-block {
+            &:nth-child(2),
+            &:nth-child(3) {
+                display: none;
+                background-color: transparent;
+            }
+        }
+    }
+
+    &:nth-child(4) {
+        .b-about-info__item-block {
+            &:nth-child(1) {
+                display: none;
+                background-color: transparent;
+            }
+
+            &:nth-child(2) {
+                @include column(32, 32);
+            }
+        }
+    }
+
+    &:nth-child(5) {
+        height: 142px;
+
+        .b-about-info__item-block {
+            &:first-child {
+                @include column(32, 32);
+                background-color: transparent;
+                border-right: 0;
+            }
+
+            &:nth-child(2),
+            &:nth-child(3) {
+                display: none;
+                background-color: $white;
+            }
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        @include column(15, 30);
+    }
+
+    @media #{$laptop} {
+        @include column(8, 32);
+    }
+
+    @media #{$fullhd} {
+        @include column(7, 28);
+    }
+}
+
+.b-about-info__text {
+    width: 100%;
+    text-align: center;
+}
+
+.b-about-info__item-block {
+    @include column(16, 32);
+    @include row();
+    align-items: center;
+    height: 100%;
+    background-color: $bg-grey;
+
+    &:first-child {
+        border-right: 1px solid $grey;
+    }
+}
+
+.b-about-info__text-link {
+    @include font-size('h3');
+    font-weight: 700;
+}
