@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7bc5d2b25b7e7d1bd81bd1e1a671b0b9",
+    "content-hash": "0a178fbb03867109f96f575c089b4bf7",
     "packages": [
         {
             "name": "bitrix-expert/bbc",
@@ -308,6 +308,35 @@
             ],
             "description": "Kelnik Helper lib",
             "time": "2018-11-02T09:47:02+00:00"
+        },
+        {
+            "name": "kelnik/module-news",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.kelnik.pro:bitrix/kelnik.module.news.git",
+                "reference": "e3c5d4ee5d0f3f4404312870a31db44dca686dce"
+            },
+            "require": {
+                "bitrix-expert/bbc": "<=2",
+                "bitrix-expert/bbc-module": "1.*",
+                "bitrix-expert/tools": "^1.5",
+                "composer/installers": "^1.2",
+                "kelnik/module-helpers": "~3.0",
+                "php": ">=7.0"
+            },
+            "type": "bitrix-d7-module",
+            "extra": {
+                "installer-name": "news"
+            },
+            "authors": [
+                {
+                    "name": "Kelnik Studios",
+                    "email": "developer@kelnik.ru"
+                }
+            ],
+            "description": "Bitrix module. News and Action",
+            "time": "2018-11-02T09:06:06+00:00"
         },
         {
             "name": "kelnik/module-text",

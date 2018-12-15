@@ -8,37 +8,73 @@ define("PATH_TO_404", "/404.php"); ?>
     <meta name="cmsmagazine" content="f2d72d3408f63252b7c735ac5b026ced">
     <link type="text/plain" rel="author" href="/humans.txt">
     <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title><?php $APPLICATION->ShowTitle() ?></title>
-    <? $APPLICATION->ShowMeta("keywords"); ?>
-    <? $APPLICATION->ShowMeta("description"); ?>
-    <? $APPLICATION->ShowMeta("robots"); ?>
-    <? $APPLICATION->SetAdditionalCSS("/scripts/lib/jquery-selectric/public/selectric.css"); ?>
-    <? $APPLICATION->SetAdditionalCSS("/scripts/lib/magnific-popup/dist/magnific-popup.css"); ?>
-    <? $APPLICATION->SetAdditionalCSS("/scripts/lib/fotorama/fotorama.css"); ?>
     <? $APPLICATION->SetAdditionalCSS("/styles/app.css"); ?>
-    <?php if (CSite::InDir('/visual/')): ?>
-        <? $APPLICATION->SetAdditionalCSS("/styles/apartments.css"); ?>
-    <?php endif; ?>
 
+    <meta name="theme-color" content="#000000">
     <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicons/apple-touch-icon-57x57-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/favicons/apple-touch-icon-76x76-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/favicons/apple-touch-icon-120x120-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicons/apple-touch-icon-152x152-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/favicons/apple-touch-icon-180x180-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="32x32" href="/favicons/apple-touch-icon-32x32.png">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
     <link rel="icon" sizes="192x192" href="/favicons/touch-icon-192x192.png">
 
-    <? $APPLICATION->ShowCSS(); ?>
-    <link rel="stylesheet" href="/styles/print.css" media="print">
-
-    <? if (!empty($USER) && $USER->IsAdmin()) {
-        $APPLICATION->ShowHeadStrings();
-    }
-    ?>
+    <? $APPLICATION->ShowHead(); ?>
 </head>
-<?php if (CSite::InDir('/visual/')): ?>
-    <?php include('inc_header_visual.php'); ?>
-<?php else: ?>
-    <?php include('inc_header.php'); ?>
-<?php endif; ?>
+<body>
+    <div id="panel"><?$APPLICATION->ShowPanel();?></div>
+    <?php include 'inc_notify_old_browser.php'; ?>
+    <div class="l-layout">
+        <header class="l-home__header j-home__header">
+            <div class="l-home__header-left">
+                <a href="/" class="b-logo__link" title="Вернуться на главную"></a>
+            </div>
+            <div class="l-home__header-center">
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:menu",
+                    "top",
+                    Array(
+                        "ALLOW_MULTI_SELECT" => "N",
+                        "DELAY" => "N",
+                        "MAX_LEVEL" => "1",
+                        "MENU_CACHE_GET_VARS" => array(""),
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_TYPE" => "A",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "ROOT_MENU_TYPE" => "top",
+                        "USE_EXT" => "N"
+                    )
+                );?>
+            </div>
+            <div class="l-home__header-right">
+                <div class="b-account">
+                    <!--
+                    Добавляем на класс b-account__link
+                        1. is-auth - сменится иконка на авторизованную
+                    -->
+                    <a href="#" class="b-account__link is-auth">
+            <span class="b-account__link-icon">
+                <span class="b-account__messages">2</span>
+            </span>
+                        <span class="b-account__link-text">Личный кабинет</span>
+                    </a>
+                </div>
+                <div class="b-language">
+                    <a href="#" class="b-language__link">
+                        Ru
+                    </a>
+                </div>
+                <div class="b-burger-wrap j-burger-click">
+                    <div class="b-burger">
+                        <div class="b-burger__line"></div>
+                        <div class="b-burger__line"></div>
+                        <div class="b-burger__line"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="l-layout__content">
