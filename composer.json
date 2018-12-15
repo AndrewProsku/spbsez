@@ -10,7 +10,8 @@
     "kelnik/composer-plugin": "*",
     "composer/installers": "*",
     "kelnik/module.admin_helper": "~3.0",
-    "kelnik/module-text": "~3.0"
+    "kelnik/module-text": "~3.0",
+    "kelnik/module-news": "~3.0"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "*",

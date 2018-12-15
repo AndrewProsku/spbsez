@@ -1,5 +1,5 @@
 <?$arTemplate = array(
-	"NAME" => "Основной шаблон",
+	"NAME" => "ОЭЗ",
 	"DESCRIPTION" => "",
 	"SORT" => "",
 );
