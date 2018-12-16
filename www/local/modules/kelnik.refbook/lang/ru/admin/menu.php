@@ -1,0 +1,5 @@
+<?php
+$MESS['KELNIK_REFBOOK_PARTNER_MENU'] = 'Партнеры';
+$MESS['KELNIK_REFBOOK_RESIDENT_MENU'] = 'Резиденты';
+$MESS['KELNIK_REFBOOK_REVIEW_MENU'] = 'Отзывы';
+$MESS['KELNIK_REFBOOK_MODULE'] = 'Справочники';

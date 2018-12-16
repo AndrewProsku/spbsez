@@ -1,5 +1,4 @@
     </main>
-
     <footer class="l-home-footer b-footer">
         <div class="b-footer__left">
             <a href="/" class="b-footer__logo">
@@ -100,69 +99,16 @@
     </footer>
 
     <div class="b-mobile-menu j-mobile-menu">
-        <div class="b-mobile-menu__header">
-            <div class="b-mobile-menu__header-left">
-                <a href="/" class="b-mobile-menu__header-logo">
-                    <img src="/images/home/logo-menu.svg" alt="Особая экономическая зона" title="На главную страницу">
-                </a>
-            </div>
-            <div class="b-mobile-menu__header-right">
-                <div class="b-account">
-                    <!--
-                    Добавляем на класс b-account__link
-                        1. is-auth - сменится иконка на авторизованную
-                    -->
-                    <a href="#" class="b-account__link">
-                        <span class="b-account__link-icon">
-                            <span class="b-account__messages">2</span>
-                        </span>
-                        <span class="b-account__link-text">Личный кабинет</span>
-                    </a>
-
-                    <div class="b-account__tooltip">
-                        <div class="b-account__tooltip-block">
-                            <ul class="b-account__tooltip-list">
-                                <li class="b-account__tooltip-item">
-                                    <a href="#" class="b-account__tooltip-link">
-                                        Профиль
-                                    </a>
-                                </li>
-
-                                <li class="b-account__tooltip-item">
-                                    <a href="#" class="b-account__tooltip-link">
-                                        Подача отчета
-                                    </a>
-                                </li>
-
-                                <li class="b-account__tooltip-item">
-                                    <a href="#" class="b-account__tooltip-link">
-                                        Сообщение от ОЭЗ
-                                    </a>
-                                </li>
-
-                                <li class="b-account__tooltip-item">
-                                    <a href="#" class="b-account__tooltip-link">
-                                        Подать заявку
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="b-language">
-                    <a href="#" class="b-language__link">
-                        Ru
-                    </a>
-                </div>
-                <div class="b-close-menu-warp j-close-menu">
-                    <div class="b-close-menu">
-                        <div class="b-close-menu__line"></div>
-                        <div class="b-close-menu__line"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <? $APPLICATION->IncludeComponent(
+            "kelnik:user.menu",
+            "mobile-header",
+            array(
+                "COMPONENT_TEMPLATE" => "mobile-header",
+                "CACHE_TYPE" => "A",
+                "CACHE_TIME" => "360000"
+            ),
+            array()
+        ); ?>
 
         <?$APPLICATION->IncludeComponent(
             "bitrix:menu",
@@ -182,57 +128,17 @@
             ),
             false
         );?>
-
         <div class="b-mobile-menu__footer">
-            <!--
-
-            Для авторизованного пользователя
-            Добавляем на класс b-account
-                1. b-account_is_hover - появится всплывашка
-            Добавляем на класс b-account__link
-                1. is-auth - сменится иконка на авторизованную
-                2. j-account-auth - Нужен для запрета перехода по ссылке,
-                    что бы появился тултип а не переход произошел
-
-            -->
-            <div class="b-account b-account_is_hover">
-                <a href="#" class="b-account__link is-auth j-account-auth">
-                    <span class="b-account__link-icon">
-                        <span class="b-account__messages">2</span>
-                    </span>
-                    <span class="b-account__link-text">Личный кабинет</span>
-                </a>
-
-                <div class="b-account__tooltip">
-                    <div class="b-account__tooltip-block">
-                        <ul class="b-account__tooltip-list">
-                            <li class="b-account__tooltip-item">
-                                <a href="#" class="b-account__tooltip-link">
-                                    Профиль
-                                </a>
-                            </li>
-
-                            <li class="b-account__tooltip-item">
-                                <a href="#" class="b-account__tooltip-link">
-                                    Подача отчета
-                                </a>
-                            </li>
-
-                            <li class="b-account__tooltip-item">
-                                <a href="#" class="b-account__tooltip-link">
-                                    Сообщение от ОЭЗ
-                                </a>
-                            </li>
-
-                            <li class="b-account__tooltip-item">
-                                <a href="#" class="b-account__tooltip-link">
-                                    Подать заявку
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <? $APPLICATION->IncludeComponent(
+                "kelnik:user.menu",
+                "mobile",
+                array(
+                    "COMPONENT_TEMPLATE" => "mobile",
+                    "CACHE_TYPE" => "A",
+                    "CACHE_TIME" => "360000"
+                ),
+                array()
+            ); ?>
             <? $APPLICATION->IncludeComponent(
                 'kelnik:site.info',
                 'social-footer',
