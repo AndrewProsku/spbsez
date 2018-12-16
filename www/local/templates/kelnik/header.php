@@ -50,31 +50,15 @@ define("PATH_TO_404", "/404.php"); ?>
                     )
                 );?>
             </div>
-            <div class="l-home__header-right">
-                <div class="b-account">
-                    <!--
-                    Добавляем на класс b-account__link
-                        1. is-auth - сменится иконка на авторизованную
-                    -->
-                    <a href="#" class="b-account__link is-auth">
-            <span class="b-account__link-icon">
-                <span class="b-account__messages">2</span>
-            </span>
-                        <span class="b-account__link-text">Личный кабинет</span>
-                    </a>
-                </div>
-                <div class="b-language">
-                    <a href="#" class="b-language__link">
-                        Ru
-                    </a>
-                </div>
-                <div class="b-burger-wrap j-burger-click">
-                    <div class="b-burger">
-                        <div class="b-burger__line"></div>
-                        <div class="b-burger__line"></div>
-                        <div class="b-burger__line"></div>
-                    </div>
-                </div>
-            </div>
+            <? $APPLICATION->IncludeComponent(
+                "kelnik:user.menu",
+                "header",
+                array(
+                    "COMPONENT_TEMPLATE" => "header",
+                    "CACHE_TYPE" => "A",
+                    "CACHE_TIME" => "360000"
+                ),
+                array()
+            ); ?>
         </header>
         <main class="l-layout__content">
