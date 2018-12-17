@@ -2,7 +2,7 @@
 <?php if(empty($arResult['SOCIAL_INST']) && empty($arResult['SOCIAL_FACEBOOK'])): return; endif; ?>
 <div class="b-social">
     <?php if($arResult['SOCIAL_INST']): ?>
-    <a href="<?= $arResult['SOCIAL_INST']; ?>" class="b-social__link">
+    <a href="<?= $arResult['SOCIAL_INST']; ?>" rel="nofollow" class="b-social__link">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="47"
              height="48" viewBox="0 0 47 48">
             <defs>
@@ -19,7 +19,7 @@
     </a>
     <?php endif; ?>
     <?php if($arResult['SOCIAL_FACEBOOK']): ?>
-    <a href="<?= $arResult['SOCIAL_FACEBOOK']; ?>" class="b-social__link">
+    <a href="<?= $arResult['SOCIAL_FACEBOOK']; ?>" rel="nofollow" class="b-social__link">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48"
              height="47" viewBox="0 0 48 47">
             <defs>
