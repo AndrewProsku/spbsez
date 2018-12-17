@@ -917,6 +917,8 @@ $path: '/images/home/';
 }
 
 .l-home-plots__item {
+    padding-bottom: 5px;
+
     @media #{$tablet-portrait} {
         &:last-child {
             .l-home-plots__link {
