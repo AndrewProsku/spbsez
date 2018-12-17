@@ -242,12 +242,47 @@
 }
 
 .b-nav__item {
+    position: relative;
+
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(6) {
+        &:before {
+            display: none;
+            content: "";
+            width: 10px;
+            height: 10px;
+            border: 5px solid $dark-white;
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+            transform: rotate(45deg);
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            margin-left: -5px;
+        }
+    }
+
     &.is-active {
+        &:before {
+            display: block;
+        }
+
         .b-nav__link {
             &:hover {
                 border-color: transparent;
             }
         }
+    }
+
+    @media #{$laptop} {
+        padding-top: 27px;
+        padding-bottom: 27px;
+    }
+
+    @media #{$fullhd} {
+        padding-top: 35px;
+        padding-bottom: 35px;
     }
 }
 
