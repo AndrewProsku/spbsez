@@ -18,9 +18,16 @@ const getBodyScrollTop = function() {
     const offset = yOffset ||
         (document.documentElement && document.documentElement.scrollTop) ||
         (document.body && document.body.scrollTop);
-    const isTextVisible = (-mainScreenText.getBoundingClientRect().top + header.clientHeight) < windowHeight;
 
-    if (offset > maxYOffset || !isTextVisible) {
+    if (mainScreenText) {
+        const isTextVisible = (-mainScreenText.getBoundingClientRect().top + header.clientHeight) < windowHeight;
+
+        if (offset > maxYOffset || !isTextVisible) {
+            header.classList.add('is-scroll');
+        } else {
+            header.classList.remove('is-scroll');
+        }
+    } else if (offset > maxYOffset) {
         header.classList.add('is-scroll');
     } else {
         header.classList.remove('is-scroll');
