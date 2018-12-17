@@ -271,12 +271,12 @@ class YandexMap {
 
                 zoomIn: function() {
                     let map = this.getData().control.getMap();
-                    map.setZoom(map.getZoom() + 1, {checkZoomRange: false});
+                    map.setZoom(map.getZoom() + 1, {checkZoomRange: true});
                 },
 
                 zoomOut: function() {
                     let map = this.getData().control.getMap();
-                    map.setZoom(map.getZoom() - 1, {checkZoomRange: false});
+                    map.setZoom(map.getZoom() - 1, {checkZoomRange: true});
                 }
             }
         );
