@@ -7,10 +7,13 @@
 
 // margin - В любом нашем проекте не требуется какое-либо другое значение кроме 0
 // font-smoothind сглаживает шрифты
+/* stylelint-disable  property-no-vendor-prefix */
 body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
+    -weblit-text-size-adjust: none;
 }
+/* stylelint-enable */
 
 // отключаем на мобильных непритяную подсветку у ссылок при тапе.
 // Непритяна она тем, что иконки тоже обрамляются подствекой и становится не красиво

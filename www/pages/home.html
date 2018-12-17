@@ -470,61 +470,67 @@
 
         <div class="l-home-our-resident l-home__block">
             <h2>Резиденты</h2>
-            <div class="b-slider__wrapper">
-                <div class="b-slider__block-wrapper">
-                    <div class="b-slider__block  j-residents-slider">
-                            <div class="b-slider__item">
-        <div class="b-slider__item-logo">
-            <img src="/images/home/biocad.jpg" alt="BioCAD">
-        </div>
-        <div class="b-slider__item-desc">
-            <p class="b-slider__item-title">
-                Биокад
-            </p>
-            <p class="b-slider__item-text">
-                Фармацевтика и биотехнологии
-            </p>
-        </div>
-    </div>
-    <div class="b-slider__item">
-        <div class="b-slider__item-logo">
-            <img src="/images/home/laser-sistem.jpg" alt="BioCAD">
-        </div>
-        <div class="b-slider__item-desc">
-            <p class="b-slider__item-title">
-                Лазерные системы
-            </p>
-            <p class="b-slider__item-text">
-                Приборостроение
-            </p>
-        </div>
-    </div>
-    <div class="b-slider__item">
-        <div class="b-slider__item-logo">
-            <img src="/images/home/racurs.jpg" alt="BioCAD">
-        </div>
-        <div class="b-slider__item-desc">
-            <p class="b-slider__item-title">
-                Ракурс-инжиниринг
-            </p>
-            <p class="b-slider__item-text">
-                Микроэлектроника
-            </p>
-        </div>
-    </div>
-
+            <div class="b-carousel">
+                <div class="glide j-residents-carousel">
+                    <div class="glide__track b-carousel__track" data-glide-el="track">
+                        <ul class="glide__slides">
+                                <li class="glide__slide">
+        <div class="b-carousel__item ">
+            <div class="b-carousel__item-logo">
+                <img src="/images/home/biocad.jpg" alt="BioCAD">
+            </div>
+                        <div class="b-carousel__item-desc">
+                <p class="b-carousel__item-title">
+                    Биокад
+                </p>
+                <p class="b-carousel__item-text">
+                    Фармацевтика и биотехнологии
+                </p>
+            </div>
                     </div>
-                </div>
+    </li>
+    <li class="glide__slide">
+        <div class="b-carousel__item ">
+            <div class="b-carousel__item-logo">
+                <img src="/images/home/laser-sistem.jpg" alt="BioCAD">
+            </div>
+                        <div class="b-carousel__item-desc">
+                <p class="b-carousel__item-title">
+                    Лазерные системы
+                </p>
+                <p class="b-carousel__item-text">
+                    Приборостроение
+                </p>
+            </div>
+                    </div>
+    </li>
+    <li class="glide__slide">
+        <div class="b-carousel__item ">
+            <div class="b-carousel__item-logo">
+                <img src="/images/home/racurs.jpg" alt="BioCAD">
+            </div>
+                        <div class="b-carousel__item-desc">
+                <p class="b-carousel__item-title">
+                    Ракурс-инжиниринг
+                </p>
+                <p class="b-carousel__item-text">
+                    Микроэлектроника
+                </p>
+            </div>
+                    </div>
+    </li>
+                        </ul>
+                    </div>
 
-                <div class="b-slider__arrows">
-                    <button class="b-slider__arrow slider__arrow-left"></button>
-                    <button class="b-slider__arrow slider__arrow-right"></button>
-                </div>
-
-                <div class="b-slider__dots">
-                    <div class="b-slider__dot is-active"></div>
-                    <div class="b-slider__dot"></div>
-                    <div class="b-slider__dot"></div>
+                    <div class="glide__arrows b-carousel__arrows" data-glide-el="controls">
+                        <button class="b-carousel__arrow b-carousel__arrow-left" data-glide-dir="<" type="button"></button>
+                        <button class="b-carousel__arrow b-carousel__arrow-right" data-glide-dir="&#62;" type="button"></button>
+                    </div>
+                    <div class="b-carousel__dots" data-glide-el="controls[nav]">
+                        <button class="b-carousel__dot" data-glide-dir="=0" type="button"></button>
+                        <button class="b-carousel__dot" data-glide-dir="=1" type="button"></button>
+                        <button class="b-carousel__dot" data-glide-dir="=2" type="button"></button>
+                    </div>
                 </div>
             </div>
 
@@ -534,53 +540,74 @@
         </div>
 
         <div class="l-home-reviews">
-            <div class="b-slider-reviews__wrapper">
-                <div class="b-slider-reviews__block-wrapper">
-                    <div class="b-slider-reviews__block">
-                        <div class="b-slider-reviews__item">
-                            <div class="b-slider-reviews__item-image" style="background-image:url('/images/home/review-img.jpg')"></div>
-                            <div class="b-slider-reviews__person">
-                                <div class="b-slider-reviews__person-img">
-                                    <img src="/images/home/review-person.png" alt="картинка">
-                                    <div class="b-slider-reviews__person-name-wrap">
-                                        <div class="b-slider-reviews__person-name">
-                                            Георгий Побелянский
+            <div class="b-slider-reviews">
+                <div class="glide j-reviews-carousel">
+                    <div class="glide__track b-carousel__track" data-glide-el="track">
+                        <div class="glide__slides">
+
+                            <div class="glide__slide">
+                                <div class="b-slider-reviews__item">
+                                    <div class="b-slider-reviews__item-image" style="background-image:url('/images/home/review-img.jpg')"></div>
+                                    <div class="b-slider-reviews__person">
+                                        <div class="b-slider-reviews__person-img">
+                                            <img src="/images/home/review-person.png" alt="картинка">
+                                            <div class="b-slider-reviews__person-name-wrap">
+                                                <div class="b-slider-reviews__person-name">Георгий Побелянский</div>
+                                                <p>Генеральный директор фармацевтической компании «ВЕРТЕКС»</p>
+                                            </div>
                                         </div>
-                                        <p>
-                                            генеральный директор фармацевтической
-                                            компании «ВЕРТЕКС»
-                                        </p>
+                                        <div class="b-slider-reviews__person-content">
+                                            <div class="b-slider-reviews__person-text">Очевидные преимущества для резидентов ОЭЗ «Санкт-Петербург» —
+                                                преференции и льготы, стоимость земельного участка ниже среднерыночной стоимости,
+                                                создание инженерной инфраструктуры на территории зоны за счет городских
+                                                ресурсов, продление срока действия особой экономической зоны до 2054 года.</div>
+                                            <a href="#" class="b-slider-reviews__person-link b-link-line-two">
+                                                Отзыв полностью
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="b-slider-reviews__person-content">
-                                    <div class="b-slider-reviews__person-text">
-                                        Очевидные преимущества для резидентов ОЭЗ «Санкт-Петербург» —
-                                        преференции и льготы, стоимость земельного участка ниже среднерыночной стоимости,
-                                        создание инженерной инфраструктуры на территории зоны за счет городских
-                                        ресурсов, продление срока действия особой экономической зоны до 2054 года.
-                                    </div>
-                                    <a href="#" class="b-slider-reviews__person-link b-link-line-two">
-                                        Отзыв полностью
-                                    </a>
                                 </div>
                             </div>
+                            <div class="glide__slide">
+                                <div class="b-slider-reviews__item">
+                                    <div class="b-slider-reviews__item-image" style="background-image:url('/images/home/review-img.jpg')"></div>
+                                    <div class="b-slider-reviews__person">
+                                        <div class="b-slider-reviews__person-img">
+                                            <img src="/images/home/review-person.png" alt="картинка">
+                                            <div class="b-slider-reviews__person-name-wrap">
+                                                <div class="b-slider-reviews__person-name">Георгий Побелянский</div>
+                                                <p>Генеральный директор фармацевтической компании «ВЕРТЕКС»</p>
+                                            </div>
+                                        </div>
+                                        <div class="b-slider-reviews__person-content">
+                                            <div class="b-slider-reviews__person-text">Очевидные преимущества для резидентов ОЭЗ «Санкт-Петербург» —
+                                                преференции и льготы, стоимость земельного участка ниже среднерыночной стоимости,
+                                                создание инженерной инфраструктуры на территории зоны за счет городских
+                                                ресурсов, продление срока действия особой экономической зоны до 2054 года.</div>
+                                            <a href="#" class="b-slider-reviews__person-link b-link-line-two">
+                                                Отзыв полностью
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>#}
                         </div>
                     </div>
-                </div>
 
-                <div class="b-slider-reviews__arrows">
-                    <button class="b-slider-reviews__arrow slider-reviews__arrow-left">
-                        <img src="/images/home/slide-arrow-white.svg" alt="стрелка влево">
-                    </button>
-                    <button class="b-slider-reviews__arrow slider-reviews__arrow-right">
-                        <img src="/images/home/slide-arrow-white.svg" alt="стрелка вправо">
-                    </button>
-                </div>
+                    <div class="glide__arrows b-slider-reviews__arrows" data-glide-el="controls">
+                        <button class="b-slider-reviews__arrow b-slider-reviews__arrow-left" data-glide-dir="<" type="button">
+                            <img src="/images/home/slide-arrow-white.svg" alt="стрелка влево">
+                        </button>
+                        <button class="b-slider-reviews__arrow b-slider-reviews__arrow-right" data-glide-dir="&#62;" type="button">
+                            <img src="/images/home/slide-arrow-white.svg" alt="стрелка вправо">
+                        </button>
+                    </div>
 
-                <div class="b-slider__dots">
-                    <div class="b-slider__dot is-active"></div>
-                    <div class="b-slider__dot"></div>
-                    <div class="b-slider__dot"></div>
+                    <div class="b-slider-reviews__dots" data-glide-el="controls[nav]">
+                        <button class="b-slider-reviews__dot" data-glide-dir="=0" type="button"></button>
+                        <button class="b-slider-reviews__dot" data-glide-dir="=1" type="button"></button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -812,40 +839,45 @@
 
         <div class="l-home-partners l-home__block">
             <h2>Партнеры</h2>
-            <div class="b-slider__wrapper">
-                <div class="b-slider__block-wrapper">
-                    <div class="b-slider__block">
-                        <div class="b-slider__item">
-                            <div class="b-slider__item-logo">
-                                <img src="/images/home/partner1.png" alt="Биокад">
-                            </div>
-                        </div>
 
-                        <div class="b-slider__item">
-                            <div class="b-slider__item-logo">
-                                <img src="/images/home/partner2.png" alt="Лазерные системы">
-                            </div>
-                        </div>
+            <div class="b-carousel b-carousel_theme_partners">
+                <div class="glide j-partners-carousel">
+                    <div class="glide__track b-carousel__track" data-glide-el="track">
+                        <ul class="glide__slides">
+                                <li class="glide__slide">
+        <div class="b-carousel__item b-carousel__item_without_description">
+            <div class="b-carousel__item-logo">
+                <img src="/images/home/partner1.png" alt="Ассоциация клатеров и технопарков России">
+            </div>
+                    </div>
+    </li>
+    <li class="glide__slide">
+        <div class="b-carousel__item b-carousel__item_without_description">
+            <div class="b-carousel__item-logo">
+                <img src="/images/home/partner2.png" alt="Санкт-Петербургская торогво-промышленная палата">
+            </div>
+                    </div>
+    </li>
+    <li class="glide__slide">
+        <div class="b-carousel__item b-carousel__item_without_description">
+            <div class="b-carousel__item-logo">
+                <img src="/images/home/partner3.png" alt="Машиностроительный кластер Республики Татарстан">
+            </div>
+                    </div>
+    </li>
+                        </ul>
+                    </div>
 
-                        <div class="b-slider__item">
-                            <div class="b-slider__item-logo">
-                                <img src="/images/home/partner3.png" alt="Ракурс-инжиниринг">
-                            </div>
-                        </div>
+                    <div class="glide__arrows b-carousel__arrows" data-glide-el="controls">
+                        <button class="b-carousel__arrow b-carousel__arrow-left" data-glide-dir="<" type="button"></button>
+                        <button class="b-carousel__arrow b-carousel__arrow-right" data-glide-dir="&#62;" type="button"></button>
+                    </div>
+                    <div class="b-carousel__dots" data-glide-el="controls[nav]">
+                        <button class="b-carousel__dot" data-glide-dir="=0" type="button"></button>
+                        <button class="b-carousel__dot" data-glide-dir="=1" type="button"></button>
+                        <button class="b-carousel__dot" data-glide-dir="=2" type="button"></button>
                     </div>
                 </div>
-
-                <div class="b-slider__arrows">
-                    <button class="b-slider__arrow slider__arrow-left"></button>
-                    <button class="b-slider__arrow slider__arrow-right"></button>
-                </div>
-
-                <div class="b-slider__dots">
-                    <div class="b-slider__dot is-active"></div>
-                    <div class="b-slider__dot"></div>
-                    <div class="b-slider__dot"></div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -998,7 +1030,7 @@
                 <ul class="b-mobile-menu__nav-body">
                     <li class="b-mobile-menu__nav-item">
                        <a href="#" class="b-mobile-menu__nav-link">
-                           Особая экономичкская зона
+                           Особая экономичекская зона
                        </a>
                     </li>
 
@@ -1114,16 +1146,14 @@
         <!--
 
         Для авторизованного пользователя
-        Добавляем на класс b-account
-            1. b-account_is_hover - появится всплывашка
         Добавляем на класс b-account__link
             1. is-auth - сменится иконка на авторизованную
-            2. j-account-auth - Нужен для запрета перехода по ссылке,
-                что бы появился тултип а не переход произошел
+            2. j-account-auth - Нужен для работы тултипа со ссылками
+            Тултип показывается и скрывается при клике на .b-account__link если на ней также есть класс .is-auth
 
         -->
-        <div class="b-account b-account_is_hover">
-            <a href="#" class="b-account__link is-auth j-account-auth">
+        <div class="b-account j-account-auth">
+            <a href="#" class="b-account__link is-auth">
                 <span class="b-account__link-icon">
                     <span class="b-account__messages">2</span>
                 </span>
@@ -1171,7 +1201,6 @@
     </div>
 </div>
         </div>
-
         <script async src="/scripts/app.js"></script>
     </body>
 </html>

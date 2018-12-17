@@ -80,11 +80,12 @@
 
     @media #{$laptop} {
         @include column(12, 36);
-        @include post(2, 36);
+        //@include post(2, 36);
+        @include push(22, 36);
         @include margin-level(top, cyan);
         position: absolute;
         top: 0;
-        right: 0;
+        //right: 0;
         display: block;
         border-radius: 4px;
     }
@@ -119,6 +120,7 @@
         @include suffix(1.5, 11.5);
 
         &:first-child {
+            border-right: 0;
             border-bottom: 1px solid $grey;
         }
     }
@@ -236,7 +238,8 @@
 .l-contacts__block-content {
     @include font-size("p1");
 
-    p {
+    p,
+    p:last-of-type {
         font-size: inherit;
         margin-bottom: 16px;
     }

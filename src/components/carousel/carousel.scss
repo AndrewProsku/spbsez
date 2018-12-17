@@ -1,0 +1,221 @@
+// Зависимости
+@import "../../common/styles/mixins";
+
+.b-carousel {
+    position: relative;
+
+    @media #{$tablet-portrait} {
+        @include push(2, 32);
+        @include post(2, 32);
+    }
+
+    @media #{$laptop} {
+        @include column(30, 32);
+        @include push(1, 32);
+        @include post(2, 32);
+        @include margin-level(bottom, blue);
+    }
+
+    @media #{$laptop-wide} {
+        @include push(2.2, 32);
+        @include post(3.4, 32);
+    }
+}
+
+.b-carousel_theme_partners {
+    margin-bottom: 0;
+}
+
+.b-carousel__track {
+    @include margin-level(bottom, orange);
+    border: 1px solid $grey;
+    border-radius: 4px;
+
+    @media #{$laptop} {
+        margin-bottom: 0;
+    }
+}
+
+.b-carousel__item {
+    height: 250px;
+    background-color: $white;
+    border-left: 1px solid $grey;
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+
+    @media #{$tablet-portrait} {
+        height: 220px;
+    }
+
+    @media #{$laptop} {
+        height: 280px;
+    }
+
+    @media #{$fullhd} {
+        height: 360px;
+    }
+}
+
+.b-carousel__item_without_description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.b-carousel_theme_partners .b-carousel__item {
+    height: 205px;
+
+    @media #{$tablet-portrait} {
+        height: 180px;
+    }
+
+    @media #{$laptop} {
+        height: 228px;
+    }
+
+    @media #{$laptop-wide} {
+        height: 220px;
+    }
+}
+
+.b-carousel__slide_is_active:not(.b-carousel__slide_is_swiping) .b-carousel__item {
+    border-left: none;
+}
+
+.b-carousel__item-logo {
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    img {
+        height: 58px;
+    }
+
+    @media #{$tablet-portrait} {
+        padding-bottom: 36px;
+
+        img {
+            height: 45px;
+        }
+    }
+
+    @media #{$laptop} {
+        padding-bottom: 60px;
+    }
+
+    @media #{$laptop-wide} {
+        padding-top: 66px;
+
+        img {
+            height: 56px;
+        }
+    }
+
+    @media #{$fullhd} {
+        padding-top: 105px;
+        padding-bottom: 90px;
+    }
+}
+
+.b-carousel__item-desc {
+    text-align: center;
+}
+
+.b-carousel__item-title {
+    @include font-size("p3");
+    margin-bottom: 7px;
+}
+
+.b-carousel__item-text {
+    @include font-size("p4");
+    color: $black;
+    opacity: 0.48;
+}
+
+.b-carousel__arrows {
+    display: none;
+
+    @media #{$laptop} {
+        display: block;
+        position: absolute;
+        top: 50%;
+        width: 100%;
+    }
+}
+
+.b-carousel__arrow {
+    @include transition(all);
+    width: 80px;
+    height: 80px;
+    background: none;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    margin-top: -40px;
+
+    svg {
+        width: inherit;
+        height: inherit;
+    }
+}
+
+.b-carousel__arrow-left {
+    right: calc(100% + 35px);
+    background-image: url("/images/home/slider-arrow-left.svg");
+
+    &:hover {
+        background-image: url("/images/home/slider-arrow-left_hover.svg");
+    }
+
+    @media #{$laptop-wide} {
+        right: calc(100% + 45px);
+    }
+}
+
+.b-carousel__arrow-right {
+    left: calc(100% + 35px);
+    background-image: url("/images/home/slider-arrow-right.svg");
+
+    &:hover {
+        background-image: url("/images/home/slider-arrow-right_hover.svg");
+    }
+
+    @media #{$laptop-wide} {
+        left: calc(100% + 46px);
+    }
+}
+
+.b-carousel__dots {
+    text-align: center;
+    @include margin-level(bottom, green);
+
+    @media #{$tablet-portrait} {
+        @include margin-level(bottom, blue);
+    }
+
+    @media #{$laptop} {
+        display: none;
+    }
+}
+
+.b-carousel__dot {
+    display: inline-block;
+    vertical-align: middle;
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    background-color: $violet;
+    border: 2px solid $violet;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.b-carousel__dot_is_active {
+    background-color: $white;
+}

@@ -1,0 +1,19 @@
+{% for item in items %}
+    <li class="glide__slide">
+        <div class="b-carousel__item {% if not item.description %}b-carousel__item_without_description{% endif %}">
+            <div class="b-carousel__item-logo">
+                <img src="{{ item.picture.source }}" alt="{{ item.picture.alt }}">
+            </div>
+            {% if item.description %}
+            <div class="b-carousel__item-desc">
+                <p class="b-carousel__item-title">
+                    {{ item.description.title }}
+                </p>
+                <p class="b-carousel__item-text">
+                    {{ item.description.text }}
+                </p>
+            </div>
+            {% endif %}
+        </div>
+    </li>
+{% endfor %}

@@ -1,9 +1,10 @@
 import '../styles/app.scss';
+import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
 import Select from '../../components/forms/select/';
+import Utils from './utils';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
-
 
 /**
  * Добавляем класс на шапку при прокрутке.
@@ -11,12 +12,22 @@ import yandexMapLoad from 'components/yandex-map/load';
 const getBodyScrollTop = function() {
     const header = document.querySelector('.j-home__header');
     const yOffset = self.pageYOffset;
-    const maxYOffset = 700;
+    const maxYOffset = 600;
+    const mainScreenText = document.querySelector('.b-main-screen-content');
+    const windowHeight = document.documentElement.clientHeight;
     const offset = yOffset ||
         (document.documentElement && document.documentElement.scrollTop) ||
         (document.body && document.body.scrollTop);
 
-    if (offset > maxYOffset) {
+    if (mainScreenText) {
+        const isTextVisible = (-mainScreenText.getBoundingClientRect().top + header.clientHeight) < windowHeight;
+
+        if (offset > maxYOffset || !isTextVisible) {
+            header.classList.add('is-scroll');
+        } else {
+            header.classList.remove('is-scroll');
+        }
+    } else if (offset > maxYOffset) {
         header.classList.add('is-scroll');
     } else {
         header.classList.remove('is-scroll');
@@ -64,11 +75,13 @@ const openMenu = function() {
     burger.addEventListener('click', (event) => {
         event.preventDefault();
         menu.classList.add('is-open');
+        document.body.classList.add('is-scroll-disabled');
     });
 
     close.addEventListener('click', (event) => {
         event.preventDefault();
         menu.classList.remove('is-open');
+        document.body.classList.remove('is-scroll-disabled');
     });
 };
 
@@ -83,11 +96,14 @@ const authBlock = document.querySelector('.j-account-auth');
 
 if (authBlock) {
     const auth = function() {
-        const isAuth = document.querySelector('.j-account-auth');
+        const authLink = authBlock.querySelector('.b-account__link.is-auth');
 
-        isAuth.addEventListener('click', (event) => {
-            event.preventDefault();
-        });
+        if (authLink) {
+            authLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                authBlock.classList.toggle('b-account_is_hover');
+            });
+        }
     };
 
     auth();
@@ -153,9 +169,9 @@ openSubmenu();
  * Открытие и закрытие в документах кнопки удалить.
  */
 
-const docWrap = document.querySelectorAll('.j-profile-document__item');
+const docWrap = Array.from(document.querySelectorAll('.j-profile-document__item'));
 
-if (docWrap) {
+if (docWrap.length) {
     docWrap.forEach((element) => {
         const delDocWrap = element.querySelector('.j-profile-document__item-delete');
         const delDoc = element.querySelector('.j-delete-doc-button');
@@ -186,3 +202,98 @@ if (mapWrapper) {
         });
 }
 /* eslint-enable */
+
+
+/**
+ * Добавляем слайдеры на главной странице.
+ */
+
+const defaultCarouselSettings = {
+    type       : 'carousel',
+    startAt    : 0,
+    perView    : 3,
+    gap        : 0,
+    breakpoints: {
+        1279: {
+            perView: 2
+        },
+        668: {
+            perView: 1
+        }
+    },
+    classes: {
+        activeNav  : 'b-carousel__dot_is_active',
+        activeSlide: 'b-carousel__slide_is_active'
+    }
+};
+
+
+const residentsCarouselEl = document.querySelector('.j-residents-carousel');
+
+if (residentsCarouselEl) {
+    const residentsCarousel = new Glide('.j-residents-carousel', defaultCarouselSettings);
+
+    residentsCarousel.on('swipe.start', () => {
+        const carouselActiveSlide = residentsCarouselEl.querySelector('.b-carousel__slide_is_active');
+
+        carouselActiveSlide.classList.add('b-carousel__slide_is_swiping');
+    });
+    residentsCarousel.on('swipe.end', () => {
+        const carouselActiveSlide = residentsCarouselEl.querySelector('.b-carousel__slide_is_active');
+
+        carouselActiveSlide.classList.remove('b-carousel__slide_is_swiping');
+    });
+
+    residentsCarousel.mount();
+}
+
+
+const partnersCarouselEl = document.querySelector('.j-partners-carousel');
+
+if (partnersCarouselEl) {
+    const partnersCarousel = new Glide('.j-partners-carousel', defaultCarouselSettings);
+
+    partnersCarousel.on('swipe.start', () => {
+        const carouselActiveSlide = partnersCarouselEl.querySelector('.b-carousel__slide_is_active');
+
+        carouselActiveSlide.classList.add('b-carousel__slide_is_swiping');
+    });
+    partnersCarousel.on('swipe.end', () => {
+        const carouselActiveSlide = partnersCarouselEl.querySelector('.b-carousel__slide_is_active');
+
+        carouselActiveSlide.classList.remove('b-carousel__slide_is_swiping');
+    });
+
+    partnersCarousel.mount();
+}
+
+
+const reviewsCarouselEl = document.querySelector('.j-reviews-carousel');
+
+if (reviewsCarouselEl) {
+    const reviewsCarousel = new Glide('.j-reviews-carousel', {
+        type   : 'carousel',
+        startAt: 0,
+        perView: 1,
+        gap    : 0,
+        classes: {
+            activeNav: 'b-slider-reviews__dot_is_active'
+        }
+    });
+
+    reviewsCarousel.mount();
+}
+
+
+/**
+ * Добавляем класс для контена главного экрана,
+ * чтобы увеличить значение отступа на величну панелей управления в мобильных браузерах
+ */
+const mainScreenContent = document.querySelector('.b-main-screen-content');
+
+if (mainScreenContent) {
+    if (Utils.isMobile()) {
+        mainScreenContent.classList.add('b-main-screen-content_is_mobile');
+    }
+}
+

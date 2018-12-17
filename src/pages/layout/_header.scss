@@ -28,6 +28,7 @@
 
         .b-logo__link {
             height: 55px;
+            margin-top: 0;
             background-image: url("/images/home/logo-color.svg");
 
             @media #{$laptop} {
@@ -98,6 +99,7 @@
 
         .b-logo__link {
             height: 55px;
+            margin-top: 0;
             background-image: url("/images/home/logo-color.svg");
 
             @media #{$laptop} {
@@ -177,7 +179,8 @@
     height: 100%;
 
     @media #{$laptop} {
-        @include column(5, 36);
+        flex-basis: auto;
+        flex-grow: 0;
         width: 210px;
         min-width: 210px;
         height: 100%;
@@ -186,6 +189,11 @@
     @media #{$fullhd} {
         width: 315px;
         min-width: 315px;
+        overflow: hidden;
+
+        .b-logo__link {
+            margin-left: -20px;
+        }
     }
 }
 
@@ -198,18 +206,16 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
-
-    @media #{$tablet-portrait} {
-        height: 55px;
-    }
+    margin-top: -13px;
 
     @media #{$laptop} {
         max-width: 100%;
-        height: 72px;
+        margin-top: 0;
     }
 
     @media #{$fullhd} {
         height: 97px;
+        margin-top: -10px;
     }
 }
 
