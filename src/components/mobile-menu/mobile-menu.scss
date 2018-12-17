@@ -390,7 +390,6 @@
         @include transition(opacity);
 
         &:hover {
-            @include transition(opacity);
             opacity: 0.6;
         }
 
