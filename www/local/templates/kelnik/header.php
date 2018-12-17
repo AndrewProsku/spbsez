@@ -61,4 +61,4 @@ define("PATH_TO_404", "/404.php"); ?>
                 array()
             ); ?>
         </header>
-        <main class="l-layout__content">
+        <main class="l-layout__content <? $APPLICATION->ShowProperty('mainAdditionalCLass'); ?>">
