@@ -246,7 +246,9 @@
             content: "";
             width: 10px;
             height: 10px;
-            background-color: $dark-white;
+            border: 5px solid $dark-white;
+            border-bottom-color: transparent;
+            border-right-color: transparent;
             transform: rotate(45deg);
             position: absolute;
             bottom: -5px;
