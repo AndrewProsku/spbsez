@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Контакты");
-$APPLICATION->SetPageProperty('mainAdditionalCLass', 'l-layout__content-inner');
+$APPLICATION->SetPageProperty('title', 'Контакты | РОСОЭЗ');
 ?>
     <div class="l-contacts">
         <div class="l-contacts__map-wrapper">
