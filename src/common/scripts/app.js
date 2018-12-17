@@ -75,11 +75,13 @@ const openMenu = function() {
     burger.addEventListener('click', (event) => {
         event.preventDefault();
         menu.classList.add('is-open');
+        document.body.classList.add('is-scroll-disabled');
     });
 
     close.addEventListener('click', (event) => {
         event.preventDefault();
         menu.classList.remove('is-open');
+        document.body.classList.remove('is-scroll-disabled');
     });
 };
 
@@ -94,11 +96,14 @@ const authBlock = document.querySelector('.j-account-auth');
 
 if (authBlock) {
     const auth = function() {
-        const isAuth = document.querySelector('.j-account-auth');
+        const authLink = authBlock.querySelector('.b-account__link.is-auth');
 
-        isAuth.addEventListener('click', (event) => {
-            event.preventDefault();
-        });
+        if (authLink) {
+            authLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                authBlock.classList.toggle('b-account_is_hover');
+            });
+        }
     };
 
     auth();
@@ -164,9 +169,9 @@ openSubmenu();
  * Открытие и закрытие в документах кнопки удалить.
  */
 
-const docWrap = document.querySelectorAll('.j-profile-document__item');
+const docWrap = Array.from(document.querySelectorAll('.j-profile-document__item'));
 
-if (docWrap) {
+if (docWrap.length) {
     docWrap.forEach((element) => {
         const delDocWrap = element.querySelector('.j-profile-document__item-delete');
         const delDoc = element.querySelector('.j-delete-doc-button');

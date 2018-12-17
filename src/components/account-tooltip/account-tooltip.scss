@@ -43,13 +43,9 @@
     }
 }
 
-.b-account_is_hover {
-    &:hover {
-        .b-account__tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-    }
+.b-account_is_hover .b-account__tooltip {
+    visibility: visible;
+    opacity: 1;
 }
 
 /*
