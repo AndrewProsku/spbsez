@@ -56,6 +56,10 @@
     display: block;
     max-width: 232px;
     width: 100%;
+
+    img {
+        max-height: 76px;
+    }
 }
 
 .b-mobile-menu__header-right {
@@ -191,6 +195,7 @@
     @media #{$tablet-portrait} {
         @include prefix(3, 36);
         @include suffix(3, 36);
+        height: auto;
     }
 
     @media #{$tablet-landscape} {
@@ -215,6 +220,21 @@
 .b-mobile-menu__nav-header-link {
     @include font-size("p1");
     color: $white;
+
+    &.is-active,
+    &.is-active:hover {
+        background-image: none;
+    }
+
+    &.is-active:after {
+        content: "";
+        display: block;
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        bottom: -6px;
+        background-color: $white;
+    }
 }
 
 .b-mobile-menu__nav-header_action_accordion {
@@ -225,6 +245,21 @@
     }
 
     &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+
+        @media #{$tablet-portrait} {
+            display: none;
+        }
+    }
+
+    &:before {
         content: "";
         display: block;
         width: 13px;
@@ -241,7 +276,7 @@
         }
     }
 
-    &.is-open:after {
+    &.is-open:before {
         transform: rotate(180deg);
     }
 }
@@ -251,7 +286,6 @@
 
     @media #{$tablet-portrait} {
         display: block;
-        @include column(26, 30);
     }
 }
 
@@ -276,8 +310,24 @@
 
 .b-mobile-menu__nav-link {
     @include font-size("p3");
+    @include transition(opacity);
     color: $white;
     opacity: 0.72;
+
+    &:hover,
+    &.is-active {
+        opacity: 1;
+    }
+
+    &.is-active:after {
+        content: "";
+        display: block;
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        bottom: -6px;
+        background-color: $white;
+    }
 }
 
 .b-mobile-menu__footer {
@@ -337,6 +387,13 @@
     }
 
     .b-footer__social-link {
+        @include transition(opacity);
+
+        &:hover {
+            @include transition(opacity);
+            opacity: 0.6;
+        }
+
         svg {
             width: 30px;
             height: 30px;
@@ -359,4 +416,8 @@
         height: 100px;
         margin-top: -100px;
     }
+}
+
+.is-scroll-disabled {
+    overflow: hidden;
 }
