@@ -45,6 +45,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.1",
     "@babel/preset-env": "^7.0.0",
+    "@glidejs/glide": "^3.2.4",
     "autoprefixer": "^9.1.5",
     "babel-loader": "^8.0.2",
     "babel-polyfill": "^6.26.0",
