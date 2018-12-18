@@ -1,0 +1,11 @@
+{
+  "request": {
+    "status": 1,
+    "errors": []
+  },
+  "data": {
+    "success": true,
+    "errorText": "Данная эл. почта не зарегистрирована",
+    "email": "ivanov.sergey@biocad.ru"
+  }
+}
