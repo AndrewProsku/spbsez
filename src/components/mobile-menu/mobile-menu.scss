@@ -220,6 +220,21 @@
 .b-mobile-menu__nav-header-link {
     @include font-size("p1");
     color: $white;
+
+    &.is-active,
+    &.is-active:hover {
+        background-image: none;
+    }
+
+    &.is-active:after {
+        content: "";
+        display: block;
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        bottom: -6px;
+        background-color: $white;
+    }
 }
 
 .b-mobile-menu__nav-header_action_accordion {
@@ -295,8 +310,24 @@
 
 .b-mobile-menu__nav-link {
     @include font-size("p3");
+    @include transition(opacity);
     color: $white;
     opacity: 0.72;
+
+    &:hover,
+    &.is-active {
+        opacity: 1;
+    }
+
+    &.is-active:after {
+        content: "";
+        display: block;
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        bottom: -6px;
+        background-color: $white;
+    }
 }
 
 .b-mobile-menu__footer {
@@ -359,7 +390,6 @@
         @include transition(opacity);
 
         &:hover {
-            @include transition(opacity);
             opacity: 0.6;
         }
 

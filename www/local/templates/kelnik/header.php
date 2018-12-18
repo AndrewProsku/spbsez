@@ -11,7 +11,10 @@ define("PATH_TO_404", "/404.php"); ?>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title><?php $APPLICATION->ShowTitle() ?></title>
-    <? $APPLICATION->SetAdditionalCSS("/styles/app.css"); ?>
+    <?
+        $APPLICATION->SetAdditionalCSS("/styles/app.css");
+        $isRegularPage = !in_array($APPLICATION->GetCurDir(), ['/']) && !defined('ERROR_404');
+    ?>
 
     <meta name="theme-color" content="#000000">
     <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
@@ -29,7 +32,7 @@ define("PATH_TO_404", "/404.php"); ?>
     <div id="panel"><?$APPLICATION->ShowPanel();?></div>
     <?php include 'inc_notify_old_browser.php'; ?>
     <div class="l-layout">
-        <header class="l-home__header j-home__header">
+        <header class="l-home__header<?php if($isRegularPage): ?> inner-header<?php endif; ?> j-home__header">
             <div class="l-home__header-left">
                 <a href="/" class="b-logo__link" title="Вернуться на главную"></a>
             </div>
@@ -61,4 +64,4 @@ define("PATH_TO_404", "/404.php"); ?>
                 array()
             ); ?>
         </header>
-        <main class="l-layout__content">
+        <main class="l-layout__content<? if($isRegularPage): ?> l-layout__content-inner<?php endif; ?>">
