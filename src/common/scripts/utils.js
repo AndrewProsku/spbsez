@@ -77,7 +77,7 @@ class Utils {
         const statusSuccess = 200;
         const dataToSend = data;
 
-        xhr.open('GET', url);
+        xhr.open('POST', url);
 
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.setRequestHeader('x-requested-with', 'XMLHttpRequest');
