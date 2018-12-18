@@ -161,136 +161,7 @@ $APPLICATION->SetPageProperty('title', 'Особая экономическая 
         </div>
 
         <div class="b-about-privileges" id="privileges">
-            <div class="b-about-privileges__mobile">
-                <div class="b-about-privileges__mobile-title">
-                    <?$APPLICATION->IncludeComponent(
-                        "kelnik:textblocks",
-                        "",
-                        Array(
-                            "CACHE_TIME" => "360000",
-                            "CACHE_TYPE" => "A",
-                            "CODE" => "about_block_3-1"
-                        )
-                    );?>
-                </div>
-                <div class="b-about-privileges__mobile-desc">
-                    <?$APPLICATION->IncludeComponent(
-                        "kelnik:textblocks",
-                        "",
-                        Array(
-                            "CACHE_TIME" => "360000",
-                            "CACHE_TYPE" => "A",
-                            "CODE" => "about_block_3-2"
-                        )
-                    );?>
-                </div>
-                <ul class="b-about-privileges__mobile-list">
-                    <li class="b-about-privileges__mobile-item">
-                        <p>
-                            <?$APPLICATION->IncludeComponent(
-                                "kelnik:textblocks",
-                                "",
-                                Array(
-                                    "CACHE_TIME" => "360000",
-                                    "CACHE_TYPE" => "A",
-                                    "CODE" => "about_block_3-3"
-                                )
-                            );?>
-                        </p>
-                    </li>
-                    <li class="b-about-privileges__mobile-item">
-                        <p>
-                            <?$APPLICATION->IncludeComponent(
-                                "kelnik:textblocks",
-                                "",
-                                Array(
-                                    "CACHE_TIME" => "360000",
-                                    "CACHE_TYPE" => "A",
-                                    "CODE" => "about_block_3-7"
-                                )
-                            );?>
-                        </p>
-                    </li>
-                    <li class="b-about-privileges__mobile-item">
-                        <p>
-                            <?$APPLICATION->IncludeComponent(
-                                "kelnik:textblocks",
-                                "",
-                                Array(
-                                    "CACHE_TIME" => "360000",
-                                    "CACHE_TYPE" => "A",
-                                    "CODE" => "about_block_3-4"
-                                )
-                            );?>
-                        </p>
-                    </li>
-                    <li class="b-about-privileges__mobile-item">
-                        <p><?$APPLICATION->IncludeComponent(
-                                "kelnik:textblocks",
-                                "",
-                                Array(
-                                    "CACHE_TIME" => "360000",
-                                    "CACHE_TYPE" => "A",
-                                    "CODE" => "about_block_3-8"
-                                )
-                            );?>
-                        </p>
-                    </li>
-                    <li class="b-about-privileges__mobile-item">
-                        <p><?$APPLICATION->IncludeComponent(
-                                "kelnik:textblocks",
-                                "",
-                                Array(
-                                    "CACHE_TIME" => "360000",
-                                    "CACHE_TYPE" => "A",
-                                    "CODE" => "about_block_3-9"
-                                )
-                            );?>
-                        </p>
-                    </li>
-                    <li class="b-about-privileges__mobile-item">
-                        <p>
-                            <?$APPLICATION->IncludeComponent(
-                                "kelnik:textblocks",
-                                "",
-                                Array(
-                                    "CACHE_TIME" => "360000",
-                                    "CACHE_TYPE" => "A",
-                                    "CODE" => "about_block_3-5"
-                                )
-                            );?>
-                        </p>
-                    </li>
-                    <li class="b-about-privileges__mobile-item">
-                        <p>
-                            <?$APPLICATION->IncludeComponent(
-                                "kelnik:textblocks",
-                                "",
-                                Array(
-                                    "CACHE_TIME" => "360000",
-                                    "CACHE_TYPE" => "A",
-                                    "CODE" => "about_block_3-10"
-                                )
-                            );?>
-                        </p>
-                    </li>
-                    <li class="b-about-privileges__mobile-item">
-                        <p>
-                            <?$APPLICATION->IncludeComponent(
-                                "kelnik:textblocks",
-                                "",
-                                Array(
-                                    "CACHE_TIME" => "360000",
-                                    "CACHE_TYPE" => "A",
-                                    "CODE" => "about_block_3-6"
-                                )
-                            );?>
-                        </p>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="b-about-privileges__desctop">
+            <div class="b-about-privileges__block">
                 <div class="b-about-privileges__main-block">
                     <div class="b-about-privileges__main-block-text">
                         <?$APPLICATION->IncludeComponent(
@@ -336,7 +207,46 @@ $APPLICATION->SetPageProperty('title', 'Особая экономическая 
                                     Array(
                                         "CACHE_TIME" => "360000",
                                         "CACHE_TYPE" => "A",
+                                        "CODE" => "about_block_3-7"
+                                    )
+                                );?>
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
                                         "CODE" => "about_block_3-4"
+                                    )
+                                );?>
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                               <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "about_block_3-8"
+                                    )
+                                );?>
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "about_block_3-9"
                                     )
                                 );?>
                             </p>
@@ -362,58 +272,20 @@ $APPLICATION->SetPageProperty('title', 'Особая экономическая 
                                     Array(
                                         "CACHE_TIME" => "360000",
                                         "CACHE_TYPE" => "A",
-                                        "CODE" => "about_block_3-6"
-                                    )
-                                );?>
-                            </p>
-                        </div>
-                        <div class="b-about-privileges__item">
-                            <p>
-                                <?$APPLICATION->IncludeComponent(
-                                    "kelnik:textblocks",
-                                    "",
-                                    Array(
-                                        "CACHE_TIME" => "360000",
-                                        "CACHE_TYPE" => "A",
-                                        "CODE" => "about_block_3-7"
-                                    )
-                                );?>
-                            </p>
-                        </div>
-                        <div class="b-about-privileges__item">
-                            <p>
-                                <?$APPLICATION->IncludeComponent(
-                                    "kelnik:textblocks",
-                                    "",
-                                    Array(
-                                        "CACHE_TIME" => "360000",
-                                        "CACHE_TYPE" => "A",
-                                        "CODE" => "about_block_3-8"
-                                    )
-                                );?>
-                            </p>
-                        </div>
-                        <div class="b-about-privileges__item">
-                            <p>
-                                <?$APPLICATION->IncludeComponent(
-                                    "kelnik:textblocks",
-                                    "",
-                                    Array(
-                                        "CACHE_TIME" => "360000",
-                                        "CACHE_TYPE" => "A",
-                                        "CODE" => "about_block_3-9"
-                                    )
-                                );?>
-                            </p>
-                        </div>
-                        <div class="b-about-privileges__item">
-                            <p><?$APPLICATION->IncludeComponent(
-                                    "kelnik:textblocks",
-                                    "",
-                                    Array(
-                                        "CACHE_TIME" => "360000",
-                                        "CACHE_TYPE" => "A",
                                         "CODE" => "about_block_3-10"
+                                    )
+                                );?>
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "about_block_3-6"
                                     )
                                 );?>
                             </p>
