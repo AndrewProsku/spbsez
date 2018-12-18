@@ -1,7 +1,9 @@
 import '../styles/app.scss';
 import AnimatedLines from 'components/animation-line/index';
+import Authorization from '../../components/authorization';
 import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
+import PasswordRecovery from '../../components/password-recovery';
 import Select from '../../components/forms/select/';
 import Utils from './utils';
 import YandexMap from 'components/yandex-map';
@@ -310,3 +312,38 @@ if (bgAnimationLines && homeMainScreen) {
 
     animatedLines.init();
 }
+
+/**
+ * Инициализация формы авторизации
+ */
+const authorizationForm = document.querySelector('.j-form-authorization');
+
+if (authorizationForm) {
+    const authorization = new Authorization();
+
+    authorization.init();
+}
+
+
+/**
+ * Инициализация формы восстановления пароля
+ */
+const recoveryForm = document.querySelector('.j-form-password-recovery');
+
+if (recoveryForm) {
+    const passwordRecovery = new PasswordRecovery();
+
+    passwordRecovery.init();
+}
+
+
+/**
+ * Инициализация формы ввода нового пароля
+ */
+// const newPasswordForm = document.querySelector('.j-form-new-password');
+//
+// if (newPasswordForm) {
+//     const newPassword = new NewPassword();
+//
+//     newPassword.init();
+
