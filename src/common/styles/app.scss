@@ -20,6 +20,10 @@
 @import "../../pages/profile";
 @import "../../pages/profile-administrators";
 @import "../../pages/profile-document";
+@import "../../pages/password-recovery";
+@import "../../pages/password-recovery-step2";
+@import "../../pages/password-recovery-step3";
+@import "../../pages/password-recovery-step4";
 
 // Components
 
@@ -40,7 +44,4 @@
 @import "../../components/forms/password/password";
 @import "../../components/forms/checkbox/checkbox";
 @import "../../components/yandex-map/yandex-map";
-@import "../../pages/password-recovery";
-@import "../../pages/password-recovery-step2";
-@import "../../pages/password-recovery-step3";
-@import "../../pages/password-recovery-step4";
+@import "../../components/animation-line/animation-line";

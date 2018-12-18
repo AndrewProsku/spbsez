@@ -1,10 +1,12 @@
 import '../styles/app.scss';
+import AnimatedLines from 'components/animation-line/index';
 import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
 import Select from '../../components/forms/select/';
 import Utils from './utils';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
+
 
 /**
  * Добавляем класс на шапку при прокрутке.
@@ -297,3 +299,14 @@ if (mainScreenContent) {
     }
 }
 
+/**
+ * Добавляем анимацию фона при скролле главной страницы,
+ */
+
+const bgAnimationLines = document.querySelector('.j-animation-lines');
+
+if (bgAnimationLines && homeMainScreen) {
+    const animatedLines = new AnimatedLines(bgAnimationLines, homeMainScreen);
+
+    animatedLines.init();
+}

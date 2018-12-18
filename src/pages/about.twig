@@ -2,6 +2,13 @@
 {% block title %} <title>Особая экономическая зона</title> {% endblock %}
 
 {% block content %}
+
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    {# Блок с подменю #}
+
     {% include '../components/page-submenu/page-submenu.twig' with {
         subitems: [{
                 href: '#',

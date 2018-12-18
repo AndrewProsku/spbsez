@@ -1,6 +1,7 @@
 .l-add-request {
     @include prefix(2, 36);
     @include suffix(2, 36);
+    background-color: $white;
 
     @media #{$laptop} {
         @include prefix(3, 36);
