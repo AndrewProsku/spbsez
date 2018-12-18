@@ -68,7 +68,7 @@ $path: '/images/home/';
     background-position: center center;
     background-size: cover;
     overflow: hidden;
-    z-index: -100;
+    z-index: -1;
 
     @media #{$laptop} {
         background-image: none;
@@ -293,11 +293,9 @@ $path: '/images/home/';
 /* фиксированный background */
 .l-home__block_bg_fixed {
     background-color: $white;
-    background-image: url($path + 'line-bg2.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
-    background-attachment: fixed;
 
     @media #{$laptop} {
         background-size: cover;
@@ -436,12 +434,7 @@ $path: '/images/home/';
 .l-home__news {
     position: relative;
     z-index: 1;
-    background-color: $bg-grey;
-    background-image: url($path + 'line-bg2.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-    background-attachment: fixed;
+    background-color: rgba($bg-grey, 0.5);
 
     @media #{$laptop} {
         background-size: cover;

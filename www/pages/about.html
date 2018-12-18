@@ -195,7 +195,39 @@
             </header>
 
             <main class="l-layout__content l-layout__content-inner">
-                    <div class="b-page-submenu">
+
+    <div class="b-animation-lines j-animation-lines">
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+    <div class="b-animmation-lines__line"></div>
+</div>
+
+    <div class="b-page-submenu">
     <ul class="b-page-submenu__list">
                 <li class="b-page-submenu__item is-active">
             <a href="#" class="b-lk-nav__link b-link-line">
@@ -942,7 +974,7 @@
                 <ul class="b-mobile-menu__nav-body">
                     <li class="b-mobile-menu__nav-item">
                        <a href="#" class="b-mobile-menu__nav-link">
-                           Особая экономичкская зона
+                           Особая экономичекская зона
                        </a>
                     </li>
 
@@ -1058,16 +1090,14 @@
         <!--
 
         Для авторизованного пользователя
-        Добавляем на класс b-account
-            1. b-account_is_hover - появится всплывашка
         Добавляем на класс b-account__link
             1. is-auth - сменится иконка на авторизованную
-            2. j-account-auth - Нужен для запрета перехода по ссылке,
-                что бы появился тултип а не переход произошел
+            2. j-account-auth - Нужен для работы тултипа со ссылками
+            Тултип показывается и скрывается при клике на .b-account__link если на ней также есть класс .is-auth
 
         -->
-        <div class="b-account b-account_is_hover">
-            <a href="#" class="b-account__link is-auth j-account-auth">
+        <div class="b-account j-account-auth">
+            <a href="#" class="b-account__link is-auth">
                 <span class="b-account__link-icon">
                     <span class="b-account__messages">2</span>
                 </span>

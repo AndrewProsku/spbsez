@@ -1,9 +1,6 @@
 .l-about {
-    background-image: url("/images/home/line-bg2.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
+    position: relative;
+    z-index: 1;
 }
 
 .b-about-title {
