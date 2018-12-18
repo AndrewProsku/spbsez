@@ -1,9 +1,6 @@
 .l-about {
-    background-image: url("/images/home/line-bg2.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
+    position: relative;
+    z-index: 1;
 }
 
 .b-about-title {
@@ -579,58 +576,16 @@
     }
 }
 
-.b-about-privileges__mobile {
-    @media #{$tablet-portrait} {
-        display: none;
-    }
-}
-
-.b-about-privileges__mobile-title {
-    margin-bottom: 12px;
-
-    h2, h3, h4 {
-        margin: 0;
-    }
-}
-
-.b-about-privileges__mobile-desc {
-    @include margin-level(bottom, green);
-    @include font-size("p2");
-
-    p {
-        font-size: inherit;
-    }
-}
-
-.b-about-privileges__mobile-item {
-    margin-bottom: 16px;
-
-    &:last-child {
-        margin-bottom: 0;
-    }
-
-    p {
-        @include font-size("p1");
-    }
-
-    strong {
-        font-size: 22px;
-        font-weight: 700;
-    }
-}
-
-.b-about-privileges__desctop {
-    display: none;
-    justify-content: center;
-    background-image: url("/images/about/lines-bg.svg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 110% 110%;
-    padding-top: 70px;
-    padding-bottom: 70px;
-
+.b-about-privileges__block {
     @media #{$tablet-portrait} {
         @include row();
+        justify-content: center;
+        background-image: url("/images/about/lines-bg.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 110% 110%;
+        padding-top: 70px;
+        padding-bottom: 70px;
     }
 
     @media #{$laptop} {
@@ -645,32 +600,40 @@
 }
 
 .b-about-privileges__main-block {
-    @include row();
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    width: 41vw;
-    height: 41vw;
-    border-radius: 50%;
+    @media #{$tablet-portrait} {
+        @include row();
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        width: 41vw;
+        height: 41vw;
+        border-radius: 50%;
+    }
 }
 
 .b-about-privileges__main-block-text {
-    @include row();
-    width: 71.5%;
-    height: 71.5%;
-    border: 1px solid $white;
-    border-radius: 50%;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
+    @media #{$tablet-portrait} {
+        @include row();
+        width: 71.5%;
+        height: 71.5%;
+        border: 1px solid $white;
+        border-radius: 50%;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+    }
 
     h2 {
-        display: block;
-        width: 100%;
-        font-size: 2.4vw;
-        line-height: 3vw;
-        margin-bottom: 6%;
+        margin-bottom: 12px;
+
+        @media #{$tablet-portrait} {
+            display: block;
+            width: 100%;
+            font-size: 2.4vw;
+            line-height: 3vw;
+            margin-bottom: 6%;
+        }
 
         @media #{$laptop} {
             @include font-size("h2");
@@ -678,9 +641,23 @@
     }
 
     p {
-        max-width: 85%;
-        font-size: 1.5vw;
-        line-height: 2vw;
+        @include margin-level(bottom, green);
+        @include font-size("p2");
+
+        &:last-of-type {
+            @include margin-level(bottom, green);
+        }
+
+        @media #{$tablet-portrait} {
+            max-width: 85%;
+            font-size: 1.5vw;
+            line-height: 2vw;
+            margin-bottom: 0;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
 
         @media #{$laptop} {
             @include font-size("p3");
@@ -689,8 +666,12 @@
 }
 
 .b-about-privileges__item {
-    @include font-size("p4");
-    position: absolute;
+    @include font-size("p1");
+    margin-bottom: 16px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 
     p {
         font-size: inherit;
@@ -698,36 +679,51 @@
     }
 
     strong {
-        font-size: 16px;
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    br {
+        display: none;
+
+        @media #{$tablet-portrait} {
+            display: block;
+        }
     }
 
     &:nth-child(1) {
-        top: -7%;
-        right: 101%;
-        text-align: right;
-        min-width: 195px;
+        @media #{$tablet-portrait} {
+            top: -7%;
+            right: 101%;
+            text-align: right;
+            min-width: 195px;
+        }
 
         @media #{$laptop} {
             min-width: 320px;
         }
     }
 
-    &:nth-child(2) {
-        top: 28%;
-        right: 120%;
-        min-width: 140px;
-        text-align: right;
+    &:nth-child(3) {
+        @media #{$tablet-portrait} {
+            top: 28%;
+            right: 120%;
+            min-width: 140px;
+            text-align: right;
+        }
 
         @media #{$laptop} {
             min-width: 230px;
         }
     }
 
-    &:nth-child(3) {
-        top: 66%;
-        right: 120%;
-        min-width: 150px;
-        text-align: right;
+    &:nth-child(6) {
+        @media #{$tablet-portrait} {
+            top: 66%;
+            right: 120%;
+            min-width: 150px;
+            text-align: right;
+        }
 
         @media #{$tablet-landscape} {
             min-width: 190px;
@@ -738,35 +734,53 @@
         }
     }
 
-    &:nth-child(4) {
-        top: 99.5%;
-        right: 100%;
-        min-width: 180px;
-        text-align: right;
-
-        @media #{$laptop} {
-            min-width: 265px;
+    &:nth-child(8) {
+        @media #{$tablet-portrait} {
+            top: 99.5%;
+            right: 100%;
+            min-width: 180px;
+            text-align: right;
         }
 
         @media #{$tablet-landscape} {
             top: 100%;
         }
+
+        @media #{$laptop} {
+            min-width: 265px;
+        }
     }
 
-    &:nth-child(5) {
-        top: -6%;
-        left: 101%;
-        min-width: 185px;
+    &:nth-child(2) {
+        @media #{$tablet-portrait} {
+            top: -6%;
+            left: 101%;
+            min-width: 185px;
+        }
 
         @media #{$laptop} {
             min-width: 300px;
         }
     }
 
-    &:nth-child(6) {
-        top: 28%;
-        left: 120%;
-        min-width: 140px;
+    &:nth-child(4) {
+        @media #{$tablet-portrait} {
+            top: 28%;
+            left: 120%;
+            min-width: 140px;
+        }
+
+        @media #{$laptop} {
+            min-width: 210px;
+        }
+    }
+
+    &:nth-child(5) {
+        @media #{$tablet-portrait} {
+            top: 66%;
+            left: 120%;
+            min-width: 140px;
+        }
 
         @media #{$laptop} {
             min-width: 210px;
@@ -774,31 +788,36 @@
     }
 
     &:nth-child(7) {
-        top: 66%;
-        left: 120%;
-        min-width: 140px;
-
-        @media #{$laptop} {
-            min-width: 210px;
+        @media #{$tablet-portrait} {
+            top: 94%;
+            left: 100%;
+            min-width: 190px;
         }
-    }
-
-    &:nth-child(8) {
-        bottom: -10%;
-        left: 100%;
-        min-width: 190px;
 
         @media #{$tablet-landscape} {
-            bottom: -7%;
+            top: 95%;
         }
 
         @media #{$laptop} {
             min-width: 330px;
-            bottom: -11%;
+            top: 92%;
+        }
+
+        @media #{$laptop-wide} {
+            top: 94%;
         }
 
         @media #{$fullhd} {
-            bottom: -8%;
+            top: 95%;
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        @include font-size("p4");
+        position: absolute;
+
+        strong {
+            font-size: 16px;
         }
     }
 

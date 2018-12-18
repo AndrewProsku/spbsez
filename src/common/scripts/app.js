@@ -1,12 +1,12 @@
 import '../styles/app.scss';
-import Authorization from '../../components/authorization';
+import AnimatedLines from 'components/animation-line/index';
 import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
-import PasswordRecovery from '../../components/password-recovery';
 import Select from '../../components/forms/select/';
 import Utils from './utils';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
+
 
 /**
  * Добавляем класс на шапку при прокрутке.
@@ -300,37 +300,13 @@ if (mainScreenContent) {
 }
 
 /**
- * Инициализация формы авторизации
+ * Добавляем анимацию фона при скролле главной страницы,
  */
-const authorizationForm = document.querySelector('.j-form-authorization');
 
-if (authorizationForm) {
-    const authorization = new Authorization();
+const bgAnimationLines = document.querySelector('.j-animation-lines');
 
-    authorization.init();
+if (bgAnimationLines && homeMainScreen) {
+    const animatedLines = new AnimatedLines(bgAnimationLines, homeMainScreen);
+
+    animatedLines.init();
 }
-
-
-/**
- * Инициализация формы восстановления пароля
- */
-const recoveryForm = document.querySelector('.j-form-password-recovery');
-
-if (recoveryForm) {
-    const passwordRecovery = new PasswordRecovery();
-
-    passwordRecovery.init();
-}
-
-
-/**
- * Инициализация формы ввода нового пароля
- */
-// const newPasswordForm = document.querySelector('.j-form-new-password');
-//
-// if (newPasswordForm) {
-//     const newPassword = new NewPassword();
-//
-//     newPassword.init();
-// }
-
