@@ -1,0 +1,11 @@
+{
+  "request": {
+    "status": 1,
+    "errors": []
+  },
+  "data": {
+    "login": false,
+    "errorText": "Неверный логин или пароль",
+    "redirectAfterLogin": "/pages/profile.html"
+  }
+}

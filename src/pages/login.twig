@@ -10,36 +10,36 @@
             <h1>Вход в личный кабинет</h1>
         </div>
 
-        <form action="" method="post" enctype="multipart/form-data" class="b-login-form">
+        <form action=""  enctype="multipart/form-data" class="b-login-form j-form-authorization"> {#method="post"#}
             <div class="b-form-block-wrap">
                 <!--
                      Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
                      Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
                      -->
-                <div class="b-form-block">
+                <div class="b-form-block j-auth-login">
                     {% include "../components/forms/email/email.twig" with {
                         id: "email",
-                        name: "email",
-                        required: "true"
+                        name: "email"
                     } %}
+                    {#required: "true"#}
                     <label for="email" class="b-form-block__label">
                         Эл. почта
                     </label>
                     <span class="b-form-block__error-text">
-                        Текст подсказки
+                        Это поле обязательно для заполнения
                     </span>
                 </div>
-                <div class="b-form-block">
+                <div class="b-form-block j-auth-password">
                     {% include "../components/forms/password/password.twig" with {
                         id: "password",
-                        name: "password",
-                        required: "true"
+                        name: "password"
                     } %}
+                    {#required: "true"#}
                     <label for="password" class="b-form-block__label">
                         Пароль
                     </label>
                     <span class="b-form-block__error-text">
-                        Текст подсказки
+                        Это поле обязательно для заполнения
                     </span>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     Я не помню пароль
                 </a>
             </div>
-            <div class="b-personal-information">
+            <div class="b-personal-information j-person-data">
                 {% include "../components/forms/checkbox/checkbox.twig" with {
                     id: "personal-information",
                     name: "personal-information",
@@ -56,8 +56,9 @@
                     text: "Даю согласие на обработку <a href='#' class='b-link-line'>персональных данных</a>"
                 } %}
             </div>
+            {#required: "true",#}
             <div class="b-login-form__button-block">
-                <button type="submit" class="button b-login-form__button">
+                <button type="submit" class="button b-login-form__button j-auth-submit">
                     Войдите в личный кабинет
                 </button>
             </div>
