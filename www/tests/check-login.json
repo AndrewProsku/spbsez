@@ -1,11 +1,9 @@
 {
   "request": {
-    "status": 1,
-    "errors": []
+    "status": 0,
+    "errors": ["Не введен логи или пароль", "Не введен логи или пароль"]
   },
   "data": {
-    "login": false,
-    "errorText": "Неверный логин или пароль",
-    "redirectAfterLogin": "/pages/profile.html"
+    "backUrl": "/pages/profile.html"
   }
 }

@@ -1,14 +1,19 @@
 import Utils from '../../common/scripts/utils';
 
-class PasswordRecovery {
+class NewPassword {
     constructor() {
-        this.form = 'j-form-password-recovery';
-        this.newPassword = 'j-input-new-password';
-        this.repeatPassword = 'j-input-repeat-password';
-        this.password = 'j-input-current-password';
-        this.submit = 'j-new-password-submit';
+        this.formClass = 'j-form-new-password';
+        this.newPasswordWrapperClass = 'j-input-new-password';
+        this.repeatPasswordWrapperClass = 'j-input-repeat-password';
+        this.errorInputClass = 'b-form-block-error';
+        this.messageInputClass = 'b-form-block__error-text';
+        this.successButtonClass = 'j-password-recovery-button';
 
-        this.messageClass = 'b-lb-input__message';
+        this.isNewPassword = false;
+        this.isRepeatPassword = false;
+
+        this.emptyErrorMessage = 'Поле не может быть пустым';
+        this.unequalErrorMessage = 'Введённые пароли не совпадают';
     }
 
     init() {
@@ -17,21 +22,22 @@ class PasswordRecovery {
     }
 
     _initElements() {
-        this.$form = document.querySelector(`.${this.form}`);
-        this.$newPassword = document.querySelector(`.${this.newPassword}`);
-        this.$repeatPassword = document.querySelector(`.${this.repeatPassword}`);
-        this.$password = document.querySelector(`.${this.password}`);
-        this.$submit = document.querySelector(`.${this.submit}`);
+        this.$form = document.querySelector(`.${this.formClass}`);
+        this.$newPasswordWrapper = document.querySelector(`.${this.newPasswordWrapperClass}`);
+        this.$repeatPasswordWrapper = document.querySelector(`.${this.repeatPasswordWrapperClass}`);
+        this.$inputNewPassword = this.$newPasswordWrapper.querySelector('input');
+        this.$inputRepeatPassword = this.$repeatPasswordWrapper.querySelector('input');
+        this.$messageNewPassword = this.$repeatPasswordWrapper.querySelector(`.${this.messageInputClass}`);
+        this.$messageRepeatPassword = this.$repeatPasswordWrapper.querySelector(`.${this.messageInputClass}`);
+        this.$successButton = document.querySelector(`.${this.successButtonClass}`);
     }
 
     _bindEvents() {
-        const $inputNewPassword = this.$newPassword.querySelector('input');
-
         this.$form.addEventListener('submit', (event) => {
             event.preventDefault();
             const that = this;
 
-            if (!this.checkMinLength($inputNewPassword)) {
+            if (!this.checkForm()) {
                 return;
             }
 
@@ -43,88 +49,98 @@ class PasswordRecovery {
 
             Utils.send(sendData, '/tests/new-password.json', {
                 success(response) {
-                    const {data} = response;
+                    const successStatus = 1;
+                    const failStatus = 0;
 
-                    if (data.password) {
-                        that.hideMessage(that.$password);
-                    } else {
-                        that.showMessage(that.$password);
-                    }
+                    if (response.request.status === successStatus) {
+                        that.$successButton.classList.remove('password-recovery-block_is_hidden');
+                        that.showSuccessMessage();
+                        Utils.removeElement(that.$form);
+                    } else if (response.request.status === failStatus) {
+                        const errorMessage = response.request.errors.join('</br>');
 
-                    if (data.replacePassword) {
-                        that.successMessage();
-                        that.showMessage(that.$password);
+                        that.errorRepeatPassword(errorMessage);
                     }
+                },
+                error(error) {
+                    console.error(error);
                 }
             });
         });
 
+        this.$inputNewPassword.addEventListener('change', (event) => {
+            if (event.target.value.length) {
+                this.isNewPassword = true;
+                this.removeError(this.$newPasswordWrapper);
+            } else {
+                this.isNewPassword = false;
+                this.errorNewPassword(this.emptyErrorMessage);
+            }
+        });
 
-        $inputNewPassword.addEventListener('change', () => {
-            this.checkMinLength($inputNewPassword);
+        this.$inputRepeatPassword.addEventListener('change', (event) => {
+            if (event.target.value.length) {
+                this.isRepeatPassword = true;
+                this.removeError(this.$repeatPasswordWrapper);
+            } else {
+                this.isRepeatPassword = false;
+                this.errorRepeatPassword(this.emptyErrorMessage);
+            }
         });
     }
 
-    showMessage($item) {
-        const $message = $item.querySelector(`.${this.messageClass}`);
+    checkForm() {
+        if (!this.isNewPassword) {
+            this.errorNewPassword(this.emptyErrorMessage);
 
-        if (!$message) {
-            return;
+            return false;
+        } else if (!this.isRepeatPassword) {
+            this.errorRepeatPassword(this.emptyErrorMessage);
+
+            return false;
         }
 
-        Utils.show($message);
+        return true;
     }
 
-    hideMessage($item) {
-        const $message = $item.querySelector(`.${this.messageClass}`);
-
-        if (!$message) {
-            return;
-        }
-
-        Utils.hide($message);
+    removeError(element) {
+        element.classList.remove(this.errorInputClass);
     }
 
-    checkMinLength($input) {
-        const minSize = 6;
+    errorNewPassword(message) {
+        Utils.clearHtml(this.$messageNewPassword);
+        Utils.insetContent(this.$messageNewPassword, message);
+        this.$newPasswordWrapper.classList.add(this.errorInputClass);
+    }
 
-        if ($input.value.length >= minSize) {
-            this.hideMessage(this.$newPassword);
-
-            return true;
-        }
-
-        this.showMessage(this.$newPassword);
-
-        return false;
+    errorRepeatPassword(message) {
+        Utils.clearHtml(this.$messageRepeatPassword);
+        Utils.insetContent(this.$messageRepeatPassword, message);
+        this.$repeatPasswordWrapper.classList.add(this.errorInputClass);
     }
 
     checkRepeatPassword() {
-        const $inputNewPassword = this.$newPassword.querySelector('input');
-        const $inputRepeatPassword = this.$repeatPassword.querySelector('input');
+        let result = false;
 
-        if ($inputNewPassword.value === $inputRepeatPassword.value) {
-            this.hideMessage(this.$repeatPassword);
-
-            return true;
+        if (this.$inputNewPassword.value === this.$inputRepeatPassword.value) {
+            result = true;
+            this.removeError(this.$repeatPasswordWrapper);
+        } else {
+            this.isRepeatPassword = false;
+            this.errorRepeatPassword(this.unequalErrorMessage);
         }
 
-        this.showMessage(this.$repeatPassword);
-
-        return false;
+        return result;
     }
 
-    successMessage() {
-        const $message = this.$password.querySelector(`.${this.messageClass}`);
+    showSuccessMessage() {
+        const successMessage = `Ваш пароль успешно сохранен`;
+        const $title = document.querySelector('.j-new-password-title h1');
 
-        if (!$message) {
-            return;
-        }
-
-        Utils.clearHtml($message);
-        Utils.insetContent($message, 'Пароль успешно изменен!');
+        Utils.clearHtml($title);
+        Utils.insetContent($title, successMessage);
     }
 }
 
-export default PasswordRecovery;
+export default NewPassword;
 

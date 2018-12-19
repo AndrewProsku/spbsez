@@ -2,10 +2,13 @@ import Utils from '../../common/scripts/utils';
 
 class PasswordRecovery {
     constructor() {
-        this.form = 'j-form-password-recovery';
-        this.email = 'j-input-email';
+        this.formClass = 'j-form-password-recovery';
+        this.emailWrapperClass = 'j-input-email';
         this.errorInputClass = 'b-form-block-error';
         this.messageInputClass = 'b-form-block__error-text';
+        this.descriptionClass = 'password-recovery-desc';
+        this.successButtonClass = 'j-password-recovery-button';
+        this.isEmail = false;
     }
 
     init() {
@@ -14,11 +17,12 @@ class PasswordRecovery {
     }
 
     _initElements() {
-        this.$form = document.querySelector(`.${this.form}`);
-        this.$email = document.querySelector(`.${this.email}`);
-        this.$inputEmail = this.$email.querySelector('input');
-        this.$messageEmail = this.$email.querySelector(`.${this.messageInputClass}`);
-        this.isEmail = false;
+        this.$form = document.querySelector(`.${this.formClass}`);
+        this.$emailWrapper = this.$form.querySelector(`.${this.emailWrapperClass}`);
+        this.$inputEmail = this.$emailWrapper.querySelector('input');
+        this.$messageEmail = this.$emailWrapper.querySelector(`.${this.messageInputClass}`);
+        this.$description = document.querySelector(`.${this.descriptionClass}`);
+        this.$successButton = document.querySelector(`.${this.successButtonClass}`);
         this.emptyErrorMessage = this.$messageEmail.innerText;
     }
 
@@ -34,16 +38,29 @@ class PasswordRecovery {
 
             const that = this;
             const sendData = new FormData(event.target);
+            const sentEmail = sendData.get('email');
 
             Utils.send(sendData, '/tests/check-email.json', {
                 success(response) {
-                    const {data} = response;
+                    const successStatus = 1;
+                    const failStatus = 0;
 
-                    if (data.success) {
-                        // Отображать сообщение об успехе
-                        // document.querySelector('.j-password-recovery-button').classList.remove('password-recovery-block_is_hidden');
-                    } else {
-                        that.errorEmail(data.errorText);
+                    if (response.request.status === successStatus) {
+                        let email = '';
+
+                        if (response.data && response.data.email) {
+                            email = response.data.email;
+                        } else {
+                            email = sentEmail;
+                        }
+
+                        that.$successButton.classList.remove('password-recovery-block_is_hidden');
+                        that.showSuccessMessage(email);
+                        Utils.removeElement(that.$form);
+                    } else if (response.request.status === failStatus) {
+                        const errorMessage = response.request.errors.join('</br>');
+
+                        that.errorPassword(errorMessage);
                     }
                 }
             });
@@ -62,7 +79,7 @@ class PasswordRecovery {
     }
 
     removeErrorEmail() {
-        this.$email.classList.remove(this.errorInputClass);
+        this.$emailWrapper.classList.remove(this.errorInputClass);
     }
 
     errorEmail(message) {
@@ -72,15 +89,16 @@ class PasswordRecovery {
         } else {
             Utils.insetContent(this.$messageEmail, this.emptyErrorMessage);
         }
-        this.$email.classList.add(this.errorInputClass);
+        this.$emailWrapper.classList.add(this.errorInputClass);
     }
 
-    // getSuccessTemplate(email) {
-    //     const template = `
-    //         <div class="b-password-recovery-step3__desc">
-    //             Мы выслали ссылку на восстановление пароля на адрес ${email}
-    //         </div>`;
-    // }
+    showSuccessMessage(email) {
+        const successMessage = `Мы выслали ссылку на восстановление пароля на адрес ${email}`;
+
+        Utils.clearHtml(this.$description);
+        Utils.insetContent(this.$description, successMessage);
+        this.$description.classList.add('password-recovery-desc_is_success');
+    }
 }
 
 export default PasswordRecovery;

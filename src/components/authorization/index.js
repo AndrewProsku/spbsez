@@ -22,7 +22,6 @@ class Authorization {
         this.$login = this.$form.querySelector(`.${this.login}`);
         this.$password = this.$form.querySelector(`.${this.password}`);
         this.$messagePassword = this.$password.querySelector(`.${this.messageInputs}`);
-        // this.$messageLogin = this.$login.querySelector(`.${this.messageInputs}`);
         this.$inputLogin = this.$login.querySelector('input');
         this.$inputPassword = this.$password.querySelector('input');
 
@@ -79,14 +78,21 @@ class Authorization {
     toLogin(sendData) {
         const that = this;
 
-        Utils.send(sendData, '/tests/check-login.json', {
+        Utils.send(sendData, '/api/login', {
             success(response) {
-                const {data} = response;
+                const successStatus = 1;
+                const failStatus = 0;
 
-                if (data.login) {
-                    window.location.href = data.redirectAfterLogin;
-                } else {
-                    that.errorPassword(data.errorText);
+                if (response.request.status === successStatus) {
+                    if (response.data && response.data.backUrl) {
+                        window.location.href = response.data.backUrl;
+                    } else {
+                        window.location.href = '/';
+                    }
+                } else if (response.request.status === failStatus) {
+                    const errorMessage = response.request.errors.join('</br>');
+
+                    that.errorPassword(errorMessage);
                 }
             },
             error(error) {

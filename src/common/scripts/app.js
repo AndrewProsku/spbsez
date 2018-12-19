@@ -3,6 +3,7 @@ import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
 import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
+import NewPassword from '../../components/new-password';
 import PasswordRecovery from '../../components/password-recovery';
 import Select from '../../components/forms/select/';
 import Utils from './utils';
@@ -340,10 +341,10 @@ if (recoveryForm) {
 /**
  * Инициализация формы ввода нового пароля
  */
-// const newPasswordForm = document.querySelector('.j-form-new-password');
-//
-// if (newPasswordForm) {
-//     const newPassword = new NewPassword();
-//
-//     newPassword.init();
+const newPasswordForm = document.querySelector('.j-form-new-password');
 
+if (newPasswordForm) {
+    const newPassword = new NewPassword();
+
+    newPassword.init();
+}
