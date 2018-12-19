@@ -38,17 +38,29 @@ class PasswordRecovery {
 
             const that = this;
             const sendData = new FormData(event.target);
+            const sentEmail = sendData.get('email');
 
             Utils.send(sendData, '/tests/check-email.json', {
                 success(response) {
-                    const {data} = response;
+                    const successStatus = 1;
+                    const failStatus = 0;
 
-                    if (data.success) {
+                    if (response.request.status === successStatus) {
+                        let email = '';
+
+                        if (response.data && response.data.email) {
+                            email = response.data.email;
+                        } else {
+                            email = sentEmail;
+                        }
+
                         that.$successButton.classList.remove('password-recovery-block_is_hidden');
-                        that.showSuccessMessage(data.email);
+                        that.showSuccessMessage(email);
                         Utils.removeElement(that.$form);
-                    } else {
-                        that.errorEmail(data.errorText);
+                    } else if (response.request.status === failStatus) {
+                        const errorMessage = response.request.errors.join('</br>');
+
+                        that.errorPassword(errorMessage);
                     }
                 }
             });

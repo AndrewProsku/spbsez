@@ -4,7 +4,7 @@
     <ul class="b-lk-login-nav__list">
         <?php foreach($arResult as $arItem): ?>
         <li class="b-lk-login-nav__item<?php if(!empty($arItem['SELECTED'])): ?> is-active<?php endif; ?>">
-            <a href="<?= $arItem['LINK'] ?>" class="b-lk-nav__link b-link-line"><?= $arItem['TEXT'] ?></a>
+            <a href="<?= $arItem['LINK'] ?>" class="b-lk-login-nav__link b-link-line"><?= $arItem['TEXT'] ?></a>
         </li>
         <?php endforeach; ?>
     </ul>
