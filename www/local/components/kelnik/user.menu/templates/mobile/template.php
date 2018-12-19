@@ -1,7 +1,7 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
 } ?>
-<div class="b-account b-account_is_hover">
+<div class="b-account j-account-auth">
     <a href="/cabinet/" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?>  is-auth j-account-auth<?php endif; ?>">
         <span class="b-account__link-icon">
            <?php if($arResult['IS_AUTHORIZED']): ?> <span class="b-account__messages">2</span><?php endif; ?>
