@@ -3,6 +3,38 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Особая экономическая зона");
 $APPLICATION->SetPageProperty('title', 'Особая экономическая зона | РОСОЭЗ');
 ?>
+
+    <div class="b-animation-lines j-animation-lines">
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+    </div>
+
     <?$APPLICATION->IncludeComponent(
         "bitrix:menu",
         "submenu-about",

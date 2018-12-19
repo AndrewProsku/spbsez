@@ -4,6 +4,38 @@ $APPLICATION->SetPageProperty("title", "Главная | РОСОЭЗ");
 $APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
 $APPLICATION->SetTitle("Главная");
 ?>
+
+    <div class="b-animation-lines j-animation-lines">
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+    </div>
+
     <div class="l-home__main-screen j-home__main-screen">
         <? $APPLICATION->IncludeComponent(
             'kelnik:site.info',
