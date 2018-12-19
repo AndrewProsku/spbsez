@@ -3,6 +3,38 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Контакты");
 $APPLICATION->SetPageProperty('title', 'Контакты | РОСОЭЗ');
 ?>
+
+    <div class="b-animation-lines j-animation-lines">
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+        <div class="b-animmation-lines__line"></div>
+    </div>
+
     <div class="l-contacts">
         <div class="l-contacts__map-wrapper">
             <div class="l-contacts__title">
