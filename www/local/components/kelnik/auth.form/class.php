@@ -16,16 +16,9 @@ class AuthForm extends Bbc\Basis
 {
     protected $needModules = [];
     protected $checkParams = [];
-    protected $cacheTemplate = false;
 
     protected function executeMain()
     {
         global $USER;
-
-        $this->abortResultCache();
-
-        $this->arResult['IS_AUTHORIZED'] = !empty($USER) && $USER instanceof \CUser
-                                            ? $USER->IsAuthorized()
-                                            : false;
     }
 }
