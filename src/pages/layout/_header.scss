@@ -19,6 +19,10 @@
         }
     }
 
+    .b-language__list {
+        top: 98%;
+    }
+
     @media #{$laptop} {
         @include prefix(1, 36);
         @include suffix(0, 36);
@@ -74,6 +78,10 @@
 
         .b-account__link-icon {
             fill: $blue;
+        }
+
+        .b-language__list {
+            top: 67%;
         }
 
         .b-burger-wrap {
@@ -151,6 +159,10 @@
 
         .b-account__link-icon {
             fill: $blue;
+        }
+
+        .b-language__list {
+            top: 67%;
         }
 
         .b-burger-wrap {
@@ -424,7 +436,16 @@
 .b-language {
     @include column(2, 6);
     display: none;
+    position: relative;
     text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        .b-language__list {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
 
     @media #{$laptop} {
         @include row();
@@ -443,6 +464,43 @@
     color: $white;
     text-decoration: none;
     background-image: none;
+}
+
+.b-language__list {
+    @include transition(visibility, opacity);
+    width: 80%;
+    text-align: center;
+    background-color: $white;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba($blue, 0.16);
+    padding: 13px 0;
+    position: absolute;
+    top: 67%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    margin: auto;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.b-language__item {
+    margin-bottom: 14px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &.is-active {
+        .b-language__item-link {
+            background-image: none;
+            color: $black;
+        }
+    }
+}
+
+.b-language__item-link {
+    @include font-size("p4");
 }
 
 .b-burger-wrap {
