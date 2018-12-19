@@ -7,7 +7,6 @@ class PasswordRecovery {
         this.repeatPassword = 'j-input-repeat-password';
         this.password = 'j-input-current-password';
         this.submit = 'j-new-password-submit';
-
         this.messageClass = 'b-lb-input__message';
     }
 
@@ -21,7 +20,7 @@ class PasswordRecovery {
         this.$newPassword = document.querySelector(`.${this.newPassword}`);
         this.$repeatPassword = document.querySelector(`.${this.repeatPassword}`);
         this.$password = document.querySelector(`.${this.password}`);
-        this.$submit = document.querySelector(`.${this.submit}`);
+        // this.$submit = document.querySelector(`.${this.submit}`);
     }
 
     _bindEvents() {

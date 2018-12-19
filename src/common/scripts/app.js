@@ -346,4 +346,4 @@ if (recoveryForm) {
 //     const newPassword = new NewPassword();
 //
 //     newPassword.init();
-
+// }
