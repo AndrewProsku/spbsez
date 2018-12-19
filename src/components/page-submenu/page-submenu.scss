@@ -68,7 +68,7 @@
             background-image: linear-gradient($gradient-linear);
         }
 
-        .b-lk-nav__link {
+        .b-page-submenu__link {
             color: $black;
             background-image: none;
         }
@@ -93,6 +93,5 @@
 
 .b-page-submenu__link {
     @include font-size("p3");
-    display: block;
     color: $blue;
 }

@@ -88,7 +88,7 @@ a {
     text-decoration: none;
 
     &.b-link-line {
-        background-image: linear-gradient(to top, rgba($blue, 0.12) 0%, rgba($violet, 0.12) 40%, rgba($violet, 0) 30%);
+        background-image: linear-gradient(to top, rgba($blue, 0.12) 0%, rgba($violet, 0.12) 55%, rgba($violet, 0) 30%);
         padding-bottom: 3px;
         padding-right: 3px;
 
@@ -98,7 +98,7 @@ a {
     }
 
     &.b-link-line-two {
-        background-image: linear-gradient(to top, rgba($white, 0.12) 10%, rgba($white, 0.12) 50%, rgba($white, 0) 30%);
+        background-image: linear-gradient(to top, rgba($white, 0.12) 10%, rgba($white, 0.12) 55%, rgba($white, 0) 30%);
         position: relative;
         padding-bottom: 3px;
         padding-right: 3px;

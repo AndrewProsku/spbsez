@@ -966,6 +966,7 @@ $path: '/images/home/';
         background-image: url($path + 'map-mobile.png');
         background-position: left top;
         background-size: 100% 100%;
+        left: 0;
     }
 
     .l-home-plots__all-map-icon {
@@ -993,6 +994,11 @@ $path: '/images/home/';
 .l-home-plots__map-neudorf {
     .l-home-plots__all-map-images {
         height: 300px;
+    }
+
+    .l-home-plots__all-map-build-one {
+        left: 50%;
+        top: 13%;
     }
 
     .l-home-plots__all-map-build-two {
@@ -1025,19 +1031,19 @@ $path: '/images/home/';
 .l-home-plots__map-novoorlovskaya {
     .l-home-plots__all-map-images {
         width: 460px;
-        height: 238px;
+        height: 250px;
         background-image: url($path + 'map-mobile2.png');
         background-position: left top;
         background-size: cover;
     }
 
     .l-home-plots__all-map-build-one {
-        left: 50%;
-        top: 15%;
+        left: 33%;
+        top: 16%;
     }
 
     .l-home-plots__all-map-build-two {
-        top: 81%;
+        top: 83%;
         left: 8%;
     }
 
@@ -1190,15 +1196,17 @@ $path: '/images/home/';
 
 .l-home-plots__all-map-images {
     position: relative;
-    width: 960px;
+    width: 1120px;
     height: 100%;
     background-image: url($path + 'Map@2x-8.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    left: -160px;
 
     @media #{$tablet-landscape} {
         width: 1280px;
+        left: 0;
     }
 
     @media #{$laptop} {
@@ -1298,7 +1306,7 @@ $path: '/images/home/';
     width: 50px;
     height: 50px;
     top: 65%;
-    left: 27%;
+    left: 29.5%;
 
     .b-tooltip {
         left: -50%;
@@ -1378,7 +1386,7 @@ $path: '/images/home/';
     &.icon-port {
         background-image: url($path + 'port.svg');
         top: 36%;
-        left: 42%;
+        left: 44%;
         
         &:hover {
             background-image: url($path + 'port_hover.svg');
@@ -1432,7 +1440,7 @@ $path: '/images/home/';
 
         &.icon-rialway-station-two {
             top: 35%;
-            left: 75%;
+            left: 72%;
             z-index: 1;
 
             @media #{$tablet-landscape} {
@@ -1459,7 +1467,7 @@ $path: '/images/home/';
     &.icon-center-city {
         background-image: url($path + 'center-city.svg');
         top: 37%;
-        left: 67%;
+        left: 66%;
         z-index: 2;
 
         &:hover {
@@ -1488,8 +1496,8 @@ $path: '/images/home/';
 
     &.icon-airport {
         background-image: url($path + 'airport.svg');
-        top: 65%;
-        left: 76%;
+        top: 67%;
+        left: 72%;
 
         &:hover {
             background-image: url($path + 'airport_hover.svg');
