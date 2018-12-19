@@ -78,12 +78,22 @@
         @include column(4, 8);
         display: block;
 
+        .b-language__list {
+            top: 98%;
+            width: 100%;
+            min-width: 40px;
+        }
+
         @media #{$tablet-portrait} {
             @include column(3, 24);
         }
 
         @media #{$laptop} {
             @include column(2, 21);
+
+            .b-language__list {
+                width: 80%;
+            }
         }
 
         @media #{$laptop-wide} {
