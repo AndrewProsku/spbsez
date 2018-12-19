@@ -39,12 +39,15 @@
     }
 }
 
+.b-page-submenu__block {
+    overflow-x: auto;
+}
+
 .b-page-submenu__list {
     @include row();
-    @include column(36, 36);
+    min-width: 810px;
     flex-wrap: nowrap;
     padding-right: 30px;
-    overflow-x: auto;
 }
 
 .b-page-submenu__item {

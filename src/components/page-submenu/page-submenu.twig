@@ -1,11 +1,13 @@
 <div class="b-page-submenu">
-    <ul class="b-page-submenu__list">
-        {% for subitem in subitems %}
-        <li class="b-page-submenu__item {% if subitem.active %}is-active{% endif %}">
-            <a href="{{ subitem.href }}" class="b-page-submenu__link b-link-line">
-                {{ subitem.name }}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="b-page-submenu__block">
+        <ul class="b-page-submenu__list">
+            {% for subitem in subitems %}
+                <li class="b-page-submenu__item {% if subitem.active %}is-active{% endif %}">
+                    <a href="{{ subitem.href }}" class="b-page-submenu__link b-link-line">
+                        {{ subitem.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
