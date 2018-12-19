@@ -611,17 +611,137 @@
     }
 }
 
+
+$circle-one: 25s;
+$circle-two: 23s;
+$circle-three: 22s;
+$circle-four: 22s;
+$circle-five: 13s;
+$circle-six: 22s;
+
+.b-about-privileges__main-circle {
+    @media #{$tablet-portrait} {
+
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+
+        &.one {
+            width: 90%;
+            height: 90%;
+            background-image: url("/images/about/circle-lines/1.svg");
+            animation-name: circle-rotation;
+            animation-duration: $circle-one;
+        }
+
+        &.two {
+            width: 82%;
+            height: 82%;
+            background-image: url("/images/about/circle-lines/2.svg");
+            animation-name: circle-rotation-revert;
+            animation-duration: $circle-two;
+        }
+
+        &.three {
+            width: 79%;
+            height: 79%;
+            background-image: url("/images/about/circle-lines/3.svg");
+            animation-name: circle-rotation;
+            animation-duration: $circle-three;
+        }
+
+        &.four {
+            width: 69%;
+            height: 69%;
+            background-image: url("/images/about/circle-lines/5.svg");
+            animation-name: circle-rotation-revert;
+            animation-duration: $circle-four;
+        }
+
+        &.five {
+            width: 66%;
+            height: 66%;
+            background-image: url("/images/about/circle-lines/6.svg");
+            animation-name: circle-rotation;
+            animation-duration: $circle-four;
+        }
+
+        &.six {
+            width: 64%;
+            height: 64%;
+            background-image: url("/images/about/circle-lines/7.svg");
+            animation-name: circle-rotation-revert;
+            animation-duration: $circle-six;
+        }
+
+    }
+}
+
+/* Анимация для кругов */
+
+@keyframes circle-rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes circle-rotation-revert {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(-180deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Закончилась Анимация для кругов */
+
 .b-about-privileges__main-block-text {
     @media #{$tablet-portrait} {
         @include row();
+        position: relative;
         width: 71.5%;
         height: 71.5%;
-        border: 1px solid $white;
+        border: 2px solid $white;
         border-radius: 50%;
         align-items: center;
         align-content: center;
         justify-content: center;
         text-align: center;
+
+        &:before {
+            content: "";
+            width: 103%;
+            height: 103%;
+            position: absolute;
+            top: -1.5%;
+            left: -1.5%;
+            background-image: url("/images/about/circle-lines/4.svg");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+        }
     }
 
     h2 {

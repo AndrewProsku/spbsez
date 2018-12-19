@@ -195,6 +195,14 @@ $APPLICATION->SetPageProperty('title', 'Особая экономическая 
         <div class="b-about-privileges" id="privileges">
             <div class="b-about-privileges__block">
                 <div class="b-about-privileges__main-block">
+
+                    <div class="b-about-privileges__main-circle one"></div>
+                    <div class="b-about-privileges__main-circle two"></div>
+                    <div class="b-about-privileges__main-circle three"></div>
+                    <div class="b-about-privileges__main-circle four"></div>
+                    <div class="b-about-privileges__main-circle five"></div>
+                    <div class="b-about-privileges__main-circle six"></div>
+
                     <div class="b-about-privileges__main-block-text">
                         <?$APPLICATION->IncludeComponent(
                             "kelnik:textblocks",
