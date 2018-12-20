@@ -1176,6 +1176,10 @@ $path: '/images/home/';
         display: block;
     }
 
+    @media #{$tablet-landscape} {
+        height: 515px;
+    }
+
     @media #{$laptop} {
         height: 790px;
         overflow: hidden;
@@ -1270,7 +1274,7 @@ $path: '/images/home/';
 
     @media #{$tablet-landscape} {
         left: 55.5%;
-        top: 6%;
+        top: 9%;
     }
 
     @media #{$laptop} {
@@ -1313,7 +1317,7 @@ $path: '/images/home/';
     }
 
     @media #{$tablet-landscape} {
-        top: 69%;
+        top: 65%;
         left: 30%;
     }
 

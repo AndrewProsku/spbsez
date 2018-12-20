@@ -1,4 +1,5 @@
 import '../styles/app.scss';
+import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
 import Glide from '@glidejs/glide';
@@ -9,7 +10,6 @@ import Select from '../../components/forms/select/';
 import Utils from './utils';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
-
 
 /**
  * Добавляем класс на шапку при прокрутке.
@@ -315,6 +315,21 @@ if (bgAnimationLines && homeMainScreen) {
 }
 
 /**
+ * Скролл к якорю
+ */
+const anchorSelector = Array.from(document.querySelectorAll('.j-anchor-link'));
+
+if (anchorSelector.length) {
+    anchorSelector.forEach((item) => {
+        const anchor = new Anchor();
+
+        anchor.init({
+            target: item
+        });
+    });
+}
+
+/**
  * Инициализация формы авторизации
  */
 const authorizationForm = document.querySelector('.j-form-authorization');
@@ -348,3 +363,4 @@ if (newPasswordForm) {
 
     newPassword.init();
 }
+

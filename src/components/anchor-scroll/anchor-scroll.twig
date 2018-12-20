@@ -1,4 +1,6 @@
-<a class="b-anchor-link j-anchor-link"
-   href="#{{ href }}">
-    {{ text }}
+{% for link in links %}
+<a class="b-about-desc__link b-link-line j-anchor-link"
+   href="#{{ link.href }}">
+    {{ link.text }}
 </a>
+{% endfor %}
