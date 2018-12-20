@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Utils from '../../common/scripts/utils';
 
 class NewPassword {
@@ -45,9 +46,9 @@ class NewPassword {
                 return;
             }
 
-            const sendData = new FormData(this.$form);
+            const dataToSend = $(event.target).serialize();
 
-            Utils.send(sendData, '/tests/new-password.json', {
+            Utils.send(dataToSend, '/tests/new-password.json', {
                 success(response) {
                     const successStatus = 1;
                     const failStatus = 0;
