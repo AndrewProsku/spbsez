@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Utils from '../../common/scripts/utils';
 
 class Authorization {
@@ -34,9 +35,9 @@ class Authorization {
             const isFormFulfilled = this.checkForm();
 
             if (isFormFulfilled) {
-                const data = new FormData(event.target);
+                const dataToSend = $(event.target).serialize();
 
-                this.toLogin(data);
+                this.toLogin(dataToSend);
             }
         });
 
@@ -75,10 +76,10 @@ class Authorization {
         return true;
     }
 
-    toLogin(sendData) {
+    toLogin(dataToSend) {
         const that = this;
 
-        Utils.send(sendData, '/api/login', {
+        Utils.send(dataToSend, '/api/login', {
             success(response) {
                 const successStatus = 1;
                 const failStatus = 0;
