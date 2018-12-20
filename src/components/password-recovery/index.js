@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Utils from '../../common/scripts/utils';
 
 class PasswordRecovery {
@@ -37,10 +38,10 @@ class PasswordRecovery {
             }
 
             const that = this;
-            const sendData = new FormData(event.target);
-            const sentEmail = sendData.get('email');
+            const sentEmail = new FormData(event.target).get('email');
+            const dataToSend = $(event.target).serialize();
 
-            Utils.send(sendData, '/api/forgot/', {
+            Utils.send(dataToSend, '/api/forgot/', {
                 success(response) {
                     const successStatus = 1;
                     const failStatus = 0;
@@ -60,7 +61,7 @@ class PasswordRecovery {
                     } else if (response.request.status === failStatus) {
                         const errorMessage = response.request.errors.join('</br>');
 
-                        that.errorPassword(errorMessage);
+                        that.errorEmail(errorMessage);
                     }
                 }
             });
