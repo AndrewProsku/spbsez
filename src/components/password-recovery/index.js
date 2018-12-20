@@ -40,7 +40,7 @@ class PasswordRecovery {
             const sendData = new FormData(event.target);
             const sentEmail = sendData.get('email');
 
-            Utils.send(sendData, '/tests/check-email.json', {
+            Utils.send(sendData, '/api/forgot/', {
                 success(response) {
                     const successStatus = 1;
                     const failStatus = 0;
