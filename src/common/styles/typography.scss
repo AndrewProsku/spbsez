@@ -175,6 +175,17 @@ small {
     font-weight: 500;
 }
 
+$ie-none: none;
+$ie-active: active;
+
+br {   // Для ie
+    @media all and (-ms-high-contrast: $ie-none), (-ms-high-contrast: $ie-active) {
+        visibility: hidden;
+        font-size: 0;
+        line-height: 0;
+    }
+}
+
 // Кнопки
 button {
     &:focus {

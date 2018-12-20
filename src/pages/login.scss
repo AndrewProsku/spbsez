@@ -4,6 +4,10 @@
     @include suffix(2, 36);
     background-color: $white;
 
+    h1 {
+        @include font-size("h1-inner");
+    }
+
     @media #{$laptop} {
         @include prefix(3, 36);
         @include suffix(3, 36);
