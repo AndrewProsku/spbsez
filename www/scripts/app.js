@@ -40061,7 +40061,7 @@ function () {
         var that = _this;
         var sendData = new FormData(event.target);
         var sentEmail = sendData.get('email');
-        _common_scripts_utils__WEBPACK_IMPORTED_MODULE_0__["default"].send(sendData, '/tests/check-email.json', {
+        _common_scripts_utils__WEBPACK_IMPORTED_MODULE_0__["default"].send('email=' + sentEmail, '/api/forgot/', {
           success: function success(response) {
             var successStatus = 1;
             var failStatus = 0;

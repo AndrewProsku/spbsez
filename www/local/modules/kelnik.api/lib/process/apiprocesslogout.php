@@ -1,9 +1,6 @@
 <?php
 namespace Kelnik\Api\Process;
 
-use Bitrix\Main\Localization\Loc;
-use Kelnik\Requests\Customer\CustomerTable;
-
 /**
  * Class ApiProcessLogout
  *

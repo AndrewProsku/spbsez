@@ -2,8 +2,6 @@
 namespace Kelnik\Api\Process;
 
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\Config\Option;
-use Bitrix\Main\UserTable;
 use Kelnik\Helpers\ArrayHelper;
 
 /**
@@ -33,6 +31,11 @@ class ApiProcessLogin extends ApiProcessAbstract
                 $this->errors[] = Loc::getMessage('KELNIK_API_LOGIN_OR_PWD_EMPTY');
                 return false;
             }
+        }
+
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_LOGIN_OR_PWD_EMPTY');
+            return false;
         }
 
         $userData = \CUser::GetList(
