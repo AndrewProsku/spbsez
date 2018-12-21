@@ -4,35 +4,35 @@ $APPLICATION->SetTitle("Контакты");
 $APPLICATION->SetPageProperty('title', 'Контакты | РОСОЭЗ');
 ?>
 
-    <div class="b-animation-lines j-animation-lines">
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
-        <div class="b-animmation-lines__line"></div>
+    <div class="b-animation-block j-animation-block">
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
+        <div class="b-animation-block__line"></div>
     </div>
 
     <div class="l-contacts">
