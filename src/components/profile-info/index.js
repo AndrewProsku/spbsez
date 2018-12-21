@@ -105,6 +105,7 @@ class ProfileInfo {
                     }
                     const contact = {};
 
+                    // TODO Создавать новый элемент через createElement чтобы заранее вешать на него обработчики
                     contact.deletable = that.isContactsDeletable;
                     contact.id = response.data.id;
                     that.$contactsInfo.insertAdjacentHTML('beforeend', templateContact(contact));
@@ -186,14 +187,15 @@ class ProfileInfo {
     removeContact(input) {
         const that = this;
         const dataToSend = `removeContact=${input.dataset.id}`;
+        const contactClass = `.b-profile-block[data-id="${input.dataset.id}"]`;
+        const contactToDelete = that.$contactsInfo.querySelector(contactClass);
+
 
         Utils.send(dataToSend, '/tests/personal-info-add-contact.json', {
             success(response) {
                 if (response.request.status === that.failStatus) {
                     return;
                 }
-                const contactClass = `.b-profile-block[data-id="${input.dataset.id}"]`;
-                const contactToDelete = that.$contactsInfo.querySelector(contactClass);
 
                 Utils.removeElement(contactToDelete);
 
