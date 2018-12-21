@@ -10,7 +10,7 @@ IncludeModuleLangFile(__FILE__);
 class kelnik_refbook extends CModule
 {
     public $MODULE_ID = 'kelnik.refbook';
-    public $MODEL_GROUP_RIGHTS = 'Y';
+    public $MODULE_GROUP_RIGHTS = 'Y';
 
     public function __construct()
     {
