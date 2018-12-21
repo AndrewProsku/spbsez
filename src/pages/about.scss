@@ -27,8 +27,11 @@
     @include suffix(2, 36);
     position: relative;
 
-    @media #{$laptop} {
+    @media #{$tablet-portrait} {
         @include row();
+    }
+
+    @media #{$laptop} {
         @include padding-level(top, blue);
         @include padding-level(top, blue);
         @include prefix(3, 36);
@@ -45,14 +48,15 @@
     @include padding-level(bottom, blue);
 
     @media #{$tablet-portrait} {
-        @include column(22, 32);
+        @include column(9, 32);
+        @include post(-2, 32);
+        order: 2;
+        padding-bottom: 0;
     }
 
     @media #{$laptop} {
         @include column(11, 30);
         @include post(-2, 30);
-        order: 2;
-        padding-bottom: 0;
         margin-top: -64px;
     }
 
@@ -63,10 +67,15 @@
 }
 
 .b-about-desc__content {
+    @media #{$tablet-portrait} {
+        @include column(23, 32);
+        @include suffix(2, 32);
+        order: 1;
+    }
+
     @media #{$laptop} {
         @include column(21, 30);
         @include suffix(2, 30);
-        order: 1;
     }
 
     @media #{$fullhd} {
@@ -102,7 +111,10 @@
     }
 
     @media #{$tablet-portrait} {
+        @include prefix(3, 23);
+
         &:before {
+            @include column(2, 23);
             top: 14px;
         }
     }
@@ -144,12 +156,13 @@
     }
 
     @media #{$tablet-portrait} {
+        @include prefix(3, 23);
         max-width: 100%;
 
         &:before {
-            @include column(1, 32);
-            @include push(1, 32);
-            width: 21px;
+            @include column(2, 23);
+            @include push(0, 23);
+            width: 100%;
             height: 10px;
         }
     }
@@ -185,11 +198,15 @@
     @media #{$tablet-portrait} {
         display: inline-block;
         vertical-align: top;
-        margin-bottom: 14px;
+        margin-bottom: 5px;
 
         &.b-link-line {
             padding-bottom: 0;
         }
+    }
+
+    @media #{$tablet-landscape} {
+        margin-bottom: 14px;
     }
 
     @media #{$laptop} {
