@@ -1,7 +1,6 @@
 import '../styles/app.scss';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
-import AnimationLines from 'components/animation-test/index';
 import Authorization from '../../components/authorization';
 import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
@@ -11,18 +10,6 @@ import Select from '../../components/forms/select/';
 import Utils from './utils';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
-
-
-/**
- *  Анимация фона
- */
-const animationBg = document.querySelector('.j-animation-block');
-
-if (animationBg) {
-    const animationLines = new AnimationLines();
-
-    animationLines.init();
-}
 
 /**
  * Добавляем класс на шапку при прокрутке.
@@ -319,12 +306,35 @@ if (mainScreenContent) {
  * Добавляем анимацию фона при скролле главной страницы,
  */
 
-const bgAnimationLines = document.querySelector('.j-animation-lines');
+const bgAnimationLines = document.querySelector('.j-animation-block');
 
 if (bgAnimationLines && homeMainScreen) {
     const animatedLines = new AnimatedLines(bgAnimationLines, homeMainScreen);
 
     animatedLines.init();
+}
+
+/**
+ * На добавленной анимации фона вешаем класс
+ */
+
+const animationBg = document.querySelector('.j-animation-block');
+
+if (animationBg) {
+    const animationBlock = document.querySelector('.j-animation-block');
+    const addClass = 5000;
+    const removeClass = 3000;
+
+    const animationBlockDeleteClass = () => {
+        animationBlock.classList.remove('go-animation');
+    };
+
+    const animationBlockAddClass = () => {
+        animationBlock.classList.add('go-animation');
+        setTimeout(animationBlockDeleteClass, removeClass);
+    };
+
+    setInterval(animationBlockAddClass, addClass);
 }
 
 /**
