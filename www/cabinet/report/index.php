@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Личный кабинет");
-$APPLICATION->SetPageProperty('title', 'Личный кабинет | РОСОЭЗ');
+$APPLICATION->SetTitle('Подача отчета');
+$APPLICATION->SetPageProperty('title', 'Подача отчета | РОСОЭЗ');
 if (!$USER->IsAuthorized()) {
     LocalRedirect('/cabinet/auth/');
 }
@@ -22,5 +22,7 @@ if (!$USER->IsAuthorized()) {
         "USE_EXT" => "N"
     )
 );?>
+
+
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
