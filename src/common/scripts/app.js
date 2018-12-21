@@ -6,6 +6,7 @@ import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
 import NewPassword from '../../components/new-password';
 import PasswordRecovery from '../../components/password-recovery';
+import ProfileInfo from '../../components/profile-info';
 import Select from '../../components/forms/select/';
 import Utils from './utils';
 import YandexMap from 'components/yandex-map';
@@ -117,7 +118,7 @@ if (authBlock) {
 /**
  * Подключение маски телефона
  */
-const phoneInputs = Array.from(document.querySelectorAll('input[type="tel"]'));
+const phoneInputs = Array.from(document.querySelectorAll('input[type="tel"]:not(.b-input-phone)'));
 let inputTel = {};
 
 if (phoneInputs.length) {
@@ -387,3 +388,13 @@ if (newPasswordForm) {
     newPassword.init();
 }
 
+/**
+ * Инициализация личных данных пользователя
+ */
+const profileInfoForm = document.querySelector('.j-profile-info');
+
+if (profileInfoForm) {
+    const profileInfo = new ProfileInfo();
+
+    profileInfo.init();
+}
