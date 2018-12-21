@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ruleset name="PSR2">
+    <description>The PSR2 coding standard.</description>
+    <rule ref="PSR2"/>
+    <arg name="colors"/>
+    <arg name="report-width" value="40"/>
+    <exclude-pattern>vendor/*</exclude-pattern>
+
+    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PSR2.Methods.FunctionCallSignature.MultipleArguments">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PSR2.Methods.FunctionCallSignature.ContentAfterOpenBracket">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent.TabsUsed">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Functions.ValidDefaultValue.NotAtEnd">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace">
+        <severity>0</severity>
+    </rule>
+</ruleset>

@@ -1,0 +1,36 @@
+{
+  "request": {
+    "status": 1,
+    "errors": ["Ошибка!"]
+  },
+  "data": {
+    "administrator": {
+      "name": "Иванов Сергей Константинович",
+      "email": "ivanov.sergey@biocad.ru",
+      "phone": 1234567890,
+      "status": "Супер-Администратор"
+    },
+    "company": {
+      "resident": "ООО «Биокад»",
+      "inn": 5024048000,
+      "legalAddress": "198515, город Санкт-Петербург, поселок Стрельна, улица Связи, 34 лит. а",
+      "postalAddress": "198515, город Санкт-Петербург, поселок Стрельна, улица Связи, 34 лит. а",
+      "phone": 8126577812,
+      "fax": 8812657781,
+      "email": "info@biocad.ru",
+      "ceo": "Дмитрий Анатольевич Морозов"
+    },
+    "contacts": [{
+      "id": 1,
+      "name": "Первый",
+      "post": "Первый",
+      "phone":  8126577812,
+      "email": "email1@biocad.ru"
+    },{
+      "id": 2,
+      "name": "Второй",
+      "phone":  8126577812,
+      "email": "email@biocad.ru"
+    }]
+  }
+}
