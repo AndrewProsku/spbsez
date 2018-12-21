@@ -28,8 +28,7 @@ class Anchor {
     _bindEvents() {
         const $body = $('body, html');
         const headerHeight = document.querySelector('.j-home__header').clientHeight;
-        const scrollTarget = document.querySelector(this.target.getAttribute('href'))
-            .getBoundingClientRect().top - headerHeight;
+        const scrollTarget = $(this.target.getAttribute('href')).offset().top - headerHeight;
 
         this.target.addEventListener('click', (event) => {
             event.preventDefault();
