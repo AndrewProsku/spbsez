@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="b-remember-passsword">
-        <a href="#" class="b-link-line">
+        <a href="/cabinet/forgot/" class="b-link-line">
             Я не помню пароль
         </a>
     </div>

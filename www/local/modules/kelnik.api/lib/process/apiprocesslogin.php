@@ -45,6 +45,7 @@ class ApiProcessLogin extends ApiProcessAbstract
         )->GetNext();
 
         if (empty($userData['LOGIN'])) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_LOGIN_INCORRECT');
             return false;
         }
 
