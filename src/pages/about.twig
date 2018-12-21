@@ -50,18 +50,23 @@
                     </p>
                 </div>
                 <div class="b-about-desc__links">
-                    {% set abLinks = [
-                        'Как&nbsp;стать&nbsp;резидентом',
-                        'Льготы&nbsp;и&nbsp;преференции',
-                        'Участки',
-                        'Органы&nbsp;власти'
-                    ] %}
-
-                    {% for abLink in abLinks %}
-                        <a href="#" class="b-about-desc__link b-link-line">
-                            {{ abLink }}
-                        </a>
-                    {% endfor %}
+                    {% include "../components/anchor-scroll/anchor-scroll.twig" with {
+                        links: [
+                            {
+                                href: 'resident',
+                                text: 'Как&nbsp;стать&nbsp;резидентом'
+                            }, {
+                                href: 'privileges',
+                                text: 'Льготы&nbsp;и&nbsp;преференции'
+                            }, {
+                                href: 'area',
+                                text: 'Участки'
+                            }, {
+                                href: 'government',
+                                text: 'Органы&nbsp;власти'
+                            }
+                        ]
+                    } %}
                 </div>
 
             </div>
@@ -69,7 +74,7 @@
 
         {# Нестандартный блок информации #}
 
-        <div class="b-about-info">
+        <div class="b-about-info" id="resident">
             <div class="b-about-info__item">
                 <div class="b-about-info__text">
                     <div class="b-about-info__text-title">
@@ -120,7 +125,7 @@
                 <div class="b-about-info__item-block">
                     <div class="b-about-info__text">
                         <div class="b-about-info__text-title">
-                            более 35 млрд ₽
+                            более 35 млрд &#x20bd;
                         </div>
                         <div class="b-about-info__text-desc">
                             частных инвестиции
@@ -132,7 +137,7 @@
                 <div class="b-about-info__item-block" style="background-image:url('/images/about/about-info-img2.jpg');">
                     <div class="b-about-info__text">
                         <div class="b-about-info__text-title">
-                            11 млрд ₽
+                            11 млрд &#x20bd;
                         </div>
                         <div class="b-about-info__text-desc">
                             налоговые поступления <br/>
@@ -146,10 +151,10 @@
             <div class="b-about-info__item">
                 <div class="b-about-info__text">
                     <div class="b-about-info__text-title">
-                        50 млрд ₽
+                        50 млрд &#x20bd;
                     </div>
                     <div class="b-about-info__text-desc">
-                        суммарная выручка <br/>
+                        суммарная выручка <br>
                         резидентов ОЭЗ
                     </div>
                 </div>
@@ -166,7 +171,7 @@
 
         {# Блок Льготы и преференции #}
 
-        <div class="b-about-privileges">
+        <div class="b-about-privileges" id="privileges">
             <div class="b-about-privileges__block">
                 <div class="b-about-privileges__main-block">
                     <!-- Анимационные линии -->
@@ -246,7 +251,7 @@
 
         {# Блок участки #}
 
-        <div class="l-home-plots">
+        <div class="l-home-plots" id="area">
             <div class="l-home-plots__title-mobile">
                 Расположение зон
             </div>
@@ -473,10 +478,10 @@
 
         {# Блок курирующие органы власти #}
 
-        <div class="b-about-government">
+        <div class="b-about-government" id="government">
             <div class="b-government">
                 <div class="b-government__title">
-                    <h3>Курирующие органы государственной власти</h3>
+                    <h2>Курирующие органы государственной власти</h2>
                 </div>
 
                 <div class="b-government__list">

@@ -37,7 +37,8 @@
 }
 
 .b-carousel__item {
-    height: 250px;
+    height: 78vw;
+    max-height: 350px;
     background-color: $white;
     border-left: 1px solid $grey;
     cursor: grab;
@@ -47,11 +48,16 @@
     }
 
     @media #{$tablet-portrait} {
-        height: 220px;
+        height: 31vw;
     }
 
     @media #{$laptop} {
-        height: 280px;
+        height: 22vw;
+        max-height: 390px;
+    }
+
+    @media #{$laptop-wide} {
+        height: 18vw;
     }
 
     @media #{$fullhd} {
@@ -66,18 +72,27 @@
 }
 
 .b-carousel_theme_partners .b-carousel__item {
-    height: 205px;
+    height: 64vw;
+
+    .b-carousel__item-logo {
+        height: 100%;
+        max-height: 300px;
+        margin-bottom: 0;
+    }
 
     @media #{$tablet-portrait} {
-        height: 180px;
+        height: 27vw;
+        max-height: 260px;
     }
 
     @media #{$laptop} {
-        height: 228px;
+        height: 18vw;
+        max-height: 320px;
     }
 
     @media #{$laptop-wide} {
-        height: 220px;
+        height: 14vw;
+        max-height: 290px;
     }
 }
 
@@ -86,37 +101,20 @@
 }
 
 .b-carousel__item-logo {
+    @include row();
+    justify-content: center;
+    align-items: center;
+    height: 68%;
     text-align: center;
-    padding-top: 60px;
-    padding-bottom: 60px;
-
-    img {
-        height: 58px;
-    }
-
-    @media #{$tablet-portrait} {
-        padding-bottom: 36px;
-
-        img {
-            height: 45px;
-        }
-    }
-
-    @media #{$laptop} {
-        padding-bottom: 60px;
-    }
-
-    @media #{$laptop-wide} {
-        padding-top: 66px;
-
-        img {
-            height: 56px;
-        }
-    }
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 10px;
+    overflow: hidden;
 
     @media #{$fullhd} {
-        padding-top: 105px;
-        padding-bottom: 90px;
+        img {
+            max-width: 360px;
+        }
     }
 }
 

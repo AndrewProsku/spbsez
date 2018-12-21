@@ -1172,8 +1172,67 @@ $path: '/images/home/';
     background-color: $grey;
     overflow: auto;
 
+    /* стили для скролла */
+
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        @media #{$tablet-landscape} {
+            width: 10px;
+            height: 10px;
+        }
+    }
+
+    &::-webkit-scrollbar-button {
+        width: 5px;
+        height: 5px;
+
+        @media #{$tablet-landscape} {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $blue;
+        border: 1px none $white;
+        border-radius: 31px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $violet;
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+        background-color: $violet;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: rgba($white,0);
+        border: 65px none $white;
+        border-radius: 34px;
+    }
+
+    &::-webkit-scrollbar-track:hover {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-track:active {
+        background-color: rgba($dark-black,0);
+    }
+
+    &::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+
+    /* Закончились стили для скролла */
+
     @media #{$tablet-portrait} {
         display: block;
+    }
+
+    @media #{$tablet-landscape} {
+        height: 515px;
     }
 
     @media #{$laptop} {
@@ -1270,7 +1329,7 @@ $path: '/images/home/';
 
     @media #{$tablet-landscape} {
         left: 55.5%;
-        top: 6%;
+        top: 9%;
     }
 
     @media #{$laptop} {
@@ -1313,7 +1372,7 @@ $path: '/images/home/';
     }
 
     @media #{$tablet-landscape} {
-        top: 69%;
+        top: 65%;
         left: 30%;
     }
 
