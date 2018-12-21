@@ -1,0 +1,72 @@
+<div class="b-profile-block" data-id="{{ id }}">
+    {% if deletable %}<button type="button" class="b-profile-block__delete j-delete-contact" data-id="{{ id }}"></button>{% endif %}
+    <div class="b-profile-block__title">
+        <h4>Контактное лицо проекта {{ isSeveralContacts }}</h4>
+    </div>
+
+
+    <div class="b-profile-block__input-wrap">
+
+        <div class="b-form-block">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "person-name",
+                name: "person-name-" ~ id,
+                value: name
+            } %}
+
+
+            <label for="person-name" class="b-form-block__label">
+                ФИО
+            </label>
+            <span class="b-form-block__error-text">
+                            Текст подсказки
+                        </span>
+        </div>
+
+        <div class="b-form-block">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "person-post",
+                name: "person-post-" ~ id,
+                value: post
+            } %}
+
+            <label for="person-post" class="b-form-block__label">
+                Должность
+            </label>
+            <span class="b-form-block__error-text">
+                            Текст подсказки
+                        </span>
+        </div>
+
+        <div class="b-form-block">
+            {% include "../../forms/telephone/telephone.twig" with {
+                id: "person-phone",
+                name: "person-phone-" ~ id,
+                value: phone
+            } %}
+
+            <label for="person-phone" class="b-form-block__label">
+                Телефон
+            </label>
+            <span class="b-form-block__error-text">
+                            Текст подсказки
+                        </span>
+        </div>
+
+        <div class="b-form-block">
+            {% include "../../forms/email/email.twig" with {
+                id: "person-email",
+                name: "person-email-" ~ id,
+                value: email
+            } %}
+
+            <label for="person-email" class="b-form-block__label">
+                Эл.почта
+            </label>
+            <span class="b-form-block__error-text">
+                            Текст подсказки
+                        </span>
+        </div>
+
+    </div>
+</div>
