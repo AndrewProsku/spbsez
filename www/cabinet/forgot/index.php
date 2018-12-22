@@ -28,16 +28,13 @@ if ($USER->IsAuthorized()) {
     <div class="b-title b-password-recovery-title">
         <h1><? $APPLICATION->ShowTitle(false); ?></h1>
     </div>
-    <div class="password-recovery-desc">
-        Укажите электронную почту, на которую зарегистрирован ваш аккаунт — мы вышлем ссылку на восстановление
-        пароля.
-    </div>
+
     <? $APPLICATION->IncludeComponent(
         "kelnik:forgot.form",
         ".default",
         array(
             "COMPONENT_TEMPLATE" => ".default",
-            "CACHE_TYPE" => "A",
+            "CACHE_TYPE" => "N",
             "CACHE_TIME" => "360000"
         ),
         array()

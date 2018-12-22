@@ -39578,7 +39578,7 @@ function () {
         }
 
         var dataToSend = jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.target).serialize();
-        _common_scripts_utils__WEBPACK_IMPORTED_MODULE_1__["default"].send(dataToSend, '/tests/new-password.json', {
+        _common_scripts_utils__WEBPACK_IMPORTED_MODULE_1__["default"].send(dataToSend, '/api/changepassword/', {
           success: function success(response) {
             var successStatus = 1;
             var failStatus = 0;

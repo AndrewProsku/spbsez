@@ -44,7 +44,7 @@ class Api
             $this->errors[] = Loc::getMessage('KELNIK_API_EVENT_REQUIRED');
         }
 
-        if (!in_array($this->event, ['login', 'forgot']) && !$USER->IsAuthorized()) {
+        if (!in_array($this->event, ['login', 'forgot', 'changepassword']) && !$USER->IsAuthorized()) {
             $this->errors[] = Loc::getMessage('KELNIK_API_AUTH_REQUIRED');
             die($this->getResponse());
         }
