@@ -62,7 +62,7 @@ class ApiProcessChangePassword extends ApiProcessAbstract
 
         $res = $res->ChangePassword(
             $params['USER_LOGIN'],
-            $params['USER_CHEKWORD'],
+            $params['USER_CHECKWORD'],
             $params['password'],
             $params['new-password']
         );
