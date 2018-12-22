@@ -7,3 +7,5 @@ $MESS['KELNIK_API_REQUEST_ERROR'] = 'Ошибка запроса';
 $MESS['KELNIK_API_FORGOT_EMAIL_NOT_FOUND'] = 'Пользователь с таким адресом не найден';
 $MESS['KELNIK_API_AUTH_REQUIRED'] = 'Требуется авторизация';
 $MESS['KELNIK_API_LOGIN_INCORRECT'] = 'Неверный логин или пароль';
+$MESS['KELNIK_API_USER_NOT_FOUND'] = 'Пользователь не найден';
+$MESS['KELNIK_API_PASSWORD_LENGTH_ERROR'] = 'Длина пароля должна быть не меньше #NUM# символов';
