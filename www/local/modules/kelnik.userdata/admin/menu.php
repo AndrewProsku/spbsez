@@ -4,6 +4,8 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Userdata\Model\AdminInterface\ContactEditHelper;
 use Kelnik\Userdata\Model\AdminInterface\ContactListHelper;
+use Kelnik\Userdata\Model\AdminInterface\DocsEditHelper;
+use Kelnik\Userdata\Model\AdminInterface\DocsListHelper;
 
 if (!Loader::includeModule('kelnik.admin_helper')
     || !Loader::includeModule('kelnik.userdata')
@@ -37,6 +39,17 @@ return [
                 'url' => ContactListHelper::getUrl(),
                 'more_url' => [
                     ContactEditHelper::getUrl()
+                ]
+            ],
+            [
+                'parent_menu' => 'kelnik_userdata',
+                'sort' => 180,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_USERDATA_DOCS_MENU'),
+                'url' => DocsListHelper::getUrl(),
+                'more_url' => [
+                    DocsEditHelper::getUrl()
                 ]
             ]
         ]

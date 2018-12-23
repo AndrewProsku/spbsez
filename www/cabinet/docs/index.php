@@ -23,7 +23,7 @@ if (!$USER->IsAuthorized()) {
     )
 );?>
 
-<div class="l-profile">
+<div class="l-profile-document j-profile-documents">
 
     <div class="b-title b-add-request-title">
         <h1><?= $APPLICATION->ShowTitle(false); ?></h1>
@@ -47,19 +47,16 @@ if (!$USER->IsAuthorized()) {
 
     <? $APPLICATION->IncludeComponent(
         "kelnik:profile",
-        "info",
+        "docs",
         array(
-            "COMPONENT_TEMPLATE" => "info",
-            "SECTION" => "profile",
+            "COMPONENT_TEMPLATE" => "docs",
+            "SECTION" => "docs",
             "CACHE_TYPE" => "N",
             "CACHE_TIME" => "360000"
         ),
         array()
     ); ?>
 
-</div>
-<div class="l-profile-logout">
-    <button class="button-logout j-logout" type="button">Выйти из личного кабинета</button>
 </div>
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
