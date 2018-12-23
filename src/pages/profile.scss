@@ -52,8 +52,8 @@
 .l-profile-logout {
     @include prefix(2, 36);
     @include suffix(2, 36);
-    @include padding-level(bottom, pink);
-    @include padding-level(top, pink);
+    @include padding-level(bottom, blue);
+    @include padding-level(top, blue);
     background-color: $bg-grey;
 
     @media #{$laptop} {
