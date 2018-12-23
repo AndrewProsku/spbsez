@@ -14,21 +14,7 @@ class Data
             return [];
         }
 
-        $additionalFields = [
-            'NAME',
-            'LAST_NAME',
-            'SECOND_NAME',
-            'EMAIL',
-            'PERSONAL_PHONE',
-            'WORK_COMPANY',
-            'WORK_PHONE',
-            'WORK_FAX',
-            'UF_INN',
-            'UF_EMAIL',
-            'UF_OWNER_FIO',
-            'UF_ADDR_LEGAL',
-            'UF_ADDR_POST'
-        ];
+        $additionalFields = self::getUserFields();
 
         $userData = \CUser::GetList(
             ($by = 'ID'),
@@ -56,5 +42,25 @@ class Data
         $res['FULL_NAME'] = implode(' ', [$res['LAST_NAME'], $res['NAME'], $res['SECOND_NAME']]);
 
         return $res;
+    }
+
+    public static function getUserFields()
+    {
+        return [
+            'NAME',
+            'LAST_NAME',
+            'SECOND_NAME',
+            'EMAIL',
+            'PERSONAL_PHONE',
+            'WORK_COMPANY',
+            'WORK_PHONE',
+            'WORK_FAX',
+            'UF_INN',
+            'UF_EMAIL',
+            'UF_PHONE',
+            'UF_OWNER_FIO',
+            'UF_ADDR_LEGAL',
+            'UF_ADDR_POST'
+        ];
     }
 }

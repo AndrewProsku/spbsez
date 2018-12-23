@@ -2,6 +2,7 @@
 namespace Kelnik\Api\Process;
 
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\UserTable;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Userdata\Data;
 use Kelnik\Userdata\Model\ContactTable;
@@ -99,5 +100,82 @@ class ApiProcessProfile extends ApiProcessAbstract
         $this->data['id'] = $id;
 
         return true;
+    }
+
+    protected function processUpdate(array $request)
+    {
+        global $USER;
+
+        $person = ArrayHelper::getValue($request, 'person');
+        $profile = ArrayHelper::getValue($request, 'profile');
+
+        if ($person) {
+
+            $userPersons = ContactTable::getListByUser($USER->GetID());
+            foreach ($person as $personId => $fields) {
+                if (!isset($userPersons[$personId])) {
+                    continue;
+                }
+                $data = [];
+                foreach ($fields as $k => $v) {
+                    if (!in_array($k, ['FIO', 'PHONE', 'EMAIL', 'POSITION'])) {
+                        continue;
+                    }
+                    $data[$k] = $v;
+                }
+
+                try {
+                    ContactTable::update($personId, $data);
+                } catch (\Exception $e) {
+                    $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+                    return false;
+                }
+
+                $this->data['id'][] = $personId;
+            }
+
+            return true;
+
+        } elseif ($profile) {
+
+            $data = [];
+            $allowFields = Data::getUserFields();
+
+            foreach ($profile as $k => $v) {
+                $v = trim($v);
+
+                if ($k == 'FULL_NAME') {
+                    list($data['LAST_NAME'], $data['NAME'], $data['SECOND_NAME']) = explode(' ', $v);
+                    if (empty($data['NAME'])) {
+                        $data['NAME'] = $data['LAST_NAME'];
+                        unset($data['LAST_NAME']);
+                    }
+                    continue;
+                }
+
+                if (!in_array($k, $allowFields)) {
+                    continue;
+                }
+
+                $data[$k] = $v;
+            }
+
+            if (!$data) {
+                $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+                return false;
+            }
+
+            $cUser = new \CUser();
+            $cUser->Update($USER->GetID(), $data);
+
+            if ($cUser->LAST_ERROR) {
+                $this->errors[] = $cUser->LAST_ERROR;
+                return false;
+            }
+
+            $this->data = $data;
+        }
+
+        return false;
     }
 }

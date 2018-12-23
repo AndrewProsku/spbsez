@@ -53,7 +53,6 @@ class ContactTable extends DataManager
             new Main\Entity\StringField(
                 'FIO',
                 [
-                    'default_value' => 500,
                     'title' => Loc::getMessage('KELNIK_USERDATA_FIO'),
                 ]
             ),

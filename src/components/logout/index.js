@@ -7,16 +7,12 @@ class Logout {
      */
     init(options) {
         options.button.addEventListener('click', () => {
-            Utils.send('logout', '/tests/logout.json', {
+            Utils.send('logout', '/api/logout/', {
                 success(response) {
                     const successStatus = 1;
 
                     if (response.request.status === successStatus) {
-                        if (response.data && response.data.backUrl) {
-                            window.location.href = response.data.backUrl;
-                        } else {
-                            window.location.href = '/';
-                        }
+                        window.location.href = response.data.backUrl || '/';
                     }
                 },
                 error(error) {

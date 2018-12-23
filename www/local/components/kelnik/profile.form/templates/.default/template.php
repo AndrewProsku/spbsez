@@ -11,7 +11,7 @@
                 <input id="profile-name"
                        class="b-input-text"
                        type="text"
-                       name="FULL_NAME"
+                       name="profile[FULL_NAME]"
                        maxlength="255"
                        autocomplete=""
                        placeholder="">
@@ -21,8 +21,8 @@
             <div class="b-form-block">
                 <input id="profile-email"
                        class="b-input-email"
-                       type="EMAIL"
-                       name="profile-email">
+                       type="email"
+                       name="profile[EMAIL]">
                 <label for="profile-email" class="b-form-block__label">Эл.почта</label>
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
@@ -30,7 +30,7 @@
                 <input id="profile-phone"
                        class="b-input-phone"
                        type="tel"
-                       name="WORK_PHONE"
+                       name="profile[WORK_PHONE]"
                        autocomplete="tel"
                        placeholder="+7(___) ___-__-__">
                 <label for="profile-phone" class="b-form-block__label">Телефон</label>
@@ -40,7 +40,7 @@
                 <input id="profile-status"
                        class="b-input-text"
                        type="text"
-                       name="STATUS"
+                       name="profile[STATUS]"
                        maxlength=""
                        autocomplete=""
                        placeholder="" readonly>
@@ -59,7 +59,7 @@
                 <input id="company-resident"
                         class="b-input-text"
                         type="text"
-                        name="WORK_COMPANY"
+                        name="profile[WORK_COMPANY]"
                         maxlength=""
                         autocomplete=""
                         placeholder="">
@@ -71,7 +71,7 @@
                 <input id="company-inn"
                         class="b-input-text"
                         type="text"
-                        name="UF_INN"
+                        name="profile[UF_INN]"
                         maxlength=""
                         autocomplete=""
                         value=""
@@ -84,7 +84,7 @@
                 <input id="company-legal-address"
                         class="b-input-text"
                         type="text"
-                        name="UF_ADD_LEGAL"
+                        name="profile[UF_ADD_LEGAL]"
                         maxlength=""
                         autocomplete=""
                         value=""
@@ -97,7 +97,7 @@
                 <input id="company-postal-address"
                         class="b-input-text"
                         type="text"
-                        name="UF_ADDR_POST"
+                        name="profile[UF_ADDR_POST]"
                         maxlength=""
                         autocomplete=""
                         value=""
@@ -110,9 +110,9 @@
                 <input id="company-phone"
                         class="b-input-phone"
                         type="tel"
-                        name="UF_PHONE"
+                        name="profile[UF_PHONE]"
                         autocomplete="tel"
-                        placeholder="+7(___) ___-__-__">
+                        placeholder="+7 (___) ___-__-__">
                 <label for="company-phone" class="b-form-block__label">Телефон</label>
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
@@ -121,9 +121,9 @@
                 <input id="company-fax"
                         class="b-input-phone"
                         type="tel"
-                        name="UF_FAX"
+                        name="profile[UF_FAX]"
                         autocomplete="tel"
-                        placeholder="+7(___) ___-__-__">
+                        placeholder="+7 (___) ___-__-__">
                 <label for="company-fax" class="b-form-block__label">Факс</label>
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
@@ -131,7 +131,7 @@
                 <input id="company-email"
                         class="b-input-email"
                         type="email"
-                        name="UF_EMAIL">
+                        name="profile[UF_EMAIL]">
                 <label for="company-email" class="b-form-block__label">Электронная почта</label>
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
@@ -139,7 +139,7 @@
                 <input id="company-ceo"
                         class="b-input-text"
                         type="text"
-                        name="UF_OWNER_FIO"
+                        name="profile[UF_OWNER_FIO]"
                         maxlength=""
                         autocomplete=""
                         value=""

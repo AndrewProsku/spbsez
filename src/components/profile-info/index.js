@@ -55,20 +55,12 @@ class ProfileInfo {
                 const telInputs = Array.from(that.$profileInfo.querySelectorAll('input[type="tel"]'));
 
                 inputTel.init({input: telInputs});
-
-
                 that.bindEvents();
             },
             error(error) {
                 console.error(error);
             }
         });
-
-        const inputTel = new InputTel();
-        const telInputs = Array.from(that.$profileInfo.querySelectorAll('input[type="tel"]'));
-
-        inputTel.init({input: telInputs});
-        that.bindEvents();
     }
 
     bindEvents() {
@@ -86,18 +78,7 @@ class ProfileInfo {
             });
         });
 
-        const contactBlocks = Array.from(this.$contactsInfo.querySelectorAll('.b-profile-block'));
-
-        contactBlocks.forEach((contact) => {
-            const contactInputs = Array.from(contact.querySelectorAll('input'));
-
-            contactInputs.forEach((input) => {
-                input.addEventListener('change', (event) => {
-                    this.onChange(event.target);
-                });
-            });
-        });
-
+        this.bindEventsContacts();
 
         // Добавление контактного лица
         this.$addContactButton.addEventListener('click', () => {
@@ -112,8 +93,7 @@ class ProfileInfo {
                     contact.deletable = that.isContactsDeletable;
                     contact.id = response.data.id;
                     that.$contactsInfo.insertAdjacentHTML('beforeend', templateContact(contact));
-
-                    that.bindRemoveContact();
+                    that.bindEventsContacts();
 
                     const inputTel = new InputTel();
                     const telInputs = Array.from(that.$contactsInfo.querySelectorAll('input[type="tel"]'));
@@ -125,8 +105,22 @@ class ProfileInfo {
                 }
             });
         });
+    }
 
-        // Удаление контактоного лица
+    bindEventsContacts() {
+        const contactBlocks = Array.from(this.$contactsInfo.querySelectorAll('.b-profile-block'));
+
+        contactBlocks.forEach((contact) => {
+            const contactInputs = Array.from(contact.querySelectorAll('input'));
+
+            contactInputs.forEach((input) => {
+                $(input).unbind('change');
+                input.addEventListener('change', (event) => {
+                    this.onChange(event.target);
+                });
+            });
+        });
+
         this.bindRemoveContact();
     }
 
