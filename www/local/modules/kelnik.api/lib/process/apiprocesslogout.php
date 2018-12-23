@@ -15,6 +15,7 @@ class ApiProcessLogout extends ApiProcessLogin
         global $USER;
 
         $USER->Logout();
+        $this->data['backUrl'] = '/';
 
         return true;
     }
