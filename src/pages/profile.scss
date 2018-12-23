@@ -48,3 +48,21 @@
         margin: 0;
     }
 }
+
+.l-profile-logout {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(bottom, blue);
+    @include padding-level(top, blue);
+    background-color: $bg-grey;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
