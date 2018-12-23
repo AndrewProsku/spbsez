@@ -136,8 +136,8 @@ class ProfileInfo {
         if (data.STATUS) {
             that.$adminInfo.querySelector('#profile-status').value = data.STATUS;
         }
-        if (data.WORK_PHONE) {
-            that.$adminInfo.querySelector('#profile-phone').value = data.WORK_PHONE;
+        if (data.PERSONAL_PHONE) {
+            that.$adminInfo.querySelector('#profile-phone').value = data.PERSONAL_PHONE;
         }
     }
 

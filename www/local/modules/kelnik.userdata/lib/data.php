@@ -57,7 +57,6 @@ class Data
             'WORK_FAX',
             'UF_INN',
             'UF_EMAIL',
-            'UF_PHONE',
             'UF_OWNER_FIO',
             'UF_ADDR_LEGAL',
             'UF_ADDR_POST'
