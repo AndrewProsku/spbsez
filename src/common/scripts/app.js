@@ -4,6 +4,7 @@ import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
 import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
+import Logout from 'components/logout';
 import NewPassword from '../../components/new-password';
 import PasswordRecovery from '../../components/password-recovery';
 import ProfileInfo from '../../components/profile-info';
@@ -397,4 +398,15 @@ if (profileInfoForm) {
     const profileInfo = new ProfileInfo();
 
     profileInfo.init();
+}
+
+/**
+ * Инициализация кноки выхода из личного кабинета
+ */
+const logoutButton = document.querySelector('.j-logout');
+
+if (logoutButton) {
+    const logout = new Logout();
+
+    logout.init({button: logoutButton});
 }
