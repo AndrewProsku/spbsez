@@ -4,68 +4,50 @@
         <h4>Контактное лицо проекта {{ isSeveralContacts }}</h4>
     </div>
 
-
     <div class="b-profile-block__input-wrap">
 
         <div class="b-form-block">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "person-name",
-                name: "person-name-" ~ id,
-                value: name
+                name: "person[" ~ id ~ "][FIO]",
+                value: fio
             } %}
 
-
-            <label for="person-name" class="b-form-block__label">
-                ФИО
-            </label>
-            <span class="b-form-block__error-text">
-                            Текст подсказки
-                        </span>
+            <label for="person-name" class="b-form-block__label">ФИО</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
 
         <div class="b-form-block">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "person-post",
-                name: "person-post-" ~ id,
-                value: post
+                name: "person[" ~ id ~ "][POSITION]",
+                value: position
             } %}
 
-            <label for="person-post" class="b-form-block__label">
-                Должность
-            </label>
-            <span class="b-form-block__error-text">
-                            Текст подсказки
-                        </span>
+            <label for="person-post" class="b-form-block__label">Должность</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
 
         <div class="b-form-block">
             {% include "../../forms/telephone/telephone.twig" with {
                 id: "person-phone",
-                name: "person-phone-" ~ id,
+                name: "person[" ~ id ~ "][PHONE]",
                 value: phone
             } %}
 
-            <label for="person-phone" class="b-form-block__label">
-                Телефон
-            </label>
-            <span class="b-form-block__error-text">
-                            Текст подсказки
-                        </span>
+            <label for="person-phone" class="b-form-block__label">Телефон</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
 
         <div class="b-form-block">
             {% include "../../forms/email/email.twig" with {
                 id: "person-email",
-                name: "person-email-" ~ id,
+                name: "person" ~ id ~ "][EMAIL]",
                 value: email
             } %}
 
-            <label for="person-email" class="b-form-block__label">
-                Эл.почта
-            </label>
-            <span class="b-form-block__error-text">
-                            Текст подсказки
-                        </span>
+            <label for="person-email" class="b-form-block__label">Эл.почта</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
 
     </div>

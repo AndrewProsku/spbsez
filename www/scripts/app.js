@@ -39876,7 +39876,7 @@ function () {
     key: "init",
     value: function init() {
       var that = this;
-      _common_scripts_utils__WEBPACK_IMPORTED_MODULE_3__["default"].send('', '/tests/personal-info.json', {
+      _common_scripts_utils__WEBPACK_IMPORTED_MODULE_3__["default"].send('', '/api/profile/', {
         success: function success(response) {
           if (response.request.status === that.failStatus) {
             return;
@@ -39885,12 +39885,9 @@ function () {
           var data = response.data;
           var inputTel = new _components_forms_telephone_telephone__WEBPACK_IMPORTED_MODULE_1__["default"](); // Заполняем форму данными
 
-          if (data.administrator) {
-            that.initAdministratorInfo(data.administrator);
-          }
-
-          if (data.company) {
-            that.initCompanyInfo(data.company);
+          if (data.profile) {
+            that.initAdministratorInfo(data.profile);
+            that.initCompanyInfo(data.profile);
           }
 
           if (data.contacts) {
@@ -39942,7 +39939,7 @@ function () {
       }); // Добавление контактного лица
 
       this.$addContactButton.addEventListener('click', function () {
-        _common_scripts_utils__WEBPACK_IMPORTED_MODULE_3__["default"].send('addContact', '/tests/personal-info.json', {
+        _common_scripts_utils__WEBPACK_IMPORTED_MODULE_3__["default"].send('action=addContact', '/api/profile/', {
           success: function success(response) {
             if (response.request.status === that.failStatus) {
               return;
@@ -39973,20 +39970,20 @@ function () {
     value: function initAdministratorInfo(data) {
       var that = this;
 
-      if (data.name) {
-        that.$adminInfo.querySelector('#profile-name').value = data.name;
+      if (data.FULL_NAME) {
+        that.$adminInfo.querySelector('#profile-name').value = data.FULL_NAME;
       }
 
-      if (data.email) {
-        that.$adminInfo.querySelector('#profile-email').value = data.email;
+      if (data.EMAIL) {
+        that.$adminInfo.querySelector('#profile-email').value = data.EMAIL;
       }
 
-      if (data.status) {
-        that.$adminInfo.querySelector('#profile-status').value = data.status;
+      if (data.STATUS) {
+        that.$adminInfo.querySelector('#profile-status').value = data.STATUS;
       }
 
-      if (data.phone) {
-        that.$adminInfo.querySelector('#profile-phone').value = data.phone;
+      if (data.WORK_PHONE) {
+        that.$adminInfo.querySelector('#profile-phone').value = data.WORK_PHONE;
       }
     }
   }, {
@@ -39994,37 +39991,30 @@ function () {
     value: function initCompanyInfo(data) {
       var that = this;
 
-      if (data.resident) {
-        that.$companyInfo.querySelector('#company-resident').value = data.resident;
-      }
-
-      if (data.inn) {
-        that.$companyInfo.querySelector('#company-inn').value = data.inn;
-      }
-
-      if (data.legalAddress) {
-        that.$companyInfo.querySelector('#company-legal-address').value = data.legalAddress;
-      }
-
-      if (data.postalAddress) {
-        that.$companyInfo.querySelector('#company-postal-address').value = data.postalAddress;
-      }
-
-      if (data.phone) {
-        that.$companyInfo.querySelector('#company-phone').value = data.phone;
-      }
-
-      if (data.fax) {
-        that.$companyInfo.querySelector('#company-fax').value = data.fax;
-      }
-
-      if (data.email) {
-        that.$companyInfo.querySelector('#company-email').value = data.email;
-      }
-
-      if (data.ceo) {
-        that.$companyInfo.querySelector('#company-ceo').value = data.ceo;
-      }
+        if (data.WORK_COMPANY) {
+            that.$companyInfo.querySelector('#company-resident').value = data.WORK_COMPANY;
+        }
+        if (data.UF_INN) {
+            that.$companyInfo.querySelector('#company-inn').value = data.UF_INN;
+        }
+        if (data.UF_ADDR_LEGAL) {
+            that.$companyInfo.querySelector('#company-legal-address').value = data.UF_ADDR_LEGAL;
+        }
+        if (data.UF_ADDR_POST) {
+            that.$companyInfo.querySelector('#company-postal-address').value = data.UF_ADDR_POST;
+        }
+        if (data.WORK_PHONE) {
+            that.$companyInfo.querySelector('#company-phone').value = data.WORK_PHONE;
+        }
+        if (data.WORK_FAX) {
+            that.$companyInfo.querySelector('#company-fax').value = data.WORK_FAX;
+        }
+        if (data.UF_EMAIL) {
+            that.$companyInfo.querySelector('#company-email').value = data.UF_EMAIL;
+        }
+        if (data.UF_OWNER_FIO) {
+            that.$companyInfo.querySelector('#company-ceo').value = data.UF_OWNER_FIO;
+        }
     }
   }, {
     key: "bindRemoveContact",
@@ -40041,10 +40031,10 @@ function () {
     key: "removeContact",
     value: function removeContact(input) {
       var that = this;
-      var dataToSend = "removeContact=".concat(input.dataset.id);
+      var dataToSend = "action=del&id=".concat(input.dataset.id);
       var contactClass = ".b-profile-block[data-id=\"".concat(input.dataset.id, "\"]");
       var contactToDelete = that.$contactsInfo.querySelector(contactClass);
-      _common_scripts_utils__WEBPACK_IMPORTED_MODULE_3__["default"].send(dataToSend, '/tests/personal-info-add-contact.json', {
+      _common_scripts_utils__WEBPACK_IMPORTED_MODULE_3__["default"].send(dataToSend, '/api/contact/', {
         success: function success(response) {
           if (response.request.status === that.failStatus) {
             return;
@@ -40067,9 +40057,9 @@ function () {
   }, {
     key: "onChange",
     value: function onChange(input) {
-      var dataToSend = jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).serialize();
+      var dataToSend = 'action=update&' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).serialize();
       var that = this;
-      _common_scripts_utils__WEBPACK_IMPORTED_MODULE_3__["default"].send(dataToSend, '/tests/personal-info.json', {
+      _common_scripts_utils__WEBPACK_IMPORTED_MODULE_3__["default"].send(dataToSend, '/api/personal/', {
         success: function success(response) {
           if (response.request.status === that.failStatus) {
             var errorMessage = response.request.errors.join('</br>');

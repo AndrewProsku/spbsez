@@ -1,5 +1,4 @@
-DROP TABLE IF EXISTS `kelnik_request`;
-CREATE TABLE `kelnik_request` (
+CREATE TABLE IF NOT EXISTS `kelnik_request` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `USER_ID` INT(11) UNSIGNED NOT NULL DEFAULT '0',
   `TYPE_ID` INT(11) UNSIGNED NOT NULL DEFAULT '0',
@@ -17,7 +16,6 @@ CREATE TABLE `kelnik_request` (
   INDEX `STATUS_ID` (`STATUS_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `kelnik_request_statuses`;
 CREATE TABLE IF NOT EXISTS `kelnik_request_statuses` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `SORT` int(11) DEFAULT '500',
@@ -28,7 +26,6 @@ CREATE TABLE IF NOT EXISTS `kelnik_request_statuses` (
   KEY `ACTIVE` (`ACTIVE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-DROP TABLE IF EXISTS `kelnik_request_types`;
 CREATE TABLE IF NOT EXISTS `kelnik_request_types` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `SORT` int(11) DEFAULT '500',

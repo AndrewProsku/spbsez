@@ -4,19 +4,17 @@ use Bitrix\Main\Application;
 use Bitrix\Main\ModuleManager;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Loader;
-use Kelnik\Requests\Booking\BookingTable;
-use Kelnik\Requests\Phone\PhoneTable;
 
 IncludeModuleLangFile(__FILE__);
 
-class kelnik_requests extends CModule
+class kelnik_userdata extends CModule
 {
-    public $MODULE_ID = 'kelnik.requests';
+    public $MODULE_ID = 'kelnik.userdata';
     public $MODULE_GROUP_RIGHTS = 'Y';
 
     public function __construct()
     {
-        $arModuleVersion = [];
+        $arModuleVersion = array();
 
         include(__DIR__ . '/version.php');
 
@@ -27,43 +25,36 @@ class kelnik_requests extends CModule
             $this->MODULE_VERSION = $arModuleVersion['VERSION'];
             $this->MODULE_VERSION_DATE = $arModuleVersion['VERSION_DATE'];
         }
-
-        $this->MODULE_NAME        = Loc::getMessage('KELNIK_REQ_NAME');
-        $this->MODULE_DESCRIPTION = Loc::getMessage('KELNIK_REQ_DESCRIPTION');
-        $this->PARTNER_NAME       = Loc::getMessage('KELNIK_REQ_PARTNER_NAME');
-        $this->PARTNER_URI        = 'http://kelnik.ru';
+        $this->MODULE_NAME = Loc::getMessage('KELNIK_USERDATA_NAME');
+        $this->MODULE_DESCRIPTION = Loc::getMessage('KELNIK_USERDATA_DESCRIPTION');
+        $this->PARTNER_NAME = Loc::getMessage('KELNIK_USERDATA_PARTNER_NAME');
+        $this->PARTNER_URI = 'http://kelnik.ru';
     }
 
     public function DoInstall()
     {
-        try {
-            ModuleManager::registerModule($this->MODULE_ID);
-            Loader::includeModule($this->MODULE_ID);
-        } catch (\Exception $e) {
-            ShowError(Loc::getMessage('KELNIK_REQ_ERROR') . $e->getMessage());
+        if (!$this->checkDependencies()) {
             return false;
         }
 
-        $this->InstallDB();
-        $this->InstallFiles();
+        ModuleManager::registerModule($this->MODULE_ID);
+        Loader::includeModule($this->MODULE_ID);
+
+        //$this->InstallFiles();
     }
 
     public function DoUninstall()
     {
-        try {
-            Loader::includeModule($this->MODULE_ID);
+        Loader::includeModule($this->MODULE_ID);
 
-            $this->UnInstallDB();
-            $this->UnInstallFiles();
-        } catch (Exception $e) {
-        }
+        //$this->UnInstallFiles();
 
         ModuleManager::unRegisterModule($this->MODULE_ID);
     }
 
     protected function getConnection()
     {
-        return Application::getInstance()->getConnection(BookingTable::getConnectionName());
+        return Application::getInstance()->getConnection();
     }
 
     public function InstallFiles()
@@ -84,6 +75,49 @@ class kelnik_requests extends CModule
         $this->runSql('uninstall.sql');
     }
 
+    protected function checkDependencies()
+    {
+        global $APPLICATION;
+
+        $requireModules = include implode(
+            DIRECTORY_SEPARATOR,
+            [
+                __DIR__,
+                '..',
+                'require.php'
+            ]
+        );
+
+        if (!$requireModules) {
+            return true;
+        }
+
+        $result = [];
+
+        foreach ($requireModules as $moduleName => $moduleParams) {
+            if (ModuleManager::isModuleInstalled($moduleName)) {
+                continue;
+            }
+
+            $result[] = $moduleName;
+        }
+
+        if (empty($result)) {
+            return true;
+        }
+
+        $APPLICATION->ThrowException(new CApplicationException(
+            Loc::getMessage(
+                'KELNIK_REQUIRE_MODULES',
+                [
+                    '#MODULES#' => implode(', ', $result)
+                ]
+            )
+        ));
+
+        return false;
+    }
+
     protected function runSql($sqlFileName)
     {
         global $DB;
@@ -92,7 +126,7 @@ class kelnik_requests extends CModule
 
         $errors = file_exists($sqlPath)
             ? $DB->RunSQLBatch($sqlPath)
-            : [Loc::getMessage('KELNIK_REQ_FILE_NOT_FOUND', ['#FILE#' => $sqlFileName])];
+            : [Loc::getMessage('KELNIK_USERDATA_FILE_NOT_FOUND', ['#FILE#' => $sqlFileName])];
 
         if ($errors !== false) {
             try {

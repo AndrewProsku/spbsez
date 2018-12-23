@@ -26,7 +26,7 @@ class ProfileInfo {
     init() {
         const that = this;
 
-        Utils.send('', '/tests/personal-info.json', {
+        Utils.send('', '/api/profile/', {
             success(response) {
                 if (response.request.status === that.failStatus) {
                     return;
@@ -36,12 +36,9 @@ class ProfileInfo {
                 const inputTel = new InputTel();
 
                 // Заполняем форму данными
-                if (data.administrator) {
-                    that.initAdministratorInfo(data.administrator);
-                }
-
-                if (data.company) {
-                    that.initCompanyInfo(data.company);
+                if (data.profile) {
+                    that.initAdministratorInfo(data.profile);
+                    that.initCompanyInfo(data.profile);
                 }
 
                 if (data.contacts) {
@@ -66,6 +63,12 @@ class ProfileInfo {
                 console.error(error);
             }
         });
+
+        const inputTel = new InputTel();
+        const telInputs = Array.from(that.$profileInfo.querySelectorAll('input[type="tel"]'));
+
+        inputTel.init({input: telInputs});
+        that.bindEvents();
     }
 
     bindEvents() {
@@ -98,7 +101,7 @@ class ProfileInfo {
 
         // Добавление контактного лица
         this.$addContactButton.addEventListener('click', () => {
-            Utils.send('addContact', '/tests/personal-info.json', {
+            Utils.send('action=addContact', '/api/profile/', {
                 success(response) {
                     if (response.request.status === that.failStatus) {
                         return;
@@ -130,46 +133,46 @@ class ProfileInfo {
     initAdministratorInfo(data) {
         const that = this;
 
-        if (data.name) {
-            that.$adminInfo.querySelector('#profile-name').value = data.name;
+        if (data.FULL_NAME) {
+            that.$adminInfo.querySelector('#profile-name').value = data.FULL_NAME;
         }
-        if (data.email) {
-            that.$adminInfo.querySelector('#profile-email').value = data.email;
+        if (data.EMAIL) {
+            that.$adminInfo.querySelector('#profile-email').value = data.EMAIL;
         }
-        if (data.status) {
-            that.$adminInfo.querySelector('#profile-status').value = data.status;
+        if (data.STATUS) {
+            that.$adminInfo.querySelector('#profile-status').value = data.STATUS;
         }
-        if (data.phone) {
-            that.$adminInfo.querySelector('#profile-phone').value = data.phone;
+        if (data.WORK_PHONE) {
+            that.$adminInfo.querySelector('#profile-phone').value = data.WORK_PHONE;
         }
     }
 
     initCompanyInfo(data) {
         const that = this;
 
-        if (data.resident) {
-            that.$companyInfo.querySelector('#company-resident').value = data.resident;
+        if (data.WORK_COMPANY) {
+            that.$companyInfo.querySelector('#company-resident').value = data.WORK_COMPANY;
         }
-        if (data.inn) {
-            that.$companyInfo.querySelector('#company-inn').value = data.inn;
+        if (data.UF_INN) {
+            that.$companyInfo.querySelector('#company-inn').value = data.UF_INN;
         }
-        if (data.legalAddress) {
-            that.$companyInfo.querySelector('#company-legal-address').value = data.legalAddress;
+        if (data.UF_ADDR_LEGAL) {
+            that.$companyInfo.querySelector('#company-legal-address').value = data.UF_ADDR_LEGAL;
         }
-        if (data.postalAddress) {
-            that.$companyInfo.querySelector('#company-postal-address').value = data.postalAddress;
+        if (data.UF_ADDR_POST) {
+            that.$companyInfo.querySelector('#company-postal-address').value = data.UF_ADDR_POST;
         }
-        if (data.phone) {
-            that.$companyInfo.querySelector('#company-phone').value = data.phone;
+        if (data.WORK_PHONE) {
+            that.$companyInfo.querySelector('#company-phone').value = data.WORK_PHONE;
         }
-        if (data.fax) {
-            that.$companyInfo.querySelector('#company-fax').value = data.fax;
+        if (data.WORK_FAX) {
+            that.$companyInfo.querySelector('#company-fax').value = data.WORK_FAX;
         }
-        if (data.email) {
-            that.$companyInfo.querySelector('#company-email').value = data.email;
+        if (data.UF_EMAIL) {
+            that.$companyInfo.querySelector('#company-email').value = data.UF_EMAIL;
         }
-        if (data.ceo) {
-            that.$companyInfo.querySelector('#company-ceo').value = data.ceo;
+        if (data.UF_OWNER_FIO) {
+            that.$companyInfo.querySelector('#company-ceo').value = data.UF_OWNER_FIO;
         }
     }
 
@@ -186,12 +189,11 @@ class ProfileInfo {
 
     removeContact(input) {
         const that = this;
-        const dataToSend = `removeContact=${input.dataset.id}`;
+        const dataToSend = `action=del&id=${input.dataset.id}`;
         const contactClass = `.b-profile-block[data-id="${input.dataset.id}"]`;
         const contactToDelete = that.$contactsInfo.querySelector(contactClass);
 
-
-        Utils.send(dataToSend, '/tests/personal-info-add-contact.json', {
+        Utils.send(dataToSend, '/api/contact/', {
             success(response) {
                 if (response.request.status === that.failStatus) {
                     return;
@@ -214,10 +216,10 @@ class ProfileInfo {
     }
 
     onChange(input) {
-        const dataToSend = $(input).serialize();
+        const dataToSend = `action=update&${$(input).serialize()}`;
         const that = this;
 
-        Utils.send(dataToSend, '/tests/personal-info.json', {
+        Utils.send(dataToSend, '/api/profile/', {
             success(response) {
                 if (response.request.status === that.failStatus) {
                     const errorMessage = response.request.errors.join('</br>');
