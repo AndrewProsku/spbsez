@@ -30,7 +30,7 @@
                 <input id="profile-phone"
                        class="b-input-phone"
                        type="tel"
-                       name="profile[WORK_PHONE]"
+                       name="profile[PERSONAL_PHONE]"
                        autocomplete="tel"
                        placeholder="+7(___) ___-__-__">
                 <label for="profile-phone" class="b-form-block__label">Телефон</label>
@@ -84,7 +84,7 @@
                 <input id="company-legal-address"
                         class="b-input-text"
                         type="text"
-                        name="profile[UF_ADD_LEGAL]"
+                        name="profile[UF_ADDR_LEGAL]"
                         maxlength=""
                         autocomplete=""
                         value=""
@@ -110,7 +110,7 @@
                 <input id="company-phone"
                         class="b-input-phone"
                         type="tel"
-                        name="profile[UF_PHONE]"
+                        name="profile[WORK_PHONE]"
                         autocomplete="tel"
                         placeholder="+7 (___) ___-__-__">
                 <label for="company-phone" class="b-form-block__label">Телефон</label>
@@ -121,7 +121,7 @@
                 <input id="company-fax"
                         class="b-input-phone"
                         type="tel"
-                        name="profile[UF_FAX]"
+                        name="profile[WORK_FAX]"
                         autocomplete="tel"
                         placeholder="+7 (___) ___-__-__">
                 <label for="company-fax" class="b-form-block__label">Факс</label>
