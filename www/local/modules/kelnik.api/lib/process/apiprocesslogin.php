@@ -63,7 +63,7 @@ class ApiProcessLogin extends ApiProcessAbstract
         }
 
         if (true === $this->data['auth']) {
-            $this->data['backUrl'] = '/';
+            $this->data['backUrl'] = '/cabinet/';
         } else {
             $this->data['error'] = ArrayHelper::getValue($this->data['auth'], 'MESSAGE', '');
             $this->data['auth'] = false;
