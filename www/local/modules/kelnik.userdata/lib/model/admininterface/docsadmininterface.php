@@ -35,7 +35,6 @@ class DocsAdminInterface extends AdminInterface
                     ],
                     'FILE_ID' => [
                         'WIDGET' => new FileWidget(),
-                        'REQUIRED' => true,
                         'FILTER' => true
                     ],
                     'DATE_CREATED' => [
