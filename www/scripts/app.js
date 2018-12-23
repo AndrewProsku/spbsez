@@ -40031,10 +40031,10 @@ function () {
     key: "removeContact",
     value: function removeContact(input) {
       var that = this;
-      var dataToSend = "action=del&id=".concat(input.dataset.id);
+      var dataToSend = "action=delContact&id=".concat(input.dataset.id);
       var contactClass = ".b-profile-block[data-id=\"".concat(input.dataset.id, "\"]");
       var contactToDelete = that.$contactsInfo.querySelector(contactClass);
-      _common_scripts_utils__WEBPACK_IMPORTED_MODULE_3__["default"].send(dataToSend, '/api/contact/', {
+      _common_scripts_utils__WEBPACK_IMPORTED_MODULE_3__["default"].send(dataToSend, '/api/profile/', {
         success: function success(response) {
           if (response.request.status === that.failStatus) {
             return;

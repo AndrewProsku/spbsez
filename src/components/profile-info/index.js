@@ -189,11 +189,11 @@ class ProfileInfo {
 
     removeContact(input) {
         const that = this;
-        const dataToSend = `action=del&id=${input.dataset.id}`;
+        const dataToSend = `action=delContact&id=${input.dataset.id}`;
         const contactClass = `.b-profile-block[data-id="${input.dataset.id}"]`;
         const contactToDelete = that.$contactsInfo.querySelector(contactClass);
 
-        Utils.send(dataToSend, '/api/contact/', {
+        Utils.send(dataToSend, '/api/profile/', {
             success(response) {
                 if (response.request.status === that.failStatus) {
                     return;

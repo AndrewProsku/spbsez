@@ -42,7 +42,7 @@
         <div class="b-form-block">
             {% include "../../forms/email/email.twig" with {
                 id: "person-email",
-                name: "person" ~ id ~ "][EMAIL]",
+                name: "person[" ~ id ~ "][EMAIL]",
                 value: email
             } %}
 
