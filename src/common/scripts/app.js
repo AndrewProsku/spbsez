@@ -7,6 +7,7 @@ import InputTel from '../../components/forms/telephone/telephone';
 import Logout from 'components/logout';
 import NewPassword from '../../components/new-password';
 import PasswordRecovery from '../../components/password-recovery';
+import ProfileDocs from '../../components/profile-docs';
 import ProfileInfo from '../../components/profile-info';
 import Select from '../../components/forms/select/';
 import Utils from './utils';
@@ -409,4 +410,8 @@ if (logoutButton) {
     const logout = new Logout();
 
     logout.init({button: logoutButton});
+}
+
+if (document.querySelector(ProfileDocs.selector)) {
+    (new ProfileDocs()).init();
 }

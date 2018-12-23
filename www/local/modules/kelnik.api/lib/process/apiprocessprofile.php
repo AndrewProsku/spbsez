@@ -6,6 +6,7 @@ use Bitrix\Main\UserTable;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Userdata\Data;
 use Kelnik\Userdata\Model\ContactTable;
+use Kelnik\Userdata\Model\DocsTable;
 
 /**
  * Class ApiProcessLogin
@@ -177,5 +178,36 @@ class ApiProcessProfile extends ApiProcessAbstract
         }
 
         return false;
+    }
+
+    protected function processDelDoc(array $request)
+    {
+        global $USER;
+
+        $id = (int)ArrayHelper::getValue($request, 'id', 0);
+
+        if (!$id) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+            return false;
+        }
+
+        try {
+            $res = DocsTable::getRow([
+                'select' => ['ID'],
+                'filter' => [
+                    '=ID' => $id,
+                    '=USER_ID' => (int)$USER->GetID()
+                ]
+            ]);
+            if (empty($res['ID'])) {
+                $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+                return false;
+            }
+            DocsTable::delete($id);
+        }catch (\Exception $e) {}
+
+        $this->data['id'] = $id;
+
+        return true;
     }
 }

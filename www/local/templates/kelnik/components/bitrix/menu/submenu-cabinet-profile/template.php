@@ -1,9 +1,13 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();?>
 <?php if (empty($arResult)): return; endif; ?>
+<?php
+$arCopy = $arResult;
+$arItem = array_shift($arCopy);
+?>
 <div class="b-links b-profile__links">
     <div class="b-links-mobile">
         <div class="b-links-mobile-header">
-            <a href="<?= $aritem['LINK']; ?>" class="b-links__link-mobile"><?= $arItem['TEXT']; ?></a>
+            <a href="<?= $arItem['LINK']; ?>" class="b-links__link-mobile"><?= $arItem['TEXT']; ?></a>
             <span class="b-links__link-icon"></span>
         </div>
         <?php if ($arCopy): ?>
