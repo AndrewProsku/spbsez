@@ -59,15 +59,19 @@ class Api
             $this->errors[] = Loc::getMessage('KELNIK_API_EVENT_NOT_EXISTS');
         }
 
-//        $requiredModules = [];
-//
-//        if ($requiredModules) {
-//            foreach ($requiredModules as $requiredModule) {
-//                if (!\CModule::IncludeModule($requiredModule)) {
-//                    $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
-//                }
-//            }
-//        }
+        $requiredModules = [];
+
+        if (in_array($this->event, ['profile'])) {
+            $requiredModules[] = 'kelnik.userdata';
+        }
+
+        if ($requiredModules) {
+            foreach ($requiredModules as $requiredModule) {
+                if (!\CModule::IncludeModule($requiredModule)) {
+                    $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+                }
+            }
+        }
 
         if (!$this->errors) {
             try {

@@ -85,11 +85,7 @@ class Authorization {
                 const failStatus = 0;
 
                 if (response.request.status === successStatus) {
-                    if (response.data && response.data.backUrl) {
-                        window.location.href = response.data.backUrl;
-                    } else {
-                        window.location.href = '/';
-                    }
+                    window.location.href = response.data.backUrl || '/';
                 } else if (response.request.status === failStatus) {
                     const errorMessage = response.request.errors.join('</br>');
 
