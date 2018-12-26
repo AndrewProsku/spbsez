@@ -9,22 +9,6 @@
     <?php else: ?>
         <h4>Заявка</h4>
         <form method="post" enctype="multipart/form-data" class="b-add-request__form">
-            <div class="b-form-block<?php if(!empty($arResult['ERRORS']['FIELDS']['NAME'])): ?> b-form-block-error<?php endif; ?>">
-                <input id="theme-request"
-                        class="b-input-text"
-                        type="text"
-                        name="name"
-                        maxlength=""
-                        autocomplete=""
-                        value="<?= $arResult['FORM']['NAME']; ?>"
-                        placeholder=""
-                        required>
-
-                <label for="theme-request" class="b-form-block__label">Тема заявки</label>
-                <?php if(!empty($arResult['ERRORS']['FIELDS']['NAME'])): ?>
-                <span class="b-form-block__error-text"><?= $arResult['ERRORS']['FIELDS']['NAME']; ?></span>
-                <?php endif; ?>
-            </div>
             <div class="b-form-block<?php if(!empty($arResult['ERRORS']['FIELDS']['THEME'])): ?> b-form-block-error<?php endif; ?>">
                 <div class="b-select">
                     <div class="b-select__wrapper">
@@ -43,6 +27,22 @@
                 </label>
                 <?php if(!empty($arResult['ERRORS']['FIELDS']['THEME'])): ?>
                     <span class="b-form-block__error-text"><?= $arResult['ERRORS']['FIELDS']['THEME']; ?></span>
+                <?php endif; ?>
+            </div>
+            <div class="b-form-block<?php if(!empty($arResult['ERRORS']['FIELDS']['NAME'])): ?> b-form-block-error<?php endif; ?>">
+                <input id="theme-request"
+                        class="b-input-text"
+                        type="text"
+                        name="name"
+                        maxlength=""
+                        autocomplete=""
+                        value="<?= $arResult['FORM']['NAME']; ?>"
+                        placeholder=""
+                        required>
+
+                <label for="theme-request" class="b-form-block__label">Тема заявки</label>
+                <?php if(!empty($arResult['ERRORS']['FIELDS']['NAME'])): ?>
+                <span class="b-form-block__error-text"><?= $arResult['ERRORS']['FIELDS']['NAME']; ?></span>
                 <?php endif; ?>
             </div>
             <div class="b-form-block b-form-block-textarea<?php if(!empty($arResult['ERRORS']['FIELDS']['MESSAGE'])): ?> b-form-block-error<?php endif; ?>">

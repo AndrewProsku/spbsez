@@ -47,20 +47,6 @@
                  Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
                  -->
                 <div class="b-form-block">
-                    {% include "../components/forms/input-text/input-text.twig" with {
-                        id: "theme-request",
-                        name: "b-form-block__text",
-                        required: "true"
-                    } %}
-
-                    <label for="theme-request" class="b-form-block__label">
-                        Тема заявки
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-                <div class="b-form-block">
                     {% include "../components/forms/select/select.twig" with {
                         id: "appeal",
                         name: "b-form-block__select",
@@ -82,6 +68,20 @@
                     <label for="appeal" class="b-form-block__label">
                         Причина обращения
                     </label>
+                </div>
+                <div class="b-form-block">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "theme-request",
+                        name: "b-form-block__text",
+                        required: "true"
+                    } %}
+
+                    <label for="theme-request" class="b-form-block__label">
+                        Тема заявки
+                    </label>
+                    <span class="b-form-block__error-text">
+                        Текст подсказки
+                    </span>
                 </div>
                 <div class="b-form-block b-form-block-textarea">
                     <textarea name="request-message" id="request-message" class="b-form-block__message" required></textarea>
