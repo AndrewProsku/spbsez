@@ -2,7 +2,6 @@ import $ from 'jquery';
 import Utils from '../../common/scripts/utils';
 
 class ProfileDocs {
-
     static get selector() {
         return '.j-profile-documents';
     }
