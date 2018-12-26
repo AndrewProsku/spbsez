@@ -5,24 +5,5 @@
       "Ошибка!"
     ]
   },
-  "data": {
-    "administrators": [
-      {
-        "id": 1,
-        "fio": "Вознесенский Алексей",
-        "email": "voznesenskiy.alex@biocad.ru",
-        "phone": 9215499878,
-        "status": 1,
-        "access": [1, 2, 3]
-      },
-      {
-        "id": 2,
-        "fio": "Панарин Артемий",
-        "email": "panarin.artemiy@biocad.ru",
-        "phone": 9526548942,
-        "status": 2,
-        "access": [1, 2, 3]
-      }
-    ]
-  }
+  "data": null
 }

@@ -43,58 +43,92 @@ class ProfileAdministrators {
         adminBlocks.forEach((adminBlock) => {
             this.adminCount += 1;
 
-            // Мультиселект
-            const selectAccordion = adminBlock.querySelector('.b-select-accordion');
-            const accordionSubmit = selectAccordion.querySelector('.b-select-accordion__button');
-            const accesses = this.setAccessesInputValue(selectAccordion);
-
-            adminBlock.querySelector('.j-select-accordion').addEventListener('click', (event) => {
-                if (!event.target.closest('.b-select-accordion__list')) {
-                    selectAccordion.classList.toggle('is-open');
-                }
-            });
-
-            // Клик по сабмиту выпадайки
-            accordionSubmit.addEventListener('click', () => {
-                const that = this;
-                const selectAccordionClosure = selectAccordion;
-                const accessesClosure = accesses;
-                let dataToSend = `action=changeAccess&id=${adminBlock.dataset.id}`;
-
-                for (const access in accesses) {
-                    if ({}.hasOwnProperty.call(accesses, access)) {
-                        dataToSend += `&${access}=${accesses[access]}`;
-                    }
-                }
-
-                Utils.send(dataToSend, '/tests/administrators.json', {
-                    success(response) {
-                        if (response.request.status === that.successStatus) {
-                            that.setAccessesInputValue(selectAccordionClosure);
-
-                            that.removeErrorMessage(selectAccordionClosure);
-                        } else if (response.request.status === that.failStatus) {
-                            const errorMessage = response.request.errors.join('</br>');
-
-                            that.showErrorMessage(selectAccordionClosure, errorMessage);
-
-                            // Вернем значения чекбоксов к прежнему состоянию
-                            const checkboxes = Array.from(selectAccordionClosure.querySelectorAll('.b-checkbox-input'));
-
-                            checkboxes.forEach((checkbox) => {
-                                checkbox.checked = accessesClosure[checkbox.name];
-                            });
-                        }
-                    },
-                    error(error) {
-                        console.error(error);
-                    }
-                });
-
-                selectAccordion.classList.remove('is-open');
-            });
 
             this.bindEventsAdmin(adminBlock);
+        });
+    }
+
+    bindEventsAdmin(adminBlock) {
+        const adminInputs = Array.from(adminBlock.querySelectorAll(`.${this.formBlockClass} > input`));
+
+        adminInputs.forEach((input) => {
+            input.addEventListener('change', (event) => {
+                this.onChange(event.target);
+            });
+        });
+        $(adminBlock.querySelector('.j-select')).change((event) => {
+            this.onChange(event.target);
+        });
+
+        // Мультиселект
+        this.bindAccessSelect(adminBlock);
+        this.bindRemoveAdmin(adminBlock);
+    }
+
+    bindRemoveAdmin(adminBlock) {
+        const that = this;
+        const removeButton = adminBlock.querySelector('.j-delete-administrator');
+
+        removeButton.addEventListener('click', () => {
+            that.removeAdmin(adminBlock);
+        });
+    }
+
+    bindAccessSelect(adminBlock) {
+        const selectAccordion = adminBlock.querySelector('.b-select-accordion');
+        const accordionSubmit = selectAccordion.querySelector('.b-select-accordion__button');
+        const accesses = this.setAccessesInputValue(selectAccordion);
+
+        adminBlock.querySelector('.j-select-accordion').addEventListener('click', (event) => {
+            if (!event.target.closest('.b-select-accordion__list')) {
+                selectAccordion.classList.toggle('is-open');
+            }
+
+            document.addEventListener('click', (clickEvent) => {
+                if (!clickEvent.target.closest('.j-select-accordion')) {
+                    selectAccordion.classList.remove('is-open');
+                }
+            }, false);
+        });
+
+        // Клик по сабмиту выпадайки
+        accordionSubmit.addEventListener('click', () => {
+            const that = this;
+            const selectAccordionClosure = selectAccordion;
+            const accessesClosure = accesses;
+            let dataToSend = `action=changeAccess&id=${adminBlock.dataset.id}`;
+
+            for (const access in accesses) {
+                if ({}.hasOwnProperty.call(accesses, access)) {
+                    dataToSend += `&${access}=${accesses[access]}`;
+                }
+            }
+
+            Utils.send(dataToSend, '/tests/administrators.json', {
+                success(response) {
+                    if (response.request.status === that.successStatus) {
+                        that.setAccessesInputValue(selectAccordionClosure);
+
+                        that.removeErrorMessage(selectAccordionClosure);
+                    } else if (response.request.status === that.failStatus) {
+                        const errorMessage = response.request.errors.join('</br>');
+
+                        that.showErrorMessage(selectAccordionClosure, errorMessage);
+
+                        // Вернем значения чекбоксов к прежнему состоянию
+                        const checkboxes = Array.from(selectAccordionClosure.querySelectorAll('.b-checkbox-input'));
+
+                        checkboxes.forEach((checkbox) => {
+                            checkbox.checked = accessesClosure[checkbox.name];
+                        });
+                    }
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
+
+            selectAccordion.classList.remove('is-open');
         });
     }
 
@@ -116,30 +150,6 @@ class ProfileAdministrators {
         accordionInput.value = textValue.join(', ');
 
         return accesses;
-    }
-
-    bindEventsAdmin(adminBlock) {
-        const adminInputs = Array.from(adminBlock.querySelectorAll(`.${this.formBlockClass} > input`));
-
-        adminInputs.forEach((input) => {
-            input.addEventListener('change', (event) => {
-                this.onChange(event.target);
-            });
-        });
-        $(adminBlock.querySelector('.j-select')).change((event) => {
-            this.onChange(event.target);
-        });
-
-        this.bindRemoveAdmin(adminBlock);
-    }
-
-    bindRemoveAdmin(adminBlock) {
-        const that = this;
-        const removeButton = adminBlock.querySelector('.j-delete-administrator');
-
-        removeButton.addEventListener('click', () => {
-            that.removeAdmin(adminBlock);
-        });
     }
 
     addAdmin() {

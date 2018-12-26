@@ -51,7 +51,7 @@
                     text: 'Администратор',
                     selected: status == 'status1'
                 }, {
-                    value: 'status1',
+                    value: 'status2',
                     text: 'Супер-Администратор',
                     selected: status == 'status2'
                 },{
@@ -79,20 +79,19 @@
                         <p>Доступ к разделам сайта</p>
                     </div>
                     <div class="b-select-accordion__list-item">
-                        {#id: "admin" ~ id ~ "access1"#}
-                        {#name: "admin" ~ id ~ "access1",#}
                         {% include "../forms/checkbox/checkbox.twig" with {
                             id: "admin" ~ id ~ "access1",
                             name: "access1",
                             text: "Подача отчета",
-                            checked: true
+                            checked: 1 in accesses
                         } %}
                     </div>
                     <div class="b-select-accordion__list-item">
                         {% include "../forms/checkbox/checkbox.twig" with {
                             id: "admin" ~ id ~ "access2",
                             name: "access2",
-                            text: "Сообщения от ОЭЗ"
+                            text: "Сообщения от ОЭЗ",
+                            checked: 2 in accesses
                         } %}
                     </div>
                     <div class="b-select-accordion__list-item">
@@ -100,7 +99,7 @@
                             id: "admin" ~ id ~ "access3",
                             name: "access3",
                             text: "Подача заявки",
-                            checked: true
+                            checked: 3 in accesses
                         } %}
                     </div>
                     <button type="button" class="button b-select-accordion__button">OK</button>
