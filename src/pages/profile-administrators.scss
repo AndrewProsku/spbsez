@@ -82,19 +82,52 @@
 
 .b-select-accordion {
     position: relative;
+
+    &:after {
+        // Стрелочка справа у селекта
+        content: "";
+        display: block;
+        width: 12px;
+        height: 7px;
+        right: 13px;
+        position: absolute;
+        top: calc(50% - 3px);
+        @include transition(transform);
+        background-image: url("/images/home/arrow-down.svg");
+        background-position: 0 50%;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-size: contain;
+    }
+
+    &.is-open:after {
+        transform: rotate(180deg);
+    }
+
+    &.is-open .b-select-accordion__list {
+        display: block;
+    }
+
+    .b-input-text {
+        user-select: none;
+        cursor: pointer;
+    }
 }
 
+
+
 .b-select-accordion__list {
-    //display: none;
+    display: none;
     position: absolute;
     top: calc(100% + 8px);
     left: -1px;
-    z-index: 1;
+    z-index: 10;
     width: calc(100% + 2px);
     background-color: $white;
     border: 1px solid $light-grey;
     box-shadow: 0 10px 20px $grey;
     padding: 24px 40px 32px;
+    cursor: default;
 }
 
 .b-select-accordion__list-title {

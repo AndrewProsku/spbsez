@@ -233,6 +233,10 @@
     }
 }
 
+.b-form-block_type_accordion {
+    cursor: pointer
+}
+
 .b-form-block_theme_grey {
     position: relative;
     padding-top: 32px;
@@ -268,6 +272,10 @@
         height: 80px;
         padding-top: 38px;
     }
+}
+
+.b-form-block-select-accordion {
+    position: relative;
 }
 
 .b-form-block-error {
