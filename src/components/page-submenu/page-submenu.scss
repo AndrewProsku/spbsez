@@ -40,6 +40,7 @@
 }
 
 .b-page-submenu__block {
+    @include custom-scroll();
     overflow-x: auto;
 }
 

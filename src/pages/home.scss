@@ -952,6 +952,7 @@ $path: '/images/home/';
 
 .l-home-plots__map {
     @include margin-level(bottom, blue);
+    @include custom-scroll();
     width: 100%;
     max-width: 400px;
     height: 240px;
@@ -960,6 +961,7 @@ $path: '/images/home/';
     overflow: auto;
     margin-left: auto;
     margin-right: auto;
+
 
     .l-home-plots__all-map-images {
         width:  600px;
@@ -1171,61 +1173,6 @@ $path: '/images/home/';
     height: 460px;
     background-color: $grey;
     overflow: auto;
-
-    /* стили для скролла */
-
-    &::-webkit-scrollbar {
-        width: 5px;
-        height: 5px;
-        @media #{$tablet-landscape} {
-            width: 10px;
-            height: 10px;
-        }
-    }
-
-    &::-webkit-scrollbar-button {
-        width: 5px;
-        height: 5px;
-
-        @media #{$tablet-landscape} {
-            width: 16px;
-            height: 16px;
-        }
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: $blue;
-        border: 1px none $white;
-        border-radius: 31px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background-color: $violet;
-    }
-
-    &::-webkit-scrollbar-thumb:active {
-        background-color: $violet;
-    }
-
-    &::-webkit-scrollbar-track {
-        background-color: rgba($white,0);
-        border: 65px none $white;
-        border-radius: 34px;
-    }
-
-    &::-webkit-scrollbar-track:hover {
-        background-color: transparent;
-    }
-
-    &::-webkit-scrollbar-track:active {
-        background-color: rgba($dark-black,0);
-    }
-
-    &::-webkit-scrollbar-corner {
-        background-color: transparent;
-    }
-
-    /* Закончились стили для скролла */
 
     @media #{$tablet-portrait} {
         display: block;

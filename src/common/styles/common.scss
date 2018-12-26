@@ -3,6 +3,8 @@
 *:before,
 *:after {
     box-sizing: border-box;
+    scrollbar-color: $blue rgba($white, 0);
+    scrollbar-width: thin;
 }
 
 // margin - В любом нашем проекте не требуется какое-либо другое значение кроме 0
@@ -11,7 +13,7 @@
 body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
-    -weblit-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
 }
 /* stylelint-enable */
 
