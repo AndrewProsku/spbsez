@@ -7,12 +7,34 @@ import InputTel from '../../components/forms/telephone/telephone';
 import Logout from 'components/logout';
 import NewPassword from '../../components/new-password';
 import PasswordRecovery from '../../components/password-recovery';
+import ProfileAdministrators from '../../components/profile-administrators';
 import ProfileDocs from '../../components/profile-docs';
 import ProfileInfo from '../../components/profile-info';
 import Select from '../../components/forms/select/';
 import Utils from './utils';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
+
+/**
+ * Полифилл метода closest()
+ */
+/* eslint-disable */
+if (!Element.prototype.matches)
+    Element.prototype.matches = Element.prototype.msMatchesSelector ||
+        Element.prototype.webkitMatchesSelector;
+
+if (!Element.prototype.closest) {
+    Element.prototype.closest = function(s) {
+        var el = this;
+        if (!document.documentElement.contains(el)) return null;
+        do {
+            if (el.matches(s)) return el;
+            el = el.parentElement || el.parentNode;
+        } while (el !== null && el.nodeType === 1);
+        return null;
+    };
+}
+/* eslint-enable */
 
 /**
  * Добавляем класс на шапку при прокрутке.
@@ -412,6 +434,20 @@ if (logoutButton) {
     logout.init({button: logoutButton});
 }
 
+/**
+ * Инициализация формы загрузки документов
+ */
 if (document.querySelector(ProfileDocs.selector)) {
     (new ProfileDocs()).init();
+}
+
+/**
+ * Инициализация формы загрузки документов
+ */
+const administrators = document.querySelector('.j-profile-administrators');
+
+if (administrators) {
+    const profileAdministrators = new ProfileAdministrators();
+
+    profileAdministrators.init();
 }

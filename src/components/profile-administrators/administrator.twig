@@ -1,0 +1,114 @@
+<div class="b-profile-block j-profile-block"  data-id="{{ id }}">
+    <button type="button" class="b-profile-block__delete j-delete-administrator" data-id="{{ id }}"></button>
+    <div class="b-profile-block__title b-profile-admin-title">
+        <h4>{{ fio ?: 'Администратор' }}</h4>
+    </div>
+    <div class="b-profile-block__input-wrap">
+        <!--
+         Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+         Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+         -->
+
+        <div class="b-form-block">
+            {% include "../forms/input-text/input-text.twig" with {
+                id: "admin-fio-" ~ id,
+                name: "admin[" ~ id ~ "][FIO]",
+                value: fio
+            } %}
+
+            <label for="{{ "admin-fio-" ~ id }}" class="b-form-block__label">ФИО</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
+
+        <div class="b-form-block">
+            {% include "../forms/email/email.twig" with {
+                id: "admin-email-" ~ id,
+                name: "admin[" ~ id ~ "][EMAIL]",
+                value: email
+            } %}
+
+            <label for="{{ "admin-email-" ~ id }}" class="b-form-block__label">Эл.почта </label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
+
+        <div class="b-form-block">
+            {% include "../forms/telephone/telephone.twig" with {
+                id: "admin-phone-" ~ id,
+                name: "admin[" ~ id ~ "][PHONE]",
+                value: phone
+            } %}
+
+            <label for="{{ "admin-phone-" ~ id }}" class="b-form-block__label">Телефон</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
+
+        <div class="b-form-block">
+            {% include "../forms/select/select.twig" with {
+                id: "admin-status-" ~ id,
+                name: "admin[" ~ id ~ "][STATUS]",
+                options: [{
+                    value: 'status1',
+                    text: 'Администратор',
+                    selected: status == 'status1'
+                }, {
+                    value: 'status1',
+                    text: 'Супер-Администратор',
+                    selected: status == 'status2'
+                },{
+                    value: 'status3',
+                    text: 'Просто Администратор',
+                    selected: status == 'status3'
+                },{
+                    value: 'status4',
+                    text: 'Не просто Администратор',
+                    selected: status == 'status4'
+                }]
+            } %}
+
+            <label for="admin1-status" class="b-form-block__label">Статус</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
+
+        <div class="b-form-block b-form-block_type_accordion j-select-accordion">
+            <div class="b-select-accordion">
+                {% include "../forms/input-text/input-text.twig" with {
+                    disabled: "true"
+                } %}
+                <div class="b-select-accordion__list">
+                    <div class="b-select-accordion__list-title">
+                        <p>Доступ к разделам сайта</p>
+                    </div>
+                    <div class="b-select-accordion__list-item">
+                        {#id: "admin" ~ id ~ "access1"#}
+                        {#name: "admin" ~ id ~ "access1",#}
+                        {% include "../forms/checkbox/checkbox.twig" with {
+                            id: "admin" ~ id ~ "access1",
+                            name: "access1",
+                            text: "Подача отчета",
+                            checked: true
+                        } %}
+                    </div>
+                    <div class="b-select-accordion__list-item">
+                        {% include "../forms/checkbox/checkbox.twig" with {
+                            id: "admin" ~ id ~ "access2",
+                            name: "access2",
+                            text: "Сообщения от ОЭЗ"
+                        } %}
+                    </div>
+                    <div class="b-select-accordion__list-item">
+                        {% include "../forms/checkbox/checkbox.twig" with {
+                            id: "admin" ~ id ~ "access3",
+                            name: "access3",
+                            text: "Подача заявки",
+                            checked: true
+                        } %}
+                    </div>
+                    <button type="button" class="button b-select-accordion__button">OK</button>
+                </div>
+            </div>
+
+            <label for="admin1-access" class="b-form-block__label">Доступ</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
+    </div>
+</div>

@@ -89,7 +89,6 @@ class ProfileInfo {
                     }
                     const contact = {};
 
-                    // TODO Создавать новый элемент через createElement чтобы заранее вешать на него обработчики
                     contact.deletable = that.isContactsDeletable;
                     contact.id = response.data.id;
                     that.$contactsInfo.insertAdjacentHTML('beforeend', templateContact(contact));
