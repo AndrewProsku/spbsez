@@ -276,151 +276,299 @@
             </div>
         </div>
 
-        <div class="b-empty-page">
-            <p>
-                Администраторов пока нет
-            </p>
+        <div class="j-profile-administrators">
 
-            <div class="b-profile-add">
-                <a href="#" class="button-add">
-                    Добавить администратора
-                </a>
-            </div>
-        </div>
+            <div class="b-profile-block j-profile-block"  data-id="1">
+    <button type="button" class="b-profile-block__delete j-delete-administrator" data-id="1"></button>
+    <div class="b-profile-block__title b-profile-admin-title">
+        <h4>Панарин Артем</h4>
+    </div>
+    <div class="b-profile-block__input-wrap">
+        <!--
+         Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+         Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+         -->
 
-        <div class="b-profile-block">
-            <button type="button" class="b-profile-block__delete"></button>
-            <div class="b-profile-block__title b-profile-admin-title">
-                <h4>Вознесенский Алексей</h4>
-            </div>
-            <div class="b-profile-block__input-wrap">
-                <!--
-                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
-                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
-                 -->
-
-                <div class="b-form-block">
-                        <input
-        id="admin1-name"
+        <div class="b-form-block">
+                <input
+        id="admin-fio-1"
         class="b-input-text"
         type="text"
-        name="admin1-name"
+        name="admin[1][FIO]"
+        maxlength=""
+        autocomplete=""
+        value="Панарин Артем"
+        placeholder=""
+                                            >
+
+            <label for="admin-fio-1" class="b-form-block__label">ФИО</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
+
+        <div class="b-form-block">
+                <input
+        id="admin-email-1"
+        class="b-input-email"
+        type="email"
+        name="admin[1][EMAIL]"
+                    value="panarin.artemiy@biocad.ru"
+        
+        
+                            >
+
+            <label for="admin-email-1" class="b-form-block__label">Эл.почта </label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
+
+        <div class="b-form-block">
+                <input
+            id="admin-phone-1"
+            class="b-input-phone"
+            type="tel"
+            name="admin[1][PHONE]"
+            autocomplete="tel"
+            placeholder="+7 ___ ___-__-__"
+             value="9526548942"                             >
+
+            <label for="admin-phone-1" class="b-form-block__label">Телефон</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
+
+        <div class="b-form-block">
+                <div class="b-select">
+        <div class="b-select__wrapper">
+            <select
+                id="admin-status-1"
+                class="b-select__list j-select"
+                name="admin[1][STATUS]"
+                data-placeholder=""
+                                                            >
+
+                                    <option value="status1"
+                                                         selected                     >
+                        Администратор
+                    </option>
+                                    <option value="status2"
+                                                                            >
+                        Супер-Администратор
+                    </option>
+                                    <option value="status3"
+                                                                            >
+                        Просто Администратор
+                    </option>
+                                    <option value="status4"
+                                                                            >
+                        Не просто Администратор
+                    </option>
+                            </select>
+        </div>
+    </div>
+
+            <label for="admin1-status" class="b-form-block__label">Статус</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
+
+        <div class="b-form-block b-form-block_type_accordion j-select-accordion">
+            <div class="b-select-accordion">
+                    <input
+        id="1"
+        class="b-input-text"
+        type="text"
+        name=""
+        maxlength=""
+        autocomplete=""
+        value=""
+        placeholder=""
+         disabled                                     >
+
+                <div class="b-select-accordion__list">
+                    <div class="b-select-accordion__list-title">
+                        <p>Доступ к разделам сайта</p>
+                    </div>
+                    <div class="b-select-accordion__list-item">
+                            <div class="b-form__checkbox">
+        <input
+            id="admin1access1"
+            class="b-checkbox-input"
+            type="checkbox"
+            value=""
+            name="access1"
+             checked                                 >
+        <label for="admin1access1" class="b-checkbox-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+    <path class="b-checkbox-box"
+          d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
+    <path class="b-checkbox-mark" d="M9,17.568l1.809-2.229,5.064,4.829,7.958-8.543L26,13.854,15.872,24.625Z"/>
+</svg>
+            <p class="b-checkbox-text">Подача отчета</p>
+        </label>
+    </div>
+                    </div>
+                    <div class="b-select-accordion__list-item">
+                            <div class="b-form__checkbox">
+        <input
+            id="admin1access2"
+            class="b-checkbox-input"
+            type="checkbox"
+            value=""
+            name="access2"
+             checked                                 >
+        <label for="admin1access2" class="b-checkbox-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+    <path class="b-checkbox-box"
+          d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
+    <path class="b-checkbox-mark" d="M9,17.568l1.809-2.229,5.064,4.829,7.958-8.543L26,13.854,15.872,24.625Z"/>
+</svg>
+            <p class="b-checkbox-text">Сообщения от ОЭЗ</p>
+        </label>
+    </div>
+                    </div>
+                    <div class="b-select-accordion__list-item">
+                            <div class="b-form__checkbox">
+        <input
+            id="admin1access3"
+            class="b-checkbox-input"
+            type="checkbox"
+            value=""
+            name="access3"
+                                            >
+        <label for="admin1access3" class="b-checkbox-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+    <path class="b-checkbox-box"
+          d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
+    <path class="b-checkbox-mark" d="M9,17.568l1.809-2.229,5.064,4.829,7.958-8.543L26,13.854,15.872,24.625Z"/>
+</svg>
+            <p class="b-checkbox-text">Подача заявки</p>
+        </label>
+    </div>
+                    </div>
+                    <button type="button" class="button b-select-accordion__button">OK</button>
+                </div>
+            </div>
+
+            <label for="admin1-access" class="b-form-block__label">Доступ</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
+    </div>
+</div>
+
+            <div class="b-profile-block j-profile-block"  data-id="5">
+    <button type="button" class="b-profile-block__delete j-delete-administrator" data-id="5"></button>
+    <div class="b-profile-block__title b-profile-admin-title">
+        <h4>Вознесенский Алексей</h4>
+    </div>
+    <div class="b-profile-block__input-wrap">
+        <!--
+         Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+         Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+         -->
+
+        <div class="b-form-block">
+                <input
+        id="admin-fio-5"
+        class="b-input-text"
+        type="text"
+        name="admin[5][FIO]"
         maxlength=""
         autocomplete=""
         value="Вознесенский Алексей"
         placeholder=""
-                 required                             >
+                                            >
 
-                    <label for="admin1-name" class="b-form-block__label">
-                        ФИО
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
+            <label for="admin-fio-5" class="b-form-block__label">ФИО</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
 
-                <div class="b-form-block">
-                        <input
-        id="admin1-email"
+        <div class="b-form-block">
+                <input
+        id="admin-email-5"
         class="b-input-email"
         type="email"
-        name="admin1-email"
+        name="admin[5][EMAIL]"
                     value="voznesenskiy.alex@biocad.ru"
         
         
-                         required     >
+                            >
 
-                    <label for="admin1-email" class="b-form-block__label">
-                        Эл.почта
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
+            <label for="admin-email-5" class="b-form-block__label">Эл.почта </label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
 
-                <div class="b-form-block">
-                        <input
-            id="admin1-phone"
+        <div class="b-form-block">
+                <input
+            id="admin-phone-5"
             class="b-input-phone"
             type="tel"
-            name="admin1-phone"
+            name="admin[5][PHONE]"
             autocomplete="tel"
-            placeholder="+7(___) ___-__-__"
-             value="+7 921 549-98-78"                          required     >
+            placeholder="+7 ___ ___-__-__"
+             value="9215499878"                             >
 
-                    <label for="admin1-phone" class="b-form-block__label">
-                        Телефон
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
+            <label for="admin-phone-5" class="b-form-block__label">Телефон</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
 
-                <div class="b-form-block">
-                        <div class="b-select">
+        <div class="b-form-block">
+                <div class="b-select">
         <div class="b-select__wrapper">
             <select
-                id="admin1-status"
+                id="admin-status-5"
                 class="b-select__list j-select"
-                name="admin1-status"
+                name="admin[5][STATUS]"
                 data-placeholder=""
-                 required                                             >
+                                                            >
 
-                                    <option value="Супер-Администратор"
-                                                         selected                     >
-                        Супер-Администратор
-                    </option>
-                                    <option value="Администратор"
+                                    <option value="status1"
                                                                             >
                         Администратор
                     </option>
-                                    <option value="Супер-Администратор 2"
+                                    <option value="status2"
                                                                             >
-                        Супер-Администратор 2
+                        Супер-Администратор
                     </option>
-                                    <option value="Супер-Администратор 3"
+                                    <option value="status3"
                                                                             >
-                        Супер-Администратор 3
+                        Просто Администратор
+                    </option>
+                                    <option value="status4"
+                                                         selected                     >
+                        Не просто Администратор
                     </option>
                             </select>
         </div>
     </div>
 
-                    <label for="admin1-status" class="b-form-block__label">
-                        Статус
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
+            <label for="admin1-status" class="b-form-block__label">Статус</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        </div>
 
-                <div class="b-form-block">
-                    <div class="b-select-accordion">
-                            <input
-        id="admin1-access-text"
+        <div class="b-form-block b-form-block_type_accordion j-select-accordion">
+            <div class="b-select-accordion">
+                    <input
+        id="5"
         class="b-input-text"
         type="text"
-        name="admin1-access-text"
+        name=""
         maxlength=""
         autocomplete=""
-        value="Подача отчета, Сообщения от ОЭЗ, Подача заявки"
+        value=""
         placeholder=""
-         disabled          required                             >
+         disabled                                     >
 
-                        <div class="b-select-accordion__list">
-                            <div class="b-select-accordion__list-title">
-                                <p>Доступ к разделам сайта</p>
-                            </div>
-                            <div class="b-select-accordion__list-item">
-                                    <div class="b-form__checkbox">
+                <div class="b-select-accordion__list">
+                    <div class="b-select-accordion__list-title">
+                        <p>Доступ к разделам сайта</p>
+                    </div>
+                    <div class="b-select-accordion__list-item">
+                            <div class="b-form__checkbox">
         <input
-            id="admin1-access1"
+            id="admin5access1"
             class="b-checkbox-input"
             type="checkbox"
             value=""
-            name="admin1-access1"
-                                            >
-        <label for="admin1-access1" class="b-checkbox-label">
+            name="access1"
+             checked                                 >
+        <label for="admin5access1" class="b-checkbox-label">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
     <path class="b-checkbox-box"
           d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
@@ -429,17 +577,17 @@
             <p class="b-checkbox-text">Подача отчета</p>
         </label>
     </div>
-                            </div>
-                            <div class="b-select-accordion__list-item">
-                                    <div class="b-form__checkbox">
+                    </div>
+                    <div class="b-select-accordion__list-item">
+                            <div class="b-form__checkbox">
         <input
-            id="admin1-access2"
+            id="admin5access2"
             class="b-checkbox-input"
             type="checkbox"
             value=""
-            name="admin1-access2"
+            name="access2"
                                             >
-        <label for="admin1-access2" class="b-checkbox-label">
+        <label for="admin5access2" class="b-checkbox-label">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
     <path class="b-checkbox-box"
           d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
@@ -448,17 +596,17 @@
             <p class="b-checkbox-text">Сообщения от ОЭЗ</p>
         </label>
     </div>
-                            </div>
-                            <div class="b-select-accordion__list-item">
-                                    <div class="b-form__checkbox">
+                    </div>
+                    <div class="b-select-accordion__list-item">
+                            <div class="b-form__checkbox">
         <input
-            id="admin1-access3"
+            id="admin5access3"
             class="b-checkbox-input"
             type="checkbox"
             value=""
-            name="admin1-access3"
-                                            >
-        <label for="admin1-access3" class="b-checkbox-label">
+            name="access3"
+             checked                                 >
+        <label for="admin5access3" class="b-checkbox-label">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
     <path class="b-checkbox-box"
           d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
@@ -467,416 +615,19 @@
             <p class="b-checkbox-text">Подача заявки</p>
         </label>
     </div>
-                            </div>
-                            <button type="button" class="button b-select-accordion__button">OK</button>
-                        </div>
                     </div>
-
-                    <label for="admin1-access" class="b-form-block__label">
-                        Доступ
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
+                    <button type="button" class="button b-select-accordion__button">OK</button>
                 </div>
-
             </div>
-        </div>
 
-        <div class="b-profile-block">
-            <button type="button" class="b-profile-block__delete"></button>
-            <div class="b-profile-block__title b-profile-admin-title">
-                <h4>Панарин Артемий</h4>
-            </div>
-            <div class="b-profile-block__input-wrap">
-                <!--
-                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
-                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
-                 -->
-
-                <div class="b-form-block">
-                        <input
-        id="admin2-name"
-        class="b-input-text"
-        type="text"
-        name="admin2-name"
-        maxlength=""
-        autocomplete=""
-        value="Панарин Артемий"
-        placeholder=""
-                 required                             >
-
-                    <label for="admin2-name" class="b-form-block__label">
-                        ФИО
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <input
-        id="admin2-email"
-        class="b-input-email"
-        type="email"
-        name="admin2-email"
-                    value="panarin.artemiy@biocad.ru"
-        
-        
-                         required     >
-
-                    <label for="admin2-email" class="b-form-block__label">
-                        Эл.почта
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <input
-            id="admin2-phone"
-            class="b-input-phone"
-            type="tel"
-            name="admin2-phone"
-            autocomplete="tel"
-            placeholder="+7(___) ___-__-__"
-             value="+7 952 654-89-42"                          required     >
-
-                    <label for="admin2-phone" class="b-form-block__label">
-                        Телефон
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <div class="b-select">
-        <div class="b-select__wrapper">
-            <select
-                id="admin2-status"
-                class="b-select__list j-select"
-                name="admin2-status"
-                data-placeholder=""
-                 required                                             >
-
-                                    <option value="Супер-Администратор"
-                                                                            >
-                        Супер-Администратор
-                    </option>
-                                    <option value="Администратор"
-                                                         selected                     >
-                        Администратор
-                    </option>
-                                    <option value="Супер-Администратор 2"
-                                                                            >
-                        Супер-Администратор 2
-                    </option>
-                                    <option value="Супер-Администратор 3"
-                                                                            >
-                        Супер-Администратор 3
-                    </option>
-                            </select>
+            <label for="admin1-access" class="b-form-block__label">Доступ</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
     </div>
-
-                    <label for="admin2-status" class="b-form-block__label">
-                        Статус
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                    <div class="b-select-accordion">
-                            <input
-        id="admin2-access-text"
-        class="b-input-text"
-        type="text"
-        name="admin2-access-text"
-        maxlength=""
-        autocomplete=""
-        value="Подача отчета, Сообщения от ОЭЗ, Подача заявки"
-        placeholder=""
-         disabled          required                             >
-
-                        <div class="b-select-accordion__list">
-                            <div class="b-select-accordion__list-title">
-                                <p>Доступ к разделам сайта</p>
-                            </div>
-                            <div class="b-select-accordion__list-item">
-                                    <div class="b-form__checkbox">
-        <input
-            id="admin2-access1"
-            class="b-checkbox-input"
-            type="checkbox"
-            value=""
-            name="admin1-access1"
-                                            >
-        <label for="admin2-access1" class="b-checkbox-label">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-    <path class="b-checkbox-box"
-          d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
-    <path class="b-checkbox-mark" d="M9,17.568l1.809-2.229,5.064,4.829,7.958-8.543L26,13.854,15.872,24.625Z"/>
-</svg>
-            <p class="b-checkbox-text">Подача отчета</p>
-        </label>
-    </div>
-                            </div>
-                            <div class="b-select-accordion__list-item">
-                                    <div class="b-form__checkbox">
-        <input
-            id="admin2-access2"
-            class="b-checkbox-input"
-            type="checkbox"
-            value=""
-            name="admin2-access2"
-                                            >
-        <label for="admin2-access2" class="b-checkbox-label">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-    <path class="b-checkbox-box"
-          d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
-    <path class="b-checkbox-mark" d="M9,17.568l1.809-2.229,5.064,4.829,7.958-8.543L26,13.854,15.872,24.625Z"/>
-</svg>
-            <p class="b-checkbox-text">Сообщения от ОЭЗ</p>
-        </label>
-    </div>
-                            </div>
-                            <div class="b-select-accordion__list-item">
-                                    <div class="b-form__checkbox">
-        <input
-            id="admin2-access3"
-            class="b-checkbox-input"
-            type="checkbox"
-            value=""
-            name="admin2-access3"
-                                            >
-        <label for="admin2-access3" class="b-checkbox-label">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-    <path class="b-checkbox-box"
-          d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
-    <path class="b-checkbox-mark" d="M9,17.568l1.809-2.229,5.064,4.829,7.958-8.543L26,13.854,15.872,24.625Z"/>
-</svg>
-            <p class="b-checkbox-text">Подача заявки</p>
-        </label>
-    </div>
-                            </div>
-                            <button type="button" class="button b-select-accordion__button">OK</button>
-                        </div>
-                    </div>
-
-                    <label for="admin2-access" class="b-form-block__label">
-                        Доступ
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="b-profile-block">
-            <button type="button" class="b-profile-block__delete"></button>
-            <div class="b-profile-block__title b-profile-admin-title">
-                <h4>Афиногенов Максим Леонидович</h4>
-            </div>
-            <div class="b-profile-block__input-wrap">
-                <!--
-                 Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
-                 Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
-                 -->
-
-                <div class="b-form-block">
-                        <input
-        id="admin2-name"
-        class="b-input-text"
-        type="text"
-        name="admin2-name"
-        maxlength=""
-        autocomplete=""
-        value="Афиногенов Максим Леонидович"
-        placeholder=""
-                 required                             >
-
-                    <label for="admin2-name" class="b-form-block__label">
-                        ФИО
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <input
-        id="admin2-email"
-        class="b-input-email"
-        type="email"
-        name="admin2-email"
-                    value="afinogenov.max@biocad.ru"
-        
-        
-                         required     >
-
-                    <label for="admin2-email" class="b-form-block__label">
-                        Эл.почта
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <input
-            id="admin2-phone"
-            class="b-input-phone"
-            type="tel"
-            name="admin2-phone"
-            autocomplete="tel"
-            placeholder="+7(___) ___-__-__"
-             value="+7 952 654-89-43"                          required     >
-
-                    <label for="admin2-phone" class="b-form-block__label">
-                        Телефон
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                        <div class="b-select">
-        <div class="b-select__wrapper">
-            <select
-                id="admin2-status"
-                class="b-select__list j-select"
-                name="admin2-status"
-                data-placeholder=""
-                 required                                             >
-
-                                    <option value="Супер-Администратор"
-                                                                            >
-                        Супер-Администратор
-                    </option>
-                                    <option value="Администратор"
-                                                         selected                     >
-                        Администратор
-                    </option>
-                                    <option value="Супер-Администратор 2"
-                                                                            >
-                        Супер-Администратор 2
-                    </option>
-                                    <option value="Супер-Администратор 3"
-                                                                            >
-                        Супер-Администратор 3
-                    </option>
-                            </select>
-        </div>
-    </div>
-
-                    <label for="admin2-status" class="b-form-block__label">
-                        Статус
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-                <div class="b-form-block">
-                    <div class="b-select-accordion">
-                            <input
-        id="admin3-access-text"
-        class="b-input-text"
-        type="text"
-        name="admin3-access-text"
-        maxlength=""
-        autocomplete=""
-        value="Подача отчета, Сообщения от ОЭЗ, Подача заявки"
-        placeholder=""
-         disabled          required                             >
-
-                        <div class="b-select-accordion__list">
-                            <div class="b-select-accordion__list-title">
-                                <p>Доступ к разделам сайта</p>
-                            </div>
-                            <div class="b-select-accordion__list-item">
-                                    <div class="b-form__checkbox">
-        <input
-            id="admin3-access1"
-            class="b-checkbox-input"
-            type="checkbox"
-            value=""
-            name="admin3-access1"
-                                            >
-        <label for="admin3-access1" class="b-checkbox-label">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-    <path class="b-checkbox-box"
-          d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
-    <path class="b-checkbox-mark" d="M9,17.568l1.809-2.229,5.064,4.829,7.958-8.543L26,13.854,15.872,24.625Z"/>
-</svg>
-            <p class="b-checkbox-text">Подача отчета</p>
-        </label>
-    </div>
-                            </div>
-                            <div class="b-select-accordion__list-item">
-                                    <div class="b-form__checkbox">
-        <input
-            id="admin3-access2"
-            class="b-checkbox-input"
-            type="checkbox"
-            value=""
-            name="admin3-access2"
-                                            >
-        <label for="admin3-access2" class="b-checkbox-label">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-    <path class="b-checkbox-box"
-          d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
-    <path class="b-checkbox-mark" d="M9,17.568l1.809-2.229,5.064,4.829,7.958-8.543L26,13.854,15.872,24.625Z"/>
-</svg>
-            <p class="b-checkbox-text">Сообщения от ОЭЗ</p>
-        </label>
-    </div>
-                            </div>
-                            <div class="b-select-accordion__list-item">
-                                    <div class="b-form__checkbox">
-        <input
-            id="admin3-access3"
-            class="b-checkbox-input"
-            type="checkbox"
-            value=""
-            name="admin3-access3"
-                                            >
-        <label for="admin3-access3" class="b-checkbox-label">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-    <path class="b-checkbox-box"
-          d="M8.25,5.62h19a3,3,0,0,1,3,3V27.625a3,3,0,0,1-3,3h-19a3,3,0,0,1-3-3V8.62A3,3,0,0,1,8.25,5.62Z"/>
-    <path class="b-checkbox-mark" d="M9,17.568l1.809-2.229,5.064,4.829,7.958-8.543L26,13.854,15.872,24.625Z"/>
-</svg>
-            <p class="b-checkbox-text">Подача заявки</p>
-        </label>
-    </div>
-                            </div>
-                            <button type="button" class="button b-select-accordion__button">OK</button>
-                        </div>
-                    </div>
-
-                    <label for="admin2-access" class="b-form-block__label">
-                        Доступ
-                    </label>
-                    <span class="b-form-block__error-text">
-                        Текст подсказки
-                    </span>
-                </div>
-
-            </div>
-        </div>
+</div> </div>
 
         <div class="b-profile-add">
-            <a href="#" class="button-add">
-                Добавить еще администратора
-            </a>
+            <button class="button-add j-add-administrator" type="button">Добавить еще администратора</button>
         </div>
 
     </div>
