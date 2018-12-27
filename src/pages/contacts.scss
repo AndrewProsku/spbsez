@@ -76,9 +76,9 @@
 
     @media #{$laptop} {
         @include column(12, 36);
-        //@include post(2, 36);
         @include push(22, 36);
-        @include margin-level(top, cyan);
+        // Отступ прописан без использования миксина, чтобы обойти баг в IE
+        margin-top: 48px;
         position: absolute;
         top: 0;
         //right: 0;
@@ -88,6 +88,7 @@
 
     @media #{$fullhd} {
         @include column(8, 36);
+        margin-top: 64px;
     }
 }
 
@@ -237,6 +238,7 @@
     p,
     p:last-of-type {
         font-size: inherit;
+        line-height: inherit;
         margin-bottom: 16px;
     }
 
