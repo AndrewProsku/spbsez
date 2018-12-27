@@ -1,0 +1,19 @@
+{% set categories = ["",
+"Фармацевтика  биотехнологии",
+"Приборостроение",
+"Информационные технологии и телекоммуникации",
+"Высокотехнологичные производства",
+"Микроэлектроника"]%}
+
+<article class="b-resident b-resident_category_{{ categoryId }}">
+    <div class="b-resident__inner">
+        <img src="{{ image.url }}" alt="{{ image.alt }}" class="b-resident__logo">
+        <h2 class="b-resident__title">{{ title }}</h2>
+        <div class="b-resident__category">{{ categories[categoryId] }}</div>
+        <div class="b-resident__description">{{ description }}</div>
+        <div class="b-resident__links">
+            <div class="b-resident__site-link"><a href="#" class="b-link-line">{{ site }}</a></div>
+            <div class="b-resident__page-link"><a href="#" class="b-link-line">{{ location }}</a></div>
+        </div>
+    </div>
+</article>

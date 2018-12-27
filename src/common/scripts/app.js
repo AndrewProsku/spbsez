@@ -3,6 +3,7 @@ import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
 import Glide from '@glidejs/glide';
+// import ExpandedMenu from '../../components/expanded-menu/';
 import InputTel from '../../components/forms/telephone/telephone';
 import Logout from 'components/logout';
 import NewPassword from '../../components/new-password';
@@ -10,6 +11,7 @@ import PasswordRecovery from '../../components/password-recovery';
 import ProfileAdministrators from '../../components/profile-administrators';
 import ProfileDocs from '../../components/profile-docs';
 import ProfileInfo from '../../components/profile-info';
+import Residents from '../../components/residents/';
 import Select from '../../components/forms/select/';
 import Utils from './utils';
 import YandexMap from 'components/yandex-map';
@@ -458,3 +460,27 @@ if (administrators) {
 
     profileAdministrators.init();
 }
+
+/**
+ * Инициализация выпадающего меню (страница резиденты)
+ */
+// const expandedMenu = document.querySelector('.j-expanded-menu');
+//
+// if (expandedMenu) {
+//     const residentsExpandedMenu = new ExpandedMenu();
+//
+//     residentsExpandedMenu.init();
+// }
+
+/**
+ * Инициализация выпадающего меню (страница резиденты)
+ */
+const residentsBlock = document.querySelector('.j-residents');
+
+if (residentsBlock) {
+    const residents = new Residents();
+
+    residents.init();
+}
+
+

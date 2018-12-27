@@ -1,0 +1,33 @@
+<svg id="SVGDoc" width="18" height="9" xmlns="http://www.w3.org/2000/svg" version="1.1"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:avocode="https://avocode.com/" viewBox="0 0 18 9">
+    <defs>
+        <path d="M39.57143,564h8.35714c1.42016,0 2.57143,1.15127 2.57143,2.57143v1.28571c0,1.42016 -1.15127,2.57143 -2.57143,2.57143h-8.35714c-1.42016,0 -2.57143,-1.15127 -2.57143,-2.57143v-1.28571c0,-1.42016 1.15127,-2.57143 2.57143,-2.57143zM39.57025,565.28572c-0.70943,0 -1.28453,0.57414 -1.28453,1.28238v1.28239c0,0.70824 0.5751,1.28238 1.28453,1.28238h8.3495c0.70943,0 1.28453,-0.57414 1.28453,-1.28238v-1.28239c0,-0.70824 -0.5751,-1.28238 -1.28453,-1.28238z"
+              id="Path-0"/>
+        <path d="M44.00143,566.57h8.35714c1.42016,0 2.57143,1.15127 2.57143,2.57143v1.28571c0,1.42016 -1.15127,2.57143 -2.57143,2.57143h-8.35714c-1.42016,0 -2.57143,-1.15127 -2.57143,-2.57143v-1.28571c0,-1.42016 1.15127,-2.57143 2.57143,-2.57143zM44.00025,567.85572c-0.70943,0 -1.28453,0.57414 -1.28453,1.28238v1.28239c0,0.70824 0.5751,1.28238 1.28453,1.28238h8.3495c0.70943,0 1.28453,-0.57414 1.28453,-1.28238v-1.28239c0,-0.70824 -0.5751,-1.28238 -1.28453,-1.28238z"
+              id="Path-1"/>
+        <linearGradient id="LinearGradient1016" gradientUnits="userSpaceOnUse" x1="37" y1="567.215" x2="50.5"
+                        y2="567.215">
+            <stop stop-opacity="1" stop-color="#30409a" offset="0"></stop>
+            <stop stop-opacity="1" stop-color="#662d91" offset="1"></stop>
+        </linearGradient>
+        <linearGradient id="LinearGradient1024" gradientUnits="userSpaceOnUse" x1="41.43" y1="569.7850000000001"
+                        x2="54.93" y2="569.7850000000001">
+            <stop stop-opacity="1" stop-color="#30409a" offset="0"></stop>
+            <stop stop-opacity="1" stop-color="#662d91" offset="1"></stop>
+        </linearGradient>
+    </defs>
+    <desc>Generated with Avocode.</desc>
+    <g transform="matrix(1,0,0,1,-37,-564)">
+        <g>
+            <title>Group 27</title>
+            <g>
+                <title>Rectangle 8</title>
+                <use xlink:href="#Path-0" fill="url(#LinearGradient1016)"/>
+            </g>
+            <g>
+                <title>Rectangle 8 Copy</title>
+                <use xlink:href="#Path-1" fill="url(#LinearGradient1024)"/>
+            </g>
+        </g>
+    </g>
+</svg>

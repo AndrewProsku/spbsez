@@ -1,0 +1,91 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Резиденты</title> {% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    <div class="l-residents">
+        <div class="b-title b-residents-title"><h1>Резиденты</h1></div>
+
+        {% include "../components/expanded-menu/expanded-menu.twig" %}
+
+        <div class="b-residents-content j-residents" data-category-id="0">
+            {% set residents = [{
+                title: "Биокад",
+                image: {
+                    url: "/images/residents/logotypes/biocad.png",
+                    alt: "Логотип"
+                },
+                categoryId: 1,
+                description: "Разработка и производство биологических субстанций и готовых лекарственных средств биологической природы, в том числе, не имеющих произведенных в Российской Федерации аналогов",
+                site: "biocad.ru",
+                location: "Нойдорф"
+            }, {
+                title: "Лазерные системы",
+                image: {
+                    url: "/images/residents/logotypes/lazernie-systemy.png",
+                    alt: "Логотип"
+                },
+                categoryId: 2,
+                description: "Разработка и производство биологических субстанций и готовых лекарственных средств биологической природы, в том числе, не имеющих произведенных в Российской Федерации аналогов",
+                site: "biocad.ru",
+                location: "Нойдорф"
+            }, {
+                title: "Бизнес Компьютер Центр
+                        Санкт-Петербург",
+                image: {
+                    url: "/images/residents/logotypes/bcc.png",
+                    alt: "Логотип"
+                },
+                categoryId: 3,
+                description: "Разработка и организация опытного
+                        производства комплексов оборудования
+                        для обеспечения доступа к мультимедийной информации",
+                site: "bbc.ru",
+                location: "Нойдорф"
+            }, {
+                title: "Ракурс-инжиниринг",
+                image: {
+                    url: "/images/residents/logotypes/rakurs.png",
+                    alt: "Логотип"
+                },
+                categoryId: 5,
+                description: "Разработка и освоение опытного
+                        производства программно-технических комплексов для объектов отрасли России",
+                site: "rakurs.com",
+                location: "Нойдорф"
+            }, {
+                title: "Новотех СПБ",
+                image: {
+                    url: "/images/residents/logotypes/novtech.png",
+                    alt: "Логотип"
+                },
+                categoryId: 5,
+                description: "Разработка и серийное производство
+                        энергоэффективных интеллектуальных электроприводов и инновационного оборудования для электротехнологий на базе индукционного нагрева",
+                site: "novtex-spb.com",
+                location: "Нойдорф"
+            }, {
+                title: "Инмед",
+                image: {
+                    url: "/images/residents/logotypes/inmed.png",
+                    alt: "Логотип"
+                },
+                categoryId: 1,
+                description: "Организация исследований, разработок и опытно-промышленного производства
+                        новых функциональных материалов на основе полимерных нановолокон,
+                        освоение энерго- и ресурсосберегающей
+                        технологии производства композиционных нетканых материалов на основе синтетических и природных…",
+                site: "nanofibers.ru",
+                location: "Нойдорф"
+            }] %}
+
+            {% for resident in residents %}
+                {% include "../components/residents/resident.twig" with resident %}
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}
