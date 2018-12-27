@@ -80,6 +80,7 @@
 
         .b-language__list {
             top: 98%;
+            z-index: 100;
             width: 100%;
             min-width: 40px;
         }
@@ -224,7 +225,7 @@
 
 .b-mobile-menu__nav-header {
     position: relative;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .b-mobile-menu__nav-header-link {
@@ -276,7 +277,7 @@
         height: 8px;
         position: absolute;
         top: 50%;
-        right: 0;
+        right: 2px;
         background-image: url("/images/home/accordion-arrow-down.svg");
         background-repeat: no-repeat;
         @include transition(transform);
