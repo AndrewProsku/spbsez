@@ -6,12 +6,13 @@
 
     {% include "../components/animation-line/animation-line.twig" %}
 
-    <div class="l-residents">
+    <div class="l-residents j-residents-page" data-selected-category-id="0">
         <div class="b-title b-residents-title"><h1>Резиденты</h1></div>
 
         {% include "../components/expanded-menu/expanded-menu.twig" %}
 
-        <div class="b-residents-content j-residents" data-category-id="0">
+        {#j-residents#}
+        <div class="b-residents-content">
             {% set residents = [{
                 title: "Биокад",
                 image: {

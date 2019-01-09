@@ -25,44 +25,45 @@
     }
 }
 
-.b-residents-content {
-    &[data-category-id="0"] {
+.l-residents {
+    &[data-selected-category-id="0"] {
         .b-resident {
             display: block;
         }
     }
 
-    &[data-category-id="1"] {
+    &[data-selected-category-id="1"] {
         .b-resident_category_1 {
             display: block;
         }
     }
 
-    &[data-category-id="2"] {
+    &[data-selected-category-id="2"] {
         .b-resident_category_2 {
             display: block;
         }
     }
 
-    &[data-category-id="3"] {
+    &[data-selected-category-id="3"] {
         .b-resident_category_3 {
             display: block;
         }
     }
 
-    &[data-category-id="4"] {
+    &[data-selected-category-id="4"] {
         .b-resident_category_4 {
             display: block;
         }
     }
 
-    &[data-category-id="5"] {
+    &[data-selected-category-id="5"] {
         .b-resident_category_5 {
             display: block;
         }
     }
+}
 
-
+.b-residents-content {
     @media #{$tablet-portrait} {
         display: flex;
         flex-wrap: wrap;

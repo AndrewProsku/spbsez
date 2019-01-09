@@ -3,9 +3,13 @@ import throttle from 'lodash/throttle';
 
 class Residents {
     constructor() {
-        this.$residentsContent = document.querySelector('.j-residents');
+        this.$residentsPage = document.querySelector('.j-residents-page');
+
+        // this.$residentsContent = document.querySelector('.j-residents');
         this.residents = Array.from(document.querySelectorAll('.b-resident'));
-        this.filters = Array.from(document.querySelectorAll('.b-filters__item'));
+
+        this.$filters = document.querySelector('.j-filters');
+        // this.filters = Array.from(document.querySelectorAll('.b-filters__item'));
 
         // Выпадающее меню
         this.$menu = document.querySelector('.j-expanded-menu');
@@ -23,8 +27,20 @@ class Residents {
             const selectedCategoryId = selectedItem.dataset.categoryId;
             const categoryName = selectedItem.querySelector('.b-expanded-menu__item-text').textContent;
 
-            this.$residentsContent.dataset.categoryId = selectedCategoryId;
+            this.$residentsPage.dataset.selectedCategoryId = selectedCategoryId;
+            // this.$residentsContent.dataset.categoryId = selectedCategoryId; // TODO delete
             this.$menuHeader.textContent = categoryName;
+            this.$menu.classList.remove('b-expanded-menu_is_open');
+        });
+
+        // Фильтры
+        this.$filters.addEventListener('click', (event) => {
+            const selectedItem = event.target.closest('.b-filters__item');
+            const selectedCategoryId = selectedItem.dataset.categoryId;
+
+            const activeClass = 'b-filters__item_is_active';
+            selectedItem.classList.toggle(activeClass);
+            this.$residentsPage.dataset.selectedCategoryId = selectedCategoryId;
         });
 
         // Список резидентов

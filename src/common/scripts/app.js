@@ -475,7 +475,7 @@ if (administrators) {
 /**
  * Инициализация выпадающего меню (страница резиденты)
  */
-const residentsBlock = document.querySelector('.j-residents');
+const residentsBlock = document.querySelector('.j-residents-page');
 
 if (residentsBlock) {
     const residents = new Residents();

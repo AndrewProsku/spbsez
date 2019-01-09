@@ -77,8 +77,47 @@
 }
 
 .b-expanded-menu__item {
+    display: block;
     padding: 10px 15px;
     cursor: pointer;
+}
+
+.l-residents {
+    &[data-selected-category-id="0"] {
+        .b-expanded-menu__item[data-category-id="0"] {
+            display: none;
+        }
+    }
+
+    &[data-selected-category-id="1"] {
+        .b-expanded-menu__item[data-category-id="1"] {
+            display: none;
+        }
+    }
+
+    &[data-selected-category-id="2"] {
+        .b-expanded-menu__item[data-category-id="2"] {
+            display: none;
+        }
+    }
+
+    &[data-selected-category-id="3"] {
+        .b-expanded-menu__item[data-category-id="3"] {
+            display: none;
+        }
+    }
+
+    &[data-selected-category-id="4"] {
+        .b-expanded-menu__item[data-category-id="4"] {
+            display: none;
+        }
+    }
+
+    &[data-selected-category-id="5"] {
+        .b-expanded-menu__item[data-category-id="5"] {
+            display: none;
+        }
+    }
 }
 
 .b-expanded-menu__counter {
