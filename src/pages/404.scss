@@ -1,0 +1,34 @@
+.l-404 {
+    @include padding-level(bottom, blue);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-404-title {
+    @include padding-level(top, blue);
+    @include padding-level(bottom, yellow);
+    color: $blue;
+}
+
+.b-404-desc {
+    max-width: 360px;
+    padding-top: 8px;
+
+    p {
+        @include font-size('p1');
+    }
+
+    @media #{$tablet-portrait} {
+        max-width: 100%;
+    }
+}
