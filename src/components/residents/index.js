@@ -1,20 +1,20 @@
-// import $ from 'jquery';
 import throttle from 'lodash/throttle';
 
 class Residents {
     constructor() {
         this.$residentsPage = document.querySelector('.j-residents-page');
-
-        // this.$residentsContent = document.querySelector('.j-residents');
         this.residents = Array.from(document.querySelectorAll('.b-resident'));
-
         this.$filters = document.querySelector('.j-filters');
-        // this.filters = Array.from(document.querySelectorAll('.b-filters__item'));
 
         // Выпадающее меню
         this.$menu = document.querySelector('.j-expanded-menu');
         this.$menuHeader = this.$menu.querySelector('.b-expanded-menu__header');
+        this.$itemCounter = this.$menuHeader.querySelector('.b-expanded-menu__item-counter');
         this.$menuList = this.$menu.querySelector('.b-expanded-menu__list');
+
+        this.selectedCategories = new Set();
+
+        this.THROTTLE_TIMEOUT = 50;
     }
 
     init() {
@@ -22,25 +22,24 @@ class Residents {
             this.$menu.classList.toggle('b-expanded-menu_is_open');
         });
 
+        // Выпадающий список категорий
         this.$menuList.addEventListener('click', (event) => {
             const selectedItem = event.target.closest('.b-expanded-menu__item');
             const selectedCategoryId = selectedItem.dataset.categoryId;
-            const categoryName = selectedItem.querySelector('.b-expanded-menu__item-text').textContent;
 
-            this.$residentsPage.dataset.selectedCategoryId = selectedCategoryId;
-            // this.$residentsContent.dataset.categoryId = selectedCategoryId; // TODO delete
-            this.$menuHeader.textContent = categoryName;
-            this.$menu.classList.remove('b-expanded-menu_is_open');
+            this.$residentsPage.classList.remove('all-categories');
+            this.changeSelectedCategories(selectedCategoryId);
+            this.$itemCounter.textContent = this.selectedCategories.size ? String(this.selectedCategories.size) : '';
         });
 
-        // Фильтры
+        // Фильтры-табы
         this.$filters.addEventListener('click', (event) => {
             const selectedItem = event.target.closest('.b-filters__item');
             const selectedCategoryId = selectedItem.dataset.categoryId;
 
-            const activeClass = 'b-filters__item_is_active';
-            selectedItem.classList.toggle(activeClass);
-            this.$residentsPage.dataset.selectedCategoryId = selectedCategoryId;
+            this.$residentsPage.classList.remove('all-categories');
+            this.changeSelectedCategories(selectedCategoryId);
+            this.$itemCounter.textContent = this.selectedCategories.size ? String(this.selectedCategories.size) : '';
         });
 
         // Список резидентов
@@ -54,9 +53,17 @@ class Residents {
             }
         });
 
-        const throttleTimeout = 50;
+        window.addEventListener('resize', throttle(this.onResize.bind(this), this.THROTTLE_TIMEOUT));
+    }
 
-        window.addEventListener('resize', throttle(this.onResize.bind(this), throttleTimeout));
+    changeSelectedCategories(categoryId) {
+        if (!this.selectedCategories.has(categoryId)) {
+            this.selectedCategories.add(categoryId);
+            this.$residentsPage.classList.add(`category-${categoryId}`);
+        } else if (this.selectedCategories.has(categoryId)) {
+            this.selectedCategories.delete(categoryId);
+            this.$residentsPage.classList.remove(`category-${categoryId}`);
+        }
     }
 
     isOverflowed(element) {
@@ -74,15 +81,6 @@ class Residents {
     }
 
     onResidentMouseLeave(event) {
-        // event.target.style.height = 'auto';
-        // document.documentElement.clientWidth;
-        // if (document.documentElement.clientWidth < 670) {
-        //     event.target.style.height = '420px';
-        //     event.target.style.width = 'auto';
-        // } else {
-        //     event.target.style.height = '480px';
-        //     event.target.style.width = '50%';
-        // }
         event.target.style.removeProperty('height');
         event.target.style.removeProperty('width');
         event.target.classList.remove(`b-resident_is_expanded`);

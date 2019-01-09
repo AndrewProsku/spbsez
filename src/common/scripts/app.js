@@ -3,7 +3,6 @@ import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
 import Glide from '@glidejs/glide';
-// import ExpandedMenu from '../../components/expanded-menu/';
 import InputTel from '../../components/forms/telephone/telephone';
 import Logout from 'components/logout';
 import NewPassword from '../../components/new-password';
@@ -460,17 +459,6 @@ if (administrators) {
 
     profileAdministrators.init();
 }
-
-/**
- * Инициализация выпадающего меню (страница резиденты)
- */
-// const expandedMenu = document.querySelector('.j-expanded-menu');
-//
-// if (expandedMenu) {
-//     const residentsExpandedMenu = new ExpandedMenu();
-//
-//     residentsExpandedMenu.init();
-// }
 
 /**
  * Инициализация выпадающего меню (страница резиденты)

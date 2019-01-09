@@ -6,12 +6,11 @@
 
     {% include "../components/animation-line/animation-line.twig" %}
 
-    <div class="l-residents j-residents-page" data-selected-category-id="0">
+    <div class="l-residents all-categories j-residents-page">
         <div class="b-title b-residents-title"><h1>Резиденты</h1></div>
 
         {% include "../components/expanded-menu/expanded-menu.twig" %}
 
-        {#j-residents#}
         <div class="b-residents-content">
             {% set residents = [{
                 title: "Биокад",

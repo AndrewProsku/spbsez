@@ -2,7 +2,6 @@
     @include padding-level(bottom, pink);
     @include prefix(2, 36);
     @include suffix(2, 36);
-    //background-color: $white;
 
     h1 {
         @include font-size("h1-inner");
@@ -25,48 +24,11 @@
     }
 }
 
-.l-residents {
-    &[data-selected-category-id="0"] {
-        .b-resident {
-            display: block;
-        }
-    }
-
-    &[data-selected-category-id="1"] {
-        .b-resident_category_1 {
-            display: block;
-        }
-    }
-
-    &[data-selected-category-id="2"] {
-        .b-resident_category_2 {
-            display: block;
-        }
-    }
-
-    &[data-selected-category-id="3"] {
-        .b-resident_category_3 {
-            display: block;
-        }
-    }
-
-    &[data-selected-category-id="4"] {
-        .b-resident_category_4 {
-            display: block;
-        }
-    }
-
-    &[data-selected-category-id="5"] {
-        .b-resident_category_5 {
-            display: block;
-        }
-    }
-}
-
 .b-residents-content {
     @media #{$tablet-portrait} {
         display: flex;
         flex-wrap: wrap;
+        border-left: 1px solid $grey;
     }
 }
 
@@ -81,35 +43,28 @@
 
     @media #{$tablet-only} {
         width: 50%;
-
-        &:nth-child(even) {
-            .b-resident__inner {
-                border-left: none;
-            }
-        }
-
-        &:nth-child(n+3) {
-            .b-resident__inner {
-                border-top: none;
-            }
-        }
     }
 
     @media #{$laptop} {
         width: 33%;
-
-        &:nth-child(3n + 1) {
-            .b-resident__inner {
-                border-left: 1px solid $grey;
-            }
-        }
-
-        &:nth-child(n + 4) {
-            .b-resident__inner {
-                border-top: none;
-            }
-        }
     }
+}
+
+.all-categories .b-resident {
+    display: block;
+}
+
+.category-1 .b-resident_category_1,
+.category-2 .b-resident_category_2,
+.category-3 .b-resident_category_3,
+.category-4 .b-resident_category_4,
+.category-5 .b-resident_category_5,
+.category-6 .b-resident_category_6,
+.category-7 .b-resident_category_7,
+.category-8 .b-resident_category_8,
+.category-9 .b-resident_category_9,
+.category-10 .b-resident_category_10 {
+    display: block;
 }
 
 .b-resident__inner {
@@ -124,11 +79,12 @@
     @media #{$tablet-portrait} {
         height: 480px;
         border-radius: 0;
+        border-left: none;
+        margin-top: -1px;
     }
 
     @media #{$laptop} {
         height: 600px;
-        border-left: none;
     }
 
     @media #{$fullhd} {
@@ -146,8 +102,8 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 40px;
-        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+        height: 45px;
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .99) 90%, #ffffff 100%);
     }
 }
 
@@ -158,6 +114,7 @@
         position: absolute;
         height: auto;
         width: 100%;
+        min-height: 100%;
         z-index: 10;
         box-shadow: 0 10px 20px $grey;
     }
@@ -225,10 +182,11 @@
     padding-right: 20px;
     margin-bottom: 15px;
     position: relative;
+    flex-grow: 1;
 
-    @media #{$tablet-portrait} {
-        //height: 126px;
-    }
+    //@media #{$tablet-portrait} {
+    //    height: 126px;
+    //}
 
     @media #{$laptop} {
         padding-left: 36px;

@@ -49,6 +49,11 @@
     }
 }
 
+.b-expanded-menu__item-counter {
+    font-family: $font-bold;
+    font-weight: 700;
+}
+
 .b-expanded-menu_is_open {
     .b-expanded-menu__header {
         background-color: $white;
@@ -80,44 +85,26 @@
     display: block;
     padding: 10px 15px;
     cursor: pointer;
+    border: 1px solid transparent;
+
+    /* &.is-active {
+        background-color: $white;
+        border-color: $bg-grey;
+    } */
 }
 
-.l-residents {
-    &[data-selected-category-id="0"] {
-        .b-expanded-menu__item[data-category-id="0"] {
-            display: none;
-        }
-    }
-
-    &[data-selected-category-id="1"] {
-        .b-expanded-menu__item[data-category-id="1"] {
-            display: none;
-        }
-    }
-
-    &[data-selected-category-id="2"] {
-        .b-expanded-menu__item[data-category-id="2"] {
-            display: none;
-        }
-    }
-
-    &[data-selected-category-id="3"] {
-        .b-expanded-menu__item[data-category-id="3"] {
-            display: none;
-        }
-    }
-
-    &[data-selected-category-id="4"] {
-        .b-expanded-menu__item[data-category-id="4"] {
-            display: none;
-        }
-    }
-
-    &[data-selected-category-id="5"] {
-        .b-expanded-menu__item[data-category-id="5"] {
-            display: none;
-        }
-    }
+.category-1 .b-expanded-menu__item[data-category-id="1"],
+.category-2 .b-expanded-menu__item[data-category-id="2"],
+.category-3 .b-expanded-menu__item[data-category-id="3"],
+.category-4 .b-expanded-menu__item[data-category-id="4"],
+.category-5 .b-expanded-menu__item[data-category-id="5"],
+.category-6 .b-expanded-menu__item[data-category-id="6"],
+.category-7 .b-expanded-menu__item[data-category-id="7"],
+.category-8 .b-expanded-menu__item[data-category-id="8"],
+.category-9 .b-expanded-menu__item[data-category-id="9"],
+.category-10 .b-expanded-menu__item[data-category-id="10"] {
+    background-color: $white;
+    border-color: $bg-grey;
 }
 
 .b-expanded-menu__counter {
@@ -147,7 +134,6 @@
     @include font-size("p3");
     margin: 0 8px 8px 0;
     border-radius: 4px;
-    // height: 40px;
     padding: 9px 24px 8px;
     background-color: $bg-grey;
     white-space: nowrap;
@@ -155,7 +141,7 @@
     border: 1px solid transparent;
     @include transition(background-color);
 
-    &_is_active,
+    // &_is_active,
     &:hover {
         background-color: $white;
         border-color: $grey;
@@ -167,6 +153,19 @@
     }
 }
 
+.category-1 .b-filters__item[data-category-id="1"],
+.category-2 .b-filters__item[data-category-id="2"],
+.category-3 .b-filters__item[data-category-id="3"],
+.category-4 .b-filters__item[data-category-id="4"],
+.category-5 .b-filters__item[data-category-id="5"],
+.category-6 .b-filters__item[data-category-id="6"],
+.category-7 .b-filters__item[data-category-id="7"],
+.category-8 .b-filters__item[data-category-id="8"],
+.category-9 .b-filters__item[data-category-id="9"],
+.category-10 .b-filters__item[data-category-id="10"] {
+    background-color: $white;
+    border-color: $grey;
+}
 
 .b-filters__counter {
     font-family: $font-bold;
