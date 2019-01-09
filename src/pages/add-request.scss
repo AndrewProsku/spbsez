@@ -83,16 +83,17 @@
 
 .b-links-mobile-item {
     padding-left: 15px;
+}
+
+.b-links-mobile-link {
+    @include font-size("p3");
+    display: block;
+    color: $blue;
     margin-bottom: 5px;
 
     &:last-child {
         margin-bottom: 0;
     }
-}
-
-.b-links-mobile-link {
-    @include font-size("p3");
-    color: $blue;
 }
 
 .b-links-desctop {
