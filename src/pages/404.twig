@@ -1,0 +1,23 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Такой страницы не существует</title> {% endblock %}
+
+{% block content %}
+
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    <div class="l-404">
+
+        <div class="b-title b-404-title">
+            <h1>Такой страницы не существует</h1>
+        </div>
+
+        <div class="b-404-desc">
+            <p>
+                Попробуйте начать с <a href="/" class="b-link-line">главной&nbsp;страницы</a> или <a href="#" class="b-link-line">посмотрите наши&nbsp;участки</a>
+            </p>
+        </div>
+
+    </div>
+{% endblock %}
