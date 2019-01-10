@@ -127,6 +127,11 @@ $path: '/images/home/';
     margin-bottom: 13px;
     fill: $white;
     background-image: none;
+    @include transition(opacity);
+
+    &:hover {
+        opacity: 0.6;
+    }
 
     svg {
         width: 40px;
@@ -223,6 +228,10 @@ $path: '/images/home/';
     @include transition(opacity);
     transition-duration: 3s;
     opacity: 0.4;
+
+    @media #{$laptop-wide} {
+        line-height: 48px;
+    }
 }
 
 .b-main-screen__list {
@@ -754,20 +763,23 @@ $path: '/images/home/';
     @media #{$tablet-portrait} {
         @include column(11, 32);
         font-size: 26px;
+        padding-top: 20px;
     }
 
     @media #{$laptop} {
         @include column(9, 30);
         font-size: 36px;
+        padding-top: 20px;
     }
 
     @media #{$laptop-wide} {
         font-size: 48px;
+        padding-top: 20px;
     }
 
     @media #{$fullhd} {
         @include column(8, 30);
-        padding-top: 0;
+        padding-top: 13px;
     }
 
 }
@@ -978,6 +990,7 @@ $path: '/images/home/';
         .b-tooltip {
             font-size: 12px;
             padding: 3px 5px;
+            //white-space: nowrap;
         }
     }
 
@@ -1260,6 +1273,8 @@ $path: '/images/home/';
             font-size: 20px;
             padding-left: 20px;
             padding-right: 20px;
+            padding-top: 8px;
+            padding-bottom: 7px;
         }
     }
 }
@@ -1553,6 +1568,13 @@ $path: '/images/home/';
         padding: 5px 25px;
         visibility: hidden;
         opacity: 0;
+        white-space: nowrap;
+
+        &_position_left {
+            left: auto;
+            right: 100%;
+            top: -30px;
+        }
     }
 
     @media #{$tablet-landscape} {
