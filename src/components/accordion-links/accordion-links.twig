@@ -1,0 +1,22 @@
+<div class="b-links j-links {% if modify %}{{ modify }}{% endif %}">
+    <div class="b-links-mobile">
+        <div class="b-links-mobile-header">
+            <a href="#" class="b-links__link-mobile">
+                {{ title }}
+            </a>
+            <span class="b-links__link-icon"></span>
+        </div>
+        <ul class="b-links-mobile-body">
+            {% block content %}
+                <li>Нет ссылок</li>
+            {% endblock %}
+        </ul>
+    </div>
+    <div class="b-links-desctop">
+        {% for item in items %}
+            <a href="#" class="b-links__link {{ item.active }}">
+                {{ item.text }}
+            </a>
+        {% endfor %}
+    </div>
+</div>

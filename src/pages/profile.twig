@@ -12,39 +12,32 @@
 
         {# Блок ссылок #}
 
-        <div class="b-links b-profile__links">
-            <div class="b-links-mobile">
-                <div class="b-links-mobile-header">
-                    <a href="#" class="b-links__link-mobile">
-                        Личные данные
+        {% embed '../components/accordion-links/accordion-links.twig' with {
+            title: 'Личные данные',
+            modify: "b-profile__links",
+            items: [{
+                active: "is-active",
+                text: "Личные данные"
+            },{
+                text: "Документы"
+            },{
+                text: "Администраторы"
+            }]
+        } %}
+            {% block content %}
+                <li class="b-links-mobile-item">
+                    <a href="#" class="b-links-mobile-link">
+                        Документы
                     </a>
-                    <span class="b-links__link-icon"></span>
-                </div>
-                <ul class="b-links-mobile-body">
-                    <li class="b-links-mobile-item">
-                        <a href="#" class="b-links-mobile-link">
-                            Документы
-                        </a>
-                    </li>
-                    <li class="b-links-mobile-item">
-                        <a href="#" class="b-links-mobile-link">
-                            Администраторы
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="b-links-desctop">
-                <a href="#" class="b-links__link is-active">
-                    Личные данные
-                </a>
-                <a href="#" class="b-links__link">
-                    Документы
-                </a>
-                <a href="#" class="b-links__link">
-                    Администраторы
-                </a>
-            </div>
-        </div>
+                </li>
+                <li class="b-links-mobile-item">
+                    <a href="#" class="b-links-mobile-link">
+                        Администраторы
+                    </a>
+                </li>
+            {% endblock %}
+
+        {% endembed %}
 
         <div class="j-profile-info">
             {# Блок администратор #}
