@@ -376,7 +376,9 @@
 
     @media #{$laptop-wide} {
         @include column(5, 9);
+        @include suffix(0.5, 9);
         text-align: left;
+        justify-content: flex-end;
     }
 }
 
