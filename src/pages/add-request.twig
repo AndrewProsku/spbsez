@@ -11,31 +11,30 @@
 
         {# Блок ссылок #}
 
-        <div class="b-links">
-            <div class="b-links-mobile">
-                <div class="b-links-mobile-header">
-                    <a href="#" class="b-links__link-mobile">
+        {% embed '../components/accordion-links/accordion-links.twig' with {
+            title: 'Стандартная',
+            modify: "b-profile__links",
+            items: [{
+                text: "Стандартная",
+                active: "is-active"
+            },{
+                text: "Пропуск на временный въезд"
+            }]
+        } %}
+            {% block content %}
+                <li class="b-links-mobile-item">
+                    <a href="#" class="b-links-mobile-link">
                         Стандартная
                     </a>
-                    <span class="b-links__link-icon"></span>
-                </div>
-                <ul class="b-links-mobile-body">
-                    <li class="b-links-mobile-item">
-                        <a href="#" class="b-links-mobile-link">
-                            Пропуск на временный въезд
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="b-links-desctop">
-                <a href="#" class="b-links__link is-active">
-                    Стандартная
-                </a>
-                <a href="#" class="b-links__link">
-                    Пропуск на временный въезд
-                </a>
-            </div>
-        </div>
+                </li>
+                <li class="b-links-mobile-item">
+                    <a href="#" class="b-links-mobile-link">
+                        Пропуск на временный въезд
+                    </a>
+                </li>
+            {% endblock %}
+
+        {% endembed %}
 
         {# Форма #}
 
