@@ -114,12 +114,19 @@ const openMenu = function() {
         event.preventDefault();
         menu.classList.add('is-open');
         document.body.classList.add('is-scroll-disabled');
+        const x = window.scrollX;
+        const y = window.scrollY;
+
+        window.onscroll = function winScroll() {
+            window.scrollTo(x, y);
+        };
     });
 
     close.addEventListener('click', (event) => {
         event.preventDefault();
         menu.classList.remove('is-open');
         document.body.classList.remove('is-scroll-disabled');
+        window.onscroll = function winScroll() {};
     });
 };
 
