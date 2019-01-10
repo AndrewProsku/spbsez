@@ -1,3 +1,10 @@
+.b-slider-reviews {
+    .b-carousel__track {
+        border: none;
+        border-radius: 0;
+    }
+}
+
 .b-slider-reviews__dots {
     position: relative;
     top: -20px;

@@ -375,7 +375,7 @@ $APPLICATION->SetPageProperty('title', 'Особая экономическая 
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
-                                    <div class="b-tooltip">
+                                    <div class="b-tooltip b-tooltip_position_left">
                                         Ладожский вокзал
                                     </div>
                                 </div>
@@ -460,7 +460,7 @@ $APPLICATION->SetPageProperty('title', 'Особая экономическая 
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
-                                    <div class="b-tooltip">
+                                    <div class="b-tooltip b-tooltip_position_left">
                                         Ладожский вокзал
                                     </div>
                                 </div>
@@ -545,7 +545,7 @@ $APPLICATION->SetPageProperty('title', 'Особая экономическая 
                         </div>
 
                         <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
-                            <div class="b-tooltip">
+                            <div class="b-tooltip b-tooltip_position_left">
                                 Ладожский вокзал
                             </div>
                         </div>
