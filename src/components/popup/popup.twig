@@ -1,11 +1,11 @@
 <div class="b-popup">
     <div class="b-popup__overlay"></div>
 
-    <button class="b-popup__close" aria-label="{{ buttonAriaLabel|default('Закрыть всплывающее окно') }}">
-        {{ source('/images/popup/close.svg') }}
-    </button>
-
     <div class="b-popup__wrap">
+        <button class="b-popup__close" aria-label="{{ buttonAriaLabel|default('Закрыть всплывающее окно') }}">
+            {#{{ source('/images/popup/close.svg') }}#}
+        </button>
+
         <div class="b-popup__content">
             {{ content }}
         </div>

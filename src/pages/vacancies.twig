@@ -2,7 +2,123 @@
 {% block title %} <title>Вакансии</title> {% endblock %}
 
 {% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    {# Блок с подменю #}
+
+    {% include '../components/page-submenu/page-submenu.twig' with {
+        subitems: [{
+            href: '#',
+            name: 'Особая&nbsp;экономическая&nbsp;зона'
+        },{
+            href: '#',
+            name: 'Управляющая&nbsp;компания'
+        },{
+            href: '#',
+            name: 'Вакансии',
+            active: true
+        },{
+            href: '#',
+            name: 'Раскрытие&nbsp;информации'
+        }
+        ]
+
+    } %}
+
     <div class="l-vacancies">
-        
+        <div class="b-vacancies-title">
+            <h1>Вакансии</h1>
+        </div>
+
+        <div class="b-vacancies-description">
+            <p>Управляющая компания АО «ОЭЗ «Санкт-Петербург» заинтересована в привлечении новаторски мыслящих, ориентированных на результат, квалифицированных специалистов. Наши сотрудники разделяют ценности компании и работают на создание благоприятного инвестиционного климата для резидентов ОЭЗ.</p>
+            <p>В данном разделе мы публикуем открытые вакансии. Чтобы ознакомиться с условиями и отправить резюме, кликните мышкой по названию вакансии. Мы благодарим Вас за желание стать частью нашей команды!</p>
+        </div>
+
+        <div class="b-vacancies-list">
+            <div class="b-vacancy">
+                <h2 class="b-vacancy__header">Системный администрантор</h2>
+                <div class="b-vacancy__content-wrapper">
+                    <div class="b-vacancy__content">
+                    </div>
+                </div>
+            </div>
+            <div class="b-vacancy j-vacancy">
+                <h2 class="b-vacancy__header">Руководитель проекта/Ведущий инженер (слаботочные сети/АСУ)</h2>
+                <div class="b-vacancy__content-wrapper">
+                    <div class="b-vacancy__content">
+                        <div class="b-vacancy__salary">до 100 000 ₽</div>
+                        <div class="b-vacancy__characteristics">
+                            <div class="b-vacancy__characteristic">
+                                <div class="b-vacancy__characteristic-name">Опыт работы</div>
+                                <div class="b-vacancy__characteristic-value">3-6 лет</div>
+                            </div>
+                            <div class="b-vacancy__characteristic">
+                                <div class="b-vacancy__characteristic-name">Занятость</div>
+                                <div class="b-vacancy__characteristic-value">Полная, полный день</div>
+                            </div>
+                        </div>
+                        <div class="b-vacancy-description">
+                            <p>В дочернюю компанию ОЭЗ «Санкт-Петербург» требуется ведущий инженер (слаботочные системы/сети), с большим опытом работы в функции генерального подрядчика. Работа на территории компании, Санкт-Петербург в офисе</p>
+                        </div>
+                        <h3 class="b-vacancy__subtitle">Обязанности</h3>
+                        <ul class="b-vacancy__description-list">
+                            <li class="b-vacancy__description-item">Работа с государственными органами</li>
+                            <li class="b-vacancy__description-item">Организация и ведение деловых переговоров</li>
+                            <li class="b-vacancy__description-item">Оформления официальной деловой переписки</li>
+                            <li class="b-vacancy__description-item">Работа со схематическими, картографическими и презентационными материалами</li>
+                            <li class="b-vacancy__description-item">Работа с информационно-правовыми системами (консультант плюс, гарант и т.д.)</li>
+                            <li class="b-vacancy__description-item">Работа с электронным документооборотом</li>
+                            <li class="b-vacancy__description-item">Создание, ведение и анализ информационных баз</li>
+                            <li class="b-vacancy__description-item">Организация и контроль работы подрядчика</li>
+                            <li class="b-vacancy__description-item">Планирование работ по срокам</li>
+                            <li class="b-vacancy__description-item">Формирование календарно-сетевого графика</li>
+                            <li class="b-vacancy__description-item">Контроль выполнения сроков в соответствии с графиком работ</li>
+                            <li class="b-vacancy__description-item">Работа с ИТД.</li>
+                        </ul>
+                        <h3 class="b-vacancy__subtitle">Требования</h3>
+                        <ul class="b-vacancy__description-list">
+                            <li class="b-vacancy__description-item">Высшее строительное/инженерное образование</li>
+                            <li class="b-vacancy__description-item">Опыт работы в строительстве на аналогичной должности не менее 2-3 лет</li>
+                            <li class="b-vacancy__description-item">Знание программ: Microsoft Office Word, Microsoft Office Excel, AutoCAD, Internet</li>
+                            <li class="b-vacancy__description-item">Знание основных поставщиков оборудования и материалов слаботочных систем/сетей</li>
+                            <li class="b-vacancy__description-item">Успешный опыт анализа коммерческих предложений, выбора подрядных организаций</li>
+                            <li class="b-vacancy__description-item">Отличные технические навыки по направлению слаботочные системы/сети.</li>
+                        </ul>
+                        <h3 class="b-vacancy__subtitle">Условия</h3>
+                        <ul class="b-vacancy__description-list">
+                            <li class="b-vacancy__description-item">Работа в крупной и стабильной компании</li>
+                            <li class="b-vacancy__description-item">Карьерный рост</li>
+                            <li class="b-vacancy__description-item">Развитие профессиональных знаний и навыков</li>
+                            <li class="b-vacancy__description-item">Огромные проекты федерального масштаба</li>
+                            <li class="b-vacancy__description-item">Молодая, амбициозная, проектно-ориентированная команда</li>
+                            <li class="b-vacancy__description-item">Компенсация жилья, для иногородних кандидатов.</li>
+                        </ul>
+                        <button class="button b-vacancy__button" data-href="#popup">Откликнуться на вакансию</button>
+                    </div>
+                </div>
+            </div>
+            <div class="b-vacancy">
+                <h2 class="b-vacancy__header">Электромонтер по ремонту и обслуживанию электрооборудования (5 разряд)</h2>
+                <div class="b-vacancy__content-wrapper">
+                    <div class="b-vacancy__content">
+                        <p>Управляющая компания АО «ОЭЗ «Санкт-Петербург» заинтересована в привлечении новаторски мыслящих, ориентированных на результат, квалифицированных специалистов. Наши сотрудники разделяют ценности компании и работают на создание благоприятного инвестиционного климата для резидентов ОЭЗ.</p>
+                        <p>В данном разделе мы публикуем открытые вакансии. Чтобы ознакомиться с условиями и отправить резюме, кликните мышкой по названию вакансии. Мы благодарим Вас за желание стать частью нашей команды!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="#popup" class="b-vacancies-popup">
+                <h1>Контент для попапа</h1>
+                <p>Управляющая компания АО «ОЭЗ «Санкт-Петербург» заинтересована в привлечении новаторски мыслящих, ориентированных на результат, квалифицированных специалистов. Наши сотрудники разделяют ценности компании и работают на создание благоприятного инвестиционного климата для резидентов ОЭЗ.</p>
+                <p>В данном разделе мы публикуем открытые вакансии. Чтобы ознакомиться с условиями и отправить резюме, кликните мышкой по названию вакансии. Мы благодарим Вас за желание стать частью нашей команды!</p>
+                <p>В данном разделе мы публикуем открытые вакансии. Чтобы ознакомиться с условиями и отправить резюме, кликните мышкой по названию вакансии. Мы благодарим Вас за желание стать частью нашей команды!</p>
+                <p>В данном разделе мы публикуем открытые вакансии. Чтобы ознакомиться с условиями и отправить резюме, кликните мышкой по названию вакансии. Мы благодарим Вас за желание стать частью нашей команды!</p>
+                <p>В данном разделе мы публикуем открытые вакансии. Чтобы ознакомиться с условиями и отправить резюме, кликните мышкой по названию вакансии. Мы благодарим Вас за желание стать частью нашей команды!</p>
+            </div>
+        </div>
+
     </div>
 {% endblock %}

@@ -200,6 +200,7 @@ button {
     vertical-align: top;
     min-width: 284px;
     height: 48px;
+    font-family: $font;
     font-size: 14px;
     color: $white;
     line-height: 48px;
@@ -212,6 +213,7 @@ button {
     padding-right: 50px;
     padding-left: 26px;
     cursor: pointer;
+    white-space: nowrap;
 
     &:after {
         @include transition(right);

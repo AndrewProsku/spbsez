@@ -1,3 +1,255 @@
 .l-vacancies {
-	
+    @include padding-level(top, blue);
+    @include padding-level(bottom, violet);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(10.5, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(12, 36);
+    }
 }
+
+.b-vacancies-title {
+    @include padding-level(bottom, cyan);
+
+    h1 {
+        @include font-size("h1-inner");
+        margin-bottom: 0;
+    }
+}
+
+.b-vacancies-description {
+    @include padding-level(bottom, cyan);
+    p {
+        @include font-size('p1');
+    }
+
+    p:not(:last-child) {
+        @include padding-level(bottom, cyan);
+    }
+}
+
+.b-vacancies-list {
+    border-radius: 4px;
+    border: 1px solid $grey;
+    background-color: $white;
+}
+
+.b-vacancy__header {
+    @include transition(all);
+    @include font-size('p2');
+    position: relative;
+    padding: 21px 30px 18px 19px;
+    margin-bottom: 0;
+    font-family: $font-bold;
+    font-weight: 700;
+    color: $blue;
+    cursor: pointer;
+
+    &:after {
+        @include transition(transform);
+        content: "";
+        display: block;
+        width: 13px;
+        height: 8px;
+        right: 17px;
+        position: absolute;
+        top: 29px;
+        background-image: url("/images/home/arrow-down.svg");
+        background-position: 0 50%;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-size: contain;
+    }
+
+    @media #{$tablet-portrait} {
+        padding-right: 50px;
+    }
+
+    @media #{$tablet-portrait} {
+        padding: 24px 75px 21px 32px;
+    }
+
+    @media #{$fullhd} {
+        padding-top: 23px;
+        padding-bottom: 27px;
+    }
+}
+
+.b-vacancy__header:after {
+    @media #{$tablet-portrait} {
+        right: 24px;
+    }
+
+    @media #{$laptop} {
+        top: 33px;
+    }
+
+    @media #{$laptop} {
+        right: 31px;
+    }
+}
+
+.b-vacancy_is_open {
+    .b-vacancy__header {
+        @include padding-level(top, yellow);
+        @include padding-level(bottom, yellow);
+        @include font-size('h4');
+        font-family: $font;
+        font-weight: 500;
+        color: $black;
+        padding-right: 50px;
+
+        &:after {
+            transform: rotate(180deg);
+            top: 38px;
+        }
+
+        @media #{$laptop} {
+            padding-left: 35px;
+        }
+
+        @media #{$fullhd} {
+            /*padding-top: 23px;
+            padding-bottom: 27px;*/
+            padding-left: 54px;
+        }
+    }
+}
+
+.b-vacancy__content-wrapper {
+    @include transition(height);
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    height: 0;
+    border-bottom: 1px solid $grey;
+}
+
+.b-vacancy__content {
+    @include padding-level(bottom, blue);
+    @include font-size('p2');
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    padding-left: 19px;
+    padding-right: 19px;
+
+    @media #{$laptop} {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    @media #{$fullhd} {
+        /*padding-top: 23px;
+        padding-bottom: 27px;*/
+        padding-left: 54px;
+    }
+}
+
+.b-vacancy__salary {
+    @include padding-level(bottom, yellow);
+    @include font-size('h4');
+    font-family: $font-bold;
+    font-weight: 700;
+}
+
+.b-vacancy__characteristics {
+    //@include padding-level(bottom, yellow);
+    //display: flex;
+    overflow: hidden;
+}
+.b-vacancy__characteristic {
+    //flex-grow: 1;
+    float: left;
+
+    &:first-child {
+        @include padding-level(bottom, yellow);
+        min-width: 20%;
+        padding-right: 4%;
+    }
+}
+
+.b-vacancy__characteristic-name {
+    @include font-size('p4');
+    font-family: $font-bold;
+    font-weight: 700;
+    white-space: nowrap;
+    padding-bottom: 6px;
+}
+
+.b-vacancy__characteristic-value {
+
+}
+
+.b-vacancy-description {
+    @include padding-level(bottom, green);
+
+    p:not(:last-child) {
+        @include padding-level(bottom, green);
+    }
+}
+
+.b-vacancy__subtitle {
+    @include padding-level(bottom, yellow);
+    @include font-size('h4');
+    margin-bottom: 0;
+}
+
+.b-vacancy__description-list {
+    @include padding-level(bottom, green);
+}
+
+.b-vacancy__description-item {
+    padding-left: 22px;
+    position: relative;
+
+    &:not(:last-child) {
+        padding-bottom: 10px;
+    }
+
+    &:before {
+        content: "—";
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        @include font-size('p2');
+        font-family: $font-bold;
+        font-weight: 700;
+        color: $blue;
+    }
+
+    @media #{$tablet-portrait} {
+        padding-left: 30px;
+    }
+
+    @media #{$laptop} {
+        padding-left: 35px;
+    }
+}
+
+.button.b-vacancy__button {
+    font-family: $font;
+    min-width: 244px;
+    padding-left: 17px;
+    //width: 100%;
+
+    @media #{$tablet-portrait} {
+        min-width: 355px;
+        padding-left: 32px;
+    }
+}
+
+.b-vacancies-popup {
+    display: none;
+}
+

@@ -4,22 +4,22 @@
 @import "../../common/styles/mixins";
 @import "../../common/styles/breakpoints";
 @import "../../common/styles/grid";
-@import "../../common/styles/management-layers";
+//@import "../../common/styles/management-layers";
 
 // SETTINGS
-$popup-overlay-background-color: #000000;
-$popup-overlay-opacity: 0.8;
-$popup-content-background-color: red;
+$popup-overlay-background-color: $blue;
+$popup-overlay-opacity: 0.9;
+$popup-content-background-color: $white;
 $popup-close-icon-width: 20px;
 $popup-close-icon-height: 20px;
-$popup-close-icon-opacity: 0.5;
+//$popup-close-icon-opacity: 1;
 $popup-desktop-close-icon-color: #ffffff;
 $popup-mobile-close-icon-color: #000000;
 
 // вынести класс куда-нибудь отдельно, т.к повторяется еще в mobile-header.scss
 .body-fixed {
     overflow: hidden;
-    position: fixed;
+    //position: fixed;
 }
 
 // COMPONENT
@@ -31,7 +31,7 @@ $popup-mobile-close-icon-color: #000000;
     height: 100%;
     position: fixed;
     overflow: auto;
-    z-index: z(popup);
+    z-index: 1000;
     top: 0;
     left: 0;
 }
@@ -48,13 +48,7 @@ $popup-mobile-close-icon-color: #000000;
     left: 0;
     background-color: $popup-overlay-background-color;
     opacity: $popup-overlay-opacity;
-    cursor: pointer;
-
-    @media #{$laptop} {
-        &:hover + .b-popup__close {
-            opacity: 1;
-        }
-    }
+    //cursor: pointer;
 }
 
 // Close button
@@ -64,15 +58,36 @@ $popup-mobile-close-icon-color: #000000;
     z-index: 1;
     right: 20px;
     top: 20px;
+    width: 20px;
+    height: 20px;
+    padding: 0;
     cursor: pointer;
     background-color: transparent;
     border: 0;
     outline: 0;
-    opacity: $popup-close-icon-opacity;
+    opacity: 1;
+
+    &:before,
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        background-color: $blue;
+    }
+
+    &:before {
+        transform: rotate(45deg);
+    }
+
+    &:after {
+        transform: rotate(-45deg);
+    }
 
     @media #{$laptop} {
         &:hover {
-            opacity: 1;
+            opacity: .8;
         }
     }
 }
@@ -109,6 +124,7 @@ $popup-mobile-close-icon-color: #000000;
     padding-bottom: 20px;
     background-color: $popup-content-background-color;
     min-height: 100vh;
+    border-radius: 4px;
 
     @media #{$laptop} {
         min-height: inherit;

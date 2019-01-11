@@ -15,6 +15,17 @@ import Select from '../../components/forms/select/';
 import Utils from './utils';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
+import Accordion from 'components/accordion';
+import Popup from 'components/popup';
+import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
+
+const popup = new Popup();
+
+popup.init({
+    target              : document.querySelector('.b-vacancy__button'),
+    template            : vacanciesPopupTemplate,
+    closeButtonAriaLabel: 'Закрыть'
+});
 
 /**
  * Полифилл метода closest()
@@ -470,5 +481,28 @@ if (residentsBlock) {
 
     residents.init();
 }
+
+
+/**
+ * Инициализация аккордиона вакансий
+ */
+
+const vacancies = Array.from(document.querySelectorAll('.j-vacancy'));
+
+if (vacancies.length) {
+
+    vacancies.forEach((vacancy) => {
+        const accordion = new Accordion();
+
+        accordion.init({
+            target: vacancy,
+            activeClass: 'b-vacancy_is_open',
+            headerClass: 'b-vacancy__header',
+            contentWrapperClass: 'b-vacancy__content-wrapper',
+            contentClass: 'b-vacancy__content',
+        });
+    });
+}
+
 
 
