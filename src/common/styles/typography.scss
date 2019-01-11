@@ -91,10 +91,6 @@ a {
         background-image: linear-gradient(to top, rgba($blue, 0.12) 0%, rgba($violet, 0.12) 55%, rgba($violet, 0) 30%);
         padding-bottom: 3px;
         padding-right: 3px;
-
-        &:hover {
-            background-image: linear-gradient(to top, rgba($blue, 1) 2px, rgba($violet, 0) 10%, rgba(127, 81, 163, 0) 70%);
-        }
     }
 
     &.b-link-line-two {
@@ -102,9 +98,19 @@ a {
         position: relative;
         padding-bottom: 3px;
         padding-right: 3px;
+    }
 
-        &:hover {
-            background-image: linear-gradient(to top, rgba($white, 0.6) 2px, rgba($blue, 0) 10%, rgba(127, 81, 163, 0) 70%);
+    @media #{$tablet-portrait} {
+        &.b-link-line {
+            &:hover {
+                background-image: linear-gradient(to top, rgba($blue, 1) 2px, rgba($violet, 0) 10%, rgba(127, 81, 163, 0) 70%);
+            }
+        }
+
+        &.b-link-line-two {
+            &:hover {
+                background-image: linear-gradient(to top, rgba($white, 0.6) 2px, rgba($blue, 0) 10%, rgba(127, 81, 163, 0) 70%);
+            }
         }
     }
 }
@@ -229,17 +235,6 @@ button {
         box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.48);
     }
 
-    &:hover {
-        background-position: right center;
-
-        &:after {
-            width: 9px;
-            height: 9px;
-            background-image: url("/images/home/arrow-white-small.svg");
-            right: 5%;
-        }
-    }
-
     // Для заблоченной кнопки добавить класс is-disabled
     &.is-disabled {
         background: $grey;
@@ -264,6 +259,17 @@ button {
         font-size: 18px;
         line-height: 56px;
         padding-right: 90px;
+
+        &:hover {
+            background-position: right center;
+
+            &:after {
+                width: 9px;
+                height: 9px;
+                background-image: url("/images/home/arrow-white-small.svg");
+                right: 5%;
+            }
+        }
     }
 }
 
@@ -296,17 +302,6 @@ button {
         margin-top: -5px;
     }
 
-    &:hover {
-        color: $blue;
-
-        &:after {
-            width: 10px;
-            height: 9px;
-            background-image: url("/images/home/arrow-blue-small.svg");
-            right: 5%;
-        }
-    }
-
     &:active {
         box-shadow: inset 0 2px 4px rgba($blue, 0.48);
     }
@@ -336,6 +331,17 @@ button {
         font-size: 18px;
         line-height: 56px;
         padding-right: 90px;
+
+        &:hover {
+            color: $blue;
+
+            &:after {
+                width: 10px;
+                height: 9px;
+                background-image: url("/images/home/arrow-blue-small.svg");
+                right: 5%;
+            }
+        }
     }
 }
 
@@ -366,15 +372,6 @@ button {
         right: 9%;
     }
 
-    &:hover {
-        color: $blue;
-
-        &:after {
-            right: 5%;
-            transform: rotate(90deg);
-        }
-    }
-
     &:active {
         box-shadow: inset 0 2px 4px rgba($blue, 0.48);
     }
@@ -403,6 +400,15 @@ button {
 
         &:after {
             font-size: 24px;
+        }
+
+        &:hover {
+            color: $blue;
+
+            &:after {
+                right: 5%;
+                transform: rotate(90deg);
+            }
         }
     }
 }
