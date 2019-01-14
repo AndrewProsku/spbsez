@@ -1,0 +1,204 @@
+.l-profile-message-item {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(bottom, pink);
+
+    h1 {
+        @include font-size("h1-inner");
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-profile-message-item-back {
+    @include margin-level(bottom, cyan);
+}
+
+.b-profile-message-item-back__button {
+    @include transition(color);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    min-width: 284px;
+    height: 48px;
+    font-size: 14px;
+    color: $black;
+    line-height: 48px;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid $grey;
+    background-color: $dark-white;
+    padding-left: 80px;
+    padding-right: 32px;
+    cursor: pointer;
+
+    &:before {
+        @include transition(left);
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        width: 14px;
+        height: 7px;
+        background-image: url("/images/home/arrow-black.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        transform: rotate(180deg);
+        margin-top: -3.5px;
+
+        @media #{$tablet-portrait} {
+            width: 18px;
+            height: 9px;
+            margin-top: -5px;
+        }
+    }
+
+    &:active {
+        box-shadow: inset 0 2px 4px rgba($blue, 0.48);
+    }
+
+    &:hover {
+        &:before {
+            left: 8%;
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        height: 56px;
+        font-size: 18px;
+        line-height: 56px;
+    }
+}
+
+.b-profile-message-item-block {
+    position: relative;
+
+    @media #{$laptop} {
+        @include column(25, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(25, 28);
+    }
+}
+
+.b-profile-message-item-block__date {
+    @include font-size("p4");
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: $dark-white;
+    border-radius: 16px;
+    padding: 5px 12px 5px 30px;
+    margin-bottom: 20px;
+
+    &:before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        background-image: url($path + 'time.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        margin-top: -6px;
+    }
+
+    @media #{$laptop} {
+        padding-left: 36px;
+        padding-right: 15px;
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        &:before {
+            left: 10px;
+        }
+    }
+}
+
+.b-profile-message-item-block__title {
+    @include font-size("p1");
+    font-weight: 700;
+    margin-bottom: 16px;
+
+    @media #{$laptop} {
+        @include column(20, 25);
+    }
+}
+
+.b-profile-message-item-block__desc {
+    @include font-size("p2");
+    @include margin-level(bottom, cyan);
+
+    @media #{$laptop} {
+        @include column(20, 25);
+    }
+
+    @media #{$fullhd} {
+        @include column(21, 25);
+    }
+}
+
+.b-profile-message-item-block__files {
+    position: relative;
+    padding-top: 8px;
+
+    &:before {
+        content: "";
+        width: 107px;
+        height: 2px;
+        background-image: linear-gradient(to right, $blue, $violet);
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.b-profile-message-item-block__files-title {
+    @include font-size("p4");
+    @include margin-level(bottom, dark-yellow);
+    font-weight: 700;
+}
+
+.b-profile-message-item-block__files-wrap {
+    @media #{$tablet-portrait} {
+        @include row();
+    }
+}
+
+.b-profile-message-item-block__file-item {
+    margin-bottom: 24px;
+
+    span {
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    @media #{$tablet-portrait} {
+        @include column(10, 32);
+    }
+
+    @media #{$tablet-landscape} {
+        @include column(6, 32);
+    }
+
+    @media #{$laptop} {
+        @include column(6, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(4, 28);
+    }
+}

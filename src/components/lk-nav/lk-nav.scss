@@ -65,5 +65,35 @@
 .b-lk-nav__link {
     @include font-size("p3");
     display: block;
+    position: relative;
     color: $blue;
+}
+
+.b-lk-nav__item-message {
+    .b-lk-nav__item-new-message {
+        display: none;
+        position: absolute;
+        top: -8px;
+        right: -13px;
+        width: 16px;
+        height: 16px;
+        background-color: $blue;
+        font-size: 12px;
+        font-weight: 700;
+        color: $white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 16px;
+
+        @media #{$laptop} {
+            top: -10px;
+            right: -17px;
+        }
+    }
+
+    &.is-new-message {
+        .b-lk-nav__item-new-message {
+            display: block;
+        }
+    }
 }
