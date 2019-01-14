@@ -1,0 +1,53 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Сообщение</title> {% endblock %}
+
+{% block content %}
+    {% include '../components/lk-nav/lk-nav.twig' %}
+
+    <div class="l-profile-message-item">
+
+        <div class="b-title b-profile-message-item-title">
+            <h1>Сообщения от ОЭЗ</h1>
+        </div>
+
+        <div class="b-profile-message-item-back">
+            <a href="#" class="b-profile-message-item-back__button">
+                Назад к сообщениям
+            </a>
+        </div>
+
+        <div class="b-profile-message-item-block">
+            <div class="b-profile-message-item-block__date">
+                24.12.208, 13:02
+            </div>
+            <div class="b-profile-message-item-block__title">
+                Презентация Фонда развития промышленности о механизме действия постановления Правительства РФ от 03.01.2014 №3
+            </div>
+            <div class="b-profile-message-item-block__desc">
+                &laquo;Предоставление субсидий предприятиям на&nbsp;возмещение частизатрат на&nbsp;уплату процентов по&nbsp;кредитам, полученным в&nbsp;2014&nbsp;&mdash; 2019 годах&nbsp;и (или) выплату купонного дохода по&nbsp;облигациям, выпущенным в&nbsp;2017&nbsp;&mdash; 2019 годах в&nbsp;рамках реализации комплексных инвестиционных проектов по&nbsp;приоритетным направлениям гражданской промышленности&raquo;
+            </div>
+            <div class="b-profile-message-item-block__files">
+                <div class="b-profile-message-item-block__files-title">
+                    Прикрепленные файлы
+                </div>
+                <div class="b-profile-message-item-block__files-wrap">
+                    <div class="b-profile-message-item-block__file-item">
+                        <img src="/images/home/jpg-icon.png" alt="картинка">
+                        <span>постановление.jpg</span>
+                        <a href="#" class="b-link-line">
+                            Скачать
+                        </a>
+                    </div>
+                    <div class="b-profile-message-item-block__file-item">
+                        <img src="/images/home/download-icon.png" alt="картинка">
+                        <span>постановление.jpg</span>
+                        <a href="#" class="b-link-line">
+                            Скачать
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}
