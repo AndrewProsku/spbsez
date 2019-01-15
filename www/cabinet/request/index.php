@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle('Подать заявку');
-$APPLICATION->SetPageProperty('title', 'Подать заявку | РОСОЭЗ');
+$APPLICATION->SetPageProperty('title', 'Подать заявку | АООЭЗ');
 if (!$USER->IsAuthorized()) {
     LocalRedirect('/cabinet/auth/');
 }

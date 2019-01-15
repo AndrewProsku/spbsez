@@ -14,6 +14,7 @@ define("PATH_TO_404", "/404.php"); ?>
     <?php
         $APPLICATION->SetAdditionalCSS("/styles/app.css");
         $isRegularPage = !in_array($APPLICATION->GetCurDir(), ['/']) || defined('ERROR_404');
+        $showAnimation = $APPLICATION->GetProperty('showAnimation') === true || defined('ERROR_404');
     ?>
 
     <meta name="theme-color" content="#000000">
@@ -65,3 +66,4 @@ define("PATH_TO_404", "/404.php"); ?>
             ); ?>
         </header>
         <main class="l-layout__content<? if($isRegularPage): ?> l-layout__content-inner<?php endif; ?>">
+            <?php if($showAnimation): include 'inc_animation.php'; endif; ?>

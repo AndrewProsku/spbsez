@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Профиль");
-$APPLICATION->SetPageProperty('title', 'Личный кабинет | РОСОЭЗ');
+$APPLICATION->SetPageProperty('title', 'Личный кабинет | АОСОЭЗ');
 if (!$USER->IsAuthorized()) {
     LocalRedirect('/cabinet/auth/');
 }

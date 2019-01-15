@@ -17,7 +17,7 @@
                             </div>
                             <div class="b-carousel__item-desc">
                                 <p class="b-carousel__item-title"><?= $element['NAME']; ?></p>
-                                <p class="b-carousel__item-text"><?= $element['TEXT']; ?></p>
+                                <p class="b-carousel__item-text"><?= $element['TYPE_NAME']; ?></p>
                             </div>
                         </div>
                     </li>

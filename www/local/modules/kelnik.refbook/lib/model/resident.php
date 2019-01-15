@@ -4,12 +4,15 @@ namespace Kelnik\Refbook\Model;
 
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
 class ResidentTable extends DataManager
 {
+    const PLACE_NEUDORF = 1;
+    const PLACE_NOVOORLOVSKAYA = 2;
     /**
      * @return string
      */
@@ -30,6 +33,18 @@ class ResidentTable extends DataManager
                     'primary' => true,
                     'autocomplete' => true,
                     'title' => Loc::getMessage('KELNIK_RESIDENT_ID')
+                ]
+            ),
+            new Main\Entity\IntegerField(
+                'TYPE_ID',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_TYPE')
+                ]
+            ),
+            new Main\Entity\IntegerField(
+                'PLACE',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_PLACE')
                 ]
             ),
             new Main\Entity\IntegerField(
@@ -59,13 +74,52 @@ class ResidentTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_RESIDENT_NAME'),
                 ]
             ),
+            new Main\Entity\StringField(
+                'SITE',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_SITE'),
+                ]
+            ),
             new Main\Entity\StringField('TEXT_TEXT_TYPE'),
+
             new Main\Entity\TextField(
                 'TEXT',
                 [
                     'title' => Loc::getMessage('KELNIK_RESIDENT_TEXT'),
                 ]
+            ),
+
+            new Main\Entity\ReferenceField(
+                'TYPE',
+                ResidentTypesTable::class,
+                [
+                    'this.TYPE_ID' => 'ref.ID'
+                ]
             )
         ];
+    }
+
+    public static function getPlaces()
+    {
+        return [
+            self::PLACE_NEUDORF => Loc::getMessage('KELNIK_RESIDENT_NEUDORF'),
+            self::PLACE_NOVOORLOVSKAYA => Loc::getMessage('KELNIK_RESIDENT_NOVOORLOVSKAYA')
+        ];
+    }
+
+    public static function getPlaceName($id)
+    {
+        return ArrayHelper::getValue(self::getPlaces(), $id);
+    }
+
+    public static function getPlaceLink($id)
+    {
+        return ArrayHelper::getValue(
+            [
+                self::PLACE_NEUDORF => '/contacts/#neudorf',
+                self::PLACE_NOVOORLOVSKAYA => '/contacts/#novoorlovskaya'
+            ],
+            $id
+        );
     }
 }

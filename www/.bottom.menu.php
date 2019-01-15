@@ -23,7 +23,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Резиденты", 
-		"", 
+		"/residents/",
 		Array(), 
 		Array(), 
 		"" 
