@@ -1,40 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Особая экономическая зона");
-$APPLICATION->SetPageProperty('title', 'Особая экономическая зона | РОСОЭЗ');
+$APPLICATION->SetPageProperty('title', 'Особая экономическая зона | АООЭЗ');
 ?>
-
-    <div class="b-animation-block j-animation-block">
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-    </div>
-
     <?$APPLICATION->IncludeComponent(
         "bitrix:menu",
         "submenu-about",

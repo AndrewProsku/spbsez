@@ -1,41 +1,9 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetPageProperty("title", "Главная | РОСОЭЗ");
+$APPLICATION->SetPageProperty("title", "Главная | АОСОЭЗ");
 $APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
 $APPLICATION->SetTitle("Главная");
 ?>
-
-    <div class="b-animation-block j-animation-block">
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-    </div>
-
     <div class="l-home__main-screen j-home__main-screen">
         <? $APPLICATION->IncludeComponent(
             'kelnik:site.info',
@@ -142,7 +110,7 @@ $APPLICATION->SetTitle("Главная");
             array(
                 "COMPONENT_TEMPLATE" => "residents",
                 "SECTION" => "2",
-                "CACHE_GROUPS" => "Y",
+                "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
                 "CACHE_TIME" => "360000"
             ),
@@ -154,7 +122,7 @@ $APPLICATION->SetTitle("Главная");
             array(
                 "COMPONENT_TEMPLATE" => "reviews",
                 "SECTION" => "3",
-                "CACHE_GROUPS" => "Y",
+                "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
                 "CACHE_TIME" => "360000"
             ),
@@ -391,7 +359,7 @@ $APPLICATION->SetTitle("Главная");
             array(
                 "COMPONENT_TEMPLATE" => "partners",
                 "SECTION" => "1",
-                "CACHE_GROUPS" => "Y",
+                "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
                 "CACHE_TIME" => "360000"
             ),

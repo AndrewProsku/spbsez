@@ -16,14 +16,14 @@ if ($GLOBALS['APPLICATION']->GetUserRight('kelnik.refbook') < 'R') {
 return [
     [
         "parent_menu" => "global_menu_content",
-        "sort"        => 220,
-        "url"         => \Kelnik\Refbook\Model\AdminInterface\PartnerListHelper::getUrl(),
-        "text"        => Loc::getMessage('KELNIK_REFBOOK_MODULE'),
-        "title"       => Loc::getMessage('KELNIK_REFBOOK_MODULE_TITLE'),
+        "sort" => 220,
+        "url" => \Kelnik\Refbook\Model\AdminInterface\PartnerListHelper::getUrl(),
+        "text" => Loc::getMessage('KELNIK_REFBOOK_MODULE'),
+        "title" => Loc::getMessage('KELNIK_REFBOOK_MODULE_TITLE'),
         'icon' => 'kelnik-admin-menu_icon',
         'page_icon' => 'kelnik-admin-menu_icon',
-        "items_id"    => "kelnik_refbook",
-        "items"       => [
+        "items_id" => "kelnik_refbook",
+        "items" => [
             [
                 'parent_menu' => 'kelnik_refbook',
                 'sort' => 180,
@@ -44,6 +44,27 @@ return [
                 'url' => \Kelnik\Refbook\Model\AdminInterface\ResidentListHelper::getUrl(),
                 'more_url' => [
                     \Kelnik\Refbook\Model\AdminInterface\ResidentEditHelper::getUrl()
+                ],
+                "items_id" => "kelnik_refbook_residents",
+                "items" => [
+                    [
+                        'parent_menu' => 'kelnik_refbook_residents',
+                        'sort' => 180,
+                        'text' => Loc::getMessage('KELNIK_REFBOOK_RESIDENT_LIST_MENU'),
+                        'url' => \Kelnik\Refbook\Model\AdminInterface\ResidentListHelper::getUrl(),
+                        'more_url' => [
+                            \Kelnik\Refbook\Model\AdminInterface\ResidentEditHelper::getUrl()
+                        ]
+                    ],
+                    [
+                        'parent_menu' => 'kelnik_refbook_residents',
+                        'sort' => 180,
+                        'text' => Loc::getMessage('KELNIK_REFBOOK_RESIDENT_TYPES_MENU'),
+                        'url' => \Kelnik\Refbook\Model\AdminInterface\ResidentTypesListHelper::getUrl(),
+                        'more_url' => [
+                            \Kelnik\Refbook\Model\AdminInterface\ResidentTypesEditHelper::getUrl()
+                        ]
+                    ]
                 ]
             ],
             [
