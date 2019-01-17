@@ -9,10 +9,6 @@
 $popup-overlay-background-color: $blue;
 $popup-overlay-opacity: 0.9;
 $popup-content-background-color: $white;
-$popup-close-icon-width: 20px;
-$popup-close-icon-height: 20px;
-$popup-desktop-close-icon-color: #ffffff;
-$popup-mobile-close-icon-color: #000000;
 
 // вынести класс куда-нибудь отдельно, т.к повторяется еще в mobile-header.scss
 .body-fixed {
@@ -52,10 +48,10 @@ $popup-mobile-close-icon-color: #000000;
     @include transition(opacity);
     position: absolute;
     z-index: 1;
-    right: 20px;
-    top: 20px;
-    width: 20px;
-    height: 20px;
+    right: 16px;
+    top: 16px;
+    width: 14px;
+    height: 14px;
     padding: 0;
     cursor: pointer;
     background-color: transparent;
@@ -84,15 +80,12 @@ $popup-mobile-close-icon-color: #000000;
     &:after {
         transform: rotate(-45deg);
     }
-}
 
-.b-popup__icon-close {
-    width: $popup-close-icon-width;
-    height: $popup-close-icon-height;
-    fill: $popup-mobile-close-icon-color;
-
-    @media #{$laptop} {
-        fill: $popup-desktop-close-icon-color;
+    @media #{$tablet-portrait} {
+        right: 32px;
+        top: 32px;
+        width: 20px;
+        height: 20px;
     }
 }
 
@@ -104,23 +97,34 @@ $popup-mobile-close-icon-color: #000000;
     right: 0;
     position: absolute;
 
-    @media #{$laptop} {
-        @include column(18);
+    @media #{$tablet-portrait} {
         position: relative;
         max-height: 100%;
+        width: 640px;
+        flex-basis: auto;
+        flex-grow: 0;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
 .b-popup__content {
-    @include prefix(1);
-    @include suffix(1);
+    @include prefix(2);
+    @include suffix(2);
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
     background-color: $popup-content-background-color;
     min-height: 100vh;
-    border-radius: 4px;
+
+
+    @media #{$tablet-portrait} {
+        min-height: inherit;
+        border-radius: 4px;
+        padding: 70px 80px 80px;
+    }
 
     @media #{$laptop} {
-        min-height: inherit;
+        padding-top: 64px;
+        padding-bottom: 64px;
     }
 }

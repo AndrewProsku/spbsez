@@ -2,6 +2,7 @@
 
 // Component
 .b-input-text {
+    @include transition(box-shadow);
     display: block;
     width: 100%;
     border: none;

@@ -28,9 +28,11 @@
 @import "../../pages/residents";
 @import "../../pages/profile-messages";
 @import "../../pages/profile-message-item";
+@import "../../pages/vacancies";
 
 // Components
 
+@import "../../components/popup/popup-vacancies";
 @import "../../../node_modules/@glidejs/glide/src/assets/sass/glide.core";
 @import "../../components/alert-old-browser/alert-old-browser";
 @import "../../components/mobile-menu/mobile-menu";
@@ -48,6 +50,7 @@
 @import "../../components/forms/password/password";
 @import "../../components/forms/checkbox/checkbox";
 @import "../../components/forms/search/search";
+@import "../../components/forms/file/file";
 @import "../../components/yandex-map/yandex-map";
 @import "../../components/animation-line/animation-line";
 @import "../../components/logout/logout";

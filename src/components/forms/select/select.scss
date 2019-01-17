@@ -45,7 +45,7 @@ $select-arrow-color: #aaa;
 $select-arrow-custom: true;
 $select-arrow-image: "/images/home/arrow-down.svg";
 $select-arrow-container-width: 12px;
-$select-arrow-right-padding: 13px;
+$select-arrow-right-padding: 24px;
 
 // States
 $select-disabled-opacity: .5 !important;
@@ -184,11 +184,13 @@ $select-multi-results-bg: transparent;
 
             span {
                 color: $select-color;
+                text-overflow: initial;
             }
 
             // Враппер для стрелочки справа у селекта
             div {
                 width: $select-arrow-container-width;
+                z-index: 1;
 
                 @if ($select-arrow-custom) {
                     right: $select-arrow-right-padding;
@@ -319,6 +321,22 @@ $select-multi-results-bg: transparent;
         border: none;
         box-shadow: none;
     }
+}
+
+.b-select .chosen-container.chosen-container-single .chosen-single div:after {
+    @include transition(box-shadow);
+    content: '';
+    display: block;
+    width: 15px;
+    left: -15px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    box-shadow: inset -15px 0 15px $white;
+}
+
+.b-form-block:hover .b-select .chosen-container.chosen-container-single .chosen-single div:after {
+    box-shadow: inset -15px 0 15px $bg-select;
 }
 
 // Враппер для мобильного вида селекта

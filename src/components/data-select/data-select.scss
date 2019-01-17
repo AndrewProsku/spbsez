@@ -2,7 +2,7 @@
 // Documentation - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/forms/select.html
 
 // Dependencies
-
+/* stylelint-disable */
 @import "../../common/styles/breakpoints";
 @import "../../common/styles/colors";
 @import "../../common/styles/common";
@@ -385,3 +385,5 @@ $select-multi-results-bg: transparent;
 //    }
 //}
 //.chosen-container-active.chosen-with-drop
+
+/* stylelint-enable */

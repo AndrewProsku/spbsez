@@ -7,7 +7,6 @@
  * Активный класс
  * @type {string}
  */
-const activeClass = 'b-accordion_is_open';
 
 class Accordion {
     /**
@@ -19,6 +18,7 @@ class Accordion {
         this.header = null;
         this.contentWrapper = null;
         this.content = null;
+        this.activeClass = '';
     }
 
     /**
@@ -38,9 +38,16 @@ class Accordion {
      */
     _setOptions(options) {
         this.target = options.target;
-        this.header = this.target.querySelector('.b-accordion__header');
-        this.contentWrapper = this.target.querySelector('.b-accordion__content-wrapper');
-        this.content = this.target.querySelector('.b-accordion__content');
+        this.activeClass = options.activeClass || 'b-accordion_is_open';
+        this.header = options.headerClass ?
+            this.target.querySelector(`.${options.headerClass}`) :
+            this.target.querySelector('.b-accordion__header');
+        this.contentWrapper = options.contentWrapperClass ?
+            this.target.querySelector(`.${options.contentWrapperClass}`) :
+            this.target.querySelector('.b-accordion__content-wrapper');
+        this.content = options.contentClass ?
+            this.target.querySelector(`.${options.contentClass}`) :
+            this.target.querySelector('.b-accordion__content');
     }
 
     /**
@@ -66,7 +73,7 @@ class Accordion {
      * @private
      */
     _onHeaderClick() {
-        const method = this.target.classList.contains(activeClass) ?
+        const method = this.target.classList.contains(this.activeClass) ?
             '_hideContent' :
             '_showContent';
 
@@ -78,7 +85,7 @@ class Accordion {
      * @private
      */
     _hideContent() {
-        this.target.classList.remove(activeClass);
+        this.target.classList.remove(this.activeClass);
         this._setHeightContentWrapper(this.defaultHeight);
     }
 
@@ -87,7 +94,7 @@ class Accordion {
      * @private
      */
     _showContent() {
-        this.target.classList.add(activeClass);
+        this.target.classList.add(this.activeClass);
         this._updateHeightContent();
     }
 
@@ -96,7 +103,7 @@ class Accordion {
      * @private
      */
     _onWindowResize() {
-        if (this.target.classList.contains(activeClass)) {
+        if (this.target.classList.contains(this.activeClass)) {
             this._updateHeightContent();
         }
     }
