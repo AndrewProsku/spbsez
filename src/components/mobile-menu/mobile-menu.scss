@@ -1,21 +1,18 @@
 .b-mobile-menu {
-    @include transition(visibility, opacity);
+    @include transition(left);
     transition-duration: 0.5s;
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: -110%;
     z-index: 100;
     width: 100%;
     height: 100%;
     background-image: linear-gradient($gradient-30deg);
-    visibility: hidden;
-    opacity: 0;
 
     &.is-open {
-        visibility: visible;
-        opacity: 1;
+        left: 0;
     }
 
     @media #{$tablet-portrait} {
@@ -33,10 +30,6 @@
 .b-mobile-menu__header {
     @include row();
     @include column(36, 36);
-
-    @media #{$fullhd} {
-        padding-top: 8px;
-    }
 }
 
 .b-mobile-menu__header-left {
@@ -54,11 +47,24 @@
 
 .b-mobile-menu__header-logo {
     display: block;
-    max-width: 232px;
-    width: 100%;
+    max-width: 217px;
+    height: 68px;
+    background-image: url("/images/home/logo-menu.svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top: -10px;
+    margin-left: -3px;
 
-    img {
-        max-height: 76px;
+    @media #{$laptop} {
+        margin-top: 3px;
+    }
+
+    @media #{$fullhd} {
+        max-width: 298px;
+        height: 97px;
+        margin-top: -7px;
+        margin-left: -11px;
     }
 }
 
@@ -68,7 +74,7 @@
     @include prefix(4, 36);
     height: 100%;
     text-align: right;
-    padding-top: 30px;
+    padding-top: 23px;
 
     .b-account {
         display: none;
@@ -127,6 +133,11 @@
             @media #{$laptop} {
                 margin-right: 15px;
             }
+
+            @media #{$laptop-wide} {
+                margin-right: 4px;
+                margin-top: 2px;
+            }
         }
 
         .b-account__link-text {
@@ -136,31 +147,53 @@
 
     @media #{$laptop} {
         @include column(22, 36);
+        padding-top: 28px;
 
         .b-account {
             @include column(17, 21);
-            @include suffix(1, 21);
+            @include suffix(0, 21);
             margin-top: -3px;
         }
     }
 
     @media #{$laptop-wide} {
+        justify-content: flex-end;
+
         .b-account {
+            @include column(5, 9);
+            @include suffix(0.22, 9);
             margin-top: -5px;
+            text-align: left;
         }
+
+        .b-account__link-text {
+            font-size: 17px;
+        }
+    }
+
+    @media #{$fullhd} {
+        padding-top: 37px;
     }
 }
 
 .b-close-menu-warp {
     @include column(4, 8);
-    text-align: center;
+    @include suffix(4, 36);
+    text-align: right;
 
     @media #{$tablet-portrait} {
         @include column(3, 24);
+        @include suffix(1.5, 36);
     }
 
     @media #{$laptop} {
         @include column(2, 21);
+        @include suffix(1, 36);
+    }
+
+    @media #{$fullhd} {
+        @include suffix(0, 36);
+        text-align: center;
     }
 }
 
@@ -168,13 +201,24 @@
     display: inline-block;
     vertical-align: top;
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
     cursor: pointer;
 
     @media #{$laptop} {
         width: 30px;
         height: 30px;
+    }
+
+    @media #{$laptop-wide} {
+        width: 32px;
+        height: 32px;
+        margin-top: 2px;
+        margin-right: 1px;
+    }
+
+    @media #{$fullhd} {
+        margin-right: 7px;
     }
 }
 
@@ -219,6 +263,10 @@
     }
 }
 
+.b-mobile-menu__nav-wrap {
+    width: 100%;
+}
+
 .b-mobile-menu__nav-block {
     margin-bottom: 14px;
 }
@@ -243,7 +291,7 @@
         height: 2px;
         width: 100%;
         position: absolute;
-        bottom: -6px;
+        bottom: -2px;
         background-color: $white;
     }
 }
@@ -277,7 +325,7 @@
         height: 8px;
         position: absolute;
         top: 50%;
-        right: 2px;
+        right: 6px;
         background-image: url("/images/home/accordion-arrow-down.svg");
         background-repeat: no-repeat;
         @include transition(transform);
@@ -428,6 +476,8 @@
     }
 }
 
+/*
 .is-scroll-disabled {
     overflow: hidden;
 }
+*/

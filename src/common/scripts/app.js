@@ -122,12 +122,19 @@ const openMenu = function() {
         event.preventDefault();
         menu.classList.add('is-open');
         document.body.classList.add('is-scroll-disabled');
+        const x = window.scrollX;
+        const y = window.scrollY;
+
+        window.onscroll = function winScroll() {
+            window.scrollTo(x, y);
+        };
     });
 
     close.addEventListener('click', (event) => {
         event.preventDefault();
         menu.classList.remove('is-open');
         document.body.classList.remove('is-scroll-disabled');
+        window.onscroll = function winScroll() {};
     });
 };
 
@@ -341,6 +348,18 @@ if (mainScreenContent) {
     if (Utils.isMobile()) {
         mainScreenContent.classList.add('b-main-screen-content_is_mobile');
     }
+
+    /* На главном экране рассчитываем padding-top */
+
+    const innerHeightWindow = window.innerHeight;
+
+    mainScreenContent.style.paddingTop = `${innerHeightWindow}px`;
+
+    window.addEventListener('resize', () => {
+        const resizeWindowHeight = window.innerHeight;
+
+        mainScreenContent.style.paddingTop = `${resizeWindowHeight}px`;
+    });
 }
 
 /**
@@ -479,6 +498,19 @@ if (residentsBlock) {
     residents.init();
 }
 
+/**
+ * Для картинок мобильных карт - устанавливаем позицию скролла
+ */
+
+const blockMap = document.querySelector('.j-home-plots');
+
+if (blockMap) {
+    const novoorlovskay = document.querySelector('.l-home-plots__map-novoorlovskaya');
+    const neudorf = document.querySelector('.l-home-plots__map-neudorf');
+
+    novoorlovskay.scrollLeft += 220;
+    neudorf.scrollTop += 150;
+}
 
 /**
  * Инициализация аккордиона вакансий

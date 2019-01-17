@@ -55,12 +55,26 @@ class kelnik_refbook extends CModule
 
         $this->getConnection()->query("CREATE TABLE `" . \Kelnik\Refbook\Model\ResidentTable::getTableName() . "` (
             `ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `TYPE_ID` INT(11) UNSIGNED NOT NULL DEFAULT '0',
+            `PLACE` INT(3) UNSIGNED NOT NULL DEFAULT '0',
             `SORT` INT(11) NOT NULL DEFAULT '500',
             `IMAGE_ID` INT(11) UNSIGNED NULL DEFAULT '0',
             `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
             `NAME` VARCHAR(255) NOT NULL,
+            `SITE` VARCHAR(255) NULL DEFAULT NULL,
             `TEXT_TEXT_TYPE` VARCHAR(4) NULL DEFAULT 'html',
             `TEXT` TEXT NULL,
+            PRIMARY KEY (`ID`),
+            INDEX `SORT` (`SORT`),
+            INDEX `ACTIVE` (`ACTIVE`),
+            INDEX `TYPE_ID` (`TYPE_ID`)
+        ) COLLATE='utf8_general_ci' ENGINE=InnoDB;");
+
+        $this->getConnection()->query("CREATE TABLE `" . \Kelnik\Refbook\Model\ResidentTypesTable::getTableName() . "` (
+            `ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `SORT` INT(11) NOT NULL DEFAULT '500',
+            `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
+            `NAME` VARCHAR(255) NOT NULL,
             PRIMARY KEY (`ID`),
             INDEX `SORT` (`SORT`),
             INDEX `ACTIVE` (`ACTIVE`)
@@ -94,6 +108,7 @@ class kelnik_refbook extends CModule
 
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\PartnerTable::getTableName());
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\ResidentTable::getTableName());
+        $this->getConnection()->dropTable(\Kelnik\Refbook\Model\ResidentTypesTable::getTableName());
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\ReviewTable::getTableName());
         //$this->UnInstallFiles();
 

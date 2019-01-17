@@ -30,6 +30,8 @@
     @include margin-level(bottom, orange);
     border: 1px solid $grey;
     border-radius: 4px;
+    padding: 1px; // что бы не разрывался радиус у бордера
+    overflow: hidden;
 
     @media #{$laptop} {
         margin-bottom: 0;
@@ -41,6 +43,7 @@
     max-height: 350px;
     background-color: $white;
     border-left: 1px solid $grey;
+    overflow: hidden;
     cursor: grab;
 
     &:active {

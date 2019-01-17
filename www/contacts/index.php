@@ -1,40 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Контакты");
-$APPLICATION->SetPageProperty('title', 'Контакты | РОСОЭЗ');
+$APPLICATION->SetPageProperty('title', 'Контакты | АООЭЗ');
 ?>
-
-    <div class="b-animation-block j-animation-block">
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-        <div class="b-animation-block__line"></div>
-    </div>
-
     <div class="l-contacts">
         <div class="l-contacts__map-wrapper">
             <div class="l-contacts__title">
