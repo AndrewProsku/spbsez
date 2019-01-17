@@ -29,8 +29,6 @@ class Accordion {
         this._setOptions(options);
         this._setHeightContentWrapper(this.defaultHeight);
         this._bindEvents();
-
-        this._showContent();
     }
 
     /**
@@ -41,7 +39,7 @@ class Accordion {
     _setOptions(options) {
         this.target = options.target;
         this.activeClass = options.activeClass || 'b-accordion_is_open';
-        this.header =  options.headerClass ?
+        this.header = options.headerClass ?
             this.target.querySelector(`.${options.headerClass}`) :
             this.target.querySelector('.b-accordion__header');
         this.contentWrapper = options.contentWrapperClass ?

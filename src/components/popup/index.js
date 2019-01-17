@@ -58,7 +58,6 @@ class Popup {
      * Запуск попапа при клике на кнопку.
      */
     makeOpen() {
-        console.log('open');
         this.contentTypeCheck();
     }
 

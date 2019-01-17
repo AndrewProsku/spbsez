@@ -42,7 +42,7 @@
 }
 
 .b-vacancy__header {
-    @include transition(all);
+    @include transition(color);
     @include font-size('p2');
     position: relative;
     padding: 21px 30px 18px 19px;
@@ -116,8 +116,6 @@
         }
 
         @media #{$fullhd} {
-            /*padding-top: 23px;
-            padding-bottom: 27px;*/
             padding-left: 54px;
         }
     }
@@ -129,6 +127,9 @@
     position: relative;
     z-index: 2;
     height: 0;
+}
+
+.b-vacancy:not(:last-child) .b-vacancy__content-wrapper {
     border-bottom: 1px solid $grey;
 }
 
@@ -149,8 +150,6 @@
     }
 
     @media #{$fullhd} {
-        /*padding-top: 23px;
-        padding-bottom: 27px;*/
         padding-left: 54px;
     }
 }
@@ -163,12 +162,9 @@
 }
 
 .b-vacancy__characteristics {
-    //@include padding-level(bottom, yellow);
-    //display: flex;
     overflow: hidden;
 }
 .b-vacancy__characteristic {
-    //flex-grow: 1;
     float: left;
 
     &:first-child {
@@ -241,7 +237,6 @@
     font-family: $font;
     min-width: 244px;
     padding-left: 17px;
-    //width: 100%;
 
     @media #{$tablet-portrait} {
         min-width: 355px;
@@ -249,7 +244,46 @@
     }
 }
 
+.b-vacancies-empty {
+    @include font-size('h4');
+    font-family: $font-bold;
+    font-weight: 700;
+    display: none;
+}
+
+.b-vacancies-empty {
+    display: block;
+}
+
+// Стили для попапа
 .b-vacancies-popup {
     display: none;
 }
 
+.b-vacancies-popup__header  {
+    @include padding-level(bottom, yellow);
+    @include font-size('h4');
+    margin-bottom: 0;
+}
+
+.b-vacancy-response-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.b-vacancy-response-form__inputs {
+    @include padding-level(bottom, green);
+}
+
+.b-vacancies-popup__success {
+    display: flex;
+    flex-direction: column;
+}
+
+.b-vacancies-popup__text {
+    @include padding-level(bottom, green);
+}
+
+.b-vacancy__button {
+    max-width: 355px;
+}

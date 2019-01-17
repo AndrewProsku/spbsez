@@ -26,10 +26,11 @@
 @import "../../pages/about";
 @import "../../pages/404";
 @import "../../pages/residents";
+@import "../../pages/vacancies";
 
 // Components
 
-@import "../../components/popup/popup";
+@import "../../components/popup/popup-vacancies";
 @import "../../../node_modules/@glidejs/glide/src/assets/sass/glide.core";
 @import "../../components/alert-old-browser/alert-old-browser";
 @import "../../components/mobile-menu/mobile-menu";
@@ -46,9 +47,9 @@
 @import "../../components/forms/telephone/telephone";
 @import "../../components/forms/password/password";
 @import "../../components/forms/checkbox/checkbox";
+@import "../../components/forms/file/file";
 @import "../../components/yandex-map/yandex-map";
 @import "../../components/animation-line/animation-line";
 @import "../../components/logout/logout";
 @import "../../components/expanded-menu/expanded-menu";
-@import "../../pages/vacancies";
 @import "../../components/accordion-links/accordion-links";

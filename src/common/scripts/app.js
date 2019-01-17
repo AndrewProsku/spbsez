@@ -1,31 +1,28 @@
 import '../styles/app.scss';
+import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
 import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
 import Logout from 'components/logout';
+import Mediator from 'common/scripts/mediator';
 import NewPassword from '../../components/new-password';
 import PasswordRecovery from '../../components/password-recovery';
+import Popup from 'components/popup';
 import ProfileAdministrators from '../../components/profile-administrators';
 import ProfileDocs from '../../components/profile-docs';
 import ProfileInfo from '../../components/profile-info';
 import Residents from '../../components/residents/';
 import Select from '../../components/forms/select/';
 import Utils from './utils';
+import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
+import Vacancy from '../../components/vacancy';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
-import Accordion from 'components/accordion';
-import Popup from 'components/popup';
-import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 
-const popup = new Popup();
 
-popup.init({
-    target              : document.querySelector('.b-vacancy__button'),
-    template            : vacanciesPopupTemplate,
-    closeButtonAriaLabel: 'Закрыть'
-});
+const mediator = new Mediator();
 
 /**
  * Полифилл метода closest()
@@ -490,19 +487,41 @@ if (residentsBlock) {
 const vacancies = Array.from(document.querySelectorAll('.j-vacancy'));
 
 if (vacancies.length) {
-
     vacancies.forEach((vacancy) => {
         const accordion = new Accordion();
 
         accordion.init({
-            target: vacancy,
-            activeClass: 'b-vacancy_is_open',
-            headerClass: 'b-vacancy__header',
+            target             : vacancy,
+            activeClass        : 'b-vacancy_is_open',
+            headerClass        : 'b-vacancy__header',
             contentWrapperClass: 'b-vacancy__content-wrapper',
-            contentClass: 'b-vacancy__content',
+            contentClass       : 'b-vacancy__content'
+        });
+    });
+}
+
+/**
+ * Инициализация аккордиона вакансий
+ */
+const vacancyPopupButtons = Array.from(document.querySelectorAll('.j-vacancy-button'));
+
+if (vacancyPopupButtons.length) {
+    vacancyPopupButtons.forEach((button) => {
+        const popup = new Popup();
+
+        popup.init({
+            target              : button,
+            template            : vacanciesPopupTemplate,
+            closeButtonAriaLabel: 'Закрыть'
         });
     });
 }
 
 
+mediator.subscribe('openPopup', (popup) => {
+    if (popup.popup.classList.contains('b-popup_theme_vacancy')) {
+        const vacancy = new Vacancy();
 
+        vacancy.init({popup});
+    }
+});
