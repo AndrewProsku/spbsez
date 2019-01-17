@@ -33,6 +33,10 @@
             top: 50%;
         }
     }
+
+    @media #{$laptop} {
+        font-size: 16px;
+    }
 }
 
 .b-input-file__delete {
