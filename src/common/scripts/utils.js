@@ -79,7 +79,9 @@ class Utils {
 
         xhr.open('POST', url);
 
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        if (!(data instanceof FormData)) {
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        }
         xhr.setRequestHeader('x-requested-with', 'XMLHttpRequest');
 
         xhr.send(dataToSend);

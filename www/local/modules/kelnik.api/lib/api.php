@@ -15,6 +15,18 @@ class Api
     protected $errors = [];
     protected $data = [];
 
+    /**
+     * События не требующие авторизации
+     *
+     * @var array
+     */
+    protected $freeEvents = [
+        'login',
+        'forgot',
+        'changepassword',
+        'vacancy'
+    ];
+
     public static function instance()
     {
         if (!self::$instance) {
@@ -44,7 +56,7 @@ class Api
             $this->errors[] = Loc::getMessage('KELNIK_API_EVENT_REQUIRED');
         }
 
-        if (!in_array($this->event, ['login', 'forgot', 'changepassword']) && !$USER->IsAuthorized()) {
+        if (!in_array($this->event, $this->freeEvents) && !$USER->IsAuthorized()) {
             $this->errors[] = Loc::getMessage('KELNIK_API_AUTH_REQUIRED');
             die($this->getResponse());
         }
@@ -63,6 +75,10 @@ class Api
 
         if (in_array($this->event, ['profile'])) {
             $requiredModules[] = 'kelnik.userdata';
+        }
+
+        if (in_array($this->event, ['vacancy'])) {
+            $requiredModules[] = 'kelnik.vacancy';
         }
 
         if ($requiredModules) {

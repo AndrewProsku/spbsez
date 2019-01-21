@@ -105,9 +105,7 @@ class Vacancy {
             const isFormFulfilled = this.checkForm();
 
             if (isFormFulfilled) {
-                const dataToSend = $(event.target).serialize();
-
-                Utils.send(dataToSend, '/tests/example.json', {
+                Utils.send(new FormData(that.$form), '/api/vacancy/', {
                     success(response) {
                         const successStatus = 1;
                         const failStatus = 0;
