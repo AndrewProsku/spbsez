@@ -113,7 +113,7 @@
         content: "";
         width: 27px;
         height: 32px;
-        background-image: url("/images/home/download-icon.png");
+        background-image: url("/images/files-icons/file.png");
         background-position: center center;
         background-repeat: no-repeat;
         background-size: contain;
@@ -126,6 +126,41 @@
             left: 24px;
             margin-top: -16px;
         }
+    }
+
+    &--ext_doc:before,
+    &--ext_docx:before {
+        background-image: url("/images/files-icons/doc.png");
+    }
+    &--ext_xsl:before,
+    &--ext_xlsx:before {
+        background-image: url("/images/files-icons/xls.png");
+    }
+    &--ext_pdf:before {
+        background-image: url("/images/files-icons/pdf.png");
+    }
+    &--ext_odf:before {
+        background-image: url("/images/files-icons/odf.png");
+    }
+    &--ext_png:before {
+        background-image: url("/images/files-icons/png.png");
+    }
+    &--ext_jpg:before,
+    &--ext_jpeg:before {
+        background-image: url("/images/files-icons/jpg.png");
+    }
+    &--ext_ppt:before,
+    &--ext_pptx:before{
+        background-image: url("/images/files-icons/ppt.png");
+    }
+    &--ext_rtf:before {
+        background-image: url("/images/files-icons/rtf.png");
+    }
+    &--ext_xls:before {
+        background-image: url("/images/files-icons/xls.png");
+    }
+    &--ext_xml:before {
+        background-image: url("/images/files-icons/xml.png");
     }
 
     @media #{$tablet-portrait} {
@@ -278,6 +313,7 @@
     text-align: center;
     fill: $blue;
     padding: 2px;
+    cursor: pointer;
 
     &.is-delete {
         fill: $white;

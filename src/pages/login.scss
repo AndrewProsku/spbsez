@@ -41,7 +41,7 @@
     }
 }
 
-.b-remember-passsword {
+.b-remember-password {
     @include font-size("p4");
     margin-bottom: 20px;
 }
@@ -56,4 +56,8 @@ p.b-checkbox-text {
 
 .b-login-form__button-block {
     @include padding-level(top, green);
+}
+
+.b-personal-information {
+    display: inline-block;
 }

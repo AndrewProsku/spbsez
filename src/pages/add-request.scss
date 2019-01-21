@@ -244,6 +244,34 @@
     }
 }
 
+.b-checkbox-error {
+    @include font-size("p4");
+    position: relative;
+    display: none;
+    background-color: $dark-white;
+    border: 1px solid $grey;
+    padding: 5px 0 5px 16px;
+    margin-top: 5px;
+    border-radius: 4px;
+
+    &:before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: -5px;
+        left: 5px;
+        background-color: $dark-white;
+        border-top: 1px solid $grey;
+        border-left: 1px solid $grey;
+        transform: rotate(45deg);
+    }
+}
+
+.is-error .b-checkbox-error {
+    display: block;
+}
+
 .b-form-block__select-wrapper {
     position: relative;
 

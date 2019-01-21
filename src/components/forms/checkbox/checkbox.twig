@@ -11,8 +11,8 @@
             {% if required %} required {% endif %}
         >
         <label for="{{ id }}" class="b-checkbox-label">
-            {% include './checkbox.svg.twig' %}
-            <p class="b-checkbox-text">{{ text }}</p>
+            <span class="b-checkbox-box">{% include './check.svg.twig' %}</span>
+            <span class="b-checkbox-text">{{ text }}</span>
         </label>
     </div>
 {% else %}

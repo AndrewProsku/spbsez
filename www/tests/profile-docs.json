@@ -1,0 +1,18 @@
+{
+  "request": {
+    "status": 1,
+    "errors": ["Ошибка из респонса", "Все пропало!!11"]
+  },
+  "data": {
+    "FILE_DATA": {
+      "EXT": "docx",
+      "ORIGINAL_NAME": "ReferenceCard.pdf",
+      "FILE_SIZE_FORMAT": "118.82 КБ",
+      "SRC": "/upload/kelnik.userdata/985/98585a1cf1258108096b255e0590b654.pdf"
+    },
+    "ID": 45,
+    "USER_NAME": "ivanov.sergey@biocad.ru",
+    "DATE_MODIFIED_FORMAT": "2019-01-17",
+    "DATE_MODIFIED_FORMAT_HUMAN": "17.01.2019"
+  }
+}

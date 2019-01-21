@@ -7,10 +7,16 @@ class Authorization {
         this.submit = 'j-auth-submit';
         this.login = 'j-auth-login';
         this.password = 'j-auth-password';
+        this.approve = 'j-person-data';
+        this.formBlockClass = 'b-form-block';
         this.errorInputClass = 'b-form-block-error';
         this.messageInputs = 'b-form-block__error-text';
         this.isLogin = false;
         this.isPassword = false;
+        this.isApprove = false;
+
+        this.emptyErrorMessage = 'Поле не может быть пустым';
+        this.incorrectEmailMessage = 'Некорректный email адрес';
     }
 
     init() {
@@ -22,9 +28,11 @@ class Authorization {
         this.$form = document.querySelector(`.${this.form}`);
         this.$login = this.$form.querySelector(`.${this.login}`);
         this.$password = this.$form.querySelector(`.${this.password}`);
+        this.$approve = this.$form.querySelector(`.${this.approve}`);
         this.$messagePassword = this.$password.querySelector(`.${this.messageInputs}`);
         this.$inputLogin = this.$login.querySelector('input');
         this.$inputPassword = this.$password.querySelector('input');
+        this.$inputApprove = this.$approve.querySelector('input');
 
         this.defaultErrorMessage = this.$messagePassword.innerText;
     }
@@ -41,13 +49,16 @@ class Authorization {
             }
         });
 
-        this.$inputLogin.addEventListener('change', () => {
-            if (this.$inputLogin.value.length) {
-                this.isLogin = true;
-                this.removeErrorLogin();
+        this.$inputLogin.addEventListener('change', (event) => {
+            const isValidEmail = event.target.checkValidity();
+
+            if (isValidEmail) {
+                this.loginChangeHandler(event.target);
             } else {
                 this.isLogin = false;
-                this.errorLogin();
+                // this.showErrorMessage(event.target, this.incorrectEmailMessage);
+                // this.errorLogin(this.incorrectEmailMessage);
+                this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });
 
@@ -60,15 +71,42 @@ class Authorization {
                 this.errorPassword();
             }
         });
+
+        this.$inputApprove.addEventListener('change', () => {
+            if (this.$inputApprove.checked) {
+                this.isApprove = true;
+                this.$approve.classList.remove('is-error');
+            } else {
+                this.isApprove = false;
+            }
+        });
+    }
+
+    loginChangeHandler(target) {
+        if (target.value.length) {
+            this.isLogin = true;
+            this.removeErrorLogin();
+        } else {
+            this.isLogin = false;
+            this.showErrorMessage(target, this.emptyErrorMessage);
+        }
     }
 
     checkForm() {
         if (!this.isLogin) {
-            this.errorLogin();
+            if (!this.$inputLogin.value.length) {
+                this.showErrorMessage(this.$inputLogin, this.emptyErrorMessage);
+            } else if (!this.$inputLogin.checkValidity()) {
+                this.showErrorMessage(this.$inputLogin, this.incorrectEmailMessage);
+            }
 
             return false;
         } else if (!this.isPassword) {
             this.errorPassword();
+
+            return false;
+        } else if (!this.isApprove) {
+            this.errorApprove();
 
             return false;
         }
@@ -102,8 +140,17 @@ class Authorization {
         this.$login.classList.remove(this.errorInputClass);
     }
 
-    errorLogin() {
-        this.$login.classList.add(this.errorInputClass);
+    errorApprove() {
+        this.$approve.classList.add('is-error');
+    }
+
+    showErrorMessage(element, message) {
+        const parentFormBlock = element.closest(`.${this.formBlockClass}`);
+        const messageEl = parentFormBlock.querySelector(`.${this.messageInputs}`);
+
+        Utils.clearHtml(messageEl);
+        Utils.insetContent(messageEl, message);
+        parentFormBlock.classList.add(this.errorInputClass);
     }
 
     removeErrorPassword() {
