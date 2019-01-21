@@ -1,0 +1,4 @@
+<?php
+$MESS['KELNIK_VACANCY_RESPONSE_MENU'] = 'Отклики';
+$MESS['KELNIK_VACANCY_LIST_MENU'] = 'Список';
+$MESS['KELNIK_VACANCY_MODULE'] = 'Вакансии';
