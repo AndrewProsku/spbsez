@@ -16,7 +16,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Администраторы",
-		"#",
+		"/cabinet/admins/",
 		Array(),
 		Array(),
 		"\$GLOBALS[\"USER\"]->IsAuthorized()"

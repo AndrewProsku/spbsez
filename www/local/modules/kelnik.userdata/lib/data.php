@@ -39,9 +39,21 @@ class Data
             $res[$field] = ArrayHelper::getValue($userData, $field);
         }
 
-        $res['FULL_NAME'] = implode(' ', [$res['LAST_NAME'], $res['NAME'], $res['SECOND_NAME']]);
+        $res['FULL_NAME'] = self::getUserFullName($res);
 
         return $res;
+    }
+
+    public static function getUserFullName(array $userData)
+    {
+        return implode(
+            ' ',
+            [
+                ArrayHelper::getValue($userData, 'LAST_NAME'),
+                ArrayHelper::getValue($userData, 'NAME'),
+                ArrayHelper::getValue($userData, 'SECOND_NAME')
+            ]
+        );
     }
 
     public static function getUserFields()
