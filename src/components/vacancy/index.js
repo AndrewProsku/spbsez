@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import InputFile from 'components/forms/file';
 import InputTel from 'components/forms/telephone/telephone';
 import Select from 'components/forms/select';
