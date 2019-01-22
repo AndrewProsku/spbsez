@@ -32,6 +32,7 @@ $ultra-range: ($ultra-upper-bound + 1, 10000px);
 
 // Медиа-запросы
 $screen: "only screen";
+$touch-only: "pointer: coarse";
 
 $mobile: "#{$screen}";
 $mobile-only: "#{$screen} and (max-width: #{upper-bound($mobile-range)})";
