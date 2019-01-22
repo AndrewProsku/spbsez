@@ -113,6 +113,20 @@ a {
             }
         }
     }
+
+    @media ($touch-only) {
+        &.b-link-line {
+            &:hover {
+                background-image: linear-gradient(to top, rgba($blue, 0.12) 0%, rgba($violet, 0.12) 55%, rgba($violet, 0) 30%);
+            }
+        }
+
+        &.b-link-line-two {
+            &:hover {
+                background-image: linear-gradient(to top, rgba($white, 0.12) 10%, rgba($white, 0.12) 55%, rgba($white, 0) 30%);
+            }
+        }
+    }
 }
 
 // Акцентный текст
