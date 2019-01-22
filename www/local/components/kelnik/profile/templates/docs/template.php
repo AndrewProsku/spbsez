@@ -9,13 +9,6 @@
 </div>
 <?php endif; ?>
 
-<?php if(!empty($arResult['ERROR'])): ?>
-<div class="b-profile-document-error is-active">
-    <div class="b-profile-document-error__close"></div>
-    <p><?= $arResult['ERROR']; ?></p>
-</div>
-<?php endif; ?>
-
 <?php if(!empty($arResult['DOCS'])): ?>
 <div class="b-profile-document__list">
     <?php foreach ($arResult['DOCS'] as $doc): ?>
@@ -56,7 +49,7 @@
 
 <div class="b-profile-add">
     <form method="post" enctype="multipart/form-data">
-        <input type="hidden" name="action" value="addDoc">
+        <input type="hidden" name="action" value="addFile">
         <label class="b-profile-add__label">
             <input type="file"
                    name="doc"
@@ -67,9 +60,3 @@
         </label>
     </form>
 </div>
-
-<?/*<div class="b-empty-page b-empty-page_padding_top is-active">
-    <p>
-        Еще не загружен ни один документ. Чтобы загрузить нажмите на кнопку справа.
-    </p>
-</div>*/?>
