@@ -1,7 +1,7 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
 } ?>
-<form action="" enctype="multipart/form-data" class="b-login-form j-form-authorization">
+<form action="" enctype="multipart/form-data" class="b-login-form j-form-authorization" novalidate>
     <div class="b-form-block-wrap">
         <div class="b-form-block j-auth-login">
             <input id="email"
