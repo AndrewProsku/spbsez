@@ -1,7 +1,9 @@
 <?php
 namespace Kelnik\Api\Process;
 
+use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Type\DateTime;
 use Bitrix\Main\UserTable;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Userdata\Data;
@@ -178,6 +180,68 @@ class ApiProcessProfile extends ApiProcessAbstract
         }
 
         return false;
+    }
+
+    protected function processAddDoc(array $request)
+    {
+        global $USER;
+
+        $doc = Context::getCurrent()->getRequest()->getFile('doc');
+
+        if (!is_uploaded_file($doc['tmp_name'])) {
+            $this->errors[] = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_UPLOAD_ERROR');
+            return false;
+        }
+
+        $allowExt = DocsTable::getAllowExt();
+
+        if (!in_array($doc['type'], array_keys($allowExt))) {
+            $this->errors[] = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_EXT_ERROR');
+            return false;
+        }
+
+        try {
+            $doc['MODULE_ID'] = 'kelnik.userdata';
+            $fileId = \CFile::SaveFile($doc, $doc['MODULE_ID'], true);
+        } catch (\Exception $e) {
+        }
+
+        if (!$fileId) {
+            $this->errors[] = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_UPLOAD_ERROR');
+            return false;
+        }
+
+        try {
+            $res = DocsTable::add([
+                'USER_ID' => $USER->GetID(),
+                'FILE_ID' => $fileId
+            ]);
+        } catch (\Exception $e) {
+        }
+
+        if (!$res->isSuccess()) {
+            $this->errors[] = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_UPLOAD_ERROR');
+            return false;
+        }
+
+        $dateTime = new DateTime();
+        $fileData = \CFile::GetFileArray($fileId);
+
+        $res = [
+            'id' => $res->getId(),
+            'userName' => $USER->GetFirstName(),
+        ];
+
+        $res['filePath'] = $fileData['SRC'];
+        $res['fileName'] = $fileData['ORIGINAL_NAME'];
+        $res['fileSizeFormat'] = \CFile::FormatSize($fileData['FILE_SIZE']);
+        $res['fileExt'] = strtolower(pathinfo($fileData['ORIGINAL_NAME'], PATHINFO_EXTENSION));
+        $res['dateModified'] = $dateTime->format('Y-m-d');
+        $res['dateModifiedHuman'] = $dateTime->format('d.m.Y');
+
+        $this->data['docs'][] = $res;
+
+        return true;
     }
 
     protected function processDelDoc(array $request)
