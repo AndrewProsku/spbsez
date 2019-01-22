@@ -141,77 +141,73 @@
 .b-resident__title {
     @include font-size("h4");
     @include padding-level(bottom, red);
+    @include prefix(2, 32);
+    @include suffix(2, 32);
     font-family: $font-bold;
     font-weight: 700;
-    padding-left: 20px;
-    padding-right: 20px;
     margin-bottom: 0;
 
     @media #{$laptop} {
-        padding-left: 36px;
-        padding-right: 36px;
+        @include prefix(3, 32);
+        @include suffix(3, 32);
     }
 
     @media #{$fullhd} {
-        padding-left: 54px;
-        padding-right: 54px;
+        @include prefix(1, 9);
+        @include suffix(1, 9);
     }
 }
 
 .b-resident__category {
     @include font-size("p4");
     @include padding-level(bottom, yellow);
-    padding-left: 20px;
-    padding-right: 20px;
+    @include prefix(2, 32);
+    @include suffix(2, 32);
 
     @media #{$laptop} {
-        padding-left: 36px;
-        padding-right: 36px;
+        @include prefix(3, 32);
+        @include suffix(3, 32);
     }
 
     @media #{$fullhd} {
-        padding-left: 54px;
-        padding-right: 54px;
+        @include prefix(1, 9);
+        @include suffix(1, 9);
     }
 }
 
 .b-resident__description {
     @include font-size("p3");
+    @include prefix(2, 32);
+    @include suffix(2, 32);
     overflow: hidden;
-    padding-left: 20px;
-    padding-right: 20px;
     margin-bottom: 15px;
     position: relative;
     flex-grow: 1;
 
-    //@media #{$tablet-portrait} {
-    //    height: 126px;
-    //}
-
     @media #{$laptop} {
-        padding-left: 36px;
-        padding-right: 36px;
+        @include prefix(3, 32);
+        @include suffix(3, 32);
     }
 
     @media #{$fullhd} {
-        padding-left: 54px;
-        padding-right: 54px;
+        @include prefix(1, 9);
+        @include suffix(1, 9);
     }
 }
 
 .b-resident__links {
+    @include prefix(2, 32);
+    @include suffix(2, 32);
     margin-top: auto;
-    padding-left: 20px;
-    padding-right: 20px;
 
     @media #{$laptop} {
-        padding-left: 36px;
-        padding-right: 36px;
+        @include prefix(3, 32);
+        @include suffix(3, 32);
     }
 
     @media #{$fullhd} {
-        padding-left: 54px;
-        padding-right: 54px;
+        @include prefix(1, 9);
+        @include suffix(1, 9);
     }
 }
 
