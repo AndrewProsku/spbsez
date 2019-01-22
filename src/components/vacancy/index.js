@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import InputFile from 'components/forms/file';
 import InputTel from 'components/forms/telephone/telephone';
 import Select from 'components/forms/select';
@@ -105,9 +104,7 @@ class Vacancy {
             const isFormFulfilled = this.checkForm();
 
             if (isFormFulfilled) {
-                const dataToSend = $(event.target).serialize();
-
-                Utils.send(dataToSend, '/tests/example.json', {
+                Utils.send(new FormData(that.$form), '/api/vacancy/', {
                     success(response) {
                         const successStatus = 1;
                         const failStatus = 0;
