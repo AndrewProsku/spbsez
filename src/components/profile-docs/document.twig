@@ -1,11 +1,11 @@
-<div class="b-profile-document__item j-profile-document__item b-profile-document__ext_{{ FILE_DATA.EXT }}" data-id="{{ ID }}" data-ext="{{ FILE_DATA.EXT }}" data-can-delete="true">
+<div class="b-profile-document__item j-profile-document__item b-profile-document__ext_{{ fileExt }}" data-id="{{ id }}" data-ext="{{ fileExt }}" data-can-delete="true">
     <div class="b-profile-document__item-title">
-        <a href="{{ FILE_DATA.SRC }}" class="b-profile-document__item-title-link b-link-line">{{ FILE_DATA.ORIGINAL_NAME }}</a>
-        <span class="b-profile-document__item-title-weight">{{ FILE_DATA.FILE_SIZE_FORMAT }}</span>
+        <a href="{{ filePath }}" class="b-profile-document__item-title-link b-link-line">{{ fileName }}</a>
+        <span class="b-profile-document__item-title-weight">{{ fileSize }}</span>
     </div>
     <div class="b-profile-document__item-desc">
-        <span class="b-profile-document__item-name">{{ USER_NAME }}</span>
-        <time datetime="{{ DATE_MODIFIED_FORMAT }}" class="b-profile-document__item-date">{{ DATE_MODIFIED_FORMAT_HUMAN }}</time>
+        <span class="b-profile-document__item-name">{{ userName }}</span>
+        <time datetime="{{ dateModified }}" class="b-profile-document__item-date">{{ dateModifiedHuman }}</time>
         <div class="b-profile-document__item-delete j-profile-document__item-delete">
             <button type="button" class="b-profile-document__item-delete-button j-delete-doc-button">
                 {% include "../../sprites/svg/delete-icon.svg.twig" %}

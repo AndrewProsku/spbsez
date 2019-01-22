@@ -31,33 +31,37 @@ class ProfileDocs {
             event.preventDefault();
         });
 
+        const that = this;
+
         this.fileInput.addEventListener('change', (event) => {
-            const that = this;
             const FIRST_ELEMENT = 0;
             const file = event.target.files[FIRST_ELEMENT];
 
-            if (this.validFileType(file.type)) {
-                const formData = new FormData();
-
-                formData.append('doc[]', file, file.name);
-                Utils.send(formData, '/tests/profile-docs.json', {
-                    success(response) {
-                        if (response.request.status === that.successStatus) {
-                            const newDocumentItem = that.createDocumentItem(response.data);
-
-                            Utils.insetContent(that.documentsList, newDocumentItem);
-                            that.removeErrorMessages();
-                        }
-                    },
-                    error(error) {
-                        console.error(error);
-                    }
-                });
-            } else {
+            if (!this.validFileType(file.type)) {
                 const wrongTypeMessage = this.createMessageBlock();
 
                 this.documentsPage.insertBefore(wrongTypeMessage, this.fileButton);
+
+                return;
             }
+
+            const formData = new FormData(event.target.closest('form'));
+
+            Utils.send(formData, '/api/profile/', {
+                success(response) {
+                    if (!response.request.status === that.successStatus) {
+                        return;
+                    }
+
+                    response.data.docs.forEach((row) => {
+                        that.documentsList.insertBefore(that.createDocumentItem(row), that.documentsList.firstChild);
+                    });
+                    that.removeErrorMessages();
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
         });
 
         this.bindRemoveDocs();
