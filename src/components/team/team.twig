@@ -1,0 +1,14 @@
+<section class="b-team">
+    <div class="b-team__title b-title">
+        <h2>Команда</h2>
+    </div>
+    <div class="b-team__wrapper">
+        {% for item in items %}
+            <div class="b-team__item">
+                <img src="{{ item.src }}" alt="{{ item.alt }}" class="b-team__photo">
+                <h3 class="b-team__name">{{ item.name }}</h3>
+                <div class="b-team__description">{{ item.description }}</div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
