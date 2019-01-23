@@ -1,0 +1,40 @@
+.l-management-company__quote {
+    @include column(36, 36);
+    @include prefix(4, 36);
+    @include suffix(4, 36);
+    @include padding-level(both, pink);
+    position: relative;
+    overflow: hidden;
+    background-color: $bg-grey;
+
+    @media #{$tablet-portrait} {
+        @include prefix(7, 36);
+        @include suffix(5, 36);
+    }
+
+    @media #{$tablet-landscape} {
+        @include prefix(8, 36);
+        @include suffix(7, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(8, 36);
+        @include suffix(8, 36);
+    }
+}
+
+.l-management-company__quote .b-animation-block {
+    position: absolute;
+    transform: rotate(10deg) scale(0.5, 0.5);
+    z-index: 2;
+    overflow: initial;
+
+    @media #{$laptop} {
+        transform: rotate(10deg) scale(0.8, 0.8);
+
+    }
+
+    @media #{$fullhd} {
+        transform: rotate(10deg) scale(1, 1);
+    }
+}

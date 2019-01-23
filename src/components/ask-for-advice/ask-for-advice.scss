@@ -1,0 +1,35 @@
+.b-ask-for-advice {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    padding-top: 20px;
+    padding-bottom: 36px;
+    background-image: linear-gradient(to right, $blue 0%, $violet 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.b-ask-for-advice__title {
+    @media #{$fullhd} {
+        padding-bottom: 30px;
+    }
+}
+
+.b-ask-for-advice__title h2 {
+    margin: 0;
+    color: $white;
+}
+
+.b-ask-for-advice__text p {
+    @include font-size("p1");
+    max-width: 870px;
+    color: $white;
+}
+
+a.b-ask-for-advice__link {
+    margin-top: 36px;
+    color: $blue;
+    background: $white;
+    
+    &:after {
+        background-image: url("/images/management-company/arrow-right.svg");
+    }
+}
