@@ -123,13 +123,13 @@
     font-size: inherit;
     opacity: 0.48;
     margin-bottom: 10px;
+    background-color: transparent;
+    border: none;
+    line-height: 21px;
+    padding: 0;
 
     &:hover {
         opacity: 0.76;
-    }
-
-    &:last-of-type {
-        margin-bottom: 0;
     }
 
     @media #{$laptop} {
@@ -137,10 +137,6 @@
         vertical-align: middle;
         margin-bottom: 0;
         margin-right: 30px;
-
-        &:last-of-type {
-            margin-right: 0;
-        }
     }
 }
 

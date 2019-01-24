@@ -61,7 +61,7 @@
         border-radius: 0 0 4px 4px;
         border-bottom: 1px solid $grey;
     }
-    
+
     &:hover {
         background-color: $bg-select;
     }
@@ -108,7 +108,7 @@
         margin-bottom: -4px;
 
         &:valid {
-            background-color: $bg-select;
+            //background-color: $bg-select;
         }
     }
 
@@ -134,7 +134,7 @@
 .b-form-block_theme_grey {
     position: relative;
     padding-top: 32px;
-    
+
     &:before {
         content: "";
         width: calc(100% + 2px);

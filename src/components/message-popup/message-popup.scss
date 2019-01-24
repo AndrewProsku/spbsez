@@ -1,0 +1,31 @@
+.b-message-popup {
+    display: none;
+}
+
+.b-message-popup__header {
+    @include padding-level(bottom, yellow);
+    @include font-size("h4");
+    margin-bottom: 0;
+}
+
+.b-vacancy-response-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.b-vacancy-response-form__inputs {
+    @include padding-level(bottom, green);
+}
+
+.b-message-popup__success {
+    display: flex;
+    flex-direction: column;
+}
+
+.b-message-popup__text {
+    @include padding-level(bottom, green);
+}
+
+.b-vacancy__button {
+    max-width: 355px;
+}
