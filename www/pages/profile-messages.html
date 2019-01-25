@@ -246,15 +246,15 @@
         </div>
 
         <div class="b-message-filter">
-            <div class="b-message-filter__mobile-date">
-                    <div class="b-select-data">
-        <div class="b-select-data__wrapper">
+            <div class="b-message-filter__mobile-date j-messages-select">
+                    <div class="b-select">
+        <div class="b-select__wrapper">
             <select
-                    id="message-date"
-                    class="b-select-data__list j-select"
-                    name="message-date"
-                    data-placeholder=""
-                                                                        >
+                id="message-date"
+                class="b-select__list j-select"
+                name="message-date"
+                data-placeholder=""
+                                                            >
 
                                     <option value="2018"
                                                                             >
@@ -276,19 +276,29 @@
         </div>
     </div>
             </div>
-            <div class="b-message-filter__date">
-                <div class="b-message-filter__date-item is-active">
-                    2018
-                </div>
-                <div class="b-message-filter__date-item">
-                    2017
-                </div>
-                <div class="b-message-filter__date-item">
-                    2016
-                </div>
-                <div class="b-message-filter__date-item">
-                    2015
-                </div>
+            <div class="b-message-filter__date j-messages-tabs">
+                <ul class="b-tabs b-tabs-ajax">
+            <li class="b-tabs__item is-active j-tabs__item"
+            data-link="/tests/messages.json"
+            data-year="2018">
+            2018
+        </li>
+            <li class="b-tabs__item  j-tabs__item"
+            data-link="/tests/messages-2017.json"
+            data-year="2017">
+            2017
+        </li>
+            <li class="b-tabs__item  j-tabs__item"
+            data-link="/tests/messages.json"
+            data-year="2016">
+            2016
+        </li>
+            <li class="b-tabs__item  j-tabs__item"
+            data-link="/tests/messages.json"
+            data-year="2015">
+            2015
+        </li>
+    </ul>
             </div>
             <div class="b-message-filter__search">
                 <form action="" method="POST" enctype="multipart/form-data" class="b-message-filter__search-form">
@@ -306,358 +316,75 @@
             </div>
         </div>
 
-        <div class="b-message-block-wrap">
+        <div class="b-message-block-wrap j-messages">
+                <div class="b-message-block-title">Декабрь</div>
 
-            <div class="b-message-block-title">
-                Декабрь
-            </div>
-
-            <div class="b-message-block">
-
-                <!-- Для отображения нового сообщения добавить класс is-new -->
-                <div class="b-message-block__item is-new">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Вы получите решение Экспертного совета в течение 40 рабочих дней после уведомления о принятии заявки
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                        <span class="b-message-block__item-time">
-                            11:00
-                        </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
+    <div class="b-message-block">
+        <!-- Для отображения нового сообщения добавить класс is-new -->
+                    <div class="b-message-block__item is-new">
+                <div class="b-message-block__item-title">
+                    <a href="#" class="b-link-line">Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен</a>
                 </div>
-                <div class="b-message-block__item is-new">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Презентация Фонда развития промышленности о механизме действия постановления Правитель
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1651. Заявка одобрена
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1651. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Стройте свой уникальный инновационный бизнес на территории с особыми привилегиям и получайте прибыль
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Копия свидетельства о постановке на учет в налоговом органе
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1654. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1541. Заявка одобрена
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1541. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка одобрена
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
+                <div class="b-message-block__item-desc">
+                    <span class="b-message-block__item-time">11:30</span>
+                    <time datetime="2018-12-26" class="b-message-block__item-date">26.12.2018</time>
                 </div>
             </div>
-
-            <div class="b-message-block-title">
-                Ноябрь
-            </div>
-
-            <div class="b-message-block">
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                        <span class="b-message-block__item-time">
-                            11:00
-                        </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
+                    <div class="b-message-block__item is-new">
+                <div class="b-message-block__item-title">
+                    <a href="#" class="b-link-line">Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен</a>
                 </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Заявка А-12-1540. Заявка в обработке
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
-                </div>
-                <div class="b-message-block__item">
-                    <div class="b-message-block__item-title">
-                        <a href="#" class="b-link-line">
-                            Технические параметры арендуемого имущества
-                        </a>
-                    </div>
-                    <div class="b-message-block__item-desc">
-                    <span class="b-message-block__item-time">
-                        11:00
-                    </span>
-                        <time datetime="2018-12-12" class="b-message-block__item-date">
-                            12.12.2018
-                        </time>
-                    </div>
+                <div class="b-message-block__item-desc">
+                    <span class="b-message-block__item-time">11:30</span>
+                    <time datetime="2018-12-26" class="b-message-block__item-date">26.12.2018</time>
                 </div>
             </div>
+                    <div class="b-message-block__item ">
+                <div class="b-message-block__item-title">
+                    <a href="#" class="b-link-line">Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен</a>
+                </div>
+                <div class="b-message-block__item-desc">
+                    <span class="b-message-block__item-time">11:30</span>
+                    <time datetime="2018-12-26" class="b-message-block__item-date">26.12.2018</time>
+                </div>
+            </div>
+            </div>
+    <div class="b-message-block-title">Ноябрь</div>
 
+    <div class="b-message-block">
+        <!-- Для отображения нового сообщения добавить класс is-new -->
+                    <div class="b-message-block__item ">
+                <div class="b-message-block__item-title">
+                    <a href="#" class="b-link-line">Заявка А-11-34534. Заявка в обработке</a>
+                </div>
+                <div class="b-message-block__item-desc">
+                    <span class="b-message-block__item-time">09:27</span>
+                    <time datetime="2018-11-26" class="b-message-block__item-date">26.11.2018</time>
+                </div>
+            </div>
+                    <div class="b-message-block__item ">
+                <div class="b-message-block__item-title">
+                    <a href="#" class="b-link-line">Заявка А-11-35635. Заявка в обработке</a>
+                </div>
+                <div class="b-message-block__item-desc">
+                    <span class="b-message-block__item-time">13:45</span>
+                    <time datetime="2018-11-20" class="b-message-block__item-date">20.11.2018</time>
+                </div>
+            </div>
+                    <div class="b-message-block__item ">
+                <div class="b-message-block__item-title">
+                    <a href="#" class="b-link-line">Заявка А-11-13676. Заявка в обработке</a>
+                </div>
+                <div class="b-message-block__item-desc">
+                    <span class="b-message-block__item-time">17:12</span>
+                    <time datetime="2018-11-20" class="b-message-block__item-date">20.11.2018</time>
+                </div>
+            </div>
+            </div>
         </div>
 
         <div class="b-message-more">
-            <button type="button" class="b-message-more__button button-add">
+            <button type="button" class="b-message-more__button button-add j-more" data-send="/tests/messages.json">
                 Загрузить еще сообщения
             </button>
         </div>

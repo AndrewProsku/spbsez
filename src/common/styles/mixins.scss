@@ -130,3 +130,59 @@
         background-color: transparent;
     }
 }
+
+// Модификаторы для подгрузки иконок файлов
+@mixin file-icons() {
+    &:before {
+        content: "";
+        display: block;
+        background-image: url("/images/files-icons/file.png");
+        background-position: top left;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    &_ext_doc:before,
+    &_ext_docx:before {
+        background-image: url("/images/files-icons/doc.png");
+    }
+
+    &_ext_xsl:before,
+    &_ext_xlsx:before {
+        background-image: url("/images/files-icons/xls.png");
+    }
+
+    &_ext_pdf:before {
+        background-image: url("/images/files-icons/pdf.png");
+    }
+
+    &_ext_odf:before {
+        background-image: url("/images/files-icons/odf.png");
+    }
+
+    &_ext_png:before {
+        background-image: url("/images/files-icons/png.png");
+    }
+
+    &_ext_jpg:before,
+    &_ext_jpeg:before {
+        background-image: url("/images/files-icons/jpg.png");
+    }
+
+    &_ext_ppt:before,
+    &_ext_pptx:before {
+        background-image: url("/images/files-icons/ppt.png");
+    }
+
+    &_ext_rtf:before {
+        background-image: url("/images/files-icons/rtf.png");
+    }
+
+    &_ext_xls:before {
+        background-image: url("/images/files-icons/xls.png");
+    }
+
+    &_ext_xml:before {
+        background-image: url("/images/files-icons/xml.png");
+    }
+}

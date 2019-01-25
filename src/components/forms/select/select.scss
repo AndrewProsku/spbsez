@@ -159,7 +159,7 @@ $select-multi-results-bg: transparent;
             border-color: $select-brd-color;
             border-style: solid;
 
-            min-width: 220px;
+            //min-width: 220px;
 
             // Стрелочка справа у селекта
             div b {
@@ -323,7 +323,8 @@ $select-multi-results-bg: transparent;
     }
 }
 
-.b-select .chosen-container.chosen-container-single .chosen-single div:after {
+// Светлое затетнение длинного теста для селекта используемого в формах
+.b-form-block .b-select .chosen-container.chosen-container-single .chosen-single div:after {
     @include transition(box-shadow);
     content: '';
     display: block;

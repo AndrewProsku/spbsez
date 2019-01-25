@@ -182,6 +182,10 @@ class Index {
             });
         }
     }
+
+    triggerUpdate() {
+        $(this.select).trigger('chosen:updated');
+    }
 }
 
 export default Index;

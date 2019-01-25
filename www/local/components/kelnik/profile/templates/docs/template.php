@@ -19,7 +19,7 @@
 <?php if(!empty($arResult['DOCS'])): ?>
 <div class="b-profile-document__list">
     <?php foreach ($arResult['DOCS'] as $doc): ?>
-    <div class="b-profile-document__item j-profile-document__item b-profile-document__item--ext_<?= $doc['FILE_DATA']['EXT']; ?>"
+    <div class="b-profile-document__item j-profile-document__item b-profile-document__item_ext_<?= $doc['FILE_DATA']['EXT']; ?>"
         data-id="<?= $doc['ID']; ?>"
         data-ext="<?= $doc['FILE_DATA']['EXT']; ?>"
         data-can-delete="true">
