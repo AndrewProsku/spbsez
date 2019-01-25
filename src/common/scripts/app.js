@@ -589,7 +589,10 @@ mediator.subscribe('openPopup', (popup) => {
 });
 
 
-// Загрузить еще сообщения
+/**
+ * Инициализация подгрузки сообщений от ОЭЗ
+ */
+
 const moreMessagesButton = document.querySelector('.j-more');
 let moreMessages = null;
 
@@ -603,10 +606,13 @@ if (moreMessagesButton) {
     });
 }
 
-// Табы для сообщений
+
+/**
+ * Инициализация табов для сообщений от ОЭЗ
+ */
+
 const messagesTabs = document.querySelector('.j-messages-tabs');
 const messagesSelectWrapper = document.querySelector('.j-messages-select');
-
 
 if (messagesTabs && messagesSelectWrapper) {
     // Инициализируем мобильный селект
@@ -644,5 +650,21 @@ if (messagesTabs && messagesSelectWrapper) {
             name : 'year',
             value: selectedValue
         });
+    });
+}
+
+
+/**
+ * Инициализация выпадающего меню для личного кабинета
+ */
+
+const accordionLinks = document.querySelector('.j-accordion-links');
+
+if (accordionLinks) {
+    const accordionLinksHeader = accordionLinks.querySelector('.j-accordion-links__header');
+    const accordionLinksMobile = accordionLinks.querySelector('.j-accordion-links__mobile');
+
+    accordionLinksHeader.addEventListener('click', () => {
+        accordionLinksMobile.classList.toggle('is-open');
     });
 }

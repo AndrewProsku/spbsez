@@ -20,7 +20,7 @@ $arItem = array_shift($arCopy);
         </ul>
         <?php endif; ?>
     </div>
-    <div class="b-links-desctop">
+    <div class="b-links-desktop">
         <?php foreach($arResult as $arItem): ?>
         <a href="<?= $arItem['LINK'] ?>" class="b-links__link<?php if(!empty($arItem['SELECTED'])): ?> is-active<?php endif; ?>"><?= $arItem['TEXT'] ?></a>
         <?php endforeach; ?>
