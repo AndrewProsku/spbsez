@@ -55,6 +55,10 @@ $checkbox-text-decoration-hover: none;
     &:focus {
         outline: 0;
     }
+
+    svg {
+        opacity: 0;
+    }
 }
 
 .b-checkbox-box {
@@ -76,7 +80,7 @@ $checkbox-text-decoration-hover: none;
 // Checked
 .b-checkbox-input:checked + .b-checkbox-label {
     svg {
-        opacity: 0;
+        opacity: 1;
     }
 }
 

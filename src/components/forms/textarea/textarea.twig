@@ -1,0 +1,13 @@
+{% if id %}
+    <textarea
+            id="{{ id }}"
+            class="b-input-text"
+            name="{{ name }}"
+            rows="{{ rows }}"
+            cols="{{ cols }}"
+            placeholder="{{ placeholder }}"
+    ></textarea>
+
+{% else %}
+    <h2 style="color: red">Пожалуйста, укажи уникальный id для инпута</h2>
+{% endif %}

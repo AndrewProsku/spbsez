@@ -7,6 +7,8 @@ import Glide from '@glidejs/glide';
 import InputTel from '../../components/forms/telephone/telephone';
 import Logout from 'components/logout';
 import Mediator from 'common/scripts/mediator';
+import Message from '../../components/message-popup';
+import messagePopupTemplate from '../../components/message-popup/message-popup.twig';
 import More from 'components/more';
 import NewPassword from '../../components/new-password';
 import PasswordRecovery from '../../components/password-recovery';
@@ -23,7 +25,6 @@ import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig'
 import Vacancy from '../../components/vacancy';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
-
 
 const mediator = new Mediator();
 
@@ -562,6 +563,28 @@ mediator.subscribe('openPopup', (popup) => {
         const vacancy = new Vacancy();
 
         vacancy.init({popup});
+    }
+});
+
+/**
+ * Инициализация попапа "Написать сообщение" в футере
+ */
+
+const messageButton = document.querySelector('.j-message-button');
+
+const messagePopup = new Popup();
+
+messagePopup.init({
+    target              : messageButton,
+    template            : messagePopupTemplate,
+    closeButtonAriaLabel: 'Закрыть'
+});
+
+mediator.subscribe('openPopup', (popup) => {
+    if (popup.popup.classList.contains('b-popup_theme_message')) {
+        const message = new Message();
+
+        message.init({popup});
     }
 });
 
