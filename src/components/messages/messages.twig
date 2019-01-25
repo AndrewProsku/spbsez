@@ -1,0 +1,18 @@
+{% for month in data.MONTHS %}
+    <div class="b-message-block-title">{{ month.TITLE }}</div>
+
+    <div class="b-message-block">
+        <!-- Для отображения нового сообщения добавить класс is-new -->
+        {% for message in month.MESSAGES %}
+            <div class="b-message-block__item {% if message.IS_NEW %}is-new{% endif %}">
+                <div class="b-message-block__item-title">
+                    <a href="{{ message.SRC }}" class="b-link-line">{{ message.TITLE }}</a>
+                </div>
+                <div class="b-message-block__item-desc">
+                    <span class="b-message-block__item-time">{{ message.TIME }}</span>
+                    <time datetime="{{ message.DATE_MODIFIED_FORMAT }}" class="b-message-block__item-date">{{ message.DATE_MODIFIED_FORMAT_HUMAN }}</time>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
