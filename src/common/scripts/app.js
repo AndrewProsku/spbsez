@@ -9,6 +9,7 @@ import Logout from 'components/logout';
 import Mediator from 'common/scripts/mediator';
 import Message from '../../components/message-popup';
 import messagePopupTemplate from '../../components/message-popup/message-popup.twig';
+import More from 'components/more';
 import NewPassword from '../../components/new-password';
 import PasswordRecovery from '../../components/password-recovery';
 import Popup from 'components/popup';
@@ -17,6 +18,8 @@ import ProfileDocs from '../../components/profile-docs';
 import ProfileInfo from '../../components/profile-info';
 import Residents from '../../components/residents/';
 import Select from '../../components/forms/select/';
+import TabsAjax from 'components/tabs/tabs-ajax';
+import templateMessages from 'components/messages/messages.twig';
 import Utils from './utils';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
@@ -182,14 +185,18 @@ if (phoneInputs.length) {
 
 const selectDomItem = document.querySelector('.j-select');
 
+
 if (selectDomItem) {
-    const select = new Select({
-        element: '.j-select',
+    // Селект для сообщений инциализируется отдельно
+    if (!selectDomItem.closest('.j-messages-select')) {
+        const select = new Select({
+            element: '.j-select',
 
-        disableSearch: true
-    });
+            disableSearch: true
+        });
 
-    select.init();
+        select.init();
+    }
 }
 
 
@@ -580,3 +587,62 @@ mediator.subscribe('openPopup', (popup) => {
         message.init({popup});
     }
 });
+
+
+// Загрузить еще сообщения
+const moreMessagesButton = document.querySelector('.j-more');
+let moreMessages = null;
+
+if (moreMessagesButton) {
+    moreMessages = new More();
+
+    moreMessages.init({
+        button  : moreMessagesButton,
+        content : document.querySelector('.j-messages'),
+        template: templateMessages
+    });
+}
+
+// Табы для сообщений
+const messagesTabs = document.querySelector('.j-messages-tabs');
+const messagesSelectWrapper = document.querySelector('.j-messages-select');
+
+
+if (messagesTabs && messagesSelectWrapper) {
+    // Инициализируем мобильный селект
+    const messagesSelect = new Select({
+        element: '.j-messages-select .j-select',
+
+        disableSearch: true
+    });
+
+    messagesSelect.init();
+
+    // Инициализируем десктопные табы
+    const tabs = new TabsAjax();
+    const tabContent = document.querySelector('.j-messages');
+
+    tabs.init({
+        target  : messagesTabs,
+        content : tabContent,
+        template: templateMessages
+    });
+
+    mediator.subscribe('tabLoaded', (tab) => {
+        if (moreMessages) {
+            moreMessages.resetStep();
+        }
+
+        messagesSelectWrapper.querySelector(`select`).value = tab.dataset.year;
+        messagesSelect.triggerUpdate();
+    });
+
+    mediator.subscribe('chosen-select-change', () => {
+        const selectedValue = messagesSelectWrapper.querySelector('select').value;
+
+        mediator.publish('tabSelected', {
+            name : 'year',
+            value: selectedValue
+        });
+    });
+}

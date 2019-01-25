@@ -1,0 +1,87 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Сообщения от ОЭЗ</title> {% endblock %}
+
+{% block content %}
+    {% include '../components/lk-nav/lk-nav.twig' %}
+
+    <div class="l-profile-messages">
+
+        <div class="b-title b-profile-message-title">
+            <h1>Сообщения от ОЭЗ</h1>
+        </div>
+
+        <div class="b-message-filter">
+            {#<div class="b-message-filter__mobile-date">
+                {% include "../components/forms/select.twig" with {
+                    id: "message-date",
+                    name: "message-date",
+                    options: [{
+                        value: '2018',
+                        text: '2018',
+                        selected: status == 'status1'
+                    }, {
+                        value: '2017',
+                        text: '2017',
+                        selected: status == 'status2'
+                    },{
+                        value: '2016',
+                        text: '2016',
+                        selected: status == 'status3'
+                    },{
+                        value: '2015',
+                        text: '2015',
+                        selected: status == 'status4'
+                    }]
+                } %}
+            </div>
+            <div class="b-message-filter__date j-messages-tabs">
+                {% include "../components/tabs/tabs-ajax.twig" with {
+                    tabs: [{
+                        href: "/tests/messages.json",
+                        text: "2018",
+                        active: true
+                    }, {
+                        href: "/tests/messages-2017.json",
+                        text: "2017"
+                    }, {
+                        href: "/tests/messages.json",
+                        text: "2016",
+                    }, {
+                        href: "/tests/messages.json",
+                        text: "2015"
+                    }]
+                } %}
+            </div>#}
+            <div class="b-message-filter__search">
+                <form action="" method="POST" enctype="multipart/form-data" class="b-message-filter__search-form">
+                    {% include '../components/forms/search/search.twig' with {
+                        id: "message-search",
+                        value: 'инновационный бизнес',
+                        placeholder: "Поиск сообщений"
+                    } %}
+                    <button type="submit" class="b-message-filter__search-form-button">
+                        <img src="/images/forms/search-icon.png" alt="Найти">
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="b-message-block-wrap">
+
+            <div class="b-message-block-title">Найдено 3 сообщения:</div>
+
+            <div class="b-message-block">
+                <div class="b-message-block__item">
+                    <div class="b-message-block__item-title">
+                        <a href="#" class="b-link-line">Стройте свой уникальный инновационный бизнес на территории с особыми привилегиям и получайте прибыль</a>
+                    </div>
+                    <div class="b-message-block__item-desc">
+                        <span class="b-message-block__item-time">11:30</span>
+                        <time datetime="2017-12-26" class="b-message-block__item-date">26.12.2017</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

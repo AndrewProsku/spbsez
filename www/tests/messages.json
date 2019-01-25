@@ -1,0 +1,59 @@
+{
+  "request": {
+    "status": 1,
+    "errors": ["Ошибка из респонса", "Все пропало!!11"]
+  },
+  "data": {
+    "MONTHS": [{
+      "TITLE": "Декабрь",
+      "MESSAGES": [{
+        "TITLE" : "Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен",
+        "SRC": "#",
+        "IS_NEW": true,
+        "DATE_MODIFIED_FORMAT": "2018-12-26",
+        "DATE_MODIFIED_FORMAT_HUMAN": "26.12.2018",
+        "TIME": "11:30"
+      }, {
+        "TITLE" : "Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен",
+        "SRC": "#",
+        "IS_NEW": true,
+        "DATE_MODIFIED_FORMAT": "2018-12-26",
+        "DATE_MODIFIED_FORMAT_HUMAN": "26.12.2018",
+        "TIME": "11:30"
+      }, {
+        "TITLE" : "Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен",
+        "SRC": "#",
+        "IS_NEW": false,
+        "DATE_MODIFIED_FORMAT": "2018-12-26",
+        "DATE_MODIFIED_FORMAT_HUMAN": "26.12.2018",
+        "TIME": "11:30"
+      }]
+    }, {
+      "TITLE": "Ноябрь",
+      "MESSAGES": [{
+        "TITLE" : "Заявка А-11-34534. Заявка в обработке",
+        "SRC": "#",
+        "IS_NEW": false,
+        "DATE_MODIFIED_FORMAT": "2018-11-26",
+        "DATE_MODIFIED_FORMAT_HUMAN": "26.11.2018",
+        "TIME": "09:27"
+      }, {
+        "TITLE" : "Заявка А-11-35635. Заявка в обработке",
+        "SRC": "#",
+        "IS_NEW": false,
+        "DATE_MODIFIED_FORMAT": "2018-11-20",
+        "DATE_MODIFIED_FORMAT_HUMAN": "20.11.2018",
+        "TIME": "13:45"
+      }, {
+        "TITLE" : "Заявка А-11-13676. Заявка в обработке",
+        "SRC": "#",
+        "IS_NEW": false,
+        "DATE_MODIFIED_FORMAT": "2018-11-20",
+        "DATE_MODIFIED_FORMAT_HUMAN": "20.11.2018",
+        "TIME": "17:12"
+      }]
+    }],
+    "MORE_URL": "/tests/messages-2017.json",
+    "IS_END": true
+  }
+}
