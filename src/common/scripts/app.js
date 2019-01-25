@@ -572,13 +572,16 @@ mediator.subscribe('openPopup', (popup) => {
 
 const messageButton = document.querySelector('.j-message-button');
 
-const messagePopup = new Popup();
+if (messageButton) {
+    const messagePopup = new Popup();
 
-messagePopup.init({
-    target              : messageButton,
-    template            : messagePopupTemplate,
-    closeButtonAriaLabel: 'Закрыть'
-});
+    messagePopup.init({
+        target              : messageButton,
+        template            : messagePopupTemplate,
+        closeButtonAriaLabel: 'Закрыть'
+    });
+}
+
 
 mediator.subscribe('openPopup', (popup) => {
     if (popup.popup.classList.contains('b-popup_theme_message')) {

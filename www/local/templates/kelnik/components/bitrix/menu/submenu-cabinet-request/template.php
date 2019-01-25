@@ -4,17 +4,16 @@
 $arCopy = $arResult;
 $arItem = array_shift($arCopy);
 ?>
-<div class="b-links">
-    <div class="b-links-mobile">
-        <div class="b-links-mobile-header">
-            <a href="<?= $aritem['LINK']; ?>" class="b-links__link-mobile"><?= $arItem['TEXT']; ?></a>
-            <span class="b-links__link-icon"></span>
+<div class="b-links j-accordion-links b-profile__links">
+    <div class="b-links-mobile j-accordion-links__mobile">
+        <div class="b-links-mobile__header j-accordion-links__header">
+            <span class="b-links-mobile__title"><?= $arItem['TEXT']; ?></span>
         </div>
         <?php if ($arCopy): ?>
-        <ul class="b-links-mobile-body">
-            <li class="b-links-mobile-item">
+        <ul class="b-links-mobile__body">
+            <li class="b-links-mobile__item">
                 <?php foreach($arResult as $arItem): ?>
-                    <a href="<?= $arItem['LINK'] ?>" class="b-links-mobile-link<?php if(!empty($arItem['SELECTED'])): ?> is-active<?php endif; ?>"><?= $arItem['TEXT'] ?></a>
+                    <a href="<?= $arItem['LINK'] ?>" class="b-links-mobile__link<?php if(!empty($arItem['SELECTED'])): ?> is-active<?php endif; ?>"><?= $arItem['TEXT'] ?></a>
                 <?php endforeach; ?>
             </li>
         </ul>
