@@ -116,7 +116,7 @@
                                                 </g>
                                             </svg>
                                         </span>
-                                        <p class="b-checkbox-text">Подача отчета</p>
+                                        <span class="b-checkbox-text">Подача отчета</span>
                                     </label>
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                                                 </g>
                                             </svg>
                                         </span>
-                                        <p class="b-checkbox-text">Сообщения от ОЭЗ</p>
+                                        <span class="b-checkbox-text">Сообщения от ОЭЗ</span>
                                     </label>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                                                 </g>
                                             </svg>
                                         </span>
-                                        <p class="b-checkbox-text">Подача заявки</p>
+                                        <span class="b-checkbox-text">Подача заявки</span>
                                     </label>
                                 </div>
                             </div>
