@@ -1,0 +1,263 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Особая экономическая зона</title> {% endblock %}
+
+{% block content %}
+
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    {# Блок с подменю #}
+
+    {% include '../components/page-submenu/page-submenu.twig' with {
+        subitems: [{
+            href: '#',
+            name: 'Особая&nbsp;экономическая&nbsp;зона'
+        },{
+            href: '#',
+            name: 'Управляющая&nbsp;компания',
+            active: true
+        },{
+            href: '#',
+            name: 'Вакансии'
+        },{
+            href: '#',
+            name: 'Раскрытие&nbsp;информации'
+        }
+        ]
+
+    } %}
+
+    <div class="l-services">
+
+        <div class="b-title b-services-title">
+            <h1>Услуги</h1>
+        </div>
+
+        <div class="b-services-text">
+            <p>Управляющая компания АО «Особая экономическая зона «Санкт-Петербург» предлагает всестороннюю поддержку и услуги для развития бизнеса резидентов.</p>
+        </div>
+
+        <div class="l-services__wrap">
+            {% include '../components/offers/offers.twig' with {
+                title: "Аренда офисных помещений",
+                text: "<p>На обеих площадках ОЭЗ к аренде предлагаются коммерческие помещения в бизнес центрах класса «В+»:</p>",
+                src: "/images/services/office.png",
+                alt: "Фотография офиса",
+                lists: [{
+                    items: [
+                        "Помещения с отделкой",
+                        "Возможность подключения Internet и телефонии",
+                        "Аренда мест на парковке",
+                        "Возможность арендовать переговорные комнаты, конференц-зал",
+                        "Наличие кафе-ресторана",
+                        "Аренда мест на парковке",
+                        "Профессиональная уборка офисов",
+                        "Профессиональная уборка офисов"
+                    ]}],
+                content: "
+                    <div class='b-offers__count'>
+                        <span class='b-offers__count-bold'>В ставку включены:</span> НДС, Коммунальные услуги, Электроэнергия
+                    </div>"
+            } %}
+        </div>
+
+        <div class="l-services__wrap">
+            {% include '../components/offers/offers.twig' with {
+                title: "Аренда переговорных комнат и конференц-залов",
+                text: "<p>Для проведения переговоров, встреч, семинаров, конференций, в том числе по видеосвязи, круглых столов и панельных дискуссий на площадках ОЭЗ Управляющая компания предлагает резидентам и нерезидентам арендовать оборудованные переговорные комнаты и просторный конференц-зал.</p>
+                       <p>Помещения оснащены мебелью и современным телекоммуникационным оборудованием. Кафе в бизнес-центре способно обеспечить кейтеринговое обслуживание деловых мероприятий.</p>
+                       <p>Сотрудники резидентов площадки «Новоорловская» могут бесплатно проводить встречи в welcome-зоне первого этажа бизнес центра.</p>",
+                src: "/images/services/conference.png",
+                alt: "Фотография офиса",
+                lists: [{
+                    subtitle: "Переговорные комнаты БЦ «Новоорловский»",
+                    items: [
+                        "Разная вместимость и полное оснащение мебелью (от 20 до 50 гостей)",
+                        "Аудио-видео оборудование для проведения презентаций",
+                        "Видеоконференцсвязь для проведения дистанционных совещаний",
+                        "Доступ к сети интернет",
+                        "Техническое сопровождение проведения конференций и совещаний"
+                    ]}, {
+                    subtitle: "Конференц-зал АДЦ «Нойдорф»",
+                    items: [
+                        "До 250 участников",
+                        "Президиум на 5 человек с трибуной",
+                        "Многоэкранная система и проектор",
+                        "Мультимедийное сопровождение",
+                        "Возможность синхронного перевода",
+                        "Возможность записи совещания или конференции"
+                    ]}
+                ]
+            } %}
+        </div>
+
+        <div class="l-services__wrap">
+            {% include '../components/offers/offers.twig' with {
+                title: "Центр обработки данных в АДЦ «Нойдорф»",
+                text: "<p>ЦОД (центр обработки данных) располагается на первом этаже здания административно-делового центра «Нойдорф». Требования к помещениям и инженерным системам ЦОД были учтены на этапе проектирования здания</p>",
+                src: "/images/services/cod.png",
+                alt: "Фотография центра",
+                lists: [{
+                    subtitle: "Услуги ЦОД",
+                    items: [
+                        "Размещение оборудования",
+                        "Аренда оборудования",
+                        "Аренда виртуальной ИТ-инфраструктуры",
+                        "Готовая виртуальная инфраструктура (laaS)",
+                        "Прямые каналы передачи данных крупнейших операторов региона",
+                        "Круглосуточный мониторинг и техническая поддержка",
+                        "Круглосуточная охрана"
+                    ]}, {
+                    subtitle: "Основные характеристики ЦОД",
+                    items: [
+                        "Общая площадь – 240 м²",
+                        "Площадь машинного зала – 120 м²",
+                        "Уровень резервирования инженерных систем – по требованиям Tier III",
+                        "Система физической безопасности реализована на трех рубежах",
+                        "Количество шкафов емкостью до 48U-39U — 39",
+                        "Максимальная мощность на стойку до 8U — 39 кВт",
+                        "Внешние сети телекоммуникаций ЦОД построены по 3 трассам",
+                        "Помещения ЦОД оборудованы пожарной сигнализацией, системой газового пожаротушения
+и аспирационной системой сверхраннего обнаружения пожара"
+                    ]}
+                ],
+                content: "
+                    <div class='b-offers__description'>
+                        <div class='b-offers__description-title'>
+                            <h4>Диспетчерский пост</h4>
+                        </div>
+                        <div class='b-offers__description-text'>
+                            <p>Мониторинг инженерных систем ЦОД осуществляется круглосуточно с диспетчерского поста, расположенного в непосредственной близости с машинным залом.</p>
+                        </div>
+                    </div>
+                    <div class='b-offers__description'>
+                        <div class='b-offers__description-title'>
+                            <h4>Рабочее место инженера</h4>
+                        </div>
+                        <div class='b-offers__description-text'>
+                            <p>Рабочее место дежурного системного инженера организовано с использованием программного обеспечения TAC Vista и позволяет в реальном времени контролировать основные параметры всех систем</p>
+                        </div>
+                    </div>
+
+                    <div class='b-offers__logo'>
+                        <div class='b-offers__logo-title'>
+                            <h4>В здании ЦОД размещено оборудование большинства основных операторов связи региона</h4>
+                        </div>
+                        <div class='b-offers__logo-wrap'>
+                            <img src='/images/services/logo-mts.jpg' alt='Логотип компании МТС'>
+                            <img src='/images/services/logo-biline.jpg' alt='Логотип компании Билайн'>
+                            <img src='/images/services/logo-megafone.jpg' alt='Логотип компании Мегафон'>
+                            <img src='/images/services/logo-tele2.jpg' alt='Логотип компании Теле2'>
+                            <img src='/images/services/logo-ttk.jpg' alt='Логотип компании ТТК'>
+                            <img src='/images/services/logo-obit.jpg' alt='Логотип компании ОБИТ'>
+                            <img src='/images/services/logo-er.jpg' alt='Логотип компании ЕР ТЕЛЕКОМ'>
+                            <img src='/images/services/logo-severen.jpg' alt='Логотип компании СЕВЕРЕН ТЕЛЕКОМ'>
+                        </div>
+                    </div>"
+            } %}
+        </div>
+
+        <div class="l-services__advantage">
+            {% include '../components/advantage/advantage.twig' with {
+                modify: "b-advantages_theme_gradient",
+                title: "Круглосуточная охрана",
+                text: "<p>В особой экономической зоне действует система контрольно-пропускных пунктов (КПП), предотвращающая свободное проникновение посторонних лиц на территорию. Проезд автотранспорта сторонних организаций и служб доставки осуществляется по предварительному согласованию с диспетчерской службой Управляющей компании. Кроме того, оба входа в бизнес-центр оборудованы системой контроля и управлением доступа в здание.</p>",
+                src: "/images/services/security.png",
+                alt: "Фотография поста охраны"
+            }%}
+        </div>
+
+        <div class="l-services__advantage">
+            {% include '../components/advantage/advantage.twig' with {
+                title: "Удобный паркинг",
+                text: "
+                    <div class='b-advantages__wrapper'>
+                        <div class='b-advantages__parking-item'>
+                            <div class='b-advantages__place'>170 мест</div>
+                            <div class='b-advantages__place-text'>
+                                <p>На открытой парковке площадки «Новоорловская»</p>
+                            </div>
+                        </div>
+                        <div class='b-advantages__parking-item'>
+                            <div class='b-advantages__place'>170 мест</div>
+                            <div class='b-advantages__place-text'>
+                                <p>На открытой парковке площадки «Новоорловская»</p>
+                            </div>
+                        </div>
+                    </div>",
+                src: "/images/services/parking.png",
+                alt: "Фотография паркинга"
+            }%}
+        </div>
+
+        <div class="l-services__advantage">
+            {% include '../components/advantage/advantage.twig' with {
+                modify: "b-advantages_theme_gradient",
+                title: "Таможенный пост",
+                text: "<p>На территории ОЭЗ «Санкт-Петербург» применяется таможенная процедура «свободная таможенная зона», позволяющая на льготных условиях ввозить оборудование и компоненты для резидентов ОЭЗ.</p>",
+                src: "/images/services/post.png",
+                alt: "Фотография таможенного поста"
+            }%}
+        </div>
+
+        <div class="l-services__advantage">
+            {% include '../components/advantage/advantage.twig' with {
+                title: "Мероприятия для резидентов",
+                text: "<p>Мероприятия для резидентов с участием представителей государственной власти, банков, институтов развития, контрольных и разрешительных органов</p>",
+                src: "/images/services/meeting.png",
+                alt: "Фотография мероприятия"
+            }%}
+        </div>
+    </div>
+
+    <div id="#service" class="b-service-popup">
+        <h3 class="b-service-popup__header">Написать сообщение</h3>
+        <form action="" method="post" enctype="multipart/form-data" class="b-service-response-form j-service-form">
+            <div class="b-service-response-form__inputs">
+                <div class="b-form-block j-service-text">
+                    {% include "../components/forms/textarea/textarea.twig" with {
+                        id: "text",
+                        name: "text"
+                    } %}
+
+                    <label for="admin-fio" class="b-form-block__label">Комментарий</label>
+                    <span class="b-form-block__error-text">Комментарий</span>
+                </div>
+                <div class="b-form-block j-service-fio">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "service-fio",
+                        name: "service-fio"
+                    } %}
+
+                    <label for="admin-fio" class="b-form-block__label">Как тебя зовут</label>
+                    <span class="b-form-block__error-text">Имя</span>
+                </div>
+                <div class="b-form-block j-service-email">
+                    {% include "../components/forms/email/email.twig" with {
+                        id: "service-email",
+                        name: "service-email"
+                    } %}
+                    <label for="email" class="b-form-block__label">
+                        Эл. почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                            Текст подсказки
+                        </span>
+                </div>
+                <div class="b-form-block j-service-phone">
+                    {% include "../components/forms/telephone/telephone.twig" with {
+                        id: "service-phone",
+                        name: "service-phone"
+                    } %}
+
+                    <label for="admin-phone" class="b-form-block__label">Телефон</label>
+                    <span class="b-form-block__error-text">Текст подсказки</span>
+                </div>
+            </div>
+
+            <button class="button b-service__button j-service-submit">Написать сообщение</button>
+        </form>
+    </div>
+{% endblock %}
+

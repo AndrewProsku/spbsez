@@ -1,4 +1,4 @@
-import '../styles/app.scss';
+import '../../pages/app.scss';
 import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
@@ -18,6 +18,8 @@ import ProfileDocs from '../../components/profile-docs';
 import ProfileInfo from '../../components/profile-info';
 import Residents from '../../components/residents/';
 import Select from '../../components/forms/select/';
+import Service from '../../components/service-popup';
+import servicePopupTemplate from '../../components/service-popup/service-popup.twig';
 import TabsAjax from 'components/tabs/tabs-ajax';
 import templateMessages from 'components/messages/messages.twig';
 import Utils from './utils';
@@ -585,6 +587,32 @@ mediator.subscribe('openPopup', (popup) => {
         const message = new Message();
 
         message.init({popup});
+    }
+});
+
+/**
+ * Инициализация попапа для страницы услуг
+ */
+
+const servicePopupButtons = Array.from(document.querySelectorAll('.j-service-button'));
+
+if (servicePopupButtons.length) {
+    servicePopupButtons.forEach((button) => {
+        const service = new Popup();
+
+        service.init({
+            target              : button,
+            template            : servicePopupTemplate,
+            closeButtonAriaLabel: 'Закрыть'
+        });
+    });
+}
+
+mediator.subscribe('openPopup', (popup) => {
+    if (popup.popup.classList.contains('b-popup_theme_service')) {
+        const service = new Service();
+
+        service.init({popup});
     }
 });
 

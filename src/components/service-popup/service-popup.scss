@@ -1,0 +1,31 @@
+.b-service-popup {
+    display: none;
+}
+
+.b-service-popup__header {
+    @include padding-level(bottom, yellow);
+    @include font-size("h4");
+    margin-bottom: 0;
+}
+
+.b-service-response-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.b-service-response-form__inputs {
+    @include padding-level(bottom, green);
+}
+
+.b-service-popup__success {
+    display: flex;
+    flex-direction: column;
+}
+
+.b-service-popup__text {
+    @include padding-level(bottom, green);
+}
+
+.b-service__button {
+    max-width: 355px;
+}
