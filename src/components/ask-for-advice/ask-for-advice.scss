@@ -32,4 +32,8 @@ a.b-ask-for-advice__link {
     &:after {
         background-image: url("/images/management-company/arrow-right.svg");
     }
+
+    &:hover:after {
+        background-image: url("/images/management-company/arrow-right-small.svg");
+    }
 }
