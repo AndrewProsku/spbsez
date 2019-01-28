@@ -1,7 +1,7 @@
 .b-ask-for-advice {
     @include prefix(2, 36);
     @include suffix(2, 36);
-    padding-top: 20px;
+    padding-top: 50px;
     padding-bottom: 36px;
     background-image: linear-gradient(to right, $blue 0%, $violet 100%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
@@ -28,7 +28,7 @@ a.b-ask-for-advice__link {
     margin-top: 36px;
     color: $blue;
     background: $white;
-    
+
     &:after {
         background-image: url("/images/management-company/arrow-right.svg");
     }
