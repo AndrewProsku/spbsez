@@ -1,5 +1,9 @@
 .b-quote__title {
     @include padding-level(bottom, reset);
+
+    & h2 {
+        margin-bottom: 44px;
+    }
 }
 
 .b-quote__text {
