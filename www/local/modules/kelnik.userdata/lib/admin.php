@@ -16,8 +16,8 @@ class Admin
     public const GROUP_SUPER_ADMIN = 1;
     public const GROUP_ADMIN = 7;
     public const GROUP_MODERATOR = 8;
-    public const GROUP_RESIDENT_ADMIN = 9;
-    public const GROUP_RESIDENT = 10;
+    public const GROUP_RESIDENT_SUPER_ADMIN = 9;
+    public const GROUP_RESIDENT_ADMIN = 10;
 
     private $userId;
     private $user;
@@ -102,20 +102,20 @@ class Admin
         if ($this->hasEditAdmin()) {
             return [
                 self::GROUP_MODERATOR,
-                self::GROUP_RESIDENT_ADMIN,
-                self::GROUP_RESIDENT
+                self::GROUP_RESIDENT_SUPER_ADMIN,
+                self::GROUP_RESIDENT_ADMIN
             ];
         }
 
         if ($this->hasEditModerator()) {
             return [
-                self::GROUP_RESIDENT_ADMIN,
-                self::GROUP_RESIDENT
+                self::GROUP_RESIDENT_SUPER_ADMIN,
+                self::GROUP_RESIDENT_ADMIN
             ];
         }
 
         if ($this->hasEditResidentAdmin()) {
-            return [self::GROUP_RESIDENT];
+            return [self::GROUP_RESIDENT_ADMIN];
         }
 
         return [];

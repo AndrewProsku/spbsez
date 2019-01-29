@@ -2,7 +2,10 @@
 
 include realpath(__DIR__ . '/../../../vendor/autoload.php');
 
+\Bitrix\Main\Loader::includeModule('kelnik.userdata');
+
 AddEventHandler("main", "OnBeforeEventAdd", "OnBeforeEventAddHandler");
+AddEventHandler('main', 'OnUserTypeBuildList', [\Kelnik\Userdata\FieldTypeUser::class, 'GetUserTypeDescription']);
 
 function OnBeforeEventAddHandler(&$event, &$lid, $arFields) {
     if ($event == "FAVORITES") {
