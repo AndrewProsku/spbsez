@@ -226,7 +226,7 @@ button {
     line-height: 48px;
     text-align: left;
     text-decoration: none;
-    background: linear-gradient($gradient-linear);
+    background-image: linear-gradient($gradient-linear);
     background-size: 200% auto;
     border: none;
     border-radius: 4px;
@@ -241,10 +241,10 @@ button {
         width: 18px;
         height: 9px;
         background-image: url("/images/home/arrow-right.svg");
+        background-repeat: no-repeat;
         position: absolute;
-        top: 50%;
+        top: calc(50% - 5px);
         right: 9%;
-        margin-top: -5px;
     }
 
     &:active {
@@ -424,6 +424,32 @@ button {
             &:after {
                 right: 5%;
                 transform: rotate(90deg);
+            }
+        }
+    }
+}
+
+.button_icon_pen {
+    &:after {
+        @include transition(right, top);
+        width: 12px;
+        height: 12px;
+        background-image: url("/images/forms/pen-icon.svg");
+        position: absolute;
+        top: calc(50% - 6px);
+        right: 9%;
+    }
+
+    @media #{$tablet-portrait} {
+        &:hover {
+            background-position: center;
+
+            &:after {
+                width: 12px;
+                height: 12px;
+                top: calc(50% - 3px);
+                background-image: url("/images/forms/pen-icon.svg");
+                right: 10%;
             }
         }
     }
