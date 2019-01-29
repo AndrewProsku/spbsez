@@ -66,19 +66,19 @@
             </div>
             <div class="b-form-block j-message-fio">
                 {% include "../../components/forms/input-text/input-text.twig" with {
-                    id: "vacancy-fio",
-                    name: "vacancy-fio"
+                    id: "message-fio",
+                    name: "message-fio"
                 } %}
 
-                <label for="admin-fio" class="b-form-block__label">Как тебя зовут</label>
+                <label for="message-fio" class="b-form-block__label">Как тебя зовут</label>
                 <span class="b-form-block__error-text">Имя</span>
             </div>
             <div class="b-form-block j-message-email">
                 {% include "../../components/forms/email/email.twig" with {
-                    id: "vacancy-email",
-                    name: "vacancy-email"
+                    id: "message-email",
+                    name: "message-email"
                 } %}
-                <label for="email" class="b-form-block__label">
+                <label for="message-email" class="b-form-block__label">
                     Эл. почта
                 </label>
                 <span class="b-form-block__error-text">
@@ -87,11 +87,11 @@
             </div>
             <div class="b-form-block j-message-phone">
                 {% include "../../components/forms/telephone/telephone.twig" with {
-                    id: "vacancy-phone",
-                    name: "vacancy-phone"
+                    id: "message-phone",
+                    name: "message-phone"
                 } %}
 
-                <label for="admin-phone" class="b-form-block__label">Телефон</label>
+                <label for="message-phone" class="b-form-block__label">Телефон</label>
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
         </div>
