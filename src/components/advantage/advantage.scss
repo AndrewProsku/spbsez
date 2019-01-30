@@ -3,13 +3,16 @@
     @include padding-level(bottom, violet);
     @include prefix(2, 36);
     @include suffix(2, 36);
+    position: relative;
     background-color: $bg-grey;
+    z-index: 3;
 
     @media #{$tablet-portrait} {
         @include suffix(1, 36);
         @include row();
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
     }
 
     @media #{$laptop} {
@@ -81,6 +84,10 @@
 .b-advantages__parking-item {
     @media #{$tablet-portrait} {
         @include column(10, 21);
+    }
+
+    @media #{$laptop} {
+        @include column(6, 21);
     }
 
     &:not(:last-child) {

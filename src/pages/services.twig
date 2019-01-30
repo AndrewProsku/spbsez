@@ -39,6 +39,7 @@
         </div>
 
         <div class="l-services__wrap">
+            {% include "../components/animation-line/animation-line.twig" %}
             {% include '../components/offers/offers.twig' with {
                 title: "Аренда офисных помещений",
                 text: "<p>На обеих площадках ОЭЗ к аренде предлагаются коммерческие помещения в бизнес центрах класса «В+»:</p>",
@@ -93,6 +94,7 @@
         </div>
 
         <div class="l-services__wrap">
+            {% include "../components/animation-line/animation-line.twig" %}
             {% include '../components/offers/offers.twig' with {
                 title: "Центр обработки данных в АДЦ «Нойдорф»",
                 text: "<p>ЦОД (центр обработки данных) располагается на первом этаже здания административно-делового центра «Нойдорф». Требования к помещениям и инженерным системам ЦОД были учтены на этапе проектирования здания</p>",
@@ -145,14 +147,14 @@
                             <h4>В здании ЦОД размещено оборудование большинства основных операторов связи региона</h4>
                         </div>
                         <div class='b-offers__logo-wrap'>
-                            <img src='/images/services/logo-mts.jpg' alt='Логотип компании МТС'>
-                            <img src='/images/services/logo-biline.jpg' alt='Логотип компании Билайн'>
-                            <img src='/images/services/logo-megafone.jpg' alt='Логотип компании Мегафон'>
-                            <img src='/images/services/logo-tele2.jpg' alt='Логотип компании Теле2'>
-                            <img src='/images/services/logo-ttk.jpg' alt='Логотип компании ТТК'>
-                            <img src='/images/services/logo-obit.jpg' alt='Логотип компании ОБИТ'>
-                            <img src='/images/services/logo-er.jpg' alt='Логотип компании ЕР ТЕЛЕКОМ'>
-                            <img src='/images/services/logo-severen.jpg' alt='Логотип компании СЕВЕРЕН ТЕЛЕКОМ'>
+                            <img class='b-offers__l-icon b-offers__l-icon_theme_mts' src='/images/services/mts.png' alt='Логотип компании МТС'>
+                            <img class='b-offers__l-icon b-offers__l-icon_theme_beeline' src='/images/services/beeline.png' alt='Логотип компании Билайн'>
+                            <img class='b-offers__l-icon b-offers__l-icon_theme_megafon' src='/images/services/megafon.png' alt='Логотип компании Мегафон'>
+                            <img class='b-offers__l-icon b-offers__l-icon_theme_tele2' src='/images/services/tele2.png' alt='Логотип компании Теле2'>
+                            <img class='b-offers__l-icon b-offers__l-icon_theme_ttk' src='/images/services/ttk.png' alt='Логотип компании ТТК'>
+                            <img class='b-offers__l-icon b-offers__l-icon_theme_obit' src='/images/services/obit.png' alt='Логотип компании ОБИТ'>
+                            <img class='b-offers__l-icon b-offers__l-icon_theme_ertelecom' src='/images/services/ertelecom.png' alt='Логотип компании ЕР ТЕЛЕКОМ'>
+                            <img class='b-offers__l-icon b-offers__l-icon_theme_severn' src='/images/services/severn.png' alt='Логотип компании СЕВЕРЕН ТЕЛЕКОМ'>
                         </div>
                     </div>"
             } %}
@@ -169,6 +171,8 @@
         </div>
 
         <div class="l-services__advantage">
+            {% include "../components/animation-line/animation-line.twig" %}
+
             {% include '../components/advantage/advantage.twig' with {
                 title: "Удобный паркинг",
                 text: "
@@ -202,6 +206,8 @@
         </div>
 
         <div class="l-services__advantage">
+            {% include "../components/animation-line/animation-line.twig" %}
+
             {% include '../components/advantage/advantage.twig' with {
                 title: "Мероприятия для резидентов",
                 text: "<p>Мероприятия для резидентов с участием представителей государственной власти, банков, институтов развития, контрольных и разрешительных органов</p>",
@@ -215,7 +221,42 @@
         <h3 class="b-service-popup__header">Написать сообщение</h3>
         <form action="" method="post" enctype="multipart/form-data" class="b-service-response-form j-service-form">
             <div class="b-service-response-form__inputs">
-                <div class="b-form-block j-service-text">
+                <div class="b-form-block j-service-title-select">
+                    {% include "../components/forms/select/select.twig" with {
+                        id: "service-title",
+                        name: "service-title",
+                        options: [{
+                            value: 'service1',
+                            text: 'Системный администратор'
+                        }, {
+                            value: 'service2',
+                            text: 'Руководитель проекта/Ведущий инженер (слаботочные сети/АСУ)',
+                        }, {
+                            value: 'service3',
+                            text: 'Главный юрисконсульт по приоритетным проектам'
+                        }, {
+                            value: 'service4',
+                            text: 'Специалист проектного офиса / Офис менеджер'
+                        }, {
+                            value: 'service5',
+                            text: 'Специалист в отдел по привлечению инвеcторов'
+                        }, {
+                            value: 'service6',
+                            text: 'Руководитель объекта строительства (начальник стройки)'
+                        }, {
+                            value: 'service7',
+                            text: 'Инженер по охране труда и технике безопасности'
+                        }, {
+                            value: 'service8',
+                            text: 'Электромонтер по ремонту и обслуживанию электрооборудования (5 разряд)'
+                        }]
+                    } %}
+                    <label for="service-title" class="b-form-block__label">
+                        Должность
+                    </label>
+                    <span class="b-form-block__error-text">Текст подсказки</span>
+                </div>
+                <div class="b-form-block j-service-text b-input-textarea">
                     {% include "../components/forms/textarea/textarea.twig" with {
                         id: "text",
                         name: "text"
@@ -223,6 +264,15 @@
 
                     <label for="admin-fio" class="b-form-block__label">Комментарий</label>
                     <span class="b-form-block__error-text">Комментарий</span>
+                </div>
+                <div class="b-form-block j-service-text">
+                    {% include "../components/forms/textarea/textarea.twig" with {
+                        id: "text",
+                        name: "company"
+                    } %}
+
+                    <label for="admin-fio" class="b-form-block__label">Компания</label>
+                    <span class="b-form-block__error-text">Компания</span>
                 </div>
                 <div class="b-form-block j-service-fio">
                     {% include "../components/forms/input-text/input-text.twig" with {
@@ -234,16 +284,20 @@
                     <span class="b-form-block__error-text">Имя</span>
                 </div>
                 <div class="b-form-block j-service-email">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "position",
+                        name: "position"
+                    } %}
+                    <label for="email" class="b-form-block__label">Должность</label>
+                    <span class="b-form-block__error-text">Текст подсказки</span>
+                </div>
+                <div class="b-form-block j-service-email">
                     {% include "../components/forms/email/email.twig" with {
                         id: "service-email",
                         name: "service-email"
                     } %}
-                    <label for="email" class="b-form-block__label">
-                        Эл. почта
-                    </label>
-                    <span class="b-form-block__error-text">
-                            Текст подсказки
-                        </span>
+                    <label for="email" class="b-form-block__label">Эл. почта</label>
+                    <span class="b-form-block__error-text">Текст подсказки</span>
                 </div>
                 <div class="b-form-block j-service-phone">
                     {% include "../components/forms/telephone/telephone.twig" with {

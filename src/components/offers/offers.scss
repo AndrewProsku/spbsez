@@ -3,6 +3,10 @@
     @include padding-level(bottom, violet);
     @include prefix(2, 36);
     @include suffix(2, 36);
+    @include row();
+    flex-direction: row-reverse;
+    position: relative;
+    z-index: 3;
 
     @media #{$tablet-portrait} {
         @include suffix(1, 36);
@@ -10,12 +14,12 @@
 
     @media #{$laptop} {
         @include prefix(3, 36);
-        @include suffix(3, 36);
+        @include suffix(1, 36);
     }
 
     @media #{$fullhd} {
         @include prefix(4, 36);
-        @include suffix(4, 36);
+        @include suffix(1.5, 36);
     }
 }
 
@@ -47,7 +51,7 @@
 }
 
 .b-offers__title h2 {
-    @include margin-level(both, dark-yellow);
+    @include margin-level(bottom, dark-yellow);
     @include font-size("h2");
 }
 
@@ -65,6 +69,7 @@
     @include font-size("p3");
     padding-top: 16px;
     position: relative;
+    width: 100%;
 
     @media #{$tablet-portrait} {
         @include column(10, 21);
@@ -113,6 +118,11 @@
     padding-bottom: 11px;
     background-color: $white;
     font-size: 14px;
+
+    @media #{$laptop} {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 }
 
 .b-offers__count-bold {
@@ -152,6 +162,29 @@
     @include row();
 }
 
-.b-offers__logo-wrap img {
-    max-height: 32px;
+
+.b-offers__l-icon {
+    @include post(2, 32);
+    margin-bottom: 24px;
+    height: 32px;
+
+    @media #{$fullhd} {
+        @include post(1, 32);
+    }
+
+    &__theme_beeline {
+        height: 36px;
+    }
+
+    &__theme_ttk {
+        height: 26px;
+    }
+
+    &__theme_ertelecom {
+        height: 30px;
+    }
+
+    &__theme_sevren {
+        height: 36px;
+    }
 }
