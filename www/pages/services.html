@@ -336,7 +336,7 @@
                     <div class='b-offers__count'>
                         <span class='b-offers__count-bold'>В ставку включены:</span> НДС, Коммунальные услуги, Электроэнергия
                     </div>
-            <button class="button b-offers__button j-service-button" data-href="#service">Оставить заявку</button>
+            <button class="button b-offers__button j-service-button" data-href="#service" data-id="service1">Оставить заявку</button>
 
     </div>
 </section>
@@ -373,7 +373,7 @@
                                             <li class="b-offers__item">Возможность записи совещания или конференции</li>
                                     </ul>
 
-            <button class="button b-offers__button j-service-button" data-href="#service">Оставить заявку</button>
+            <button class="button b-offers__button j-service-button" data-href="#service" data-id="service2">Оставить заявку</button>
 
     </div>
 </section>
@@ -476,7 +476,7 @@
                             <img class='b-offers__l-icon b-offers__l-icon_theme_severn' src='/images/services/severn.png' alt='Логотип компании СЕВЕРЕН ТЕЛЕКОМ'>
                         </div>
                     </div>
-            <button class="button b-offers__button j-service-button" data-href="#service">Оставить заявку</button>
+            <button class="button b-offers__button j-service-button" data-href="#service" data-id="service3">Оставить заявку</button>
 
     </div>
 </section>
@@ -616,7 +616,7 @@
     </div>
 
     <div id="#service" class="b-service-popup">
-        <h3 class="b-service-popup__header">Написать сообщение</h3>
+        <h3 class="b-service-popup__header">Оставить заявку</h3>
         <form action="" method="post" enctype="multipart/form-data" class="b-service-response-form j-service-form">
             <div class="b-service-response-form__inputs">
                 <div class="b-form-block j-service-title-select">
@@ -631,35 +631,15 @@
 
                                     <option value="service1"
                                                                             >
-                        Системный администратор
+                        Аренда офисных помещений
                     </option>
                                     <option value="service2"
                                                                             >
-                        Руководитель проекта/Ведущий инженер (слаботочные сети/АСУ)
+                        Аренда переговорных комнат и конференц-залов
                     </option>
                                     <option value="service3"
                                                                             >
-                        Главный юрисконсульт по приоритетным проектам
-                    </option>
-                                    <option value="service4"
-                                                                            >
-                        Специалист проектного офиса / Офис менеджер
-                    </option>
-                                    <option value="service5"
-                                                                            >
-                        Специалист в отдел по привлечению инвесторов
-                    </option>
-                                    <option value="service6"
-                                                                            >
-                        Руководитель объекта строительства (начальник стройки)
-                    </option>
-                                    <option value="service7"
-                                                                            >
-                        Инженер по охране труда и технике безопасности
-                    </option>
-                                    <option value="service8"
-                                                                            >
-                        Электромонтер по ремонту и обслуживанию электрооборудования (5 разряд)
+                        Центр обработки данных в АДЦ «Нойдорф»
                     </option>
                             </select>
         </div>
@@ -682,15 +662,17 @@
                     <label for="admin-fio" class="b-form-block__label">Комментарий</label>
                     <span class="b-form-block__error-text">Комментарий</span>
                 </div>
-                <div class="b-form-block j-service-text">
-                        <textarea
-            id="text"
-            class="b-input-text"
-            name="company"
-            rows=""
-            cols=""
-            placeholder=""
-    ></textarea>
+                <div class="b-form-block j-service-company">
+                        <input
+        id="company"
+        class="b-input-text"
+        type="text"
+        name="company"
+        maxlength=""
+        autocomplete=""
+        value=""
+        placeholder=""
+                                            >
 
                     <label for="admin-fio" class="b-form-block__label">Компания</label>
                     <span class="b-form-block__error-text">Компания</span>
@@ -710,7 +692,7 @@
                     <label for="admin-fio" class="b-form-block__label">Как тебя зовут</label>
                     <span class="b-form-block__error-text">Имя</span>
                 </div>
-                <div class="b-form-block j-service-email">
+                <div class="b-form-block j-service-position">
                         <input
         id="position"
         class="b-input-text"
@@ -752,7 +734,7 @@
                 </div>
             </div>
 
-            <button class="button b-service__button j-service-submit">Написать сообщение</button>
+            <button class="button b-service__button j-service-submit">Оставить заявку</button>
         </form>
     </div>
             </main>

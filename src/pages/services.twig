@@ -59,7 +59,8 @@
                 content: "
                     <div class='b-offers__count'>
                         <span class='b-offers__count-bold'>В ставку включены:</span> НДС, Коммунальные услуги, Электроэнергия
-                    </div>"
+                    </div>",
+                id: 'service1'
             } %}
         </div>
 
@@ -89,7 +90,8 @@
                         "Возможность синхронного перевода",
                         "Возможность записи совещания или конференции"
                     ]}
-                ]
+                ],
+                id: 'service2'
             } %}
         </div>
 
@@ -156,7 +158,8 @@
                             <img class='b-offers__l-icon b-offers__l-icon_theme_ertelecom' src='/images/services/ertelecom.png' alt='Логотип компании ЕР ТЕЛЕКОМ'>
                             <img class='b-offers__l-icon b-offers__l-icon_theme_severn' src='/images/services/severn.png' alt='Логотип компании СЕВЕРЕН ТЕЛЕКОМ'>
                         </div>
-                    </div>"
+                    </div>",
+                id: 'service3'
             } %}
         </div>
 
@@ -218,7 +221,7 @@
     </div>
 
     <div id="#service" class="b-service-popup">
-        <h3 class="b-service-popup__header">Написать сообщение</h3>
+        <h3 class="b-service-popup__header">Оставить заявку</h3>
         <form action="" method="post" enctype="multipart/form-data" class="b-service-response-form j-service-form">
             <div class="b-service-response-form__inputs">
                 <div class="b-form-block j-service-title-select">
@@ -227,28 +230,13 @@
                         name: "service-title",
                         options: [{
                             value: 'service1',
-                            text: 'Системный администратор'
+                            text: 'Аренда офисных помещений'
                         }, {
                             value: 'service2',
-                            text: 'Руководитель проекта/Ведущий инженер (слаботочные сети/АСУ)',
+                            text: 'Аренда переговорных комнат и конференц-залов',
                         }, {
                             value: 'service3',
-                            text: 'Главный юрисконсульт по приоритетным проектам'
-                        }, {
-                            value: 'service4',
-                            text: 'Специалист проектного офиса / Офис менеджер'
-                        }, {
-                            value: 'service5',
-                            text: 'Специалист в отдел по привлечению инвеcторов'
-                        }, {
-                            value: 'service6',
-                            text: 'Руководитель объекта строительства (начальник стройки)'
-                        }, {
-                            value: 'service7',
-                            text: 'Инженер по охране труда и технике безопасности'
-                        }, {
-                            value: 'service8',
-                            text: 'Электромонтер по ремонту и обслуживанию электрооборудования (5 разряд)'
+                            text: 'Центр обработки данных в АДЦ «Нойдорф»'
                         }]
                     } %}
                     <label for="service-title" class="b-form-block__label">
@@ -265,9 +253,9 @@
                     <label for="admin-fio" class="b-form-block__label">Комментарий</label>
                     <span class="b-form-block__error-text">Комментарий</span>
                 </div>
-                <div class="b-form-block j-service-text">
-                    {% include "../components/forms/textarea/textarea.twig" with {
-                        id: "text",
+                <div class="b-form-block j-service-company">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "company",
                         name: "company"
                     } %}
 
@@ -283,7 +271,7 @@
                     <label for="admin-fio" class="b-form-block__label">Как тебя зовут</label>
                     <span class="b-form-block__error-text">Имя</span>
                 </div>
-                <div class="b-form-block j-service-email">
+                <div class="b-form-block j-service-position">
                     {% include "../components/forms/input-text/input-text.twig" with {
                         id: "position",
                         name: "position"
@@ -310,7 +298,7 @@
                 </div>
             </div>
 
-            <button class="button b-service__button j-service-submit">Написать сообщение</button>
+            <button class="button b-service__button j-service-submit">Оставить заявку</button>
         </form>
     </div>
 {% endblock %}
