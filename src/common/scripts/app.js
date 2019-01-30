@@ -190,7 +190,8 @@ const selectDomItem = document.querySelector('.j-select');
 
 if (selectDomItem) {
     // Селект для сообщений инциализируется отдельно
-    if (!selectDomItem.closest('.j-messages-select')) {
+    if (!selectDomItem.closest('.j-messages-select') &&
+        !selectDomItem.closest('.b-service-popup')) {
         const select = new Select({
             element: '.j-select',
 

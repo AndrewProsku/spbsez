@@ -1,4 +1,5 @@
 import InputTel from '../forms/telephone/telephone';
+import Select from 'components/forms/select';
 import successTemplate from './success.twig';
 import Utils from '../../common/scripts/utils';
 
@@ -15,6 +16,8 @@ class Service {
         this.email = 'j-service-email';
         this.phone = 'j-service-phone';
         this.text = 'j-service-text';
+        this.company = 'j-service-company';
+        this.position = 'j-service-position';
 
         this.errorInputClass = 'b-form-block-error';
         this.serviceInputClass = 'b-form-block__error-text';
@@ -30,6 +33,7 @@ class Service {
 
         this.emptyErrorMessage = 'Поле не может быть пустым';
         this.incorrectEmailMessage = 'Некорректный email адрес';
+        this.incorrectPhoneMessage = 'Номер телефона введен не полностью';
     }
 
     init(options) {
@@ -49,7 +53,11 @@ class Service {
         this.$phone = this.$form.querySelector(`.${this.phone}`);
         this.$inputPhone = this.$phone.querySelector('input');
         this.$textarea = this.$form.querySelector(`.${this.text}`);
-        this.$inputTextarea = this.$form.querySelector(`textarea`);
+        this.$inputTextarea = this.$textarea.querySelector(`textarea`);
+        this.$company = this.$form.querySelector(`.${this.company}`);
+        this.$inputCompany = this.$company.querySelector(`input`);
+        this.$position = this.$form.querySelector(`.${this.position}`);
+        this.$inputPosition = this.$position.querySelector(`input`);
     }
 
     _initInputs() {
@@ -61,6 +69,18 @@ class Service {
 
             inputTel.init({input: vacancyPhone});
         }
+
+        const vacancyID = this.popup.target.dataset.id;
+
+        this.popup.popup.querySelector(`select`).value = vacancyID;
+
+        const select = new Select({
+            element: '.b-popup_theme_service .j-select',
+
+            disableSearch: true
+        });
+
+        select.init();
     }
 
     _bindEvents() {
@@ -91,24 +111,60 @@ class Service {
             }
         });
 
+        this._checkName();
+        this._checkEmail();
+        this._checkPhone();
+        this._checkTextarea();
+        this._checkCompany();
+        this._checkPosition();
+    }
+
+    _checkName() {
         this.$inputFIO.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'fio');
         });
+    }
+
+    _checkEmail() {
         this.$inputEmail.addEventListener('change', (event) => {
             const isValidEmail = event.target.checkValidity();
+            const emailStr = '^[-._a-zA-Za-яA-я0-9]{2,}@(?:[a-zA-Za-яА-Я0-9][-a-z-A-Z-a-я-А-Я0-9]+\\.)+[a-za-я]{2,6}$';
+            const regEmail = new RegExp(emailStr, 'u');
 
-            if (isValidEmail) {
+            if (isValidEmail && regEmail.test(this.$inputEmail.value)) {
                 this.inputChangeHandler(event, 'email');
-            } else {
-                this.isFieldCorrect.email = false;
+            } else if (isValidEmail === false || regEmail.test(this.$inputEmail.value) === false) {
                 this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });
+    }
+
+    _checkPhone() {
         this.$inputPhone.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'phone');
+            const regPhone = new RegExp('\\+7\\s\\d{3}\\s\\d{3}-\\d{2}-\\d{2}', 'u');
+
+            if (!regPhone.test(this.$inputPhone.value)) {
+                this.showErrorMessage(event.target, this.incorrectPhoneMessage);
+            }
         });
+    }
+
+    _checkTextarea() {
         this.$textarea.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'text');
+        });
+    }
+
+    _checkCompany() {
+        this.$inputCompany.addEventListener('change', (event) => {
+            this.inputChangeHandler(event, 'company');
+        });
+    }
+
+    _checkPosition() {
+        this.$inputPosition.addEventListener('change', (event) => {
+            this.inputChangeHandler(event, 'position');
         });
     }
 
@@ -128,7 +184,7 @@ class Service {
         if (!this.isFieldCorrect.fio) {
             this.showErrorMessage(this.$inputFIO, this.emptyErrorMessage);
         }
-        if (!this.isFieldCorrect.email) {
+        if (!this.$inputEmail.value.length) {
             this.showErrorMessage(this.$inputEmail, this.emptyErrorMessage);
         }
         if (!this.isFieldCorrect.phone) {
@@ -136,6 +192,12 @@ class Service {
         }
         if (!this.isFieldCorrect.text) {
             this.showErrorMessage(this.$inputTextarea, this.emptyErrorMessage);
+        }
+        if (!this.isFieldCorrect.company) {
+            this.showErrorMessage(this.$inputCompany, this.emptyErrorMessage);
+        }
+        if (!this.isFieldCorrect.position) {
+            this.showErrorMessage(this.$inputPosition, this.emptyErrorMessage);
         }
 
         for (const field in this.isFieldCorrect) {
