@@ -19,6 +19,10 @@ class Admin
     public const GROUP_RESIDENT_SUPER_ADMIN = 9;
     public const GROUP_RESIDENT_ADMIN = 10;
 
+    private const CAN_REPORT = 'UF_CAN_REPORT';
+    private const CAN_REQUEST = 'UF_CAN_REQUEST';
+    private const CAN_MSG = 'UF_CAN_OEZ_MSG';
+
     private $userId;
     private $user;
     private $userGroups = [];
@@ -79,7 +83,8 @@ class Admin
             ($by = 'ID'),
             ($order = 'DESC'),
             [
-                'GROUPS_ID' => $groups
+                'GROUPS_ID' => $groups,
+                '=UF_ADMIN_ID' => $this->userId
             ],
             [
                 'SELECT' => [
@@ -99,53 +104,91 @@ class Admin
 
     private function getEditableGroups()
     {
-        if ($this->hasEditAdmin()) {
-            return [
-                self::GROUP_MODERATOR,
-                self::GROUP_RESIDENT_SUPER_ADMIN,
-                self::GROUP_RESIDENT_ADMIN
-            ];
-        }
-
-        if ($this->hasEditModerator()) {
-            return [
-                self::GROUP_RESIDENT_SUPER_ADMIN,
-                self::GROUP_RESIDENT_ADMIN
-            ];
-        }
-
-        if ($this->hasEditResidentAdmin()) {
+        if ($this->canEditResidentAdmin()) {
             return [self::GROUP_RESIDENT_ADMIN];
         }
 
         return [];
     }
 
-    public function hasEditAdmin()
-    {
-        return in_array(self::GROUP_SUPER_ADMIN, $this->userGroups);
-    }
-
-    public function hasEditModerator()
+    public function canEditResidentAdmin()
     {
         return array_intersect(
             $this->userGroups,
             [
-                self::GROUP_SUPER_ADMIN,
-                self::GROUP_ADMIN
+                self::GROUP_RESIDENT_SUPER_ADMIN
             ]
         );
     }
 
-    public function hasEditResidentAdmin()
+    public function canEditResident()
     {
         return array_intersect(
             $this->userGroups,
             [
-                self::GROUP_SUPER_ADMIN,
-                self::GROUP_ADMIN,
-                self::GROUP_MODERATOR
+                self::GROUP_RESIDENT_SUPER_ADMIN,
+                self::GROUP_RESIDENT_ADMIN
             ]
         );
+    }
+
+    /**
+     * Проверка возможности отправлять отчет
+     *
+     * @return bool
+     */
+    public function canReport()
+    {
+        return (bool) ArrayHelper::getValue($this->user, self::CAN_REPORT);
+    }
+
+    /**
+     * Проверка возможности делать запрос
+     *
+     * @return bool
+     */
+    public function canRequest()
+    {
+        return (bool) ArrayHelper::getValue($this->user, self::CAN_REQUEST);
+    }
+
+    /**
+     * Проверка возможности получать сообщения от ОЭЗ
+     *
+     * @return bool
+     */
+    public function canMessages()
+    {
+        return (bool) ArrayHelper::getValue($this->user, self::CAN_MSG);
+    }
+
+    /**
+     * Проверка меню раздела личного кабиента
+     *
+     * @param \CUser $user
+     * @param array $menu
+     * @return array
+     */
+    public static function checkMenu(\CUser $user, array $menu)
+    {
+        if (!$user->IsAuthorized() || !$menu) {
+            return $menu;
+        }
+
+        try {
+            $admin = new self($user->GetID());
+
+            foreach ($menu as &$v) {
+                if (empty($v[3]['check']) || !method_exists($admin, $v[3]['check'])) {
+                    continue;
+                }
+
+                $v[4] = $admin->{$v[3]['check']}() ? '' : 'false';
+                $v[3] = [];
+            }
+        } catch (\Exception $e) {
+        }
+
+        return $menu;
     }
 }

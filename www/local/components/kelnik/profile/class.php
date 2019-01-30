@@ -65,7 +65,13 @@ class ProfileForm extends Bbc\Basis
         global $USER;
 
         try {
-            $this->arResult['USERS'] = (new Admin($USER->GetID()))->getEditableUsers();
+            $adminModel = new Admin($USER->GetID());
+
+//            if (!$adminModel->hasEditResidentAdmin()) {
+//                LocalRedirect('/cabinet/');
+//            }
+
+            $this->arResult['USERS'] = $adminModel->getEditableUsers();
         } catch (\Exception $e) {
             $this->arResult['USERS'] = [];
         }
