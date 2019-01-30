@@ -1,12 +1,12 @@
 <section class="b-offers">
-    <div class="b-offers__title">
-        <h2>{{ title }}</h2>
+    <div class="b-offers__img">
+        <img src="{{ src }}" alt="{{ alt }}">
     </div>
-    <div class="b-offers__wrapper">
-        <div class="b-offers__img">
-            <img src="{{ src }}" alt="{{ alt }}">
+    <div class="b-offers__block">
+        <div class="b-offers__title">
+            <h2>{{ title }}</h2>
         </div>
-        <div class="b-offers__block">
+        {#<div class="b-offers__block">#}
             <div class="b-offers__text">{{ text }}</div>
             {% for block in lists %}
                 {% if block.subtitle %}
@@ -20,6 +20,6 @@
             {% endfor %}
             {{ content }}
             <button class="button b-offers__button j-service-button" data-href="#service">Оставить заявку</button>
-        </div>
+        {#</div>#}
     </div>
 </section>

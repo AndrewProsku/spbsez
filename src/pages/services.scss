@@ -18,6 +18,7 @@
 
 .b-services-text {
     @include font-size("p1");
+    @include margin-level(bottom, blue);
     @include padding-level(top, dark-yellow);
     @include padding-level(bottom, blue);
     @include prefix(2, 36);
@@ -32,6 +33,30 @@
     @media #{$fullhd} {
         @include prefix(4, 36);
         @include suffix(4, 36);
+        max-width: 1450px;
+    }
+}
+
+.l-services__wrap,
+.l-services__advantage {
+    position: relative;
+    overflow: hidden;
+}
+
+.l-services__wrap .b-animation-block,
+.l-services__advantage .b-animation-block {
+    position: absolute;
+    transform: rotate(10deg) scale(0.5, 0.5);
+    z-index: 2;
+    overflow: initial;
+
+    @media #{$laptop} {
+        transform: rotate(10deg) scale(0.8, 0.8);
+
+    }
+
+    @media #{$fullhd} {
+        transform: rotate(10deg) scale(1, 1);
     }
 }
 
