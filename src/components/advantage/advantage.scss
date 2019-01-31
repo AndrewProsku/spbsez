@@ -1,15 +1,17 @@
 .b-advantages {
-    @include padding-level(top, violet);
-    @include padding-level(bottom, violet);
+    @include padding-level(both, violet);
     @include prefix(2, 36);
     @include suffix(2, 36);
+    position: relative;
     background-color: $bg-grey;
+    z-index: 3;
 
     @media #{$tablet-portrait} {
         @include suffix(1, 36);
         @include row();
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
     }
 
     @media #{$laptop} {
@@ -83,6 +85,10 @@
         @include column(10, 21);
     }
 
+    @media #{$laptop} {
+        @include column(6, 21);
+    }
+
     &:not(:last-child) {
         @include margin-level(bottom, green);
         @include post(1, 21);
@@ -104,9 +110,9 @@
 }
 
 .b-advantages__place-text p {
-    position: relative;
     @include font-size("p3");
-    padding-top: 16px;
+    @include padding-level(top, orange);
+    position: relative;
 
     &:before {
         position: absolute;

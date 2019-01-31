@@ -1,8 +1,11 @@
 .b-offers {
-    @include padding-level(top, violet);
-    @include padding-level(bottom, violet);
+    @include padding-level(both, violet);
     @include prefix(2, 36);
     @include suffix(2, 36);
+    @include row();
+    flex-direction: row-reverse;
+    position: relative;
+    z-index: 3;
 
     @media #{$tablet-portrait} {
         @include suffix(1, 36);
@@ -10,12 +13,12 @@
 
     @media #{$laptop} {
         @include prefix(3, 36);
-        @include suffix(3, 36);
+        @include suffix(1, 36);
     }
 
     @media #{$fullhd} {
         @include prefix(4, 36);
-        @include suffix(4, 36);
+        @include suffix(1.5, 36);
     }
 }
 
@@ -47,7 +50,7 @@
 }
 
 .b-offers__title h2 {
-    @include margin-level(both, dark-yellow);
+    @include margin-level(bottom, dark-yellow);
     @include font-size("h2");
 }
 
@@ -63,8 +66,9 @@
 .b-offers__item {
     @include margin-level(bottom, green);
     @include font-size("p3");
-    padding-top: 16px;
+    @include padding-level(top, orange);
     position: relative;
+    width: 100%;
 
     @media #{$tablet-portrait} {
         @include column(10, 21);
@@ -109,10 +113,15 @@
     @include margin-level(bottom, cyan);
     @include prefix(2, 32);
     @include suffix(2, 32);
+    @include font-size("p2");
     padding-top: 11px;
     padding-bottom: 11px;
     background-color: $white;
-    font-size: 14px;
+
+    @media #{$laptop} {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 }
 
 .b-offers__count-bold {
@@ -120,7 +129,7 @@
 }
 
 .b-offers__description:not(:last-child) {
-    margin-bottom: 30px;
+    @include margin-level(bottom, yellow);
 }
 
 .b-offers__description-title h4 {
@@ -137,13 +146,12 @@
     @include prefix(2, 32);
     @include suffix(2, 32);
     @include margin-level(bottom, cyan);
-    padding-top: 20px;
-    padding-bottom: 20px;
+    @include padding-level(both, orange);
     background-color: $white;
 }
 
 .b-offers__logo-title h4 {
-    font-size: 16px;
+    @include font-size("p3");
     line-height: 1.5;
     font-weight: 700;
 }
@@ -152,6 +160,29 @@
     @include row();
 }
 
-.b-offers__logo-wrap img {
-    max-height: 32px;
+
+.b-offers__l-icon {
+    @include post(2, 32);
+    @include margin-level(bottom, dark-yellow);
+    height: 32px;
+
+    @media #{$fullhd} {
+        @include post(1, 32);
+    }
+
+    &_theme_beeline {
+        height: 36px;
+    }
+
+    &_theme_ttk {
+        height: 26px;
+    }
+
+    &_theme_ertelecom {
+        height: 30px;
+    }
+
+    &_theme_sevren {
+        height: 36px;
+    }
 }

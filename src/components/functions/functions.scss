@@ -8,8 +8,6 @@
     }
 
     @media #{$laptop} {
-        @include padding-level(top, blue);
-        @include padding-level(top, blue);
         @include prefix(2, 36);
         @include suffix(2, 36);
     }
@@ -17,29 +15,27 @@
     @media #{$fullhd} {
         @include prefix(4, 36);
         @include suffix(4, 36);
-        padding-top: 160px;
     }
 }
 
 .b-functions__title {
-    padding-top: 0;
-    padding-bottom: 24px;
+    @include padding-level(top, reset);
+    @include padding-level(bottom, dark-yellow);
 
     @media #{$tablet-portrait} {
-        padding-bottom: 0;
+        @include padding-level(bottom, reset);
     }
 
     @media #{$fullhd} {
-        margin-bottom: 8px;
+        @include margin-level(bottom, red);
     }
 }
 
 .b-functions__title h2 {
-    line-height: 1.33;
+    @include font-size("h2");
 }
 
 .b-functions__wrapper {
-
     @media #{$tablet-portrait} {
         min-height: 894px;
         width: 100%;
@@ -61,7 +57,7 @@
     @include prefix(3, 32);
     @include suffix(3, 32);
     @include padding-level(top, dark-yellow);
-    padding-bottom: 32px;
+    @include padding-level(bottom, green);
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -90,7 +86,7 @@
         border: 1px solid $grey;
     }
 
-    &_investors {
+    &_theme_investors {
         background-image: url("/images/management-company/invest.jpg");
 
         &:after {
@@ -103,7 +99,7 @@
         }
     }
 
-    &_development {
+    &_theme_development {
         background-image: url("/images/management-company/develop.jpg");
 
         &:after {
@@ -119,7 +115,7 @@
         }
     }
 
-    &_work {
+    &_theme_work {
         &:after {
             @media #{$tablet-portrait} {
                 left: -50%;
@@ -134,9 +130,9 @@
         }
     }
 
-    &_investors,
-    &_development,
-    &_work {
+    &_theme_investors,
+    &_theme_development,
+    &_theme_work {
         position: relative;
 
         &:after {
@@ -152,15 +148,11 @@
 }
 
 .b-functions__item-title {
-    font-size: 14px;
+    @include font-size("p3");
     font-weight: 700;
 
-    @media #{$fullhd} {
-        font-size: 18px;
-    }
-
-    &_investors,
-    &_development {
+    &_theme_investors,
+    &_theme_development {
         color: $white;
     }
 }
@@ -168,8 +160,8 @@
 .b-functions__text {
     @include font-size("p2");
 
-    &_investors,
-    &_development {
+    &_theme_investors,
+    &_theme_development {
         color: $white;
     }
 }

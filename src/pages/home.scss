@@ -768,24 +768,21 @@ $path: '/images/home/';
 
 .l-home-resident__item-title {
     @include margin-level(bottom, orange);
+    @include font-size('h2');
     font-family: $font-bold;
-    font-size: 24px;
     padding-top: 15px;
 
     @media #{$tablet-portrait} {
         @include column(11, 32);
-        font-size: 26px;
         padding-top: 20px;
     }
 
     @media #{$laptop} {
         @include column(9, 30);
-        font-size: 36px;
         padding-top: 20px;
     }
 
     @media #{$laptop-wide} {
-        font-size: 48px;
         padding-top: 20px;
     }
 
@@ -1036,7 +1033,7 @@ $path: '/images/home/';
         padding-right: 10px;
     }
 
-    
+
     @media #{$tablet-portrait} {
         display: none;
     }
@@ -1446,7 +1443,7 @@ $path: '/images/home/';
         background-image: url($path + 'port.svg');
         top: 36%;
         left: 44%;
-        
+
         &:hover {
             background-image: url($path + 'port_hover.svg');
         }

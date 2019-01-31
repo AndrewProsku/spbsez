@@ -1,4 +1,4 @@
-import '../../pages/app.scss';
+import '../styles/app.scss';
 import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
@@ -190,7 +190,8 @@ const selectDomItem = document.querySelector('.j-select');
 
 if (selectDomItem) {
     // Селект для сообщений инциализируется отдельно
-    if (!selectDomItem.closest('.j-messages-select')) {
+    if (!selectDomItem.closest('.j-messages-select') &&
+        !selectDomItem.closest('.b-service-popup')) {
         const select = new Select({
             element: '.j-select',
 

@@ -91,7 +91,6 @@ class Message {
                 });
             }
         });
-
         this.$inputFIO.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'fio');
         });
@@ -102,9 +101,7 @@ class Message {
 
             if (isValidEmail && regEmail.test(this.$inputEmail.value)) {
                 this.inputChangeHandler(event, 'email');
-            } else if (isValidEmail === false) {
-                this.showErrorMessage(event.target, this.incorrectEmailMessage);
-            } else if (regEmail.test(this.$inputEmail.value) === false) {
+            } else if (isValidEmail === false || regEmail.test(this.$inputEmail.value) === false) {
                 this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });
