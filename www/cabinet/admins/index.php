@@ -43,7 +43,7 @@ if (!$USER->IsAuthorized()) {
             "MENU_CACHE_USE_GROUPS" => "Y",
             "MENU_CACHE_USE_USERS" => "Y",
             "ROOT_MENU_TYPE" => "sub",
-            "USE_EXT" => "N"
+            "USE_EXT" => "Y"
         )
     );?>
 
@@ -54,7 +54,7 @@ if (!$USER->IsAuthorized()) {
             "COMPONENT_TEMPLATE" => "admins",
             "SECTION" => "admins",
             "CACHE_TYPE" => "N",
-            "CACHE_TIME" => "360000"
+            "CACHE_TIME" => "3600"
         ),
         array()
     ); ?>

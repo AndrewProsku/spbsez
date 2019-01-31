@@ -19,7 +19,7 @@ if (!$USER->IsAuthorized()) {
         "MENU_CACHE_TYPE" => "A",
         "MENU_CACHE_USE_GROUPS" => "Y",
         "ROOT_MENU_TYPE" => "left",
-        "USE_EXT" => "N"
+        "USE_EXT" => "Y"
     )
 );?>
 

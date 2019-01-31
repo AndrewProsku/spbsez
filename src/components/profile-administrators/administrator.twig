@@ -43,30 +43,7 @@
         </div>
 
         <div class="b-form-block">
-            {% include "../forms/select/select.twig" with {
-                id: "admin-status-" ~ id,
-                name: "admin[" ~ id ~ "][STATUS]",
-                options: [{
-                    value: 'status1',
-                    text: 'Администратор',
-                    selected: status == 'status1'
-                }, {
-                    value: 'status2',
-                    text: 'Супер-Администратор',
-                    selected: status == 'status2'
-                },{
-                    value: 'status3',
-                    text: 'Просто Администратор',
-                    selected: status == 'status3'
-                },{
-                    value: 'status4',
-                    text: 'Не просто Администратор',
-                    selected: status == 'status4'
-                }]
-            } %}
-
-            <label for="admin1-status" class="b-form-block__label">Статус</label>
-            <span class="b-form-block__error-text">Текст подсказки</span>
+            {{ STATUS }}
         </div>
 
         <div class="b-form-block b-form-block_type_accordion j-select-accordion">

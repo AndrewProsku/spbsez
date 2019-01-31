@@ -155,7 +155,7 @@ class ProfileAdministrators {
     addAdmin() {
         const that = this;
 
-        Utils.send('action=addAdmin', '/tests/personal-info-add-contact.json', {
+        Utils.send('action=addAdmin', '/api/profile/', {
             success(response) {
                 if (response.request.status === that.failStatus) {
                     return;
@@ -171,16 +171,6 @@ class ProfileAdministrators {
                 const newTelInputs = Array.from(newAdminBlock.querySelectorAll('input[type="tel"]'));
 
                 inputTel.init({input: newTelInputs});
-
-                // Инициализируем кастомный select
-                const selectInput = newAdminBlock.querySelector('.j-select');
-                const select = new Select({
-                    element      : selectInput,
-                    disableSearch: true
-                });
-
-                select.init();
-
 
                 that.bindEventsAdmin(newAdminBlock);
 
