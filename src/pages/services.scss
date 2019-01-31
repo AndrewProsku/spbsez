@@ -37,14 +37,19 @@
     }
 }
 
-.l-services__wrap,
-.l-services__advantage {
+.l-services__wrap {
     position: relative;
     overflow: hidden;
 }
 
+.l-services__advantage {
+    position: relative;
+    overflow: hidden;
+    background-color: $bg-grey;
+}
+
 .l-services__wrap .b-animation-block,
-.l-services__advantaшьge .b-animation-block {
+.l-services__advantage .b-animation-block {
     position: absolute;
     transform: rotate(10deg) scale(0.5, 0.5);
     z-index: 2;
