@@ -1,21 +1,33 @@
 .b-ask-for-advice {
-    @include prefix(2, 36);
+    @include prefix(2 , 36);
     @include suffix(2, 36);
-    padding-top: 50px;
-    padding-bottom: 36px;
+    @include padding-level(both, violet);
     background-image: linear-gradient(to right, $blue 0%, $violet 100%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-}
 
-.b-ask-for-advice__title {
+    @media #{$tablet-portrait} {
+        @include suffix(3, 36);
+        @include prefix(2, 36);
+    }
+
+    @media #{$tablet-landscape} {
+        @include suffix(3, 36);
+        @include prefix(3, 36);
+    }
+
     @media #{$fullhd} {
-        padding-bottom: 30px;
+        @include suffix(2, 36);
+        @include prefix(4, 36);
     }
 }
 
-.b-ask-for-advice__title h2 {
-    margin: 0;
+.b-ask-for-advice__title {
+    padding: 0;
     color: $white;
+
+    @media #{$fullhd} {
+        padding-bottom: 30px;
+    }
 }
 
 .b-ask-for-advice__text p {
@@ -25,7 +37,7 @@
 }
 
 a.b-ask-for-advice__link {
-    margin-top: 36px;
+    @include margin-level(top, yellow);
     color: $blue;
     background: $white;
 

@@ -1,6 +1,5 @@
 .b-advantages {
-    @include padding-level(top, violet);
-    @include padding-level(bottom, violet);
+    @include padding-level(both, violet);
     @include prefix(2, 36);
     @include suffix(2, 36);
     position: relative;
@@ -111,9 +110,9 @@
 }
 
 .b-advantages__place-text p {
-    position: relative;
     @include font-size("p3");
-    padding-top: 16px;
+    @include padding-level(top, orange);
+    position: relative;
 
     &:before {
         position: absolute;

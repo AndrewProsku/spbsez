@@ -1,13 +1,16 @@
+.b-quote {
+    position: relative;
+    z-index: 3;
+}
+
 .b-quote__title {
     @include padding-level(bottom, reset);
-
-    & h2 {
-        margin-bottom: 44px;
-    }
+    @include margin-level(bottom, green);
 }
 
 .b-quote__text {
     @include padding-level(bottom, cyan);
+    @include font-size("quote");
     position: relative;
 
     &:before,
@@ -74,20 +77,7 @@
 
         @media #{$fullhd} {
             bottom: 62px;
-            right: -69px;
+            right: -105px;
         }
-    }
-}
-
-.b-quote__text p {
-    font-size: 20px;
-    line-height: 1.4;
-
-    @media #{$tablet-landscape} {
-        font-size: 26px;
-    }
-
-    @media #{$fullhd} {
-        font-size: 30px;
     }
 }
