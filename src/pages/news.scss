@@ -1,0 +1,299 @@
+.l-news {
+	@include row();
+}
+
+.l-news__title {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+
+    h1 {
+        @include font-size(h1);
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.l-news__main {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(bottom, pink);
+    width: 100%;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.l-news__useful {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(top, pink);
+    @include padding-level(bottom, pink);
+    background-color: $bg-grey;
+    width: 100%;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.l-news-presentations {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(top, pink);
+    @include padding-level(bottom, pink);
+    background-image: linear-gradient(to right, $blue 0%, $violet 100%);
+    color: $white;
+    width: 100%;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-useful {
+    @media #{$laptop} {
+        @include column(20, 28);
+    }
+}
+
+.b-useful__title {
+    @include font-size(h1);
+}
+
+.b-useful__content {
+
+}
+
+.b-useful__item {
+    @include margin-level(bottom, cyan);
+}
+
+.b-useful__caption-wrap {
+    @include margin-level(bottom, red);
+}
+
+.b-useful__caption {
+    color: $blue;
+    position: relative;
+    display: inline;
+    font-size: 9px;
+    background-image: linear-gradient(to right, rgba(63, 63, 153, 0.12) 0%, rgba(127, 81, 163, 0.12) 100%);
+    margin-top: -9px;
+}
+
+.b-useful__caption span {
+    @include font-size(p1);
+    position: relative;
+    top: -7px;
+}
+
+.b-useful__text {
+    @include margin-level(bottom, dark-yellow);
+}
+
+.b-useful__date {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.b-useful__date span {
+    display: flex;
+    align-items: center;
+    background-color: $white;
+    border-radius: 16px;
+    padding: 7px 22px;
+    margin-right: 15px;
+}
+
+.b-useful__date svg,
+.b-useful__date img {
+    margin-right: 15px;
+}
+
+.b-presentations {
+    @include row();
+    justify-content: space-between;
+}
+
+.b-presentations__info {
+    @include margin-level(bottom, cyan);
+    width: 100%;
+
+    @media #{$laptop} {
+        @include column(12, 28);
+        margin-bottom: 0;
+    }
+}
+
+.b-presentations__contacts {
+    width: 100%;
+
+    @media #{$laptop} {
+        @include column(12, 28);
+    }
+}
+
+.b-presentations__title {
+    @include font-size(h2);
+    @include margin-level(bottom, green);
+}
+
+.b-files {
+    max-width: 640px;
+    background-color: $white;
+    border-radius: 4px;
+    overflow: hidden;
+    color: $black;
+}
+
+.b-files__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px;
+    border-bottom: 1px solid $grey;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    @media #{$mobile-only} {
+        flex-wrap: wrap;
+        padding: 15px;
+    }
+}
+
+.b-files__left {
+    display: flex;
+    align-items: center;
+
+    @media #{$mobile-only} {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+.b-files__right {
+    @media #{$mobile-only} {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.b-files__icon {
+    width: 27px;
+    min-width: 27px;
+    height: 32px;
+    background-image: url("/images/news/file.png");
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    color: $white;
+    font-size: 12px;
+    padding-bottom: 3px;
+    margin-right: 16px;
+}
+
+.b-files__name {
+    //height: 9px;
+    margin-right: 15px;
+    //margin-top: 16px;
+    color:  $blue;
+    font-weight: 700;
+    //background-image: linear-gradient(to right, rgba(63, 63, 153, 0.12) 0%, rgba(127, 81, 163, 0.12) 100%);
+}
+.b-files__name span {
+    //@include font-size(p3);
+    position: relative;
+    //top: -16px;
+}
+
+.b-files__size {
+    min-width: 70px;
+    opacity: 0.48;
+    display: none;
+
+    @media #{$tablet-portrait} {
+        display: block;
+    }
+}
+
+.b-files__size-adapt {
+    display: block;
+
+    @media #{$tablet-portrait} {
+        display: none;
+    }
+}
+
+.b-files__date {
+    opacity: 0.48;
+}
+
+.b-contact-info {
+    @include vertical-paddings(1, 12);
+    @include padding-level(top, green);
+    @include padding-level(bottom, cyan);
+    background-color: $white;
+    border-radius: 4px;
+    overflow: hidden;
+    color: $black;
+    max-width: 640px;
+
+    @media #{$mobile-only} {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+.b-contact-info__name {
+    @include font-size(p3);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.b-contact-info__prof {
+    margin-bottom: 30px;
+    opacity: 0.72;
+    max-width: 355px;
+}
+
+.b-contact-info__phone {
+    margin-bottom: 10px;
+}
+
+.b-contact-info__phone a {
+    color: inherit;
+}
+
+.b-contact-info__email {
+
+}
