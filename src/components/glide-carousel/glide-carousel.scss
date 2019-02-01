@@ -83,3 +83,13 @@
         background-color: $white;
     }
 }
+
+.glide__track {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.glide__slide img {
+    display: block;
+    width: 100%;
+}
