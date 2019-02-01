@@ -1,0 +1,349 @@
+.l-profile-messages {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(bottom, pink);
+
+    h1 {
+        @include font-size("h1-inner");
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-profile-message-title {
+    @include padding-level(top, blue);
+    @include padding-level(bottom, green);
+}
+
+.b-message-filter {
+    display: flex;
+    @include margin-level(bottom, green);
+
+    @media #{$tablet-portrait} {
+        @include column(30, 30);
+    }
+
+    @media #{$laptop-wide} {
+        @include column(20, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(20, 28);
+    }
+}
+
+.b-message-filter__mobile-date {
+    @include column(10, 32);
+    @include post(1, 32);
+    height: 40px;
+    /*background-color: $dark-white;
+    border-radius: 4px;*/
+
+    @media #{$tablet-portrait} {
+        display: none;
+    }
+}
+
+.b-message-filter__date {
+    display: none;
+
+    @media #{$tablet-portrait} {
+        @include row();
+        @include post(1);
+        //max-width: 258px;
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    /*@media #{$laptop} {
+        max-width: 100%;
+    }*/
+}
+
+/*.b-message-filter__date-item {
+    display: inline-block;
+    vertical-align: middle;
+    width: 78px;
+    min-width: 78px;
+    height: 40px;
+    font-size: 14px;
+    color: $blue;
+    line-height: 40px;
+    text-align: center;
+    background-color: $dark-white;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 8px;
+
+    &:hover {
+        border-color: $grey;
+        color: $black;
+        background-color: $white;
+    }
+
+    &.is-active {
+        border-color: $grey;
+        color: $black;
+        background-color: $white;
+    }
+
+    @media #{$laptop} {
+        font-size: 16px;
+    }
+
+    @media #{$fullhd} {
+        width: 86px;
+        height: 48px;
+        font-size: 18px;
+        line-height: 48px;
+    }
+}*/
+
+.b-message-filter__search {
+    //@include column(21, 32);
+
+    /*@media #{$tablet-portrait} {
+        @include column(17, 32);
+    }*/
+    flex-grow: 1;
+
+    @media #{$tablet-portrait} {
+        max-width: 100%;
+        flex-basis: auto;
+    }
+
+    /*@media #{$laptop} {
+        max-width: 100%;
+    }*/
+}
+
+.b-message-filter__search-form {
+    position: relative;
+}
+
+.b-message-filter__search-form-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+
+    &:focus {
+        outline: none;
+    }
+
+    @media #{$fullhd} {
+        height: 48px;
+    }
+}
+
+.b-message-block-wrap {
+    @include margin-level(bottom, cyan);
+
+    @media #{$laptop-wide} {
+        @include column(20, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(20, 28);
+    }
+}
+
+.b-message-block-title {
+    @include font-size("h4");
+    @include margin-level(bottom, yellow);
+    font-weight: 700;
+}
+
+.b-message-block {
+    @include margin-level(bottom, green);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.b-message-block__item {
+    position: relative;
+    border: 1px solid $grey;
+    border-bottom: 0;
+    padding: 15px 30px 20px 40px;
+
+    &:first-child {
+        border-radius: 4px 4px 0 0;
+    }
+
+    &:last-child {
+        border-radius: 0 0 4px 4px;
+        border-bottom: 1px solid $grey;
+    }
+
+    &.is-new {
+        background-color: $bg-select;
+
+        &:before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background-image: linear-gradient(to right, $blue, $violet);
+            border-radius: 50%;
+            position: absolute;
+            top: 25%;
+            left: 16px;
+            margin-top: -4px;
+        }
+
+        .b-message-block__item-title {
+            font-weight: 700;
+
+            &:after {
+                background-image: linear-gradient(to right, rgba($bg-select, 0.2), rgba($bg-select, 1));
+            }
+        }
+
+        .b-message-block__item-desc {
+            opacity: 1;
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        @include row();
+        @include prefix(3, 32);
+        @include suffix(1, 32);
+        padding-top: 20px;
+        flex-wrap: nowrap;
+
+        &.is-new {
+            &:before {
+                top: 49%;
+                left: 0;
+                @include push(1.5, 32)
+            }
+        }
+    }
+
+    @media #{$laptop-wide} {
+        @include prefix(1, 20);
+
+        &.is-new {
+            &:before {
+                @include push(0.5, 20)
+            }
+        }
+    }
+
+    @media #{$fullhd} {
+        @include prefix(1, 20);
+    }
+}
+
+.b-message-block__item-title {
+    @include font-size("p3");
+    position: relative;
+    //display: block;
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-height: 40px;
+    margin-bottom: 15px;
+    overflow: hidden;
+
+    &:after {
+        content: "";
+        width: 60px;
+        height: 20px;
+        background-image: linear-gradient(to right, rgba($white, 0.2), rgba($white, 1));
+        position: absolute;
+        bottom: 0;
+        right: -1px;
+    }
+
+    @media #{$tablet-portrait} {
+        white-space: nowrap;
+        margin-bottom: 0;
+
+        &:after {
+            height: 100%;
+        }
+    }
+}
+
+.b-message-block__item-desc {
+    @include font-size('p4');
+    display: flex;
+    flex-shrink: 0;
+    opacity: 0.48;
+
+    @media #{$tablet-portrait} {
+        @include prefix(1, 32);
+        padding-top: 2px;
+        margin-left: auto;
+        min-width: 130px;
+        justify-content: flex-end;
+    }
+}
+
+.b-message-block__item-time {
+    margin-right: 10px;
+}
+
+
+@keyframes rotate {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
+
+button.b-message-more__button {
+    &:after {
+        content: "";
+        width: 16px;
+        height: 17px;
+        background-image: url("/images/home/more-arrow.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        top: 50%;
+        margin-top: -8px;
+    }
+
+    &:hover {
+        &:after {
+            right: 9%;
+            animation: rotate 0.3s linear forwards;
+        }
+    }
+}
+
+
+
+
+
+.b-message-filter__mobile-date .b-select .chosen-container-single .chosen-single {
+    height: 40px;
+    padding-top: 12px;
+    background-color: $dark-white;
+    border-radius: 4px;
+}
+
+.b-message-filter__mobile-date  .b-select .chosen-container-single.chosen-with-drop .chosen-single {
+    background: $dark-white;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.b-message-filter__mobile-date .chosen-container-single .chosen-drop {
+    //border-bottom-right-radius: 0;
+    //border-bottom-left-radius: 0;
+    top: 100%;
+    border-top: 0;
+}

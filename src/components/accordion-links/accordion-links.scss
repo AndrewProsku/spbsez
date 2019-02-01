@@ -1,0 +1,122 @@
+.b-links {
+    @include margin-level(bottom, cyan);
+}
+
+.b-links-mobile {
+    background-color: $bg-grey;
+    border-radius: 8px;
+
+    &.is-open {
+        .b-links-mobile__body {
+            display: block;
+        }
+
+        .b-links-mobile__header:after {
+            transform: rotateX(180deg);
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        display: none;
+    }
+}
+
+.b-links-mobile__header {
+    position: relative;
+    cursor: pointer;
+    padding-left: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    &:after {
+        @include post(2, 32);
+        @include transition(transform);
+        content: "";
+        display: block;
+        width: 12px;
+        height: 7px;
+        position: absolute;
+        top: calc(50% - 3px);
+        right: 0;
+        background-image: url("/images/home/arrow-down.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+    }
+}
+
+.b-links-mobile__title {
+    @include column(26.5, 32);
+    @include font-size("p3");
+    display: block;
+    padding: 9px 15px;
+    border-radius: 8px;
+    color: $black;
+    background-color: $white;
+    box-shadow: 0 1px 2px $dark-grey;
+}
+
+.b-links-mobile__body {
+    display: none;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.b-links-mobile__item {
+    padding-left: 15px;
+}
+
+.b-links-mobile__link {
+    @include font-size("p3");
+    display: block;
+    color: $blue;
+    padding: 3px 0;
+
+    &:hover {
+        color: $black;
+    }
+}
+
+.b-links-desktop {
+    display: none;
+    padding: 4px 4px 0;
+    border-radius: 8px;
+    background-color: $bg-grey;
+
+    @media #{$tablet-portrait} {
+        display: inline-block;
+        vertical-align: top;
+    }
+}
+
+.b-links__link {
+    @include font-size("p3");
+    @include transition(color);
+    display: inline-block;
+    margin-right: 16px;
+    margin-bottom: 4px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    vertical-align: top;
+    color: $blue;
+    text-align: center;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:hover {
+        color: $black;
+    }
+
+    &.is-active {
+        color: $black;
+        background-color: $white;
+        box-shadow: 0 1px 2px $dark-grey;
+    }
+
+    @media #{$laptop} {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}

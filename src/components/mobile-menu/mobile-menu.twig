@@ -1,9 +1,7 @@
 <div class="b-mobile-menu j-mobile-menu">
     <div class="b-mobile-menu__header">
         <div class="b-mobile-menu__header-left">
-            <a href="/" class="b-mobile-menu__header-logo">
-                <img src="/images/home/logo-menu.svg" alt="Особая экономическая зона" title="На главную страницу">
-            </a>
+            <a href="/" class="b-mobile-menu__header-logo"></a>
         </div>
         <div class="b-mobile-menu__header-right">
             <div class="b-account">
@@ -22,9 +20,26 @@
 
             </div>
             <div class="b-language">
-                <a href="#" class="b-language__link">
+                <span class="b-language__link">
                     Ru
-                </a>
+                </span>
+                <ul class="b-language__list">
+                    <li class="b-language__item is-active">
+                        <a href="#" class="b-language__item-link b-link-line">
+                            Рус
+                        </a>
+                    </li>
+                    <li class="b-language__item">
+                        <a href="#" class="b-language__item-link b-link-line">
+                            Eng
+                        </a>
+                    </li>
+                    <li class="b-language__item">
+                        <a href="#" class="b-language__item-link b-link-line">
+                            中國
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="b-close-menu-warp j-close-menu">
                 <div class="b-close-menu">
@@ -38,15 +53,15 @@
     <nav class="b-mobile-menu__nav">
         <div class="b-mobile-menu__nav-wrap">
             <div class="b-mobile-menu__nav-block">
-                <div class="b-mobile-menu__nav-header">
-                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                <div class="b-mobile-menu__nav-header b-mobile-menu__nav-header_action_accordion j-mobile-menu-accordion">
+                    <a href="#" class="b-mobile-menu__nav-header-link  b-link-line-two is-active">
                         Об ОЭЗ
                     </a>
                 </div>
                 <ul class="b-mobile-menu__nav-body">
                     <li class="b-mobile-menu__nav-item">
                        <a href="#" class="b-mobile-menu__nav-link">
-                           Особая экономичкская зона
+                           Особая экономическая зона
                        </a>
                     </li>
 
@@ -71,7 +86,7 @@
             </div>
 
             <div class="b-mobile-menu__nav-block">
-                <div class="b-mobile-menu__nav-header">
+                <div class="b-mobile-menu__nav-header b-mobile-menu__nav-header_action_accordion j-mobile-menu-accordion">
                     <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
                         Инфраструктура
                     </a>
@@ -116,7 +131,7 @@
             </div>
 
             <div class="b-mobile-menu__nav-block">
-                <div class="b-mobile-menu__nav-header">
+                <div class="b-mobile-menu__nav-header b-mobile-menu__nav-header_action_accordion j-mobile-menu-accordion">
                     <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
                         Медиа
                     </a>
@@ -135,7 +150,7 @@
                     </li>
 
                     <li class="b-mobile-menu__nav-item">
-                        <a href="#" class="b-mobile-menu__nav-link">
+                        <a href="#" class="b-mobile-menu__nav-link is-active">
                             Презентации
                         </a>
                     </li>
@@ -162,16 +177,14 @@
         <!--
 
         Для авторизованного пользователя
-        Добавляем на класс b-account
-            1. b-account_is_hover - появится всплывашка
         Добавляем на класс b-account__link
             1. is-auth - сменится иконка на авторизованную
-            2. j-account-auth - Нужен для запрета перехода по ссылке,
-                что бы появился тултип а не переход произошел
+            2. j-account-auth - Нужен для работы тултипа со ссылками
+            Тултип показывается и скрывается при клике на .b-account__link если на ней также есть класс .is-auth
 
         -->
-        <div class="b-account b-account_is_hover">
-            <a href="#" class="b-account__link is-auth j-account-auth">
+        <div class="b-account j-account-auth">
+            <a href="#" class="b-account__link is-auth">
                 <span class="b-account__link-icon">
                     <span class="b-account__messages">2</span>
                 </span>

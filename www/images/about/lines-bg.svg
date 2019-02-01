@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="linear-gradient" x1="603.5" y1="118.5" x2="611.5" y2="118.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#373e99"/>
+      <stop offset="1" stop-color="#662e91"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="1310" x2="1318" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" y1="962.5" y2="962.5" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-4" x1="1310" y1="962.5" x2="1318" y2="962.5" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-5" x1="439.5" y1="692.5" x2="447.5" y2="692.5" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-6" x1="1472.5" y1="692.5" x2="1480.5" y2="692.5" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-7" x1="439.5" y1="388.5" x2="447.5" y2="388.5" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-8" x1="1472.5" y1="388.5" x2="1480.5" y2="388.5" xlink:href="#linear-gradient"/>
+  </defs>
+  <title>lines</title>
+  <g id="Layer_3" data-name="Layer 3">
+    <g>
+      <path d="M1036.56,933.22l-.19-1a397.89,397.89,0,0,0,144.18-59.14l.55.84A399,399,0,0,1,1036.56,933.22Zm-156.25-.73-.15,0a398.11,398.11,0,0,1-144-60.24l.56-.83a397.18,397.18,0,0,0,143.65,60.09l.16,0ZM1292.13,764l-.82-.56a397.27,397.27,0,0,0,60.17-143.78l.13-.63,1,.2-.13.63A398.07,398.07,0,0,1,1292.13,764Zm-666-2.75a399,399,0,0,1-59.34-144.52l1-.19A397.87,397.87,0,0,0,627,760.68Zm726-298.08a398.18,398.18,0,0,0-59.31-144.11l.83-.55A398.88,398.88,0,0,1,1353.13,463Zm-783.69-2.49-1-.2.06-.31a398.05,398.05,0,0,1,60.15-143.88l.83.55a397.08,397.08,0,0,0-60,143.52ZM1183,208.43a397.14,397.14,0,0,0-143.39-59.91l-.47-.09.2-1,.46.1a398.19,398.19,0,0,1,143.75,60.06Zm-443.86-1.36-.55-.83a399,399,0,0,1,144.5-59.4l.19,1A398,398,0,0,0,739.18,207.07Z" fill="#fff"/>
+      <polyline points="1114.5 171.5 1167.5 118.5 1310.5 118.5" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+      <polyline points="805.5 171.5 752.5 118.5 609.5 118.5" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+      <polyline points="1114.5 909.5 1167.5 962.5 1310.5 962.5" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+      <polyline points="805.5 909.5 752.5 962.5 609.5 962.5" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+      <line x1="1330.5" y1="388.5" x2="1473.5" y2="388.5" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+      <line x1="1330.5" y1="692.5" x2="1473.5" y2="692.5" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+      <line x1="447.5" y1="388.5" x2="590.5" y2="388.5" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+      <line x1="447.5" y1="692.5" x2="590.5" y2="692.5" fill="none" stroke="#fff" stroke-miterlimit="10"/>
+      <circle cx="607.5" cy="118.5" r="4" stroke="#fff" stroke-miterlimit="10" fill="url(#linear-gradient)"/>
+      <circle cx="1314" cy="118.5" r="4" stroke="#fff" stroke-miterlimit="10" fill="url(#linear-gradient-2)"/>
+      <circle cx="607.5" cy="962.5" r="4" stroke="#fff" stroke-miterlimit="10" fill="url(#linear-gradient-3)"/>
+      <circle cx="1314" cy="962.5" r="4" stroke="#fff" stroke-miterlimit="10" fill="url(#linear-gradient-4)"/>
+      <circle cx="443.5" cy="692.5" r="4" stroke="#fff" stroke-miterlimit="10" fill="url(#linear-gradient-5)"/>
+      <circle cx="1476.5" cy="692.5" r="4" stroke="#fff" stroke-miterlimit="10" fill="url(#linear-gradient-6)"/>
+      <circle cx="443.5" cy="388.5" r="4" stroke="#fff" stroke-miterlimit="10" fill="url(#linear-gradient-7)"/>
+      <circle cx="1476.5" cy="388.5" r="4" stroke="#fff" stroke-miterlimit="10" fill="url(#linear-gradient-8)"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<?php
+$MESS["KELNIK_VACANCY_ID"] = "ID";
+$MESS["KELNIK_VACANCY_ACTIVE"] = "Активность";
+$MESS["KELNIK_VACANCY_NAME"] = "ФИО";
+$MESS["KELNIK_VACANCY_FILE"] = "Файл";
+$MESS["KELNIK_VACANCY_VACANCY"] = "Вакансия";
+$MESS["KELNIK_VACANCY_PHONE"] = "Телефон";
+$MESS["KELNIK_VACANCY_EMAIL"] = "E-mail";
+$MESS["KELNIK_VACANCY_DATE_CREATED"] = "Дата создания";

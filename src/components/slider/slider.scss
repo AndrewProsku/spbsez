@@ -212,6 +212,7 @@
     vertical-align: middle;
     width: 9px;
     height: 9px;
+    padding: 0;
     background-color: $violet;
     border: 2px solid $violet;
     border-radius: 50%;
@@ -219,4 +220,8 @@
     &.is-active {
         background-color: $white;
     }
+}
+
+.b-slider__dot_is_active {
+    background-color: $white;
 }

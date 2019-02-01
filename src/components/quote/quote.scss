@@ -1,0 +1,83 @@
+.b-quote {
+    position: relative;
+    z-index: 3;
+}
+
+.b-quote__title {
+    @include padding-level(bottom, reset);
+    @include margin-level(bottom, green);
+}
+
+.b-quote__text {
+    @include padding-level(bottom, cyan);
+    @include font-size("quote");
+    position: relative;
+
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        background-image: url("/images/management-company/quote.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        width: 27px;
+        height: 26px;
+
+        @media #{$tablet-portrait} {
+            width: 40px;
+            height: 42px;
+        }
+
+        @media #{$tablet-landscape} {
+            width: 81px;
+            height: 77px;
+        }
+
+        @media #{$fullhd} {
+            width: 108px;
+            height: 96px;
+        }
+    }
+
+    &:before {
+        top: 0;
+        left: -33px;
+        transform: rotate(180deg);
+
+        @media #{$tablet-portrait} {
+            top: 6px;
+            left: -87px;
+        }
+
+        @media #{$tablet-landscape} {
+            top: 13px;
+            left: -117px;
+        }
+
+        @media #{$fullhd} {
+            top: 10px;
+            left: -173px;
+        }
+    }
+
+    &:after {
+        bottom: 20px;
+        right: -33px;
+
+        @media #{$tablet-portrait} {
+            bottom: 65px;
+            right: -52px;
+        }
+
+        @media #{$tablet-landscape} {
+            bottom: 49px;
+            right: -133px;
+        }
+
+        @media #{$fullhd} {
+            bottom: 62px;
+            right: -105px;
+        }
+    }
+}

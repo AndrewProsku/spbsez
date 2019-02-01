@@ -1,0 +1,24 @@
+{% for novelty in news %}
+    <div class="b-news__item b-news-item">
+
+        <div class="b-news-item__top">
+            <div class="b-news-item__image">
+                <img src="{{ novelty.image }}" alt="">
+            </div>
+            <div class="b-news-item__title">
+                <a href="{{ novelty.link }}"><span>{{ novelty.title }}</span></a>
+            </div>
+        </div>
+
+        <ul class="b-news-item__tags">
+            <li class="b-news-item__date">
+                {% include '../media/time.svg.twig' %}
+                {{ novelty.date }}
+            </li>
+
+            {% for tag in novelty.tags %}
+                <li><a href="{{ tag.link}}">{{ tag.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endfor %}

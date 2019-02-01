@@ -1,0 +1,31 @@
+{#
+    Слайдер только изображений (без текстов)
+#}
+<div class="glide {{ modify }}">
+    <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+            {% for slide in slides %}
+                <li class="glide__slide"><img src="{{ slide }}" alt=""></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if arrow %}
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__cust_arrow glide__cust_arrow-left" data-glide-dir="<" type="button">
+                <img src="/images/home/slide-arrow-white.svg" alt="стрелка влево">
+            </button>
+            <button class="glide__cust_arrow glide__cust_arrow-right" data-glide-dir="&#62;" type="button">
+                <img src="/images/home/slide-arrow-white.svg" alt="стрелка вправо">
+            </button>
+        </div>
+    {% endif %}
+
+    {% if dots %}
+        <div class="glide__cust_dots" data-glide-el="controls[nav]">
+            {% for index, slide in slides %}
+                <button class="glide__cust_dot" data-glide-dir="={{ index }}" type="button"></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

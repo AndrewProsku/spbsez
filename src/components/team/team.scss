@@ -1,0 +1,103 @@
+.b-team__title h2 {
+    @include column(32, 36);
+    @include post(2, 36);
+    @include push(2, 36);
+    @include padding-level(top, reset);
+    @include margin-level(bottom, reset);
+    @include font-size("h2");
+
+    @media #{$tablet-portrait} {
+        margin: 0;
+    }
+}
+
+.b-team__title {
+    @include padding-level(both, reset);
+
+    @media #{$tablet-portrait} {
+        @include post(2, 36);
+        @include push(2, 36);
+    }
+
+    @media #{$tablet-landscape} {
+        @include post(3, 36);
+        @include push(3, 36);
+    }
+
+    @media #{$laptop} {
+        @include post(3, 36);
+        @include push(3, 36);
+        @include padding-level(top, reset);
+    }
+
+    @media #{$fullhd} {
+        @include post(4, 36);
+        @include push(4, 36);
+    }
+}
+
+.b-team__wrapper {
+    @include margin-level(bottom, pink);
+    @include row();
+
+    @media #{$tablet-portrait} {
+        @include post(2, 36);
+        @include push(1, 36);
+    }
+
+    @media #{$tablet-landscape} {
+        @include post(2, 36);
+        @include push(2, 36);
+    }
+
+    @media #{$fullhd} {
+        @include post(1, 36);
+        @include push(3, 36);
+    }
+}
+
+.b-team__item {
+    @include column(32, 36);
+    @include post(2, 36);
+    @include push(2, 36);
+    @include margin-level(top, cyan);
+    flex-basis: 100%;
+
+    @media #{$tablet-portrait} {
+        @include column(9, 33);
+        @include post(1, 33);
+        @include push(1, 33);
+    }
+
+    @media #{$tablet-landscape} {
+        @include column(6, 32);
+        @include post(1, 32);
+        @include push(1, 32);
+    }
+}
+
+.b-team__photo {
+    @include column(21, 32);
+    @include margin-level(bottom, orange);
+    border-radius: 4px;
+
+    @media #{$tablet-portrait} {
+        @include column(32, 32);
+    }
+}
+
+.b-team__name {
+    @include font-size("p1");
+    @include margin-level(bottom, red);
+    font-weight: 700;
+}
+
+.b-team__description {
+    @include font-size("p3");
+    @include column(24, 32);
+    opacity: 0.7;
+
+    @media #{$tablet-portrait} {
+        @include column(32, 32);
+    }
+}

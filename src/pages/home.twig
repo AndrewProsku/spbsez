@@ -3,11 +3,15 @@
 
 {% block content %}
 
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
     {# Главный экран #}
 
     <div class="l-home__main-screen j-home__main-screen">
         <div class="l-home__main-screen-video-wrapper">
-            <video class="l-home__main-screen-video" width="100%" height="auto" preload="auto" autoplay="autoplay" loop="loop" >
+            <video class="l-home__main-screen-video" width="100%" height="auto" preload="auto" autoplay="autoplay" loop="loop" muted>
                 <source src="/video/movie_1920.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                 <source src="/video/movie_1920.ogv" type='video/ogg; codecs="theora, vorbis"'>
                 <source src="/video/movie_1920.webm" type='video/webm; codecs="vp8, vorbis"'>
@@ -30,7 +34,7 @@
                     <span>Особая</span> экономическая&nbsp;зона &laquo;Санкт&nbsp;&mdash;&nbsp;Петербург&raquo;
                 </h1>
                 <div class="b-main-screen-text-desc">
-                    ОЭЗ &laquo;Санкт-Петербург&raquo;&nbsp;&mdash; это эффективный государственный проект, инновационная площадка для
+                    ОЭЗ &laquo;Санкт&nbsp;-&nbsp;Петербург&raquo;&nbsp;&mdash; это эффективный государственный проект, инновационная площадка для
                     реализации крупных бизнес-проектов по&nbsp;разработке и&nbsp;производству высокотехнологичной продукции,
                     предлагающая выгодные льготы, преференции и&nbsp;поддержку&nbsp;государства.
                 </div>
@@ -154,7 +158,7 @@
                         <div class="l-home__news-main-title">
                             <a href="#" class="b-link-line">
                                 Сегодня на&nbsp;площадке &laquo;Нойдорф&raquo; открылось инновационное
-                                предприятие резидента ОЭЗ &laquo;Санкт-Петербург&raquo;&nbsp;&mdash;
+                                предприятие резидента ОЭЗ &laquo;Санкт&nbsp;-&nbsp;Петербург&raquo;&nbsp;&mdash;
                                 ООО &laquo;ТР&nbsp;Инжиниринг&raquo;
                             </a>
                         </div>
@@ -171,7 +175,7 @@
                     <div class="l-home__news-item">
                         <div class="l-home__news-title">
                             <a href="#" class="b-link-line">
-                                ОЭЗ &laquo;Санкт-Петербург&raquo; впервые вошла в&nbsp;рейтинг лучших экономических
+                                ОЭЗ &laquo;Санкт&nbsp;-&nbsp;Петербург&raquo; впервые вошла в&nbsp;рейтинг лучших экономических
                                 зон&nbsp;мира!
                             </a>
                         </div>
@@ -201,7 +205,7 @@
                     <div class="l-home__news-item">
                         <div class="l-home__news-title">
                             <a href="#" class="b-link-line">
-                                В&nbsp;этом месяце ОЭЗ &laquo;Санкт-Петербург&raquo; получила 1,15 млрд руб.&nbsp;
+                                В&nbsp;этом месяце ОЭЗ &laquo;Санкт&nbsp;-&nbsp;Петербург&raquo; получила 1,15 млрд руб.&nbsp;
                                 от&nbsp;АО&nbsp;&laquo;ОЭЗ&raquo; на&nbsp;строительство инженерной и&nbsp;транспортной&nbsp;инфраструктуры
                             </a>
                         </div>
@@ -274,7 +278,7 @@
             <div class="l-home-resident__more-about">
                 <div class="l-home-resident__more-about-text">
                     <p>
-                        Стать резидентом Особой экономической зоны технико-внедренческого типа &laquo;Санкт-Петербург&raquo; могут
+                        Стать резидентом Особой экономической зоны технико-внедренческого типа &laquo;Санкт&nbsp;-&nbsp;Петербург&raquo; могут
                         как индивидуальные предприниматели, так и&nbsp;коммерческие организации, зарегистрированные
                         <a href="#" class="b-link-line-two">в соответствии с законодательством Российской&nbsp;Федерации</a>
                     </p>
@@ -287,50 +291,55 @@
         </div>
 
         {# Блок наши резиденты #}
-
         <div class="l-home-our-resident l-home__block">
             <h2>Резиденты</h2>
-            <div class="b-slider__wrapper">
-                <div class="b-slider__block-wrapper">
-                    <div class="b-slider__block  j-residents-slider">
-                        {% include "../components/slider/slider.twig" with {
-                            items: [{
-                                picture: {
-                                    source : "/images/home/biocad.jpg",
-                                    alt: "BioCAD",
+            <div class="b-carousel">
+                <div class="glide j-residents-carousel">
+                    <div class="glide__track b-carousel__track" data-glide-el="track">
+                        <ul class="glide__slides">
+                            {% include "../components/carousel/carousel-item.twig" with {
+                                items: [{
+                                    picture: {
+                                        source : "/images/home/biocad.jpg",
+                                        alt: "BioCAD",
+                                    },
+                                    description: {
+                                        title: "Биокад",
+                                        text : "Фармацевтика и биотехнологии"
+                                    }
+                                }, {
+                                    picture: {
+                                        source : "/images/home/laser-sistem.png",
+                                        alt: "BioCAD",
+                                    },
+                                    description: {
+                                        title: "Лазерные системы",
+                                        text : "Приборостроение"
+                                    }
+                                }, {
+                                    picture: {
+                                        source : "/images/home/racurs.jpg",
+                                        alt: "BioCAD",
+                                    },
+                                    description: {
+                                        title: "Ракурс-инжиниринг",
+                                        text : "Микроэлектроника"
+                                    }
                                 },
-                                title: "Биокад",
-                                text : "Фармацевтика и биотехнологии"
-                            },{
-                                picture: {
-                                    source : "/images/home/laser-sistem.jpg",
-                                    alt: "BioCAD",
-                                },
-                                title: "Лазерные системы",
-                                text : "Приборостроение"
-                            },{
-                                picture: {
-                                    source : "/images/home/racurs.jpg",
-                                    alt: "BioCAD",
-                                },
-                                title: "Ракурс-инжиниринг",
-                                text : "Микроэлектроника"
-                            },
-                            ]
-                        }%}
-
+                                ]
+                            }%}
+                        </ul>
                     </div>
-                </div>
 
-                <div class="b-slider__arrows">
-                    <button class="b-slider__arrow slider__arrow-left"></button>
-                    <button class="b-slider__arrow slider__arrow-right"></button>
-                </div>
-
-                <div class="b-slider__dots">
-                    <div class="b-slider__dot is-active"></div>
-                    <div class="b-slider__dot"></div>
-                    <div class="b-slider__dot"></div>
+                    <div class="glide__arrows b-carousel__arrows" data-glide-el="controls">
+                        <button class="b-carousel__arrow b-carousel__arrow-left" data-glide-dir="<" type="button"></button>
+                        <button class="b-carousel__arrow b-carousel__arrow-right" data-glide-dir="&#62;" type="button"></button>
+                    </div>
+                    <div class="b-carousel__dots" data-glide-el="controls[nav]">
+                        <button class="b-carousel__dot" data-glide-dir="=0" type="button"></button>
+                        <button class="b-carousel__dot" data-glide-dir="=1" type="button"></button>
+                        <button class="b-carousel__dot" data-glide-dir="=2" type="button"></button>
+                    </div>
                 </div>
             </div>
 
@@ -342,149 +351,84 @@
         {#Блок отзывы#}
 
         <div class="l-home-reviews">
-            <div class="b-slider-reviews__wrapper">
-                <div class="b-slider-reviews__block-wrapper">
-                    <div class="b-slider-reviews__block">
-                        <div class="b-slider-reviews__item">
-                            <div class="b-slider-reviews__item-image" style="background-image:url('/images/home/review-img.jpg')"></div>
-                            <div class="b-slider-reviews__person">
-                                <div class="b-slider-reviews__person-img">
-                                    <img src="/images/home/review-person.png" alt="картинка">
-                                    <div class="b-slider-reviews__person-name-wrap">
-                                        <div class="b-slider-reviews__person-name">
-                                            Георгий Побелянский
+            <div class="b-slider-reviews">
+                <div class="glide j-reviews-carousel">
+                    <div class="glide__track b-carousel__track" data-glide-el="track">
+                        <div class="glide__slides">
+                            <div class="glide__slide">
+                                <div class="b-slider-reviews__item">
+                                    <div class="b-slider-reviews__item-image" style="background-image:url('/images/home/review-img.jpg')"></div>
+                                    <div class="b-slider-reviews__person">
+                                        <div class="b-slider-reviews__person-img">
+                                            <img src="/images/home/review-person.png" alt="картинка">
+                                            <div class="b-slider-reviews__person-name-wrap">
+                                                <div class="b-slider-reviews__person-name">Георгий Побелянский</div>
+                                                <p>Генеральный директор фармацевтической компании &laquo;ВЕРТЕКС&raquo;</p>
+                                            </div>
                                         </div>
-                                        <p>
-                                            генеральный директор фармацевтической
-                                            компании &laquo;ВЕРТЕКС&raquo;
-                                        </p>
+                                        <div class="b-slider-reviews__person-content">
+                                            <div class="b-slider-reviews__person-text">Очевидные преимущества для резидентов ОЭЗ &laquo;Санкт&nbsp;-&nbsp;Петербург&raquo;&nbsp;&mdash;
+                                                преференции и&nbsp;льготы, стоимость земельного участка ниже среднерыночной стоимости,
+                                                создание инженерной инфраструктуры на&nbsp;территории зоны за&nbsp;счет городских
+                                                ресурсов, продление срока действия особой экономической зоны до&nbsp;2054&nbsp;года.</div>
+                                            <a href="#" class="b-slider-reviews__person-link b-link-line-two">
+                                                Отзыв полностью
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="b-slider-reviews__person-content">
-                                    <div class="b-slider-reviews__person-text">
-                                        Очевидные преимущества для резидентов ОЭЗ &laquo;Санкт-Петербург&raquo;&nbsp;&mdash;
-                                        преференции и&nbsp;льготы, стоимость земельного участка ниже среднерыночной стоимости,
-                                        создание инженерной инфраструктуры на&nbsp;территории зоны за&nbsp;счет городских
-                                        ресурсов, продление срока действия особой экономической зоны до&nbsp;2054&nbsp;года.
+                            </div>
+                            <div class="glide__slide">
+                                <div class="b-slider-reviews__item">
+                                    <div class="b-slider-reviews__item-image" style="background-image:url('/images/home/review-img.jpg')"></div>
+                                    <div class="b-slider-reviews__person">
+                                        <div class="b-slider-reviews__person-img">
+                                            <img src="/images/home/review-person.png" alt="картинка">
+                                            <div class="b-slider-reviews__person-name-wrap">
+                                                <div class="b-slider-reviews__person-name">Георгий Побелянский</div>
+                                                <p>Генеральный директор фармацевтической компании &laquo;ВЕРТЕКС&raquo;</p>
+                                            </div>
+                                        </div>
+                                        <div class="b-slider-reviews__person-content">
+                                            <div class="b-slider-reviews__person-text">Очевидные преимущества для резидентов ОЭЗ &laquo;Санкт&nbsp;-&nbsp;Петербург&raquo;&nbsp;&mdash;
+                                                преференции и&nbsp;льготы, стоимость земельного участка ниже среднерыночной стоимости,
+                                                создание инженерной инфраструктуры на&nbsp;территории зоны за&nbsp;счет городских
+                                                ресурсов, продление срока действия особой экономической зоны до&nbsp;2054&nbsp;года.</div>
+                                            <a href="#" class="b-slider-reviews__person-link b-link-line-two">
+                                                Отзыв полностью
+                                            </a>
+                                        </div>
                                     </div>
-                                    <a href="#" class="b-slider-reviews__person-link b-link-line-two">
-                                        Отзыв полностью
-                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="b-slider-reviews__arrows">
-                    <button class="b-slider-reviews__arrow slider-reviews__arrow-left">
-                        <img src="/images/home/slide-arrow-white.svg" alt="стрелка влево">
-                    </button>
-                    <button class="b-slider-reviews__arrow slider-reviews__arrow-right">
-                        <img src="/images/home/slide-arrow-white.svg" alt="стрелка вправо">
-                    </button>
-                </div>
+                    <div class="glide__arrows b-slider-reviews__arrows" data-glide-el="controls">
+                        <button class="b-slider-reviews__arrow b-slider-reviews__arrow-left" data-glide-dir="<" type="button">
+                            <img src="/images/home/slide-arrow-white.svg" alt="стрелка влево">
+                        </button>
+                        <button class="b-slider-reviews__arrow b-slider-reviews__arrow-right" data-glide-dir="&#62;" type="button">
+                            <img src="/images/home/slide-arrow-white.svg" alt="стрелка вправо">
+                        </button>
+                    </div>
 
-                <div class="b-slider__dots">
-                    <div class="b-slider__dot is-active"></div>
-                    <div class="b-slider__dot"></div>
-                    <div class="b-slider__dot"></div>
+                    <div class="b-slider-reviews__dots" data-glide-el="controls[nav]">
+                        <button class="b-slider-reviews__dot" data-glide-dir="=0" type="button"></button>
+                        <button class="b-slider-reviews__dot" data-glide-dir="=1" type="button"></button>
+                    </div>
+
                 </div>
             </div>
         </div>
 
         {# Блок участки #}
 
-        <div class="l-home-plots">
+        <div class="l-home-plots j-home-plots">
             <div class="l-home-plots__title-mobile">
                 Расположение зон
             </div>
             <div class="l-home-plots__list">
-
-                <div class="l-home-plots__item">
-
-                    <div class="l-home-plots__map l-home-plots__map-neudorf">
-                        <div class="l-home-plots__all-map-images">
-                            <div class="l-home-plots__all-map-icon-wrap">
-                                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
-                            <span class="b-tooltip">
-                                Новоорловская
-                            </span>
-                                </a>
-                                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
-                            <span class="b-tooltip">
-                                Нойдорф
-                            </span>
-                                </a>
-                                <div class="l-home-plots__all-map-icon icon-port">
-                                    <div class="b-tooltip">
-                                        Порт
-                                    </div>
-                                </div>
-
-                                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-one">
-                                    <div class="b-tooltip">
-                                        Вокзал
-                                    </div>
-                                </div>
-
-                                <div class="l-home-plots__all-map-icon icon-center-city">
-                                    <div class="b-tooltip">
-                                        Центр&nbsp;города
-                                    </div>
-                                </div>
-
-                                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
-                                    <div class="b-tooltip">
-                                        Ладожский вокзал
-                                    </div>
-                                </div>
-
-                                <div class="l-home-plots__all-map-icon icon-airport">
-                                    <div class="b-tooltip">
-                                        Аэропорт
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="l-home-plots__content">
-                        <div class="l-home-plots__title">
-                            <a href="#" class="b-link-line">
-                                Участок «Нойдорф»
-                            </a>
-                        </div>
-                        <div class="l-home-plots__desc">
-                            <div class="l-home-plots__desc-item">
-                                <p>
-                                    <strong>18,99 га</strong> <span>площадь участка</span>
-                                </p>
-                            </div>
-                            <div class="l-home-plots__desc-item">
-                                <p>
-                                    <strong>30 км</strong> <span>от центра</span>
-                                </p>
-                            </div>
-                            <div class="l-home-plots__desc-item">
-                                <p>
-                                    <strong>Стрельна</strong> <span>юго&nbsp;-&nbsp;запад&nbsp;Петербурга</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="l-home-plots__text">
-                            <p>
-                                В&nbsp;окружении развитой городской инфраструктуры и&nbsp;культурного наследия. Менее
-                                10&nbsp;минут до&nbsp;выезда на&nbsp;КАД. 20&nbsp;минут на&nbsp;автотранспорте до&nbsp;аэропорта
-                            </p>
-                        </div>
-                        <div class="l-home-plots__link">
-                            <a href="#" class="b-link-line">
-                                Узнать больше
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="l-home-plots__item">
 
@@ -520,7 +464,7 @@
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
-                                    <div class="b-tooltip">
+                                    <div class="b-tooltip b-tooltip_position_left">
                                         Ладожский вокзал
                                     </div>
                                 </div>
@@ -571,6 +515,91 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="l-home-plots__item">
+
+                    <div class="l-home-plots__map l-home-plots__map-neudorf">
+                        <div class="l-home-plots__all-map-images">
+                            <div class="l-home-plots__all-map-icon-wrap">
+                                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
+                            <span class="b-tooltip">
+                                Новоорловская
+                            </span>
+                                </a>
+                                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
+                            <span class="b-tooltip">
+                                Нойдорф
+                            </span>
+                                </a>
+                                <div class="l-home-plots__all-map-icon icon-port">
+                                    <div class="b-tooltip">
+                                        Порт
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-one">
+                                    <div class="b-tooltip">
+                                        Вокзал
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-center-city">
+                                    <div class="b-tooltip">
+                                        Центр&nbsp;города
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
+                                    <div class="b-tooltip b-tooltip_position_left">
+                                        Ладожский вокзал
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-airport">
+                                    <div class="b-tooltip">
+                                        Аэропорт
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="l-home-plots__content">
+                        <div class="l-home-plots__title">
+                            <a href="#" class="b-link-line">
+                                Участок «Нойдорф»
+                            </a>
+                        </div>
+                        <div class="l-home-plots__desc">
+                            <div class="l-home-plots__desc-item">
+                                <p>
+                                    <strong>18,99 га</strong> <span>площадь участка</span>
+                                </p>
+                            </div>
+                            <div class="l-home-plots__desc-item">
+                                <p>
+                                    <strong>30 км</strong> <span>от центра</span>
+                                </p>
+                            </div>
+                            <div class="l-home-plots__desc-item">
+                                <p>
+                                    <strong>Стрельна</strong> <span>юго&nbsp;-&nbsp;запад&nbsp;Петербурга</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="l-home-plots__text">
+                            <p>
+                                В&nbsp;окружении развитой городской инфраструктуры и&nbsp;культурного наследия. Менее
+                                10&nbsp;минут до&nbsp;выезда на&nbsp;КАД. 20&nbsp;минут на&nbsp;автотранспорте до&nbsp;аэропорта
+                            </p>
+                        </div>
+                        <div class="l-home-plots__link">
+                            <a href="#" class="b-link-line">
+                                Узнать больше
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="l-home-plots__all-map">
@@ -605,7 +634,7 @@
                         </div>
 
                         <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
-                            <div class="b-tooltip">
+                            <div class="b-tooltip b-tooltip_position_left">
                                 Ладожский&nbsp;вокзал
                             </div>
                         </div>
@@ -624,40 +653,42 @@
 
         <div class="l-home-partners l-home__block">
             <h2>Партнеры</h2>
-            <div class="b-slider__wrapper">
-                <div class="b-slider__block-wrapper">
-                    <div class="b-slider__block">
-                        <div class="b-slider__item">
-                            <div class="b-slider__item-logo">
-                                <img src="/images/home/partner1.png" alt="Биокад">
-                            </div>
-                        </div>
 
-                        <div class="b-slider__item">
-                            <div class="b-slider__item-logo">
-                                <img src="/images/home/partner2.png" alt="Лазерные системы">
-                            </div>
-                        </div>
+            <div class="b-carousel b-carousel_theme_partners">
+                <div class="glide j-partners-carousel">
+                    <div class="glide__track b-carousel__track" data-glide-el="track">
+                        <ul class="glide__slides">
+                            {% include "../components/carousel/carousel-item.twig" with {
+                                items: [{
+                                    picture: {
+                                        source : "/images/home/partner1.png",
+                                        alt: "Ассоциация клатеров и технопарков России",
+                                    }
+                                },{
+                                    picture: {
+                                        source : "/images/home/partner2.png",
+                                        alt: "Санкт&nbsp;-&nbsp;Петербургская торогво-промышленная палата",
+                                    }
+                                },{
+                                    picture: {
+                                        source : "/images/home/partner3.png",
+                                        alt: "Машиностроительный кластер Республики Татарстан",
+                                    }
+                                }]
+                            }%}
+                        </ul>
+                    </div>
 
-                        <div class="b-slider__item">
-                            <div class="b-slider__item-logo">
-                                <img src="/images/home/partner3.png" alt="Ракурс-инжиниринг">
-                            </div>
-                        </div>
+                    <div class="glide__arrows b-carousel__arrows" data-glide-el="controls">
+                        <button class="b-carousel__arrow b-carousel__arrow-left" data-glide-dir="<" type="button"></button>
+                        <button class="b-carousel__arrow b-carousel__arrow-right" data-glide-dir="&#62;" type="button"></button>
+                    </div>
+                    <div class="b-carousel__dots" data-glide-el="controls[nav]">
+                        <button class="b-carousel__dot" data-glide-dir="=0" type="button"></button>
+                        <button class="b-carousel__dot" data-glide-dir="=1" type="button"></button>
+                        <button class="b-carousel__dot" data-glide-dir="=2" type="button"></button>
                     </div>
                 </div>
-
-                <div class="b-slider__arrows">
-                    <button class="b-slider__arrow slider__arrow-left"></button>
-                    <button class="b-slider__arrow slider__arrow-right"></button>
-                </div>
-
-                <div class="b-slider__dots">
-                    <div class="b-slider__dot is-active"></div>
-                    <div class="b-slider__dot"></div>
-                    <div class="b-slider__dot"></div>
-                </div>
-
             </div>
         </div>
     </div>

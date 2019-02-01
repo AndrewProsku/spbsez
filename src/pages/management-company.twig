@@ -1,0 +1,146 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Особая экономическая зона</title> {% endblock %}
+
+{% block content %}
+
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    {# Блок с подменю #}
+
+    {% include '../components/page-submenu/page-submenu.twig' with {
+        subitems: [{
+            href: '',
+            name: 'Особая&nbsp;экономическая&nbsp;зона'
+        },{
+            href: '',
+            name: 'Управляющая&nbsp;компания',
+            active: true
+        },{
+            href: '',
+            name: 'Вакансии'
+        },{
+            href: '',
+            name: 'Раскрытие&nbsp;информации'
+        }
+        ]
+
+    } %}
+
+    <div class="l-management-company">
+
+        <div class="b-title b-about-title">
+            <h1>Управляющая компания</h1>
+        </div>
+
+        {# Блок ОБ ОЭЗ описание #}
+
+        <div class="b-about-desc">
+            <div class="b-about-desc__img">
+                <img src="/images/management-company/mission-img.png" alt="Изображение строения">
+            </div>
+            <div class="b-about-desc__content">
+                <div class="b-about-desc__title">
+                    <h3>АО «Особая экономическая зона «Санкт-Петербург»</h3>
+                </div>
+                <div class="b-about-desc__text">
+                    <p>
+                        Компания создана для осуществления успешного управления особой экономической зоной технико-внедренческого типа в Санкт-Петербурге с применением российского и международного опыта для развития высокотехнологичных отраслей экономики города.
+                    </p>
+                    <p>
+                        АО «ОЭЗ «Санкт-Петербурга» ведет деятельность по привлечению российских и зарубежных инвесторов, потенциально заинтересованных в разработке и внедрении новых технологий и перспективных образцов импортозамещающей продукции.
+                    </p>
+                </div>
+                <div class="b-about-desc__links">
+                    {% include "../components/anchor-scroll/anchor-scroll.twig" with {
+                        links: [
+                            {
+                                href: '#',
+                                text: 'Миссия&nbsp;компании'
+                            }, {
+                                href: '#',
+                                text: 'Функции&nbsp;упарвляющей&nbsp;компании'
+                            }, {
+                                href: '#',
+                                text: 'Команда'
+                            }
+                        ]
+                    } %}
+                </div>
+
+            </div>
+        </div>
+
+        {# Блок с анимацией #}
+
+        <div class="l-management-company__quote">
+            {% include "../components/animation-line/animation-line.twig" %}
+
+            {% include "../components/quote/quote.twig" %}
+        </div>
+
+        {# Нестандартный блок информации #}
+        <div class="l-management-company__functions">
+            {% include "../components/functions/functions.twig" %}
+        </div>
+        <div class="l-management-company__team">
+            {% include "../components/team/team.twig" with {
+                items: [{
+                    src: "/images/management-company/tamara.jpg",
+                    alt: "",
+                    name: "Тамара Рондалева",
+                    description: "Генеральный директор"
+                }, {
+                    src: "/images/management-company/stanislav.jpg",
+                    alt: "",
+                    name: "Станислав Гармаш",
+                    description: "Заместитель генерального директора по работе с инвесторами"
+                }, {
+                    src: "/images/management-company/vladimir.jpg",
+                    alt: "",
+                    name: "Владимир Балабанов",
+                    description: "Заместитель генерального директора по строительству"
+                }, {
+                    src: "/images/management-company/tahir.jpg",
+                    alt: "",
+                    name: "Тахир Бикбаев",
+                    description: "Заместитель генерального директора по организационным вопросам"
+                }, {
+                    src: "/images/management-company/andrey.jpg",
+                    alt: "",
+                    name: "Андрей Иванов",
+                    description: "Начальник управления по работе с инвесторами"
+                }, {
+                    src: "/images/management-company/evgeniy.jpg",
+                    alt: "",
+                    name: "Евгений Ильин",
+                    description: "Начальник управления правовых и имущественных отношений"
+                }, {
+                    src: "/images/management-company/anna.jpg",
+                    alt: "",
+                    name: "Анна Каленихина",
+                    description: "Главный бухгалтер"
+                }, {
+                    src: "/images/management-company/alexey.jpg",
+                    alt: "",
+                    name: "Алексей Корниенко",
+                    description: "Начальник управления эксплуатации – главный энергетик"
+                }, {
+                    src: "/images/management-company/olga.jpg",
+                    alt: "",
+                    name: "Ольга Шарова",
+                    description: "Начальник финансово-экономического управления"
+                }, {
+                    src: "/images/management-company/anastasia.jpg",
+                    alt: "",
+                    name: "Анастасия Рябинина",
+                    description: "Связи с общественностью и взаимодействие со СМИ"
+                }]
+            } %}
+        </div>
+        <div class="l-management-company__ask-for-advice">
+            {% include "../components/ask-for-advice/ask-for-advice.twig" %}
+        </div>
+    </div>
+{% endblock %}

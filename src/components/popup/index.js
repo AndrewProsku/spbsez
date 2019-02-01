@@ -7,6 +7,7 @@
 /**
  * DEPENDENCIES
  */
+import $ from 'jquery';
 import Mediator from 'common/scripts/mediator';
 import template from 'components/popup/popup.twig';
 import Utils from 'common/scripts/utils';

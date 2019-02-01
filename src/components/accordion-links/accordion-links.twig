@@ -1,0 +1,25 @@
+<div class="b-links j-accordion-links {% if modify %}{{ modify }}{% endif %}">
+    <div class="b-links-mobile j-accordion-links__mobile">
+        <div class="b-links-mobile__header j-accordion-links__header">
+            <span class="b-links-mobile__title">
+                {{ title }}
+            </span>
+        </div>
+        <ul class="b-links-mobile__body">
+            {% for item in items if not item.active %}
+                <li class="b-links-mobile__item">
+                    <a href="#" class="b-links-mobile__link">
+                        {{ item.text }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="b-links-desktop">
+        {% for item in items %}
+            <a href="#" class="b-links__link {{ item.active }}">
+                {{ item.text }}
+            </a>
+        {% endfor %}
+    </div>
+</div>

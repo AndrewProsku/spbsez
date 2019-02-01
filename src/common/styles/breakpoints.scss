@@ -32,6 +32,7 @@ $ultra-range: ($ultra-upper-bound + 1, 10000px);
 
 // Медиа-запросы
 $screen: "only screen";
+$touch-only: "pointer: coarse";
 
 $mobile: "#{$screen}";
 $mobile-only: "#{$screen} and (max-width: #{upper-bound($mobile-range)})";
@@ -41,6 +42,8 @@ $tablet-portrait-only: "#{$screen} and (min-width:#{lower-bound($tablet-portrait
 
 $tablet-landscape: "#{$screen} and (min-width:#{lower-bound($tablet-landscape-range)})";
 $tablet-landscape-only: "#{$screen} and (min-width:#{lower-bound($tablet-landscape-range)}) and (max-width:#{upper-bound($tablet-landscape-range)})";
+
+$tablet-only: "#{$screen} and (min-width:#{lower-bound($tablet-portrait-range)}) and (max-width:#{upper-bound($tablet-landscape-range)})";
 
 $laptop: "#{$screen} and (min-width:#{lower-bound($laptop-range)})";
 $laptop-only: "#{$screen} and (min-width:#{lower-bound($laptop-range)}) and (max-width:#{upper-bound($laptop-range)})";

@@ -4,42 +4,13 @@
  * @link https://kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/anchor-scroll.html documentation
  */
 
-const bindEvents = function(anchorLinks, animateTime, framesCount) {
-    const anchors = [].slice.call(document.querySelectorAll(anchorLinks));
-    const topPosition = 0;
-
-    anchors.forEach((anchorLink) => {
-        anchorLink.addEventListener('click', (event) => {
-            event.preventDefault();
-
-            const coordY = document.querySelector(anchorLink.getAttribute('href')).getBoundingClientRect().top;
-
-            const scroller = setInterval(() => {
-                const scrollBy = coordY / framesCount;
-
-                if (scrollBy > window.pageYOffset - coordY &&
-                    window.innerHeight + window.pageYOffset < document.body.offsetHeight) {
-                    window.scrollBy(topPosition, scrollBy);
-                } else {
-                    window.scrollTo(topPosition, coordY);
-                    clearInterval(scroller);
-                }
-            }, animateTime / framesCount);
-
-            window.addEventListener('wheel', () => {
-                clearInterval(scroller);
-            });
-        });
-    });
-};
-
+import $ from 'jquery';
 
 class Anchor {
     /**
-     * @constructor
      * @param {Object} options - outer options
      */
-    constructor(options) {
+    init(options) {
         const defaultSpeed = 300;
         const defaultFrameCount = 20;
 
@@ -51,7 +22,20 @@ class Anchor {
             return;
         }
 
-        bindEvents(this.target, this.animationTime, this.framesCount);
+        this._bindEvents();
+    }
+
+    _bindEvents() {
+        const $body = $('body, html');
+        const headerHeight = document.querySelector('.j-home__header').clientHeight;
+        const scrollTarget = $(this.target.getAttribute('href')).offset().top - headerHeight;
+
+        this.target.addEventListener('click', (event) => {
+            event.preventDefault();
+            $body.animate({
+                scrollTop: scrollTarget
+            }, 'slow');
+        });
     }
 }
 

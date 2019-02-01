@@ -1,0 +1,9 @@
+{
+  "request": {
+    "status": 0,
+    "errors": ["Не введен логи или пароль", "Не введен логи или пароль"]
+  },
+  "data": {
+    "backUrl": "/pages/profile.html"
+  }
+}

@@ -1,0 +1,167 @@
+.b-functions {
+    @include padding-level(both, pink);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+
+    @media #{$tablet-portrait} {
+        @include row();
+    }
+
+    @media #{$laptop} {
+        @include prefix(2, 36);
+        @include suffix(2, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-functions__title {
+    @include padding-level(top, reset);
+    @include padding-level(bottom, dark-yellow);
+
+    @media #{$tablet-portrait} {
+        @include padding-level(bottom, reset);
+    }
+
+    @media #{$fullhd} {
+        @include margin-level(bottom, red);
+    }
+}
+
+.b-functions__title h2 {
+    @include font-size("h2");
+}
+
+.b-functions__wrapper {
+    @media #{$tablet-portrait} {
+        min-height: 894px;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    @media #{$laptop} {
+        min-height: 425px;
+        flex-wrap: nowrap;
+    }
+    @media #{$laptop} {
+        min-height: 561px;
+    }
+}
+
+.b-functions__item {
+    @include prefix(3, 32);
+    @include suffix(3, 32);
+    @include padding-level(top, dark-yellow);
+    @include padding-level(bottom, green);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-size: cover;
+    background-position: center center;
+
+    @media #{$tablet-portrait} {
+        @include prefix(2, 32);
+        @include suffix(2, 32);
+        flex-basis: 50%;
+        height: 33.33%;
+    }
+
+    @media #{$laptop} {
+        @include prefix(1, 32);
+        @include suffix(1, 32);
+        flex-basis: 25%;
+        height: 66.66%;
+    }
+
+    &:nth-child(2n) {
+        position: relative;
+        align-self: flex-end;
+        background-color: $bg-select;
+        border: 1px solid $grey;
+    }
+
+    &_theme_investors {
+        background-image: url("/images/management-company/invest.jpg");
+
+        &:after {
+            @media #{$tablet-portrait} {
+                right: -50%;
+                top: 0;
+                border-right: 1px solid #d3d4e0;
+                border-top: 1px solid #d3d4e0;
+            }
+        }
+    }
+
+    &_theme_development {
+        background-image: url("/images/management-company/develop.jpg");
+
+        &:after {
+            @media #{$tablet-portrait} {
+                right: -50%;
+                top: 0;
+                border-right: 1px solid #d3d4e0;
+            }
+
+            @media #{$laptop} {
+                border-top: 1px solid #d3d4e0;
+            }
+        }
+    }
+
+    &_theme_work {
+        &:after {
+            @media #{$tablet-portrait} {
+                left: -50%;
+                bottom: -1px;
+                border-left: 1px solid #d3d4e0;
+            }
+
+            @media #{$laptop} {
+                border-bottom: 1px solid #d3d4e0;
+                border-right: 1px solid #d3d4e0;
+            }
+        }
+    }
+
+    &_theme_investors,
+    &_theme_development,
+    &_theme_work {
+        position: relative;
+
+        &:after {
+            @media #{$tablet-portrait} {
+                content: "";
+                position: absolute;
+                width: 50%;
+                height: 50%;
+                background-color: $white;
+            }
+        }
+    }
+}
+
+.b-functions__item-title {
+    @include font-size("p3");
+    font-weight: 700;
+
+    &_theme_investors,
+    &_theme_development {
+        color: $white;
+    }
+}
+
+.b-functions__text {
+    @include font-size("p2");
+
+    &_theme_investors,
+    &_theme_development {
+        color: $white;
+    }
+}

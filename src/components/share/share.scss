@@ -1,0 +1,42 @@
+.b-share {
+    display: flex;
+    align-items: center;
+}
+
+.b-share__caption {
+    @include font-size(p3);
+    margin-right: 20px;
+    font-weight: 700;
+
+    @media #{$tablet-portrait} {
+        margin-right: 33px;
+    }
+}
+
+.b-share__item {
+    width: 35px;
+    height: 35px;
+    margin-right: 14px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    @media #{$tablet-portrait} {
+        margin-right: 24px;
+    }
+}
+
+.b-share__item_icon_fb {
+    background-image: url('/images/share/fb.png');
+}
+
+.b-share__item_icon_vk {
+    background-image: url('/images/share/vk.png');
+}
+
+.b-share__item_icon_odk {
+    background-image: url('/images/share/odk.png');
+}

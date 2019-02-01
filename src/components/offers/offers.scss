@@ -1,0 +1,188 @@
+.b-offers {
+    @include padding-level(both, violet);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include row();
+    flex-direction: row-reverse;
+    position: relative;
+    z-index: 3;
+
+    @media #{$tablet-portrait} {
+        @include suffix(1, 36);
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(1, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(1.5, 36);
+    }
+}
+
+.b-offers__wrapper {
+    @media #{$tablet-portrait} {
+        @include row();
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+}
+
+.b-offers__img {
+    width: 80%;
+
+    @media #{$tablet-portrait} {
+        @include column(10, 33);
+    }
+}
+
+.b-offers__block {
+    @media #{$tablet-portrait} {
+        @include column(21, 33);
+        @include post(2, 33);
+    }
+
+    @media #{$laptop} {
+        @include column(20, 33);
+    }
+}
+
+.b-offers__title h2 {
+    @include margin-level(bottom, dark-yellow);
+    @include font-size("h2");
+}
+
+.b-offers__text p {
+    @include padding-level(bottom, cyan);
+    @include font-size("p1");
+}
+
+.b-offers__list {
+    @include row();
+}
+
+.b-offers__item {
+    @include margin-level(bottom, green);
+    @include font-size("p3");
+    @include padding-level(top, orange);
+    position: relative;
+    width: 100%;
+
+    @media #{$tablet-portrait} {
+        @include column(10, 21);
+    }
+
+    @media #{$laptop} {
+        @include column(6, 20);
+    }
+
+    &:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 52px;
+        height: 2px;
+        background-image: linear-gradient($gradient-linear);
+    }
+
+    &:nth-child(2n + 1) {
+        @media #{$tablet-portrait} {
+            @include post(1, 21);
+        }
+
+        @media #{$laptop} {
+            margin: 0;
+        }
+    }
+
+    &:not(:nth-child(3n)) {
+        @media #{$laptop} {
+            @include post(1, 20);
+        }
+    }
+
+    &:last-child {
+        @include margin-level(bottom, blue);
+    }
+}
+
+.b-offers__count {
+    @include margin-level(bottom, cyan);
+    @include prefix(2, 32);
+    @include suffix(2, 32);
+    @include font-size("p2");
+    padding-top: 11px;
+    padding-bottom: 11px;
+    background-color: $white;
+
+    @media #{$laptop} {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+.b-offers__count-bold {
+    font-weight: 700;
+}
+
+.b-offers__description:not(:last-child) {
+    @include margin-level(bottom, yellow);
+}
+
+.b-offers__description-title h4 {
+    @include font-size("p2");
+    margin-bottom: 0;
+    font-weight: 700;
+}
+
+.b-offers__description-text p {
+    @include font-size("p2");
+}
+
+.b-offers__logo {
+    @include prefix(2, 32);
+    @include suffix(2, 32);
+    @include margin-level(bottom, cyan);
+    @include padding-level(both, orange);
+    background-color: $white;
+}
+
+.b-offers__logo-title h4 {
+    @include font-size("p3");
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+.b-offers__logo-wrap {
+    @include row();
+}
+
+
+.b-offers__l-icon {
+    @include post(2, 32);
+    @include margin-level(bottom, dark-yellow);
+    height: 32px;
+
+    @media #{$fullhd} {
+        @include post(1, 32);
+    }
+
+    &_theme_beeline {
+        height: 36px;
+    }
+
+    &_theme_ttk {
+        height: 26px;
+    }
+
+    &_theme_ertelecom {
+        height: 30px;
+    }
+
+    &_theme_sevren {
+        height: 36px;
+    }
+}

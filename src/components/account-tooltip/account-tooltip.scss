@@ -43,11 +43,31 @@
     }
 }
 
-.b-account_is_hover {
-    &:hover {
-        .b-account__tooltip {
-            visibility: visible;
-            opacity: 1;
+.b-account_is_hover .b-account__tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.b-account__tooltip-item-message {
+    .b-account__tooltip-item-new-message {
+        display: none;
+        position: absolute;
+        top: -13px;
+        right: -20px;
+        width: 16px;
+        height: 16px;
+        background-color: $blue;
+        font-size: 12px;
+        font-weight: 700;
+        color: $white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 16px;
+    }
+
+    &.is-new-message {
+        .b-account__tooltip-item-new-message {
+            display: block;
         }
     }
 }

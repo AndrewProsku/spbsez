@@ -1,0 +1,66 @@
+{
+  "request": {
+    "status": 1,
+    "errors": ["Ошибка из респонса", "Все пропало!!11"]
+  },
+  "data": {
+    "MONTHS": [{
+      "TITLE": "Апрель",
+      "MESSAGES": [{
+        "TITLE" : "Стройте свой уникальный инновационный бизнес на территории с особыми привилегиям и получайте прибыль",
+        "SRC": "#",
+        "IS_NEW": true,
+        "DATE_MODIFIED_FORMAT": "2017-12-26",
+        "DATE_MODIFIED_FORMAT_HUMAN": "26.12.2017",
+        "TIME": "11:30"
+      }, {
+        "TITLE" : "Копия свидетельства о постановке на учет в налоговом органе",
+        "SRC": "#",
+        "IS_NEW": true,
+        "DATE_MODIFIED_FORMAT": "2017-12-26",
+        "DATE_MODIFIED_FORMAT_HUMAN": "26.12.2017",
+        "TIME": "11:30"
+      }, {
+        "TITLE" : "Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен",
+        "SRC": "#",
+        "IS_NEW": false,
+        "DATE_MODIFIED_FORMAT": "2017-12-26",
+        "DATE_MODIFIED_FORMAT_HUMAN": "26.12.2017",
+        "TIME": "11:30"
+      }]
+    }, {
+      "TITLE": "Март",
+      "MESSAGES": [{
+        "TITLE" : "Заявка А-12-1541. Заявка в обработке",
+        "SRC": "#",
+        "IS_NEW": false,
+        "DATE_MODIFIED_FORMAT": "2017-11-26",
+        "DATE_MODIFIED_FORMAT_HUMAN": "26.11.2017",
+        "TIME": "09:27"
+      }, {
+        "TITLE" : "Заявка А-11-35635. Заявка в обработке",
+        "SRC": "#",
+        "IS_NEW": false,
+        "DATE_MODIFIED_FORMAT": "2017-11-20",
+        "DATE_MODIFIED_FORMAT_HUMAN": "20.11.2017",
+        "TIME": "13:45"
+      }, {
+        "TITLE" : "Технические параметры арендуемого имущества",
+        "SRC": "#",
+        "IS_NEW": false,
+        "DATE_MODIFIED_FORMAT": "2017-11-20",
+        "DATE_MODIFIED_FORMAT_HUMAN": "20.11.2017",
+        "TIME": "17:12"
+      }, {
+        "TITLE" : "Заявка А-11-13676. Заявка в обработке",
+        "SRC": "#",
+        "IS_NEW": false,
+        "DATE_MODIFIED_FORMAT": "2017-11-20",
+        "DATE_MODIFIED_FORMAT_HUMAN": "20.11.2017",
+        "TIME": "17:12"
+      }]
+    }],
+    "MORE_URL": "/tests/messages-2017.json",
+    "IS_END": false
+  }
+}

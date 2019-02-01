@@ -1,0 +1,9 @@
+<ul class="b-tabs b-tabs-ajax">
+    {% for tab in tabs %}
+        <li class="b-tabs__item {% if tab.active %}is-active{% endif %} j-tabs__item"
+            data-link="{{ tab.href }}"
+            {% if tab.year %}data-year="{{ tab.year }}"{% endif %}>
+            {{ tab.text }}
+        </li>
+    {% endfor %}
+</ul>

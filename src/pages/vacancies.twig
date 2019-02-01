@@ -1,0 +1,173 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Вакансии</title> {% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    {# Блок с подменю #}
+
+    {% include '../components/page-submenu/page-submenu.twig' with {
+        subitems: [{
+            href: '#',
+            name: 'Особая&nbsp;экономическая&nbsp;зона'
+        },{
+            href: '#',
+            name: 'Управляющая&nbsp;компания'
+        },{
+            href: '#',
+            name: 'Вакансии',
+            active: true
+        },{
+            href: '#',
+            name: 'Раскрытие&nbsp;информации'
+        }
+        ]
+
+    } %}
+
+    <div class="l-vacancies">
+        <div class="b-vacancies-title">
+            <h1>Вакансии</h1>
+        </div>
+
+        <div class="b-vacancies-description">
+            <p>Управляющая компания АО «ОЭЗ «Санкт-Петербург» заинтересована в привлечении новаторски мыслящих, ориентированных на результат, квалифицированных специалистов. Наши сотрудники разделяют ценности компании и работают на создание благоприятного инвестиционного климата для резидентов ОЭЗ.</p>
+            <p>В данном разделе мы публикуем открытые вакансии. Чтобы ознакомиться с условиями и отправить резюме, кликните мышкой по названию вакансии. Мы благодарим Вас за желание стать частью нашей команды!</p>
+        </div>
+
+        {# Для отображения блока добавить класс is-active и уьрать со страницы  .b-vacancies-list #}
+        <div class="b-vacancies-empty">
+            К сожалению, в настоящий момент открытых вакансий нет
+        </div>
+
+        {#
+            Чтобы при открытии попапа в выпадающем списке вакансий была предвыбрана правильная вакансия
+            необходимо чтобы значение атрибута data-id на кнопке для открытия попапа совпадало со значением
+            атрибута value у соответствующей опции выпадающего списка
+         #}
+        <div class="b-vacancies-list">
+            {% include "../components/vacancy/vacancy.twig"  with {
+                id: 'vacancy1',
+                title: 'Системный администратор'
+            }%}
+
+            {% include "../components/vacancy/vacancy.twig"  with {
+                id: 'vacancy2',
+                title: 'Руководитель проекта/Ведущий инженер (слаботочные сети/АСУ)'
+            }%}
+
+            {% include "../components/vacancy/vacancy.twig"  with {
+                id: 'vacancy3',
+                title: 'Главный юрисконсульт по приоритетным проектам'
+            }%}
+
+            {% include "../components/vacancy/vacancy.twig"  with {
+                id: 'vacancy4',
+                title: 'Специалист проектного офиса / Офис менеджер'
+            }%}
+
+            {% include "../components/vacancy/vacancy.twig"  with {
+                id: 'vacancy5',
+                title: 'Системный администратор'
+            }%}
+
+            {% include "../components/vacancy/vacancy.twig"  with {
+                id: 'vacancy6',
+                title: 'Специалист в отдел по привлечению инвеcторов'
+            }%}
+
+            {% include "../components/vacancy/vacancy.twig"  with {
+                id: 'vacancy7',
+                title: 'Инженер по охране труда и технике безопасности'
+            }%}
+
+            {% include "../components/vacancy/vacancy.twig"  with {
+                id: 'vacancy8',
+                title: 'Электромонтер по ремонту и обслуживанию электрооборудования (5 разряд)'
+            }%}
+        </div>
+
+        <div id="#popup" class="b-vacancies-popup">
+            <h3 class="b-vacancies-popup__header">Отклик на вакансию</h3>
+            <form action="" method="post" enctype="multipart/form-data" class="b-vacancy-response-form j-vacancy-form">
+                <div class="b-vacancy-response-form__inputs">
+                    <div class="b-form-block j-vacancy-title-select">
+                        {% include "../components/forms/select/select.twig" with {
+                            id: "vacancy-title",
+                            name: "vacancy-title",
+                            options: [{
+                                value: 'vacancy1',
+                                text: 'Системный администратор'
+                            }, {
+                                value: 'vacancy2',
+                                text: 'Руководитель проекта/Ведущий инженер (слаботочные сети/АСУ)',
+                            }, {
+                                value: 'vacancy3',
+                                text: 'Главный юрисконсульт по приоритетным проектам'
+                            }, {
+                                value: 'vacancy4',
+                                text: 'Специалист проектного офиса / Офис менеджер'
+                            }, {
+                                value: 'vacancy5',
+                                text: 'Специалист в отдел по привлечению инвеcторов'
+                            }, {
+                                value: 'vacancy6',
+                                text: 'Руководитель объекта строительства (начальник стройки)'
+                            }, {
+                                value: 'vacancy7',
+                                text: 'Инженер по охране труда и технике безопасности'
+                            }, {
+                                value: 'vacancy8',
+                                text: 'Электромонтер по ремонту и обслуживанию электрооборудования (5 разряд)'
+                            }]
+                        } %}
+                        <label for="vacancy-title" class="b-form-block__label">
+                            Должность
+                        </label>
+                        <span class="b-form-block__error-text">Текст подсказки</span>
+                    </div>
+                    <div class="b-form-block j-vacancy-fio">
+                        {% include "../components/forms/input-text/input-text.twig" with {
+                            id: "vacancy-fio",
+                            name: "vacancy-fio"
+                        } %}
+
+                        <label for="admin-fio" class="b-form-block__label">ФИО</label>
+                        <span class="b-form-block__error-text">Текст подсказки</span>
+                    </div>
+                    <div class="b-form-block j-vacancy-email">
+                        {% include "../components/forms/email/email.twig" with {
+                            id: "vacancy-email",
+                            name: "vacancy-email"
+                        } %}
+                        <label for="email" class="b-form-block__label">
+                            Эл. почта
+                        </label>
+                        <span class="b-form-block__error-text">
+                            Текст подсказки
+                        </span>
+                    </div>
+                    <div class="b-form-block j-vacancy-phone">
+                        {% include "../components/forms/telephone/telephone.twig" with {
+                            id: "vacancy-phone",
+                            name: "vacancy-phone"
+                        } %}
+
+                        <label for="admin-phone" class="b-form-block__label">Телефон</label>
+                        <span class="b-form-block__error-text">Текст подсказки</span>
+                    </div>
+                    {% include "../components/forms/file/file.twig" with {
+                        class: "j-vacancy-resume",
+                        id: "vacancy-resume",
+                        name: "vacancy-resume",
+                        label: "Прикрепите резюме"
+                    } %}
+                </div>
+
+                <button class="button b-vacancy__button j-vacancy-submit">Откликнуться на вакансию</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

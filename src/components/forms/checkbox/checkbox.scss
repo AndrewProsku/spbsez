@@ -25,16 +25,17 @@ $checkbox-text-opacity-disable: $checkbox-opacity-disable;
 $checkbox-text-opacity-hover: 1;
 $checkbox-text-decoration-hover: none;
 
-// Icon
-$checkbox-svg-width: 24px;
-$checkbox-svg-height: 24px;
 
 // Component
 .b-form__checkbox {
     svg {
-        width: $checkbox-svg-width;
-        height: $checkbox-svg-height;
+        @include transition(opacity);
+        width: 16px;
+        height: 11px;
         stroke: $checkbox-color-stroke;
+        position: absolute;
+        top: calc(50% - 6px);
+        left: calc(50% - 8px);
     }
 
     &:focus {
@@ -54,18 +55,21 @@ $checkbox-svg-height: 24px;
     &:focus {
         outline: 0;
     }
+
+    svg {
+        opacity: 0;
+    }
 }
 
 .b-checkbox-box {
-    @include transition(fill);
-    fill: $checkbox-color-notcheck;
-}
-
-.b-checkbox-mark {
-    @include transition(fill-opacity);
-    fill: $checkbox-color-mark;
-    fill-opacity: 0;
-    stroke: transparent;
+    flex-shrink: 0;
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-color: $checkbox-color-notcheck;
+    border: 1px solid $checkbox-color-stroke;
+    border-radius: 2px;
 }
 
 .b-checkbox-text {
@@ -75,23 +79,14 @@ $checkbox-svg-height: 24px;
 
 // Checked
 .b-checkbox-input:checked + .b-checkbox-label {
-    .b-checkbox-mark {
-        fill-opacity: 1;
-    }
-
-    .b-checkbox-box {
-        fill: $checkbox-color-check;
+    svg {
+        opacity: 1;
     }
 }
 
 // Disabled
 .b-checkbox-input:disabled + .b-checkbox-label {
     cursor: default;
-
-    .b-checkbox-box {
-        fill: $checkbox-color-disable;
-        opacity: $checkbox-opacity-disable;
-    }
 
     .b-checkbox-text {
         color: $checkbox-text-color-disable;

@@ -1,0 +1,25 @@
+{#
+    css от news.scss
+#}
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Новости</title> {% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    <div class="l-news">
+        <div class="l-news__title b-title"><h1>Новости</h1></div>
+
+        <div class="l-news__main">
+            {% include '../components/news/news.twig' with {
+                filter: true,
+                modifyButton: "button_theme_gray button_icon_refresh j-news-load-more",
+                hrefButton: "#",
+                textButton: "Загрузить еще новости"
+            } %}
+        </div>
+
+    </div>
+{% endblock %}

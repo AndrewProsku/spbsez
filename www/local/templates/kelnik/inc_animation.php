@@ -1,0 +1,31 @@
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();?>
+<div class="b-animation-block j-animation-block">
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+</div>
