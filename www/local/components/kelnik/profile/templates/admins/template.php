@@ -16,7 +16,7 @@
                         <input id="admin-fio-<?= $row['ID']; ?>"
                                 class="b-input-text"
                                 type="text"
-                                name="admin[<?= $row['ID']; ?>][FULL_NAME]"
+                                name="FULL_NAME"
                                 maxlength=""
                                 autocomplete=""
                                 value="<?= $row['FULL_NAME']; ?>"
@@ -29,7 +29,7 @@
                         <input id="admin-email-<?= $row['ID']; ?>"
                                 class="b-input-email"
                                 type="email"
-                                name="admin[<?= $row['ID']; ?>][EMAIL]"
+                                name="EMAIL"
                                 value="<?= $row['EMAIL']; ?>">
                         <label for="admin-email-<?= $row['ID']; ?>" class="b-form-block__label">Эл.почта </label>
                         <span class="b-form-block__error-text">Текст подсказки</span>
@@ -39,7 +39,7 @@
                         <input id="admin-phone-<?= $row['ID']; ?>"
                                 class="b-input-phone"
                                 type="tel"
-                                name="admin[<?= $row['ID']; ?>][PHONE]"
+                                name="PERSONAL_PHONE"
                                 autocomplete="tel"
                                 placeholder="+7 ___ ___-__-__"
                                 value="<?= $row['PERSONAL_PHONE']; ?>">
@@ -48,34 +48,12 @@
                     </div>
 
                     <div class="b-form-block">
-                        <div class="b-select">
-                            <div class="b-select__wrapper">
-                                <select id="admin-status-<?= $row['ID']; ?>"
-                                        class="b-select__list j-select"
-                                        name="admin[<?= $row['ID']; ?>][STATUS]"
-                                        data-placeholder="">
-
-                                    <option value="status1"
-                                    >
-                                        Администратор
-                                    </option>
-                                    <option value="status2"
-                                    >
-                                        Супер-Администратор
-                                    </option>
-                                    <option value="status3"
-                                    >
-                                        Просто Администратор
-                                    </option>
-                                    <option value="status4"
-                                            selected>
-                                        Не просто Администратор
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <label for="admin1-status" class="b-form-block__label">Статус</label>
+                        <input id="admin-status-<?= $row['ID']; ?>"
+                               class="b-input-text"
+                               type="text"
+                               name="STATUS"
+                               value="<?= $row['STATUS_NAME']; ?>" readonly disabled>
+                        <label for="admin-status-<?= $row['ID']; ?>" class="b-form-block__label">Статус</label>
                         <span class="b-form-block__error-text">Текст подсказки</span>
                     </div>
 
@@ -97,14 +75,14 @@
                                 </div>
                                 <div class="b-select-accordion__list-item">
                                     <div class="b-form__checkbox">
-                                        <input
-                                                id="admin5access1"
+                                        <?php $rowId = 'admin' . $row['ID'] . 'report'; ?>
+                                        <input id="<?= $rowId; ?>"
                                                 class="b-checkbox-input"
                                                 type="checkbox"
-                                                value=""
-                                                name="access1"
-                                                checked>
-                                        <label for="admin5access1" class="b-checkbox-label">
+                                                value="1"
+                                                name="report"
+                                                <?php if($row[\Kelnik\Userdata\Profile\ProfileModel::CAN_REPORT]): ?> checked<?php endif; ?>>
+                                        <label for="<?= $rowId; ?>" class="b-checkbox-label">
                                             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"
                                                       viewBox="0 0 16 11">
                                                 <defs>
@@ -125,14 +103,14 @@
                                 </div>
                                 <div class="b-select-accordion__list-item">
                                     <div class="b-form__checkbox">
-                                        <input
-                                                id="admin5access2"
+                                        <?php $rowId = 'admin' . $row['ID'] . 'msg'; ?>
+                                        <input id="<?= $rowId; ?>"
                                                 class="b-checkbox-input"
                                                 type="checkbox"
-                                                value=""
-                                                name="access2"
-                                        >
-                                        <label for="admin5access2" class="b-checkbox-label">
+                                               value="1"
+                                               name="msg"
+                                               <?php if($row[\Kelnik\Userdata\Profile\ProfileModel::CAN_MSG]): ?> checked<?php endif; ?>>
+                                        <label for="<?= $rowId; ?>" class="b-checkbox-label">
                                             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"
                                                       viewBox="0 0 16 11">
                                                 <defs>
@@ -153,14 +131,14 @@
                                 </div>
                                 <div class="b-select-accordion__list-item">
                                     <div class="b-form__checkbox">
-                                        <input
-                                                id="admin5access3"
+                                        <?php $rowId = 'admin' . $row['ID'] . 'request'; ?>
+                                        <input id="<?= $rowId; ?>"
                                                 class="b-checkbox-input"
                                                 type="checkbox"
-                                                value=""
-                                                name="access3"
-                                                checked>
-                                        <label for="admin5access3" class="b-checkbox-label">
+                                                value="1"
+                                                name="request"
+                                                <?php if($row[\Kelnik\Userdata\Profile\ProfileModel::CAN_REQUEST]): ?> checked<?php endif; ?>>
+                                        <label for="<?= $rowId; ?>" class="b-checkbox-label">
                                             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"
                                                       viewBox="0 0 16 11">
                                                     <defs>

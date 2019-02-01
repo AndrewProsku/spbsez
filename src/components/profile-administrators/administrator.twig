@@ -1,7 +1,7 @@
 <div class="b-profile-block j-profile-block"  data-id="{{ id }}">
     <button type="button" class="b-profile-block__delete j-delete-administrator" data-id="{{ id }}"></button>
     <div class="b-profile-block__title b-profile-admin-title">
-        <h4>{{ fio ?: 'Администратор' }}</h4>
+        <h4>{{ FULL_NAME ?: 'Администратор' }}</h4>
     </div>
     <div class="b-profile-block__input-wrap">
         <!--
@@ -12,8 +12,8 @@
         <div class="b-form-block">
             {% include "../forms/input-text/input-text.twig" with {
                 id: "admin-fio-" ~ id,
-                name: "admin[" ~ id ~ "][FIO]",
-                value: fio
+                name: "FULL_NAME",
+                value: FULL_NAME
             } %}
 
             <label for="{{ "admin-fio-" ~ id }}" class="b-form-block__label">ФИО</label>
@@ -23,8 +23,8 @@
         <div class="b-form-block">
             {% include "../forms/email/email.twig" with {
                 id: "admin-email-" ~ id,
-                name: "admin[" ~ id ~ "][EMAIL]",
-                value: email
+                name: "EMAIL",
+                value: EMAIL
             } %}
 
             <label for="{{ "admin-email-" ~ id }}" class="b-form-block__label">Эл.почта </label>
@@ -34,8 +34,8 @@
         <div class="b-form-block">
             {% include "../forms/telephone/telephone.twig" with {
                 id: "admin-phone-" ~ id,
-                name: "admin[" ~ id ~ "][PHONE]",
-                value: phone
+                name: "PERSONAL_PHONE",
+                value: PERSONAL_PHONE
             } %}
 
             <label for="{{ "admin-phone-" ~ id }}" class="b-form-block__label">Телефон</label>
@@ -43,7 +43,7 @@
         </div>
 
         <div class="b-form-block">
-            {{ STATUS }}
+            {{ STATUS_NAME }}
         </div>
 
         <div class="b-form-block b-form-block_type_accordion j-select-accordion">
@@ -57,26 +57,26 @@
                     </div>
                     <div class="b-select-accordion__list-item">
                         {% include "../forms/checkbox/checkbox.twig" with {
-                            id: "admin" ~ id ~ "access1",
+                            id: "admin" ~ id ~ "report",
                             name: "access1",
                             text: "Подача отчета",
-                            checked: 1 in accesses
+                            checked: report in accesses
                         } %}
                     </div>
                     <div class="b-select-accordion__list-item">
                         {% include "../forms/checkbox/checkbox.twig" with {
-                            id: "admin" ~ id ~ "access2",
+                            id: "admin" ~ id ~ "msg",
                             name: "access2",
                             text: "Сообщения от ОЭЗ",
-                            checked: 2 in accesses
+                            checked: msg in accesses
                         } %}
                     </div>
                     <div class="b-select-accordion__list-item">
                         {% include "../forms/checkbox/checkbox.twig" with {
-                            id: "admin" ~ id ~ "access3",
+                            id: "admin" ~ id ~ "request",
                             name: "access3",
                             text: "Подача заявки",
-                            checked: 3 in accesses
+                            checked: request in accesses
                         } %}
                     </div>
                     <button type="button" class="button b-select-accordion__button">OK</button>

@@ -15,9 +15,9 @@ class ProfileModel
 
     public const OWNER_FIELD = 'UF_ADMIN_ID';
 
-    private const CAN_REPORT = 'UF_CAN_REPORT';
-    private const CAN_REQUEST = 'UF_CAN_REQUEST';
-    private const CAN_MSG = 'UF_CAN_OEZ_MSG';
+    public const CAN_REPORT = 'UF_CAN_REPORT';
+    public const CAN_REQUEST = 'UF_CAN_REQUEST';
+    public const CAN_MSG = 'UF_CAN_OEZ_MSG';
 
     private $userId;
     private $user;
@@ -65,10 +65,6 @@ class ProfileModel
 
     public function getUserInfo()
     {
-        $res = [
-            'STATUS' => 'Супер-Администратор',
-        ];
-
         foreach (self::getUserFields() as $field) {
             $res[$field] = ArrayHelper::getValue($this->user, $field);
         }
@@ -150,7 +146,13 @@ class ProfileModel
             ],
             [
                 'SELECT' => [
-                    'NAME', 'LAST_NAME', 'SECOND_NAME',
+                    self::CAN_MSG,
+                    self::CAN_REQUEST,
+                    self::CAN_REPORT,
+                    self::OWNER_FIELD
+                ],
+                'FIELDS' => [
+                    'ID', 'NAME', 'LAST_NAME', 'SECOND_NAME',
                     'LOGIN', 'EMAIL', 'PERSONAL_PHONE'
                 ]
             ]

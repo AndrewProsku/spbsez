@@ -15,11 +15,6 @@ class ProfileAdministrators {
         this.successStatus = 1;
         this.failStatus = 0;
         this.adminCount = 0;
-        this.accessText = {
-            access1: 'Подача отчета',
-            access2: 'Сообщения от ОЭЗ',
-            access3: 'Подача заявки'
-        };
     }
 
     init() {
@@ -37,13 +32,10 @@ class ProfileAdministrators {
             this.addAdmin();
         });
 
-
         const adminBlocks = Array.from(this.$administrators.querySelectorAll('.j-profile-block'));
 
         adminBlocks.forEach((adminBlock) => {
             this.adminCount += 1;
-
-
             this.bindEventsAdmin(adminBlock);
         });
     }
@@ -53,11 +45,11 @@ class ProfileAdministrators {
 
         adminInputs.forEach((input) => {
             input.addEventListener('change', (event) => {
-                this.onChange(event.target);
+                this.onChange(adminBlock.dataset.id, event.target);
             });
         });
         $(adminBlock.querySelector('.j-select')).change((event) => {
-            this.onChange(event.target);
+            this.onChange(adminBlock.dataset.id, event.target);
         });
 
         // Мультиселект
@@ -77,7 +69,8 @@ class ProfileAdministrators {
     bindAccessSelect(adminBlock) {
         const selectAccordion = adminBlock.querySelector('.b-select-accordion');
         const accordionSubmit = selectAccordion.querySelector('.b-select-accordion__button');
-        const accesses = this.setAccessesInputValue(selectAccordion);
+
+        this.setAccessesInputValue(selectAccordion);
 
         adminBlock.querySelector('.j-select-accordion').addEventListener('click', (event) => {
             if (!event.target.closest('.b-select-accordion__list')) {
@@ -95,16 +88,14 @@ class ProfileAdministrators {
         accordionSubmit.addEventListener('click', () => {
             const that = this;
             const selectAccordionClosure = selectAccordion;
-            const accessesClosure = accesses;
-            let dataToSend = `action=changeAccess&id=${adminBlock.dataset.id}`;
+            const accessesClosure = this.setAccessesInputValue(selectAccordion);
+            let dataToSend = `action=updateAdmin&id=${adminBlock.dataset.id}`;
 
-            for (const access in accesses) {
-                if ({}.hasOwnProperty.call(accesses, access)) {
-                    dataToSend += `&${access}=${accesses[access]}`;
-                }
+            for (const access in accessesClosure) {
+                dataToSend += `&${access}=${accessesClosure[access]}`;
             }
 
-            Utils.send(dataToSend, '/tests/administrators.json', {
+            Utils.send(dataToSend, '/api/profile/', {
                 success(response) {
                     if (response.request.status === that.successStatus) {
                         that.setAccessesInputValue(selectAccordionClosure);
@@ -134,22 +125,31 @@ class ProfileAdministrators {
 
     setAccessesInputValue(selectAccordion) {
         const accordionInput = selectAccordion.querySelector('.b-input-text');
-        const accordionCheckboxes = Array.from(selectAccordion.querySelectorAll('.b-checkbox-input'));
         const accesses = {};
+        const accessFields = {};
         const textValue = [];
 
-        accordionCheckboxes.forEach((checkbox) => {
-            accesses[checkbox.name] = checkbox.checked;
+        selectAccordion.querySelectorAll('.b-checkbox-input').forEach((checkbox) => {
+            if (checkbox.checked) {
+                let label = Array.from(checkbox.nextElementSibling.getElementsByClassName('b-checkbox-text'));
+
+                accessFields[checkbox.name] = checkbox.value;
+
+                if (label) {
+                    label = label.shift();
+                    accesses[checkbox.id] = label.innerText;
+                }
+            }
         });
 
         for (const access in accesses) {
             if (accesses[access]) {
-                textValue.push(this.accessText[access]);
+                textValue.push(accesses[access]);
             }
         }
         accordionInput.value = textValue.join(', ');
 
-        return accesses;
+        return accessFields;
     }
 
     addAdmin() {
@@ -190,7 +190,7 @@ class ProfileAdministrators {
         const that = this;
         const dataToSend = `action=delAdmin&id=${element.dataset.id}`;
 
-        Utils.send(dataToSend, '/tests/administrators.json', {
+        Utils.send(dataToSend, '/api/profile/', {
             success(response) {
                 if (response.request.status === that.failStatus) {
                     return;
@@ -209,11 +209,11 @@ class ProfileAdministrators {
         });
     }
 
-    onChange(input) {
+    onChange(id, input) {
         const that = this;
-        const dataToSend = `action=update&${$(input).serialize()}`;
+        const dataToSend = `action=updateAdmin&id=${id}&${$(input).serialize()}`;
 
-        Utils.send(dataToSend, '/tests/administrators.json', {
+        Utils.send(dataToSend, '/api/profile/', {
             success(response) {
                 if (response.request.status === that.failStatus) {
                     const errorMessage = response.request.errors.join('</br>');

@@ -213,6 +213,24 @@ class ApiProcessProfile extends ApiProcessAbstract
             return false;
         }
 
+        $this->data['id'] = $res;
+
+        return true;
+    }
+
+    protected function processUpdateAdmin(array $request)
+    {
+        $res = $this->admins->update(
+            (int) ArrayHelper::getValue($request, 'id'),
+            $request
+        );
+
+        if (!$res) {
+            $this->errors[] = $this->admins->getLastError();
+
+            return false;
+        }
+
         return true;
     }
 }
