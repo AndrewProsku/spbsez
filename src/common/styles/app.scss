@@ -31,6 +31,8 @@
 @import "../../pages/vacancies";
 @import "../../pages/management-company";
 @import "../../pages/services";
+@import "../../pages/news";
+@import "../../pages/news-single";
 
 // Components
 
@@ -41,6 +43,7 @@
 // @import "../../components/slider/slider";
 @import "../../components/carousel/carousel";
 @import "../../components/reviews/reviews";
+@import "../../components/news/news";
 
 @import "../../components/account-tooltip/account-tooltip";
 @import "../../components/lk-nav/lk-nav";
@@ -68,4 +71,6 @@
 @import "../../components/offers/offers";
 @import "../../components/advantage/advantage";
 @import "../../components/service-popup/service-popup";
+@import "../../components/share/share";
+@import "../../components/glide-carousel/glide-carousel";
 

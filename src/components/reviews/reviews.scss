@@ -318,3 +318,11 @@
     @include post(1);
     right: 0;
 }
+
+.glide__track {
+    border-radius: 4px;
+    overflow: hidden;
+}
+.glide__slide img {
+    display: block;
+}
