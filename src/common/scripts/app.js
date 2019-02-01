@@ -1,4 +1,4 @@
-import '../../pages/app.scss';
+import '../styles/app.scss';
 import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
@@ -11,6 +11,7 @@ import Message from '../../components/message-popup';
 import messagePopupTemplate from '../../components/message-popup/message-popup.twig';
 import More from 'components/more';
 import NewPassword from '../../components/new-password';
+import News from '../../components/news';
 import PasswordRecovery from '../../components/password-recovery';
 import Popup from 'components/popup';
 import ProfileAdministrators from '../../components/profile-administrators';
@@ -346,6 +347,22 @@ if (reviewsCarouselEl) {
     });
 
     reviewsCarousel.mount();
+}
+
+const newsCarouselEl = document.querySelector('.j-news-slider');
+
+if (newsCarouselEl) {
+    const newsCarousel = new Glide('.j-news-slider', {
+        type   : 'carousel',
+        startAt: 0,
+        perView: 1,
+        gap    : 0,
+        classes: {
+            activeNav: 'glide__cust_dot_is_active'
+        }
+    });
+
+    newsCarousel.mount();
 }
 
 
@@ -699,4 +716,13 @@ if (accordionLinks) {
     accordionLinksHeader.addEventListener('click', () => {
         accordionLinksMobile.classList.toggle('is-open');
     });
+}
+
+/**
+ *  Инициализация фильтрации и подгрузки новостей
+ */
+if (document.querySelector('.j-news-filter') || document.querySelector('.j-news-load-more')) {
+    const news = new News();
+
+    news.init();
 }

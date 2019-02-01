@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="cmsmagazine" content="f2d72d3408f63252b7c735ac5b026ced">
+
+<meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#000000">
+<link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="32x32" href="/favicons/apple-touch-icon-32x32.png">
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" sizes="192x192" href="/favicons/touch-icon-192x192.png">
+
+<link rel="stylesheet" href="/styles/app.css">
+<!--[if IE 8 ]>
+    <link rel="stylesheet" href="/alert-old-browser/ie-8-browser.css">
+<![endif]-->
+
+         <title>Новости</title> </head>
+    <body>
+
+        <div class="b-alert-old-browser is-hidden">
+    <div class="b-alert-old-browser__content">
+        <button class="b-alert-old-browser__close">
+            <!--[if IE 8 ]>
+                <img src="/images/alert-old-browser/close.png" alt="close">
+            <![endif]-->
+            <!--[if (gt IE 9)|!(IE)]><!-->
+                <img src="/images/alert-old-browser/close.svg" alt="close">
+            <!--<![endif]-->
+        </button>
+
+        <div class="b-alert-old-browser__icon">
+            <!--[if IE 8 ]>
+                <img src="/images/alert-old-browser/bike.png" alt="bike">
+            <![endif]-->
+            <!--[if (gt IE 9)|!(IE)]><!-->
+                <img src="/images/alert-old-browser/bike.svg" alt="bike">
+            <!--<![endif]-->
+        </div>
+
+        <h2 class="b-alert-old-browser__title">
+            Упс! Сайт может работать некорректно
+        </h2>
+
+        <div class="b-alert-old-browser__text">
+            <p>
+                Ваш браузер устарел и не поддерживает некоторые современные технологии сайта. Чтобы работали все
+                функции,
+                обновите браузер или скачайте другой из проверенных:
+            </p>
+        </div>
+
+        <ul class="b-alert-old-browser__browsers">
+            <li class="b-alert-old-browser__browser">
+                <a class="b-alert-old-browser__browser-link" href="https://browser.yandex.ru/" target="_blank">
+                    <!--[if IE 8 ]>
+                        <img src="/images/alert-old-browser/yandex.png" alt="yandex">
+                    <![endif]-->
+                    <!--[if (gt IE 9)|!(IE)]><!-->
+                        <img src="/images/alert-old-browser/yandex.svg" alt="yandex">
+                    <!--<![endif]-->
+                    <p class="b-alert-old-browser__browser-name">Яндекс.Браузер</p>
+                </a>
+            </li>
+            <li class="b-alert-old-browser__browser">
+                <a class="b-alert-old-browser__browser-link"
+                   href="https://www.google.ru/chrome/browser/desktop/index.html" target="_blank">
+                    <!--[if IE 8 ]>
+                        <img src="/images/alert-old-browser/chrome.png" alt="chrome">
+                    <![endif]-->
+                    <!--[if (gt IE 9)|!(IE)]><!-->
+                        <img src="/images/alert-old-browser/chrome.svg" alt="chrome">
+                    <!--<![endif]-->
+                    <p class="b-alert-old-browser__browser-name">Google Chrome</p>
+                </a>
+            </li>
+            <li class="b-alert-old-browser__browser">
+                <a class="b-alert-old-browser__browser-link" href="https://www.mozilla.org/ru/firefox/new/"
+                   target="_blank">
+                    <!--[if IE 8 ]>
+                        <img src="/images/alert-old-browser/firefox.png" alt="firefox">
+                    <![endif]-->
+                    <!--[if (gt IE 9)|!(IE)]><!-->
+                        <img src="/images/alert-old-browser/firefox.svg" alt="firefox">
+                    <!--<![endif]-->
+                    <p class="b-alert-old-browser__browser-name">Mozilla Firefox</p>
+                </a>
+            </li>
+            <li class="b-alert-old-browser__browser">
+                <a class="b-alert-old-browser__browser-link" href="http://www.opera.com/ru/download" target="_blank">
+                    <!--[if IE 8 ]>
+                        <img src="/images/alert-old-browser/opera.png" alt="opera">
+                    <![endif]-->
+                    <!--[if (gt IE 9)|!(IE)]><!-->
+                        <img src="/images/alert-old-browser/opera.svg" alt="opera">
+                    <!--<![endif]-->
+                    <p class="b-alert-old-browser__browser-name"> Opera Browser</p>
+                </a>
+            </li>
+        </ul>
+
+        <button class="b-alert-old-browser__ignore-button">
+            Все равно перейти на сайт
+        </button>
+    </div>
+</div>
+
+        <div class="l-layout">
+
+            <header class="l-home__header inner-header j-home__header">
+                <div class="l-home__header-left">
+    <a href="/" class="b-logo__link" title="Вернуться на главную"></a>
+</div>
+<div class="l-home__header-center">
+    <nav class="b-nav">
+        <ul class="b-nav__list">
+
+                            <li class="b-nav__item  is-active  ">
+                    <a href="#" class="b-nav__link">
+                        Об ОЭЗ
+                    </a>
+                </li>
+                            <li class="b-nav__item  ">
+                    <a href="#" class="b-nav__link">
+                        Инфраструктура
+                    </a>
+                </li>
+                            <li class="b-nav__item  ">
+                    <a href="#" class="b-nav__link">
+                        Услуги
+                    </a>
+                </li>
+                            <li class="b-nav__item  ">
+                    <a href="#" class="b-nav__link">
+                        Резиденты
+                    </a>
+                </li>
+                            <li class="b-nav__item  ">
+                    <a href="#" class="b-nav__link">
+                        Инвесторам
+                    </a>
+                </li>
+                            <li class="b-nav__item  ">
+                    <a href="#" class="b-nav__link">
+                        Медиа
+                    </a>
+                </li>
+                            <li class="b-nav__item  ">
+                    <a href="#" class="b-nav__link">
+                        Контакты
+                    </a>
+                </li>
+                    </ul>
+    </nav>
+</div>
+<div class="l-home__header-right">
+    <div class="b-account">
+        <!--
+        Добавляем на класс b-account__link
+            1. is-auth - сменится иконка на авторизованную
+        -->
+        <a href="#" class="b-account__link is-auth">
+            <span class="b-account__link-icon">
+                <span class="b-account__messages">2</span>
+            </span>
+            <span class="b-account__link-text">Личный кабинет</span>
+        </a>
+    </div>
+    <div class="b-language">
+        <span class="b-language__link">
+            Ru
+        </span>
+        <ul class="b-language__list">
+            <li class="b-language__item is-active">
+                <a href="#" class="b-language__item-link b-link-line">
+                    Рус
+                </a>
+            </li>
+            <li class="b-language__item">
+                <a href="#" class="b-language__item-link b-link-line">
+                    Eng
+                </a>
+            </li>
+            <li class="b-language__item">
+                <a href="#" class="b-language__item-link b-link-line">
+                    中國
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="b-burger-wrap j-burger-click">
+        <div class="b-burger">
+            <div class="b-burger__line"></div>
+            <div class="b-burger__line"></div>
+            <div class="b-burger__line"></div>
+        </div>
+    </div>
+</div>
+
+            </header>
+
+            <main class="l-layout__content l-layout__content-inner">
+
+    <div class="b-animation-block j-animation-block">
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+    <div class="b-animation-block__line"></div>
+</div>
+
+    <div class="l-news">
+        <div class="l-news__title b-title"><h1>Новости</h1></div>
+
+        <div class="l-news__main">
+
+<div class="b-news">
+
+            <form action="#" class="b-news__filter b-mini-filter j-news-filter">
+
+        <div class="b-mini-filter__group j-news-select-group">
+
+            <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span class="j-news-select-title">Все</span></div>
+
+            <div class="b-mini-filter__group-wrap">
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="years[]" value="2018" data-text="2018" id="years2018" class="b-mini-filter__input">
+                    <label for="years2018" class="b-mini-filter__fake">2018</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="years[]" value="2017" data-text="2017" id="years2017" class="b-mini-filter__input">
+                    <label for="years2017" class="b-mini-filter__fake">2017</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="years[]" value="2016" data-text="2016" id="years2016" class="b-mini-filter__input">
+                    <label for="years2016" class="b-mini-filter__fake">2016</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="years[]" value="2015" data-text="2015" id="years2015" class="b-mini-filter__input">
+                    <label for="years2015" class="b-mini-filter__fake">2015</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="b-mini-filter__group j-news-select-group">
+
+            <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span class="j-news-select-title">Все</span></div>
+
+            <div class="b-mini-filter__group-wrap">
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="anons" data-text="Анонс" id="typesAnons" class="b-mini-filter__input">
+                    <label for="typesAnons" class="b-mini-filter__fake">Анонс</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="press" data-text="Пресс-релиз" id="typesPress" class="b-mini-filter__input">
+                    <label for="typesPress" class="b-mini-filter__fake">Пресс-релиз</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="resid" data-text="Новости резидентов" id="typesResid" class="b-mini-filter__input">
+                    <label for="typesResid" class="b-mini-filter__fake">Новости резидентов</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="news" data-text="Новости" id="typesNews" class="b-mini-filter__input">
+                    <label for="typesNews" class="b-mini-filter__fake">Новости</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="about" data-text="СМИ о нас" id="typesAbout" class="b-mini-filter__input">
+                    <label for="typesAbout" class="b-mini-filter__fake">СМИ о нас</label>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <div class="b-news__content j-news-container">
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#"><span>Руководители компаний-резидентов площадки «Нойдорф» — «ТР Инжиниринг» «Ракурс-Инжиниринг», рассказали
+                    об успехах</span></a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    <svg id="SVGDoc" width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:avocode="https://avocode.com/" viewBox="0 0 14 14"><defs><path d="M277.851,977.063c-0.227,0.603 -0.351,1.256 -0.351,1.937c0,3.038 2.463,5.5 5.5,5.5c3.038,0 5.5,-2.462 5.5,-5.5c0,-3.037 -2.462,-5.5 -5.5,-5.5c-0.855,0 -1.666,0.196 -2.388,0.544" id="Path-0"/><path d="M282.75,976.5v3h2.25" id="Path-1"/></defs><desc>Generated with Avocode.</desc><g transform="matrix(1,0,0,1,-276,-972)"><g><title>Group 5</title><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g></svg>
+                    5 декабря
+                </li>
+                <li><a href="#">Новости резидентов</a></li>
+            </ul>
+        </div>
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#"><span>XVI форум малого и среднего предпринимательства Санкт-Петербурга. Действующий губернатор Александр Беглов посетил стенд Приморского района</span></a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    <svg id="SVGDoc" width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:avocode="https://avocode.com/" viewBox="0 0 14 14"><defs><path d="M277.851,977.063c-0.227,0.603 -0.351,1.256 -0.351,1.937c0,3.038 2.463,5.5 5.5,5.5c3.038,0 5.5,-2.462 5.5,-5.5c0,-3.037 -2.462,-5.5 -5.5,-5.5c-0.855,0 -1.666,0.196 -2.388,0.544" id="Path-0"/><path d="M282.75,976.5v3h2.25" id="Path-1"/></defs><desc>Generated with Avocode.</desc><g transform="matrix(1,0,0,1,-276,-972)"><g><title>Group 5</title><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g></svg>
+                    5 декабря
+                </li>
+                <li><a href="#">Новости резидентов</a></li>
+            </ul>
+        </div>
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#"><span>Торжественное открытие крупнейшего в СНГ предприятия по исследованию, разработке и производству рентгеновской аппаратуры для научных целей</span></a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    <svg id="SVGDoc" width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:avocode="https://avocode.com/" viewBox="0 0 14 14"><defs><path d="M277.851,977.063c-0.227,0.603 -0.351,1.256 -0.351,1.937c0,3.038 2.463,5.5 5.5,5.5c3.038,0 5.5,-2.462 5.5,-5.5c0,-3.037 -2.462,-5.5 -5.5,-5.5c-0.855,0 -1.666,0.196 -2.388,0.544" id="Path-0"/><path d="M282.75,976.5v3h2.25" id="Path-1"/></defs><desc>Generated with Avocode.</desc><g transform="matrix(1,0,0,1,-276,-972)"><g><title>Group 5</title><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g></svg>
+                    5 декабря
+                </li>
+                <li><a href="#">Новости</a></li>
+            </ul>
+        </div>
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#"><span>Во время Петербургского международрого форума состоялся круглый стол, в рамках которого обсудили трансформацию инновационной инфрастркутуры</span></a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    <svg id="SVGDoc" width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:avocode="https://avocode.com/" viewBox="0 0 14 14"><defs><path d="M277.851,977.063c-0.227,0.603 -0.351,1.256 -0.351,1.937c0,3.038 2.463,5.5 5.5,5.5c3.038,0 5.5,-2.462 5.5,-5.5c0,-3.037 -2.462,-5.5 -5.5,-5.5c-0.855,0 -1.666,0.196 -2.388,0.544" id="Path-0"/><path d="M282.75,976.5v3h2.25" id="Path-1"/></defs><desc>Generated with Avocode.</desc><g transform="matrix(1,0,0,1,-276,-972)"><g><title>Group 5</title><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g></svg>
+                    5 декабря
+                </li>
+                <li><a href="#">Новости резидентов</a></li>
+            </ul>
+        </div>
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#"><span>Во время Петербургского международрого форума состоялся круглый стол, в рамках которого обсудили трансформацию инновационной инфрастркутуры</span></a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    <svg id="SVGDoc" width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:avocode="https://avocode.com/" viewBox="0 0 14 14"><defs><path d="M277.851,977.063c-0.227,0.603 -0.351,1.256 -0.351,1.937c0,3.038 2.463,5.5 5.5,5.5c3.038,0 5.5,-2.462 5.5,-5.5c0,-3.037 -2.462,-5.5 -5.5,-5.5c-0.855,0 -1.666,0.196 -2.388,0.544" id="Path-0"/><path d="M282.75,976.5v3h2.25" id="Path-1"/></defs><desc>Generated with Avocode.</desc><g transform="matrix(1,0,0,1,-276,-972)"><g><title>Group 5</title><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g></svg>
+                    5 декабря
+                </li>
+                <li><a href="#">Новости резидентов</a></li>
+            </ul>
+        </div>
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#"><span>Во время Петербургского международрого форума состоялся круглый стол, в рамках которого обсудили трансформацию инновационной инфрастркутуры</span></a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    <svg id="SVGDoc" width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:avocode="https://avocode.com/" viewBox="0 0 14 14"><defs><path d="M277.851,977.063c-0.227,0.603 -0.351,1.256 -0.351,1.937c0,3.038 2.463,5.5 5.5,5.5c3.038,0 5.5,-2.462 5.5,-5.5c0,-3.037 -2.462,-5.5 -5.5,-5.5c-0.855,0 -1.666,0.196 -2.388,0.544" id="Path-0"/><path d="M282.75,976.5v3h2.25" id="Path-1"/></defs><desc>Generated with Avocode.</desc><g transform="matrix(1,0,0,1,-276,-972)"><g><title>Group 5</title><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g></svg>
+                    5 декабря
+                </li>
+                <li><a href="#">Новости</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="b-news__button">
+        <a href="#" class="button button_theme_gray button_icon_refresh j-news-load-more">Загрузить еще новости</a>
+    </div>
+
+</div>
+        </div>
+
+    </div>
+            </main>
+
+            <footer class="l-home-footer b-footer">
+                <div class="b-footer__left">
+    <a href="/" class="b-footer__logo">
+        <img src="../images/home/logo-white.svg" alt="Особая Экономическая зона">
+    </a>
+</div>
+<div class="b-footer__center">
+    <nav class="b-footer__nav">
+        <ul class="b-footer__nav-list">
+
+                            <li class="b-footer__nav-item">
+                    <a href="#" class="b-footer__nav-link">
+                        Об ОЭЗ
+                    </a>
+                </li>
+                            <li class="b-footer__nav-item">
+                    <a href="#" class="b-footer__nav-link">
+                        Инфраструктура
+                    </a>
+                </li>
+                            <li class="b-footer__nav-item">
+                    <a href="#" class="b-footer__nav-link">
+                        Услуги
+                    </a>
+                </li>
+                            <li class="b-footer__nav-item">
+                    <a href="#" class="b-footer__nav-link">
+                        Резиденты
+                    </a>
+                </li>
+                            <li class="b-footer__nav-item">
+                    <a href="#" class="b-footer__nav-link">
+                        Инвесторам
+                    </a>
+                </li>
+                            <li class="b-footer__nav-item">
+                    <a href="#" class="b-footer__nav-link">
+                        Медиа
+                    </a>
+                </li>
+                            <li class="b-footer__nav-item">
+                    <a href="#" class="b-footer__nav-link">
+                        Контакты
+                    </a>
+                </li>
+                    </ul>
+    </nav>
+    <div class="b-footer__copyright">
+        <span class="b-footer__copyright-text">© 2018, ОЭЗ «Санкт — Петербург»</span>
+        <a href="#" class="b-footer__copyright-link">
+            Раскрытие информации
+        </a>
+        <button class="b-footer__copyright-link j-message-button" data-href="#message">
+            Написать сообщение
+        </button>
+    </div>
+</div>
+<div class="b-footer__right">
+    <div class="b-footer__right-wrap">
+        <div class="b-footer__social">
+            <a href="#" class="b-footer__social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="47" height="48" viewBox="0 0 47 48"><defs><path id="sthka" d="M1867.32 116.342c11.345 0 20.576 9.231 20.576 20.577 0 11.346-9.23 20.577-20.577 20.577-11.346 0-20.576-9.23-20.576-20.577 0-11.346 9.23-20.577 20.576-20.577m-.005-2.742c-12.876 0-23.314 10.437-23.314 23.314s10.438 23.315 23.314 23.315c12.877 0 23.315-10.438 23.315-23.315s-10.438-23.314-23.315-23.314"/><path id="sthkb" d="M1873.293 127.47a3.467 3.467 0 0 1 3.463 3.463v11.959a3.468 3.468 0 0 1-3.463 3.464h-11.962a3.466 3.466 0 0 1-3.461-3.464v-11.96a3.464 3.464 0 0 1 3.461-3.462h11.962m-5.977 15.66c3.43 0 6.223-2.79 6.223-6.218a6.227 6.227 0 0 0-6.223-6.218c-3.43 0-6.222 2.79-6.222 6.218s2.792 6.219 6.222 6.219m6.415-11.144a1.476 1.476 0 0 0 0-2.95 1.475 1.475 0 0 0 0 2.95m-2.828 4.925a3.597 3.597 0 0 1-3.592 3.594 3.597 3.597 0 0 1-3.59-3.594 3.596 3.596 0 0 1 3.59-3.592 3.597 3.597 0 0 1 3.592 3.592"/></defs><g><g transform="translate(-1844 -113)"><use  xlink:href="#sthka"/></g><g transform="translate(-1844 -113)"><use xlink:href="#sthkb"/></g></g></svg>
+            </a>
+            <a href="#" class="b-footer__social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="47" viewBox="0 0 48 47"><defs><path id="7ttna" d="M1868 176.06c13.255 0 24 10.438 24 23.314 0 12.877-10.745 23.315-24 23.315s-24-10.438-24-23.315c0-12.876 10.745-23.314 24-23.314m.005 2.743c-11.68 0-21.181 9.23-21.181 20.576s9.502 20.577 21.181 20.577c11.68 0 21.181-9.23 21.181-20.577 0-11.346-9.502-20.576-21.181-20.576"/><path id="7ttnb" d="M1865.036 204.877c0-1.728-.007-3.458.007-5.186.002-.292-.083-.382-.382-.37-.555.022-1.111-.003-1.666.01-.224.005-.308-.055-.305-.286.011-1.079.01-2.158.001-3.236-.002-.209.063-.276.279-.272.567.013 1.136-.015 1.702.013.33.015.397-.1.39-.394a53.13 53.13 0 0 1-.002-2.464c.023-1.003.3-1.938.915-2.754.778-1.033 1.885-1.505 3.16-1.56 1.31-.056 2.624-.024 3.936-.038.183-.003.237.062.237.233a252.988 252.988 0 0 0 0 3.274c.003.195-.064.254-.258.25-.631-.009-1.263-.005-1.894-.003-.84.002-1.342.422-1.394 1.23-.043.647-.013 1.299-.027 1.949-.006.23.135.215.292.214.959-.002 1.919.01 2.877-.007.281-.004.374.059.342.347a147.7 147.7 0 0 0-.32 3.255c-.02.246-.136.293-.362.288a104.57 104.57 0 0 0-2.272-.002c-.543.002-.49-.077-.49.46-.004 3.385-.008 6.767.006 10.15.003.358-.092.446-.456.44-1.299-.023-2.599-.024-3.9.002-.365.006-.425-.115-.423-.432.014-1.703.007-3.407.007-5.111"/></defs><g><g transform="translate(-1844 -176)"><use xlink:href="#7ttna"/></g><g transform="translate(-1844 -176)"><use xlink:href="#7ttnb"/></g></g></svg>
+            </a>
+        </div>
+        <a href="#" class="b-footer__kelnik">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="16" viewBox="0 0 55 16"><defs><path id="jegya" d="M249.328 7451.358a.146.146 0 0 1-.144.148h-2.04a.144.144 0 0 1-.144-.148v-15.313c0-.083.064-.15.143-.15l2.04-.005c.08 0 .145.067.145.15z"/><path id="jegyb" d="M273.44 7451.363a.146.146 0 0 1-.145.148h-1.9a.145.145 0 0 1-.145-.148v-15.317c0-.079.063-.146.146-.146h1.899c.08 0 .145.067.145.146z"/><path id="jegyc" d="M294.138 7451.363a.144.144 0 0 1-.142.148h-1.902a.145.145 0 0 1-.144-.148v-15.308c0-.088.063-.155.144-.155h1.902c.079 0 .142.067.142.155z"/><path id="jegyd" d="M289.789 7451.363a.145.145 0 0 1-.143.148h-1.901a.146.146 0 0 1-.145-.148v-11.131c0-.084.066-.152.145-.152h1.9c.08 0 .144.068.144.152z"/><path id="jegye" d="M289.789 7438.08c0 .084-.063.15-.143.15h-1.901a.147.147 0 0 1-.145-.15v-2.026a.15.15 0 0 1 .145-.154h1.9c.08 0 .144.067.144.154z"/><path id="jegyf" d="M252.587 7443.704c.88-1.038 6.272-7.438 6.412-7.597.057-.073-.011-.207-.09-.207h-2.48c-.07 0-.138.054-.2.133l-5.579 6.665v2.017l5.579 6.665c.062.078.13.133.2.133h2.665c.076 0 .146-.138.086-.207-.138-.156-5.79-6.678-6.593-7.602"/><path id="jegyg" d="M297.032 7445.645c1.12-1.378 4.16-5.21 4.298-5.367.06-.066-.012-.208-.088-.208h-2.115c-.07 0-.137.056-.201.133l-3.466 4.432v2.02l3.65 4.717c.062.081.13.135.198.135h2.298c.079 0 .148-.139.088-.206-.136-.156-1.848-2.127-4.662-5.656"/><path id="jegyh" d="M280.58 7439.78c-1.323 0-4.98 0-4.98 5.197v6.388c0 .083.064.149.143.149h1.913c.079 0 .143-.066.143-.149l-.003-6.637c0-2.99 1.97-2.969 2.726-2.969.737 0 2.724.02 2.724 2.968v6.638c0 .083.065.149.143.149h1.908c.079 0 .145-.066.145-.149v-6.388c0-5.197-3.513-5.197-4.862-5.197"/><path id="jegyi" d="M267.979 7441.312c-.896-1.042-2.075-1.532-3.63-1.532-1.602 0-2.794.499-3.698 1.569-.908 1.074-1.371 2.556-1.371 4.441 0 1.905.463 3.405 1.355 4.494.903 1.09 2.08 1.548 3.655 1.548 1.25 0 2.297-.274 3.189-1.004.874-.71 1.416-1.635 1.642-2.78l.003.003c.001-.006-.002-.01 0-.012.009-.098-.088-.098-.088-.098h-2.022c-.143.586-.429 1.126-.854 1.457-.428.326-1.106.525-1.726.525-.876 0-1.661-.32-2.143-.893-.482-.57-.842-1.471-.82-2.54h7.577c.157 0 .222-.098.232-.231a7.17 7.17 0 0 0 .027-.612c0-1.838-.443-3.284-1.328-4.335zm-6.503 3.426c.074-.953.395-1.754.846-2.265.448-.495 1.178-.788 1.963-.788.823 0 1.63.293 2.083.803.448.522.73 1.316.736 2.25z"/></defs><g><g opacity=".48" transform="translate(-247 -7436)"><use fill="#fff" xlink:href="#jegya"/></g><g opacity=".48" transform="translate(-247 -7436)"><use fill="#fff" xlink:href="#jegyb"/></g><g opacity=".48" transform="translate(-247 -7436)"><use fill="#fff" xlink:href="#jegyc"/></g><g opacity=".48" transform="translate(-247 -7436)"><use fill="#fff" xlink:href="#jegyd"/></g><g opacity=".48" transform="translate(-247 -7436)"><use fill="#fff" xlink:href="#jegye"/></g><g opacity=".48" transform="translate(-247 -7436)"><use fill="#fff" xlink:href="#jegyf"/></g><g opacity=".48" transform="translate(-247 -7436)"><use fill="#fff" xlink:href="#jegyg"/></g><g opacity=".48" transform="translate(-247 -7436)"><use fill="#fff" xlink:href="#jegyh"/></g><g opacity=".48" transform="translate(-247 -7436)"><use fill="#fff" xlink:href="#jegyi"/></g></g></svg> </a>
+    </div>
+</div>
+
+<div id="#message" class="b-message-popup">
+    <h3 class="b-message-popup__header">Написать сообщение</h3>
+    <form action="" method="post" enctype="multipart/form-data" class="b-vacancy-response-form j-message-form">
+        <div class="b-vacancy-response-form__inputs">
+            <div class="b-form-block j-message-text">
+                    <textarea
+            id="text"
+            class="b-input-text"
+            name="text"
+            rows=""
+            cols=""
+            placeholder=""
+    ></textarea>
+
+                <label for="admin-fio" class="b-form-block__label">Комментарий</label>
+                <span class="b-form-block__error-text">Комментарий</span>
+            </div>
+            <div class="b-form-block j-message-fio">
+                    <input
+        id="message-fio"
+        class="b-input-text"
+        type="text"
+        name="message-fio"
+        maxlength=""
+        autocomplete=""
+        value=""
+        placeholder=""
+                                            >
+
+                <label for="message-fio" class="b-form-block__label">Как тебя зовут</label>
+                <span class="b-form-block__error-text">Имя</span>
+            </div>
+            <div class="b-form-block j-message-email">
+                    <input
+        id="message-email"
+        class="b-input-email"
+        type="email"
+        name="message-email"
+        
+        
+                            >
+                <label for="message-email" class="b-form-block__label">
+                    Эл. почта
+                </label>
+                <span class="b-form-block__error-text">
+                            Текст подсказки
+                        </span>
+            </div>
+            <div class="b-form-block j-message-phone">
+                    <input
+            id="message-phone"
+            class="b-input-phone"
+            type="tel"
+            name="message-phone"
+            autocomplete="tel"
+            placeholder="+7 ___ ___-__-__"
+                                        >
+
+                <label for="message-phone" class="b-form-block__label">Телефон</label>
+                <span class="b-form-block__error-text">Текст подсказки</span>
+            </div>
+        </div>
+
+        <button class="button b-vacancy__button j-message-submit">Написать сообщение</button>
+    </form>
+</div>
+            </footer>
+
+            <div class="b-mobile-menu j-mobile-menu">
+    <div class="b-mobile-menu__header">
+        <div class="b-mobile-menu__header-left">
+            <a href="/" class="b-mobile-menu__header-logo"></a>
+        </div>
+        <div class="b-mobile-menu__header-right">
+            <div class="b-account">
+                <!--
+                Добавляем на класс b-account__link
+                    1. is-auth - сменится иконка на авторизованную
+                -->
+                <a href="#" class="b-account__link">
+                    <span class="b-account__link-icon">
+                        <span class="b-account__messages">2</span>
+                    </span>
+                    <span class="b-account__link-text">Личный кабинет</span>
+                </a>
+
+                <div class="b-account__tooltip">
+    <div class="b-account__tooltip-block">
+        <ul class="b-account__tooltip-list">
+            <li class="b-account__tooltip-item">
+                <a href="#" class="b-account__tooltip-link">
+                    Профиль
+                </a>
+            </li>
+
+            <li class="b-account__tooltip-item">
+                <a href="#" class="b-account__tooltip-link">
+                    Подача отчета
+                </a>
+            </li>
+
+            <!-- Для отображения счетчика новых сообщений добавить класс is-new-message -->
+            <li class="b-account__tooltip-item b-account__tooltip-item-message is-new-message">
+                <a href="#" class="b-account__tooltip-link">
+                    Сообщение от ОЭЗ
+                    <span class="b-account__tooltip-item-new-message">1</span>
+                </a>
+            </li>
+
+            <li class="b-account__tooltip-item">
+                <a href="#" class="b-account__tooltip-link">
+                    Подать заявку
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+            </div>
+            <div class="b-language">
+                <span class="b-language__link">
+                    Ru
+                </span>
+                <ul class="b-language__list">
+                    <li class="b-language__item is-active">
+                        <a href="#" class="b-language__item-link b-link-line">
+                            Рус
+                        </a>
+                    </li>
+                    <li class="b-language__item">
+                        <a href="#" class="b-language__item-link b-link-line">
+                            Eng
+                        </a>
+                    </li>
+                    <li class="b-language__item">
+                        <a href="#" class="b-language__item-link b-link-line">
+                            中國
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="b-close-menu-warp j-close-menu">
+                <div class="b-close-menu">
+                    <div class="b-close-menu__line"></div>
+                    <div class="b-close-menu__line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="b-mobile-menu__nav">
+        <div class="b-mobile-menu__nav-wrap">
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header b-mobile-menu__nav-header_action_accordion j-mobile-menu-accordion">
+                    <a href="#" class="b-mobile-menu__nav-header-link  b-link-line-two is-active">
+                        Об ОЭЗ
+                    </a>
+                </div>
+                <ul class="b-mobile-menu__nav-body">
+                    <li class="b-mobile-menu__nav-item">
+                       <a href="#" class="b-mobile-menu__nav-link">
+                           Особая экономическая зона
+                       </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Управляющая компания
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Вакансии
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Раскрытие информации
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header b-mobile-menu__nav-header_action_accordion j-mobile-menu-accordion">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Инфраструктура
+                    </a>
+                </div>
+                <ul class="b-mobile-menu__nav-body">
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Площадка «Нойдорф»
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Площадка «Новоорловская»
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Услуги
+                    </a>
+                </div>
+            </div>
+
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Резиденты
+                    </a>
+                </div>
+            </div>
+
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Инвесторам
+                    </a>
+                </div>
+            </div>
+
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header b-mobile-menu__nav-header_action_accordion j-mobile-menu-accordion">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Медиа
+                    </a>
+                </div>
+                <ul class="b-mobile-menu__nav-body">
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Новости
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Полезная информация
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link is-active">
+                            Презентации
+                        </a>
+                    </li>
+
+                    <li class="b-mobile-menu__nav-item">
+                        <a href="#" class="b-mobile-menu__nav-link">
+                            Контакты пресс-службы
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="b-mobile-menu__nav-block">
+                <div class="b-mobile-menu__nav-header">
+                    <a href="#" class="b-mobile-menu__nav-header-link b-link-line-two">
+                        Контакты
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="b-mobile-menu__footer">
+        <!--
+
+        Для авторизованного пользователя
+        Добавляем на класс b-account__link
+            1. is-auth - сменится иконка на авторизованную
+            2. j-account-auth - Нужен для работы тултипа со ссылками
+            Тултип показывается и скрывается при клике на .b-account__link если на ней также есть класс .is-auth
+
+        -->
+        <div class="b-account j-account-auth">
+            <a href="#" class="b-account__link is-auth">
+                <span class="b-account__link-icon">
+                    <span class="b-account__messages">2</span>
+                </span>
+                <span class="b-account__link-text">Личный кабинет</span>
+            </a>
+
+            <div class="b-account__tooltip">
+    <div class="b-account__tooltip-block">
+        <ul class="b-account__tooltip-list">
+            <li class="b-account__tooltip-item">
+                <a href="#" class="b-account__tooltip-link">
+                    Профиль
+                </a>
+            </li>
+
+            <li class="b-account__tooltip-item">
+                <a href="#" class="b-account__tooltip-link">
+                    Подача отчета
+                </a>
+            </li>
+
+            <!-- Для отображения счетчика новых сообщений добавить класс is-new-message -->
+            <li class="b-account__tooltip-item b-account__tooltip-item-message is-new-message">
+                <a href="#" class="b-account__tooltip-link">
+                    Сообщение от ОЭЗ
+                    <span class="b-account__tooltip-item-new-message">1</span>
+                </a>
+            </li>
+
+            <li class="b-account__tooltip-item">
+                <a href="#" class="b-account__tooltip-link">
+                    Подать заявку
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+        </div>
+
+        <div class="b-footer__social">
+            <a href="#" class="b-footer__social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="47" height="48" viewBox="0 0 47 48"><defs><path id="sthka" d="M1867.32 116.342c11.345 0 20.576 9.231 20.576 20.577 0 11.346-9.23 20.577-20.577 20.577-11.346 0-20.576-9.23-20.576-20.577 0-11.346 9.23-20.577 20.576-20.577m-.005-2.742c-12.876 0-23.314 10.437-23.314 23.314s10.438 23.315 23.314 23.315c12.877 0 23.315-10.438 23.315-23.315s-10.438-23.314-23.315-23.314"/><path id="sthkb" d="M1873.293 127.47a3.467 3.467 0 0 1 3.463 3.463v11.959a3.468 3.468 0 0 1-3.463 3.464h-11.962a3.466 3.466 0 0 1-3.461-3.464v-11.96a3.464 3.464 0 0 1 3.461-3.462h11.962m-5.977 15.66c3.43 0 6.223-2.79 6.223-6.218a6.227 6.227 0 0 0-6.223-6.218c-3.43 0-6.222 2.79-6.222 6.218s2.792 6.219 6.222 6.219m6.415-11.144a1.476 1.476 0 0 0 0-2.95 1.475 1.475 0 0 0 0 2.95m-2.828 4.925a3.597 3.597 0 0 1-3.592 3.594 3.597 3.597 0 0 1-3.59-3.594 3.596 3.596 0 0 1 3.59-3.592 3.597 3.597 0 0 1 3.592 3.592"/></defs><g><g transform="translate(-1844 -113)"><use  xlink:href="#sthka"/></g><g transform="translate(-1844 -113)"><use xlink:href="#sthkb"/></g></g></svg>
+            </a>
+            <a href="#" class="b-footer__social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="47" viewBox="0 0 48 47"><defs><path id="7ttna" d="M1868 176.06c13.255 0 24 10.438 24 23.314 0 12.877-10.745 23.315-24 23.315s-24-10.438-24-23.315c0-12.876 10.745-23.314 24-23.314m.005 2.743c-11.68 0-21.181 9.23-21.181 20.576s9.502 20.577 21.181 20.577c11.68 0 21.181-9.23 21.181-20.577 0-11.346-9.502-20.576-21.181-20.576"/><path id="7ttnb" d="M1865.036 204.877c0-1.728-.007-3.458.007-5.186.002-.292-.083-.382-.382-.37-.555.022-1.111-.003-1.666.01-.224.005-.308-.055-.305-.286.011-1.079.01-2.158.001-3.236-.002-.209.063-.276.279-.272.567.013 1.136-.015 1.702.013.33.015.397-.1.39-.394a53.13 53.13 0 0 1-.002-2.464c.023-1.003.3-1.938.915-2.754.778-1.033 1.885-1.505 3.16-1.56 1.31-.056 2.624-.024 3.936-.038.183-.003.237.062.237.233a252.988 252.988 0 0 0 0 3.274c.003.195-.064.254-.258.25-.631-.009-1.263-.005-1.894-.003-.84.002-1.342.422-1.394 1.23-.043.647-.013 1.299-.027 1.949-.006.23.135.215.292.214.959-.002 1.919.01 2.877-.007.281-.004.374.059.342.347a147.7 147.7 0 0 0-.32 3.255c-.02.246-.136.293-.362.288a104.57 104.57 0 0 0-2.272-.002c-.543.002-.49-.077-.49.46-.004 3.385-.008 6.767.006 10.15.003.358-.092.446-.456.44-1.299-.023-2.599-.024-3.9.002-.365.006-.425-.115-.423-.432.014-1.703.007-3.407.007-5.111"/></defs><g><g transform="translate(-1844 -176)"><use xlink:href="#7ttna"/></g><g transform="translate(-1844 -176)"><use xlink:href="#7ttnb"/></g></g></svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+        </div>
+
+        <script async src="/scripts/app.js"></script>
+    </body>
+</html>

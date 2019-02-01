@@ -218,7 +218,6 @@ button {
     position: relative;
     display: inline-block;
     vertical-align: top;
-    min-width: 284px;
     height: 48px;
     font-family: $font;
     font-size: 14px;
@@ -241,6 +240,7 @@ button {
         width: 18px;
         height: 9px;
         background-image: url("/images/home/arrow-right.svg");
+        background-repeat: no-repeat;
         position: absolute;
         top: 50%;
         right: 9%;
@@ -256,6 +256,7 @@ button {
         background: $grey;
         color: rgba($blue, 0.48);
         cursor: default;
+        pointer-events: none;
 
         &:after {
             background-image: url("/images/home/arrow-blue.svg");
@@ -275,6 +276,7 @@ button {
         font-size: 18px;
         line-height: 56px;
         padding-right: 90px;
+        min-width: 284px;
 
         &:hover {
             background-position: right center;
@@ -358,6 +360,95 @@ button {
                 right: 5%;
             }
         }
+    }
+}
+
+.button_theme_gray {
+    border: 1px solid $grey;
+    background: none;
+    background-color: $bg-grey;
+    color: $black;
+
+    &:after {
+        background-image: url("/images/home/arrow-black.svg");
+    }
+
+    @media #{$tablet-portrait} {
+        &:hover {
+            color: $blue;
+
+            &:after {
+                width: 10px;
+                height: 9px;
+                background-image: url("/images/home/arrow-blue-small.svg");
+                right: 5%;
+            }
+        }
+    }
+}
+
+.button_icon_refresh {
+    &:after {
+        @include transition(transform);
+        width: 17px;
+        height: 17px;
+        background-image: url("/images/news/refresh.png");
+        top: 50%;
+        transform: translate(0, -50%) rotate(0deg);
+        margin: 0;
+    }
+
+    @media #{$tablet-portrait} {
+        &:hover {
+            &:after {
+                width: 17px;
+                height: 17px;
+                background-image: url("/images/news/refresh.png");
+                right: 9%;
+                transform: translate(0, -50%) rotate(360deg);
+            }
+        }
+    }
+
+    &.is-disabled {
+        &:after {
+            width: 17px;
+            height: 17px;
+            right: 9%;
+            transform: translate(0, -50%) rotate(360deg);
+            background-image: url("/images/news/refresh.png");
+            animation: rotate360 .6s infinite linear;
+        }
+    }
+}
+
+@keyframes rotate360 {
+    0% {
+        transform: translate(0, -50%) rotate(0);
+    }
+
+    100% {
+        transform: translate(0, -50%) rotate(360deg);
+    }
+}
+
+.button_reserve_icon {
+    padding-left: 50px;
+    padding-right: 26px;
+    text-align: right;
+
+    &:after {
+        left: 9%;
+        right: auto;
+        transform: rotateY(180deg);
+    }
+}
+
+.button_without_icon {
+    padding-right: 26px;
+
+    &:after {
+        display: none;
     }
 }
 

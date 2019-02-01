@@ -1,0 +1,76 @@
+@import "breakpoints";
+@import "colors";
+@import "common";
+@import "grid";
+@import "mixins";
+@import "management-layers";
+@import "font-sizes";
+@import "vertical-indent";
+@import "typography";
+
+// Layout's
+@import "../../pages/layout/layout";
+@import "../../pages/layout/header";
+@import "../../pages/layout/footer";
+@import "../../pages/home";
+@import "../../pages/contacts";
+@import "../../pages/add-request";
+@import "../../pages/login";
+@import "../../pages/profile";
+@import "../../pages/profile-administrators";
+@import "../../pages/profile-document";
+@import "../../pages/password-recovery";
+@import "../../pages/password-recovery-step2";
+@import "../../pages/password-recovery-step3"; // Страница не используется
+@import "../../pages/password-recovery-step4"; // Страница не используется
+@import "../../pages/about";
+@import "../../pages/404";
+@import "../../pages/residents";
+@import "../../pages/profile-messages";
+@import "../../pages/profile-message-item";
+@import "../../pages/vacancies";
+@import "../../pages/management-company";
+@import "../../pages/services";
+@import "../../pages/news";
+@import "../../pages/news-single";
+
+// Components
+
+@import "../../components/popup/popup-vacancies";
+@import "../../../node_modules/@glidejs/glide/src/assets/sass/glide.core";
+@import "../../components/alert-old-browser/alert-old-browser";
+@import "../../components/mobile-menu/mobile-menu";
+// @import "../../components/slider/slider";
+@import "../../components/carousel/carousel";
+@import "../../components/reviews/reviews";
+@import "../../components/news/news";
+
+@import "../../components/account-tooltip/account-tooltip";
+@import "../../components/lk-nav/lk-nav";
+@import "../../components/lk-login-nav/lk-login-nav";
+@import "../../components/page-submenu/page-submenu";
+@import "../../components/forms/input-text/input-text";
+@import "../../components/forms/email/email";
+@import "../../components/forms/telephone/telephone";
+@import "../../components/forms/password/password";
+@import "../../components/forms/checkbox/checkbox";
+@import "../../components/forms/search/search";
+@import "../../components/forms/file/file";
+@import "../../components/forms/textarea/textarea";
+@import "../../components/yandex-map/yandex-map";
+@import "../../components/animation-line/animation-line";
+@import "../../components/logout/logout";
+@import "../../components/expanded-menu/expanded-menu";
+@import "../../components/accordion-links/accordion-links";
+@import "../../components/tabs/tabs";
+@import "../../components/team/team";
+@import "../../components/ask-for-advice/ask-for-advice";
+@import "../../components/functions/functions";
+@import "../../components/quote/quote";
+@import "../../components/message-popup/message-popup";
+@import "../../components/offers/offers";
+@import "../../components/advantage/advantage";
+@import "../../components/service-popup/service-popup";
+@import "../../components/share/share";
+@import "../../components/glide-carousel/glide-carousel";
+

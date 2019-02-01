@@ -1,0 +1,146 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Новости</title> {% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    <div class="l-news">
+        <div class="l-news__title b-title"><h1>Новости</h1></div>
+
+        <div class="l-news__main">
+            {% include '../components/news/news.twig' with {
+                modifyButton: "button_theme_gray",
+                hrefButton: "/pages/news-all.html",
+                textButton: "Посмотреть все новости"
+            } %}
+        </div>
+
+        <div class="l-news__useful">
+            <div class="b-useful">
+                <h2 class="b-useful__title">Полезная информация</h2>
+
+                <div class="b-useful__content">
+
+                    <div class="b-useful__item">
+                        <div class="b-useful__caption-wrap">
+                            <div class="b-useful__caption"><span>Как составить бизнес-план — образец с расчетами, структура и содержание бизнес-плана</span></div>
+                        </div>
+                        <div class="b-useful__text">
+                            Подобный документ создается на основе трех знаний о своей идее, которые и лягут в основу всех ваших последующих действий. Только четкое понимание этих вещей может дать ту стартовую площадку, которая в итоге приведет вас к цели. Вот эти 3 знания — ключевые факторы успеха любого проекта
+                        </div>
+                        <div class="b-useful__date">
+                            <span>{% include '../components/news/media/time.svg.twig' %} 5 декабря</span>
+                        </div>
+                    </div>
+
+                    <div class="b-useful__item">
+                        <div class="b-useful__caption-wrap">
+                            <div class="b-useful__caption"><span>Стратегия привлечения финансовых ресурсов</span></div>
+                        </div>
+                        <div class="b-useful__text">
+                            Выделяют следующие типы стратегий привлечения финансовых средств, которые могут иметь внутреннюю и внешнюю ориентацию (но, как правило, должны органически сочетать ту и другую).
+                        </div>
+                        <div class="b-useful__date">
+                            <span>{% include '../components/news/media/time.svg.twig' %} 5 декабря</span>
+                        </div>
+                    </div>
+
+                    <div class="b-useful__item">
+                        <div class="b-useful__caption-wrap">
+                            <div class="b-useful__caption"><span>Электронная подпись за час без визита в офис</span></div>
+                        </div>
+                        <div class="b-useful__text">
+                            Получить квалифицированный сертификат электронной подписи можно в аккредитованных удостоверяющих центрах.
+                        </div>
+                        <div class="b-useful__date">
+                            <span>{% include '../components/news/media/time.svg.twig' %} 5 декабря</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="b-useful__button">
+                    <a href="#" class="button button_theme_white">Посмотреть все статьи</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="l-news-presentations">
+            <div class="b-presentations">
+                <div class="b-presentations__info">
+
+                    <div class="b-presentations__title">Презентации</div>
+
+                    <div class="b-presentations__files">
+                        <div class="b-files">
+                            <div class="b-files__item">
+                                <div class="b-files__left">
+                                    <span class="b-files__icon">doc</span>
+                                    <a href="#" class="b-files__name"><span>Презентация ОЭЗ 2018 Презентация ОЭЗ 2018</span></a>
+                                    <div class="b-files__size">5,5 мб</div>
+                                </div>
+                                <div class="b-files__right">
+                                    <div class="b-files__size b-files__size-adapt">5,5 мб</div>
+                                    <div class="b-files__date">12.12.2018</div>
+                                </div>
+                            </div>
+
+                            <div class="b-files__item">
+                                <div class="b-files__left">
+                                    <span class="b-files__icon">link</span>
+                                    <a href="#" class="b-files__name"><span>Видео об ОЭЗ 2019</span></a>
+                                    <div class="b-files__size">5,5 мб</div>
+                                </div>
+                                <div class="b-files__right">
+                                    <div class="b-files__size b-files__size-adapt">5,5 мб</div>
+                                    <div class="b-files__date">12.12.2018</div>
+                                </div>
+                            </div>
+
+                            <div class="b-files__item">
+                                <div class="b-files__left">
+                                    <span class="b-files__icon">pdf</span>
+                                    <a href="#" class="b-files__name"><span>Фирменный стиль 2018</span></a>
+                                    <div class="b-files__size">5,5 мб</div>
+                                </div>
+                                <div class="b-files__right">
+                                    <div class="b-files__size b-files__size-adapt">5,5 мб</div>
+                                    <div class="b-files__date">12.12.2018</div>
+                                </div>
+                            </div>
+
+                            <div class="b-files__item">
+                                <div class="b-files__left">
+                                    <span class="b-files__icon">pdf</span>
+                                    <a href="#" class="b-files__name"><span>Презентации резидентов</span></a>
+                                    <div class="b-files__size">5,5 мб</div>
+                                </div>
+                                <div class="b-files__right">
+                                    <div class="b-files__size b-files__size-adapt">5,5 мб</div>
+                                    <div class="b-files__date">12.12.2018</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="b-presentations__contacts">
+
+                    <div class="b-presentations__title">Контакты пресс-службы</div>
+
+                    <div class="b-presentations__contact-info">
+                        <div class="b-contact-info">
+                            <div class="b-contact-info__name">Анастасия Рябинина</div>
+                            <div class="b-contact-info__prof">Помощник генерального директора по связям с общественностью</div>
+                            <div class="b-contact-info__phone"><a href="tel:+78123804929">+7 (812) 380-49-29 (доб. 4005)</a></div>
+                            <div class="b-contact-info__email"><a href="mailto:press@spbsez.ru" class="b-link-line">press@spbsez.ru</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
