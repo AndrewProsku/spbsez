@@ -1,5 +1,5 @@
-import Utils from '../../common/scripts/utils';
 import templateNew from './templates/news.twig';
+import Utils from '../../common/scripts/utils';
 
 class News {
     constructor() {
@@ -30,8 +30,6 @@ class News {
     }
 
     _bindEvents() {
-        const that = this;
-
         this.filter.addEventListener('change', () => {
             this._sendFilter();
             this._setTitlesInSelects();

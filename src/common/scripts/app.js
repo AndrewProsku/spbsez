@@ -1,4 +1,5 @@
 import '../styles/app.scss';
+import '../../components/background-animation';
 import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
