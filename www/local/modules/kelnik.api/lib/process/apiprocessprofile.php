@@ -37,7 +37,7 @@ class ApiProcessProfile extends ApiProcessAbstract
         }
 
         if (!$action) {
-            $this->data['profile'] = $this->profile->getUserInfo();
+            $this->data['profile'] = $this->profile->getInfo();
             $this->data['contacts'] = array_values($this->contacts->getList());
 
             foreach ($this->data['contacts'] as &$v) {
@@ -213,7 +213,8 @@ class ApiProcessProfile extends ApiProcessAbstract
             return false;
         }
 
-        $this->data['id'] = $res;
+        $this->data = $this->admins->getById($res);
+        unset($this->data[ProfileModel::OWNER_FIELD]);
 
         return true;
     }
@@ -224,6 +225,24 @@ class ApiProcessProfile extends ApiProcessAbstract
             (int) ArrayHelper::getValue($request, 'id'),
             $request
         );
+
+        if (!$res) {
+            $this->errors[] = $this->admins->getLastError();
+
+            return false;
+        }
+
+        if (is_numeric($res)) {
+            $this->data = $this->admins->getById($res);
+            unset($this->data[ProfileModel::OWNER_FIELD]);
+        }
+
+        return true;
+    }
+
+    protected function processDelAdmin(array $request)
+    {
+        $res = $this->admins->delete((int) ArrayHelper::getValue($request, 'id'));
 
         if (!$res) {
             $this->errors[] = $this->admins->getLastError();

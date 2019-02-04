@@ -10,7 +10,7 @@ use Kelnik\Helpers\ArrayHelper;
 /**
  * Класс обработки учетных записей администраторов ОЭЗ.
  *
- * Т.к. изначально одобрили прототип с созданием учетных записей администратор
+ * Т.к. изначально одобрили прототип с созданием учетных записей администратора
  * без заполнения обязательных полей, то такие записи не сохраняем в БД,
  * а храним на время сессии. При заполнении E-mail такие записи переводим для хранения в БД.
  *
@@ -28,11 +28,19 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         'PERSONAL_PHONE',
         ProfileModel::CAN_MSG,
         ProfileModel::CAN_REPORT,
-        ProfileModel::CAN_REQUEST
+        ProfileModel::CAN_REQUEST,
     ];
 
+    /**
+     * Создание учетной записи
+     *
+     * @param array $data
+     * @return bool|int
+     */
     public function add(array $data)
     {
+        $this->lastError = '';
+
         if (!$this->checkPermissions()) {
             return false;
         }
@@ -40,20 +48,22 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         if (!$data) {
             $data = [
                 'ID' => self::getFakeId(),
-                ProfileModel::OWNER_FIELD => $this->profile->getUserId(),
+                ProfileModel::OWNER_FIELD => $this->profile->getId(),
                 'STATUS_NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_ADMIN'),
-                'NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_DEFAULT_NAME')
+                'NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_DEFAULT_NAME'),
+                'FULL_NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_DEFAULT_NAME')
             ];
 
-            if (!self::addFakeRow($data)) {
-                return false;
-            }
+            self::addFakeRow($data);
+
+            return $data['ID'];
         }
 
-        $dbData = $this->prepareUserData($data);
+        $dbData = $this->prepareToDb($data);
 
         if (!$dbData) {
             $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_EMPTY_ROW');
+
             return false;
         }
 
@@ -61,7 +71,8 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
 
         $dbData['ACTIVE'] = 'Y';
         $dbData['GROUP_ID'] = [ProfileModel::GROUP_RESIDENT_ADMIN];
-        $dbData[ProfileModel::OWNER_FIELD] = $this->profile->getUserId();
+        $dbData[ProfileModel::OWNER_FIELD] = $this->profile->getId();
+        $dbData['PASSWORD'] = randString(8);
 
         $res = $el->Add($dbData);
 
@@ -76,15 +87,18 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         return $res;
     }
 
+    /**
+     * Обновление учетной записи
+     *
+     * @param $id
+     * @param array $data
+     * @return bool
+     */
     public function update($id, array $data)
     {
-        if (!$id) {
-            $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_ROW_NOT_EXISTS');
+        $this->lastError = '';
 
-            return false;
-        }
-
-        if (!$this->checkPermissions()) {
+        if (!$this->checkId($id) || !$this->checkPermissions()) {
             return false;
         }
 
@@ -92,15 +106,11 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
             return $this->updateFakeRow($id, $data);
         }
 
-        $row = \CUser::GetByID($id)->Fetch();
-
-        if (!$row || (int)$row[ProfileModel::OWNER_FIELD] !== $this->profile->getUserId()) {
-            $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_ROW_NOT_EXISTS');
-
+        if (!$this->checkOwner($id)) {
             return false;
         }
 
-        $dbData = $this->prepareUserData($data);
+        $dbData = $this->prepareToDb($data);
 
         if (!$dbData) {
             $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_EMPTY_ROW');
@@ -120,57 +130,160 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         return true;
     }
 
+    /**
+     * Удаление учетной записи
+     *
+     * @param $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        $this->lastError = '';
+
+        if (!$this->checkId($id) || !$this->checkPermissions()) {
+            return false;
+        }
+
+        if ($id < 0) {
+            return $this->deleteFakeRow($id);
+        }
+
+        if (!$this->checkOwner($id)) {
+            return false;
+        }
+
+        if (!\CUser::Delete($id)) {
+            $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_DELETE_ERROR');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Поиск учетной записи
+     *
+     * @param $id
+     * @return array
+     */
+    public function getById($id)
+    {
+        if (!$id || !$this->checkPermissions()) {
+            return [];
+        }
+
+        if ($id < 0) {
+            return $this->getFakeRow($id);
+        }
+
+        $res = \CUser::GetByID($id)->Fetch();
+
+        if ($res) {
+            $allowFields = $this->allowFields;
+            $allowFields[] = 'ID';
+
+            foreach ($res as $k => $v) {
+                if (in_array($k, $allowFields)) {
+                    continue;
+                }
+                unset($res[$k]);
+            }
+            $res['FULL_NAME'] = ProfileModel::getFullName($res);
+            $res['STATUS_NAME'] = Loc::getMessage('KELNIK_PROFILE_STATUS_ADMIN');
+        }
+
+        return $res;
+    }
+
     protected function getFakeId()
     {
         return 0 - time();
     }
 
-    protected function addFakeRow(array $data): bool
+    /**
+     * Добавление временной учетной записи
+     *
+     * @param array $data
+     */
+    protected function addFakeRow(array $data)
     {
-        $_SESSION['accounts'][$this->profile->getUserId()][$data['ID']] = base64_encode(serialize($data));
-
-        return true;
+        $_SESSION['accounts'][$this->profile->getId()][$data['ID']] = base64_encode(serialize($data));
     }
 
-    protected function updateFakeRow($id, array $data): bool
+    /**
+     * Обновление данных временной учетной записи
+     *
+     * @param $id
+     * @param array $data
+     * @return bool|int
+     */
+    protected function updateFakeRow($id, array $data)
     {
-        if (!$this->profile->canEditResidentAdmin()) {
-            return false;
-        }
-
         $row = $this->getFakeRow($id);
 
-        if (!$row || $row[ProfileModel::OWNER_FIELD] !== $this->profile->getUserId()) {
+        if (!$row) {
             $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_ROW_NOT_EXISTS');
 
             return false;
         }
 
-        $data['ID'] = $id;
+        if (!$this->checkOwner($id, $row)) {
+            return false;
+        }
+
+        $data = self::parseFullName($data);
 
         foreach ($data as $k => $v) {
             if (!in_array($k, $this->allowFields)) {
                 unset($data[$k]);
+                continue;
             }
+            $data[$k] = trim($v);
+        }
+        $data['ID'] = $id;
+
+        if (isset($data['EMAIL']) && !filter_var($data['EMAIL'], FILTER_VALIDATE_EMAIL)) {
+            $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_EMAIL_INCORRECT');
+
+            return false;
         }
 
-        $_SESSION['accounts'][$this->profile->getUserId()][$id] = base64_encode(serialize($data));
+        $row = array_merge($row, $data);
+        $row['FULL_NAME'] = ProfileModel::getFullName($row);
+
+        if (!empty($row['EMAIL'])) {
+            return $this->convertFakeToReal($row);
+        }
+
+        $_SESSION['accounts'][$this->profile->getId()][$id] = base64_encode(serialize($row));
 
         return true;
     }
 
+    /**
+     * Поиск временной учетной записи
+     *
+     * @param $id
+     * @return array
+     */
     protected function getFakeRow($id): array
     {
-        $res = ArrayHelper::getValue($_SESSION, 'accounts.' . $this->profile->getUserId() . '.' . $id);
+        $res = ArrayHelper::getValue($_SESSION, 'accounts.' . $this->profile->getId() . '.' . $id);
 
         return $res
                 ? unserialize(base64_decode($res))
                 : [];
     }
 
+    /**
+     * Список временных учетных записей
+     *
+     * @return array
+     */
     protected function getFakeRows(): array
     {
-        $tmp = ArrayHelper::getValue($_SESSION, 'accounts.' . $this->profile->getUserId());
+        $tmp = ArrayHelper::getValue($_SESSION, 'accounts.' . $this->profile->getId());
 
         if (!$tmp) {
             return [];
@@ -179,7 +292,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         $rows = [];
         foreach ($tmp as $v) {
             $v = unserialize(base64_decode($v));
-            $v['FULL_NAME'] = ProfileModel::getUserFullName($v);
+            $v['FULL_NAME'] = ProfileModel::getFullName($v);
             $rows[$v['ID']] = $v;
         }
 
@@ -187,21 +300,50 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         return $rows;
     }
 
+    /**
+     * Удаление временной учетной записи
+     *
+     * @param $id
+     * @return bool
+     */
     protected function deleteFakeRow($id): bool
     {
-        unset($_SESSION['accounts'][$this->profile->getUserId()][$id]);
+        if (!isset($_SESSION['accounts'][$this->profile->getId()][$id])) {
+            $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_ROW_NOT_EXISTS');
+
+            return false;
+        }
+
+        unset($_SESSION['accounts'][$this->profile->getId()][$id]);
 
         return true;
     }
 
+    /**
+     * Объедененный список учетных записей
+     *
+     * @return array
+     */
     public function getList(): array
     {
-        return array_merge(
+        $res = array_merge(
                 $this->profile->getEditableUsers(),
                 $this->getFakeRows()
         );
+
+        foreach ($res as &$v) {
+            $v['STATUS_NAME'] = Loc::getMessage('KELNIK_PROFILE_STATUS_ADMIN');
+        }
+        unset($v);
+
+        return $res;
     }
 
+    /**
+     * Проверка прав доступа к разделу
+     *
+     * @return bool
+     */
     protected function checkPermissions()
     {
         $this->lastError = '';
@@ -215,7 +357,51 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         return true;
     }
 
-    protected function prepareUserData(array $data)
+    /**
+     * Проверка
+     * @param $id
+     * @return bool
+     */
+    protected function checkId($id)
+    {
+        if (!$id) {
+            $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_ROW_NOT_EXISTS');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Проверка создателя учетной записи
+     *
+     * @param $id
+     * @param bool $row
+     * @return bool
+     */
+    protected function checkOwner($id, $row = false)
+    {
+        if (false === $row) {
+            $row = \CUser::GetByID($id)->Fetch();
+        }
+
+        if (!$row || (int)$row[ProfileModel::OWNER_FIELD] !== $this->profile->getId()) {
+            $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_ROW_NOT_EXISTS');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Преобразование переданных данных для сохранения в БД
+     *
+     * @param array $data
+     * @return array
+     */
+    protected function prepareToDb(array $data)
     {
         $dbData = [];
 
@@ -223,9 +409,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
             return $dbData;
         }
 
-        if (isset($data['FULL_NAME'])) {
-            list($dbData['LAST_NAME'], $dbData['NAME'], $dbData['SECOND_NAME']) = explode(' ', $data['FULL_NAME']);
-        }
+        $data = self::parseFullName($data);
 
         foreach ($data as $k => $v) {
             if (!in_array($k, $this->allowFields)) {
@@ -240,5 +424,40 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         }
 
         return $dbData;
+    }
+
+    protected function convertFakeToReal(array $data)
+    {
+        $this->lastError = '';
+
+        if (empty($data['EMAIL'])) {
+            $this->lastError = Loc::getMessage('');
+
+            return false;
+        }
+
+        $oldId = ArrayHelper::getValue($data, 'ID');
+        $data = $this->prepareToDb($data);
+        unset($data['ID']);
+
+        $res = $this->add($data);
+
+        if ($res) {
+            $this->deleteFakeRow($oldId);
+
+            return $res;
+        }
+
+        return false;
+    }
+
+    protected static function parseFullName(array $data)
+    {
+        if (isset($data['FULL_NAME'])) {
+            list($data['LAST_NAME'], $data['NAME'], $data['SECOND_NAME']) = explode(' ', $data['FULL_NAME']);
+            unset($data['FULL_NAME']);
+        }
+
+        return $data;
     }
 }

@@ -43,7 +43,9 @@
         </div>
 
         <div class="b-form-block">
-            {{ STATUS_NAME }}
+            <input id="admin-status-{{ id }}" class="b-input-text" type="text" name="STATUS" value="{{ STATUS_NAME }}" readonly="" disabled="">
+            <label for="admin-status-{{ id }}" class="b-form-block__label">Статус</label>
+            <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
 
         <div class="b-form-block b-form-block_type_accordion j-select-accordion">
@@ -58,25 +60,28 @@
                     <div class="b-select-accordion__list-item">
                         {% include "../forms/checkbox/checkbox.twig" with {
                             id: "admin" ~ id ~ "report",
-                            name: "access1",
+                            name: "UF_CAN_REPORT",
                             text: "Подача отчета",
-                            checked: report in accesses
+                            value: "1",
+                            checked: UF_CAN_REPORT
                         } %}
                     </div>
                     <div class="b-select-accordion__list-item">
                         {% include "../forms/checkbox/checkbox.twig" with {
                             id: "admin" ~ id ~ "msg",
-                            name: "access2",
+                            name: "UF_CAN_MSG",
                             text: "Сообщения от ОЭЗ",
-                            checked: msg in accesses
+                            value: "1",
+                            checked: UF_CAN_MSG
                         } %}
                     </div>
                     <div class="b-select-accordion__list-item">
                         {% include "../forms/checkbox/checkbox.twig" with {
                             id: "admin" ~ id ~ "request",
-                            name: "access3",
+                            name: "UF_CAN_REQUEST",
                             text: "Подача заявки",
-                            checked: request in accesses
+                            value: "1",
+                            checked: UF_CAN_REQUEST
                         } %}
                     </div>
                     <button type="button" class="button b-select-accordion__button">OK</button>

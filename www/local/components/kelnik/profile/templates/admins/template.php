@@ -80,7 +80,7 @@
                                                 class="b-checkbox-input"
                                                 type="checkbox"
                                                 value="1"
-                                                name="report"
+                                                name="<?= \Kelnik\Userdata\Profile\ProfileModel::CAN_REPORT; ?>"
                                                 <?php if($row[\Kelnik\Userdata\Profile\ProfileModel::CAN_REPORT]): ?> checked<?php endif; ?>>
                                         <label for="<?= $rowId; ?>" class="b-checkbox-label">
                                             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +108,7 @@
                                                 class="b-checkbox-input"
                                                 type="checkbox"
                                                value="1"
-                                               name="msg"
+                                               name="<?= \Kelnik\Userdata\Profile\ProfileModel::CAN_MSG; ?>"
                                                <?php if($row[\Kelnik\Userdata\Profile\ProfileModel::CAN_MSG]): ?> checked<?php endif; ?>>
                                         <label for="<?= $rowId; ?>" class="b-checkbox-label">
                                             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +136,7 @@
                                                 class="b-checkbox-input"
                                                 type="checkbox"
                                                 value="1"
-                                                name="request"
+                                                name="<?= \Kelnik\Userdata\Profile\ProfileModel::CAN_REQUEST; ?>"
                                                 <?php if($row[\Kelnik\Userdata\Profile\ProfileModel::CAN_REQUEST]): ?> checked<?php endif; ?>>
                                         <label for="<?= $rowId; ?>" class="b-checkbox-label">
                                             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"

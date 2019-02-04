@@ -15,7 +15,7 @@ class ProfileSectionContacts extends ProfileSectionAbstract
     public function add(array $data)
     {
         try {
-            $data['USER_ID'] = $this->profile->getUserId();
+            $data['USER_ID'] = $this->profile->getId();
             $res = ContactTable::add($data);
         } catch (\Exception $e) {
             return false;
@@ -35,7 +35,7 @@ class ProfileSectionContacts extends ProfileSectionAbstract
                 'select' => ['ID'],
                 'filter' => [
                     '=ID' => $id,
-                    '=USER_ID' => $this->profile->getUserId()
+                    '=USER_ID' => $this->profile->getId()
                 ]
             ]);
             if (empty($res['ID'])) {
@@ -90,6 +90,6 @@ class ProfileSectionContacts extends ProfileSectionAbstract
      */
     public function getList(): array
     {
-        return ContactTable::getListByUser($this->profile->getUserId());
+        return ContactTable::getListByUser($this->profile->getId());
     }
 }

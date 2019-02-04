@@ -88,7 +88,7 @@ class RequestForm extends Bbc\Basis
                     'BODY'    => $this->arResult['FORM']['MESSAGE']
                 ]);
 
-                $this->arResult['USER_EMAIL'] = $profile->getUserField('EMAIL');
+                $this->arResult['USER_EMAIL'] = $profile->getField('EMAIL');
 
                 return true;
             }

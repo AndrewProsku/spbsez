@@ -2,7 +2,6 @@
 
 namespace Kelnik\Userdata\Profile;
 
-
 use Kelnik\Helpers\ArrayHelper;
 
 class ProfileModel
@@ -63,23 +62,23 @@ class ProfileModel
         }
     }
 
-    public function getUserInfo()
+    public function getInfo()
     {
         foreach (self::getUserFields() as $field) {
             $res[$field] = ArrayHelper::getValue($this->user, $field);
         }
 
-        $res['FULL_NAME'] = self::getUserFullName($this->user);
+        $res['FULL_NAME'] = self::getFullName($this->user);
 
         return $res;
     }
 
-    public function getUserField($fieldName)
+    public function getField($fieldName)
     {
         return ArrayHelper::getValue($this->user, $fieldName, null);
     }
 
-    public function getUserId()
+    public function getId()
     {
         return $this->userId;
     }
@@ -159,7 +158,7 @@ class ProfileModel
         );
 
         while ($row = $tmp->Fetch()) {
-            $row['FULL_NAME'] = $this->getUserFullName($row);
+            $row['FULL_NAME'] = self::getFullName($row);
             $res[$row['ID']] = $row;
         }
 
@@ -263,7 +262,7 @@ class ProfileModel
         return $menu;
     }
 
-    public static function getUserFullName(array $data)
+    public static function getFullName(array $data)
     {
         return implode(
             ' ',

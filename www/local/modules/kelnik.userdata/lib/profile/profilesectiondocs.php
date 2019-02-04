@@ -39,7 +39,7 @@ class ProfileSectionDocs extends ProfileSectionAbstract
 
         try {
             $res = DocsTable::add([
-                'USER_ID' => $this->profile->getUserId(),
+                'USER_ID' => $this->profile->getId(),
                 'FILE_ID' => $fileId
             ]);
         } catch (\Exception $e) {
@@ -68,7 +68,7 @@ class ProfileSectionDocs extends ProfileSectionAbstract
                 'select' => ['ID'],
                 'filter' => [
                     '=ID' => $id,
-                    '=USER_ID' => $this->profile->getUserId()
+                    '=USER_ID' => $this->profile->getId()
                 ]
             ]);
             if (empty($res['ID'])) {
@@ -85,6 +85,6 @@ class ProfileSectionDocs extends ProfileSectionAbstract
 
     public function getList()
     {
-        return DocsTable::getListByUser($this->profile->getUserId());
+        return DocsTable::getListByUser($this->profile->getId());
     }
 }

@@ -160,24 +160,13 @@ class ProfileAdministrators {
                 if (response.request.status === that.failStatus) {
                     return;
                 }
-                const admin = {
-                    id: response.data.id
-                };
-                const template = templateAdmin(admin);
-                const newAdminBlock = new DOMParser().parseFromString(template, 'text/html').body.firstChild;
-
-                // Инициализируем инпут телефонного номера
-                const inputTel = new InputTel();
-                const newTelInputs = Array.from(newAdminBlock.querySelectorAll('input[type="tel"]'));
-
-                inputTel.init({input: newTelInputs});
-
-                that.bindEventsAdmin(newAdminBlock);
+                const admin = response.data;
 
                 if (!that.adminCount) {
                     Utils.removeElement(document.querySelector('.j-empty-page'));
                 }
-                that.$administrators.appendChild(newAdminBlock);
+                that.$administrators.appendChild(that.prepareTemplate(admin));
+                that.bindEventsAdmin(that.$administrators.lastElementChild);
                 that.adminCount += 1;
             },
             error(error) {
@@ -221,12 +210,43 @@ class ProfileAdministrators {
                     that.showErrorMessage(input, errorMessage);
                 } else if (response.request.status === that.successStatus) {
                     that.removeErrorMessage(input);
+
+                    if (input.name === 'FULL_NAME') {
+                        input.closest('.j-profile-block')
+                            .querySelector('.b-profile-admin-title').firstElementChild.textContent = input.value;
+                    }
+
+                    if (response.data === null) {
+                        return;
+                    }
+
+                    const originAdminBlock = input.closest('.j-profile-block');
+
+                    const newBlock = originAdminBlock.parentNode
+                        .insertBefore(that.prepareTemplate(response.data), originAdminBlock);
+
+                    originAdminBlock.remove();
+                    that.bindEventsAdmin(newBlock);
                 }
             },
             error(error) {
                 console.error(error);
             }
         });
+    }
+
+    prepareTemplate(admin) {
+        admin.id = admin.ID;
+
+        const newAdminBlock = new DOMParser().parseFromString(templateAdmin(admin), 'text/html').body.firstChild;
+
+        // Инициализируем инпут телефонного номера
+        const inputTel = new InputTel();
+        const newTelInputs = Array.from(newAdminBlock.querySelectorAll('input[type="tel"]'));
+
+        inputTel.init({input: newTelInputs});
+
+        return newAdminBlock;
     }
 
     showErrorMessage(element, message) {

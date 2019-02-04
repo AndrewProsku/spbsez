@@ -20,7 +20,7 @@ class ProfileSectionRequests extends ProfileSectionAbstract
             return false;
         }
 
-        $data['USER_ID'] = $this->profile->getUserId();
+        $data['USER_ID'] = $this->profile->getId();
 
         try {
             $res = StandartTable::add($data);
@@ -46,7 +46,7 @@ class ProfileSectionRequests extends ProfileSectionAbstract
             $lastRequest = StandartTable::getRow([
                 'select' => ['DATE_CREATED'],
                 'filter' => [
-                    '=USER_ID' => $this->profile->getUserId()
+                    '=USER_ID' => $this->profile->getId()
                 ],
                 'order' => [
                     'DATE_CREATED' => 'DESC'
