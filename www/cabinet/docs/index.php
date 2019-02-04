@@ -1,62 +1,70 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Профиль");
-$APPLICATION->SetPageProperty('title', 'Личный кабинет | АООЭЗ');
-if (!$USER->IsAuthorized()) {
-    LocalRedirect('/cabinet/auth/');
-}
+    require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+    $APPLICATION->SetTitle("Профиль");
+    $APPLICATION->SetPageProperty('title', 'Личный кабинет | АООЭЗ');
+    if (!$USER->IsAuthorized()) {
+        LocalRedirect('/cabinet/auth/');
+    }
 ?>
+<div class="l-profile-document__wrap-flex">
+    <div class="l-profile-document__wrap-top">
+        <?$APPLICATION->IncludeComponent(
+            "bitrix:menu",
+            "submenu-cabinet",
+            Array(
+                "ALLOW_MULTI_SELECT" => "N",
+                "DELAY" => "N",
+                "MAX_LEVEL" => "1",
+                "MENU_CACHE_GET_VARS" => array(""),
+                "MENU_CACHE_TIME" => "3600",
+                "MENU_CACHE_TYPE" => "A",
+                "MENU_CACHE_USE_GROUPS" => "Y",
+                "ROOT_MENU_TYPE" => "left",
+                "USE_EXT" => "N"
+            )
+        );?>
 
-<?$APPLICATION->IncludeComponent(
-    "bitrix:menu",
-    "submenu-cabinet",
-    Array(
-        "ALLOW_MULTI_SELECT" => "N",
-        "DELAY" => "N",
-        "MAX_LEVEL" => "1",
-        "MENU_CACHE_GET_VARS" => array(""),
-        "MENU_CACHE_TIME" => "3600",
-        "MENU_CACHE_TYPE" => "A",
-        "MENU_CACHE_USE_GROUPS" => "Y",
-        "ROOT_MENU_TYPE" => "left",
-        "USE_EXT" => "N"
-    )
-);?>
+        <div class="l-profile-document j-profile-documents">
 
-<div class="l-profile-document j-profile-documents">
+            <div class="b-title b-add-request-title">
+                <h1><?= $APPLICATION->ShowTitle(false); ?></h1>
+            </div>
 
-    <div class="b-title b-add-request-title">
-        <h1><?= $APPLICATION->ShowTitle(false); ?></h1>
+            <?$APPLICATION->IncludeComponent(
+                "bitrix:menu",
+                "submenu-cabinet-profile",
+                Array(
+                    "ALLOW_MULTI_SELECT" => "N",
+                    "DELAY" => "N",
+                    "MAX_LEVEL" => "1",
+                    "MENU_CACHE_GET_VARS" => array(""),
+                    "MENU_CACHE_TIME" => "3600",
+                    "MENU_CACHE_TYPE" => "A",
+                    "MENU_CACHE_USE_GROUPS" => "Y",
+                    "ROOT_MENU_TYPE" => "sub",
+                    "USE_EXT" => "N"
+                )
+            );?>
+
+            <? $APPLICATION->IncludeComponent(
+                "kelnik:profile",
+                "docs",
+                array(
+                    "COMPONENT_TEMPLATE" => "docs",
+                    "SECTION" => "docs",
+                    "CACHE_TYPE" => "N",
+                    "CACHE_TIME" => "360000"
+                ),
+                array()
+            ); ?>
+
+        </div>
     </div>
 
-    <?$APPLICATION->IncludeComponent(
-        "bitrix:menu",
-        "submenu-cabinet-profile",
-        Array(
-            "ALLOW_MULTI_SELECT" => "N",
-            "DELAY" => "N",
-            "MAX_LEVEL" => "1",
-            "MENU_CACHE_GET_VARS" => array(""),
-            "MENU_CACHE_TIME" => "3600",
-            "MENU_CACHE_TYPE" => "A",
-            "MENU_CACHE_USE_GROUPS" => "Y",
-            "ROOT_MENU_TYPE" => "sub",
-            "USE_EXT" => "N"
-        )
-    );?>
-
-    <? $APPLICATION->IncludeComponent(
-        "kelnik:profile",
-        "docs",
-        array(
-            "COMPONENT_TEMPLATE" => "docs",
-            "SECTION" => "docs",
-            "CACHE_TYPE" => "N",
-            "CACHE_TIME" => "360000"
-        ),
-        array()
-    ); ?>
-
+    <div class="l-profile-logout">
+        <button class="button-logout j-logout" type="button">Выйти из личного кабинета</button>
+    </div>
 </div>
+
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
