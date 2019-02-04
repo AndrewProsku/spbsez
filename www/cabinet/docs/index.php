@@ -1,10 +1,10 @@
-<?
-    require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-    $APPLICATION->SetTitle("Профиль");
-    $APPLICATION->SetPageProperty('title', 'Личный кабинет | АООЭЗ');
-    if (!$USER->IsAuthorized()) {
-        LocalRedirect('/cabinet/auth/');
-    }
+<?php
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetTitle("Профиль");
+$APPLICATION->SetPageProperty('title', 'Личный кабинет | АООЭЗ');
+if (!$USER->IsAuthorized()) {
+    LocalRedirect('/cabinet/auth/');
+}
 ?>
 <div class="l-profile-document__wrap-flex">
     <div class="l-profile-document__wrap-top">
@@ -20,7 +20,7 @@
                 "MENU_CACHE_TYPE" => "A",
                 "MENU_CACHE_USE_GROUPS" => "Y",
                 "ROOT_MENU_TYPE" => "left",
-                "USE_EXT" => "N"
+                "USE_EXT" => "Y"
             )
         );?>
 
@@ -42,7 +42,7 @@
                     "MENU_CACHE_TYPE" => "A",
                     "MENU_CACHE_USE_GROUPS" => "Y",
                     "ROOT_MENU_TYPE" => "sub",
-                    "USE_EXT" => "N"
+                    "USE_EXT" => "Y"
                 )
             );?>
 
@@ -53,7 +53,7 @@
                     "COMPONENT_TEMPLATE" => "docs",
                     "SECTION" => "docs",
                     "CACHE_TYPE" => "N",
-                    "CACHE_TIME" => "360000"
+                    "CACHE_TIME" => "3600"
                 ),
                 array()
             ); ?>

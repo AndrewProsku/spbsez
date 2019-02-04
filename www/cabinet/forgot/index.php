@@ -19,7 +19,7 @@ if ($USER->IsAuthorized()) {
         "MENU_CACHE_TYPE" => "A",
         "MENU_CACHE_USE_GROUPS" => "Y",
         "ROOT_MENU_TYPE" => "left",
-        "USE_EXT" => "N"
+        "USE_EXT" => "Y"
     )
 );?>
 
@@ -35,7 +35,7 @@ if ($USER->IsAuthorized()) {
         array(
             "COMPONENT_TEMPLATE" => ".default",
             "CACHE_TYPE" => "N",
-            "CACHE_TIME" => "360000"
+            "CACHE_TIME" => "3600"
         ),
         array()
     ); ?>

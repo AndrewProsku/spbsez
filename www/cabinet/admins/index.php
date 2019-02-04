@@ -10,19 +10,20 @@ if (!$USER->IsAuthorized()) {
 <div class="l-profile-document__wrap-flex">
     <div class="l-profile-document__wrap-top">
         <?$APPLICATION->IncludeComponent(
-        "bitrix:menu",
-        "submenu-cabinet",
-        Array(
-            "ALLOW_MULTI_SELECT" => "N",
-            "DELAY" => "N",
-            "MAX_LEVEL" => "1",
-            "MENU_CACHE_GET_VARS" => array(""),
-            "MENU_CACHE_TIME" => "3600",
-            "MENU_CACHE_TYPE" => "A",
-            "MENU_CACHE_USE_GROUPS" => "Y",
-            "ROOT_MENU_TYPE" => "left",
-            "USE_EXT" => "N"
-        )
+            "bitrix:menu",
+            "submenu-cabinet",
+            Array(
+                "ALLOW_MULTI_SELECT" => "N",
+                "DELAY" => "N",
+                "MAX_LEVEL" => "1",
+                "MENU_CACHE_GET_VARS" => array(""),
+                "MENU_CACHE_TIME" => "3600",
+                "MENU_CACHE_TYPE" => "A",
+                "MENU_CACHE_USE_GROUPS" => "Y",
+                "MENU_CACHE_USE_USERS" => "Y",
+                "ROOT_MENU_TYPE" => "sub",
+                "USE_EXT" => "Y"
+            )
         );?>
 
         <div class="l-profile-administrators">
@@ -34,31 +35,30 @@ if (!$USER->IsAuthorized()) {
             <?$APPLICATION->IncludeComponent(
             "bitrix:menu",
             "submenu-cabinet-profile",
-            Array(
-            "ALLOW_MULTI_SELECT" => "N",
-            "DELAY" => "N",
-            "MAX_LEVEL" => "1",
-            "MENU_CACHE_GET_VARS" => array(""),
-            "MENU_CACHE_TIME" => "3600",
-            "MENU_CACHE_TYPE" => "A",
-            "MENU_CACHE_USE_GROUPS" => "Y",
-            "ROOT_MENU_TYPE" => "sub",
-            "USE_EXT" => "N"
-            )
+                Array(
+                    "ALLOW_MULTI_SELECT" => "N",
+                    "DELAY" => "N",
+                    "MAX_LEVEL" => "1",
+                    "MENU_CACHE_GET_VARS" => array(""),
+                    "MENU_CACHE_TIME" => "3600",
+                    "MENU_CACHE_TYPE" => "A",
+                    "MENU_CACHE_USE_GROUPS" => "Y",
+                    "ROOT_MENU_TYPE" => "sub",
+                    "USE_EXT" => "N"
+                )
             );?>
 
             <? $APPLICATION->IncludeComponent(
             "kelnik:profile",
             "admins",
-            array(
-            "COMPONENT_TEMPLATE" => "admins",
-            "SECTION" => "admins",
-            "CACHE_TYPE" => "N",
-            "CACHE_TIME" => "360000"
-            ),
-            array()
+                array(
+                    "COMPONENT_TEMPLATE" => "admins",
+                    "SECTION" => "admins",
+                    "CACHE_TYPE" => "N",
+                    "CACHE_TIME" => "3600"
+                ),
+                array()
             ); ?>
-
         </div>
     </div>
 

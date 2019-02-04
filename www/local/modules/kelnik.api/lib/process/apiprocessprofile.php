@@ -4,11 +4,10 @@ namespace Kelnik\Api\Process;
 use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
-use Bitrix\Main\UserTable;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Userdata\Data;
-use Kelnik\Userdata\Model\ContactTable;
-use Kelnik\Userdata\Model\DocsTable;
+use Kelnik\Userdata\Profile\ProfileModel;
+use Kelnik\Userdata\Profile\ProfileSectionContacts;
 
 /**
  * Class ApiProcessLogin
@@ -19,27 +18,33 @@ use Kelnik\Userdata\Model\DocsTable;
  */
 class ApiProcessProfile extends ApiProcessAbstract
 {
+    protected $profile;
+    protected $contacts;
+    protected $docs;
+    protected $admins;
+
     public function execute(array $request): bool
     {
         global $USER;
 
         $action = trim(ArrayHelper::getValue($request, 'action'));
 
+        try {
+            $this->profile = new ProfileModel($USER->GetID());
+            $this->initSection($action);
+        } catch (\Exception $e) {
+            return false;
+        }
+
         if (!$action) {
-            $this->data['profile'] = Data::getUserInfo($USER->GetID());
-            $this->data['contacts'] = ContactTable::getAssoc([
-                'select' => [
-                    'ID', 'FIO', 'POSITION', 'PHONE', 'EMAIL'
-                ],
-                'filter' => [
-                    '=USER_ID' => (int)$USER->GetID()
-                ]
-            ]);
+            $this->data['profile'] = $this->profile->getInfo();
+            $this->data['contacts'] = array_values($this->contacts->getList());
 
             foreach ($this->data['contacts'] as &$v) {
                 $v = array_change_key_case($v, CASE_LOWER);
             }
             unset($v);
+
             return true;
         }
 
@@ -52,53 +57,56 @@ class ApiProcessProfile extends ApiProcessAbstract
         return true;
     }
 
-    protected function processAddContact(array $request)
+    protected function initSection($action)
     {
-        global $USER;
+        $sections = [
+            'contact' => 'contacts',
+            'doc' => 'docs',
+            'admin' => 'admins'
+        ];
 
-        try {
-            $res = ContactTable::add([
-                'USER_ID' => (int) $USER->GetID()
-            ]);
-        }catch (\Exception $e) {
-            $res = false;
+        $action = strtolower($action);
+
+        foreach ($sections as $section => $model) {
+
+            if (!$action || false === strpos($action, $section)) {
+                continue;
+            }
+
+            $nameSpace = '\Kelnik\Userdata\Profile\ProfileSection' . ucfirst($model);
+
+            if (!class_exists($nameSpace)) {
+                return;
+            }
+
+            $this->{$model} = new $nameSpace($this->profile);
+
+            return;
         }
 
-        if (!$res->isSuccess()) {
+        $this->contacts = new ProfileSectionContacts($this->profile);
+    }
+
+    protected function processAddContact(array $request)
+    {
+        if (!$res = $this->contacts->add([])) {
             $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
             return false;
         }
 
-        $this->data['id'] = $res->getId();
+        $this->data['id'] = $res;
 
         return true;
     }
 
     protected function processDelContact(array $request)
     {
-        global $USER;
-
         $id = (int)ArrayHelper::getValue($request, 'id', 0);
 
-        if (!$id) {
+        if (false === $this->contacts->delete($id)) {
             $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
             return false;
         }
-
-        try {
-            $res = ContactTable::getRow([
-                'select' => ['ID'],
-                'filter' => [
-                    '=ID' => $id,
-                    '=USER_ID' => (int)$USER->GetID()
-                ]
-            ]);
-            if (empty($res['ID'])) {
-                $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
-                return false;
-            }
-            ContactTable::delete($id);
-        }catch (\Exception $e) {}
 
         $this->data['id'] = $id;
 
@@ -107,76 +115,34 @@ class ApiProcessProfile extends ApiProcessAbstract
 
     protected function processUpdate(array $request)
     {
-        global $USER;
-
-        $person = ArrayHelper::getValue($request, 'person');
+        $person  = ArrayHelper::getValue($request, 'person');
         $profile = ArrayHelper::getValue($request, 'profile');
 
         if ($person) {
 
-            $userPersons = ContactTable::getListByUser($USER->GetID());
-            foreach ($person as $personId => $fields) {
-                if (!isset($userPersons[$personId])) {
-                    continue;
-                }
-                $data = [];
-                foreach ($fields as $k => $v) {
-                    if (!in_array($k, ['FIO', 'PHONE', 'EMAIL', 'POSITION'])) {
-                        continue;
-                    }
-                    $data[$k] = $v;
-                }
+            $res = $this->contacts->updateRows($person);
 
-                try {
-                    ContactTable::update($personId, $data);
-                } catch (\Exception $e) {
-                    $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
-                    return false;
-                }
-
-                $this->data['id'][] = $personId;
+            if (false === $res) {
+                $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+                return false;
             }
+
+            $this->data = $res;
 
             return true;
 
         } elseif ($profile) {
 
-            $data = [];
-            $allowFields = Data::getUserFields();
+            $res = $this->profile->update($profile);
 
-            foreach ($profile as $k => $v) {
-                $v = trim($v);
-
-                if ($k == 'FULL_NAME') {
-                    list($data['LAST_NAME'], $data['NAME'], $data['SECOND_NAME']) = explode(' ', $v);
-                    if (empty($data['NAME'])) {
-                        $data['NAME'] = $data['LAST_NAME'];
-                        unset($data['LAST_NAME']);
-                    }
-                    continue;
-                }
-
-                if (!in_array($k, $allowFields)) {
-                    continue;
-                }
-
-                $data[$k] = $v;
-            }
-
-            if (!$data) {
-                $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+            if (!$res) {
+                $this->errors[] = false === $res
+                                    ? Loc::getMessage('KELNIK_API_INTERNAL_ERROR')
+                                    : $res;
                 return false;
             }
 
-            $cUser = new \CUser();
-            $cUser->Update($USER->GetID(), $data);
-
-            if ($cUser->LAST_ERROR) {
-                $this->errors[] = $cUser->LAST_ERROR;
-                return false;
-            }
-
-            $this->data = $data;
+            $this->data = $res;
         }
 
         return false;
@@ -184,52 +150,28 @@ class ApiProcessProfile extends ApiProcessAbstract
 
     protected function processAddDoc(array $request)
     {
-        global $USER;
-
         $doc = Context::getCurrent()->getRequest()->getFile('doc');
 
         if (!is_uploaded_file($doc['tmp_name'])) {
-            $this->errors[] = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_UPLOAD_ERROR');
+            $this->errors[] = Loc::getMessage('KELNIK_API_DOC_FILE_UPLOAD_ERROR');
+
             return false;
         }
 
-        $allowExt = DocsTable::getAllowExt();
+        $res = $this->docs->add($doc);
 
-        if (!in_array($doc['type'], array_keys($allowExt))) {
-            $this->errors[] = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_EXT_ERROR');
-            return false;
-        }
+        if (!$res) {
+            $this->errors[] = $this->docs->getLastError();
 
-        try {
-            $doc['MODULE_ID'] = 'kelnik.userdata';
-            $fileId = \CFile::SaveFile($doc, $doc['MODULE_ID'], true);
-        } catch (\Exception $e) {
-        }
-
-        if (!$fileId) {
-            $this->errors[] = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_UPLOAD_ERROR');
-            return false;
-        }
-
-        try {
-            $res = DocsTable::add([
-                'USER_ID' => $USER->GetID(),
-                'FILE_ID' => $fileId
-            ]);
-        } catch (\Exception $e) {
-        }
-
-        if (!$res->isSuccess()) {
-            $this->errors[] = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_UPLOAD_ERROR');
             return false;
         }
 
         $dateTime = new DateTime();
-        $fileData = \CFile::GetFileArray($fileId);
+        $fileData = \CFile::GetFileArray($res);
 
         $res = [
-            'id' => $res->getId(),
-            'userName' => $USER->GetFirstName(),
+            'id' => $res,
+            'userName' => $this->profile->getUserField('NAME')
         ];
 
         $res['filePath'] = $fileData['SRC'];
@@ -246,31 +188,67 @@ class ApiProcessProfile extends ApiProcessAbstract
 
     protected function processDelDoc(array $request)
     {
-        global $USER;
-
         $id = (int)ArrayHelper::getValue($request, 'id', 0);
 
-        if (!$id) {
+        $res = $this->docs->delete($id);
+
+        if (!$res) {
             $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+
             return false;
         }
 
-        try {
-            $res = DocsTable::getRow([
-                'select' => ['ID'],
-                'filter' => [
-                    '=ID' => $id,
-                    '=USER_ID' => (int)$USER->GetID()
-                ]
-            ]);
-            if (empty($res['ID'])) {
-                $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
-                return false;
-            }
-            DocsTable::delete($id);
-        }catch (\Exception $e) {}
-
         $this->data['id'] = $id;
+
+        return true;
+    }
+
+    protected function processAddAdmin(array $request)
+    {
+        $res = $this->admins->add([]);
+
+        if (!$res) {
+            $this->errors[] = $this->admins->getLastError();
+
+            return false;
+        }
+
+        $this->data = $this->admins->getById($res);
+        unset($this->data[ProfileModel::OWNER_FIELD]);
+
+        return true;
+    }
+
+    protected function processUpdateAdmin(array $request)
+    {
+        $res = $this->admins->update(
+            (int) ArrayHelper::getValue($request, 'id'),
+            $request
+        );
+
+        if (!$res) {
+            $this->errors[] = $this->admins->getLastError();
+
+            return false;
+        }
+
+        if (is_numeric($res)) {
+            $this->data = $this->admins->getById($res);
+            unset($this->data[ProfileModel::OWNER_FIELD]);
+        }
+
+        return true;
+    }
+
+    protected function processDelAdmin(array $request)
+    {
+        $res = $this->admins->delete((int) ArrayHelper::getValue($request, 'id'));
+
+        if (!$res) {
+            $this->errors[] = $this->admins->getLastError();
+
+            return false;
+        }
 
         return true;
     }
