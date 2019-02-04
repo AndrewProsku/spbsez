@@ -218,27 +218,19 @@
 .b-news-item__title {
     @include margin-level(bottom, yellow);
     min-height: 100px;
-    padding-top: 9px;
 
     @media #{$tablet-landscape} {
         min-height: 135px;
     }
 
     @media #{$fullhd} {
-        padding: 9px 30px 0 30px;
+        padding: 0 30px;
     }
 }
 
 .b-news-item__title a {
-    position: relative;
-    display: inline;
-    font-size: 9px;
-    background-image: linear-gradient(to right, rgba(63, 63, 153, 0.12) 0%, rgba(127, 81, 163, 0.12) 100%);
-}
-.b-news-item__title a span {
     @include font-size(p3);
-    position: relative;
-    top: -7px;
+
 }
 
 .b-news-item__tags {
@@ -277,6 +269,7 @@
 .b-news-item__date svg,
 .b-news-item__date img {
     margin-right: 15px;
+    overflow: hidden;
 }
 
 .b-news__button {
