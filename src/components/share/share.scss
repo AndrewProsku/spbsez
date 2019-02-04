@@ -14,6 +14,7 @@
 }
 
 .b-share__item {
+    @include transition(opacity);
     width: 35px;
     height: 35px;
     margin-right: 14px;
@@ -22,6 +23,10 @@
 
     &:last-child {
         margin-right: 0;
+    }
+
+    &:hover {
+        opacity: 0.6;
     }
 
     @media #{$tablet-portrait} {
