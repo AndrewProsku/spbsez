@@ -87,7 +87,7 @@ class News {
         this._disableButton();
 
         if (news.length) {
-            this.formData.set('countShowNews', `${news.length}`);
+            this.formData.append('countShowNews', `${news.length}`);
         }
 
         Utils.send(this.formData, '/tests/news.json', {
@@ -126,7 +126,7 @@ class News {
         this.groups.forEach((group) => {
             const select = group.querySelector(`.${this.selectsClass}`);
             const title = group.querySelector(`.${this.selectsTitleClass}`);
-            const inputsChecked = group.querySelectorAll('input:checked');
+            const inputsChecked = Array.from(group.querySelectorAll('input:checked'));
             let titleText = null;
 
             inputsChecked.forEach((input) => {
