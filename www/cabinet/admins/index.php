@@ -21,7 +21,7 @@ if (!$USER->IsAuthorized()) {
                 "MENU_CACHE_TYPE" => "A",
                 "MENU_CACHE_USE_GROUPS" => "Y",
                 "MENU_CACHE_USE_USERS" => "Y",
-                "ROOT_MENU_TYPE" => "sub",
+                "ROOT_MENU_TYPE" => "left",
                 "USE_EXT" => "Y"
             )
         );?>
