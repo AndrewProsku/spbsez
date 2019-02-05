@@ -3,17 +3,13 @@
 namespace Kelnik\Refbook\Component;
 
 use Bex\Bbc;
-use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Helpers\Database\DataManager;
-use Kelnik\News\Categories\CategoriesTable;
-use Kelnik\News\News\NewsTable;
 use Kelnik\Helpers\BitrixHelper;
-use Kelnik\Helpers\PluralHelper;
 use Kelnik\Refbook\Model\PartnerTable;
 use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Refbook\Model\ResidentTypesTable;
 use Kelnik\Refbook\Model\ReviewTable;
+use Kelnik\Refbook\Model\TeamTable;
 use Kelnik\Refbook\Types;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
@@ -37,20 +33,21 @@ class RefbookList extends Bbc\Basis
     protected function executeMain()
     {
         $classes = [
-            \Kelnik\Refbook\Types::TYPE_PARTNER => PartnerTable::class,
-            \Kelnik\Refbook\Types::TYPE_RESIDENT => ResidentTable::class,
-            \Kelnik\Refbook\Types::TYPE_REVIEW => ReviewTable::class
+            Types::TYPE_PARTNER => PartnerTable::class,
+            Types::TYPE_RESIDENT => ResidentTable::class,
+            Types::TYPE_REVIEW => ReviewTable::class,
+            Types::TYPE_TEAM => TeamTable::class
         ];
 
         if (!$this->arParams['SECTION'] || !isset($classes[$this->arParams['SECTION']])) {
-            return;
+            return false;
         }
 
         $className = $classes[$this->arParams['SECTION']];
 
         $select = $this->arParams['SECTION'] == Types::TYPE_REVIEW
-            ? ['ID', 'NAME', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'PREVIEW']
-            : ['ID', 'NAME', 'IMAGE_ID', 'TEXT'];
+                    ? ['ID', 'NAME', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'PREVIEW']
+                    : ['ID', 'NAME', 'IMAGE_ID', 'TEXT'];
 
         $filter = [
             '=ACTIVE' => $className::YES

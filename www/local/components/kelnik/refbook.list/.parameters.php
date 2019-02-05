@@ -24,7 +24,8 @@ try
                 'VALUES' => [
                     \Kelnik\Refbook\Types::TYPE_PARTNER => Loc::getMessage('KELNIK_REFBOOK_TYPE_PARTNER'),
                     \Kelnik\Refbook\Types::TYPE_RESIDENT => Loc::getMessage('KELNIK_REFBOOK_TYPE_RESIDENT'),
-                    \Kelnik\Refbook\Types::TYPE_REVIEW => Loc::getMessage('KELNIK_REFBOOK_TYPE_REVIEW')
+                    \Kelnik\Refbook\Types::TYPE_REVIEW => Loc::getMessage('KELNIK_REFBOOK_TYPE_REVIEW'),
+                    \Kelnik\Refbook\Types::TYPE_TEAM => Loc::getMessage('KELNIK_REFBOOK_TYPE_TEAM')
                 ]
             ],
             'CACHE_GROUPS' => [
