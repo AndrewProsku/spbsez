@@ -10,7 +10,7 @@
     <div class="b-team__wrapper">
         <?php foreach ($arResult['ELEMENTS'] as $element): ?>
             <div class="b-team__item">
-                <?php (!empty($element['IMAGE_ID_PATH'])): ?>
+                <?php if(!empty($element['IMAGE_ID_PATH'])): ?>
                     <img src="<?= $element['IMAGE_ID_PATH']; ?>"
                          alt="<?= htmlentities($element['NAME'], ENT_QUOTES, 'UTF-8'); ?>"
                          class="b-team__photo">
