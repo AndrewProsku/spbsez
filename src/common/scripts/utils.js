@@ -96,7 +96,9 @@ class Utils {
                 callback.error(xhr.status);
             }
 
-            callback.complete();
+            if (callback.complete) {
+                callback.complete();
+            }
         };
     }
 
