@@ -47,8 +47,7 @@ class TeamAdminInterface extends AdminInterface
                         'WIDGET' => new FileWidget(),
                         'IMAGE' => true,
                         'HEADER' => false,
-                        'FILTER' => false,
-                        'REQUIRED' => true
+                        'FILTER' => false
                     ],
                     'TEXT'     => [
                         'WIDGET'   => new StringWidget(),
