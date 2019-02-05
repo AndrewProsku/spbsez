@@ -6,8 +6,7 @@ if (!$aMenuLinks || !$USER->IsAuthorized()) {
 
 try {
     \Bitrix\Main\Loader::includeModule('kelnik.userdata');
-    $profile = new \Kelnik\Userdata\Profile\ProfileModel($USER->GetID());
-    $aMenuLinks = $profile->checkMenu($aMenuLinks);
+    $aMenuLinks = \Kelnik\Userdata\Profile\ProfileModel::getInstance($USER->GetID())->checkMenu($aMenuLinks);
 } catch (Exception $e) {
     return;
 }

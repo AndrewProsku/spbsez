@@ -30,7 +30,7 @@ class ApiProcessProfile extends ApiProcessAbstract
         $action = trim(ArrayHelper::getValue($request, 'action'));
 
         try {
-            $this->profile = new ProfileModel($USER->GetID());
+            $this->profile = ProfileModel::getInstance($USER->GetID());
             $this->initSection($action);
         } catch (\Exception $e) {
             return false;
