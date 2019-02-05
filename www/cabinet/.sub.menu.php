@@ -18,8 +18,8 @@ $aMenuLinks = Array(
 		"Администраторы",
 		"/cabinet/admins/",
 		Array(),
-		Array(),
-		"\$GLOBALS[\"USER\"]->IsAuthorized()"
+		Array("check"=>"canEditResidentAdmin"),
+		"false"
 	),
 );
 ?>

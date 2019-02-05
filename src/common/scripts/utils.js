@@ -71,13 +71,14 @@ class Utils {
      * @param {Object} data - отправляемые данные.
      * @param {String} url - маршрут по которому нужно произвести запрос.
      * @param {Function} callback -  функция обратного вызова, которая при успехе вызовет success, а при ошибке error.
+     * @param {string} method - Метод отправки
      */
-    static send(data, url, callback = function() {}) {
+    static send(data, url, callback = function() {}, method = 'POST') {
         const xhr = new XMLHttpRequest();
         const statusSuccess = 200;
         const dataToSend = data;
 
-        xhr.open('POST', url);
+        xhr.open(method, url);
 
         if (!(data instanceof FormData)) {
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -94,6 +95,8 @@ class Utils {
             } else {
                 callback.error(xhr.status);
             }
+
+            callback.complete();
         };
     }
 

@@ -1,0 +1,205 @@
+{#
+    filter - Наличие фильтрации
+    hrefButton - Ссылка на нижней кнопке
+    modifyButton - Модификаторы кнопки (button_theme_gray, button_without_icon )
+    textButton - Текст кнопки
+#}
+
+<div class="b-news">
+
+    {% if filter %}
+        <form action="#" class="b-news__filter b-mini-filter j-news-filter">
+
+        <div class="b-mini-filter__group j-news-select-group">
+
+            <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span class="j-news-select-title">Все</span></div>
+
+            <div class="b-mini-filter__group-wrap">
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="years[]" value="2018" data-text="2018" id="years2018" class="b-mini-filter__input">
+                    <label for="years2018" class="b-mini-filter__fake">2018</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="years[]" value="2017" data-text="2017" id="years2017" class="b-mini-filter__input">
+                    <label for="years2017" class="b-mini-filter__fake">2017</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="years[]" value="2016" data-text="2016" id="years2016" class="b-mini-filter__input">
+                    <label for="years2016" class="b-mini-filter__fake">2016</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="years[]" value="2015" data-text="2015" id="years2015" class="b-mini-filter__input">
+                    <label for="years2015" class="b-mini-filter__fake">2015</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="b-mini-filter__group j-news-select-group">
+
+            <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span class="j-news-select-title">Все</span></div>
+
+            <div class="b-mini-filter__group-wrap">
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="anons" data-text="Анонс" id="typesAnons" class="b-mini-filter__input">
+                    <label for="typesAnons" class="b-mini-filter__fake">Анонс</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="press" data-text="Пресс-релиз" id="typesPress" class="b-mini-filter__input">
+                    <label for="typesPress" class="b-mini-filter__fake">Пресс-релиз</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="resid" data-text="Новости резидентов" id="typesResid" class="b-mini-filter__input">
+                    <label for="typesResid" class="b-mini-filter__fake">Новости резидентов</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="news" data-text="Новости" id="typesNews" class="b-mini-filter__input">
+                    <label for="typesNews" class="b-mini-filter__fake">Новости</label>
+                </div>
+
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="about" data-text="СМИ о нас" id="typesAbout" class="b-mini-filter__input">
+                    <label for="typesAbout" class="b-mini-filter__fake">СМИ о нас</label>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    {% endif %}
+
+    <div class="b-news__content j-news-container">
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#" class="b-link-line">Руководители компаний-резидентов площадки «Нойдорф» — «ТР Инжиниринг» «Ракурс-Инжиниринг», рассказали
+                    об успехах</a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    {% include './media/time.svg.twig' %}
+                    5 декабря
+                </li>
+                <li><a href="#">Новости резидентов</a></li>
+            </ul>
+        </div>
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#" class="b-link-line">XVI форум малого и среднего предпринимательства Санкт-Петербурга. Действующий губернатор Александр Беглов посетил стенд Приморского района</a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    {% include './media/time.svg.twig' %}
+                    5 декабря
+                </li>
+                <li><a href="#">Новости резидентов</a></li>
+            </ul>
+        </div>
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#" class="b-link-line">Торжественное открытие крупнейшего в СНГ предприятия по исследованию, разработке и производству рентгеновской аппаратуры для научных целей</a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    {% include './media/time.svg.twig' %}
+                    5 декабря
+                </li>
+                <li><a href="#">Новости</a></li>
+            </ul>
+        </div>
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#" class="b-link-line">Во время Петербургского международрого форума состоялся круглый стол, в рамках которого обсудили трансформацию инновационной инфрастркутуры</a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    {% include './media/time.svg.twig' %}
+                    5 декабря
+                </li>
+                <li><a href="#">Новости резидентов</a></li>
+            </ul>
+        </div>
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#" class="b-link-line">Во время Петербургского международрого форума состоялся круглый стол, в рамках которого обсудили трансформацию инновационной инфрастркутуры</a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    {% include './media/time.svg.twig' %}
+                    5 декабря
+                </li>
+                <li><a href="#">Новости резидентов</a></li>
+            </ul>
+        </div>
+
+        <div class="b-news__item b-news-item">
+
+            <div class="b-news-item__top">
+                <div class="b-news-item__image">
+                    <img src="/images/news/news-1.jpg" alt="">
+                </div>
+                <div class="b-news-item__title">
+                    <a href="#" class="b-link-line">Во время Петербургского международрого форума состоялся круглый стол, в рамках которого обсудили трансформацию инновационной инфрастркутуры</a>
+                </div>
+            </div>
+
+            <ul class="b-news-item__tags">
+                <li class="b-news-item__date">
+                    {% include './media/time.svg.twig' %}
+                    5 декабря
+                </li>
+                <li><a href="#">Новости</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="b-news__button">
+        <a href="{{ hrefButton }}" class="button {{ modifyButton }}">{{ textButton }}</a>
+    </div>
+
+</div>

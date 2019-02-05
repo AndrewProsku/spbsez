@@ -1,17 +1,17 @@
-@import "./breakpoints";
-@import "./colors";
-@import "./common";
-@import "./grid";
-@import "./mixins";
-@import "./management-layers";
-@import "./font-sizes";
-@import "./vertical-indent";
-@import "./typography";
+@import "breakpoints";
+@import "colors";
+@import "common";
+@import "grid";
+@import "mixins";
+@import "management-layers";
+@import "font-sizes";
+@import "vertical-indent";
+@import "typography";
 
 // Layout's
 @import "../../pages/layout/layout";
-@import "../../pages/layout/_header";
-@import "../../pages/layout/_footer";
+@import "../../pages/layout/header";
+@import "../../pages/layout/footer";
 @import "../../pages/home";
 @import "../../pages/contacts";
 @import "../../pages/add-request";
@@ -32,6 +32,9 @@
 @import "../../pages/management-company";
 @import "../../pages/reports";
 @import "../../pages/reports-forms";
+@import "../../pages/services";
+@import "../../pages/news";
+@import "../../pages/news-single";
 
 // Components
 
@@ -42,6 +45,7 @@
 // @import "../../components/slider/slider";
 @import "../../components/carousel/carousel";
 @import "../../components/reviews/reviews";
+@import "../../components/news/news";
 
 @import "../../components/account-tooltip/account-tooltip";
 @import "../../components/tooltip/custom-tooltip";
@@ -69,4 +73,9 @@
 @import "../../components/functions/functions";
 @import "../../components/quote/quote";
 @import "../../components/message-popup/message-popup";
-
+@import "../../components/offers/offers";
+@import "../../components/advantage/advantage";
+@import "../../components/service-popup/service-popup";
+@import "../../components/share/share";
+@import "../../components/glide-carousel/glide-carousel";
+@import "../../components/background-animation/bg-animation";

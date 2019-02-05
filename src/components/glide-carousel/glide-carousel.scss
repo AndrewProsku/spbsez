@@ -1,0 +1,97 @@
+/* stylelint-disable */
+.glide__cust_arrow {
+    @include transition(opacity);
+    display: none;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+        opacity: 0.7;
+    }
+
+    &:disabled {
+        opacity: 0.4;
+    }
+
+    img {
+        width: inherit;
+        height: inherit;
+    }
+
+    @media #{$tablet-portrait} {
+        display: block;
+        position: absolute;
+        top: 46%;
+        margin-top: -24px;
+    }
+
+    @media #{$tablet-landscape} {
+        top: 50%;
+    }
+
+    @media #{$laptop} {
+        width: 64px;
+        height: 64px;
+        margin-top: -32px;
+    }
+
+    @media #{$fullhd} {
+        width: 80px;
+        height: 80px;
+        margin-top: -40px;
+    }
+}
+
+.glide__cust_arrow-left {
+    @include push(1);
+    transform: rotate(180deg);
+    margin-right: 30px;
+    left: 0;
+}
+
+.glide__cust_arrow-right {
+    @include post(1);
+    right: 0;
+}
+
+.glide__cust_dots {
+    position: relative;
+    top: 0;
+    margin-top: -25px;
+    text-align: center;
+    
+    @media #{$tablet-portrait} {
+        top: -20px;
+    }
+}
+
+.glide__cust_dot {
+    display: inline-block;
+    vertical-align: middle;
+    width: 12px;
+    height: 12px;
+    background-color: $blue;
+    border: 2px solid $blue;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+
+    &_is_active {
+        background-color: $white;
+    }
+}
+
+.glide__track {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.glide__slide img {
+    display: block;
+    width: 100%;
+}
+/* stylelint-enable */
