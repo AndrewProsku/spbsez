@@ -8,7 +8,7 @@
     <div class="b-mobile-menu__header-right">
         <div class="b-account">
             <a href="/cabinet/" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?> is-auth<?php endif; ?>">
-               <span class="b-account__link-icon">
+                <span class="b-account__link-icon">
                    <?php if($arResult['IS_AUTHORIZED']): ?> <span class="b-account__messages">2</span><?php endif; ?>
                 </span>
                 <span class="b-account__link-text">Личный кабинет</span>
@@ -25,7 +25,7 @@
                     "MENU_CACHE_TYPE" => "A",
                     "MENU_CACHE_USE_GROUPS" => "Y",
                     "ROOT_MENU_TYPE" => "user",
-                    "USE_EXT" => "N"
+                    "USE_EXT" => "Y"
                 )
             );?>
         </div>

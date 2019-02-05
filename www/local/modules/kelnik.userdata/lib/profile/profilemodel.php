@@ -23,7 +23,18 @@ class ProfileModel
     private $userGroups = [];
     private $lastError = '';
 
-    public function __construct(int $userId)
+    private static $instance = [];
+
+    public static function getInstance(int $userId)
+    {
+        if (!empty(self::$instance[$userId])) {
+            return self::$instance[$userId];
+        }
+
+        return self::$instance[$userId] = new self($userId);
+    }
+
+    private function __construct(int $userId)
     {
         $this->userId = (int) $userId;
         $this->user = \CUser::GetByID($this->userId)->Fetch();
@@ -60,6 +71,14 @@ class ProfileModel
 
             $this->userGroups[] = $row['GROUP_ID'];
         }
+    }
+
+    private function __clone()
+    {
+    }
+
+    private function __wakeup()
+    {
     }
 
     public function getInfo()

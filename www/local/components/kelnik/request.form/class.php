@@ -46,7 +46,7 @@ class RequestForm extends Bbc\Basis
         }
 
         try {
-            $profile = new ProfileModel($USER->GetID());
+            $profile = ProfileModel::getInstance($USER->GetID());
             $sectionRequests = new ProfileSectionRequests($profile);
         } catch (\Exception $exception) {
             return false;
