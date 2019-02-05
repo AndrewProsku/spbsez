@@ -1,5 +1,4 @@
-{% if id %}
-    <input
+<input
         id="{{ id }}"
         class="b-input-text"
         type="text"
@@ -11,9 +10,11 @@
         {% if disabled %} disabled {% endif %}
         {% if required %} required {% endif %}
         {% if readonly %} readonly {% endif %}
+        {% if hidden %} hidden {% endif %}
         {% if pattern %} pattern="{{ pattern }}" {% endif %}
         {% if autocapitalize %} autocapitalize="{{ autocapitalize }}" {% endif %}
-    >
+>
+{% if id %}
 
 {% else %}
     <h2 style="color: red">Пожалуйста, укажи уникальный id для инпута</h2>

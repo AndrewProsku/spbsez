@@ -1,19 +1,21 @@
 {% if id %}
-    <div class="b-form__radio">
+    <div class="b-custom-radio">
         <input
             id="{{ id }}"
-            class="b-form__radio-input"
+            class="b-custom-radio__input"
             type="radio"
             value="{{ value }}"
             name="{{ name }}"
             {% if checked %} checked {% endif %}
             {% if disabled %} disabled {% endif %}
             {% if required %} required {% endif %}
+            {% for attribute in dataAttributes %}
+                data-{{ attribute.name }}="{{ attribute.value }}"
+            {% endfor %}
         >
-        <label for="{{ id }}" class="b-form__radio-label">
-            <span class="b-form__radio-icon"></span>
-            {% include 'radio.svg' %}
-            <span class="b-form__radio-text">{{ text }}</span>
+        <label for="{{ id }}" class="b-custom-radio__label">
+            <span class="b-custom-radio__icon"></span>
+            <span class="b-custom-radio__text">{{ text }}</span>
         </label>
     </div>
 {% else %}

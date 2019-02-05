@@ -38,61 +38,61 @@
                      Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
                      -->
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/input-text/input-text.twig" with {
                             id: "profile-name",
                             name: "profile-name"
                         } %}
 
-                        <label for="profile-name" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             ФИО
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/email/email.twig" with {
                             id: "profile-email",
                             name: "profile-email"
                         } %}
 
-                        <label for="profile-email" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             Эл.почта
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/telephone/telephone.twig" with {
                             id: "profile-phone",
                             name: "profile-phone"
                         } %}
 
-                        <label for="profile-phone" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             Телефон
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/input-text/input-text.twig" with {
                             id: "profile-status",
                             name: "profile-status"
                         } %}
 
-                        <label for="profile-status" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             Статус
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
                 </div>
             </div>
@@ -105,121 +105,121 @@
                 </div>
                 <div class="b-profile-block__input-wrap j-profile-info-company">
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/input-text/input-text.twig" with {
                             id: "company-resident",
                             name: "company-resident"
                         } %}
 
-                        <label for="company-resident" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             Резидент
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/input-text/input-text.twig" with {
                             id: "company-inn",
                             name: "company-inn"
                         } %}
 
-                        <label for="company-inn" class="b-form-block__label">
+                        <lspan class="b-form-block__label">
                             ИНН
-                        </label>
+                        </lspan>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/input-text/input-text.twig" with {
                             id: "company-legal-address",
                             name: "company-legal-address"
                         } %}
 
-                        <label for="company-legal-address" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             Юр.адрес
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/input-text/input-text.twig" with {
                             id: "company-postal-address",
                             name: "company-postal-address"
                         } %}
 
-                        <label for="company-postal-address" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             Почтовый адрес
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/telephone/telephone.twig" with {
                             id: "company-phone",
                             name: "company-phone"
                         } %}
 
-                        <label for="company-phone" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             Телефон
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/telephone/telephone.twig" with {
                             id: "company-fax",
                             name: "company-fax"
                         } %}
 
-                        <label for="company-fax" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             Факс
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
-                    <div class="b-form-block">
+                    <label class="b-form-block">
                         {% include "../components/forms/email/email.twig" with {
                             id: "company-email",
                             name: "company-email"
                         } %}
 
-                        <label for="company-email" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             Электронная почта
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
 
                     <!--
                         Для добавления полоски вверху блока и инпутом добавить класс b-form-block_theme_grey
                         к классу b-form-block
                     -->
-                    <div class="b-form-block b-form-block_theme_grey">
+                    <label class="b-form-block b-form-block_theme_grey">
                         {% include "../components/forms/input-text/input-text.twig" with {
                             id: "company-ceo",
                             name: "company-ceo"
                         } %}
 
-                        <label for="company-director" class="b-form-block__label">
+                        <span class="b-form-block__label">
                             ФИО генерального директора
-                        </label>
+                        </span>
                         <span class="b-form-block__error-text">
                             Текст подсказки
                         </span>
-                    </div>
+                    </label>
                 </div>
             </div>
 
