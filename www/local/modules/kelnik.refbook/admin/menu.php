@@ -78,6 +78,17 @@ return [
                     \Kelnik\Refbook\Model\AdminInterface\ReviewEditHelper::getUrl()
                 ]
             ],
+            [
+                'parent_menu' => 'kelnik_refbook',
+                'sort' => 180,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_REFBOOK_TEAM_MENU'),
+                'url' => \Kelnik\Refbook\Model\AdminInterface\TeamListHelper::getUrl(),
+                'more_url' => [
+                    \Kelnik\Refbook\Model\AdminInterface\TeamEditHelper::getUrl()
+                ]
+            ]
         ]
     ]
 ];
