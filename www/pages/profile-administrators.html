@@ -283,7 +283,7 @@
             <div class="b-profile-block j-profile-block"  data-id="1">
     <button type="button" class="b-profile-block__delete j-delete-administrator" data-id="1"></button>
     <div class="b-profile-block__title b-profile-admin-title">
-        <h4>Панарин Артем</h4>
+        <h4>Администратор</h4>
     </div>
     <div class="b-profile-block__input-wrap">
         <!--
@@ -292,16 +292,16 @@
          -->
 
         <div class="b-form-block">
-                <input
+            <input
         id="admin-fio-1"
         class="b-input-text"
         type="text"
-        name="admin[1][FIO]"
+        name="FULL_NAME"
         maxlength=""
         autocomplete=""
-        value="Панарин Артем"
+        value=""
         placeholder=""
-                                            >
+                                                >
 
             <label for="admin-fio-1" class="b-form-block__label">ФИО</label>
             <span class="b-form-block__error-text">Текст подсказки</span>
@@ -312,8 +312,7 @@
         id="admin-email-1"
         class="b-input-email"
         type="email"
-        name="admin[1][EMAIL]"
-                    value="panarin.artemiy@biocad.ru"
+        name="EMAIL"
         
         
                             >
@@ -327,52 +326,24 @@
             id="admin-phone-1"
             class="b-input-phone"
             type="tel"
-            name="admin[1][PHONE]"
+            name="PERSONAL_PHONE"
             autocomplete="tel"
             placeholder="+7 ___ ___-__-__"
-             value="9526548942"                             >
+                                        >
 
             <label for="admin-phone-1" class="b-form-block__label">Телефон</label>
             <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
 
         <div class="b-form-block">
-                <div class="b-select">
-        <div class="b-select__wrapper">
-            <select
-                id="admin-status-1"
-                class="b-select__list j-select"
-                name="admin[1][STATUS]"
-                data-placeholder=""
-                                                            >
-
-                                    <option value="status1"
-                                                         selected                     >
-                        Администратор
-                    </option>
-                                    <option value="status2"
-                                                                            >
-                        Супер-Администратор
-                    </option>
-                                    <option value="status3"
-                                                                            >
-                        Просто Администратор
-                    </option>
-                                    <option value="status4"
-                                                                            >
-                        Не просто Администратор
-                    </option>
-                            </select>
-        </div>
-    </div>
-
-            <label for="admin1-status" class="b-form-block__label">Статус</label>
+            <input id="admin-status-1" class="b-input-text" type="text" name="STATUS" value="" readonly="" disabled="">
+            <label for="admin-status-1" class="b-form-block__label">Статус</label>
             <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
 
         <div class="b-form-block b-form-block_type_accordion j-select-accordion">
             <div class="b-select-accordion">
-                    <input
+                <input
         id="1"
         class="b-input-text"
         type="text"
@@ -381,7 +352,7 @@
         autocomplete=""
         value=""
         placeholder=""
-         disabled                                     >
+         disabled                                         >
 
                 <div class="b-select-accordion__list">
                     <div class="b-select-accordion__list-title">
@@ -390,13 +361,13 @@
                     <div class="b-select-accordion__list-item">
                             <div class="b-form__checkbox">
         <input
-            id="admin1access1"
+            id="admin1report"
             class="b-checkbox-input"
             type="checkbox"
-            value=""
-            name="access1"
-             checked                                 >
-        <label for="admin1access1" class="b-checkbox-label">
+            value="1"
+            name="UF_CAN_REPORT"
+                                            >
+        <label for="admin1report" class="b-checkbox-label">
             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 16 11">
     <defs>
         <path d="M281,4467.5l5,5l8.5,-8.5" id="Path-0"/>
@@ -415,13 +386,13 @@
                     <div class="b-select-accordion__list-item">
                             <div class="b-form__checkbox">
         <input
-            id="admin1access2"
+            id="admin1msg"
             class="b-checkbox-input"
             type="checkbox"
-            value=""
-            name="access2"
-             checked                                 >
-        <label for="admin1access2" class="b-checkbox-label">
+            value="1"
+            name="UF_CAN_MSG"
+                                            >
+        <label for="admin1msg" class="b-checkbox-label">
             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 16 11">
     <defs>
         <path d="M281,4467.5l5,5l8.5,-8.5" id="Path-0"/>
@@ -440,13 +411,13 @@
                     <div class="b-select-accordion__list-item">
                             <div class="b-form__checkbox">
         <input
-            id="admin1access3"
+            id="admin1request"
             class="b-checkbox-input"
             type="checkbox"
-            value=""
-            name="access3"
+            value="1"
+            name="UF_CAN_REQUEST"
                                             >
-        <label for="admin1access3" class="b-checkbox-label">
+        <label for="admin1request" class="b-checkbox-label">
             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 16 11">
     <defs>
         <path d="M281,4467.5l5,5l8.5,-8.5" id="Path-0"/>
@@ -475,7 +446,7 @@
             <div class="b-profile-block j-profile-block"  data-id="5">
     <button type="button" class="b-profile-block__delete j-delete-administrator" data-id="5"></button>
     <div class="b-profile-block__title b-profile-admin-title">
-        <h4>Вознесенский Алексей</h4>
+        <h4>Администратор</h4>
     </div>
     <div class="b-profile-block__input-wrap">
         <!--
@@ -484,16 +455,16 @@
          -->
 
         <div class="b-form-block">
-                <input
+            <input
         id="admin-fio-5"
         class="b-input-text"
         type="text"
-        name="admin[5][FIO]"
+        name="FULL_NAME"
         maxlength=""
         autocomplete=""
-        value="Вознесенский Алексей"
+        value=""
         placeholder=""
-                                            >
+                                                >
 
             <label for="admin-fio-5" class="b-form-block__label">ФИО</label>
             <span class="b-form-block__error-text">Текст подсказки</span>
@@ -504,8 +475,7 @@
         id="admin-email-5"
         class="b-input-email"
         type="email"
-        name="admin[5][EMAIL]"
-                    value="voznesenskiy.alex@biocad.ru"
+        name="EMAIL"
         
         
                             >
@@ -519,52 +489,24 @@
             id="admin-phone-5"
             class="b-input-phone"
             type="tel"
-            name="admin[5][PHONE]"
+            name="PERSONAL_PHONE"
             autocomplete="tel"
             placeholder="+7 ___ ___-__-__"
-             value="9215499878"                             >
+                                        >
 
             <label for="admin-phone-5" class="b-form-block__label">Телефон</label>
             <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
 
         <div class="b-form-block">
-                <div class="b-select">
-        <div class="b-select__wrapper">
-            <select
-                id="admin-status-5"
-                class="b-select__list j-select"
-                name="admin[5][STATUS]"
-                data-placeholder=""
-                                                            >
-
-                                    <option value="status1"
-                                                                            >
-                        Администратор
-                    </option>
-                                    <option value="status2"
-                                                                            >
-                        Супер-Администратор
-                    </option>
-                                    <option value="status3"
-                                                                            >
-                        Просто Администратор
-                    </option>
-                                    <option value="status4"
-                                                         selected                     >
-                        Не просто Администратор
-                    </option>
-                            </select>
-        </div>
-    </div>
-
-            <label for="admin1-status" class="b-form-block__label">Статус</label>
+            <input id="admin-status-5" class="b-input-text" type="text" name="STATUS" value="" readonly="" disabled="">
+            <label for="admin-status-5" class="b-form-block__label">Статус</label>
             <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
 
         <div class="b-form-block b-form-block_type_accordion j-select-accordion">
             <div class="b-select-accordion">
-                    <input
+                <input
         id="5"
         class="b-input-text"
         type="text"
@@ -573,7 +515,7 @@
         autocomplete=""
         value=""
         placeholder=""
-         disabled                                     >
+         disabled                                         >
 
                 <div class="b-select-accordion__list">
                     <div class="b-select-accordion__list-title">
@@ -582,13 +524,13 @@
                     <div class="b-select-accordion__list-item">
                             <div class="b-form__checkbox">
         <input
-            id="admin5access1"
+            id="admin5report"
             class="b-checkbox-input"
             type="checkbox"
-            value=""
-            name="access1"
-             checked                                 >
-        <label for="admin5access1" class="b-checkbox-label">
+            value="1"
+            name="UF_CAN_REPORT"
+                                            >
+        <label for="admin5report" class="b-checkbox-label">
             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 16 11">
     <defs>
         <path d="M281,4467.5l5,5l8.5,-8.5" id="Path-0"/>
@@ -607,13 +549,13 @@
                     <div class="b-select-accordion__list-item">
                             <div class="b-form__checkbox">
         <input
-            id="admin5access2"
+            id="admin5msg"
             class="b-checkbox-input"
             type="checkbox"
-            value=""
-            name="access2"
+            value="1"
+            name="UF_CAN_MSG"
                                             >
-        <label for="admin5access2" class="b-checkbox-label">
+        <label for="admin5msg" class="b-checkbox-label">
             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 16 11">
     <defs>
         <path d="M281,4467.5l5,5l8.5,-8.5" id="Path-0"/>
@@ -632,13 +574,13 @@
                     <div class="b-select-accordion__list-item">
                             <div class="b-form__checkbox">
         <input
-            id="admin5access3"
+            id="admin5request"
             class="b-checkbox-input"
             type="checkbox"
-            value=""
-            name="access3"
-             checked                                 >
-        <label for="admin5access3" class="b-checkbox-label">
+            value="1"
+            name="UF_CAN_REQUEST"
+                                            >
+        <label for="admin5request" class="b-checkbox-label">
             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 16 11">
     <defs>
         <path d="M281,4467.5l5,5l8.5,-8.5" id="Path-0"/>
@@ -662,7 +604,8 @@
             <span class="b-form-block__error-text">Текст подсказки</span>
         </div>
     </div>
-</div> </div>
+</div>
+        </div>
 
         <div class="b-profile-add">
             <button class="button-add j-add-administrator" type="button">Добавить еще администратора</button>
@@ -761,7 +704,7 @@
                 <span class="b-form-block__error-text">Комментарий</span>
             </div>
             <div class="b-form-block j-message-fio">
-                    <input
+                <input
         id="message-fio"
         class="b-input-text"
         type="text"
@@ -770,7 +713,7 @@
         autocomplete=""
         value=""
         placeholder=""
-                                            >
+                                                >
 
                 <label for="message-fio" class="b-form-block__label">Как тебя зовут</label>
                 <span class="b-form-block__error-text">Имя</span>

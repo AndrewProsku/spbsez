@@ -1,4 +1,5 @@
 import '../styles/app.scss';
+import '../../components/background-animation';
 import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
@@ -11,17 +12,21 @@ import Message from '../../components/message-popup';
 import messagePopupTemplate from '../../components/message-popup/message-popup.twig';
 import More from 'components/more';
 import NewPassword from '../../components/new-password';
+import News from '../../components/news';
 import PasswordRecovery from '../../components/password-recovery';
 import Popup from 'components/popup';
 import ProfileAdministrators from '../../components/profile-administrators';
 import ProfileDocs from '../../components/profile-docs';
 import ProfileInfo from '../../components/profile-info';
+import ReportForm from '../../components/reports/reports-form';
 import Residents from '../../components/residents/';
 import Select from '../../components/forms/select/';
 import Service from '../../components/service-popup';
 import servicePopupTemplate from '../../components/service-popup/service-popup.twig';
 import TabsAjax from 'components/tabs/tabs-ajax';
 import templateMessages from 'components/messages/messages.twig';
+import templateTooltip from 'components/tooltip/custom-tooltip.twig';
+import Tooltip from 'components/tooltip/';
 import Utils from './utils';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
@@ -346,6 +351,22 @@ if (reviewsCarouselEl) {
     });
 
     reviewsCarousel.mount();
+}
+
+const newsCarouselEl = document.querySelector('.j-news-slider');
+
+if (newsCarouselEl) {
+    const newsCarousel = new Glide('.j-news-slider', {
+        type   : 'carousel',
+        startAt: 0,
+        perView: 1,
+        gap    : 0,
+        classes: {
+            activeNav: 'glide__cust_dot_is_active'
+        }
+    });
+
+    newsCarousel.mount();
 }
 
 
@@ -700,3 +721,82 @@ if (accordionLinks) {
         accordionLinksMobile.classList.toggle('is-open');
     });
 }
+
+/**
+ *  Инициализация фильтрации и подгрузки новостей
+ */
+if (document.querySelector('.j-news-filter') || document.querySelector('.j-news-load-more')) {
+    const news = new News();
+
+    news.init();
+}
+
+
+/**
+ *  Инициализация тултипа с подсказми
+ */
+const helpTooltips = Array.from(document.querySelectorAll('.j-help'));
+
+if (helpTooltips) {
+    helpTooltips.forEach((helpTooltip) => {
+        const tooltip = new Tooltip();
+
+        tooltip.init({
+            target  : helpTooltip,
+            template: templateTooltip
+        });
+    });
+}
+
+/**
+ * Инициализация форм отчетов
+ */
+
+const reportFormEl = document.querySelector('.j-report-form');
+
+if (reportFormEl) {
+    const reportForm = new ReportForm();
+
+    reportForm.init({
+        target: reportFormEl
+    });
+}
+
+// Скрытие/отображение инпута иностранных акционеров в зависимости от значения радио-кнопок перед ним
+const foreignInvestorsSwitch = document.querySelector('.j-foreign-investors-switch');
+const foreignInvestorsField = document.querySelector('.j-foreign-investors-field');
+const toggleBlock = (input) => {
+    switch (input.value) {
+        case 'no': {
+            if (input.checked === true) {
+                foreignInvestorsField.classList.add('b-input-block_is_disabled');
+            } else {
+                foreignInvestorsField.classList.remove('b-input-block_is_disabled');
+            }
+            break;
+        }
+        case 'yes': {
+            if (input.checked === true) {
+                foreignInvestorsField.classList.remove('b-input-block_is_disabled');
+            } else {
+                foreignInvestorsField.classList.add('b-input-block_is_disabled');
+            }
+            break;
+        }
+        default: break;
+    }
+};
+
+if (foreignInvestorsSwitch && foreignInvestorsField) {
+    const inputs = foreignInvestorsSwitch.querySelectorAll('input[type="radio"]');
+
+    inputs.forEach((radio) => {
+        radio.addEventListener('change', (event) => {
+            toggleBlock(event.target);
+        });
+    });
+}
+
+mediator.subscribe('radioChecked', (input) => {
+    toggleBlock(input);
+});

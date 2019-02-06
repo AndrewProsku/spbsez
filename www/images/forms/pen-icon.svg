@@ -1,0 +1,13 @@
+<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M471.17 788.39v-9.86h3.7v9.86z" id="a"/>
+        <path d="M467.204 789.662l2.48-.672a.32.32 0 0 0 .144-.592l-1.808-1.76a.32.32 0 0 0-.544.16l-.672 2.464a.32.32 0 0 0 .4.4z"
+              id="b"/>
+    </defs>
+    <g transform="translate(-466 -778)">
+        <g transform="rotate(-135 473 783.5)">
+            <use xlink:href="#a" fill="#fff"/>
+        </g>
+        <use xlink:href="#b" fill="#fff"/>
+    </g>
+</svg>

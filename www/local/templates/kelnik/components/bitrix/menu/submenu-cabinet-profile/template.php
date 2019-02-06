@@ -2,7 +2,14 @@
 <?php if (empty($arResult)): return; endif; ?>
 <?php
 $arCopy = $arResult;
-$arItem = array_shift($arCopy);
+$arItem = [];
+
+foreach ($arCopy as $k => $v) {
+    if ($v['SELECTED']) {
+        $arItem = $v;
+        unset($arCopy[$k]);
+    }
+}
 ?>
 <div class="b-links j-accordion-links b-profile__links">
     <div class="b-links-mobile j-accordion-links__mobile">
@@ -12,7 +19,7 @@ $arItem = array_shift($arCopy);
         <?php if ($arCopy): ?>
             <ul class="b-links-mobile__body">
                 <li class="b-links-mobile__item">
-                    <?php foreach($arResult as $arItem): ?>
+                    <?php foreach($arCopy as $arItem): ?>
                         <a href="<?= $arItem['LINK'] ?>" class="b-links-mobile__link<?php if(!empty($arItem['SELECTED'])): ?> is-active<?php endif; ?>"><?= $arItem['TEXT'] ?></a>
                     <?php endforeach; ?>
                 </li>

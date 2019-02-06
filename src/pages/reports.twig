@@ -1,0 +1,95 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Отчет о деятельности резидента</title> {% endblock %}
+
+{% block content %}
+    {% include '../components/lk-nav/lk-nav.twig' %}
+
+    <div class="l-reports">
+        <div class="b-title b-reports-title">
+            <h1>Отчет&nbsp;о деятельности резидента</h1>
+        </div>
+
+        <h2 class="b-reports-subtitle">Отчеты за 2018 год</h2>
+
+        <div class="b-quarters">
+            <section class="b-quarter b-quarter_status_to-fill">
+                <h3 class="b-quarter__title">1 квартал</h3>
+                <div class="b-quarter__label">Нужно заполнить</div>
+                <a class="button b-quarter__button button_icon_pen" href="">Заполнить</a>
+            </section>
+            <section class="b-quarter b-quarter_status_check">
+                <h3 class="b-quarter__title">1 квартал</h3>
+                <div class="b-quarter__label">На проверке</div>
+                <a class="button b-quarter__button button_icon_pen" href="">Заполнить</a>
+            </section>
+            <section class="b-quarter b-quarter_status_approved">
+                <h3 class="b-quarter__title">2 квартал</h3>
+                <div class="b-quarter__label">Принят</div>
+                <a class="button b-quarter__button" href="#">Посмотреть</a>
+            </section>
+            <section class="b-quarter b-quarter_status_rejected">
+                <h3 class="b-quarter__title">3 квартал</h3>
+                <div class="b-quarter__label">Отклонен</div>
+                <a class="button b-quarter__button" href="#">Редактировать</a>
+            </section>
+            <section class="b-quarter b-quarter_status_preliminary">
+                <h3 class="b-quarter__title">Предварительный годовой отчет</h3>
+                <div class="b-quarter__description">Отчетный период не наступил</div>
+            </section>
+            <section class="b-quarter b-quarter_status_disabled">
+                <h3 class="b-quarter__title">Годовой отчет</h3>
+                <div class="b-quarter__description">Отчетный период не наступил</div>
+            </section>
+        </div>
+
+        <h2 class="b-reports-subtitle">Архив очетов</h2>
+        <h3 class="b-reports-year">2017</h3>
+        <div class="b-quarters">
+            <section class="b-quarter b-quarter_status_approved">
+                <h3 class="b-quarter__title">1 квартал</h3>
+                <div class="b-quarter__label">Принят</div>
+                <a class="button b-quarter__button" href="#">Посмотреть</a>
+            </section>
+            <section class="b-quarter b-quarter_status_approved">
+                <h3 class="b-quarter__title">2 квартал</h3>
+                <div class="b-quarter__label">Принят</div>
+                <a class="button b-quarter__button" href="#">Посмотреть</a>
+            </section>
+            <section class="b-quarter b-quarter_status_approved">
+                <h3 class="b-quarter__title">3 квартал</h3>
+                <div class="b-quarter__label">Принят</div>
+                <a class="button b-quarter__button" href="#">Посмотреть</a>
+            </section>
+            <section class="b-quarter b-quarter_status_approved">
+                <h3 class="b-quarter__title">Годовой отчет</h3>
+                <div class="b-quarter__label">Принят</div>
+                <a class="button b-quarter__button" href="#">Посмотреть</a>
+            </section>
+        </div>
+        <h3 class="b-reports-year">2016</h3>
+        <div class="b-quarters">
+            <section class="b-quarter b-quarter_status_approved">
+                <h3 class="b-quarter__title">1 квартал</h3>
+                <div class="b-quarter__label">Принят</div>
+                <a class="button b-quarter__button" href="#">Посмотреть</a>
+            </section>
+            <section class="b-quarter b-quarter_status_approved">
+                <h3 class="b-quarter__title">2 квартал</h3>
+                <div class="b-quarter__label">Принят</div>
+                <a class="button b-quarter__button" href="#">Посмотреть</a>
+            </section>
+            <section class="b-quarter b-quarter_status_approved">
+                <h3 class="b-quarter__title">3 квартал</h3>
+                <div class="b-quarter__label">Принят</div>
+                <a class="button b-quarter__button" href="#">Посмотреть</a>
+            </section>
+            <section class="b-quarter b-quarter_status_approved">
+                <h3 class="b-quarter__title">Годовой отчет</h3>
+                <div class="b-quarter__label">Принят</div>
+                <a class="button b-quarter__button" href="#">Посмотреть</a>
+            </section>
+        </div>
+    </div>
+
+
+{% endblock %}

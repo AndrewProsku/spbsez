@@ -1,0 +1,35 @@
+{#
+Блоки с изобр. по 5 в ряд
+
+title - Заголовок
+data (array) - данные
+    img - изображение
+    caption - текст
+    linkText - текст в ссылке
+#}
+
+<div class="b-priorities-direction">
+    <div class="b-priorities-direction__title">{{ title }}</div>
+
+    <div class="b-priorities-direction__items">
+
+        {% for item in data %}
+            <div class="b-priorities-direction__item">
+                <div class="b-priorities-direction__wrap">
+                    <div class="b-priorities-direction__img">
+                        <img src="{{ item.img }}" alt="">
+                    </div>
+
+                    <div class="b-priorities-direction__inner-wrap">
+                        <div class="b-priorities-direction__caption">{{ item.caption }}</div>
+
+                        <div class="b-priorities-direction__residents b-priorities-direction__residents_is_adapt"><a href="#" class="b-link-line">{{ item.linkText }}</a></div>
+                    </div>
+                </div>
+
+                <div class="b-priorities-direction__residents"><a href="#" class="b-link-line">{{ item.linkText }}</a></div>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>

@@ -20,7 +20,7 @@
             "MENU_CACHE_TYPE" => "A",
             "MENU_CACHE_USE_GROUPS" => "Y",
             "ROOT_MENU_TYPE" => "user",
-            "USE_EXT" => "N"
+            "USE_EXT" => "Y"
         )
     );?>
 </div>

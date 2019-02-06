@@ -30,7 +30,12 @@
 @import "../../pages/profile-message-item";
 @import "../../pages/vacancies";
 @import "../../pages/management-company";
+@import "../../pages/reports";
+@import "../../pages/reports-forms";
 @import "../../pages/services";
+@import "../../pages/news";
+@import "../../pages/news-single";
+@import "../../pages/investors";
 
 // Components
 
@@ -41,8 +46,10 @@
 // @import "../../components/slider/slider";
 @import "../../components/carousel/carousel";
 @import "../../components/reviews/reviews";
+@import "../../components/news/news";
 
 @import "../../components/account-tooltip/account-tooltip";
+@import "../../components/tooltip/custom-tooltip";
 @import "../../components/lk-nav/lk-nav";
 @import "../../components/lk-login-nav/lk-login-nav";
 @import "../../components/page-submenu/page-submenu";
@@ -54,6 +61,8 @@
 @import "../../components/forms/search/search";
 @import "../../components/forms/file/file";
 @import "../../components/forms/textarea/textarea";
+@import "../../components/forms/custom-radio/custom-radio";
+@import "../../components/forms/select/select";
 @import "../../components/yandex-map/yandex-map";
 @import "../../components/animation-line/animation-line";
 @import "../../components/logout/logout";
@@ -68,4 +77,11 @@
 @import "../../components/offers/offers";
 @import "../../components/advantage/advantage";
 @import "../../components/service-popup/service-popup";
-
+@import "../../components/share/share";
+@import "../../components/glide-carousel/glide-carousel";
+@import "../../components/background-animation/bg-animation";
+@import "../../components/investor-info/investor-info";
+@import "../../components/priorities-direction/priorities-direction";
+@import "../../components/advantage-location/advantage-location";
+@import "../../components/income-tax/income-tax";
+@import "../../components/percent-title/percent-title";
