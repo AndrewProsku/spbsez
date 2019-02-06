@@ -4,7 +4,9 @@ namespace Kelnik\Messages\Model;
 
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Userdata\Profile\ProfileModel;
 
 Loc::loadMessages(__FILE__);
 
@@ -71,14 +73,28 @@ class MessagesTable extends DataManager
                 ]
             ),
 
+            // Список компаний (определенный список пользователей)
+            // для агрегации пользователей
+            //
+            (new Main\ORM\Fields\Relations\Reference(
+                'COMPANIES',
+                MessageCompaniesTable::class,
+                Main\ORM\Query\Join::on('this.ID', 'ref.MESSAGE_ID')
+            ))->configureJoinType('LEFT'),
 
-            new Main\Entity\ReferenceField(
+            (new Main\ORM\Fields\Relations\Reference(
+                'FILES',
+                MessageFilesTable::class,
+                Main\ORM\Query\Join::on('this.ID', 'ref.ENTITY_ID')
+            ))->configureJoinType('LEFT'),
+
+            // Список пользователей для получения данного сообщения
+            //
+            (new Main\ORM\Fields\Relations\Reference(
                 'USERS',
                 MessageUsersTable::class,
-                [
-                    'this.ID' => 'ref.MESSAGE_ID'
-                ]
-            )
+                Main\ORM\Query\Join::on('this.ID', 'ref.MESSAGE_ID')
+            ))->configureJoinType('LEFT')
         ];
     }
 
@@ -89,7 +105,13 @@ class MessagesTable extends DataManager
         $data['DATE_CREATED'] = $data['DATE_MODIFIED'] = new Main\Type\DateTime();
         $data['USER_ID'] = $USER->GetID();
 
-        return parent::add($data);
+        $res = parent::add($data);
+
+        if ($res->isSuccess() && $data['ACTIVE'] === self::YES) {
+            self::updateUsers($res->getId());
+        }
+
+        return $res;
     }
 
     public static function update($id, array $data)
@@ -103,6 +125,91 @@ class MessagesTable extends DataManager
                     );
         }
 
-        return parent::update($id, $data);
+        $res = parent::update($id, $data);
+
+        if ($res->isSuccess() /*&& $data['ACTIVE'] === self::YES*/) {
+            self::updateUsers($id);
+        }
+
+        return $res;
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws Main\ArgumentTypeException
+     * @throws Main\ObjectException
+     */
+    protected static function updateUsers($id): bool
+    {
+        $id = (int) $id;
+
+        if (!$id) {
+            return false;
+        }
+
+        try {
+            Main\Application::getConnection()->query('DELETE FROM `' . MessageUsersTable::getTableName() . '` WHERE `MESSAGE_ID` = ' . $id);
+        } catch (\Exception $e) {
+        }
+
+        try {
+            $companies = MessageCompaniesTable::getList([
+                'filter' => [
+                    '=MESSAGE_ID' => $id
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        $companies = ArrayHelper::getColumn($companies, 'USER_ID');
+
+        if (!$companies) {
+            return false;
+        }
+
+        $tmp = \CUser::GetList(
+            ($by = 'ID'),
+            ($order = 'DESC'),
+            [
+                'GROUPS_ID' => ProfileModel::GROUP_RESIDENT_ADMIN,
+                ProfileModel::OWNER_FIELD => $companies
+            ],
+            [
+                'SELECT' => [
+                    ProfileModel::OWNER_FIELD
+                ],
+                'FIELDS' => [
+                    'ID'
+                ]
+            ]
+        );
+
+        if (!$tmp->AffectedRowsCount()) {
+            return false;
+        }
+
+        $users = [];
+
+        $sqlHelper = Main\Application::getConnection()->getSqlHelper();
+
+        while($row = $tmp->Fetch()) {
+            $users[] = '(' . $sqlHelper->convertToDbInteger($id) . ', ' .
+                        $sqlHelper->convertToDbInteger($row['ID']) . ', ' .
+                        $sqlHelper->convertToDbDateTime(new Main\Type\DateTime()) .
+                        ')';
+        }
+
+        try {
+            Main\Application::getConnection()->query(
+                'INSERT INTO `' . MessageUsersTable::getTableName() . '` (`MESSAGE_ID`, `USER_ID`, `DATE_MODIFIED`) ' .
+                'VALUES ' . implode($users, ', ')
+            );
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 }

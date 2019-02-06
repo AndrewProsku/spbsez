@@ -20,8 +20,8 @@ class MessagesEditHelper extends AdminEditHelper
 
     public function hasWriteRightsElement($element = [])
     {
-        if (empty($element['ID']) || empty($element['ACTIVE']) || !$this->hasRights()) {
-            return false;
+        if (empty($element['ID']) || empty($element['ACTIVE'])) {
+            return parent::hasWriteRightsElement($element);
         }
 
         return $element['ACTIVE'] !== MessagesTable::YES;
