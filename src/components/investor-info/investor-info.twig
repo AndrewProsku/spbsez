@@ -1,0 +1,36 @@
+{#
+    Выводится без внешних отспупов, растягивается на 100%
+
+    modify - модификатор | (b-investors-info_big_title)
+    title - Заголовок
+    text - Основной текст
+    tags - (array) теги под текстом
+    img - изображение
+#}
+
+<div class="b-investors-info {{ modify }}">
+
+    <div class="b-investors-info__content">
+        <div class="b-investors-info__title">{{ title }}</div>
+
+        <div class="b-investors-info__text">
+            <div class="b-investors-info__wrap-icon"><span class="b-investors-info__line"></span></div>
+            <div class="b-investors-info__text-box">
+                {{ text }}
+            </div>
+        </div>
+
+        <div class="b-investors-info__tags">
+            <div class="b-investors-info__wrap-icon"><span class="b-investors-info__clip"></span></div>
+            <div class="b-investors-info__tags-box">
+                {% for tag in tags %}
+                    <div class="b-investors-info__tag"><a href="#" class="b-link-line">{{ tag }}</a></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="b-investors-info__image">
+        <img src="{{ img }}" alt="">
+    </div>
+</div>

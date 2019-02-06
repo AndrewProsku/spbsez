@@ -417,7 +417,7 @@ button {
             right: 9%;
             transform: translate(0, -50%) rotate(360deg);
             background-image: url("/images/news/refresh.png");
-            animation: rotate360 .6s infinite linear;
+            animation: rotate360 0.6s infinite linear;
         }
     }
 }

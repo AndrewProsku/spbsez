@@ -44,6 +44,14 @@
     }
 }
 
+.b-about-desc_without_margin {
+    .b-about-desc__img {
+        @media #{$laptop} {
+            margin-top: 0;
+        }
+    }
+}
+
 .b-about-desc__img {
     @include padding-level(bottom, blue);
 
