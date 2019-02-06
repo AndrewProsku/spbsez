@@ -1,0 +1,110 @@
+.b-investors-info {
+    @include row();
+}
+
+.b-investors-info_big_title {
+    .b-investors-info__title {
+        @include font-size(h2);
+        font-weight: 400;
+    }
+}
+
+.b-investors-info__content {
+    order: 2;
+
+    @media #{$tablet-portrait} {
+        @include column(20, 31);
+        @include post(1, 31);
+        order: 1;
+    }
+}
+
+.b-investors-info__image {
+    @include column(24, 31);
+    @include margin-level(bottom, yellow);
+
+    @media #{$tablet-portrait} {
+        @include column(10, 31);
+        margin-bottom: 0;
+        order: 1;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.b-investors-info__title {
+    @include margin-level(bottom, green);
+    @include font-size(h3);
+    font-weight: 700;
+}
+
+.b-investors-info__text {
+    @include row();
+    @include margin-level(bottom, green);
+}
+
+.b-investors-info__tags {
+    @include row();
+}
+
+.b-investors-info__wrap-icon {
+    @include column(2, 20);
+    @include post(1, 20);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.b-investors-info__line {
+    width: 100%;
+    display: block;
+    height: 2px;
+    background-color: $blue;
+    margin-top: 16px;
+
+    @media #{$tablet-portrait} {
+        margin-top: 23px;
+    }
+}
+
+.b-investors-info__clip {
+    display: inline-block;
+    width: 18px;
+    min-width: 18px;
+    height: 9px;
+    background-image: url("/images/investors-info/clip.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 8px;
+
+    @media #{$tablet-portrait} {
+        margin-top: 15px;
+        width: 31px;
+        min-width: 31px;
+        height: 14px;
+    }
+}
+
+.b-investors-info__text-box {
+    @include font-size(p1);
+    @include column(17, 20);
+
+    @media #{$tablet-portrait} {
+        @include suffix(2, 20);
+    }
+}
+
+.b-investors-info__tags-box {
+    @include column(17, 20);
+    @include font-size(p2);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.b-investors-info__tag {
+    margin-right: 35px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,110 @@
+.b-priorities-direction__title {
+    @include font-size(h2);
+    @include margin-level(bottom, cyan);
+}
+
+.b-priorities-direction__items {
+    @include row();
+    margin-bottom: -24px;
+
+    @media #{$tablet-portrait} {
+        margin-bottom: -37px;
+    }
+
+    @media #{$laptop} {
+        margin-bottom: -64px;
+    }
+}
+
+.b-priorities-direction__item {
+    @include column(32, 32);
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    @media #{$tablet-portrait} {
+        @include column(10, 32);
+        @include post(1, 32);
+        margin-bottom: 37px;
+    }
+
+    @media #{$tablet-landscape} {
+        @include column(10, 32);
+        @include post(1, 32);
+        margin-bottom: 37px;
+    }
+
+    @media #{$laptop} {
+        @include column(5, 30);
+        @include post(1, 30);
+        margin-bottom: 64px;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:nth-child(3n) {
+        @media #{$tablet-portrait-only} {
+            margin-right: 0;
+        }
+
+        @media #{$tablet-landscape-only} {
+            margin-right: 0;
+        }
+    }
+}
+
+.b-priorities-direction__wrap {
+    display: flex;
+
+    @media #{$tablet-portrait} {
+        display: block;
+    }
+}
+
+.b-priorities-direction__img {
+    min-width: 80px;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    
+    @media #{$tablet-portrait} {
+        @include margin-level(bottom, dark-yellow);
+        min-width: 120px;
+        width: 120px;
+        height: 120px;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.b-priorities-direction__caption {
+    @include margin-level(bottom, red);
+    @include font-size(p2);
+
+    @media #{$tablet-portrait} {
+        @include margin-level(bottom, orange);
+    }
+}
+
+.b-priorities-direction__residents {
+    @include font-size(p3);
+    display: none;
+    
+    @media #{$tablet-portrait} {
+        display: block;
+    }
+}
+
+.b-priorities-direction__residents_is_adapt {
+    display: block;
+
+    @media #{$tablet-portrait} {
+        display: none;
+    }
+}
