@@ -127,6 +127,10 @@
     }
 }
 
+label.b-form-block {
+    display: block;
+}
+
 .b-form-block_type_accordion {
     cursor: pointer
 }
@@ -212,6 +216,7 @@
 
 .b-form-block__label {
     @include font-size("p4");
+    display: block;
     position: absolute;
     top: 8px;
     left: 16px;
