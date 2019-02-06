@@ -94,7 +94,13 @@ class MessagesTable extends DataManager
                 'USERS',
                 MessageUsersTable::class,
                 Main\ORM\Query\Join::on('this.ID', 'ref.MESSAGE_ID')
-            ))->configureJoinType('LEFT')
+            ))->configureJoinType('LEFT'),
+
+            new Main\Entity\ExpressionField(
+                'USER_CNT',
+                'COUNT(DISTINCT %s)',
+                'USERS.USER_ID'
+            )
         ];
     }
 

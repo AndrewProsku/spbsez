@@ -5,6 +5,7 @@ namespace Kelnik\Messages\Model\AdminInterface;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminInterface;
 use Kelnik\AdminHelper\Widget\CheckboxWidget;
+use Kelnik\AdminHelper\Widget\ChildWidget;
 use Kelnik\AdminHelper\Widget\ComboBoxWidget;
 use Kelnik\AdminHelper\Widget\FileWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
@@ -62,6 +63,10 @@ class MessagesAdminInterface extends AdminInterface
                     'TEXT' => [
                         'WIDGET' => new VisualEditorWidget(),
                         'REQUIRED' => true
+                    ],
+                    'USER_CNT' => [
+                        'WIDGET' => new ChildWidget(),
+                        'TITLE' => Loc::getMessage('KELNIK_MESSAGES_USERS')
                     ]
                 ]
             ]
