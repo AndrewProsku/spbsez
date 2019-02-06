@@ -89,17 +89,61 @@
 }
 
 .b-income-tax__two-percent {
-    @include column(7, 28);
-    @include suffix(1, 28);
+    @include column(21, 28);
+    margin-bottom: 40px;
+    padding-top: 20px;
+
+
+    @media #{$tablet-portrait} {
+        @include column(10, 32);
+        @include post(1, 32);
+
+        &:nth-child(3) {
+            margin-right: 0;
+        }
+    }
+
+    @media #{$laptop} {
+        @include column(7, 30);
+        @include post(0, 30);
+        @include suffix(0.5, 30);
+
+        &:nth-child(3) {
+            @include post(1, 30);
+        }
+    }
+    
+    @media #{$fullhd} {
+        @include suffix(1, 28);
+        @include column(7, 28);
+
+        &:nth-child(3) {
+            @include post(0, 30);
+        }
+    }
 }
 
 .b-income-tax__invest {
-    @include column(6, 28);
-    @include prefix(1, 28);
+    @include column(30, 30);
+
+    @media #{$laptop} {
+        @include column(8, 30);
+        @include prefix(1, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(7, 28);
+        @include prefix(1, 28);
+    }
+}
+
+.b-income-tax__list {
+    @include font-size(p3);
+    max-width: 390px;
 }
 
 .b-income-tax__list span {
-    @include font-size(p3);
+    @include font-size(p2);
     display: block;
     margin-bottom: 15px;
 
