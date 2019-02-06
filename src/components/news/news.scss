@@ -146,6 +146,18 @@
     border: 1px solid transparent;
     cursor: pointer;
 
+    &_is_success {
+        color: $white;
+        border-color: rgba($green, 0.32);
+        background-color: $green;
+    }
+
+    &_is_error {
+        color: $black;
+        border-color: rgba($red, 0.32);
+        background-color:  rgba($red, 0.08);
+    }
+
     @media #{$mobile-only} {
         display: block;
         border-radius: 0;

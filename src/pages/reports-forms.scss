@@ -284,6 +284,8 @@
     @include suffix(2, 32);
     @include padding-level(top, dark-yellow);
     @include padding-level(bottom, dark-yellow);
+    font-family: $font-bold;
+    font-weight: 700;
     border-bottom: 2px solid $white;
     position: relative;
 
@@ -298,7 +300,8 @@
     }
 
     @media #{$fullhd} {
-        @include prefix(2, 24);
+        //@include prefix(2, 24);
+        padding-left: 0;
         @include suffix(2, 24);
     }
 
@@ -436,4 +439,8 @@
     &:after {
         display: none;
     }
+}
+
+.b-reports-filter {
+    @include padding-level(bottom, cyan);
 }

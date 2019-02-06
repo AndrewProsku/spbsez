@@ -722,9 +722,19 @@ if (accordionLinks) {
     });
 }
 
+/**
+ *  Инициализация фильтрации и подгрузки новостей
+ */
+if (document.querySelector('.j-news-filter') || document.querySelector('.j-news-load-more')) {
+    const news = new News();
 
-//
+    news.init();
+}
 
+
+/**
+ *  Инициализация тултипа с подсказми
+ */
 const helpTooltips = Array.from(document.querySelectorAll('.j-help'));
 
 if (helpTooltips) {
@@ -790,12 +800,3 @@ if (foreignInvestorsSwitch && foreignInvestorsField) {
 mediator.subscribe('radioChecked', (input) => {
     toggleBlock(input);
 });
-
-/**
- *  Инициализация фильтрации и подгрузки новостей
- */
-if (document.querySelector('.j-news-filter') || document.querySelector('.j-news-load-more')) {
-    const news = new News();
-
-    news.init();
-}

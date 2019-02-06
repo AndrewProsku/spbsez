@@ -249,10 +249,36 @@
                 <label class="b-input-block__label" for="resident-name">Наименование ОЭЗ</label>
             </div>
         </div>
-        <div class="b-report-steps">
-            <div class="b-report-steps__mobile"></div>
-            <div class="b-report-steps__tabs"></div>
-        </div>
+        <form action="#" class="b-reports-filter b-mini-filter j-reports-filter">
+
+            <div class="b-mini-filter__group j-reports-select-group">
+
+                <div class="b-mini-filter__values j-reports-select" data-title-default="Все"><span class="j-reports-select-title">Ф-1 Общая</span></div>
+
+                <div class="b-mini-filter__group-wrap">
+                    <div class="b-mini-filter__item">
+                        <input type="checkbox" name="reports-forms" value="form1" data-text="Ф-1 Общая" id="form1" class="b-mini-filter__input">
+                        <label for="form1" class="b-mini-filter__fake b-mini-filter__fake_state_success">Ф-1 Общая</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="checkbox" name="reports-forms" value="form2" data-text="Ф-2 Налоги" id="form2" class="b-mini-filter__input">
+                        <label for="form2" class="b-mini-filter__fake">Ф-2 Налоги</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="checkbox" name="reports-forms" value="form3" data-text="Ф-3 Стройка" id="form3" class="b-mini-filter__input">
+                        <label for="form3" class="b-mini-filter__fake">Ф-3 Стройка</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="checkbox" name="reports-forms" value="form4" data-text="Ф-4 Аренда" id="form4" class="b-mini-filter__input">
+                        <label for="form4" class="b-mini-filter__fake">Ф-4 Аренда</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         <button class="button button_icon_check b-report-approve" type="button">Подтвердить данные формы</button>
 
         <div class="b-report-form j-report-form">
