@@ -1,0 +1,78 @@
+.b-reduced-rates {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(top, pink);
+    @include padding-level(bottom, pink);
+    background-color: $white;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(2, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(2, 36);
+    }
+}
+
+.b-reduced-rates__title {
+    @include font-size(h2);
+    @include margin-level(bottom, blue);
+}
+
+.b-reduced-rates__items {
+    @include row();
+    padding-top: 20px;
+}
+
+.b-reduced-rates__item {
+    @include column(32, 32);
+    @include margin-level(bottom, blue);
+
+    @media #{$tablet-portrait} {
+        @include column(15, 32);
+        @include post(2, 32);
+        @include margin-level(bottom, violet);
+        padding-right: 0;
+
+        &:nth-child(2n) {
+            margin-right: 0;
+        }
+    }
+
+    @media #{$laptop} {
+        @include column(7, 31);
+        @include post(1, 31);
+        @include margin-level(bottom, cyan);
+
+        &:nth-child(2n) {
+            @include post(1, 31);
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    @media #{$fullhd} {
+        @include column(6.5, 30);
+        @include post(1, 30);
+
+        &:nth-child(2n) {
+            @include post(1, 30);
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.b-reduced-rates__additional {
+    @include font-size(p1);
+
+    strong {
+        color: $blue;
+    }
+}
