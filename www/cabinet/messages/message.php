@@ -22,16 +22,17 @@ if (!$USER->IsAuthorized()) {
         "USE_EXT" => "Y"
     )
 );?>
-<div class="l-profile-messages">
-    <div class="b-title b-profile-message-title">
+<div class="l-profile-message-item">
+    <div class="b-title b-profile-message-item-title">
         <h1><?php $APPLICATION->ShowTitle(false); ?></h1>
     </div>
     <?$APPLICATION->IncludeComponent(
         "kelnik:messages",
-        "",
+        "message",
         Array(
             "CACHE_TIME" => "3600",
-            "CACHE_TYPE" => "N"
+            "CACHE_TYPE" => "N",
+            "ITEM_ID" => $_REQUEST['ELEMENT_ID']
         )
     );?>
 </div>

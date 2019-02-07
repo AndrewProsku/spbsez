@@ -17,30 +17,30 @@ $aMenuLinks = Array(
 	Array(
 		"Профиль", 
 		"/cabinet/", 
-		Array(), 
-		Array(), 
-		"\$GLOBALS[\"USER\"]->IsAuthorized()" 
+		Array(),
+		Array("check"=>"hasAccess"),
+		"\$GLOBALS[\"USER\"]->IsAuthorized()"
 	),
 	Array(
-		"Подача отчета", 
-		"/cabinet/report/", 
+		"Подача отчета",
+		"/cabinet/report/",
 		Array(),
 		Array("check"=>"canReport"),
 		"false"
 	),
 	Array(
-		"Сообщения от ОЭЗ", 
-		"/cabinet/messages/", 
+		"Сообщения от ОЭЗ",
+		"/cabinet/messages/",
 		Array(),
-		Array("check"=>"canMessages"),
-		"false" 
+		Array("check"=>"canMessages", "isMessages"=>"1"),
+		"false"
 	),
 	Array(
-		"Подать заявку", 
-		"/cabinet/request/", 
-		Array(), 
+		"Подать заявку",
+		"/cabinet/request/",
+		Array(),
 		Array("check"=>"canRequest"),
-		"false" 
+		"false"
 	)
 );
 ?>

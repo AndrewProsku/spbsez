@@ -8,7 +8,7 @@ use Bitrix\Main\Localization\Loc;
 Loc::loadMessages(__FILE__);
 
 $arComponentDescription = [
-    "NAME" => Loc::getMessage('KELNIK_REFBOOK_NAME'),
+    "NAME" => Loc::getMessage('KELNIK_VACANCIES_NAME'),
     "DESCRIPTION" => '',
     "PATH" => [
         "ID" => "Kelnik",

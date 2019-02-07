@@ -14,6 +14,10 @@ class ProfileSectionContacts extends ProfileSectionAbstract
      */
     public function add(array $data)
     {
+        if (!$this->profile->isResidentAdmin()) {
+            return false;
+        }
+
         try {
             $data['USER_ID'] = $this->profile->getId();
             $res = ContactTable::add($data);
@@ -26,7 +30,7 @@ class ProfileSectionContacts extends ProfileSectionAbstract
 
     public function delete($id)
     {
-        if (!$id) {
+        if (!$id || !$this->profile->isResidentAdmin()) {
             return false;
         }
 
@@ -57,6 +61,10 @@ class ProfileSectionContacts extends ProfileSectionAbstract
      */
     public function updateRows(array $data)
     {
+        if (!$this->profile->isResidentAdmin()) {
+            return false;
+        }
+
         $userPersons = $this->getList();
 
         $res = [];
@@ -90,6 +98,8 @@ class ProfileSectionContacts extends ProfileSectionAbstract
      */
     public function getList(): array
     {
-        return ContactTable::getListByUser($this->profile->getId());
+        return $this->profile->isResidentAdmin()
+                ? ContactTable::getListByUser($this->profile->getId())
+                : [];
     }
 }

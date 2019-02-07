@@ -51,7 +51,7 @@ class MessageCompaniesTable extends DataManager
             ($by = 'ID'),
             ($order = 'DESC'),
             [
-                'GROUPS_ID' => ProfileModel::GROUP_RESIDENT_SUPER_ADMIN
+                'GROUPS_ID' => ProfileModel::GROUP_RESIDENT_ADMIN
             ],
             [
                 'SELECT' => [],

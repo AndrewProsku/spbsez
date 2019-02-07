@@ -133,7 +133,7 @@ class MessagesTable extends DataManager
 
         $res = parent::update($id, $data);
 
-        if ($res->isSuccess() /*&& $data['ACTIVE'] === self::YES*/) {
+        if ($res->isSuccess() && $data['ACTIVE'] === self::YES) {
             self::updateUsers($id);
         }
 
@@ -179,7 +179,7 @@ class MessagesTable extends DataManager
             ($by = 'ID'),
             ($order = 'DESC'),
             [
-                'GROUPS_ID' => ProfileModel::GROUP_RESIDENT_ADMIN,
+                'GROUPS_ID' => ProfileModel::GROUP_RESIDENT,
                 ProfileModel::OWNER_FIELD => $companies
             ],
             [

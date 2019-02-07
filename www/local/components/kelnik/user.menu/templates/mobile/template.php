@@ -2,9 +2,9 @@
     die();
 } ?>
 <div class="b-account j-account-auth">
-    <a href="/cabinet/" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?>  is-auth j-account-auth<?php endif; ?>">
+    <a href="/cabinet/<?php if($arResult['MESSAGES']): ?>messages/<?php endif; ?>" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?>  is-auth j-account-auth<?php endif; ?>">
         <span class="b-account__link-icon">
-           <?php if($arResult['IS_AUTHORIZED']): ?> <span class="b-account__messages">2</span><?php endif; ?>
+           <?php if($arResult['MESSAGES']): ?> <span class="b-account__messages"><?= $arResult['MESSAGES']; ?></span><?php endif; ?>
         </span>
         <span class="b-account__link-text">Личный кабинет</span>
     </a>
