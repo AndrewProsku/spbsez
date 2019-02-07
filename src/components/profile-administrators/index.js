@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import InputTel from '../../components/forms/telephone/telephone';
-import Select from '../../components/forms/select/';
 import templateAdmin from './administrator.twig';
 import Utils from '../../common/scripts/utils';
 
@@ -92,7 +91,9 @@ class ProfileAdministrators {
             let dataToSend = `action=updateAdmin&id=${adminBlock.dataset.id}`;
 
             for (const access in accessesClosure) {
-                dataToSend += `&${access}=${accessesClosure[access]}`;
+                if (Object.prototype.hasOwnProperty.call(accessesClosure, access)) {
+                    dataToSend += `&${access}=${accessesClosure[access]}`;
+                }
             }
 
             Utils.send(dataToSend, '/api/profile/', {

@@ -1,5 +1,9 @@
 .b-input-textarea {
-    min-height: 100px;
+    min-height: 120px;
+
+    textarea {
+        height: 100%;
+    }
 }
 
 .b-form-block textarea.b-input-text {

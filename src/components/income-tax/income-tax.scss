@@ -1,0 +1,169 @@
+.b-income-tax {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(top, pink);
+    @include padding-level(bottom, pink);
+    background-color: $bg-grey;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-income-tax__top {
+    @include margin-level(bottom, pink);
+}
+
+.b-income-tax__title {
+    @include font-size(h2);
+    @include margin-level(bottom, cyan);
+}
+
+.b-income-tax__one-container {
+    @include row();
+}
+
+.b-income-tax__percent {
+    @include column(28, 28);
+
+    @media #{$tablet-portrait} {
+        @include column(21, 28);
+    }
+
+    @media #{$laptop} {
+        @include column(13, 28);
+    }
+}
+
+.b-income-tax__description {
+    @include column(28, 28);
+    @include prefix(1, 28);
+    @include font-size(p2);
+    line-height: 21px;
+
+    @media #{$tablet-portrait} {
+        line-height: 40px;
+    }
+
+    @media #{$laptop} {
+        @include column(15, 28);
+    }
+}
+
+.b-income-tax__description ul {
+    margin-bottom: 20px;
+
+    @media #{$tablet-portrait} {
+        margin-bottom: 24px;
+    }
+}
+
+.b-income-tax__description ul li {
+    padding-left: 30px;
+    position: relative;
+
+    &:after {
+        content: "";
+        width: 15px;
+        height: 2px;
+        background-color: $blue;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+    }
+}
+
+.b-income-tax__description strong {
+    color: $blue;
+}
+
+.b-income-tax__two-container {
+    @include row();
+}
+
+.b-income-tax__two-percent {
+    @include column(21, 28);
+    margin-bottom: 40px;
+    padding-top: 20px;
+
+
+    @media #{$tablet-portrait} {
+        @include column(10, 32);
+        @include post(1, 32);
+
+        &:nth-child(3) {
+            margin-right: 0;
+        }
+    }
+
+    @media #{$laptop} {
+        @include column(7, 30);
+        @include post(0, 30);
+        @include suffix(0.5, 30);
+
+        &:nth-child(3) {
+            @include post(1, 30);
+        }
+    }
+    
+    @media #{$fullhd} {
+        @include suffix(1, 28);
+        @include column(7, 28);
+
+        &:nth-child(3) {
+            @include post(0, 30);
+        }
+    }
+}
+
+.b-income-tax__invest {
+    @include column(30, 30);
+
+    @media #{$laptop} {
+        @include column(8, 30);
+        @include prefix(1, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(7, 28);
+        @include prefix(1, 28);
+    }
+}
+
+.b-income-tax__list {
+    @include font-size(p3);
+    max-width: 390px;
+}
+
+.b-income-tax__list span {
+    @include font-size(p2);
+    display: block;
+    margin-bottom: 15px;
+
+    @media #{$laptop} {
+        margin-bottom: 24px;
+    }
+}
+
+.b-income-tax__list ul li {
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 16px;
+
+    &:after {
+        content: "";
+        width: 15px;
+        height: 2px;
+        background-color: $blue;
+        position: absolute;
+        top: 10px;
+        left: 0;
+    }
+}

@@ -1,0 +1,80 @@
+<div class="b-reduced-rates">
+    <div class="b-reduced-rates__title">Пониженные ставки страховых взносов</div>
+    <div class="b-reduced-rates__items">
+        <div class="b-reduced-rates__item">
+
+            {% include '../percent-title/percent-title.twig' with {
+                modify: "b-percent-title_two_item",
+                percent: "13%",
+                caption: "пенсионный фонд",
+                items: [
+                    {
+                        percent: "20%",
+                        text: "в 2019",
+                    },{
+                        percent: "22%",
+                        text: "Стандартный взнос",
+                    }
+                ]
+            } %}
+
+        </div>
+        <div class="b-reduced-rates__item">
+
+            {% include '../percent-title/percent-title.twig' with {
+                modify: "b-percent-title_two_item",
+                percent: "5,1%",
+                caption: "федеральный ОМС",
+                items: [
+                    {
+                        percent: "5,1%",
+                        text: "в 2019",
+                    },{
+                        percent: "5,1%",
+                        text: "Стандартный взнос",
+                    }
+                ]
+            } %}
+
+        </div>
+        <div class="b-reduced-rates__item">
+
+            {% include '../percent-title/percent-title.twig' with {
+                modify: "b-percent-title_two_item",
+                percent: "2,9%",
+                caption: "фонд соц. страхования",
+                items: [
+                    {
+                        percent: "2,9%",
+                        text: "в 2019",
+                    },{
+                        percent: "2,9%",
+                        text: "Стандартный взнос",
+                    }
+                ]
+            } %}
+
+        </div>
+        <div class="b-reduced-rates__item">
+
+            {% include '../percent-title/percent-title.twig' with {
+                modify: "b-percent-title_two_item",
+                percent: "21%",
+                caption: "Итого % взносов*",
+                items: [
+                    {
+                        percent: "28%",
+                        text: "в 2019",
+                    },{
+                        percent: "30%",
+                        text: "Стандартный взнос",
+                    }
+                ]
+            } %}
+
+        </div>
+    </div>
+    <div class="b-reduced-rates__additional">
+        * Для IT-компаний действует ставка <strong>14% в период с 2017 по 2023 гг</strong>
+    </div>
+</div>

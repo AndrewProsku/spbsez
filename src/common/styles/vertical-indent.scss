@@ -4,16 +4,16 @@
 // ПЕРЕМЕННЫЕ
 // Значения уровней.
 $levels: (
-    //              320   670   960   1280  1600   1920   2560
-    red:            (8px,  8px, 8px, 8px, 8px,  8px,  8px), /*s*/
+    //              320   670   960   1280  1600   1920    2560
+    red:            (8px,  8px,  8px,  8px,  8px,   8px,   8px), /*s*/
     orange:         (16px, 16px, 16px, 16px, 16px,  16px,  16px), /*xs*/
     dark-yellow:    (24px, 24px, 24px, 24px, 24px,  24px,  24px), /*2xs*/
     yellow:         (24px, 28px, 28px, 28px, 32px,  32px,  32px), /*m*/
     green:          (24px, 32px, 32px, 40px, 48px,  48px,  48px), /*l*/
     cyan:           (28px, 36px, 36px, 48px, 64px,  64px,  64px), /*xl*/
     blue:           (32px, 40px, 40px, 64px, 80px,  80px,  80px), /*2xl*/
-    violet:         (36px, 48px, 48px, 88px, 120px,  120px, 120px), /*3xl*/
-    pink:           (40px, 56px, 56px, 88px, 160px,  160px, 160px), /*4xl*/
+    violet:         (36px, 48px, 48px, 88px, 120px, 120px, 120px), /*3xl*/
+    pink:           (40px, 56px, 56px, 88px, 160px, 160px, 160px), /*4xl*/
 );
 
 // FUNCTION

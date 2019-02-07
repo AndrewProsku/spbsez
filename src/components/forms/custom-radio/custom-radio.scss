@@ -1,0 +1,83 @@
+// Version - 1.1
+// Documentation - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/forms/checkbox-radio.html
+
+// Dependecies
+@import "../../../common/styles/mixins";
+@import "../../../common/styles/breakpoints";
+
+// Settings
+$radio-icon-border-color: #b4b7d0;
+
+// Component
+.b-custom-radio__input {
+    // скрытие дефолтного инпута. Использование миксина обусловлено потребностью сохранения переключаемости TABом.
+    @include visually-hidden();
+}
+
+.b-custom-radio__label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.b-custom-radio__icon {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border-radius: 24px;
+    border: 1px solid $radio-icon-border-color;
+    background-color: $white;
+    margin-right: 9px;
+
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: calc(50% - 6px);
+        right: calc(50% - 6px);
+        width: 12px;
+        height: 12px;
+        border-radius: 12px;
+        background-color: $blue;
+        opacity: 0;
+    }
+}
+
+// Checked
+.b-custom-radio__input:checked + .b-custom-radio__label {
+    .b-custom-radio__icon:before {
+        opacity: 1;
+    }
+}
+
+// Hover
+.b-custom-radio__label:hover .b-custom-radio__icon {
+    @media #{$laptop} {
+        background-color: $bg-select;
+    }
+}
+
+// Focus
+/* .b-custom-radio__input:focus + .b-custom-radio__label .b-custom-radio__icon {
+    @media #{$laptop} {
+        box-shadow: 0 0 4px rgba($radio-icon-border-color, 1);
+    }
+} */
+
+// Disabled
+.b-custom-radio__input:disabled + .b-custom-radio__label {
+    cursor: default;
+
+    .b-custom-radio__icon {
+        opacity: .78;
+    }
+
+    .b-custom-radio__text {
+        opacity: .48;
+    }
+}
+
+
+
+

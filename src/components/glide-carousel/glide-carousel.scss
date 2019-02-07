@@ -1,4 +1,4 @@
-.glide__cust_arrow {
+.glide__cust-arrow {
     @include transition(opacity);
     display: none;
     width: 48px;
@@ -45,19 +45,19 @@
     }
 }
 
-.glide__cust_arrow-left {
+.glide__cust-arrow_is_left {
     @include push(1);
     transform: rotate(180deg);
     margin-right: 30px;
     left: 0;
 }
 
-.glide__cust_arrow-right {
+.glide__cust-arrow_is_right {
     @include post(1);
     right: 0;
 }
 
-.glide__cust_dots {
+.glide__cust-dots {
     position: relative;
     top: 0;
     margin-top: -25px;
@@ -68,7 +68,7 @@
     }
 }
 
-.glide__cust_dot {
+.glide__cust-dot {
     display: inline-block;
     vertical-align: middle;
     width: 12px;
