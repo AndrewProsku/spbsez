@@ -1,0 +1,69 @@
+.b-contact-list {
+    @include row();
+    @include vertical-paddings(2, 32);
+    @include padding-level(top, cyan);
+    @include padding-level(bottom, dark-yellow);
+    background-color: $bg-grey;
+    
+    @media #{$laptop} {
+        @include vertical-paddings(2, 30);
+    }
+
+    @media #{$fullhd} {
+        @include vertical-paddings(2, 27);
+    }
+}
+
+.b-contact-list__item {
+    @include column(32, 32);
+    @include margin-level(bottom, blue);
+
+    @media #{$tablet-portrait} {
+        @include column(13, 28);
+        @include post(2, 28);
+        @include margin-level(bottom, cyan);
+
+        &:nth-child(2n) {
+            margin-right: 0;
+        }
+    }
+
+    @media #{$laptop} {
+        @include column(8, 26);
+        @include post(1, 26);
+        @include margin-level(bottom, cyan);
+
+        &:nth-child(2n) {
+            @include post(1, 26);
+        }
+
+        &:nth-child(3n) {
+            margin-right: 0;
+        }
+    }
+
+    @media #{$fullhd} {
+        @include column(7, 23);
+        @include post(1, 23);
+    }
+}
+
+.b-contact-list__name {
+    @include font-size(p3);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.b-contact-list__prof {
+    margin-bottom: 30px;
+    opacity: 0.72;
+    max-width: 355px;
+}
+
+.b-contact-list__phone {
+    margin-bottom: 10px;
+}
+
+.b-contact-list__phone a {
+    color: inherit;
+}

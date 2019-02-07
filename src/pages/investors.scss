@@ -77,53 +77,15 @@
 }
 
 .l-investors__infrastructure {
-    @include prefix(2, 36);
-    @include suffix(2, 36);
-    @include padding-level(top, pink);
-    @include padding-level(bottom, pink);
     width: 100%;
-    background-color: $bg-grey;
-
-    @media #{$laptop} {
-        @include prefix(3, 36);
-        @include suffix(3, 36);
-    }
-
-    @media #{$fullhd} {
-        @include prefix(4, 36);
-        @include suffix(4, 36);
-    }
 }
 
 .l-investors__benefits {
-    @include prefix(2, 36);
-    @include suffix(2, 36);
-    @include padding-level(top, pink);
-    @include padding-level(bottom, pink);
     width: 100%;
-
-    @media #{$laptop} {
-        @include prefix(4, 36);
-        @include suffix(4, 36);
-    }
 }
 
 .l-investors__resident {
-    @include prefix(2, 36);
-    @include suffix(2, 36);
-    @include padding-level(top, pink);
-    @include padding-level(bottom, pink);
     width: 100%;
-
-    @media #{$laptop} {
-        @include prefix(3, 36);
-        @include suffix(3, 36);
-    }
-
-    @media #{$fullhd} {
-        @include prefix(4, 36);
-        @include suffix(4, 36);
-    }
 }
 
 .l-investors__documents {
@@ -159,4 +121,21 @@
         @include prefix(4, 36);
         @include suffix(5, 36);
     }
+}
+
+.b-invest-documents__file {
+    @include column(32, 32);
+    
+    @media #{$laptop} {
+        @include column(20, 30);
+    }
+}
+
+.b-invest-depart__text {
+    @include font-size(p1);
+    @include margin-level(bottom, green);
+}
+
+.b-invest-depart__contacts {
+    @include margin-level(bottom, cyan);
 }
