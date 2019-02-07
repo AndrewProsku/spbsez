@@ -1,0 +1,23 @@
+{% if id %}
+    <div class="b-custom-radio">
+        <input
+            id="{{ id }}"
+            class="b-custom-radio__input"
+            type="radio"
+            value="{{ value }}"
+            name="{{ name }}"
+            {% if checked %} checked {% endif %}
+            {% if disabled %} disabled {% endif %}
+            {% if required %} required {% endif %}
+            {% for attribute in dataAttributes %}
+                data-{{ attribute.name }}="{{ attribute.value }}"
+            {% endfor %}
+        >
+        <label for="{{ id }}" class="b-custom-radio__label">
+            <span class="b-custom-radio__icon"></span>
+            <span class="b-custom-radio__text">{{ text }}</span>
+        </label>
+    </div>
+{% else %}
+    <p>Пожалуйста, укажи уникальный id для инпута</p>
+{% endif %}

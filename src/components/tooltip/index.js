@@ -30,7 +30,12 @@ class Tooltip {
         /**
          * Шаблон
          */
-        this.template = template;
+        this.template = null;
+
+        /**
+         * Контент для шаблона
+         */
+        this.content = null;
 
         /**
          * Позиция по x оси
@@ -52,7 +57,7 @@ class Tooltip {
          * right - справа от цели
          * @type {string}
          */
-        this.direction = 'over';
+        this.direction = 'under';
 
         /**
          * Смещение тултипа от цели
@@ -60,23 +65,35 @@ class Tooltip {
          * @type {number}
          */
         this.offset = 10;
+
+        /**
+         * Обработчик для для window resize с привязкой к this компонента
+         * Используется для корректоного удаления обработчика при закрытии тултипа
+         */
+        this.resizeListener = this._resizeHandler.bind(this);
     }
 
     init(options) {
         this.options = options;
         this.target = options.target;
-        this.targetCoords = this.getTargetCoords();
+        this.template = options.template || template;
+        this.content = this.target.innerHTML;
+        // Координты вычисляются в обработчиках mouseover и resize
+        // Нет смысла инициализировать их здесь
+        // this.targetCoords = this.getTargetCoords();
 
         this.bindEvents();
     }
 
     getTargetCoords() {
-        return {
-            top   : this.target.getBoundingClientRect().top,
-            right : this.target.getBoundingClientRect().right,
-            bottom: this.target.getBoundingClientRect().bottom,
-            left  : this.target.getBoundingClientRect().left
-        };
+        const result = {};
+
+        result.top = this.target.getBoundingClientRect().top + document.documentElement.scrollTop;
+        result.left = this.target.getBoundingClientRect().left + document.documentElement.scrollLeft;
+        result.bottom = result.top + this.target.offsetHeight;
+        result.right = result.left + this.target.offsetWidth;
+
+        return result;
     }
 
     /**
@@ -84,10 +101,6 @@ class Tooltip {
      */
     bindEvents() {
         const esc = 27;
-
-        window.addEventListener('resize', (event) => {
-            return event;
-        });
 
         document.addEventListener('keydown', (event) => {
             if (event.which === esc) {
@@ -101,37 +114,61 @@ class Tooltip {
             event.preventDefault();
             event.stopPropagation();
 
-            this._insertTemplete();
+            window.addEventListener('resize', this.resizeListener);
+            this._insertTemplate();
         });
 
         this.target.addEventListener('mouseout', () => {
             Utils.removeElement(this.tooltip);
+            window.removeEventListener('resize', this.resizeListener);
         });
 
-        this.target.addEventListener('mousemove', (event) => {
-            return event;
-        });
+        // this.target.addEventListener('click', (event) => {
+        //     return event;
+        // });
+    }
 
-        this.target.addEventListener('click', (event) => {
-            return event;
-        });
+    _resizeHandler() {
+        this.targetCoords = this.getTargetCoords();
+
+        this._insertTemplate();
     }
 
     /**
      * Создает и вставляет тултип на странице
      * @private
      */
-    _insertTemplete() {
-        const firstElement = 0;
-
-        Utils.insetContent(document.body, this.template({content: '<h1>привет</h1>'}));
-
-        this.tooltip = document.querySelectorAll('.b-tooltip')[firstElement];
-
+    _insertTemplate() {
+        this.targetCoords = this.getTargetCoords();
+        Utils.insetContent(document.body, this.template({content: this.content}));
+        this.tooltip = document.querySelector(`.j-tooltip`);
         const x = this._x(this.tooltip, this.direction);
         const y = this._y(this.tooltip, this.direction);
 
         this._position(x, y);
+        this._checkTooltipOverflow();
+    }
+
+    /**
+     * Проверяет попадает ли элемент тултива во вьюпорт
+     * и меняет его координты, если это необходимо
+     * @private
+     */
+    _checkTooltipOverflow() {
+        const tooltipRect = this.tooltip.getBoundingClientRect();
+
+        if (tooltipRect.right > document.documentElement.clientWidth) {
+            const ZERO = 0;
+            const maxX = document.documentElement.clientWidth - tooltipRect.width;
+            const newLeftCoord = maxX > ZERO ? maxX : ZERO;
+
+            this.tooltip.style.left = `${parseInt(newLeftCoord, 10)}px`;
+        }
+        if (tooltipRect.bottom > document.documentElement.clientHeight) {
+            const newTopCoord = this.targetCoords.top - this.offset - tooltipRect.height;
+
+            this.tooltip.style.top = `${parseInt(newTopCoord, 10)}px`;
+        }
     }
 
     /**
@@ -177,7 +214,6 @@ class Tooltip {
         let x = 0;
         const halfWidth = 2;
 
-
         switch (direction) {
             case 'over':
                 x = this.targetCoords.left +
@@ -185,7 +221,7 @@ class Tooltip {
                 break;
             case 'under':
                 x = this.targetCoords.left +
-                    (this.target.offsetWidth / halfWidth) - (tooltip.offsetWidth / halfWidth) - this.offset;
+                    (this.target.offsetWidth / halfWidth) - (tooltip.offsetWidth / halfWidth);
                 break;
             case 'left':
                 x = this.targetCoords.left - tooltip.offsetWidth - this.offset;
@@ -195,7 +231,7 @@ class Tooltip {
                 break;
             default:
                 x = this.targetCoords.left +
-                    (this.target.offsetWidth / halfWidth) - (tooltip.offsetWidth / halfWidth) - this.offset;
+                    (this.target.offsetWidth / halfWidth) - (tooltip.offsetWidth / halfWidth);
                 break;
         }
 

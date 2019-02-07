@@ -284,19 +284,19 @@
     </div>
 
             <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__cust_arrow glide__cust_arrow-left" data-glide-dir="<" type="button">
+            <button class="glide__cust_is_arrow glide__cust-arrow_is_left" data-glide-dir="<" type="button">
                 <img src="/images/home/slide-arrow-white.svg" alt="стрелка влево">
             </button>
-            <button class="glide__cust_arrow glide__cust_arrow-right" data-glide-dir="&#62;" type="button">
+            <button class="glide__cust-arrow glide__cust-arrow_is_right" data-glide-dir="&#62;" type="button">
                 <img src="/images/home/slide-arrow-white.svg" alt="стрелка вправо">
             </button>
         </div>
 
-            <div class="glide__cust_dots" data-glide-el="controls[nav]">
-                            <button class="glide__cust_dot" data-glide-dir="=0" type="button"></button>
-                            <button class="glide__cust_dot" data-glide-dir="=1" type="button"></button>
-                            <button class="glide__cust_dot" data-glide-dir="=2" type="button"></button>
-                            <button class="glide__cust_dot" data-glide-dir="=3" type="button"></button>
+            <div class="glide__cust-dots" data-glide-el="controls[nav]">
+                            <button class="glide__cust-dot" data-glide-dir="=0" type="button"></button>
+                            <button class="glide__cust-dot" data-glide-dir="=1" type="button"></button>
+                            <button class="glide__cust-dot" data-glide-dir="=2" type="button"></button>
+                            <button class="glide__cust-dot" data-glide-dir="=3" type="button"></button>
                     </div>
     </div>
 
@@ -425,12 +425,12 @@
     <h3 class="b-message-popup__header">Написать сообщение</h3>
     <form action="" method="post" enctype="multipart/form-data" class="b-vacancy-response-form j-message-form">
         <div class="b-vacancy-response-form__inputs">
-            <div class="b-form-block j-message-text">
+            <div class="b-form-block j-message-text b-input-textarea">
                     <textarea
             id="text"
             class="b-input-text"
             name="text"
-            rows=""
+            rows="3"
             cols=""
             placeholder=""
     ></textarea>
@@ -439,7 +439,7 @@
                 <span class="b-form-block__error-text">Комментарий</span>
             </div>
             <div class="b-form-block j-message-fio">
-                    <input
+                <input
         id="message-fio"
         class="b-input-text"
         type="text"
@@ -448,7 +448,7 @@
         autocomplete=""
         value=""
         placeholder=""
-                                            >
+                                                >
 
                 <label for="message-fio" class="b-form-block__label">Как тебя зовут</label>
                 <span class="b-form-block__error-text">Имя</span>

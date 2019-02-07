@@ -1,0 +1,28 @@
+<div class="b-invest-conditions">
+    <h2 class="b-invest-conditions__title">Льготные условия выкупа земельного участка</h2>
+
+    <div class="b-invest-conditions__items">
+        <div class="b-invest-conditions__item">
+            {% include '../percent-title/percent-title.twig' with {
+                modify: "b-percent-title_content_start b-percent-title_more_lineheight",
+                percent: "2%",
+                items: [
+                    {
+                        text: "в год от кадастровой стоимости — максимальный размер арендной платы за земельные участки, предоставляемые резиденту"
+                    }
+                ]
+            } %}
+        </div>
+        <div class="b-invest-conditions__item">
+            {% include '../percent-title/percent-title.twig' with {
+                modify: "b-percent-title_content_start b-percent-title_more_lineheight",
+                percent: "25%",
+                items: [
+                    {
+                        text: "от кадастровой стоимости — плата за выкуп земельного участка"
+                    }
+                ]
+            } %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<div class="b-income-tax">
+    <div class="b-income-tax__top">
+        <div class="b-income-tax__title">Налог на прибыль</div>
+
+        <div class="b-income-tax__one-container">
+
+            <div class="b-income-tax__percent">
+
+                {% include '../percent-title/percent-title.twig' with {
+                    modify: "b-percent-title_big_percent",
+                    percent: "15,5%",
+                    items: [
+                        {
+                            percent: "20%",
+                            text: "Общее налогооблажение"
+                        }
+                    ]
+                } %}
+
+            </div>
+            <div class="b-income-tax__description">
+                <span>В ОЭЗ действуют пониженные ставки налога на прибыль:</span>
+                <ul>
+                    <li>3% при уплате в федеральный бюджет,</li>
+                    <li>12,5% — при уплате в бюджет Санкт-Петербурга.</li>
+                </ul>
+                <strong>Ставка действует на весь срок существования ОЭЗ</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="b-income-tax__bottom">
+
+        <div class="b-income-tax__title">Налоговые льготы ОЭЗ</div>
+
+        <div class="b-income-tax__two-container">
+            <div class="b-income-tax__two-percent">
+
+                {% include '../percent-title/percent-title.twig' with {
+                    modify: "b-percent-title_small_items",
+                    percent: "0%",
+                    caption: "на имущество",
+                    items: [
+                        {
+                            percent: "2,2%",
+                            text: "Общее налогооблажение"
+                        }
+                    ]
+                } %}
+
+            </div>
+            <div class="b-income-tax__two-percent">
+
+                {% include '../percent-title/percent-title.twig' with {
+                    modify: "b-percent-title_small_items",
+                    percent: "0%",
+                    caption: "на землю",
+                    items: [
+                        {
+                            percent: "1,5%",
+                            text: "Общее налогооблажение"
+                        }
+                    ]
+                } %}
+
+            </div>
+            <div class="b-income-tax__two-percent">
+
+                {% include '../percent-title/percent-title.twig' with {
+                    modify: "b-percent-title_small_items",
+                    percent: "0%",
+                    caption: "на транспорт",
+                    items: [
+                        {
+                            percent: "до 150₽ за л.с",
+                            text: "Общее налогооблажение"
+                        }
+                    ]
+                } %}
+
+            </div>
+            <div class="b-income-tax__invest">
+                <div class="b-income-tax__list">
+                    <span>Инвесторы ОЭЗ не платят</span>
+                    <ul>
+                        <li>налог на имущество в течение 10 лет с момента постановки на учет, </li>
+                        <li>налог на землю в течение 5 лет с месяца возникновения права собственности,</li>
+                        <li>налог на транспортное средство в течение 5 лет с момента его регистрации.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

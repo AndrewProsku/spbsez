@@ -2,23 +2,15 @@
 // Documentation - https:// kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/forms/select.html
 
 // Dependencies
-//@import "../../../common/styles/mixins";
-//@import "../../../common/styles/breakpoints";
-//@import "../../../common/styles/colors";
-//@import "../../../common/styles/font-sizes";
-//@import "../../../common/styles/typography";
-
-@import "../../../common/styles/breakpoints";
 @import "../../../common/styles/colors";
-@import "../../../common/styles/common";
 @import "../../../common/styles/mixins";
 @import "../../../common/styles/font-sizes";
-@import "../../../common/styles/vertical-indent";
-@import "../../../common/styles/typography";
+@import "../../../common/styles/breakpoints";
+
 // Settings
 // Select
 $select-font-size: 16px;
-$select-font-family: $font;
+$select-font-family: "Brutal", sans-serif;
 $select-height: 54px;
 $select-padding: 0 16px 0 16px;
 $select-brd-radius: 0;
@@ -36,7 +28,7 @@ $select-list-bg-color: #fff;
 $select-list-color: #000;
 $select-list-shadow: 0 10px 20px #d3d4e0;
 $select-list-hover-bg: #f9f9fb;
-$select-list-hover-color: $blue;
+$select-list-hover-color: #30409a;
 
 // Arrow
 $select-arrow-width: 4px;

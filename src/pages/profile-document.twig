@@ -4,236 +4,243 @@
 {% block content %}
     {% include '../components/lk-nav/lk-nav.twig' %}
 
-    <div class="l-profile-document">
+    <div class="l-profile-document__wrap">
+        <div class="l-profile-document">
 
-        <div class="b-title b-add-request-title">
-            <h1>Профиль</h1>
-        </div>
+            <div class="b-title b-add-request-title">
+                <h1>Профиль</h1>
+            </div>
 
-        {# Блок ссылок #}
+            {# Блок ссылок #}
 
-        {% include '../components/accordion-links/accordion-links.twig' with {
-            title: 'Документы',
-            modify: "b-profile__links",
-            items: [{
-                text: "Личные данные"
-            },{
-                text: "Документы",
-                active: "is-active"
-            },{
-                text: "Администраторы"
-            }]
-        } %}
+            {% include '../components/accordion-links/accordion-links.twig' with {
+                title: 'Документы',
+                modify: "b-profile__links",
+                items: [{
+                    text: "Личные данные"
+                },{
+                    text: "Документы",
+                    active: "is-active"
+                },{
+                    text: "Администраторы"
+                }]
+            } %}
 
-        {# Для отображения блока добавить класс is-active к классу b-empty-page #}
+            {# Для отображения блока добавить класс is-active к классу b-empty-page #}
 
-        <div class="b-empty-page is-active">
-            <p>
-                Еще не загружен ни один документ
-            </p>
-        </div>
+            <div class="b-empty-page is-active">
+                <p>
+                    Еще не загружен ни один документ
+                </p>
+            </div>
 
-        {# Для отображения блока добавить класс is-active к классу b-profile-document-error #}
+            {# Для отображения блока добавить класс is-active к классу b-profile-document-error #}
 
-        <div class="b-profile-document-error is-active">
-            <div class="b-profile-document-error__close"></div>
-            <p>
-                К сожалению, вы выбрали недопустимый формат файла. Попробуйте другой
-            </p>
-        </div>
+            <div class="b-profile-document-error is-active">
+                <div class="b-profile-document-error__close"></div>
+                <p>
+                    К сожалению, вы выбрали недопустимый формат файла. Попробуйте другой
+                </p>
+            </div>
 
-        <div class="b-profile-document__list">
-            <div class="b-profile-document__item j-profile-document__item">
-                <div class="b-profile-document__item-title">
-                    <a href="#" class="b-profile-document__item-title-link b-link-line">
-                        Договор аренды.doc
-                    </a>
-                     <span class="b-profile-document__item-title-weight">
-                         5,5 мб
-                     </span>
-                </div>
-                <div class="b-profile-document__item-desc">
-                    <span class="b-profile-document__item-name">
-                        Сергей Иванов
-                    </span>
-                    <time datetime="2018-12-12" class="b-profile-document__item-date">
-                        12.12.2018
-                    </time>
-                    <div class="b-profile-document__item-delete j-profile-document__item-delete">
-                        <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
-                            {% include "../sprites/svg/delete-icon.svg.twig" %}
+            <div class="b-profile-document__list">
+                <div class="b-profile-document__item j-profile-document__item">
+                    <div class="b-profile-document__item-title">
+                        <a href="#" class="b-profile-document__item-title-link b-link-line">
+                            Договор аренды.doc
                         </a>
-                        <div class="b-profile-document__item-delete-tooltip">
-                            <a href="#" class="b-link-line">
-                                Удалить
+                         <span class="b-profile-document__item-title-weight">
+                             5,5 мб
+                         </span>
+                    </div>
+                    <div class="b-profile-document__item-desc">
+                        <span class="b-profile-document__item-name">
+                            Сергей Иванов
+                        </span>
+                        <time datetime="2018-12-12" class="b-profile-document__item-date">
+                            12.12.2018
+                        </time>
+                        <div class="b-profile-document__item-delete j-profile-document__item-delete">
+                            <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
+                                {% include "../sprites/svg/delete-icon.svg.twig" %}
                             </a>
+                            <div class="b-profile-document__item-delete-tooltip">
+                                <a href="#" class="b-link-line">
+                                    Удалить
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="b-profile-document__item j-profile-document__item">
+                    <div class="b-profile-document__item-title">
+                        <a href="#" class="b-profile-document__item-title-link b-link-line">
+                            Заявка на заключение соглашения.pdf
+                        </a>
+                        <span class="b-profile-document__item-title-weight">
+                             5,5 мб
+                         </span>
+                    </div>
+                    <div class="b-profile-document__item-desc">
+                        <span class="b-profile-document__item-name">
+                            ОЭЗ
+                        </span>
+                        <time datetime="2018-12-12" class="b-profile-document__item-date">
+                            12.12.2018
+                        </time>
+                        <div class="b-profile-document__item-delete j-profile-document__item-delete">
+                            <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
+                                {% include "../sprites/svg/delete-icon.svg.twig" %}
+                            </a>
+                            <div class="b-profile-document__item-delete-tooltip">
+                                <a href="#" class="b-link-line">
+                                    Удалить
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="b-profile-document__item j-profile-document__item">
+                    <div class="b-profile-document__item-title">
+                        <a href="#" class="b-profile-document__item-title-link b-link-line">
+                            Действующий бизнес-план компании.pdf
+                        </a>
+                        <span class="b-profile-document__item-title-weight">
+                             5,5 мб
+                         </span>
+                    </div>
+                    <div class="b-profile-document__item-desc">
+                        <span class="b-profile-document__item-name">
+                            ОЭЗ
+                        </span>
+                        <time datetime="2018-12-12" class="b-profile-document__item-date">
+                            24.11.2018
+                        </time>
+                        <div class="b-profile-document__item-delete j-profile-document__item-delete">
+                            <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
+                                {% include "../sprites/svg/delete-icon.svg.twig" %}
+                            </a>
+                            <div class="b-profile-document__item-delete-tooltip">
+                                <a href="#" class="b-link-line">
+                                    Удалить
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="b-profile-document__item j-profile-document__item">
+                    <div class="b-profile-document__item-title">
+                        <a href="#" class="b-profile-document__item-title-link b-link-line">
+                            Соглашение об осуществлении деятельности с допсоглашениями и заявками.xls
+                        </a>
+                        <span class="b-profile-document__item-title-weight">
+                             5,5 мб
+                         </span>
+                    </div>
+                    <div class="b-profile-document__item-desc">
+                        <span class="b-profile-document__item-name">
+                            Сергей Иванов
+                        </span>
+                        <time datetime="2018-12-12" class="b-profile-document__item-date">
+                            18.11.2018
+                        </time>
+                        <div class="b-profile-document__item-delete j-profile-document__item-delete">
+                            <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
+                                {% include "../sprites/svg/delete-icon.svg.twig" %}
+                            </a>
+                            <div class="b-profile-document__item-delete-tooltip">
+                                <a href="#" class="b-link-line">
+                                    Удалить
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="b-profile-document__item j-profile-document__item">
+                    <div class="b-profile-document__item-title">
+                        <a href="#" class="b-profile-document__item-title-link b-link-line">
+                            Допсоглашение 1.pdf
+                        </a>
+                        <span class="b-profile-document__item-title-weight">
+                             5,5 мб
+                         </span>
+                    </div>
+                    <div class="b-profile-document__item-desc">
+                        <span class="b-profile-document__item-name">
+                            Сергей Иванов
+                        </span>
+                        <time datetime="2018-12-12" class="b-profile-document__item-date">
+                            12.11.2018
+                        </time>
+                        <div class="b-profile-document__item-delete j-profile-document__item-delete">
+                            <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
+                                {% include "../sprites/svg/delete-icon.svg.twig" %}
+                            </a>
+                            <div class="b-profile-document__item-delete-tooltip">
+                                <a href="#" class="b-link-line">
+                                    Удалить
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="b-profile-document__item j-profile-document__item">
+                    <div class="b-profile-document__item-title">
+                        <a href="#" class="b-profile-document__item-title-link b-link-line">
+                            Допсоглашение 1.pdf
+                        </a>
+                        <span class="b-profile-document__item-title-weight">
+                             5,5 мб
+                         </span>
+                    </div>
+                    <div class="b-profile-document__item-desc">
+                        <span class="b-profile-document__item-name">
+                            Сергей Иванов
+                        </span>
+                        <time datetime="2018-12-12" class="b-profile-document__item-date">
+                            12.11.2018
+                        </time>
+                        <div class="b-profile-document__item-delete j-profile-document__item-delete">
+                            <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
+                                {% include "../sprites/svg/delete-icon.svg.twig" %}
+                            </a>
+                            <div class="b-profile-document__item-delete-tooltip">
+                                <a href="#" class="b-link-line">
+                                    Удалить
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="b-profile-document__item j-profile-document__item">
-                <div class="b-profile-document__item-title">
-                    <a href="#" class="b-profile-document__item-title-link b-link-line">
-                        Заявка на заключение соглашения.pdf
-                    </a>
-                    <span class="b-profile-document__item-title-weight">
-                         5,5 мб
-                     </span>
-                </div>
-                <div class="b-profile-document__item-desc">
-                    <span class="b-profile-document__item-name">
-                        ОЭЗ
+            <div class="b-profile-add">
+                <label class="b-profile-add__label">
+                    <input type="file" class="b-profile-add__input-file">
+                    <span class="button-add">
+                        Загрузить документ
                     </span>
-                    <time datetime="2018-12-12" class="b-profile-document__item-date">
-                        12.12.2018
-                    </time>
-                    <div class="b-profile-document__item-delete j-profile-document__item-delete">
-                        <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
-                            {% include "../sprites/svg/delete-icon.svg.twig" %}
-                        </a>
-                        <div class="b-profile-document__item-delete-tooltip">
-                            <a href="#" class="b-link-line">
-                                Удалить
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                </label>
             </div>
 
-            <div class="b-profile-document__item j-profile-document__item">
-                <div class="b-profile-document__item-title">
-                    <a href="#" class="b-profile-document__item-title-link b-link-line">
-                        Действующий бизнес-план компании.pdf
-                    </a>
-                    <span class="b-profile-document__item-title-weight">
-                         5,5 мб
-                     </span>
-                </div>
-                <div class="b-profile-document__item-desc">
-                    <span class="b-profile-document__item-name">
-                        ОЭЗ
-                    </span>
-                    <time datetime="2018-12-12" class="b-profile-document__item-date">
-                        24.11.2018
-                    </time>
-                    <div class="b-profile-document__item-delete j-profile-document__item-delete">
-                        <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
-                            {% include "../sprites/svg/delete-icon.svg.twig" %}
-                        </a>
-                        <div class="b-profile-document__item-delete-tooltip">
-                            <a href="#" class="b-link-line">
-                                Удалить
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            {# Для отображения блока добавить класс is-active к классу b-empty-page #}
+
+            <div class="b-empty-page b-empty-page_padding_top is-active">
+                <p>
+                    Еще не загружен ни один документ. Чтобы загрузить нажмите на кнопку справа.
+                </p>
             </div>
 
-            <div class="b-profile-document__item j-profile-document__item">
-                <div class="b-profile-document__item-title">
-                    <a href="#" class="b-profile-document__item-title-link b-link-line">
-                        Соглашение об осуществлении деятельности с допсоглашениями и заявками.xls
-                    </a>
-                    <span class="b-profile-document__item-title-weight">
-                         5,5 мб
-                     </span>
-                </div>
-                <div class="b-profile-document__item-desc">
-                    <span class="b-profile-document__item-name">
-                        Сергей Иванов
-                    </span>
-                    <time datetime="2018-12-12" class="b-profile-document__item-date">
-                        18.11.2018
-                    </time>
-                    <div class="b-profile-document__item-delete j-profile-document__item-delete">
-                        <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
-                            {% include "../sprites/svg/delete-icon.svg.twig" %}
-                        </a>
-                        <div class="b-profile-document__item-delete-tooltip">
-                            <a href="#" class="b-link-line">
-                                Удалить
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="b-profile-document__item j-profile-document__item">
-                <div class="b-profile-document__item-title">
-                    <a href="#" class="b-profile-document__item-title-link b-link-line">
-                        Допсоглашение 1.pdf
-                    </a>
-                    <span class="b-profile-document__item-title-weight">
-                         5,5 мб
-                     </span>
-                </div>
-                <div class="b-profile-document__item-desc">
-                    <span class="b-profile-document__item-name">
-                        Сергей Иванов
-                    </span>
-                    <time datetime="2018-12-12" class="b-profile-document__item-date">
-                        12.11.2018
-                    </time>
-                    <div class="b-profile-document__item-delete j-profile-document__item-delete">
-                        <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
-                            {% include "../sprites/svg/delete-icon.svg.twig" %}
-                        </a>
-                        <div class="b-profile-document__item-delete-tooltip">
-                            <a href="#" class="b-link-line">
-                                Удалить
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="b-profile-document__item j-profile-document__item">
-                <div class="b-profile-document__item-title">
-                    <a href="#" class="b-profile-document__item-title-link b-link-line">
-                        Допсоглашение 1.pdf
-                    </a>
-                    <span class="b-profile-document__item-title-weight">
-                         5,5 мб
-                     </span>
-                </div>
-                <div class="b-profile-document__item-desc">
-                    <span class="b-profile-document__item-name">
-                        Сергей Иванов
-                    </span>
-                    <time datetime="2018-12-12" class="b-profile-document__item-date">
-                        12.11.2018
-                    </time>
-                    <div class="b-profile-document__item-delete j-profile-document__item-delete">
-                        <a href="#" class="b-profile-document__item-delete-button j-delete-doc-button">
-                            {% include "../sprites/svg/delete-icon.svg.twig" %}
-                        </a>
-                        <div class="b-profile-document__item-delete-tooltip">
-                            <a href="#" class="b-link-line">
-                                Удалить
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <div class="b-profile-add">
-            <label class="b-profile-add__label">
-                <input type="file" class="b-profile-add__input-file">
-                <span class="button-add">
-                    Загрузить документ
-                </span>
-            </label>
+        <div class="l-profile-logout">
+            <button class="button-logout j-logout" type="button">Выйти из личного кабинета</button>
         </div>
-
-        {# Для отображения блока добавить класс is-active к классу b-empty-page #}
-
-        <div class="b-empty-page b-empty-page_padding_top is-active">
-            <p>
-                Еще не загружен ни один документ. Чтобы загрузить нажмите на кнопку справа.
-            </p>
-        </div>
-
     </div>
+
 {% endblock %}
