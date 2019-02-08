@@ -45,7 +45,8 @@
                 {% include "../forms/input-text/input-text.twig" with {
                     id: "visitTime",
                     name: "visitTime",
-                    required: "true"
+                    required: "true",
+                    dateMask: true
                 } %}
 
                 <label for="theme-request" class="b-form-block__label">
