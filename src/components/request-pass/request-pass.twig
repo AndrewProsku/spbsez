@@ -1,0 +1,196 @@
+<div class="b-add-request__content j-request-pass">
+    <form action="/add-request-pass.html" method="get" enctype="multipart/form-data" class="b-add-request__form">
+        <!--
+         Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
+         Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
+         -->
+        <div class="b-add-request__org">
+            <h4>Организация</h4>
+
+            <div class="b-form-block">
+                {% include "../forms/select/select.twig" with {
+                    id: "territory",
+                    name: "territory",
+                    options: [{
+                        value: 'Тест первый',
+                        text: 'Тест первый',
+                        selected: true
+                    },{
+                        value: 'Тест второй',
+                        text: 'Тест второй',
+                    },{
+                        value: 'Третье тестовое значени',
+                        text: 'Третье тестовое значени',
+                    }]
+                } %}
+                <label for="appeal" class="b-form-block__label">
+                    Территория для проезда
+                </label>
+            </div>
+
+            <div class="b-form-block">
+                {% include "../forms/input-text/input-text.twig" with {
+                    id: "organization",
+                    name: "organization",
+                    required: "true"
+                } %}
+
+                <label for="theme-request" class="b-form-block__label">
+                    Организация, подающая заявку
+                </label>
+                <span class="b-form-block__error-text">Текст подсказки</span>
+            </div>
+
+            <div class="b-form-block">
+                {% include "../forms/input-text/input-text.twig" with {
+                    id: "visitTime",
+                    name: "visitTime",
+                    required: "true"
+                } %}
+
+                <label for="theme-request" class="b-form-block__label">
+                    Дата и время визита
+                </label>
+                <span class="b-form-block__error-text">Текст подсказки</span>
+            </div>
+
+            <div class="b-form-block">
+                {% include "../forms/input-text/input-text.twig" with {
+                    id: "visitTarget",
+                    name: "visitTarget",
+                    required: "true"
+                } %}
+
+                <label for="theme-request" class="b-form-block__label">
+                    Цель визита
+                </label>
+                <span class="b-form-block__error-text">Текст подсказки</span>
+            </div>
+
+            <div class="b-form-block">
+                {% include "../forms/input-text/input-text.twig" with {
+                    id: "executiveCompany",
+                    name: "executiveCompany",
+                    required: "true"
+                } %}
+
+                <label for="theme-request" class="b-form-block__label">
+                    Должностное лицо компании, подающее заявку
+                </label>
+                <span class="b-form-block__error-text">Текст подсказки</span>
+            </div>
+
+            <div class="b-form-block b-form-block_theme_grey">
+                {% include "../forms/input-text/input-text.twig" with {
+                    id: "executiveVisit",
+                    name: "executiveVisit",
+                    required: "true"
+                } %}
+
+                <label for="theme-request" class="b-form-block__label">
+                    Должностное лицо компании, ответственное за визит
+                </label>
+                <span class="b-form-block__error-text">Текст подсказки</span>
+            </div>
+
+            <div class="b-form-block">
+                {% include "../forms/telephone/telephone.twig" with {
+                    id: "phone",
+                    name: "phone"
+                } %}
+
+                <label for="phone" class="b-form-block__label">Телефон</label>
+                <span class="b-form-block__error-text">Текст подсказки</span>
+            </div>
+        </div>
+
+        <div class="b-add-request__pass">
+            <h4>Пропуск</h4>
+
+            <div class="b-add-request__pass-container j-pass-container">
+
+                <div class="b-add-request__pass__item">
+
+                    <div class="b-form-block__half-wrap b-form-block__half-wrap_is_top">
+                        <div class="b-form-block">
+                            {% include "../forms/input-text/input-text.twig" with {
+                                id: "fio",
+                                name: "fio[]",
+                                required: "true"
+                            } %}
+
+                            <label for="theme-request" class="b-form-block__label">
+                                ФИО
+                            </label>
+                            <span class="b-form-block__error-text">Текст подсказки</span>
+                        </div>
+
+                        <div class="b-form-block">
+                            {% include "../forms/input-text/input-text.twig" with {
+                                id: "organizationPass",
+                                name: "organizationPass[]",
+                                required: "true"
+                            } %}
+
+                            <label for="theme-request" class="b-form-block__label">
+                                Организация
+                            </label>
+                            <span class="b-form-block__error-text">Текст подсказки</span>
+                        </div>
+                    </div>
+
+                    <div class="b-form-block__half-wrap b-form-block__half-wrap_is_center">
+                        <div class="b-form-block">
+                            {% include "../forms/input-text/input-text.twig" with {
+                                id: "carModel",
+                                name: "carModel[]",
+                                required: "true"
+                            } %}
+
+                            <label for="theme-request" class="b-form-block__label">
+                                Марка автомобиля
+                            </label>
+                            <span class="b-form-block__error-text">Текст подсказки</span>
+                        </div>
+
+                        <div class="b-form-block">
+                            {% include "../forms/input-text/input-text.twig" with {
+                                id: "stateNumber",
+                                name: "stateNumber[]",
+                                required: "true"
+                            } %}
+
+                            <label for="theme-request" class="b-form-block__label">
+                                Гос. номер
+                            </label>
+                            <span class="b-form-block__error-text">Текст подсказки</span>
+                        </div>
+                    </div>
+
+                    <div class="b-form-block">
+                        {% include "../forms/input-text/input-text.twig" with {
+                            id: "accompanying",
+                            name: "accompanying[]",
+                            required: "true"
+                        } %}
+
+                        <label for="theme-request" class="b-form-block__label">
+                            Фамилия и инициалы сопровождающего лица
+                        </label>
+                        <span class="b-form-block__error-text">Текст подсказки</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="b-profile-add">
+                <button class="button-add j-add-pass" type="button">Добавить еще пропуск</button>
+            </div>
+        </div>
+
+        <button type="submit" class="button b-add-request__form-button">
+            Подать заявку
+        </button>
+    </form>
+</div>

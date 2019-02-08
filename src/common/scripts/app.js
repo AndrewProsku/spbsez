@@ -18,6 +18,7 @@ import Popup from 'components/popup';
 import ProfileAdministrators from '../../components/profile-administrators';
 import ProfileDocs from '../../components/profile-docs';
 import ProfileInfo from '../../components/profile-info';
+import ProfileRequestPass from '../../components/request-pass';
 import ReportForm from '../../components/reports/reports-form';
 import Residents from '../../components/residents/';
 import Select from '../../components/forms/select/';
@@ -517,6 +518,17 @@ if (administrators) {
     const profileAdministrators = new ProfileAdministrators();
 
     profileAdministrators.init();
+}
+
+/**
+ * Инициализация страницы Заявка на пропуск
+ */
+const requestPass = document.querySelector('.j-request-pass');
+
+if (requestPass) {
+    const profileRequestPass = new ProfileRequestPass();
+
+    profileRequestPass.init();
 }
 
 /**
