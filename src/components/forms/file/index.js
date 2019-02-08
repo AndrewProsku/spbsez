@@ -19,10 +19,10 @@ class InputFile {
             Utils.show(this.clearButton);
         });
         this.clearButton.addEventListener('click', () => {
-            const NBSP_CHAT_CODE = 160;
+            const NBSP_CHAR_CODE = 160;
 
             this.fileInput.value = null;
-            this.fileInputText.textContent = String.fromCharCode(NBSP_CHAT_CODE);
+            this.fileInputText.textContent = String.fromCharCode(NBSP_CHAR_CODE);
 
             Utils.hide(this.clearButton);
             Utils.show(this.addButton);

@@ -56,8 +56,8 @@ class Index {
                 no_results_text          : this.noResultsText
                 /* eslint-enable camelcase */
             })
-            .change(() => {
-                this.mediator.publish('chosen-select-change');
+            .change((event) => {
+                this.mediator.publish('chosen-select-change', event);
             });
 
         this.bindEvents();

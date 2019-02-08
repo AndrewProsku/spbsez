@@ -1,0 +1,296 @@
+{
+  "request": {
+    "status": 1,
+    "errors": [
+      "Ошибка!"
+    ]
+  },
+  "data": {
+    "forms": [
+      {
+        "blocks": [
+          {
+            "fields": [
+              {
+                "id": "foreign-investors-yes",
+                "checked": false
+              },
+              {
+                "id": "foreign-investors-no",
+                "checked": true
+              },
+              {
+                "id": "investors-countries",
+                "value": "Гондурас"
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "jobs-plan-all",
+                "value": 1232
+              },
+              {
+                "id": "jobs-plan-year",
+                "value": 324
+              },
+              {
+                "id": "jobs-actual-all",
+                "value": null
+              },
+              {
+                "id": "jobs-actual-year",
+                "value": 324234
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "invests-plan-all",
+                "value": 23123
+              },
+              {
+                "id": "invests-plan-year",
+                "value": 213213
+              },
+              {
+                "id": "capital-invests-plan-all",
+                "value": 12321
+              },
+              {
+                "id": "capital-invests-plan-year",
+                "value": 213213
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "invests-all",
+                "value": 1232
+              },
+              {
+                "id": "invests-year",
+                "value": 324
+              },
+              {
+                "id": "capital-invests-all",
+                "value": null
+              },
+              {
+                "id": "capital-invests-year",
+                "value": 324234
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "revenue-all",
+                "value": 1232
+              },
+              {
+                "id": "revenue-year",
+                "value": 324
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "produce-all",
+                "value": 1232
+              },
+              {
+                "id": "produce-year",
+                "value": 324
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "salary",
+                "value": 1232
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "fields": [
+              {
+                "id": "taxes-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-year",
+                "value": "123"
+              },
+              {
+                "id": "taxes-federal-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-federal-year",
+                "value": "123"
+              },
+              {
+                "id": "taxes-regional-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-regional-year",
+                "value": "123"
+              },
+              {
+                "id": "taxes-local-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-local-year",
+                "value": "123"
+              },
+              {
+                "id": "taxes-offbudget-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-offbudget-year",
+                "value": "123"
+              },
+              {
+                "id": "taxes-nds-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-nds-year",
+                "value": "123"
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "taxes-breaks-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-breaks-year",
+                "value": "123"
+              },
+              {
+                "id": "taxes-breaks-federal-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-breaks-federal-year",
+                "value": "123"
+              },
+              {
+                "id": "taxes-breaks-local-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-breaks-local-year",
+                "value": "123"
+              },
+              {
+                "id": "taxes-breaks-offbudget-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-breaks-offbudget-year",
+                "value": "123"
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "custom-duties-all",
+                "value": "123"
+              },
+              {
+                "id": "custom-duties-year",
+                "value": "123"
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "custom-duties-breaks-all",
+                "value": "123"
+              },
+              {
+                "id": "custom-duties-breaks-year",
+                "value": "123"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "fields": [
+              {
+                "id": "area-application",
+                "value": "123"
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "area-rent",
+                "value": "123"
+              },
+              {
+                "id": "area-property",
+                "value": "123"
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "object-name-plan",
+                "value": "123"
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "capital-object",
+                "value": "123"
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "construction-period",
+                "value": null
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "construction-stage",
+                "value": "period1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

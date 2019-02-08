@@ -1,0 +1,165 @@
+<div class="b-report-form__title">Отчет об объектах строительства резидентов</div>
+{# 1 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="1">
+        <h3 class="b-report-block__title">Площадь требуемого земельного участка в соответствии с заявкой,&#160;га</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block b-input-block_is_untouched">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "area-application",
+                name: "area-application"
+            } %}
+            <label class="b-input-block__label" for="area-application">С начала деятельности в качестве резидента, млн ₽</label>
+        </div>
+    </div>
+</section>
+{# 2 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="2">
+        <h3 class="b-report-block__title">Площадь земельного участка, выданного резиденту,&#160;га&#160;факт</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "area-rent",
+                    name: "area-rent"
+                } %}
+                <label class="b-input-block__label" for="area-rent">В аренду,&#160;га</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "area-property",
+                    name: "area-property"
+                } %}
+                <label class="b-input-block__label" for="area-property">В собственность,&#160;га</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 3 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="3">
+        <h3 class="b-report-block__title">Наименование объекта капитального строительства в соответствии с бизнес-планом</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block b-input-block_is_untouched">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "object-name-plan",
+                name: "object-name-plan"
+            } %}
+            <label class="b-input-block__label" for="object-name-plan">Наименование объекта</label>
+        </div>
+    </div>
+</section>
+{# 4 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="4">
+        <h3 class="b-report-block__title">Мощность объекта капитального строительства,&#160;м²</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block b-input-block_is_untouched">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "capital-object",
+                name: "capital-object"
+            } %}
+            <label class="b-input-block__label" for="capital-object">Мощность объекта,&#160;м²</label>
+        </div>
+    </div>
+</section>
+{# 5 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="5">
+        <h3 class="b-report-block__title">Сроки строительства в соответствии с бизнес-планом</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block b-input-block_is_untouched">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "construction-period",
+                name: "construction-period"
+            } %}
+            <label class="b-input-block__label" for="construction-period">Сроки строительства</label>
+        </div>
+    </div>
+</section>
+{# 6 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="6">
+        <h3 class="b-report-block__title">Текущая стадия строительства объекта<div class="b-help j-help">С начала деятельности в качестве резидента</div></h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block j-reports-form-select">
+            {% include "../../forms/select/select.twig" with {
+                id: "construction-stage",
+                name: "construction-stage",
+                placeholder: true,
+                placeholderText: " ",
+                options: [{
+                    value: 'period1',
+                    text: 'Заключение договора аренды'
+                },{
+                    value: 'period1',
+                    text: 'Землеустроительные работы'
+                },{
+                    value: 'period2',
+                    text: 'Проектирование'
+                },{
+                    value: 'period3',
+                    text: 'Строительство'
+                },{
+                    value: 'period4',
+                    text: 'Получение разрешения на ввод в эксплуатацию'
+                },{
+                    value: 'period5',
+                    text: 'Операционная деятельность'
+                },{
+                    value: 'period6',
+                    text: 'Строительство не предусмотрено'
+                }]
+            } %}
+            <label class="b-input-block__label" for="construction-stage">
+                Стадия строительства
+            </label>
+        </div>
+
+        <div class="b-input-group b-report-block__extra-fields">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "construction-permit",
+                    name: "construction-permit"
+                } %}
+                <label class="b-input-block__label" for="construction-permit">Номер разрешения</label>
+            </div>
+            {% include "../../forms/file/file.twig" with {
+                class: "b-input-block j-construction-permit-file",
+                id: "construction-permit-file",
+                name: "construction-permit-file",
+                label: "Прикрепите файл разрешения"
+            } %}
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "construction-permit-date",
+                    name: "construction-permi-datet"
+                } %}
+                <label class="b-input-block__label" for="construction-permit-date">Дата документа</label>
+            </div>
+        </div>
+
+
+        {#<div class="b-form-block b-input-file j-construction-permit-file">
+            <input type="file" class="b-input-file__input"
+                   id="construction-permit-file"
+                   name="construction-permit-file">
+            <div class="b-input-file__text b-pseudo-input">&nbsp;</div>
+            <label for="construction-permit-file" class="b-input-file__add">Выбрать файл<i></i></label>
+            <button class="b-input-file__delete" type="button">Удалить<i></i></button>
+            <div class="b-form-block__label">Прикрепите файл разрешения</div>
+        </div>#}
+
+
+        <button type="button" class="button-add button-add_theme_white b-report-block__add">
+            Добавить еще стадию реализации проекта
+        </button>
+    </div>
+</section>

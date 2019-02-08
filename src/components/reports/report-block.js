@@ -28,6 +28,7 @@ class ReportBlock {
         this.target = options.target;
         this.inputsData = options.inputsData;
         this.inputs = Array.from(this.target.querySelectorAll('input'));
+        this.selects = Array.from(this.target.querySelectorAll('select'));
 
         this._initInputs();
         this._bindEvents();
@@ -40,10 +41,24 @@ class ReportBlock {
                 this.onChange(event.target);
             });
 
-            input.addEventListener('focus', (event) => {
-                event.target.closest('.b-input-block').classList.remove('b-input-block_is_untouched');
-            });
+            switch (input.type) {
+                case 'text':
+                case 'email':
+                case 'tel': {
+                    input.addEventListener('focus', (event) => {
+                        event.target.closest('.b-input-block').classList.remove('b-input-block_is_untouched');
+                    });
+                    break;
+                }
+                default: break;
+            }
         });
+
+        if (this.selects.length) {
+            mediator.subscribe('chosen-select-change', () => {
+                // console.log(event.currentTarget.value);
+            });
+        }
     }
 
     _initInputs() {
