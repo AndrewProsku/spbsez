@@ -22,12 +22,9 @@
 }
 
 .b-ask-for-advice__title {
+    @include margin-level(bottom, yellow);
     padding: 0;
     color: $white;
-
-    @media #{$fullhd} {
-        padding-bottom: 30px;
-    }
 }
 
 .b-ask-for-advice__text p {
