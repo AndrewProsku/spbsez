@@ -56,7 +56,7 @@
 .b-functions__item {
     @include prefix(3, 32);
     @include suffix(3, 32);
-    @include padding-level(top, dark-yellow);
+    @include padding-level(top, yellow);
     @include padding-level(bottom, green);
     min-height: 200px;
     display: flex;
