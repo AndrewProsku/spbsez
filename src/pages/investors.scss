@@ -1,0 +1,141 @@
+.l-investors {
+    @include row();
+}
+
+.l-investors__top {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include margin-level(bottom, pink);
+    @include padding-level(top, blue);
+    width: 100%;
+
+    h1 {
+        @include margin-level(bottom, cyan);
+        @include font-size(h1);
+        padding: 0;
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(1, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(1, 36);
+    }
+}
+
+.l-investors__priorities {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include margin-level(bottom, pink);
+    width: 100%;
+
+    @media #{$fullhd} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+}
+
+.l-investors__advantage {
+    @include margin-level(bottom, pink);
+    width: 100%;
+}
+
+.l-investors__privileges {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include margin-level(bottom, pink);
+    width: 100%;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(1, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(1, 36);
+    }
+}
+
+.l-investors__taxes {
+    width: 100%;
+}
+
+.l-investors__rate {
+    width: 100%;
+}
+
+.l-investors__post {
+    width: 100%;
+}
+
+.l-investors__conditions {
+    width: 100%;
+}
+
+.l-investors__infrastructure {
+    width: 100%;
+}
+
+.l-investors__benefits {
+    width: 100%;
+}
+
+.l-investors__resident {
+    width: 100%;
+}
+
+.l-investors__documents {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(top, pink);
+    @include padding-level(bottom, pink);
+    width: 100%;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.l-investors__department {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include margin-level(bottom, pink);
+    width: 100%;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(5, 36);
+    }
+}
+
+.b-invest-documents__file {
+    @include column(32, 32);
+    
+    @media #{$laptop} {
+        @include column(20, 30);
+    }
+}
+
+.b-invest-depart__text {
+    @include font-size(p1);
+    @include margin-level(bottom, green);
+}
+
+.b-invest-depart__contacts {
+    @include margin-level(bottom, cyan);
+}

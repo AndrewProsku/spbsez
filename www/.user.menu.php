@@ -2,7 +2,7 @@
 $aMenuLinks = Array(
 	Array(
 		"Профиль", 
-		"/cabinet/profile/", 
+		"/cabinet/",
 		Array(), 
 		Array(), 
 		"\$GLOBALS[\"USER\"]->IsAuthorized()" 
@@ -10,23 +10,23 @@ $aMenuLinks = Array(
 	Array(
 		"Подача отчета", 
 		"/cabinet/report/", 
-		Array(), 
 		Array(),
-        "\$GLOBALS[\"USER\"]->IsAuthorized()"
+        Array("check"=>"canReport"),
+        "false"
     ),
 	Array(
 		"Сообщение от ОЭЗ", 
 		"/cabinet/messages/", 
-		Array(), 
 		Array(),
-        "\$GLOBALS[\"USER\"]->IsAuthorized()"
+        Array("check"=>"canMessages"),
+        "false"
     ),
 	Array(
 		"Подать заявку", 
 		"/cabinet/request/", 
-		Array(), 
 		Array(),
-        "\$GLOBALS[\"USER\"]->IsAuthorized()"
+        Array("check"=>"canRequest"),
+        "false"
     )
 );
 ?>

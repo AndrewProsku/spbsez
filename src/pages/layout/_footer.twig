@@ -55,10 +55,11 @@
     <h3 class="b-message-popup__header">Написать сообщение</h3>
     <form action="" method="post" enctype="multipart/form-data" class="b-vacancy-response-form j-message-form">
         <div class="b-vacancy-response-form__inputs">
-            <div class="b-form-block j-message-text">
+            <div class="b-form-block j-message-text b-input-textarea">
                 {% include "../../components/forms/textarea/textarea.twig" with {
                     id: "text",
-                    name: "text"
+                    name: "text",
+                    rows: "3"
                 } %}
 
                 <label for="admin-fio" class="b-form-block__label">Комментарий</label>
@@ -70,7 +71,7 @@
                     name: "message-fio"
                 } %}
 
-                <label for="message-fio" class="b-form-block__label">Как тебя зовут</label>
+                <label for="message-fio" class="b-form-block__label">ФИО</label>
                 <span class="b-form-block__error-text">Имя</span>
             </div>
             <div class="b-form-block j-message-email">

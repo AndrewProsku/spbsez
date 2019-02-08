@@ -1,0 +1,34 @@
+{#
+Таблица с названием файлов
+
+modify - модификатор
+    b-files-list_theme_border - с обводкой
+files (array) - список файлов
+    type - подпись на иконке
+    name - название
+    size - размер
+    date - дата
+#}
+
+<div class="b-files-list {{ modify }}">
+
+    {% for file in files %}
+        <div class="b-files-list__item">
+            <div class="b-files-list__left">
+                <span class="b-files-list__icon">{{ file.type }}</span>
+
+                <div class="b-files-list__name-wrap">
+                    <a href="#" class="b-files-list__name b-link-line">{{ file.name }}</a>
+                </div>
+
+                <div class="b-files-list__size">{{ file.size }}</div>
+            </div>
+
+            <div class="b-files-list__right">
+                <div class="b-files-list__size b-files-list__size-adapt">{{ file.size }}</div>
+                <div class="b-files-list__date">{{ file.date }}</div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>

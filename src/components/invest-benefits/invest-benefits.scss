@@ -1,0 +1,133 @@
+.b-invest-benefits {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(top, pink);
+    @include padding-level(bottom, pink);
+
+    @media #{$laptop} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-invest-benefits__item-wrap {
+    display: flex;
+    position: relative;
+    z-index: 1;
+}
+
+.b-invest-benefits__item {
+    @include vertical-paddings(3, 32);
+    @include font-size(p3);
+    @include padding-level(top, blue);
+    @include padding-level(bottom, blue);
+    border: 1px solid $grey;
+    background-color: $white;
+
+    @media #{$fullhd} {
+        @include vertical-paddings(2, 28);
+    }
+}
+
+.b-invest-benefits__item_is_first {
+    @include column(32, 32);
+
+    @media #{$tablet-portrait} {
+        @include column(22, 28);
+    }
+
+    @media #{$laptop} {
+        @include column(24, 28);
+    }
+
+    @media #{$fullhd} {
+        @include column(21, 28);
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        height: 50%;
+        left: 0;
+        right: 0;
+        background-color: $bg-grey;
+        border: 1px solid $grey;
+        z-index: -1;
+    }
+}
+
+.b-invest-benefits__item_is_second {
+    @include column(32, 32);
+    background-color: $blue;
+    background-image: url("/images/invest-benefits/benefits-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: $white;
+    border: none;
+
+    @media #{$tablet-portrait} {
+        @include column(26, 32);
+        @include push(6, 32);
+    }
+
+    @media #{$laptop} {
+        @include column(24, 28);
+        @include push(4, 28);
+    }
+
+    @media #{$fullhd} {
+        @include column(18, 28);
+        @include push(7, 28);
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 50%;
+        background-color: $bg-grey;
+        border: 1px solid $grey;
+        border-top: none;
+        z-index: -1;
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 50%;
+        height: 50%;
+        border: 1px solid $grey;
+        border-top: none;
+        border-bottom: none;
+        z-index: -1;
+
+        @media #{$fullhd} {
+            left: column(3.5, 28);
+        }
+    }
+}
+
+.b-invest-benefits__item_is_third {
+    @include column(32, 32);
+
+    @media #{$tablet-portrait} {
+        @include column(26, 32);
+    }
+
+    @media #{$laptop} {
+        @include column(24, 28);
+    }
+
+    @media #{$fullhd} {
+        @include column(18, 28);
+    }
+}
+
+.b-invest-benefits__title {
+    margin-bottom: 27px;
+}

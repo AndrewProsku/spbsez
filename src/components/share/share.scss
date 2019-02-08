@@ -1,3 +1,4 @@
+
 .b-share {
     display: flex;
     align-items: center;
@@ -14,6 +15,7 @@
 }
 
 .b-share__item {
+    @include transition(opacity);
     width: 35px;
     height: 35px;
     margin-right: 14px;
@@ -24,19 +26,23 @@
         margin-right: 0;
     }
 
+    &:hover {
+        opacity: 0.6;
+    }
+
     @media #{$tablet-portrait} {
         margin-right: 24px;
     }
 }
 
 .b-share__item_icon_fb {
-    background-image: url('/images/share/fb.png');
+    background-image: url("/images/share/fb.png");
 }
 
 .b-share__item_icon_vk {
-    background-image: url('/images/share/vk.png');
+    background-image: url("/images/share/vk.png");
 }
 
 .b-share__item_icon_odk {
-    background-image: url('/images/share/odk.png');
+    background-image: url("/images/share/odk.png");
 }

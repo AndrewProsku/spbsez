@@ -3,11 +3,11 @@
 namespace Kelnik\User\Components;
 
 use Bex\Bbc;
-use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Userdata\Admin;
-use Kelnik\Userdata\Data;
+use Kelnik\Userdata\Profile\ProfileModel;
 use Kelnik\Userdata\Model\DocsTable;
+use Kelnik\Userdata\Profile\ProfileSectionAdmins;
+use Kelnik\Userdata\Profile\ProfileSectionDocs;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -27,6 +27,8 @@ class ProfileForm extends Bbc\Basis
     ];
     protected $cacheTemplate = false;
 
+    protected $profile;
+
     protected function executeMain()
     {
         global $USER;
@@ -35,17 +37,23 @@ class ProfileForm extends Bbc\Basis
             return false;
         }
 
-        if ($this->arParams['SECTION'] == 'docs') {
-            return $this->processDocs();
-        } elseif ($this->arParams['SECTION'] == 'admins') {
-            return $this->processAdmins();
+        try {
+            $this->profile = ProfileModel::getInstance($USER->GetID());
+        } catch (\Exception $e) {
+            return false;
         }
+
+        $method = 'process' . ucfirst($this->arParams['SECTION']);
+
+        if (!method_exists($this, $method)) {
+            return false;
+        }
+
+        return $this->{$method}();
     }
 
     protected function processDocs()
     {
-        global $USER;
-
         $allowExt = DocsTable::getAllowExt();
         foreach ($allowExt as $k => $v) {
             $this->arResult['ACCEPT'][] = $k;
@@ -55,21 +63,17 @@ class ProfileForm extends Bbc\Basis
         $this->arResult['ACCEPT'] = implode(',', $this->arResult['ACCEPT']);
         $this->arResult['ERROR'] = false;
 
-        $this->arResult['DOCS'] = DocsTable::getListByUser($USER->GetID());
+        $this->arResult['DOCS'] = (new ProfileSectionDocs($this->profile))->getList();
 
         return true;
     }
 
     protected function processAdmins()
     {
-        global $USER;
-
-        try {
-            $this->arResult['USERS'] = (new Admin($USER->GetID()))->getEditableUsers();
-        } catch (\Exception $e) {
-            $this->arResult['USERS'] = [];
+        if (!$this->profile->canEditResidentAdmin()) {
+            LocalRedirect('/cabinet/');
         }
 
-        return true;
+        $this->arResult['USERS'] = (new ProfileSectionAdmins($this->profile))->getList();
     }
 }

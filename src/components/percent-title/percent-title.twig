@@ -1,0 +1,28 @@
+{#
+Блок с процентами, (выводится на стр. инвесторам), блок растягивается на 100%, нужна обертка
+
+modify - модификаторы
+    b-percent-title_big_percent - шрифт текста верхнего процета в 200px
+    b-percent-title_small_items - текст доп. процентов меньше чем обычно
+    b-percent-title_two_item - когда доп. процента два
+percent - Большой текст процента
+caption - Текст под процентом
+items (array) - Доп. процента
+    percent - текст процента
+    text - описание к проценту
+#}
+
+<div class="b-percent-title {{ modify }}">
+    <div class="b-percent-title__top">
+        <div class="b-percent-title__percent">{{ percent }}</div>
+        {% if caption %}
+            <div class="b-percent-title__caption">{{ caption }}</div>
+        {% endif %}
+    </div>
+
+    <div class="b-percent-title__bottom">
+        {% for item in items %}
+            <div class="b-percent-title__item">{% if item.percent %}<span>{{ item.percent }}</span>{% endif %} {{ item.text }}</div>
+        {% endfor %}
+    </div>
+</div>

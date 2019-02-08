@@ -49,7 +49,7 @@
 
 <div class="b-profile-add">
     <form method="post" enctype="multipart/form-data">
-        <input type="hidden" name="action" value="addFile">
+        <input type="hidden" name="action" value="addDoc">
         <label class="b-profile-add__label">
             <input type="file"
                    name="doc"

@@ -1,0 +1,15 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Заголовок</title> {% endblock %}
+
+{% block content %}
+    {% include '../components/lk-nav/lk-nav.twig' %}
+    <div class="l-reports">
+        <div class="b-title b-reports-title">
+            <h1>Отчетный период не наступил</h1>
+        </div>
+        <div class="b-reports-empty">
+            Резидент заполняет отчеты 4 раза в год. Следующий отчетный период
+            во 2-м квартале 2019 года. Пришлем уведомление в <a class="b-link-line" href="">«Сообщения от ОЭЗ»</a>, когда наступит отчетный период.
+        </div>
+    </div>
+{% endblock %}

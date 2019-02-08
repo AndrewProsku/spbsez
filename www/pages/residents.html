@@ -265,6 +265,7 @@
     <div class="b-filters__item" data-category-id="4">Высокотехнологичные производства<span class="b-filters__counter">4</span></div>
     <div class="b-filters__item" data-category-id="5">Микроэлектроника<span class="b-filters__counter">11</span></div>
 </div>
+
         <div class="b-residents-content">
 
 <article class="b-resident b-resident_category_1">
@@ -427,12 +428,12 @@
     <h3 class="b-message-popup__header">Написать сообщение</h3>
     <form action="" method="post" enctype="multipart/form-data" class="b-vacancy-response-form j-message-form">
         <div class="b-vacancy-response-form__inputs">
-            <div class="b-form-block j-message-text">
+            <div class="b-form-block j-message-text b-input-textarea">
                     <textarea
             id="text"
             class="b-input-text"
             name="text"
-            rows=""
+            rows="3"
             cols=""
             placeholder=""
     ></textarea>
@@ -441,7 +442,7 @@
                 <span class="b-form-block__error-text">Комментарий</span>
             </div>
             <div class="b-form-block j-message-fio">
-                    <input
+                <input
         id="message-fio"
         class="b-input-text"
         type="text"
@@ -450,9 +451,9 @@
         autocomplete=""
         value=""
         placeholder=""
-                                            >
+                                                        >
 
-                <label for="message-fio" class="b-form-block__label">Как тебя зовут</label>
+                <label for="message-fio" class="b-form-block__label">ФИО</label>
                 <span class="b-form-block__error-text">Имя</span>
             </div>
             <div class="b-form-block j-message-email">

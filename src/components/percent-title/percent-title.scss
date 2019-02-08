@@ -1,0 +1,111 @@
+.b-percent-title {
+    @include font-size(p2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.b-percent-title_big_percent {
+    .b-percent-title__percent {
+        font-size: 80px;
+        line-height: 1.3;
+
+        @media #{$tablet-portrait} {
+            font-size: 120px;
+        }
+
+        @media #{$laptop} {
+            font-size: 160px;
+        }
+
+        @media #{$fullhd} {
+            font-size: 200px;
+            line-height: 1.2;
+        }
+    }
+}
+
+.b-percent-title_small_items {
+    .b-percent-title__item span {
+        @include font-size(h3);
+    }
+}
+
+.b-percent-title_two_item {
+    .b-percent-title__bottom {
+        display: flex;
+        border-top: 2px solid $blue;
+
+        @media #{$tablet-portrait} {
+            display: block;
+            border-top: none;
+        }
+    }
+
+    .b-percent-title__item {
+        border-top: none;
+
+        &:first-child {
+            color: $blue;
+            @include column(13, 32);
+        }
+
+        @media #{$tablet-portrait} {
+            border-top: 2px solid $blue;
+
+            &:first-child {
+                @include column(1, 1);
+            }
+        }
+    }
+}
+
+.b-percent-title_content_start {
+    justify-content: flex-start;
+}
+
+.b-percent-title_more_lineheight {
+    .b-percent-title__percent {
+        line-height: 1.4;
+    }
+}
+
+.b-percent-title__percent {
+    color: $blue;
+    font-size: 60px;
+    line-height: 1;
+
+    @media #{$laptop} {
+        font-size: 80px;
+    }
+
+    @media #{$fullhd} {
+        font-size: 120px;
+    }
+}
+
+.b-percent-title__caption {
+    @include font-size(h4);
+    @include margin-level(bottom, yellow);
+}
+
+.b-percent-title__item {
+    @include padding-level(top, yellow);
+    @include margin-level(bottom, yellow);
+    border-top: 2px solid $blue;
+
+    &:nth-child(2) {
+        border-top-width: 1px;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.b-percent-title__item span {
+    @include font-size(h2);
+    display: block;
+    margin-bottom: 10px;
+}

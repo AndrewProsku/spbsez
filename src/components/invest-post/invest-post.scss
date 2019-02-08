@@ -1,0 +1,126 @@
+.b-invest-post {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(top, pink);
+    @include padding-level(bottom, blue);
+    @include row();
+    background-color: $bg-grey;
+    background-image: url("/images/home/bg-sections.jpg");
+
+    @media #{$tablet-portrait} {
+        @include prefix(2, 36);
+        @include suffix(1, 36);
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(1, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(1, 36);
+    }
+}
+
+.b-invest-post__content {
+    order: 2;
+    
+    @media #{$tablet-portrait} {
+        @include column(21, 32);
+        order: 1;
+    }
+
+    @media #{$laptop} {
+        @include column(20, 32);
+    }
+
+    @media #{$fullhd} {
+        @include column(18, 31);
+    }
+}
+
+.b-invest-post__img {
+    @include column(26, 32);
+    order: 1;
+    margin-bottom: 36px;
+
+    @media #{$tablet-portrait} {
+        @include column(11, 32);
+        @include prefix(1, 32);
+        order: 1;
+        margin-bottom: 0;
+    }
+
+    @media #{$laptop} {
+        @include column(12, 32);
+        @include prefix(2, 32);
+    }
+
+    @media #{$fullhd} {
+        @include column(13, 31);
+    }
+}
+
+.b-invest-post__title {
+    @include font-size(h2);
+    @include margin-level(bottom, green);
+}
+
+.b-invest-post__description {
+    @include font-size(p1);
+    @include margin-level(bottom, blue);
+}
+
+.b-invest-post__caption {
+    @include font-size(h3);
+    @include margin-level(bottom, cyan);
+}
+
+.b-invest-post__list {
+    @include row();
+    @include font-size(p3);
+    @include margin-level(bottom, yellow);
+    margin-left: -#{column(0.5, 18)};
+    margin-right: -#{column(0.5, 18)};
+}
+
+.b-invest-post__list strong {
+    color: $blue;
+}
+
+.b-invest-post__list li {
+    @include margin-level(bottom ,green);
+    padding: 0 column(0.5, 18);
+    width: 100%;
+    position: relative;
+
+    &:before {
+        content: "";
+        display: block;
+        width: 52px;
+        height: 2px;
+        margin-bottom: 15px;
+        background-color: $blue;
+    }
+    
+    @media #{$tablet-portrait} {
+        width: 50%;
+    }
+
+    @media #{$laptop} {
+        width: 33.33%;
+    }
+}
+
+.b-invest-post__list_theme_two {
+    @include font-size(p2);
+}
+
+.b-invest-post__list_theme_two li {
+    width: 100%;
+
+    @media #{$laptop} {
+        width: 50%;
+    }
+}

@@ -131,7 +131,7 @@ class StandartTable extends DataManager
         return implode(
             '-',
             [
-                date('Ymd-Hi'),
+                date('ymd-Hi'),
                 (int)$USER->GetID(),
                 (int) $typeId
             ]

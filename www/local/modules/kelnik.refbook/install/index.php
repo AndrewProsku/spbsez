@@ -99,6 +99,18 @@ class kelnik_refbook extends CModule
             INDEX `ALIAS` (`ALIAS`)
         ) COLLATE='utf8_general_ci' ENGINE=InnoDB;");
 
+        $this->getConnection()->query("CREATE TABLE `kelnik_refbook_team` (
+            `ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `SORT` INT(11) NOT NULL DEFAULT '500',
+            `IMAGE_ID` INT(11) UNSIGNED NULL DEFAULT '0',
+            `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
+            `NAME` VARCHAR(255) NULL DEFAULT NULL,
+            `TEXT` VARCHAR(255) NULL DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            INDEX `SORT` (`SORT`),
+            INDEX `ACTIVE` (`ACTIVE`)
+        ) COLLATE='utf8_general_ci' ENGINE=InnoDB");
+
         //$this->InstallFiles();
     }
 
@@ -110,6 +122,7 @@ class kelnik_refbook extends CModule
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\ResidentTable::getTableName());
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\ResidentTypesTable::getTableName());
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\ReviewTable::getTableName());
+        $this->getConnection()->dropTable(\Kelnik\Refbook\Model\TeamTable::getTableName());
         //$this->UnInstallFiles();
 
         ModuleManager::unRegisterModule($this->MODULE_ID);

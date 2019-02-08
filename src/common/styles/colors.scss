@@ -15,6 +15,8 @@ $dark-black: #000000;
 $bg-map: #f7f8fb;
 $bg-select: #f9f9fb;
 $red: #d0021b;
+$green: #69a32f;
+$orange: #f5a623;
 
 // Brand color
 
@@ -23,3 +25,4 @@ $red: #d0021b;
 $gradient-linear: to right, $blue 0%, $violet 51%, $blue 100%;
 $gradient-30deg: 30deg, $blue, $violet;
 $gradient-0deg: 0deg, $blue, $violet;
+$gradient-blue-circle: radial-gradient(circle 1839px at 18.3% 690.15%, $blue 0%, $violet 100%);

@@ -8,8 +8,9 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Requests\Model\StandartTable;
-use Kelnik\Requests\Model\StatusTable;
 use Kelnik\Requests\Model\TypeTable;
+use Kelnik\Userdata\Profile\ProfileModel;
+use Kelnik\Userdata\Profile\ProfileSectionRequests;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -21,7 +22,7 @@ if (!\Bitrix\Main\Loader::includeModule('bex.bbc')) {
 
 class RequestForm extends Bbc\Basis
 {
-    protected $needModules = ['kelnik.requests'];
+    protected $needModules = ['kelnik.requests', 'kelnik.userdata'];
     protected $checkParams = [];
     protected $cacheTemplate = false;
 
@@ -42,6 +43,17 @@ class RequestForm extends Bbc\Basis
 
         if (!$USER->IsAuthorized()) {
             return false;
+        }
+
+        try {
+            $profile = ProfileModel::getInstance($USER->GetID());
+            $sectionRequests = new ProfileSectionRequests($profile);
+        } catch (\Exception $exception) {
+            return false;
+        }
+
+        if (!$profile->canRequest()) {
+            LocalRedirect('/cabinet/');
         }
 
         if ($request->isPost()) {
@@ -65,37 +77,18 @@ class RequestForm extends Bbc\Basis
                 }
             }
 
-            try {
-                $lastRequest = StandartTable::getRow([
-                    'select' => ['DATE_CREATED'],
-                    'filter' => [
-                        '=USER_ID' => $USER->GetID()
-                    ],
-                    'order' => [
-                        'DATE_CREATED' => 'DESC'
-                    ]
-                ]);
-            } catch (\Exception $e) {
-                $lastRequest = false;
-            }
-
-            if (!empty($lastRequest['DATE_CREATED'])
-                && $lastRequest['DATE_CREATED'] instanceof DateTime
-                && (time() - $lastRequest['DATE_CREATED']->getTimestamp()) < StandartTable::REQUEST_TIME_LEFT
-            ) {
+            if (!$sectionRequests->canAddNewRow()) {
                 $this->arResult['ERRORS']['TEXT'][] = Loc::getMessage('KELNIK_REQ_TIME_LEFT');
             }
 
             if (!$this->arResult['ERRORS']['FIELDS'] && !$this->arResult['ERRORS']['TEXT']) {
-
-                $this->arResult['REQUEST_ID'] = $this->submit([
-                    'USER_ID' => (int)$USER->GetID(),
+                $this->arResult['REQUEST_ID'] = $sectionRequests->add([
                     'TYPE_ID' => (int) $this->arResult['FORM']['THEME'],
                     'NAME'    => $this->arResult['FORM']['NAME'],
                     'BODY'    => $this->arResult['FORM']['MESSAGE']
                 ]);
 
-                $this->arResult['USER_EMAIL'] = $USER->GetEmail();
+                $this->arResult['USER_EMAIL'] = $profile->getField('EMAIL');
 
                 return true;
             }
@@ -110,24 +103,5 @@ class RequestForm extends Bbc\Basis
                 'SORT' => 'ASC'
             ]
         ], 'ID');
-    }
-
-    protected function submit(array $data)
-    {
-        if (!$data || !is_array($data)) {
-            return false;
-        }
-
-        try {
-            $res = StandartTable::add($data);
-        } catch (\Exception $e) {
-            die('xxx');
-        }
-
-        if (!$res->isSuccess()) {
-            return false;
-        }
-
-        return ArrayHelper::getValue($res->getData(), 'CODE', false);
     }
 }

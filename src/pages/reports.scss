@@ -1,0 +1,281 @@
+.l-reports {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(bottom, pink);
+
+    h1 {
+        @include font-size("h1-inner");
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(2, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-reports-title {
+    @include padding-level(top, blue);
+    @include padding-level(bottom, green);
+}
+
+.b-reports-subtitle {
+    @include font-size("h2");
+    @include margin-level(bottom, green);
+}
+
+.b-reports-year {
+    @include font-size("h3");
+    @include margin-level(bottom, yellow);
+}
+
+.b-reports-empty {
+    @include font-size("p1");
+}
+
+.b-quarters {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &:not(:last-child) {
+        @include margin-level(bottom, violet);
+    }
+
+    @media #{$tablet-portrait} {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}
+
+.b-quarter {
+    @include padding-level(top, dark-yellow);
+    @include padding-level(bottom, yellow);
+    @include margin-level(bottom, green);
+    display: flex;
+    flex-direction: column;
+    height: 205px;
+    max-width: 320px;
+    border-radius: 4px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+    @media #{$tablet-portrait} {
+        @include margin-level(bottom, yellow);
+        width: 280px;
+        height: 315px;
+        margin-right: 30px;
+    }
+
+    @media only screen and (min-width: 768px) {
+        margin-right: 35px;
+    }
+
+    @media #{$laptop} {
+        //width: 250px;
+        @include column(7, 31);
+        height: 280px;
+    }
+
+    @media #{$fullhd} {
+        width: 320px;
+        height: 360px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+.b-quarter_status_to-fill {
+    border: 1px solid $grey;
+    background-color: $dark-white;
+}
+
+.b-quarter_status_approved {
+    border: 1px solid rgba($green, 0.32);
+    background-color: rgba($green, 0.16);
+
+    .b-quarter__label {
+        color: $white;
+        background-color: $green;
+    }
+
+    .b-quarter__button {
+        @include transition(background-color, color);
+        background: $white;
+        color: $black;
+        border: 1px solid $green;
+
+        &:after {
+            @include transition(transform);
+            width: 19px;
+            height: 8px;
+            top: calc(50% - 4px);
+            background-image: url("/images/forms/eye-icon.svg");
+        }
+
+        &:active {
+            box-shadow: inset 0 2px 4px rgba($green, 0.48);
+        }
+
+        @media #{$tablet-portrait} {
+            &:hover {
+                color: $green;
+                background-color: lighten($green, 60%);
+
+                &:after {
+                    transform: scale(1.2);
+                    width: 19px;
+                    height: 8px;
+                    right: 9%;
+                }
+            }
+        }
+    }
+}
+
+.b-quarter_status_check {
+    border: 1px solid $grey;
+    background-color: $dark-white;
+
+    .b-quarter__label {
+        color: $white;
+        background-color: $orange;
+    }
+
+    .b-quarter__button {
+        @include transition(background-color, color);
+        background: $white;
+        color: $black;
+        border: 1px solid $dark-grey;
+
+        &:after {
+            @include transition(transform);
+            width: 19px;
+            height: 8px;
+            top: calc(50% - 4px);
+            background-image: url("/images/forms/eye-icon.svg");
+        }
+
+        &:active {
+            box-shadow: inset 0 2px 4px rgba($dark-grey, 0.48);
+        }
+
+        @media #{$tablet-portrait} {
+            &:hover {
+                //color: $dark-grey;
+                background-color: lighten($dark-grey, 60%);
+
+                &:after {
+                    transform: scale(1.2);
+                    width: 19px;
+                    height: 8px;
+                    right: 9%;
+                }
+            }
+        }
+    }
+}
+
+.b-quarter_status_rejected {
+    border: 1px solid rgba($red, 0.32);
+    background-color: rgba($red, 0.08);
+
+    .b-quarter__label {
+        color: $white;
+        background-color: $red;
+    }
+
+    .b-quarter__button {
+        @include transition(background-color, color);
+        background: $white;
+        color: $black;
+        border: 1px solid $red;
+
+        &:after {
+            @include transition(right, top);
+            width: 12px;
+            height: 12px;
+            top: calc(50% - 6px);
+            background-image: url("/images/forms/pen-icon-dark.svg");
+        }
+
+        &:active {
+            box-shadow: inset 0 2px 4px rgba($red, 0.48);
+        }
+
+        @media #{$tablet-portrait} {
+            &:hover {
+                color: $red;
+                background-color: lighten($red, 60%);
+
+                &:after {
+                    width: 12px;
+                    height: 12px;
+                    top: calc(50% - 3px);
+                    right: 10%;
+                }
+            }
+        }
+    }
+}
+
+.b-quarter_status_preliminary,
+.b-quarter_status_disabled {
+    border: 1px solid $grey;
+
+    @media #{$mobile-only} {
+        height: auto;
+    }
+
+    .b-quarter__title {
+        opacity: 0.48;
+    }
+
+    .b-quarter__description {
+        color: rgba($dark-black, 0.72);
+        padding-bottom: 12px;
+    }
+}
+
+.b-quarter_status_preliminary {
+    .b-quarter__title {
+        @media #{$laptop} {
+            font-size: 20px;
+            line-height: 24px;
+        }
+
+        @media #{$fullhd} {
+            font-size: 24px;
+            line-height: 36px;
+        }
+    }
+}
+
+.b-quarter__title {
+    @include font-size("h4");
+    @include padding-level(bottom, dark-yellow);
+    font-family: $font-bold;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.b-quarter__label {
+    height: 29px;
+    border-radius: 29px;
+    font-size: 14px;
+    line-height: 29px;
+    margin-right: auto;
+    padding: 0 16px;
+    background-color: $white;
+}
+
+.b-quarter__button {
+    min-width: auto;
+    margin-top: auto;
+    max-width: 300px;
+}

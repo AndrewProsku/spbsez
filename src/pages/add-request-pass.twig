@@ -1,0 +1,29 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Подать заявку</title> {% endblock %}
+
+{% block content %}
+    {% include '../components/lk-nav/lk-nav.twig' %}
+
+    <div class="l-add-request">
+        <div class="b-title b-add-request-title">
+            <h1>Подать заявку</h1>
+        </div>
+
+        {# Блок ссылок #}
+
+        {% include '../components/accordion-links/accordion-links.twig' with {
+            title: 'Стандартная',
+            modify: "b-profile__links",
+            items: [{
+                text: "Стандартная"
+            },{
+                text: "Пропуск на временный въезд",
+                active: "is-active"
+            }]
+        } %}
+
+        {# Форма #}
+
+        {% include '../components/request-pass/request-pass.twig' %}
+    </div>
+{% endblock %}
