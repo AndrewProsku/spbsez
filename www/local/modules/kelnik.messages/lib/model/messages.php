@@ -135,6 +135,7 @@ class MessagesTable extends DataManager
 
         if ($res->isSuccess() && $data['ACTIVE'] === self::YES) {
             self::updateUsers($id);
+            clearKelnikComponentCache('messages');
         }
 
         return $res;

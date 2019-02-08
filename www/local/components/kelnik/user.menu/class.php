@@ -35,7 +35,7 @@ class UserMenuList extends Bbc\Basis
             $profile = ProfileModel::getInstance($USER->GetID());
 
             if ($profile->canMessages()) {
-                $this->arResult['MESSAGES'] = MessageModel::getInstance($profile)->getCount();
+                $this->arResult['MESSAGES'] = MessageModel::getInstance($profile)->calcCount()->getCountNew();
             }
         }
     }

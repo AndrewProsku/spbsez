@@ -289,7 +289,7 @@ class ProfileModel
             $v[4] = $this->{$v[3]['check']}() ? '' : 'false';
 
             if (!empty($v[3]['isMessages'])) {
-                $v[3]['cnt'] = MessageModel::getInstance($this)->getCount();
+                $v[3]['cnt'] = MessageModel::getInstance($this)->calcCount()->getCountNew();
                 unset($v[3]['check']);
                 continue;
             }

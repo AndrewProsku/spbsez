@@ -57,6 +57,13 @@ class NotifyTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_REQ_NOTIFY_IS_NEW'),
                 ]
             ),
+            new StringField(
+                'NAME',
+                [
+                    'validation' => [__CLASS__, 'validateText'],
+                    'title' => Loc::getMessage('KELNIK_REQ_NOTIFY_NAME'),
+                ]
+            ),
             new TextField(
                 'TEXT',
                 [

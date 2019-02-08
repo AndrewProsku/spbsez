@@ -28,11 +28,11 @@ if (!$USER->IsAuthorized()) {
     </div>
     <?$APPLICATION->IncludeComponent(
         "kelnik:messages",
-        "message",
+        "search",
         Array(
-            "CACHE_TIME" => "3600",
-            "CACHE_TYPE" => "A",
-            "ITEM_ID" => $_REQUEST['ELEMENT_ID']
+            'CACHE_TIME' => '3600',
+            'CACHE_TYPE' => 'A',
+            'IS_SEARCH' => 'Y'
         )
     );?>
 </div>

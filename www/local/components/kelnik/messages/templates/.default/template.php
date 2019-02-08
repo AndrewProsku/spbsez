@@ -1,70 +1,43 @@
 <?php if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
 
+<?php if(!$arResult['YEARS']): ?>
+    <p>Нет сообщений</p>
+    <?php return; ?>
+<?php endif; ?>
 
 <div class="b-message-filter">
     <div class="b-message-filter__mobile-date j-messages-select">
         <div class="b-select">
             <div class="b-select__wrapper">
-                <select
-                        id="message-date"
+                <select id="message-date"
                         class="b-select__list j-select"
-                        name="message-date"
-                        data-placeholder=""
-                >
-
-                    <option value="2018"
-                    >
-                        2018
-                    </option>
-                    <option value="2017"
-                    >
-                        2017
-                    </option>
-                    <option value="2016"
-                    >
-                        2016
-                    </option>
-                    <option value="2015"
-                    >
-                        2015
-                    </option>
+                        name="year"
+                        data-placeholder="">
+                    <?php foreach ($arResult['YEARS'] as $year): ?>
+                        <option value="<?= $year; ?>"<?php if($year == $arParams['YEAR']): ?> selected<?php endif; ?>><?= $year; ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
         </div>
     </div>
     <div class="b-message-filter__date j-messages-tabs">
         <ul class="b-tabs b-tabs-ajax">
-            <li class="b-tabs__item is-active j-tabs__item"
-                data-link="/tests/messages.json"
-                data-year="2018">
-                2018
-            </li>
-            <li class="b-tabs__item  j-tabs__item"
-                data-link="/tests/messages-2017.json"
-                data-year="2017">
-                2017
-            </li>
-            <li class="b-tabs__item  j-tabs__item"
-                data-link="/tests/messages.json"
-                data-year="2016">
-                2016
-            </li>
-            <li class="b-tabs__item  j-tabs__item"
-                data-link="/tests/messages.json"
-                data-year="2015">
-                2015
-            </li>
+            <?php foreach ($arResult['YEARS'] as $year): ?>
+                <li class="b-tabs__item<?php if($year == $arParams['YEAR']): ?> is-active<?php endif; ?> j-tabs__item"
+                    data-link="/tests/messages.json"
+                    data-year="<?= $year; ?>"><?= $year; ?></li>
+            <?php endforeach; ?>
         </ul>
     </div>
     <div class="b-message-filter__search">
-        <form action="" method="POST" enctype="multipart/form-data" class="b-message-filter__search-form">
-            <input
-                    id="message-search"
+        <form action="/cabinet/messages/search/"
+              enctype="application/x-www-form-urlencoded"
+              class="b-message-filter__search-form">
+            <input id="message-search"
                     class="b-input-search"
                     type="search"
-                    name=""
-                    placeholder="Поиск сообщений"
-            >
+                    name="q"
+                    placeholder="Поиск сообщений">
             <button type="submit" class="b-message-filter__search-form-button">
                 <img src="/images/forms/search-icon.png" alt="Найти">
             </button>

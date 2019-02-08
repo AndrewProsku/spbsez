@@ -31,7 +31,7 @@ if (!$USER->IsAuthorized()) {
         "",
         Array(
             "CACHE_TIME" => "3600",
-            "CACHE_TYPE" => "N"
+            "CACHE_TYPE" => "A"
         )
     );?>
 </div>
