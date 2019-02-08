@@ -13,17 +13,31 @@ class RequestPass {
 
     init() {
         this.bindEvents();
-
-        const inputTel = new InputTel();
-        const telInputs = Array.from(this.$administrators.querySelectorAll('input[type="tel"]'));
-
-        inputTel.init({input: telInputs});
+        this.initTelInput();
+        this.initDateInput();
     }
 
     bindEvents() {
         // Добавление контактного лица
         this.$addPassButton.addEventListener('click', () => {
             this.addPass();
+        });
+    }
+
+    initTelInput() {
+        const inputTel = new InputTel();
+        const telInputs = Array.from(this.$administrators.querySelectorAll('input[type="tel"]'));
+
+        inputTel.init({input: telInputs});
+    }
+
+    initDateInput() {
+        const inputDate = new InputTel();
+        const dateInputs = Array.from(this.$administrators.querySelectorAll('input[data-date="true"]'));
+
+        inputDate.init({
+            input: dateInputs,
+            mask : '99.99.9999, 99:99'
         });
     }
 
