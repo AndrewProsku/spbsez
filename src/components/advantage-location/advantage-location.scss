@@ -19,6 +19,7 @@
 
 .b-advantage-location__content {
     @include row();
+    width: 100%;
 }
 
 .b-advantage-location__icon-wrap {

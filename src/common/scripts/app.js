@@ -5,6 +5,7 @@ import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
 import Glide from '@glidejs/glide';
+import GlideCarousel from '../../components/glide-carousel';
 import InputTel from '../../components/forms/telephone/telephone';
 import Logout from 'components/logout';
 import Mediator from 'common/scripts/mediator';
@@ -18,6 +19,7 @@ import Popup from 'components/popup';
 import ProfileAdministrators from '../../components/profile-administrators';
 import ProfileDocs from '../../components/profile-docs';
 import ProfileInfo from '../../components/profile-info';
+import ProfileRequestPass from '../../components/request-pass';
 import ReportForm from '../../components/reports/reports-form';
 import Residents from '../../components/residents/';
 import Select from '../../components/forms/select/';
@@ -360,11 +362,17 @@ if (newsCarouselEl) {
         perView: 1,
         gap    : 0,
         classes: {
-            activeNav: 'glide__cust_dot_is_active'
+            activeNav: 'glide__cust-dot_is_active'
         }
     });
+    const glideCarousel = new GlideCarousel();
+
+    glideCarousel.init();
 
     newsCarousel.mount();
+    newsCarousel.on('move.after', () => {
+        glideCarousel.setControlsPosition();
+    });
 }
 
 
@@ -515,6 +523,17 @@ if (administrators) {
     const profileAdministrators = new ProfileAdministrators();
 
     profileAdministrators.init();
+}
+
+/**
+ * Инициализация страницы Заявка на пропуск
+ */
+const requestPass = document.querySelector('.j-request-pass');
+
+if (requestPass) {
+    const profileRequestPass = new ProfileRequestPass();
+
+    profileRequestPass.init();
 }
 
 /**
