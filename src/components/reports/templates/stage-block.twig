@@ -1,0 +1,34 @@
+{% if deletable %}<button type="button" class="b-profile-block__delete j-delete-contact" data-stage-id="{{ stageID }}"></button>{% endif %}
+<div class="b-input-block b-report-stage-select j-reports-form-select">
+    {% include "../../forms/select/select.twig" with {
+        id: "construction-stage["~ stageID ~"]",
+        name: "construction-stage["~ stageID ~"]",
+        placeholder: true,
+        placeholderText: " ",
+        options: [{
+            value: 'period1',
+            text: 'Заключение договора аренды'
+        },{
+            value: 'period2',
+            text: 'Землеустроительные работы'
+        },{
+            value: 'period3',
+            text: 'Проектирование'
+        },{
+            value: 'period4',
+            text: 'Строительство'
+        },{
+            value: 'period5',
+            text: 'Получение разрешения на ввод в эксплуатацию'
+        },{
+            value: 'period6',
+            text: 'Операционная деятельность'
+        },{
+            value: 'period7',
+            text: 'Строительство не предусмотрено'
+        }]
+    } %}
+    <label class="b-input-block__label" for="construction-stage[{{ stageID }}]">
+        Стадия строительства
+    </label>
+</div>

@@ -282,10 +282,23 @@
             ]
           },
           {
-            "fields": [
+            "type": "construction-stage",
+            "stages": [
               {
-                "id": "construction-stage",
-                "value": "period1"
+                "fields": [
+                  {
+                    "id": "construction-stage[1]",
+                    "value": "period2"
+                  }
+                ]
+              },
+              {
+                "fields": [
+                  {
+                    "id": "construction-stage[2]",
+                    "value": "period5"
+                  }
+                ]
               }
             ]
           }

@@ -46,7 +46,7 @@ class ReportForm {
             template  : null
         }];
 
-        this.unitialForm = 2;
+        this.unitialForm = 0;
 
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
@@ -216,10 +216,7 @@ class ReportForm {
         // Инициализация Select
         // const stageID = this.target.dataset.id;
 
-        // this.popup.popup.querySelector(`.j-vacancy-title-select  select`).value = vacancyID;
-
-
-        if (document.querySelectorAll('.j-reports-form-select').length) {
+        if (this.target.querySelectorAll('.j-reports-form-select').length) {
             const select = new Select({
                 element: '.j-select',
 
@@ -229,23 +226,14 @@ class ReportForm {
             select.init();
         }
 
-        if (document.querySelector('.j-construction-permit-file')) {
+        if (this.target.querySelector('.j-construction-permit-file')) {
             const resumeInput = new InputFile();
 
             resumeInput.init({
-                target: document.querySelector('.b-input-file')
+                target: this.target.querySelector('.b-input-file')
             });
         }
     }
-
-    // initSelect() {
-    //     const select = new Select({
-    //         element: '.j-select',
-    //
-    //         disableSearch: true
-    //     });
-    //     select.init();
-    // }
 
     createForm(formNumber) {
         // Создание шаблона формы
@@ -320,19 +308,10 @@ class ReportForm {
             const reportBlock = new ReportBlock();
 
             reportBlock.init({
-                target    : formBlocks[i],
-                inputsData: blockData
+                target: formBlocks[i],
+                blockData
             });
         });
-
-        // formBlocks.forEach((formBlock, i) => {
-        //     const reportBlock = new ReportBlock();
-        //
-        //     reportBlock.init({
-        //         target    : formBlocks[i],
-        //         inputsData: blocksData[i]
-        //     });
-        // });
     }
 }
 

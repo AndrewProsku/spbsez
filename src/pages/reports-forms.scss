@@ -418,10 +418,6 @@
     @include padding-level(top, yellow);
 }
 
-.b-report-block__extra-fields {
-    margin-top: 9px;
-}
-
 .b-report-block__add {
     @include margin-level(top, yellow);
     min-width: auto;
@@ -480,4 +476,8 @@
 
 .b-reports-filter .b-mini-filter__group {
     margin-bottom: 0;
+}
+
+.b-report-stage-select {
+    margin-bottom: 9px;
 }

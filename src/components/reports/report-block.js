@@ -1,5 +1,7 @@
 import $ from 'jquery';
 import Mediator from 'common/scripts/mediator';
+import templatePerpmissionForm from './templates/permission-form.twig';
+import templateStageForm from './templates/stage-block.twig';
 import Utils from '../../common/scripts/utils';
 
 const mediator = new Mediator();
@@ -12,9 +14,11 @@ class ReportBlock {
         /**
          * Данные о состоянии инпутов блока, полученные от сервера
          */
+        this.blockData = {};
         this.inputsData = {};
         this.approveClass = 'b-report-block_status_approved';
         this.rejectClass = 'b-report-block_status_rejected';
+        this.stageBlockClass = 'j-report-stage-block';
         // возможно флаг не нужен
         this.isBlockApproved = false;
         // this.inputsStatus = [];
@@ -26,10 +30,25 @@ class ReportBlock {
 
     init(options) {
         this.target = options.target;
-        this.inputsData = options.inputsData;
-        this.inputs = Array.from(this.target.querySelectorAll('input'));
-        this.selects = Array.from(this.target.querySelectorAll('select'));
+        this.blockData = options.blockData;
+        // this.selects = Array.from(this.target.querySelectorAll('select'));
 
+        // this.inputs.push(Array.from(this.target.querySelectorAll('select'));
+        if (this.blockData.type) {
+            if (this.blockData.type === 'construction-stage') {
+                const stageBlock = this.target.querySelector(`.${this.stageBlockClass}`);
+
+
+                this.blockData.stages.forEach((stage, i) => {
+                    Object.assign(this.inputsData, stage);
+                    stageBlock.insertAdjacentHTML('beforeend', templateStageForm({stageID: i}));
+                });
+            }
+        } else {
+            this.inputsData = this.blockData;
+        }
+
+        this.inputs = Array.from(this.target.querySelectorAll('input, select'));
         this._initInputs();
         this._bindEvents();
     }
@@ -50,15 +69,20 @@ class ReportBlock {
                     });
                     break;
                 }
+                case 'select-one': {
+                    if (input.id === 'construction-stage') {
+                        input.onchange = (event) => {
+                            if (event.target.value === 'period3' ||
+                                event.target.value === 'period6') {
+                                Utils.insetContent(this.target, templatePerpmissionForm());
+                            }
+                        };
+                    }
+                    break;
+                }
                 default: break;
             }
         });
-
-        if (this.selects.length) {
-            mediator.subscribe('chosen-select-change', () => {
-                // console.log(event.currentTarget.value);
-            });
-        }
     }
 
     _initInputs() {
@@ -72,6 +96,10 @@ class ReportBlock {
                             if (input.checked) {
                                 mediator.publish('radioChecked', input);
                             }
+                            break;
+                        }
+                        case 'select-one': {
+                            input.value = fieldData.value;
                             break;
                         }
                         default:
