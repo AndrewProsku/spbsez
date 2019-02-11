@@ -5,6 +5,7 @@ import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
 import Glide from '@glidejs/glide';
+import GlideCarousel from '../../components/glide-carousel';
 import InputTel from '../../components/forms/telephone/telephone';
 import Logout from 'components/logout';
 import Mediator from 'common/scripts/mediator';
@@ -363,11 +364,17 @@ if (newsCarouselEl) {
         perView: 1,
         gap    : 0,
         classes: {
-            activeNav: 'glide__cust_dot_is_active'
+            activeNav: 'glide__cust-dot_is_active'
         }
     });
+    const glideCarousel = new GlideCarousel();
+
+    glideCarousel.init();
 
     newsCarousel.mount();
+    newsCarousel.on('move.after', () => {
+        glideCarousel.setControlsPosition();
+    });
 }
 
 
