@@ -3,6 +3,7 @@
 }
 
 .l-news__title {
+    @include padding-level(top, blue);
     @include prefix(2, 36);
     @include suffix(2, 36);
 
@@ -106,6 +107,7 @@
 }
 
 .b-useful__text {
+    @include font-size(p2);
     @include margin-level(bottom, dark-yellow);
 }
 
@@ -155,9 +157,6 @@
     @include font-size(h2);
     @include margin-level(bottom, green);
 }
-.b-presentations__files {
-    max-width: 640px;
-}
 
 .b-contact-info {
     @include vertical-paddings(1, 12);
@@ -167,7 +166,6 @@
     border-radius: 4px;
     overflow: hidden;
     color: $black;
-    max-width: 640px;
 
     @media #{$mobile-only} {
         padding-left: 15px;

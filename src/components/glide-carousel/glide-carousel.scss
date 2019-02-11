@@ -58,14 +58,20 @@
 }
 
 .glide__cust-dots {
-    position: relative;
+    position: absolute;
     top: 0;
-    margin-top: -25px;
-    text-align: center;
+    left: 0;
+    right: 0;
+    display: none;
+    justify-content: center;
     
     @media #{$tablet-portrait} {
-        top: -20px;
+        top: -35px;
     }
+}
+
+.glide__cust-dots-invisible {
+    display: flex;
 }
 
 .glide__cust-dot {
@@ -78,10 +84,15 @@
     border-radius: 50%;
     padding: 0;
     cursor: pointer;
+    margin-right: 12px;
 
-    &_is_active {
-        background-color: $white;
+    &:last-child {
+        margin-right: 0;
     }
+}
+
+.glide__cust-dot_is_active {
+    background-color: $white;
 }
 
 .glide__track {
@@ -92,4 +103,24 @@
 .glide__slide img {
     display: block;
     width: 100%;
+}
+
+.glide__slide-description {
+    display: block;
+    text-align: center;
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    margin-bottom: 1px;
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        height: 1px;
+        width: 240px;
+        background-color: $blue;
+    }
 }
