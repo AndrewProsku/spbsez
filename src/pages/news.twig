@@ -74,63 +74,36 @@
                     <div class="b-presentations__title">Презентации</div>
 
                     <div class="b-presentations__files">
-                        <div class="b-files">
-                            <div class="b-files__item">
-                                <div class="b-files__left">
-                                    <span class="b-files__icon">doc</span>
-                                    <div class="b-files__name-wrap">
-                                        <a href="#" class="b-files__name b-link-line">Презентация ОЭЗ 2018</a>
-                                    </div>
-                                    <div class="b-files__size">5,5 мб</div>
-                                </div>
-                                <div class="b-files__right">
-                                    <div class="b-files__size b-files__size-adapt">5,5 мб</div>
-                                    <div class="b-files__date">12.12.2018</div>
-                                </div>
-                            </div>
 
-                            <div class="b-files__item">
-                                <div class="b-files__left">
-                                    <span class="b-files__icon">link</span>
-                                    <div class="b-files__name-wrap">
-                                        <a href="#" class="b-files__name b-link-line">Видео об ОЭЗ 2019</a>
-                                    </div>
-                                    <div class="b-files__size">5,5 мб</div>
-                                </div>
-                                <div class="b-files__right">
-                                    <div class="b-files__size b-files__size-adapt">5,5 мб</div>
-                                    <div class="b-files__date">12.12.2018</div>
-                                </div>
-                            </div>
+                        {% include '../components/files-list/files-list.twig' with {
+                            files: [
+                                {
+                                    type: "doc",
+                                    name: "Презентация ОЭЗ 2018",
+                                    size: "5,5 мб",
+                                    date: "12.12.2018"
+                                },
+                                {
+                                    type: "link",
+                                    name: "Видео об ОЭЗ 2019",
+                                    size: "41,2 мб",
+                                    date: "24.12.2018"
+                                },
+                                {
+                                    type: "pdf",
+                                    name: "Фирменный стиль 2018",
+                                    size: "2,4 мб",
+                                    date: "15.12.2018"
+                                },
+                                {
+                                    type: "pdf",
+                                    name: "Презентации резидентов",
+                                    size: "7,3 мб",
+                                    date: "01.12.2018"
+                                }
+                            ]
+                        } %}
 
-                            <div class="b-files__item">
-                                <div class="b-files__left">
-                                    <span class="b-files__icon">pdf</span>
-                                    <div class="b-files__name-wrap">
-                                        <a href="#" class="b-files__name b-link-line">Фирменный стиль 2018</a>
-                                    </div>
-                                    <div class="b-files__size">5,5 мб</div>
-                                </div>
-                                <div class="b-files__right">
-                                    <div class="b-files__size b-files__size-adapt">5,5 мб</div>
-                                    <div class="b-files__date">12.12.2018</div>
-                                </div>
-                            </div>
-
-                            <div class="b-files__item">
-                                <div class="b-files__left">
-                                    <span class="b-files__icon">pdf</span>
-                                    <div class="b-files__name-wrap">
-                                        <a href="#" class="b-files__name b-link-line">Презентации резидентов</a>
-                                    </div>
-                                    <div class="b-files__size">5,5 мб</div>
-                                </div>
-                                <div class="b-files__right">
-                                    <div class="b-files__size b-files__size-adapt">5,5 мб</div>
-                                    <div class="b-files__date">12.12.2018</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                 </div>

@@ -172,6 +172,74 @@ label.b-form-block {
     }
 }
 
+.b-form-block__half-wrap {
+    @media #{$tablet-portrait} {
+        display: flex;
+        flex-wrap: wrap;
+
+        .b-form-block {
+            width: 50%;
+            border: 1px solid $grey;
+            border-radius: 0;
+
+            &:first-child {
+                border-right: none;
+            }
+        }
+    }
+}
+
+.b-form-block__half-wrap_is_top {
+    .b-form-block {
+        &:last-child {
+            border-radius: 0;
+            border-bottom: none;
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        .b-form-block {
+            &:first-child {
+                border-radius: 4px 0 0 0;
+                border-bottom: none;
+            }
+
+            &:last-child {
+                border-radius: 0 4px 0 0;
+            }
+        }
+    }
+}
+
+.b-form-block__half-wrap_is_center {
+    .b-form-block {
+        border-radius: 0;
+        border-bottom: none;
+    }
+}
+
+.b-form-block__half-wrap_is_bottom {
+    .b-form-block {
+        border-radius: 0;
+
+        &:last-child {
+            border-radius: 0 0 4px 4px;
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        .b-form-block {
+            &:first-child {
+                border-radius: 0 0 0 4px;
+            }
+
+            &:last-child {
+                border-radius: 0 0 4px 0;
+            }
+        }
+    }
+}
+
 .b-form-block-select-accordion {
     position: relative;
 }
@@ -307,6 +375,21 @@ label.b-form-block {
     height: 240px;
     border: none;
     padding: 30px 0 12px 0;
+}
+
+.b-add-request__org {
+    @include margin-level(bottom, green);
+}
+
+.b-add-request__pass {
+    @include padding-level(bottom, green);
+    border-bottom: 1px solid $grey;
+}
+
+.b-add-request__pass__item {
+    @include margin-level(bottom, green);
+    position: relative;
+
 }
 
 .b-add-request__form-button {

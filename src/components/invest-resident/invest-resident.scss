@@ -1,0 +1,273 @@
+.b-invest-resident {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(top, pink);
+    @include padding-level(bottom, pink);
+    background-color: $blue;
+    background-image: $gradient-blue-circle;
+    color: $white;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-invest-resident__title {
+    margin-bottom: 32px;
+
+    @media #{$tablet-portrait} {
+        margin-bottom: 38px;
+    }
+
+    @media #{$laptop} {
+        margin-bottom: 56px;
+    }
+}
+
+.b-invest-resident__descs {
+    @include row();
+    @include margin-level(bottom, violet);
+}
+
+.b-invest-resident__desc {
+    @include column(32, 32);
+    margin-bottom: 25px;
+
+    @media #{$tablet-portrait} {
+        @include column(14, 32);
+        @include post(2, 32);
+    }
+
+    @media #{$laptop} {
+        @include column(13, 30);
+        @include post(1, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(10, 28);
+        @include post(1, 28);
+    }
+}
+
+.b-invest-resident__desc-title {
+    @include font-size(p3);
+    display: block;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.b-invest-resident__desc-text {
+    @include font-size(p1);
+}
+
+.b-invest-resident__steps {
+    @include prefix(1, 32);
+
+    @media #{$tablet-portrait} {
+        @include prefix(2, 32);
+    }
+
+    @media #{$laptop} {
+        @include prefix(1, 30);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(1, 28);
+    }
+}
+
+.b-invest-resident__step {
+    @include row();
+    margin-bottom: 53px;
+
+    @media #{$laptop} {
+        margin-bottom: 80px;
+        min-height: 140px;
+    }
+
+    @media #{$fullhd} {
+        min-height: 170px;
+    }
+}
+
+.b-invest-resident__step-title {
+    @include column(32, 32);
+    @include prefix(3, 32);
+    @include font-size(h3);
+    font-weight: 700;
+    position: relative;
+    margin-bottom: 10px;
+
+    @media #{$tablet-portrait} {
+        @include column(14, 32);
+        @include prefix(2, 32);
+    }
+
+    @media #{$laptop} {
+        @include column(10, 30);
+        @include prefix(2, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(7, 28);
+        @include prefix(1, 28);
+    }
+}
+
+.b-invest-resident__step-title span {
+    position: absolute;
+    font-size: 80px;
+    line-height: 80px;
+    opacity: 0.12;
+    top: -10px;
+    left: -10px;
+
+    @media #{$laptop} {
+        font-size: 120px;
+        line-height: 120px;
+        left: 0;
+    }
+
+    @media #{$fullhd} {
+        font-size: 160px;
+        line-height: 160px;
+        top: -20px;
+        left: 0;
+    }
+}
+
+.b-invest-resident__step-content {
+    @include column(32, 32);
+    @include prefix(3, 32);
+
+    @media #{$tablet-portrait} {
+        @include column(16, 32);
+        @include prefix(0, 32);
+    }
+
+    @media #{$laptop} {
+        @include column(20, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(12, 28);
+    }
+}
+
+.b-invest-resident__step-text {
+    @include font-size(p1);
+    margin-bottom: 25px;
+}
+
+.b-invest-resident__step-tag {
+    display: inline-block;
+    @include font-size(p4);
+}
+
+.b-invest-resident__step-tag span {
+    display: flex;
+    align-items: center;
+    padding: 6px 18px 6px 12px;
+    background-color: rgba($white, 0.12);
+    border-radius: 16px;
+}
+
+.b-invest-resident__step-tag svg {
+    fill: $white;
+    margin-right: 15px;
+}
+
+.b-invest-resident__package {
+    @include padding-level(top, blue);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.b-invest-resident__package-title {
+    @include font-size(h4);
+}
+
+.b-invest-resident__lists {
+    @include row();
+}
+
+.b-invest-resident__list {
+    @include column(32, 32);
+    @include font-size(p2);
+    margin-bottom: 35px;
+
+    &:last-child {
+        margin-bottom: 0;
+        margin-right: 0;
+    }
+
+    @media #{$laptop} {
+        @include column(13, 28);
+        @include post(2, 28);
+    }
+}
+
+.b-invest-resident__list-num {
+    counter-reset: conterList;
+}
+
+.b-invest-resident__list-num li {
+    margin-bottom: 14px;
+    counter-increment: conterList;
+
+    &:before {
+        content: counter(conterList) ". ";
+        display: inline-block;
+        width: 20px;
+        opacity: 0.48;
+        font-weight: 700;
+
+        @media #{$tablet-portrait} {
+            width: 40px;
+        }
+    }
+}
+
+.b-invest-resident__list-num li .b-link-line {
+    display: inline-block;
+    @include font-size(p3);
+    color: $white;
+    background-image: linear-gradient(to top, rgba($white, 0.12) 0%, rgba($white, 0.12) 40%, rgba($white, 0) 30%);
+
+    &:hover {
+        background-image: linear-gradient(to top, rgba($white, 1) 2px, rgba($white, 0) 10%, rgba(127, 81, 163, 0) 70%);
+    }
+}
+
+.b-invest-resident__list-title {
+    @include font-size(p3);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.b-invest-resident__list-line {
+    @include font-size(p3);
+    @media #{$tablet-portrait} {
+        line-height: 37px;
+    }
+}
+
+.b-invest-resident__list-line li {
+    padding-left: 33px;
+    position: relative;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 13px;
+        left: 0;
+        width: 14px;
+        height: 2px;
+        background-color: rgba($white, 0.48);
+    }
+}

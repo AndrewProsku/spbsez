@@ -3,6 +3,7 @@
 }
 
 .l-news__title {
+    @include padding-level(top, blue);
     @include prefix(2, 36);
     @include suffix(2, 36);
 
@@ -106,6 +107,7 @@
 }
 
 .b-useful__text {
+    @include font-size(p2);
     @include margin-level(bottom, dark-yellow);
 }
 
@@ -156,92 +158,6 @@
     @include margin-level(bottom, green);
 }
 
-.b-files {
-    max-width: 640px;
-    background-color: $white;
-    border-radius: 4px;
-    overflow: hidden;
-    color: $black;
-}
-
-.b-files__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 25px;
-    border-bottom: 1px solid $grey;
-
-    &:last-child {
-        border-bottom: none;
-    }
-
-    @media #{$mobile-only} {
-        flex-wrap: wrap;
-        padding: 15px;
-    }
-}
-
-.b-files__left {
-    display: flex;
-    align-items: center;
-
-    @media #{$mobile-only} {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-}
-
-.b-files__right {
-    @media #{$mobile-only} {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-}
-
-.b-files__icon {
-    width: 27px;
-    min-width: 27px;
-    height: 32px;
-    background-image: url("/images/news/file.png");
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    color: $white;
-    font-size: 12px;
-    padding-bottom: 3px;
-    margin-right: 16px;
-}
-
-.b-files__name {
-    @include font-size(p3);
-    margin-right: 15px;
-    color:  $blue;
-    font-weight: 700;
-}
-
-.b-files__size {
-    min-width: 70px;
-    opacity: 0.48;
-    display: none;
-
-    @media #{$tablet-portrait} {
-        display: block;
-    }
-}
-
-.b-files__size-adapt {
-    display: block;
-
-    @media #{$tablet-portrait} {
-        display: none;
-    }
-}
-
-.b-files__date {
-    opacity: 0.48;
-}
-
 .b-contact-info {
     @include vertical-paddings(1, 12);
     @include padding-level(top, green);
@@ -250,7 +166,6 @@
     border-radius: 4px;
     overflow: hidden;
     color: $black;
-    max-width: 640px;
 
     @media #{$mobile-only} {
         padding-left: 15px;
@@ -276,8 +191,4 @@
 
 .b-contact-info__phone a {
     color: inherit;
-}
-
-.b-contact-info__email {
-
 }
