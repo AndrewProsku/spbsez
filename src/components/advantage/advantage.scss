@@ -3,7 +3,6 @@
     @include prefix(2, 36);
     @include suffix(2, 36);
     position: relative;
-    background-color: $bg-grey;
     z-index: 3;
 
     @media #{$tablet-portrait} {
