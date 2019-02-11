@@ -433,14 +433,23 @@ button {
 }
 
 .button_reserve_icon {
+    @include transition(color);
     padding-left: 50px;
     padding-right: 26px;
     text-align: right;
 
     &:after {
+        @include transition(left);
         left: 9%;
         right: auto;
         transform: rotateY(180deg);
+    }
+
+    &:hover {
+        &:after {
+            left: 5%;
+            right: auto;
+        }
     }
 }
 
