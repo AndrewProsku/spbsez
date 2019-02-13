@@ -10,7 +10,7 @@ use Kelnik\Userdata\Profile\ProfileModel;
 use Kelnik\Userdata\Profile\ProfileSectionContacts;
 
 /**
- * Class ApiProcessLogin
+ * Class ApiProcessProfile
  *
  * Профиль
  *

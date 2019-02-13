@@ -23,8 +23,21 @@ class Api
     protected $freeEvents = [
         'login',
         'forgot',
-        'changepassword',
-        'vacancy'
+        'changePassword',
+        'vacancy',
+        'message'
+    ];
+
+    protected $requireModules = [
+        'kelnik.userdata' => [
+            'profile'
+        ],
+        'kelnik.vacancy' => [
+            'vacancy'
+        ],
+        'kelnik.requests' => [
+            'message'
+        ]
     ];
 
     public static function instance()
@@ -61,29 +74,18 @@ class Api
             die($this->getResponse());
         }
 
-        if (in_array($this->event, ['search', 'visual'])) {
-            \CModule::IncludeModule('kelnik.exchange');
-        }
-
         $classNamespace = '\Kelnik\Api\Process\ApiProcess' . ucfirst($this->event);
 
         if (!method_exists($classNamespace, 'execute')) {
             $this->errors[] = Loc::getMessage('KELNIK_API_EVENT_NOT_EXISTS');
         }
 
-        $requiredModules = [];
-
-        if (in_array($this->event, ['profile'])) {
-            $requiredModules[] = 'kelnik.userdata';
-        }
-
-        if (in_array($this->event, ['vacancy'])) {
-            $requiredModules[] = 'kelnik.vacancy';
-        }
-
-        if ($requiredModules) {
-            foreach ($requiredModules as $requiredModule) {
-                if (!\CModule::IncludeModule($requiredModule)) {
+        if ($this->requireModules) {
+            foreach ($this->requireModules as $module => $events) {
+                if (!in_array($this->event, $events)) {
+                    continue;
+                }
+                if (!\CModule::IncludeModule($module)) {
                     $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
                 }
             }
