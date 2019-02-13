@@ -85,7 +85,12 @@
 }
 
 .b-offers__text p {
+    @include margin-level(bottom, green);
     @include font-size("p1");
+
+    &:last-of-type {
+        @include margin-level(bottom, reset);
+    }
 }
 
 .b-offers__list {
@@ -124,7 +129,7 @@
         }
 
         @media #{$laptop} {
-            margin: 0;
+            margin-right: 0;
         }
     }
 
