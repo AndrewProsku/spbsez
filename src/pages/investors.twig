@@ -2,6 +2,10 @@
 {% block title %} <title>Заголовок</title> {% endblock %}
 
 {% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
     <div class="l-investors">
         <div class="l-investors__top">
             <h1 class="b-title">Инвесторам</h1>
@@ -93,23 +97,94 @@
         </div>
 
         <div class="l-investors__infrastructure">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet atque delectus error iste molestias, nihil possimus quos unde. Ab culpa exercitationem in iste provident quaerat. Ab et maiores ullam veritatis. Corporis error, vel? A nisi quis repellendus tempora tempore voluptatem. Id nostrum repellat repudiandae? Ab consequuntur dicta iusto modi nobis sapiente tempore unde vitae! Blanditiis, commodi deleniti ex explicabo fuga fugit illum in ipsa ipsum labore laborum maiores minus molestiae neque odio pariatur, provident quam quasi quidem quisquam quod repellat repudiandae saepe sit totam! A, at, ea maiores non nulla numquam perferendis quam quibusdam, reiciendis similique ut voluptatibus. Provident!
+            {% include '../components/invest-infr/invest-infr.twig' %}
         </div>
 
         <div class="l-investors__benefits">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus expedita fuga mollitia? Amet consectetur consequuntur doloremque eius eveniet non odit quod similique vitae? Ad at atque consectetur consequuntur cum doloremque ducimus error ex facere id magnam maiores pariatur perspiciatis quae quasi quibusdam, quo ratione reiciendis rerum suscipit. Deleniti error et ipsa quisquam vitae? Animi asperiores aspernatur, consequatur consequuntur cumque debitis dicta dolor doloremque ducimus, ea earum eius eos excepturi illum inventore magni, maxime modi necessitatibus neque nobis odio perspiciatis possimus repellat sit tempore temporibus veritatis! Accusamus cum eius esse et ex harum nesciunt officia, quaerat quos repudiandae tempora tempore voluptas?
+            {% include '../components/invest-benefits/invest-benefits.twig' %}
         </div>
 
         <div class="l-investors__resident">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor illum pariatur possimus quidem! Consequuntur delectus earum esse et eveniet facilis, hic ipsum iusto nesciunt omnis perferendis quia quibusdam repellendus totam vel. Accusantium adipisci aut beatae consectetur consequuntur deserunt dolorum earum eligendi esse id illo impedit magni, minus molestiae nesciunt obcaecati odio, odit quaerat quia quod quos reiciendis rem repellendus reprehenderit soluta, temporibus unde veniam! Alias consequatur delectus dicta, distinctio fugiat magnam magni modi mollitia nam officia perferendis recusandae repudiandae sapiente sunt tenetur veritatis voluptate. Accusamus asperiores atque autem beatae, consectetur debitis eum incidunt molestiae nihil quasi quo sed sunt, temporibus!
+            {% include '../components/invest-resident/invest-resident.twig' %}
         </div>
 
         <div class="l-investors__documents">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque eveniet illum ipsum sapiente. Ad alias, blanditiis consequatur dicta distinctio dolores ducimus iure iusto nostrum officiis quibusdam tempora voluptas! Laudantium, natus!
+
+            <div class="b-invest-documents">
+                <h2 class="b-invest-documents__title">Документы и презентации</h2>
+
+                <div class="b-invest-documents__file">
+
+                    {% include '../components/files-list/files-list.twig' with {
+                        modify: "b-files-list_theme_border",
+                        files: [
+                            {
+                                type: "pdf",
+                                name: "Презентация компании",
+                                size: "5,5 мб",
+                                date: "12.12.2018"
+                            },
+                            {
+                                type: "link",
+                                name: "Видео о компании",
+                                size: "41,2 мб",
+                                date: "24.12.2018"
+                            }
+                        ]
+                    } %}
+
+                </div>
+            </div>
+
         </div>
 
         <div class="l-investors__department">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium alias architecto aut deserunt doloribus, error esse expedita facere fugiat harum ipsum laudantium minima nihil, omnis perferendis praesentium quibusdam quisquam ratione rem tempora totam ullam ut. Ad at autem beatae delectus deleniti dignissimos dolorem dolores doloribus esse, illo illum laborum libero nostrum praesentium quam quibusdam quidem soluta sunt temporibus ut velit veritatis voluptatibus! Aperiam commodi excepturi exercitationem illum laborum maxime modi rem ut! Dolores enim, incidunt ipsa libero non pariatur quam vero vitae? Aliquid cupiditate dignissimos dolore doloremque facilis, impedit laudantium modi, pariatur perferendis qui quisquam, ullam velit voluptas voluptate.
+
+            <div class="b-invest-depart">
+                <h2 class="b-invest-depart__title">Отдел по работе с резидентами</h2>
+
+                <div class="b-invest-depart__text">Обратитесь за консультацией по процедуре получения статуса резидента ОЭЗ «Санкт-Петербург»</div>
+
+                <div class="b-invest-depart__contacts">
+
+                    {% include '../components/contact-list/contact-list.twig' with {
+                        contacts: [
+                            {
+                                name: "Станислав Гармаш",
+                                prof: "Заместитель Генерального директора по работе с инвесторами",
+                                phone: "+7 (812) 380-49-29, доб. 5500",
+                                mail: "sgarmash@spbsez.ru"
+                            },{
+                                name: "Андрей Иванов",
+                                prof: "Начальник управления по работе с инвесторами",
+                                phone: "+7 (812) 380-49-29, доб. 5004",
+                                mail: "aivanov@spbsez.ru"
+                            },{
+                                name: "Полина Ульзутуева",
+                                prof: "Начальник управления по работе с инвесторами",
+                                phone: "+7 (812) 380-49-29, доб. 5003",
+                                mail: "pulzutueva@spbsez.ru"
+                            },{
+                                name: "Алена Голубева ",
+                                prof: "Главный специалист отдела по работе с инвесторами",
+                                phone: "+7 (812) 380-49-29, доб. 5512",
+                                mail: "agolubeva@spbsez.ru"
+                            },{
+                                name: "Диана Уличева",
+                                prof: "Главный специалист отдела по работе с инвесторами",
+                                phone: "+7 (812) 380-49-29, доб. 5007",
+                                mail: "dulicheva@spbsez.ru"
+                            },
+                        ]
+                    } %}
+
+                </div>
+
+                <div class="b-invest-depart__button">
+                    <a href="#" class="button">Написать сообщение</a>
+                </div>
+            </div>
+
         </div>
 
     </div>
