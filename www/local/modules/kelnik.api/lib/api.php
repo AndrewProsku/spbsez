@@ -37,7 +37,8 @@ class Api
             'vacancy'
         ],
         'kelnik.requests' => [
-            'message'
+            'message',
+            'service'
         ]
     ];
 

@@ -4,22 +4,13 @@ namespace Kelnik\Requests\Model\AdminInterface;
 
 use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminInterface;
-use Kelnik\AdminHelper\Widget\ComboBoxWidget;
 use Kelnik\AdminHelper\Widget\DateTimeWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\AdminHelper\Widget\TextAreaWidget;
-use Kelnik\AdminHelper\Widget\UserWidget;
-use Kelnik\Requests\Model\StatusTable;
-use Kelnik\Requests\Model\TypeTable;
 
 Loc::loadMessages(__FILE__);
 
-/**
- * Описание интерфейса (табок и полей) админки новостей.
- *
- * {@inheritdoc}
- */
 class SiteMsgAdminInterface extends AdminInterface
 {
     /**
@@ -59,14 +50,12 @@ class SiteMsgAdminInterface extends AdminInterface
                         'WIDGET' => new StringWidget(),
                         'SIZE' => 10,
                         'FILTER' => '%',
-                        'EDIT_LINK' => true,
                         'READONLY' => true
                     ],
                     'PHONE' => [
                         'WIDGET' => new StringWidget(),
                         'SIZE' => 10,
                         'FILTER' => '%',
-                        'EDIT_LINK' => true,
                         'READONLY' => true
                     ],
                     'BODY' => [

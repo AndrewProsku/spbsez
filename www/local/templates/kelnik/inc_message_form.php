@@ -1,7 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();?>
 <div id="#message" class="b-message-popup">
     <h3 class="b-message-popup__header">Написать сообщение</h3>
-    <form method="post" enctype="application/x-www-form-urlencoded" class="b-vacancy-response-form j-message-form">
+    <form method="post" enctype="multipart/form-data" class="b-vacancy-response-form j-message-form">
         <div class="b-vacancy-response-form__inputs">
             <div class="b-form-block j-message-text b-input-textarea">
                     <textarea id="text"

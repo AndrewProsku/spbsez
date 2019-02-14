@@ -11,11 +11,7 @@ use Kelnik\Requests\Model\StatusTable;
 
 Loc::loadMessages(__FILE__);
 
-/**
- * Описание интерфейса (табок и полей) админки новостей.
- *
- * {@inheritdoc}
- */
+
 class StatusAdminInterface extends AdminInterface
 {
     /**
