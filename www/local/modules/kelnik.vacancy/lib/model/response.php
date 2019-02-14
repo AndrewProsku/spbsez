@@ -90,4 +90,19 @@ class ResponseTable extends DataManager
 
         return parent::add($data);
     }
+
+    public static function userCanAddRow($userHash)
+    {
+        if (!$userHash) {
+            return false;
+        }
+
+        return !(bool) self::getRow([
+            'select' => ['ID'],
+            'filter' => [
+                '=USER_HASH' => $userHash,
+                '>=DATE_CREATED' => Main\Type\DateTime::createFromTimestamp(time() - self::REQUEST_TIME_LEFT)
+            ]
+        ]);
+    }
 }

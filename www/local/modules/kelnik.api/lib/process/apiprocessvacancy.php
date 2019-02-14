@@ -4,6 +4,7 @@ namespace Kelnik\Api\Process;
 use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
+use Kelnik\Api\Api;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Vacancy\Model\ResponseTable;
 
@@ -19,26 +20,11 @@ class ApiProcessVacancy extends ApiProcessAbstract
     public function execute(array $request): bool
     {
         $contextRequest = Context::getCurrent()->getRequest();
+        $userHash = Api::getUserHash();
 
-        if (!$contextRequest->isPost()) {
+        if (!$contextRequest->isPost() || !ResponseTable::userCanAddRow($userHash)) {
             $this->errors[] = Loc::getMessage('KELNIK_API_REQUEST_ERROR');
-            return false;
-        }
 
-        $userHash = md5(
-            implode(
-                '|',
-                [
-                    $contextRequest->getUserAgent(),
-                    $contextRequest->getRemoteAddress()
-                ]
-            )
-        );
-
-        $lastQuery = self::getLastQueryByUser($userHash);
-
-        if (($lastQuery + ResponseTable::REQUEST_TIME_LEFT) > time()) {
-            $this->errors[] = Loc::getMessage('KELNIK_API_REQUEST_ERROR');
             return false;
         }
 
@@ -52,7 +38,7 @@ class ApiProcessVacancy extends ApiProcessAbstract
         $data = [];
 
         foreach ($fields as $k => $v) {
-            $data[$k] = trim(ArrayHelper::getValue($request, $v));
+            $data[$k] = htmlentities(trim(ArrayHelper::getValue($request, $v)), ENT_QUOTES, 'UTF-8');
             if (empty($data[$k])) {
                 $this->errors[] = Loc::getMessage('KELNIK_API_VACANCY_ERROR_' . $k);
                 return false;
@@ -80,36 +66,5 @@ class ApiProcessVacancy extends ApiProcessAbstract
         }
 
         return true;
-    }
-
-    public function getLastQueryByUser($userHash)
-    {
-        $res = false;
-
-        if (!$userHash) {
-            return $res;
-        }
-
-        try {
-            $res = ResponseTable::getRow([
-                'select' => [
-                    'DATE_CREATED'
-                ],
-                'filter' => [
-                    '=USER_HASH' => $userHash
-                ],
-                'order' => [
-                    'DATE_CREATED' => 'DESC'
-                ]
-            ]);
-        } catch (\Exception $e) {
-            return $res;
-        }
-
-        if (!empty($res['DATE_CREATED']) && $res['DATE_CREATED'] instanceof DateTime) {
-            $res = $res['DATE_CREATED']->getTimestamp();
-        }
-
-        return $res;
     }
 }

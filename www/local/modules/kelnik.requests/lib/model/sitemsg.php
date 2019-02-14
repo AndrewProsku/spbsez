@@ -4,7 +4,6 @@ namespace Kelnik\Requests\Model;
 
 use Bitrix\Main\Entity\DatetimeField;
 use Bitrix\Main\Entity\IntegerField;
-use Bitrix\Main\Entity\ReferenceField;
 use Bitrix\Main\Entity\StringField;
 use Bitrix\Main\Entity\TextField;
 use Bitrix\Main\Localization\Loc;
@@ -18,7 +17,7 @@ Loc::loadMessages(__FILE__);
  */
 class SiteMsgTable extends DataManager
 {
-    const REQUEST_TIME_LEFT = 60; // 1min
+    const REQUEST_TIME_LEFT = 60; // 1 min
     /**
      * {@inheritdoc}
      */
@@ -52,16 +51,23 @@ class SiteMsgTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_REQ_DATE_MODIFIED')
                 ]
             ),
-            new StringField(
-                'CODE',
-                [
-                    'title' => Loc::getMessage('KELNIK_REQ_CODE')
-                ]
-            ),
+            new StringField('USER_HASH'),
             new StringField(
                 'NAME',
                 [
-                    'title' => Loc::getMessage('KELNIK_REQ_NAME')
+                    'title' => Loc::getMessage('KELNIK_REQ_FIO')
+                ]
+            ),
+            new StringField(
+                'EMAIL',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_EMAIL')
+                ]
+            ),
+            new StringField(
+                'PHONE',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_PHONE')
                 ]
             ),
             new TextField(
@@ -85,5 +91,20 @@ class SiteMsgTable extends DataManager
         $data['DATE_MODIFIED'] = new DateTime();
 
         return parent::update($primary, $data);
+    }
+
+    public static function userCanAddRow($userHash)
+    {
+        if (!$userHash) {
+            return false;
+        }
+
+        return !(bool) self::getRow([
+            'select' => ['ID'],
+            'filter' => [
+                '=USER_HASH' => $userHash,
+                '>=DATE_CREATED' => DateTime::createFromTimestamp(time() - self::REQUEST_TIME_LEFT)
+            ]
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Kelnik\Api;
 
+use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
@@ -104,6 +105,45 @@ class Api
         }
 
         die($this->getResponse());
+    }
+
+    public static function getUserIp()
+    {
+        $fields = [
+            'HTTP_X_REAL_IP',
+            'HTTP_CLIENT_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'REMOTE_ADDR'
+        ];
+
+        $res = '';
+
+        foreach ($fields as $v) {
+            if ($res || empty($_SERVER[$v])) {
+                continue;
+            }
+
+            $res = $_SERVER[$v];
+
+            if (false !== strpos($res, ',')) {
+                $res = array_shift(explode(',', $res));
+            }
+        }
+
+        return $res;
+    }
+
+    public static function getUserHash()
+    {
+        return md5(
+            implode(
+                '|',
+                [
+                    Context::getCurrent()->getRequest()->getUserAgent(),
+                    self::getUserIp()
+                ]
+            )
+        );
     }
 
     protected static function getDefaultResponse(): array

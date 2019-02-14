@@ -15,3 +15,7 @@ $MESS['KELNIK_API_VACANCY_ERROR_EMAIL'] = 'Не заполнено поле E-ma
 $MESS['KELNIK_API_VACANCY_ERROR_VACANCY_ID'] = 'Не указана вакансия';
 $MESS['KELNIK_API_VACANCY_ERROR_FILE'] = 'Не загружен файл резюме';
 $MESS['KELNIK_API_DOC_FILE_UPLOAD_ERROR'] = 'Не удалось загрузить файл';
+$MESS['KELNIK_API_MESSAGE_ERROR_NAME'] = 'Не заполнено поле ФИО';
+$MESS['KELNIK_API_MESSAGE_ERROR_EMAIL'] = 'Не заполнено поле E-mail';
+$MESS['KELNIK_API_MESSAGE_ERROR_PHONE'] = 'Не заполнено поле Телефон';
+$MESS['KELNIK_API_MESSAGE_ERROR_BODY'] = 'Не заполнено поле Сообщение';
