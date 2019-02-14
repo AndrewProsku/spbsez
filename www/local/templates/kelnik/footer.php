@@ -24,7 +24,9 @@
             <div class="b-footer__copyright">
                 <span class="b-footer__copyright-text">© <?= date('Y'); ?>, ОЭЗ «Санкт-Петербург»</span>
                 <a href="#" class="b-footer__copyright-link">Раскрытие информации</a>
-                <a href="#" class="b-footer__copyright-link">Написать сообщение</a>
+                <button class="b-footer__copyright-link j-message-button" data-href="#message">
+                    Написать сообщение
+                </button>
             </div>
         </div>
         <div class="b-footer__right">
@@ -96,6 +98,7 @@
                 </a>
             </div>
         </div>
+        <?php include 'inc_message_form.php'; ?>
     </footer>
 
     <div class="b-mobile-menu j-mobile-menu">
