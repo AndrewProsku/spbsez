@@ -7,6 +7,7 @@ use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Requests\Model\ServiceTable;
 use Kelnik\Requests\Model\StandartTable;
 use Kelnik\Requests\Model\TypeTable;
 use Kelnik\Userdata\Profile\ProfileModel;
@@ -23,12 +24,20 @@ if (!\Bitrix\Main\Loader::includeModule('bex.bbc')) {
 class RequestForm extends Bbc\Basis
 {
     protected $needModules = ['kelnik.requests', 'kelnik.userdata'];
-    protected $checkParams = [];
+    protected $checkParams = [
+        'SUB_TYPE' => ['type' => 'string', 'error' => false]
+    ];
     protected $cacheTemplate = false;
 
     protected function executeMain()
     {
         global $USER;
+
+        if ($this->arParams['SUB_TYPE'] === 'service') {
+            $this->arResult['TYPES'] = ServiceTable::getTypes();
+
+            return true;
+        }
 
         $request = Context::getCurrent()->getRequest();
         $this->arResult['ERRORS'] = [

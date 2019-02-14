@@ -9,13 +9,11 @@ use Kelnik\AdminHelper\Widget\DateTimeWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\AdminHelper\Widget\TextAreaWidget;
-use Kelnik\AdminHelper\Widget\UserWidget;
-use Kelnik\Requests\Model\StatusTable;
-use Kelnik\Requests\Model\TypeTable;
+use Kelnik\Requests\Model\ServiceTable;
 
 Loc::loadMessages(__FILE__);
 
-class StandartAdminInterface extends AdminInterface
+class ServiceAdminInterface extends AdminInterface
 {
     /**
      * {@inheritdoc}
@@ -40,40 +38,48 @@ class StandartAdminInterface extends AdminInterface
                     'DATE_MODIFIED' => [
                         'WIDGET' => new DateTimeWidget(),
                         'READONLY' => true,
-                        'HIDE_WHEN_CREATE' => true
+                        'HIDE_WHEN_CREATE' => true,
+                        'HEADER' => false
                     ],
                     'TYPE_ID' => [
                         'WIDGET' => new ComboBoxWidget(),
-                        'VARIANTS' => TypeTable::getAdminAssocList(),
+                        'VARIANTS' => ServiceTable::getTypes(),
                         'READONLY' => true,
                         'HIDE_WHEN_CREATE' => true
                     ],
-                    'STATUS_ID' => [
-                        'WIDGET' => new ComboBoxWidget(),
-                        'VARIANTS' => StatusTable::getAdminAssocList(),
-                        'REQUIRED' => true
-                    ],
-                    'USER_ID' => [
-                        'WIDGET' => new UserWidget(),
-                        'READONLY' => true,
-                        'HIDE_WHEN_CREATE' => true
-                    ],
-                    'CODE' => [
+                    'NAME' => [
                         'WIDGET' => new StringWidget(),
+                        'SIZE' => 40,
                         'FILTER' => '%',
                         'EDIT_LINK' => true,
                         'READONLY' => true
                     ],
-                    'NAME' => [
+                    'COMPANY' => [
                         'WIDGET' => new StringWidget(),
-                        'SIZE' => '40',
+                        'SIZE' => 10,
                         'FILTER' => '%',
-                        'EDIT_LINK' => true,
+                        'READONLY' => true
+                    ],
+                    'POSITION' => [
+                        'WIDGET' => new StringWidget(),
+                        'SIZE' => 10,
+                        'FILTER' => '%',
+                        'READONLY' => true
+                    ],
+                    'EMAIL' => [
+                        'WIDGET' => new StringWidget(),
+                        'SIZE' => 10,
+                        'FILTER' => '%',
+                        'READONLY' => true
+                    ],
+                    'PHONE' => [
+                        'WIDGET' => new StringWidget(),
+                        'SIZE' => 10,
+                        'FILTER' => '%',
                         'READONLY' => true
                     ],
                     'BODY' => [
                         'WIDGET' => new TextAreaWidget(),
-                        'SIZE' => '40',
                         'FILTER' => '%',
                         'READONLY' => true
                     ]
@@ -88,8 +94,8 @@ class StandartAdminInterface extends AdminInterface
     public function helpers()
     {
         return [
-            '\Kelnik\Requests\Model\AdminInterface\StandartListHelper',
-            '\Kelnik\Requests\Model\AdminInterface\StandartEditHelper'
+            ServiceEditHelper::class,
+            ServiceListHelper::class
         ];
     }
 }

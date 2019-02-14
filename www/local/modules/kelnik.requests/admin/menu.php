@@ -2,6 +2,8 @@
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
+use Kelnik\Requests\Model\AdminInterface\ServiceEditHelper;
+use Kelnik\Requests\Model\AdminInterface\ServiceListHelper;
 use Kelnik\Requests\Model\AdminInterface\SiteMsgListHelper;
 use Kelnik\Requests\Model\AdminInterface\SiteMsgEditHelper;
 use Kelnik\Requests\Model\AdminInterface\StandartListHelper;
@@ -55,6 +57,17 @@ return [
                 'url' => SiteMsgListHelper::getUrl(),
                 'more_url' => [
                     SiteMsgEditHelper::getUrl(),
+                ]
+            ],
+            [
+                'parent_menu' => 'global_menu_content',
+                'sort' => 100,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_REQ_SERVICE'),
+                'url' => ServiceListHelper::getUrl(),
+                'more_url' => [
+                    ServiceListHelper::getUrl(),
                 ]
             ],
             [
