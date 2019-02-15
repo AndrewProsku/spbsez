@@ -49,7 +49,6 @@ class Utils {
         element.parentNode.removeChild(element);
     }
 
-
     /**
      * Метод показывает элемент.
      * @param {Node} element - элемент, который необходимо показать.

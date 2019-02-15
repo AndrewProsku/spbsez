@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const config = require('./tasks/config');
 const autoprefixer = require('autoprefixer');
 const rev = require('./tasks/rev');
-const autoprefixer = require('autoprefixer');
 
 rev([
     './www/local/templates/kelnik/inc_footer.php'
