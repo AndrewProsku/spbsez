@@ -4,6 +4,7 @@
     @include padding-level(top, pink);
     @include padding-level(bottom, pink);
     background-color: $bg-grey;
+    background-image: url("/images/home/bg-sections.jpg");
 
     @media #{$laptop} {
         @include prefix(3, 36);

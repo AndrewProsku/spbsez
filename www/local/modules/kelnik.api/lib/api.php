@@ -2,6 +2,7 @@
 
 namespace Kelnik\Api;
 
+use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
@@ -23,8 +24,22 @@ class Api
     protected $freeEvents = [
         'login',
         'forgot',
-        'changepassword',
-        'vacancy'
+        'changePassword',
+        'vacancy',
+        'message'
+    ];
+
+    protected $requireModules = [
+        'kelnik.userdata' => [
+            'profile'
+        ],
+        'kelnik.vacancy' => [
+            'vacancy'
+        ],
+        'kelnik.requests' => [
+            'message',
+            'service'
+        ]
     ];
 
     public static function instance()
@@ -61,29 +76,18 @@ class Api
             die($this->getResponse());
         }
 
-        if (in_array($this->event, ['search', 'visual'])) {
-            \CModule::IncludeModule('kelnik.exchange');
-        }
-
         $classNamespace = '\Kelnik\Api\Process\ApiProcess' . ucfirst($this->event);
 
         if (!method_exists($classNamespace, 'execute')) {
             $this->errors[] = Loc::getMessage('KELNIK_API_EVENT_NOT_EXISTS');
         }
 
-        $requiredModules = [];
-
-        if (in_array($this->event, ['profile'])) {
-            $requiredModules[] = 'kelnik.userdata';
-        }
-
-        if (in_array($this->event, ['vacancy'])) {
-            $requiredModules[] = 'kelnik.vacancy';
-        }
-
-        if ($requiredModules) {
-            foreach ($requiredModules as $requiredModule) {
-                if (!\CModule::IncludeModule($requiredModule)) {
+        if ($this->requireModules) {
+            foreach ($this->requireModules as $module => $events) {
+                if (!in_array($this->event, $events)) {
+                    continue;
+                }
+                if (!\CModule::IncludeModule($module)) {
                     $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
                 }
             }
@@ -102,6 +106,45 @@ class Api
         }
 
         die($this->getResponse());
+    }
+
+    public static function getUserIp()
+    {
+        $fields = [
+            'HTTP_X_REAL_IP',
+            'HTTP_CLIENT_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'REMOTE_ADDR'
+        ];
+
+        $res = '';
+
+        foreach ($fields as $v) {
+            if ($res || empty($_SERVER[$v])) {
+                continue;
+            }
+
+            $res = $_SERVER[$v];
+
+            if (false !== strpos($res, ',')) {
+                $res = array_shift(explode(',', $res));
+            }
+        }
+
+        return $res;
+    }
+
+    public static function getUserHash()
+    {
+        return md5(
+            implode(
+                '|',
+                [
+                    Context::getCurrent()->getRequest()->getUserAgent(),
+                    self::getUserIp()
+                ]
+            )
+        );
     }
 
     protected static function getDefaultResponse(): array

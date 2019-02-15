@@ -30,11 +30,11 @@
 
     <div class="l-services">
 
-        <div class="b-title b-services-title">
+        <div class="b-title b-services__title">
             <h1>Услуги</h1>
         </div>
 
-        <div class="b-services-text">
+        <div class="b-services__text">
             <p>Управляющая компания АО «Особая экономическая зона «Санкт-Петербург» предлагает всестороннюю поддержку и услуги для развития бизнеса резидентов.</p>
         </div>
 
@@ -247,7 +247,7 @@
                 <div class="b-form-block j-service-text b-input-textarea">
                     {% include "../components/forms/textarea/textarea.twig" with {
                         id: "text",
-                        name: "text"
+                        name: "text",
                         rows: "3"
                     } %}
 
@@ -269,7 +269,7 @@
                         name: "service-fio"
                     } %}
 
-                    <label for="admin-fio" class="b-form-block__label">Как тебя зовут</label>
+                    <label for="admin-fio" class="b-form-block__label">ФИО</label>
                     <span class="b-form-block__error-text">Имя</span>
                 </div>
                 <div class="b-form-block j-service-position">

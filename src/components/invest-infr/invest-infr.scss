@@ -1,0 +1,142 @@
+.b-invest-infr {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level(top, pink);
+    @include padding-level(bottom, pink);
+    background-color: $bg-grey;
+    background-image: url("/images/home/bg-sections.jpg");
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-invest-infr__title {
+    @include margin-level(bottom, blue);
+}
+
+.b-invest-infr__row {
+    @include row();
+
+    @media #{$laptop} {
+        @include margin-level(bottom, cyan);
+    }
+}
+
+.b-invest-infr__item {
+    @include margin-level(bottom, cyan);
+    @include column(32, 32);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
+
+    @media #{$tablet-portrait} {
+        @include column(11, 32);
+        @include post(5, 32);
+
+        &:nth-child(2n) {
+            margin-right: 0;
+        }
+    }
+
+    @media #{$laptop} {
+        @include column(6, 30);
+        @include post(2, 30);
+        margin-bottom: 0;
+
+        &:nth-child(2n) {
+            @include post(2, 30);
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    @media #{$fullhd} {
+        @include column(6, 28);
+        @include post(1, 28);
+    }
+}
+
+.b-invest-infr__img {
+    margin-bottom: 15px;
+    width: 80px;
+    
+    @media #{$tablet-portrait} {
+        width: 160px;
+        margin-bottom: 21px;
+    }
+}
+
+.b-invest-infr__name {
+    @include prefix(2, 32);
+    @include font-size(p1);
+    font-weight: 700;
+
+    @media #{$fullhd} {
+        @include prefix(1, 11);
+    }
+
+    @media #{$laptop} {
+        @include prefix(1, 6);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(1, 6);
+    }
+}
+
+.b-invest-infr__description {
+    @include row();
+    @include font-size(p1);
+
+    @media #{$tablet-portrait} {
+        @include column(19, 32);
+    }
+
+    @media #{$tablet-portrait} {
+        @include column(19, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(19, 28);
+    }
+}
+
+.b-invest-infr__wrap-icon {
+    @include column(2, 32);
+    @include post(1, 32);
+
+    @media #{$fullhd} {
+        @include column(2, 19);
+        @include post(1, 19);
+    }
+}
+
+.b-invest-infr__icon-line {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: $blue;
+    margin-top: 24px;
+}
+
+.b-invest-infr__desc-text {
+    @include column(29, 32);
+
+    @media #{$fullhd} {
+        @include column(16, 19);
+    }
+}
+
+.b-invest-infr__desc-text strong {
+    color: $blue;
+}

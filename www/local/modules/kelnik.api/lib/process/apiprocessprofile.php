@@ -11,7 +11,7 @@ use Kelnik\Userdata\Profile\ProfileSectionContacts;
 use Kelnik\Userdata\Profile\ProfileSectionDocs;
 
 /**
- * Class ApiProcessLogin
+ * Class ApiProcessProfile
  *
  * Профиль
  *

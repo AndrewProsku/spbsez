@@ -15,11 +15,6 @@ use Kelnik\Requests\Model\TypeTable;
 
 Loc::loadMessages(__FILE__);
 
-/**
- * Описание интерфейса (табок и полей) админки новостей.
- *
- * {@inheritdoc}
- */
 class StandartAdminInterface extends AdminInterface
 {
     /**

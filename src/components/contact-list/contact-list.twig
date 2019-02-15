@@ -1,0 +1,10 @@
+<div class="b-contact-list">
+    {% for contact in contacts %}
+        <div class="b-contact-list__item">
+            <div class="b-contact-list__name">{{ contact.name }}</div>
+            <div class="b-contact-list__prof">{{ contact.prof }}</div>
+            <div class="b-contact-list__phone"><a href="#">{{ contact.phone }}</a></div>
+            <div class="b-contact-list__mail"><a href="#" class="b-link-line">{{ contact.mail }}</a></div>
+        </div>
+    {% endfor %}
+</div>

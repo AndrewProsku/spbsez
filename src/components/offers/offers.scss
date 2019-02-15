@@ -3,7 +3,7 @@
     @include prefix(2, 36);
     @include suffix(2, 36);
     @include row();
-    flex-direction: row-reverse;
+    justify-content: flex-start;
     position: relative;
     z-index: 3;
 
@@ -25,23 +25,27 @@
 .b-offers__wrapper {
     @media #{$tablet-portrait} {
         @include row();
-        flex-direction: row-reverse;
         justify-content: space-between;
     }
 }
 
 .b-offers__img {
     width: 80%;
+    order: 1;
 
     @media #{$tablet-portrait} {
         @include column(10, 33);
+        order: 3;
     }
 }
 
 .b-offers__block {
+    order: 3;
+
     @media #{$tablet-portrait} {
         @include column(21, 33);
         @include post(2, 33);
+        order: 2;
     }
 
     @media #{$laptop} {
@@ -49,18 +53,49 @@
     }
 }
 
+.b-offers__title {
+    order: 2;
+
+    @media #{$tablet-portrait} {
+        @include post(12, 33);
+        order: 1;
+    }
+
+    @media #{$laptop} {
+        @include post(13, 33);
+        flex-basis: 100%;
+    }
+}
+
 .b-offers__title h2 {
-    @include margin-level(bottom, dark-yellow);
+    @include margin-level(both, cyan);
     @include font-size("h2");
+
+    @media #{$tablet-portrait} {
+        @include margin-level(top, reset);
+    }
+}
+
+.b-offers__subtitle {
+    @include margin-level(top, blue);
+}
+
+.b-offers__text {
+    @include margin-level(bottom, cyan);
 }
 
 .b-offers__text p {
-    @include padding-level(bottom, cyan);
+    @include margin-level(bottom, green);
     @include font-size("p1");
+
+    &:last-of-type {
+        @include margin-level(bottom, reset);
+    }
 }
 
 .b-offers__list {
     @include row();
+    @include margin-level(bottom, blue);
 }
 
 .b-offers__item {
@@ -94,7 +129,7 @@
         }
 
         @media #{$laptop} {
-            margin: 0;
+            margin-right: 0;
         }
     }
 
@@ -105,7 +140,7 @@
     }
 
     &:last-child {
-        @include margin-level(bottom, blue);
+        @include margin-level(bottom, reset);
     }
 }
 
@@ -128,8 +163,8 @@
     font-weight: 700;
 }
 
-.b-offers__description:not(:last-child) {
-    @include margin-level(bottom, yellow);
+.b-offers__description {
+    @include margin-level(bottom, cyan);
 }
 
 .b-offers__description-title h4 {
@@ -154,6 +189,7 @@
     @include font-size("p3");
     line-height: 1.5;
     font-weight: 700;
+    @include margin-level(bottom, reset);
 }
 
 .b-offers__logo-wrap {
@@ -163,7 +199,7 @@
 
 .b-offers__l-icon {
     @include post(2, 32);
-    @include margin-level(bottom, dark-yellow);
+    @include margin-level(top, dark-yellow);
     height: 32px;
 
     @media #{$fullhd} {
