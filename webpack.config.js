@@ -3,14 +3,18 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const config = require('./tasks/config');
-const autoprefixer = require('autoprefixer');
+const rev = require('./tasks/rev');
+
+rev([
+    './www/local/templates/kelnik/inc_footer.php'
+]);
 
 // CONFIG
 module.exports = {
     target : 'web',
     context: path.resolve(__dirname, './src'),
     entry  : {
-        app       : ['babel-polyfill', './common/scripts/app']
+        app : ['babel-polyfill', './common/scripts/app']
     },
     output: {
         filename: '[name].js',
@@ -30,6 +34,7 @@ module.exports = {
                 loader : 'babel-loader',
                 options: {
                     presets       : ['@babel/preset-env'],
+                    plugins       : ['@babel/plugin-proposal-object-rest-spread'],
                     cacheDirectory: true
                 }
             }
