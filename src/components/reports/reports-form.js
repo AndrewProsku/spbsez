@@ -4,6 +4,8 @@ import ReportBlock from './report-block';
 import templateForm1 from './templates/form-1.twig';
 import templateForm2 from './templates/form-2.twig';
 import templateForm3 from './templates/form-3.twig';
+import templateForm4 from './templates/form-4.twig';
+import templateForm5 from './templates/form-5.twig';
 import Utils from '../../common/scripts/utils';
 
 
@@ -42,7 +44,7 @@ class ReportForm {
             template  : null
         }];
 
-        this.unitialForm = 2;
+        this.unitialForm = 4;
 
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
@@ -236,6 +238,12 @@ class ReportForm {
                 break;
             case 2:
                 template.innerHTML = templateForm3();
+                break;
+            case 3:
+                template.innerHTML = templateForm4();
+                break;
+            case 4:
+                template.innerHTML = templateForm5();
                 break;
             default:
                 template.innerHTML = templateForm1();

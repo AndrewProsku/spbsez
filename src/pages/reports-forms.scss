@@ -26,6 +26,11 @@
     }
 }
 
+.b-reports-subtitle {
+    @include font-size("h2");
+    @include margin-level(bottom, yellow);
+}
+
 .b-report-form {
     @include padding-level(top, blue);
     @include padding-level(bottom, green);
@@ -37,9 +42,13 @@
     @include margin-level(bottom, yellow);
 }
 
-.b-report-form-subtitle {
-    @include font-size("h2");
+.b-report-form__subtitle {
+    @include font-size("p2");
     @include margin-level(bottom, yellow);
+}
+
+.b-report-form__title + .b-report-form__subtitle {
+    margin-top: -8px;
 }
 
 .b-inputs-row {
@@ -47,8 +56,6 @@
     //border-radius: 4px;
     display: flex;
     flex-wrap: wrap;
-
-
 
     .b-input-block {
         width: 100%;
@@ -423,8 +430,11 @@
     @include margin-level(bottom, yellow);
 }
 
-.b-report-stage-select:not(:last-child) {
-    margin-bottom: 9px;
+.b-inputs-row_type-dynamic,
+.b-report-stage-select {
+    &:not(:last-child) {
+        margin-bottom: 9px;
+    }
 }
 
 .b-report-block__add {

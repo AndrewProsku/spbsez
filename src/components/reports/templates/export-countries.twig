@@ -1,0 +1,19 @@
+{% if deletable %}
+    <button type="button" class="b-report-form__delete j-delete-group" data-group-id="{{ groupID }}"></button>
+{% endif %}
+<div class="b-inputs-row b-inputs-row_type-dynamic"  data-group-id="{{ groupID }}">
+    <div class="b-input-block b-input-block_is_untouched">
+        {% include "../../forms/input-text/input-text.twig" with {
+            id: "export-countries["~ groupID ~"]",
+            name: "export-countries["~ groupID ~"]"
+        } %}
+        <label class="b-input-block__label" for="export-countries[{{ groupID }}]">Страны</label>
+    </div>
+    <div class="b-input-block b-input-block_is_untouched">
+        {% include "../../forms/input-text/input-text.twig" with {
+            id: "export-code["~ groupID ~"]",
+            name: "export-code["~ groupID ~"]"
+        } %}
+        <label class="b-input-block__label" for="export-code[{{ groupID }}]">Код ТН ВЭД</label>
+    </div>
+</div>
