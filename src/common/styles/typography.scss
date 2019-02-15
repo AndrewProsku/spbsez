@@ -88,8 +88,9 @@ a {
     text-decoration: none;
 
     &.b-link-line {
-        background-image: linear-gradient(to top, rgba($blue, 0.12) 0%, rgba($violet, 0.12) 40%, rgba($violet, 0) 30%);
-        padding-bottom: 5px;
+        background-image: linear-gradient(to top, rgba($blue, 0.12) 0%, rgba($violet, 0.12) 50%, rgba($violet, 0) 35%);
+        padding-top: 0.25em;
+        padding-bottom: 0.25em;
         padding-right: 3px;
     }
 
