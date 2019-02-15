@@ -70,6 +70,7 @@ class Message {
             const that = this;
             const isFormFulfilled = this.checkForm();
 
+            /* eslint-disable consistent-return */
             if (isFormFulfilled) {
                 Utils.send(new FormData(that.$form), '/api/message/', {
                     success(response) {
@@ -78,19 +79,22 @@ class Message {
                         if (response.request.status === successStatus) {
                             that.showSuccessMessage();
 
-                            return;
+                            return true;
                         }
 
                         const errorMessage = response.request.errors.join('</br>');
 
                         that.showErrorMessage(that.$inputResume, errorMessage);
                         that.errorRepeatPassword(errorMessage);
+
+                        return false;
                     },
                     error(error) {
                         console.error(error);
                     }
                 });
             }
+            /* eslint-enable consistent-return */
         });
         this.$inputFIO.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'fio');

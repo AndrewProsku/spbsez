@@ -13,6 +13,7 @@ const clean = require('./tasks/clean');
 const purifycss = require('./tasks/purifycss');
 const server = require('./tasks/server/server').server;
 const watch = require('./tasks/watch');
+const styles = require('./tasks/styles');
 
 /**
  * TASKS
@@ -25,7 +26,10 @@ gulp.task('images', gulp.series(images));
 
 gulp.task('fonts', gulp.series(font));
 
-gulp.task('build', gulp.series(clean, gulp.parallel(font, images, pages, purifycss, svg)));
+// gulp.task('build', gulp.series(clean, gulp.parallel(font, images, pages, purifycss, svg)));
+
+// Все картинки лежат не в компонентах, а непосредственно в www - перед запуском убедись, что ничего не удалишь
+gulp.task('build', gulp.series(clean, gulp.parallel(pages, styles, purifycss)));
 
 gulp.task('dev', gulp.series(server, watch));
 
