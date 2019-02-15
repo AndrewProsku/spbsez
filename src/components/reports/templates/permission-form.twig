@@ -1,22 +1,23 @@
-<div class="b-input-group b-report-block__extra-fields j-permission-form">
+<div class="b-input-group b-report-block__extra-fields j-permission-form" data-stage-id="{{ id }}">
     <div class="b-input-block b-input-block_is_untouched">
         {% include "../../forms/input-text/input-text.twig" with {
-            id: "construction-permit["~ id ~"]",
-            name: "construction-permit["~ id ~"]"
+            id: "construction-permission-num["~ id ~"]",
+            name: "construction-permission-num["~ id ~"]"
         } %}
-        <label class="b-input-block__label" for="construction-permit">Номер разрешения</label>
+        <label class="b-input-block__label" for="construction-permission-num[{{ id }}]">Номер разрешения</label>
     </div>
     {% include "../../forms/file/file.twig" with {
-        class: "b-input-block j-construction-permit-file",
-        id: "construction-permit-file["~ id ~"]",
-        name: "construction-permit-file["~ id ~"]",
-        label: "Прикрепите файл разрешения"
+        class: "b-input-block b-input-block_is_untouched j-file-input-block",
+        id: "construction-permission-file["~ id ~"]",
+        name: "construction-permission-file["~ id ~"]",
+        label: "Прикрепите файл разрешения",
+        withForm: true
     } %}
     <div class="b-input-block b-input-block_is_untouched">
         {% include "../../forms/input-text/input-text.twig" with {
-            id: "construction-permit-date["~ id ~"]",
-            name: "construction-permit-date["~ id ~"]"
+            id: "construction-permission-date["~ id ~"]",
+            name: "construction-permission-date["~ id ~"]"
         } %}
-        <label class="b-input-block__label" for="construction-permit-date">Дата документа</label>
+        <label class="b-input-block__label" for="construction-permission-date[{{ id }}]">Дата документа</label>
     </div>
 </div>

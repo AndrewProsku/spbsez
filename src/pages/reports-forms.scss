@@ -171,6 +171,7 @@
 }
 
 .b-input-block_is_untouched {
+    .b-select .chosen-container-single .chosen-single span,
     .b-pseudo-input,
     input[type="text"],
     input[type="password"],
@@ -418,6 +419,14 @@
     @include padding-level(top, yellow);
 }
 
+.b-report-block__extra-fields:not(:last-child) {
+    @include margin-level(bottom, yellow);
+}
+
+.b-report-stage-select:not(:last-child) {
+    margin-bottom: 9px;
+}
+
 .b-report-block__add {
     @include margin-level(top, yellow);
     min-width: auto;
@@ -478,6 +487,28 @@
     margin-bottom: 0;
 }
 
-.b-report-stage-select {
+.b-report-form__delete {
+    @include transition(border);
+    display: block;
+    width: 21px;
+    height: 21px;
+    margin-left: auto;
     margin-bottom: 9px;
+    background-image: url("/images/home/delete-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    background-color: $white;
+    border: 1px solid $grey;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+        border-color: $blue;
+    }
+
+    @media #{$tablet-portrait} {
+        width: 31px;
+        height: 31px;
+    }
 }

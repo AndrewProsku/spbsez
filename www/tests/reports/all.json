@@ -285,18 +285,44 @@
             "type": "construction-stage",
             "stages": [
               {
+                "stageID": 25,
                 "fields": [
                   {
-                    "id": "construction-stage[1]",
-                    "value": "period2"
+                    "id": "construction-stage[25]",
+                    "value": "stage4"
+                  },
+                  {
+                    "id": "construction-permission-num[25]",
+                    "value": "4 8 15 16 23 42"
+                  },
+                  {
+                    "id": "construction-permission-file[25]",
+                    "value": "permission.pdf"
+                  },
+                  {
+                    "id": "construction-permission-date[25]",
+                    "value": "25.01.2019"
                   }
                 ]
               },
               {
+                "stageID": 27,
                 "fields": [
                   {
-                    "id": "construction-stage[2]",
-                    "value": "period5"
+                    "id": "construction-stage[27]",
+                    "value": "stage6"
+                  },
+                  {
+                    "id": "construction-permission-num[27]",
+                    "value": "3333"
+                  },
+                  {
+                    "id": "construction-permission-file[27]",
+                    "value": null
+                  },
+                  {
+                    "id": "construction-permission-date[27]",
+                    "value": null
                   }
                 ]
               }

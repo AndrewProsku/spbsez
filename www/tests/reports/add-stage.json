@@ -1,0 +1,11 @@
+{
+  "request": {
+    "status": 1,
+    "errors": [
+      "Ошибка!"
+    ]
+  },
+  "data": {
+    "stageID": 30
+  }
+}
