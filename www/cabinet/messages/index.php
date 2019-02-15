@@ -27,13 +27,27 @@ if (!$USER->IsAuthorized()) {
         <h1><?php $APPLICATION->ShowTitle(false); ?></h1>
     </div>
     <?$APPLICATION->IncludeComponent(
-        "kelnik:messages",
-        "",
-        Array(
-            "CACHE_TIME" => "3600",
-            "CACHE_TYPE" => "A"
-        )
-    );?>
+	"kelnik:messages", 
+	"oez", 
+	array(
+		"CACHE_TIME" => "3600",
+		"CACHE_TYPE" => "A",
+		"COMPONENT_TEMPLATE" => "oez",
+		"USE_SEARCH" => "Y",
+		"SEF_MODE" => "Y",
+		"SEF_FOLDER" => "/cabinet/messages/",
+		"LIST_DATE_FORMAT" => "H:i d.m.Y",
+		"SET_404" => "Y",
+		"DETAIL_DATE_FORMAT" => "d.m.Y, H:i",
+		"SEF_URL_TEMPLATES" => array(
+			"list" => "",
+			"year" => "#YEAR#/",
+			"search" => "search/",
+			"detail" => "#ELEMENT_TYPE#-#ELEMENT_ID#/",
+		)
+	),
+	false
+);?>
 </div>
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
