@@ -85,6 +85,8 @@ class Message {
 
                         that.showErrorMessage(that.$inputResume, errorMessage);
                         that.errorRepeatPassword(errorMessage);
+
+                        return false;
                     },
                     error(error) {
                         console.error(error);
