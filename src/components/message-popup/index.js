@@ -70,6 +70,7 @@ class Message {
             const that = this;
             const isFormFulfilled = this.checkForm();
 
+            /* eslint-disable consistent-return */
             if (isFormFulfilled) {
                 Utils.send(new FormData(that.$form), '/api/message/', {
                     success(response) {
@@ -93,6 +94,7 @@ class Message {
                     }
                 });
             }
+            /* eslint-enable consistent-return */
         });
         this.$inputFIO.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'fio');

@@ -528,6 +528,10 @@ button {
             }
         }
     }
+
+    &_theme_white {
+        background-color: $white;
+    }
 }
 
 .button_icon_pen {

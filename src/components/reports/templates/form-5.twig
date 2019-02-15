@@ -1,0 +1,64 @@
+<div class="b-report-form__title">Дополнительные показатели функционирования резидентов
+    ОЭЗ ППТ, ТВТ и ПТ</div>
+{# 1 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="1">
+        <h3 class="b-report-block__title">Объем экспортируемой продукции, произведенной на территории ОЭЗ,&#160;млн&#160;₽</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "export-volume-all",
+                    name: "export-volume-all"
+                } %}
+                <label class="b-input-block__label" for="export-volume-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "export-volume-year",
+                    name: "export-volume-year"
+                } %}
+                <label class="b-input-block__label" for="export-volume-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 2 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="2">
+        <h3 class="b-report-block__title">Страны, в которые экспортируется продукция</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="j-export-groups-block"></div>
+
+        <button class="button-add button-add_theme_white b-report-block__add j-export-group-add" type="button">
+            Добавить еще группу «Страны-Код ТН ВЭД»
+        </button>
+    </div>
+</section>
+{# 3 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="3">
+        <h3 class="b-report-block__title">Относится ли производство к высокотехнологичным секторам экономики
+            <div class="b-help j-help">С начала деятельности в качестве резидента</div>
+        </h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-radio-row j-foreign-investors-switch">
+            {% include "../../forms/custom-radio/custom-radio.twig" with {
+                id: "high-tech-production-yes",
+                name: "high-tech-production",
+                value: "yes",
+                text: "Да"
+            } %}
+
+            {% include "../../forms/custom-radio/custom-radio.twig" with {
+                id: "high-tech-production-no",
+                name: "high-tech-production",
+                value: "no",
+                text: "Нет"
+            } %}
+        </div>
+    </div>
+</section>

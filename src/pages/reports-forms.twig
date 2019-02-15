@@ -7,7 +7,7 @@
             <h1>Отчет&nbsp;о деятельности резидента</h1>
         </div>
 
-        <h2 class="b-report-subtitle">Отчеты за 2018 год</h2>
+        <h2 class="b-reports-subtitle">1 квартал, 2018</h2>
 
         <div class="b-inputs-row b-report-oez">
             <div class="b-input-block">
@@ -29,27 +29,32 @@
 
             <div class="b-mini-filter__group j-reports-select-group">
 
-                <div class="b-mini-filter__values j-reports-select" data-title-default="Все"><span class="j-reports-select-title">Ф-1 Общая</span></div>
+                <div class="b-mini-filter__values j-reports-select" data-title-default="Ф-1 Общая"><span class="j-reports-select-title">Ф-1 Общая</span></div>
 
                 <div class="b-mini-filter__group-wrap">
                     <div class="b-mini-filter__item">
-                        <input type="checkbox" name="reports-forms" value="form1" data-text="Ф-1 Общая" id="form1" class="b-mini-filter__input">
-                        <label for="form1" class="b-mini-filter__fake b-mini-filter__fake_state_success">Ф-1 Общая</label>
+                        <input type="radio" name="reports-forms" value="form1" data-text="Ф-1 Общая" id="form1" class="b-mini-filter__input" checked>
+                        <label for="form1" class="b-mini-filter__fake b-mini-filter__fake_is_success">Ф-1 Общая</label>
                     </div>
 
                     <div class="b-mini-filter__item">
-                        <input type="checkbox" name="reports-forms" value="form2" data-text="Ф-2 Налоги" id="form2" class="b-mini-filter__input">
+                        <input type="radio" name="reports-forms" value="form2" data-text="Ф-2 Налоги" id="form2" class="b-mini-filter__input">
                         <label for="form2" class="b-mini-filter__fake">Ф-2 Налоги</label>
                     </div>
 
                     <div class="b-mini-filter__item">
-                        <input type="checkbox" name="reports-forms" value="form3" data-text="Ф-3 Стройка" id="form3" class="b-mini-filter__input">
+                        <input type="radio" name="reports-forms" value="form3" data-text="Ф-3 Стройка" id="form3" class="b-mini-filter__input">
                         <label for="form3" class="b-mini-filter__fake">Ф-3 Стройка</label>
                     </div>
 
                     <div class="b-mini-filter__item">
-                        <input type="checkbox" name="reports-forms" value="form4" data-text="Ф-4 Аренда" id="form4" class="b-mini-filter__input">
+                        <input type="radio" name="reports-forms" value="form4" data-text="Ф-4 Аренда" id="form4" class="b-mini-filter__input">
                         <label for="form4" class="b-mini-filter__fake">Ф-4 Аренда</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="radio" name="reports-forms" value="form5" data-text="Ф-5 ППТ, ТВ и ПТ" id="form5" class="b-mini-filter__input">
+                        <label for="form5" class="b-mini-filter__fake">Ф-5 ППТ, ТВ и ПТ</label>
                     </div>
                 </div>
             </div>
@@ -57,7 +62,9 @@
 
         <button class="button button_icon_check b-report-approve" type="button">Подтвердить данные формы</button>
 
-        {% include "../components/reports/report-form.twig" %}
+        <div class="b-report-form j-report-form">
+            {#{% include "./templates/form-1.twig" %}#}
+        </div>
 
         <button class="button button_without_icon" type="button" disabled>Отправить отчет</button>
     </div>
