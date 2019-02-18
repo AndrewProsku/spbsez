@@ -1,19 +1,19 @@
 {% if deletable %}
-    <button type="button" class="b-report-form__delete j-delete-group" data-group-id="{{ groupID }}"></button>
+    <button type="button" class="b-report-form__delete j-delete-group" data-id="{{ ID }}"></button>
 {% endif %}
-<div class="b-inputs-row b-inputs-row_type-dynamic"  data-group-id="{{ groupID }}">
+<div class="b-inputs-row"  data-id="{{ ID }}">
     <div class="b-input-block b-input-block_is_untouched">
         {% include "../../forms/input-text/input-text.twig" with {
-            id: "export-countries["~ groupID ~"]",
-            name: "export-countries["~ groupID ~"]"
+            id: "export-countries["~ ID ~"]",
+            name: "export-countries["~ ID ~"]"
         } %}
-        <label class="b-input-block__label" for="export-countries[{{ groupID }}]">Страны</label>
+        <label class="b-input-block__label" for="export-countries[{{ ID }}]">Страны</label>
     </div>
     <div class="b-input-block b-input-block_is_untouched">
         {% include "../../forms/input-text/input-text.twig" with {
-            id: "export-code["~ groupID ~"]",
-            name: "export-code["~ groupID ~"]"
+            id: "export-code["~ ID ~"]",
+            name: "export-code["~ ID ~"]"
         } %}
-        <label class="b-input-block__label" for="export-code[{{ groupID }}]">Код ТН ВЭД</label>
+        <label class="b-input-block__label" for="export-code[{{ ID }}]">Код ТН ВЭД</label>
     </div>
 </div>
