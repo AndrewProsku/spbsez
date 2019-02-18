@@ -394,7 +394,7 @@
             "type": "export-countries",
             "groups": [
               {
-                "groupID": 5,
+                "ID": 5,
                 "fields": [
                   {
                     "id": "export-countries[5]",
@@ -417,6 +417,48 @@
               {
                 "id": "high-tech-production-no",
                 "checked": true
+              }
+            ]
+          },
+          {
+            "type": "innovations",
+            "innovations": [
+              {
+                "ID": 5,
+                "fields": [
+                  {
+                    "id": "innovation[5]",
+                    "value": "Инновация"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "high-productive-jobs",
+                "value": "40"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "fields": [
+              {
+                "id": "intangible-assets",
+                "value": "123"
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "degrees-employees",
+                "value": "123"
               }
             ]
           }

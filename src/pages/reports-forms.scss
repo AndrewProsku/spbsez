@@ -430,7 +430,7 @@
     @include margin-level(bottom, yellow);
 }
 
-.b-inputs-row_type-dynamic,
+
 .b-report-stage-select {
     &:not(:last-child) {
         margin-bottom: 9px;
@@ -515,6 +515,10 @@
 
     &:hover {
         border-color: $blue;
+    }
+
+    &:not(:first-child) {
+        margin-top: 9px;
     }
 
     @media #{$tablet-portrait} {

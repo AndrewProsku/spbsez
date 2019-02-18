@@ -3,6 +3,7 @@ import InputFile from 'components/forms/file';
 import Mediator from 'common/scripts/mediator';
 import Select from 'components/forms/select';
 import templateExportForm from './templates/export-countries.twig';
+import templateInnovationForm from './templates/innovations.twig';
 import templatePermissionForm from './templates/permission-form.twig';
 import templateStageForm from './templates/stage-block.twig';
 import templateTooltip from 'components/tooltip/custom-tooltip.twig';
@@ -70,20 +71,11 @@ class ReportBlock {
                     break;
                 }
                 case 'export-countries': {
-                    this.inputsData.fields = [];
-                    blockData.groups.forEach((group) => {
-                        this.inputsData.fields.push(group.fields);
-                        group.fields.forEach((field) => {
-                            this.inputsData.fields.push(field);
-                        });
-                        // eslint-disable-next-line no-magic-numbers
-                        const isGroupDeletable = blockData.groups.length > 1;
-
-                        this.insertExportGroupForm(group.groupID, isGroupDeletable);
-                    });
-
-                    // Добавление новой стадии строительства
-                    this.addExportGroup();
+                    this.initExportCountriesBlock(blockData);
+                    break;
+                }
+                case 'innovations': {
+                    this.initInnovationsBlock(blockData);
                     break;
                 }
                 default:
@@ -100,6 +92,38 @@ class ReportBlock {
 
         // Инициализация тултипов
         this.initTooltips();
+    }
+
+    initExportCountriesBlock(data) {
+        this.inputsData.fields = [];
+        data.groups.forEach((group) => {
+            this.inputsData.fields.push(group.fields);
+            group.fields.forEach((field) => {
+                this.inputsData.fields.push(field);
+            });
+            // eslint-disable-next-line no-magic-numbers
+            const isGroupDeletable = data.groups.length > 1;
+
+            this.insertExportGroupForm(group.ID, isGroupDeletable);
+        });
+
+        this.addExportGroup();
+    }
+
+    initInnovationsBlock(data) {
+        this.inputsData.fields = [];
+        data.innovations.forEach((innovation) => {
+            this.inputsData.fields.push(innovation.fields);
+            innovation.fields.forEach((field) => {
+                this.inputsData.fields.push(field);
+            });
+            // eslint-disable-next-line no-magic-numbers
+            const isInnovationDeletable = data.innovations.length > 1;
+
+            this.insertInnovationForm(innovation.ID, isInnovationDeletable);
+        });
+
+        this.addInnovation();
     }
 
     initSelect(input) {
@@ -140,12 +164,7 @@ class ReportBlock {
                 case 'text':
                 case 'email':
                 case 'tel': {
-                    input.addEventListener('focus', (event) => {
-                        event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
-                    });
-                    input.addEventListener('change', (event) => {
-                        this.sendNewValue(event.target);
-                    });
+                    this.bindTextInputsEvents(input);
                     break;
                 }
                 case 'file': {
@@ -194,6 +213,15 @@ class ReportBlock {
                 }
                 default: break;
             }
+        });
+    }
+
+    bindTextInputsEvents(input) {
+        input.addEventListener('focus', (event) => {
+            event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
+        });
+        input.addEventListener('change', (event) => {
+            this.sendNewValue(event.target);
         });
     }
 
@@ -309,11 +337,15 @@ class ReportBlock {
         });
     }
 
+    // ///
+    // Методы для блока добавления стадий строительства
+    // ///
+
     /**
      * Подстановка формы для блока со стадиями строительства
      * @param {String} stageID - ID стадии строительства
-     * @param {Boolean} hasExtraForm - флаг необходимости подстановки ф ормы с дополнительными полями
-     * @param {Boolean} deletable - флаг ууазвающий необходимомть отображения кнопки удаления стадии
+     * @param {Boolean} hasExtraForm - флаг необходимости подстановки формы с дополнительными полями
+     * @param {Boolean} deletable - флаг указывающий необходимомть отображения кнопки удаления стадии
      */
     insertStageForm(stageID, hasExtraForm, deletable = false) {
         const stageBlock = this.target.querySelector(`.${this.stageBlockClass}`);
@@ -337,9 +369,9 @@ class ReportBlock {
     bindRemoveStage(stageID) {
         const stageBlock = this.target.querySelector(`.${this.stageBlockClass}`);
         const deleteButtonSelector = `.j-delete-stage[data-stage-id="${stageID}"]`;
-        const deleteStageButton = stageBlock.querySelector(deleteButtonSelector);
+        const deleteButton = stageBlock.querySelector(deleteButtonSelector);
 
-        deleteStageButton.addEventListener('click', (event) => {
+        deleteButton.addEventListener('click', (event) => {
             this.removeStage(event.target);
         });
     }
@@ -385,9 +417,9 @@ class ReportBlock {
 
         if (needExtraForm && !permissionForm) {
             selectWrapper.insertAdjacentHTML('afterend', templatePermissionForm({id: stageID}));
-            const extraFomInputs = Array.from(selectWrapper.nextSibling.querySelectorAll('input, select'));
+            const extraFormInputs = Array.from(selectWrapper.nextSibling.querySelectorAll('input, select'));
 
-            this._bindInputsEvents(extraFomInputs);
+            this._bindInputsEvents(extraFormInputs);
         } else if (!needExtraForm && permissionForm) {
             Utils.removeElement(permissionForm);
         }
@@ -425,16 +457,20 @@ class ReportBlock {
         });
     }
 
+    // ///
+    // Методы для блока добавления стран экспорта
+    // ///
+
     /**
      * Подстановка формы для блока со странами экспорта
      * @param {String} groupID - ID группы стран
-     * @param {Boolean} deletable - флаг ууазвающий необходимомть отображения кнопки удаления формы
+     * @param {Boolean} deletable - флаг указвающий необходимомть отображения кнопки удаления формы
      */
     insertExportGroupForm(groupID, deletable = false) {
         const groupsBlock = this.target.querySelector(`.j-export-groups-block`);
 
         Utils.insetContent(groupsBlock, templateExportForm({
-            groupID,
+            ID: groupID,
             deletable
         }));
 
@@ -459,9 +495,10 @@ class ReportBlock {
 
                     that.insertExportGroupForm(groupID, true);
                     // Сбрасываем статус блока после добавления новой группы
-                    const inputs = groupsBlock.querySelectorAll(`[data-group-id="${groupID}"] input`);
+                    const inputs = groupsBlock.querySelectorAll(`[data-id="${groupID}"] input`);
 
                     Array.from(inputs).forEach((input) => {
+                        that.bindTextInputsEvents(input);
                         that.inputsStatus[input.id] = that.getInputStatus(input);
                     });
                     that.setBlockStatus();
@@ -475,10 +512,10 @@ class ReportBlock {
 
     bindRemoveExportGroup(groupID) {
         const groupsBlock = this.target.querySelector(`.j-export-groups-block`);
-        const deleteButtonSelector = `.j-delete-group[data-group-id="${groupID}"]`;
-        const deleteGroupButton = groupsBlock.querySelector(deleteButtonSelector);
+        const deleteButtonSelector = `.j-delete-group[data-id="${groupID}"]`;
+        const deleteButton = groupsBlock.querySelector(deleteButtonSelector);
 
-        deleteGroupButton.addEventListener('click', (event) => {
+        deleteButton.addEventListener('click', (event) => {
             this.removeExportGroup(event.target);
         });
     }
@@ -486,8 +523,8 @@ class ReportBlock {
     removeExportGroup(input) {
         const that = this;
         const groupsBlock = this.target.querySelector(`.j-export-groups-block`);
-        const dataToSend = `action=delExportGroup&id=${input.dataset.groupId}`;
-        const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-group-id="${input.dataset.groupId}"]`));
+        const dataToSend = `action=delExportGroup&id=${input.dataset.id}`;
+        const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
 
         Utils.send(dataToSend, '/tests/reports/input-update.json', {
             success(response) {
@@ -500,8 +537,8 @@ class ReportBlock {
                 });
 
                 // Сбрасываем статус блока после удаления стадии
-                delete that.inputsStatus[`export-countries[${input.dataset.groupId}]`];
-                delete that.inputsStatus[`export-code[${input.dataset.groupId}]`];
+                delete that.inputsStatus[`export-countries[${input.dataset.id}]`];
+                delete that.inputsStatus[`export-code[${input.dataset.id}]`];
                 that.setBlockStatus();
 
                 // Если осталась только одна группа - её нельзя удалять
@@ -509,6 +546,102 @@ class ReportBlock {
 
                 if (groupsBlock.querySelectorAll(`.j-delete-group`).length === onlyOne) {
                     Utils.removeElement(groupsBlock.querySelector(`.j-delete-group`));
+                }
+            },
+            error(error) {
+                console.error(error);
+            }
+        });
+    }
+
+    // ///
+    // Методы для блока добавлнеия технологических инноваций
+    // ///
+
+    /**
+     * Подстановка формы для блока со странами экспорта
+     * @param {String} innovationID - ID инновации
+     * @param {Boolean} deletable - флаг указвающий необходимомть отображения кнопки удаления формы
+     */
+    insertInnovationForm(innovationID, deletable = false) {
+        const innovationsBlock = this.target.querySelector(`.j-innovations-block`);
+
+        Utils.insetContent(innovationsBlock, templateInnovationForm({
+            ID: innovationID,
+            deletable
+        }));
+
+        // Биндим событя на кнопку удаления
+        if (deletable) {
+            this.bindRemoveInnovation(innovationID);
+        }
+    }
+
+    addInnovation() {
+        const innovationsBlock = this.target.querySelector(`.j-innovations-block`);
+        const innovationAddButton = this.target.querySelector(`.j-innovation-add`);
+        const that = this;
+
+        innovationAddButton.addEventListener('click', () => {
+            Utils.send('action=addInnovation', '/tests/reports/add-stage.json', {
+                success(response) {
+                    if (response.request.status === that.FAIL_STATUS) {
+                        return;
+                    }
+                    const innovationID = response.data.ID;
+
+                    that.insertInnovationForm(innovationID, true);
+                    // Сбрасываем статус блока после добавления инновации
+                    const inputs = innovationsBlock.querySelectorAll(`[data-id="${innovationID}"] input`);
+
+                    Array.from(inputs).forEach((input) => {
+                        that.bindTextInputsEvents(input);
+                        that.inputsStatus[input.id] = that.getInputStatus(input);
+                    });
+                    that.setBlockStatus();
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
+        });
+    }
+
+    bindRemoveInnovation(innovationID) {
+        const innovationsBlock = this.target.querySelector(`.j-innovations-block`);
+        const deleteButtonSelector = `.j-delete-innovation[data-id="${innovationID}"]`;
+        const deleteButton = innovationsBlock.querySelector(deleteButtonSelector);
+
+        deleteButton.addEventListener('click', (event) => {
+            this.removeInnovation(event.target);
+        });
+    }
+
+    removeInnovation(input) {
+        const that = this;
+        const innovationsBlock = this.target.querySelector(`.j-innovations-block`);
+        const dataToSend = `action=delInnovation&id=${input.dataset.groupId}`;
+        const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
+
+        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+            success(response) {
+                if (response.request.status === that.FAIL_STATUS) {
+                    return;
+                }
+
+                elementsToDelete.forEach((element) => {
+                    Utils.removeElement(element);
+                });
+
+                // Сбрасываем статус блока после удаления стадии
+                delete that.inputsStatus[`innovation[${input.dataset.id}]`];
+                that.setBlockStatus();
+
+                // Если осталась только одна группа - её нельзя удалять
+                const onlyOne = 1;
+
+                if (innovationsBlock.querySelectorAll(`.j-delete-innovation`).length === onlyOne) {
+                    Utils.removeElement(innovationsBlock.querySelector(`.j-delete-innovation`));
                 }
             },
             error(error) {
