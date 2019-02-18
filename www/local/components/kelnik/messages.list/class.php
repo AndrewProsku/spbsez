@@ -3,6 +3,9 @@
 namespace Kelnik\Messages\Components;
 
 use Bex\Bbc\Basis;
+use Bitrix\Main\Context;
+use Bitrix\Main\Localization\Loc;
+use Kelnik\Helpers\PluralHelper;
 use Kelnik\Messages\MessageModel;
 use Kelnik\Userdata\Profile\ProfileModel;
 
@@ -13,6 +16,8 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 if (!\Bitrix\Main\Loader::includeModule('bex.bbc')) {
     return false;
 }
+
+Loc::loadMessages(__FILE__);
 
 class MessagesList extends Basis
 {
@@ -34,7 +39,7 @@ class MessagesList extends Basis
     {
         global $USER;
 
-        $this->setResultCacheKeys(['YEARS', 'MESSAGES']);
+        $this->setResultCacheKeys(['YEARS', 'MESSAGES', 'QUERY', 'CNT', 'CNT_WORD', 'SHOW_MORE']);
 
         $profile = ProfileModel::getInstance($USER->GetID());
 
@@ -47,7 +52,31 @@ class MessagesList extends Basis
         $messages->sefFolder = $this->arParams['SEF_FOLDER'];
         $messages->dateFormat = $this->arParams['DATE_FORMAT'];
 
+        if ($this->arParams['IS_SEARCH']) {
+            $this->arResult['QUERY'] = htmlentities(Context::getCurrent()->getRequest()->getQuery('q'), ENT_QUOTES, 'UTF-8');
+            $this->arResult['MESSAGES'] = $messages::prepareList(
+                $messages->getList(
+                    false,
+                    Context::getCurrent()->getRequest()->getQuery('q')
+                ),
+                false
+            );
+
+            $this->arResult['CNT'] = count($this->arResult['MESSAGES']);
+            $this->arResult['CNT_WORD'] = PluralHelper::pluralForm(
+                $this->arResult['CNT'],
+                [
+                    Loc::getMessage('KELNIK_MESSAGES_CNT_1'),
+                    Loc::getMessage('KELNIK_MESSAGES_CNT_2'),
+                    Loc::getMessage('KELNIK_MESSAGES_CNT_3')
+                ]
+            );
+
+            return true;
+        }
+
         $this->arResult['YEARS'] = $messages->getYears();
         $this->arResult['MESSAGES'] = $messages::prepareList($messages->getList($this->arParams['YEAR']));
+        $this->arResult['SHOW_MORE'] = count($messages->getMonthsByYear($this->arParams['YEAR'])) > MessageModel::MONTHS_COUNT;
     }
 }

@@ -41,7 +41,6 @@ if (!$USER->IsAuthorized()) {
 		"DETAIL_DATE_FORMAT" => "d.m.Y, H:i",
 		"SEF_URL_TEMPLATES" => array(
 			"list" => "",
-			"year" => "#YEAR#/",
 			"search" => "search/",
 			"detail" => "#ELEMENT_TYPE##ELEMENT_ID#/",
 		)

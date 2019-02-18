@@ -7,8 +7,7 @@
         'DATE_FORMAT' => $arParams['LIST_DATE_FORMAT'],
         'CACHE_TYPE' => $arParams['CACHE_TYPE'],
         'CACHE_TIME' => $arParams['CACHE_TIME'],
-        'SEF_FOLDER' => $arParams['SEF_FOLDER'],
-        'YEAR' => $arResult['VARIABLES']['YEAR']
+        'SEF_FOLDER' => $arParams['SEF_FOLDER']
     ),
     $components
 ); ?>

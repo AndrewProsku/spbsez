@@ -88,6 +88,11 @@ class MessageModel
         return array_reverse($res);
     }
 
+    public function getMonthsByYear($year)
+    {
+        return ArrayHelper::getValue($this->years, $year . '.MONTHS', []);
+    }
+
     public function getCountTotal()
     {
         return (int) $this->cntTotal;
@@ -120,7 +125,8 @@ class MessageModel
                     ") UNION (" .
                     $this->getEntityQuery(NotifyTable::class)->getQuery() .
                     ") ) as msg " .
-                    "GROUP BY `MSG_YEAR`, `MSG_MONTH`";
+                    "GROUP BY `MSG_YEAR`, `MSG_MONTH` " .
+                    "ORDER BY `MSG_YEAR` DESC, `MSG_MONTH` DESC";
 
             $res = Application::getConnection()->query($sql);
 
@@ -280,7 +286,14 @@ class MessageModel
         return $row;
     }
 
-    public function getList(int $year, $searchText = false, $lastMonth = false, $monthsCount = self::MONTHS_COUNT)
+    /**
+     * @param int $year
+     * @param bool $searchText
+     * @param int $monthsOffset
+     * @param int $monthsCount
+     * @return array
+     */
+    public function getList(int $year, $searchText = false, $monthsOffset = 0, $monthsCount = self::MONTHS_COUNT)
     {
         if (!$this->checkPermissions() || !$this->cntTotal) {
             return [];
@@ -288,34 +301,58 @@ class MessageModel
 
         $yearMonths = array_values(ArrayHelper::getValue($this->years, $year . '.MONTHS', []));
 
-        if (!$yearMonths) {
+        if (!$yearMonths && !$searchText) {
             return [];
         }
 
-        $startPos = $lastMonth ? array_search($lastMonth, $yearMonths) : 0;
-        $filterMonths = array_slice($yearMonths, $startPos, $startPos + $monthsCount);
-
-        $params = [
-            'filter' => [
-                '=USER_ID' => $this->profile->getId(),
-                '=MSG_YEAR' => $year
-            ]
+        $select = [
+            '`MSG_ID` `ID`', '`REAL_ID`', '`DATE_CREATED`',
+            '`MSG_YEAR`', '`MSG_MONTH`', '`IS_NEW`', '`NAME`'
         ];
+        $where = $limit = '';
 
-        if ($filterMonths) {
-            $params['filter']['=MSG_MONTH'] = $filterMonths;
+        if (!$searchText) {
+            $filterMonths = array_slice($yearMonths, $monthsOffset, $monthsCount);
+
+            $params = [
+                'filter' => [
+                    '=USER_ID'  => $this->profile->getId(),
+                    '=MSG_YEAR' => $year
+                ]
+            ];
+
+            if ($filterMonths) {
+                $params['filter']['=MSG_MONTH'] = $filterMonths;
+            }
+        }
+
+        $isSearch = false;
+
+        if ($searchText) {
+            $isSearch = true;
+            $params['filter'] = [
+                '=USER_ID' => $this->profile->getId(),
+                ''
+            ];
+
+            $select[] = '`TEXT`';
+
+            $searchText = Application::getConnection()->getSqlHelper()->convertToDbString('%' . $searchText . '%');
+            $where = 'WHERE `NAME` LIKE ' . $searchText . ' OR `TEXT` LIKE ' . $searchText . ' ';
+            $limit = 'LIMIT 50';
         }
 
         try {
-            $sql = "SELECT `MSG_ID` `ID`, `REAL_ID`, `DATE_CREATED`, `MSG_YEAR`, `MSG_MONTH`, `IS_NEW`, `NAME` " .
+            $sql = "SELECT " . implode(', ', $select) . " " .
                 "FROM ( (" .
-                $this->getEntityQuery(MessageUsersTable::class, $params)->getQuery() .
+                $this->getEntityQuery(MessageUsersTable::class, $params, $isSearch)->getQuery() .
                 ") UNION (" .
-                $this->getEntityQuery(NotifyTable::class, $params)->getQuery() .
+                $this->getEntityQuery(NotifyTable::class, $params, $isSearch)->getQuery() .
                 ") ) AS msg " .
+                $where .
                 "GROUP BY `MSG_ID` " .
-                "ORDER BY `DATE_CREATED` DESC";
-
+                "ORDER BY `DATE_CREATED` DESC " .
+                $limit;
             $res = Application::getConnection()->query($sql)->fetchAll();
         } catch (\Exception $e) {
             $res = [];
@@ -324,7 +361,7 @@ class MessageModel
         return $res;
     }
 
-    public static function prepareList(array $list)
+    public static function prepareList(array $list, $byMonth = true)
     {
         $res = [];
 
@@ -339,7 +376,7 @@ class MessageModel
 
             $monthNum = $v['DATE_CREATED']->format('m');
 
-            if (!isset($res[$monthNum])) {
+            if (!isset($res[$monthNum]) && $byMonth) {
                 $res[$monthNum]['NAME'] = FormatDate('f', $v['DATE_CREATED']->getTimestamp());
             }
 
@@ -348,7 +385,13 @@ class MessageModel
             $v['DATE_FORMAT'] = $v['DATE_CREATED']->format('d.m.Y');
             $v['DATE'] = $v['DATE_CREATED']->format('Y-m-d');
             $v['TIME'] = $v['DATE_CREATED']->format('H:i');
-            $res[$monthNum]['ELEMENTS'][] = $v;
+
+            if ($byMonth) {
+                $res[$monthNum]['ELEMENTS'][] = $v;
+                continue;
+            }
+
+            $res[] = $v;
         }
 
         return $res;
@@ -375,7 +418,7 @@ class MessageModel
         return in_array($type, ['n', 'm']);
     }
 
-    private function getEntityQuery($nameSpace, array $params = []): Query
+    private function getEntityQuery($nameSpace, array $params = [], $isSearch = false): Query
     {
         $isCount = true;
         $filter = [
@@ -394,7 +437,7 @@ class MessageModel
         }
 
         if (empty($select)) {
-            $select = self::getSelectByEntity($nameSpace, $isCount);
+            $select = self::getSelectByEntity($nameSpace, $isCount, $isSearch);
         }
 
         $query = new Query($nameSpace::getEntity());
@@ -407,7 +450,7 @@ class MessageModel
         return $query;
     }
 
-    private static function getSelectByEntity($nameSpace, $isCount = false): array
+    private static function getSelectByEntity($nameSpace, $isCount = false, $isSearch = false): array
     {
         if (!$isCount) {
             $res = [
@@ -429,7 +472,8 @@ class MessageModel
                     'DATE_CREATED'
                 ),
                 'IS_NEW',
-                'NAME'
+                'NAME',
+                'TEXT'
             ];
 
             if ($nameSpace === MessageUsersTable::class) {
@@ -452,8 +496,13 @@ class MessageModel
                         'MESSAGE.DATE_CREATED'
                     ),
                     'IS_NEW',
-                    'NAME' => 'MESSAGE.NAME'
+                    'NAME' => 'MESSAGE.NAME',
+                    'TEXT' => 'MESSAGE.TEXT'
                 ];
+            }
+
+            if (!$isSearch) {
+                array_pop($res);
             }
 
             return $res;

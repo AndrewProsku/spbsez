@@ -24,7 +24,7 @@
         <ul class="b-tabs b-tabs-ajax">
             <?php foreach ($arResult['YEARS'] as $year): ?>
                 <li class="b-tabs__item<?php if($year == $arParams['YEAR']): ?> is-active<?php endif; ?> j-tabs__item"
-                    data-link="/tests/messages.json"
+                    data-link="/api/messages/"
                     data-year="<?= $year; ?>"><?= $year; ?></li>
             <?php endforeach; ?>
         </ul>
@@ -63,9 +63,10 @@
     </div>
 </div>
 <?php endforeach; ?>
-
+<?php if($arResult['SHOW_MORE']): ?>
 <div class="b-message-more">
     <button type="button" class="b-message-more__button button-add j-more" data-send="/api/messages/">
         Загрузить еще сообщения
     </button>
 </div>
+<?php endif; ?>

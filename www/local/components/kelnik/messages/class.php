@@ -29,4 +29,9 @@ class Messages extends BasisRouter
             'ELEMENT_TYPE'
         ];
     }
+
+    protected function executeProlog()
+    {
+        $this->variables['IS_SEARCH'] = $this->isSearchRequest();
+    }
 }
