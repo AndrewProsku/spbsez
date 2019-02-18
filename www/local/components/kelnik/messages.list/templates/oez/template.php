@@ -44,25 +44,24 @@
         </form>
     </div>
 </div>
-
-<?php foreach ($arResult['MESSAGES'] as $month): ?>
 <div class="b-message-block-wrap j-messages">
-    <div class="b-message-block-title"><?= $month['NAME']; ?></div>
-    <div class="b-message-block">
-        <?php foreach ($month['ELEMENTS'] as $msg): ?>
-        <div class="b-message-block__item<?php if($msg['IS_NEW'] === \Kelnik\Messages\Model\MessagesTable::YES): ?> is-new<?php endif; ?>">
-            <div class="b-message-block__item-title">
-                <a href="<?= $msg['LINK']; ?>" class="b-link-line"><?= $msg['NAME']; ?></a>
+    <?php foreach ($arResult['MESSAGES'] as $month): ?>
+        <div class="b-message-block-title"><?= $month['NAME']; ?></div>
+        <div class="b-message-block">
+            <?php foreach ($month['ELEMENTS'] as $msg): ?>
+            <div class="b-message-block__item<?php if($msg['IS_NEW'] === \Kelnik\Messages\Model\MessagesTable::YES): ?> is-new<?php endif; ?>">
+                <div class="b-message-block__item-title">
+                    <a href="<?= $msg['LINK']; ?>" class="b-link-line"><?= $msg['NAME']; ?></a>
+                </div>
+                <div class="b-message-block__item-desc">
+                    <span class="b-message-block__item-time"><?= $msg['TIME']; ?></span>
+                    <time datetime="<?= $msg['DATE']; ?>" class="b-message-block__item-date"><?= $msg['DATE_FORMAT']; ?></time>
+                </div>
             </div>
-            <div class="b-message-block__item-desc">
-                <span class="b-message-block__item-time"><?= $msg['TIME']; ?></span>
-                <time datetime="<?= $msg['DATE']; ?>" class="b-message-block__item-date"><?= $msg['DATE_FORMAT']; ?></time>
-            </div>
+            <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
-    </div>
+    <?php endforeach; ?>
 </div>
-<?php endforeach; ?>
 <?php if($arResult['SHOW_MORE']): ?>
 <div class="b-message-more">
     <button type="button" class="b-message-more__button button-add j-more" data-send="/api/messages/">
