@@ -1,5 +1,5 @@
 import InputTel from '../forms/telephone/telephone';
-import successTemplate from './success.twig';
+import successTemplate from './message-success.twig';
 import Utils from '../../common/scripts/utils';
 
 class Message {
