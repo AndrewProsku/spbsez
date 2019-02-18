@@ -100,8 +100,8 @@ class Service {
                         } else if (response.request.status === failStatus) {
                             const errorMessage = response.request.errors.join('</br>');
 
-                            that.showErrorMessage(that.$inputResume, errorMessage);
-                            // that.errorRepeatPassword(errorMessage);
+                            // that.showErrorMessage(that.$inputResume, errorMessage);
+                            that.errorRepeatPassword(errorMessage);
                         }
                     },
                     error() {
