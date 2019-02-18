@@ -100,16 +100,12 @@ class Service {
                         } else if (response.request.status === failStatus) {
                             const errorMessage = response.request.errors.join('</br>');
 
-                            // that.showErrorMessage(that.$inputResume, errorMessage);
-                            // that.errorRepeatPassword(errorMessage);
-
                             const $popupContent = document.querySelector('.b-popup__content');
-                            const $errorContent = $popupContent.createElement('div.b-popup__error');
 
                             Utils.clearHtml($popupContent);
-                            Utils.insetContent($errorContent, errorMessage);
+                            Utils.insetContent($popupContent, errorMessage);
 
-                            $popupContent.querySelector('.b-popup__close').addEventListener('click', () => {
+                            $popupContent.querySelector('.j-service-popup__close').addEventListener('click', () => {
                                 this.popup.close();
                             });
                         }
@@ -240,7 +236,7 @@ class Service {
         Utils.clearHtml($popupContent);
         Utils.insetContent($popupContent, successTemplate());
 
-        $popupContent.querySelector('.b-popup__close').addEventListener('click', () => {
+        $popupContent.querySelector('.j-service-popup__close').addEventListener('click', () => {
             this.popup.close();
         });
     }
