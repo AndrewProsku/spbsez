@@ -92,16 +92,17 @@ class Service {
             if (isFormFulfilled) {
                 Utils.send(new FormData(that.$form), '/api/service/', {
                     success(response) {
-                        const successStatus = 1;
-                        const failStatus = 0;
+                        const successStatus = 0;
+                        const failStatus = 1;
 
                         if (response.request.status === successStatus) {
                             that.showSuccessMessage();
                         } else if (response.request.status === failStatus) {
                             const errorMessage = response.request.errors.join('</br>');
 
-                            that.showErrorMessage(that.$inputResume, errorMessage);
-                            that.errorRepeatPassword(errorMessage);
+                            console.error(errorMessage);
+                            // that.showErrorMessage(that.$inputResume, errorMessage);
+                            // that.errorRepeatPassword(errorMessage);
                         }
                     },
                     error(error) {

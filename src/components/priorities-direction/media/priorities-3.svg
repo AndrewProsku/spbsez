@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120" height="120" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="linear-gradient" x1="7.03" y1="112.97" x2="112.97" y2="7.03" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#30409a"/>
+      <stop offset="1" stop-color="#662e91"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="24.11" y1="88.89" x2="95.89" y2="17.11" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" x1="27" y1="45.5" x2="93" y2="45.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#373e99"/>
+      <stop offset="1" stop-color="#662e91"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="32" y1="73" x2="46" y2="73" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#30409a"/>
+      <stop offset="1" stop-color="#543494"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-5" x1="52.5" y1="70.5" x2="63.5" y2="70.5" xlink:href="#linear-gradient-4"/>
+    <linearGradient id="linear-gradient-6" x1="52.5" y1="76.5" x2="63.5" y2="76.5" xlink:href="#linear-gradient-4"/>
+    <linearGradient id="linear-gradient-7" x1="66.5" y1="70.5" x2="77.5" y2="70.5" xlink:href="#linear-gradient-4"/>
+    <linearGradient id="linear-gradient-8" x1="66.5" y1="76.5" x2="77.5" y2="76.5" xlink:href="#linear-gradient-4"/>
+    <linearGradient id="linear-gradient-9" x1="80.5" y1="70.5" x2="91.5" y2="70.5" xlink:href="#linear-gradient-4"/>
+    <linearGradient id="linear-gradient-10" x1="80.5" y1="76.5" x2="91.5" y2="76.5" xlink:href="#linear-gradient-4"/>
+    <linearGradient id="linear-gradient-11" x1="46" y1="98.5" x2="74" y2="98.5" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-12" x1="51.5" y1="92" x2="54.5" y2="92" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-13" x1="65.5" y1="92" x2="68.5" y2="92" xlink:href="#linear-gradient"/>
+  </defs>
+  <title>investors_direction_pribirostroenie</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <path d="M112,120H24A24,24,0,0,1,0,96V8A8,8,0,0,1,8,0H96a24,24,0,0,1,24,24v88A8,8,0,0,1,112,120Z" fill="#fff"/>
+      <path d="M96,2a22,22,0,0,1,22,22v88a6,6,0,0,1-6,6H24A22,22,0,0,1,2,96V8A6,6,0,0,1,8,2H96m0-2H8A8,8,0,0,0,0,8V96a24,24,0,0,0,24,24h88a8,8,0,0,0,8-8V24A24,24,0,0,0,96,0Z" fill="url(#linear-gradient)"/>
+    </g>
+    <rect x="20" y="21" width="80" height="64" rx="4" fill="#fff" stroke-width="3" stroke="url(#linear-gradient-2)"/>
+    <rect x="27" y="27" width="66" height="37" rx="2" fill="url(#linear-gradient-3)"/>
+    <circle cx="39" cy="73" r="5.5" fill="#fff" stroke-width="3" stroke="url(#linear-gradient-4)"/>
+    <line x1="52.5" y1="70.5" x2="63.5" y2="70.5" fill="none" stroke-width="3" stroke="url(#linear-gradient-5)"/>
+    <line x1="52.5" y1="76.5" x2="63.5" y2="76.5" fill="none" stroke-width="3" stroke="url(#linear-gradient-6)"/>
+    <line x1="66.5" y1="70.5" x2="77.5" y2="70.5" fill="none" stroke-width="3" stroke="url(#linear-gradient-7)"/>
+    <line x1="66.5" y1="76.5" x2="77.5" y2="76.5" fill="none" stroke-width="3" stroke="url(#linear-gradient-8)"/>
+    <line x1="80.5" y1="70.5" x2="91.5" y2="70.5" fill="none" stroke-width="3" stroke="url(#linear-gradient-9)"/>
+    <line x1="80.5" y1="76.5" x2="91.5" y2="76.5" fill="none" stroke-width="3" stroke="url(#linear-gradient-10)"/>
+    <polyline points="36 45.5 46 45.5 51 36.5 59 52.5 67 40.5 72 45.5 84 45.5" fill="none" stroke="#fff" stroke-width="3"/>
+    <line x1="46" y1="98.5" x2="74" y2="98.5" fill="#fff" stroke-width="3" stroke="url(#linear-gradient-11)"/>
+    <line x1="53" y1="98.5" x2="53" y2="85.5" fill="none" stroke-width="3" stroke="url(#linear-gradient-12)"/>
+    <line x1="67" y1="98.5" x2="67" y2="85.5" fill="none" stroke-width="3" stroke="url(#linear-gradient-13)"/>
+  </g>
+</svg>
