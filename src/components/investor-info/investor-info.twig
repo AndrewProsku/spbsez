@@ -4,7 +4,7 @@
     modify - модификатор | (b-investors-info_big_title)
     title - Заголовок
     text - Основной текст
-    tags - (array) теги под текстом
+    anchors - (array) теги под текстом
     img - изображение
 #}
 
@@ -23,8 +23,8 @@
         <div class="b-investors-info__tags">
             <div class="b-investors-info__wrap-icon"><span class="b-investors-info__clip"></span></div>
             <div class="b-investors-info__tags-box">
-                {% for tag in tags %}
-                    <div class="b-investors-info__tag"><a href="#" class="b-link-line">{{ tag }}</a></div>
+                {% for anchor in anchors %}
+                    <div class="b-investors-info__tag"><a href="#{{ anchor.link }}" class="b-link-line j-anchor-link">{{ anchor.text }}</a></div>
                 {% endfor %}
             </div>
         </div>
