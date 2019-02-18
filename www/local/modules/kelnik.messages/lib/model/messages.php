@@ -71,13 +71,33 @@ class MessagesTable extends DataManager
                 ]
             ),
 
+            // Список компаний (определенный список пользователей)
+            // для агрегации пользователей
+            //
+            (new Main\ORM\Fields\Relations\Reference(
+                'COMPANIES',
+                MessageCompaniesTable::class,
+                Main\ORM\Query\Join::on('this.ID', 'ref.MESSAGE_ID')
+            ))->configureJoinType('LEFT'),
 
-            new Main\Entity\ReferenceField(
+            (new Main\ORM\Fields\Relations\Reference(
+                'FILES',
+                MessageFilesTable::class,
+                Main\ORM\Query\Join::on('this.ID', 'ref.ENTITY_ID')
+            ))->configureJoinType('LEFT'),
+
+            // Список пользователей для получения данного сообщения
+            //
+            (new Main\ORM\Fields\Relations\Reference(
                 'USERS',
                 MessageUsersTable::class,
-                [
-                    'this.ID' => 'ref.MESSAGE_ID'
-                ]
+                Main\ORM\Query\Join::on('this.ID', 'ref.MESSAGE_ID')
+            ))->configureJoinType('LEFT'),
+
+            new Main\Entity\ExpressionField(
+                'USER_CNT',
+                'COUNT(DISTINCT %s)',
+                'USERS.USER_ID'
             )
         ];
     }
@@ -95,6 +115,7 @@ class MessagesTable extends DataManager
     public static function update($id, array $data)
     {
         $origData = self::getById($id)->fetch();
+        $data['DATE_MODIFIED'] = new Main\Type\DateTime();
 
         if ($origData && $origData['ACTIVE'] === self::YES) {
             return (new Main\ORM\Data\UpdateResult())

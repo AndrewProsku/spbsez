@@ -39,6 +39,9 @@ class Api
         'kelnik.requests' => [
             'message',
             'service'
+        ],
+        'kelnik.messages' => [
+            'messages'
         ]
     ];
 

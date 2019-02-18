@@ -11,7 +11,7 @@ use Kelnik\Requests\Model\SiteMsgTable;
 /**
  * Class ApiProcessMessage
  *
- * Профиль
+ * Сообщения с сайта
  *
  * @package Kelnik\Api\Process
  */

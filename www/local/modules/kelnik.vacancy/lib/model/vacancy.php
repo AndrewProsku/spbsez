@@ -117,7 +117,7 @@ class VacancyTable extends DataManager
                 'RESPONSE',
                 ResponseTable::class,
                 [
-                    'this.ID' => 'ref.VACANCY_ID'
+                    '=this.ID' => 'ref.VACANCY_ID'
                 ]
             ),
             new Main\Entity\ExpressionField(

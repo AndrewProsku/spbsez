@@ -18,7 +18,7 @@ $aMenuLinks = Array(
 		"Администраторы",
 		"/cabinet/admins/",
 		Array(),
-		Array("check"=>"canEditResidentAdmin"),
+		Array("check"=>"canEditResident"),
 		"false"
 	),
 );
