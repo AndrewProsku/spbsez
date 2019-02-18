@@ -62,3 +62,34 @@
         </div>
     </div>
 </section>
+{# 4 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="4">
+        <h3 class="b-report-block__title">Наименование технологических инноваций</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="j-innovations-block"></div>
+
+        <button class="button-add button-add_theme_white b-report-block__add j-innovation-add" type="button">
+            Добавить еще технологическую инновацию
+        </button>
+    </div>
+</section>
+{# 5 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="5">
+        <h3 class="b-report-block__title">Количество созданных высокопроизводительных рабочих мест (ед., при наличии)
+            <div class="b-help j-help">Количество созданных высокопроизводительных рабочих мест (ед., при наличии)</div>
+        </h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block b-input-block_is_untouched">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "high-productive-jobs",
+                name: "high-productive-jobs"
+            } %}
+            <label class="b-input-block__label" for="high-productive-jobs">Количество рабочих мест</label>
+        </div>
+    </div>
+</section>
+

@@ -6,6 +6,7 @@ import templateForm2 from './templates/form-2.twig';
 import templateForm3 from './templates/form-3.twig';
 import templateForm4 from './templates/form-4.twig';
 import templateForm5 from './templates/form-5.twig';
+import templateForm6 from './templates/form-6.twig';
 import Utils from '../../common/scripts/utils';
 
 
@@ -42,9 +43,12 @@ class ReportForm {
         }, {
             isApproved: false,
             template  : null
+        }, {
+            isApproved: false,
+            template  : null
         }];
 
-        this.unitialForm = 4;
+        this.unitialForm = 5;
 
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
@@ -150,6 +154,9 @@ class ReportForm {
             case 'form5':
                 formNumber = 4;
                 break;
+            case 'form6':
+                formNumber = 5;
+                break;
             default: break;
         }
         /* eslint-enable no-magic-numbers */
@@ -244,6 +251,9 @@ class ReportForm {
                 break;
             case 4:
                 template.innerHTML = templateForm5();
+                break;
+            case 5:
+                template.innerHTML = templateForm6();
                 break;
             default:
                 template.innerHTML = templateForm1();
