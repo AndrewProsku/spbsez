@@ -62,10 +62,12 @@
         </div>
     <?php endforeach; ?>
 </div>
-<?php if($arResult['SHOW_MORE']): ?>
+
 <div class="b-message-more">
-    <button type="button" class="b-message-more__button button-add j-more" data-send="/api/messages/">
+    <button type="button"
+            class="b-message-more__button button-add j-more"
+            data-year="<?= $arParams['YEAR']; ?>"
+            data-send="/api/messages/"<?php if(!$arResult['SHOW_MORE']): ?> style="display: none"<?php endif; ?>>
         Загрузить еще сообщения
     </button>
 </div>
-<?php endif; ?>

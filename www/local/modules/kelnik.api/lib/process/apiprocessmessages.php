@@ -3,6 +3,7 @@ namespace Kelnik\Api\Process;
 
 
 use Bitrix\Main\Localization\Loc;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Messages\MessageModel;
 use Kelnik\Userdata\Profile\ProfileModel;
 
@@ -24,33 +25,30 @@ class ApiProcessMessages extends ApiProcessAbstract
         );
         $messages->calcCount();
 
-        if (!empty($request['step'])) {
-            $offset = (int) $request['step'] * MessageModel::MONTHS_COUNT;
-            $year = date('Y');
-            $months = $messages->getMonthsByYear($year);
+        $offset = (int) ArrayHelper::getValue($request, 'step', 0) * MessageModel::MONTHS_COUNT;
+        $year   = (int) ArrayHelper::getValue($request, 'year', date('Y'));
+        $months = count($messages->getMonthsByYear($year));
 
-            $this->data['IS_END'] = true;
+        $this->data['IS_END'] = true;
 
-            if ($offset > $months) {
-                $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+        if ($offset > $months) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
 
-                return false;
-            }
-
-            $this->data['months'] = array_values(
-                $messages::prepareList(
-                    $messages->getList(
-                        $year,
-                        false,
-                        $offset
-                    )
-                )
-            );
-
-            $this->data['IS_END'] = count($months) <= $offset + MessageModel::MONTHS_COUNT;
-
-            return true;
+            return false;
         }
+
+        $this->data['months'] = array_values(
+            $messages::prepareList(
+                $messages->getList(
+                    $year,
+                    false,
+                    $offset
+                )
+            )
+        );
+
+        $this->data['YEAR'] = $year;
+        $this->data['IS_END'] = $months <= $offset + MessageModel::MONTHS_COUNT;
 
         return true;
     }
