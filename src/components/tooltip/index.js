@@ -156,13 +156,15 @@ class Tooltip {
      */
     _checkTooltipOverflow() {
         const tooltipRect = this.tooltip.getBoundingClientRect();
+        const ZERO = 0;
 
         if (tooltipRect.right > document.documentElement.clientWidth) {
-            const ZERO = 0;
             const maxX = document.documentElement.clientWidth - tooltipRect.width;
             const newLeftCoord = maxX > ZERO ? maxX : ZERO;
 
             this.tooltip.style.left = `${parseInt(newLeftCoord, 10)}px`;
+        } else if (tooltipRect.left < ZERO) {
+            this.tooltip.style.left = `0px`;
         }
         if (tooltipRect.bottom > document.documentElement.clientHeight) {
             const newTopCoord = this.targetCoords.top - this.offset - tooltipRect.height;

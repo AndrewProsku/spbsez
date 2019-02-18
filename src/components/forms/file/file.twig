@@ -1,13 +1,15 @@
 {% if id %}
     <div class="b-form-block b-input-file {{ class }}">
-        <input type="file"class="b-input-file__input"
-               id="{{ id }}"
-               name="{{ name }}">
-        <div class="b-input-file__text b-pseudo-input">&nbsp;</div>
-        <label for="{{ id }}" class="b-input-file__add">Выбрать файл<i></i></label>
-        <button class="b-input-file__delete" type="button">Удалить<i></i></button>
-        <div class="b-form-block__label">{{ label }}</div>
-        <span class="b-form-block__error-text">Текст подсказки</span>
+        {% if withForm %}<form method="post" enctype="multipart/form-data">{% endif %}
+            <input type="file" class="b-input-file__input"
+                   id="{{ id }}"
+                   name="{{ name }}">
+            <div class="b-input-file__text b-pseudo-input">&nbsp;</div>
+            <label for="{{ id }}" class="b-input-file__add">Выбрать файл<i></i></label>
+            <button class="b-input-file__delete" type="button">Удалить<i></i></button>
+            <div class="b-form-block__label">{{ label }}</div>
+            <span class="b-form-block__error-text">Текст подсказки</span>
+        {% if withForm %}</form>{% endif %}
     </div>
 
 {% else %}

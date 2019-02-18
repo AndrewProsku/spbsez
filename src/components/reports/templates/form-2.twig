@@ -1,0 +1,237 @@
+<div class="b-report-form__title">Отчет об объемах налогов и таможенных платежей </div>
+{# 1 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="1">
+        <h3 class="b-report-block__title">Объем отчислений, уплаченных резидентами в бюджеты всех уровней бюджетной системы РФ и внебюджетные фонды,&#160;млн&#160;₽</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-report-block__subtitle">Всего</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-all",
+                    name: "taxes-all"
+                } %}
+                <label class="b-input-block__label" for="taxes-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-year",
+                    name: "taxes-year"
+                } %}
+                <label class="b-input-block__label" for="taxes-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+
+        <div class="b-report-block__subtitle"><strong>В том числе</strong></div>
+        <div class="b-report-block__subtitle">Федеральный бюджет без НДС</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-federal-all",
+                    name: "taxes-federal-all"
+                } %}
+                <label class="b-input-block__label" for="taxes-federal-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-federal-year",
+                    name: "taxes-federal-year"
+                } %}
+                <label class="b-input-block__label" for="taxes-federal-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">Региональный бюджет</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-regional-all",
+                    name: "taxes-regional-all"
+                } %}
+                <label class="b-input-block__label" for="taxes-regional-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-regional-year",
+                    name: "taxes-regional-year"
+                } %}
+                <label class="b-input-block__label" for="taxes-regional-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">Местный бюджет</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-local-all",
+                    name: "taxes-local-all"
+                } %}
+                <label class="b-input-block__label" for="taxes-local-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-local-year",
+                    name: "taxes-local-year"
+                } %}
+                <label class="b-input-block__label" for="taxes-local-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">Внебюджетные фонды</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-offbudget-all",
+                    name: "taxes-offbudget-all"
+                } %}
+                <label class="b-input-block__label" for="taxes-offbudget-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-offbudget-year",
+                    name: "taxes-offbudget-year"
+                } %}
+                <label class="b-input-block__label" for="taxes-offbudget-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">НДС. Уплаченный и не возмещенный</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-nds-all",
+                    name: "taxes-nds-all"
+                } %}
+                <label class="b-input-block__label" for="taxes-nds-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-nds-year",
+                    name: "taxes-nds-year"
+                } %}
+                <label class="b-input-block__label" for="taxes-nds-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 2 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="2">
+        <h3 class="b-report-block__title">Объем полученных налоговых льгот и льгот по уплате страховых взносов,&#160;млн&#160;₽</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-report-block__subtitle">Всего, из них</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-breaks-all",
+                    name: "taxes-breaks-all"
+                } %}
+                <label class="b-input-block__label" for="taxes-breaks-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-breaks-year",
+                    name: "taxes-breaks-year"
+                } %}
+                <label class="b-input-block__label" for="taxes-breaks-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">В части, зачисляемой в федеральный бюджет</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-breaks-federal-all",
+                    name: "taxes-breaks-federal-all"
+                } %}
+                <label class="b-input-block__label" for="taxes-breaks-federal-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-breaks-federal-year",
+                    name: "taxes-breaks-federal-year"
+                } %}
+                <label class="b-input-block__label" for="taxes-breaks-federal-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">В части, зачисляемой в бюджет субъекта и местный бюджет</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-breaks-local-all",
+                    name: "taxes-breaks-local-all"
+                } %}
+                <label class="b-input-block__label" for="taxes-breaks-local-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-breaks-local-year",
+                    name: "taxes-breaks-local-year"
+                } %}
+                <label class="b-input-block__label" for="taxes-breaks-local-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">В части, зачисляемой во внебюджетные фонды</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-breaks-offbudget-all",
+                    name: "taxes-breaks-offbudget-all"
+                } %}
+                <label class="b-input-block__label" for="taxes-breaks-offbudget-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "taxes-breaks-offbudget-year",
+                    name: "taxes-breaks-offbudget-year"
+                } %}
+                <label class="b-input-block__label" for="taxes-breaks-offbudget-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 3 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="3">
+        <h3 class="b-report-block__title">Суммы таможенных платежей, уплаченных резидентами ОЭЗ,&#160;млн&#160;₽</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "custom-duties-all",
+                    name: "custom-duties-all"
+                } %}
+                <label class="b-input-block__label" for="custom-duties-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "custom-duties-year",
+                    name: "custom-duties-year"
+                } %}
+                <label class="b-input-block__label" for="custom-duties-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 4 #}
+<section class="b-report-block j-report-block">
+    <div class="b-report-block__header" data-number="4">
+        <h3 class="b-report-block__title">Объем льгот по уплате таможенных платежей,&#160;млн&#160;₽</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-inputs-row">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "custom-duties-breaks-all",
+                    name: "custom-duties-breaks-all"
+                } %}
+                <label class="b-input-block__label" for="custom-duties-breaks-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "custom-duties-breaks-year",
+                    name: "custom-duties-breaks-year"
+                } %}
+                <label class="b-input-block__label" for="custom-duties-breaks-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+    </div>
+</section>

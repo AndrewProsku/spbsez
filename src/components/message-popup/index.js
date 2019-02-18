@@ -1,5 +1,5 @@
 import InputTel from '../forms/telephone/telephone';
-import successTemplate from './success.twig';
+import successTemplate from './message-success.twig';
 import Utils from '../../common/scripts/utils';
 
 class Message {
@@ -70,6 +70,7 @@ class Message {
             const that = this;
             const isFormFulfilled = this.checkForm();
 
+            /* eslint-disable consistent-return */
             if (isFormFulfilled) {
                 Utils.send(new FormData(that.$form), '/api/message/', {
                     success(response) {
@@ -85,12 +86,15 @@ class Message {
 
                         that.showErrorMessage(that.$inputResume, errorMessage);
                         that.errorRepeatPassword(errorMessage);
+
+                        return false;
                     },
                     error(error) {
                         console.error(error);
                     }
                 });
             }
+            /* eslint-enable consistent-return */
         });
         this.$inputFIO.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'fio');

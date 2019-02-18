@@ -27,8 +27,6 @@ import Service from '../../components/service-popup';
 import servicePopupTemplate from '../../components/service-popup/service-popup.twig';
 import TabsAjax from 'components/tabs/tabs-ajax';
 import templateMessages from 'components/messages/messages.twig';
-import templateTooltip from 'components/tooltip/custom-tooltip.twig';
-import Tooltip from 'components/tooltip/';
 import Utils from './utils';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
@@ -750,23 +748,6 @@ if (document.querySelector('.j-news-filter') || document.querySelector('.j-news-
     news.init();
 }
 
-
-/**
- *  Инициализация тултипа с подсказми
- */
-const helpTooltips = Array.from(document.querySelectorAll('.j-help'));
-
-if (helpTooltips) {
-    helpTooltips.forEach((helpTooltip) => {
-        const tooltip = new Tooltip();
-
-        tooltip.init({
-            target  : helpTooltip,
-            template: templateTooltip
-        });
-    });
-}
-
 /**
  * Инициализация форм отчетов
  */
@@ -782,40 +763,40 @@ if (reportFormEl) {
 }
 
 // Скрытие/отображение инпута иностранных акционеров в зависимости от значения радио-кнопок перед ним
-const foreignInvestorsSwitch = document.querySelector('.j-foreign-investors-switch');
-const foreignInvestorsField = document.querySelector('.j-foreign-investors-field');
-const toggleBlock = (input) => {
-    switch (input.value) {
-        case 'no': {
-            if (input.checked === true) {
-                foreignInvestorsField.classList.add('b-input-block_is_disabled');
-            } else {
-                foreignInvestorsField.classList.remove('b-input-block_is_disabled');
-            }
-            break;
-        }
-        case 'yes': {
-            if (input.checked === true) {
-                foreignInvestorsField.classList.remove('b-input-block_is_disabled');
-            } else {
-                foreignInvestorsField.classList.add('b-input-block_is_disabled');
-            }
-            break;
-        }
-        default: break;
-    }
-};
+// const foreignInvestorsSwitch = document.querySelector('.j-foreign-investors-switch');
+// const foreignInvestorsField = document.querySelector('.j-foreign-investors-field');
+// const toggleBlock = (input) => {
+//     switch (input.value) {
+//         case 'no': {
+//             if (input.checked === true) {
+//                 foreignInvestorsField.classList.add('b-input-block_is_disabled');
+//             } else {
+//                 foreignInvestorsField.classList.remove('b-input-block_is_disabled');
+//             }
+//             break;
+//         }
+//         case 'yes': {
+//             if (input.checked === true) {
+//                 foreignInvestorsField.classList.remove('b-input-block_is_disabled');
+//             } else {
+//                 foreignInvestorsField.classList.add('b-input-block_is_disabled');
+//             }
+//             break;
+//         }
+//         default: break;
+//     }
+// };
 
-if (foreignInvestorsSwitch && foreignInvestorsField) {
-    const inputs = foreignInvestorsSwitch.querySelectorAll('input[type="radio"]');
-
-    inputs.forEach((radio) => {
-        radio.addEventListener('change', (event) => {
-            toggleBlock(event.target);
-        });
-    });
-}
-
-mediator.subscribe('radioChecked', (input) => {
-    toggleBlock(input);
-});
+// if (foreignInvestorsSwitch && foreignInvestorsField) {
+//     const inputs = foreignInvestorsSwitch.querySelectorAll('input[type="radio"]');
+//
+//     inputs.forEach((radio) => {
+//         radio.addEventListener('change', (event) => {
+//             toggleBlock(event.target);
+//         });
+//     });
+// }
+//
+// mediator.subscribe('radioChecked', (input) => {
+//     toggleBlock(input);
+// });

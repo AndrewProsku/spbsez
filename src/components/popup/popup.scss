@@ -124,3 +124,8 @@ $popup-mobile-close-icon-color: #000000;
         min-height: inherit;
     }
 }
+
+.b-popup__error {
+    @include font-size("p1");
+    margin-bottom: 0;
+}

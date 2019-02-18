@@ -6,6 +6,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const config = require('./tasks/config');
 const autoprefixer = require('autoprefixer');
+const rev = require('./tasks/rev');
+
+rev([
+    './www/local/templates/kelnik/inc_footer.php'
+]);
 
 // CONFIG
 module.exports = {
@@ -13,8 +18,6 @@ module.exports = {
     context: path.resolve(__dirname, './src'),
     entry  : {
         app       : ['babel-polyfill', './common/scripts/app'],
-        visual    : './common/scripts/visual',
-        parametric: './common/scripts/parametric'
     },
     output: {
         filename: '[name].js',
@@ -33,7 +36,8 @@ module.exports = {
             use    : {
                 loader : 'babel-loader',
                 options: {
-                    presets       : ['env'],
+                    presets       : ['@babel/preset-env'],
+                    plugins       : ['@babel/plugin-proposal-object-rest-spread'],
                     cacheDirectory: true
                 }
             }
@@ -67,6 +71,16 @@ module.exports = {
             use    : {
                 loader: 'twig-loader'
             }
+        },{
+            test: /\.(png|jpg|gif)$/,
+            use: [
+                {
+                    loader: 'file-loader?name=/images/[name].[ext]',
+                    options: {
+                        name: '/images/[name].[ext]'
+                    }
+                }
+            ]
         }
         ]
     },

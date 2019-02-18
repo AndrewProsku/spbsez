@@ -32,6 +32,7 @@
 
 .b-income-tax__percent {
     @include column(28, 28);
+    @include margin-level(bottom, cyan);
 
     @media #{$tablet-portrait} {
         @include column(21, 28);
@@ -39,6 +40,7 @@
 
     @media #{$laptop} {
         @include column(13, 28);
+        margin-bottom: 0;
     }
 }
 
