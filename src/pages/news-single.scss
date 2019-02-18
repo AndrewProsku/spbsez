@@ -122,10 +122,6 @@
     flex-wrap: wrap;
     align-items: center;
     margin-bottom: -10px;
-
-    @media #{$fullhd} {
-        padding: 0 30px;
-    }
 }
 
 .b-news-tags li {
