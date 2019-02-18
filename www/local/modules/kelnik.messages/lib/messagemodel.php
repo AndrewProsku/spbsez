@@ -4,9 +4,11 @@ namespace Kelnik\Messages;
 
 use Bitrix\Main\Application;
 use Bitrix\Main\Entity\ExpressionField;
+use Bitrix\Main\FileTable;
 use Bitrix\Main\ORM\Query\Query;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Helpers\BitrixHelper;
 use Kelnik\Messages\Model\MessagesTable;
 use Kelnik\Messages\Model\MessageUsersTable;
 use Kelnik\Requests\Model\NotifyTable;
@@ -156,6 +158,128 @@ class MessageModel
         return $this->calcCount();
     }
 
+    public function setViewed($type, int $id)
+    {
+        if (!self::checkType($type) || !$id) {
+            return false;
+        }
+
+        $sqlHelper = Application::getConnection()->getSqlHelper();
+        $nameSpace = NotifyTable::class;
+        $where = [
+            '`USER_ID` = ' . $sqlHelper->convertToDbInteger($this->profile->getId()),
+            '`ID` = ' . $sqlHelper->convertToDbInteger($id)
+        ];
+
+        if ($type === 'm') {
+            $nameSpace = MessageUsersTable::class;
+            unset($where[1]);
+            $where[] = '`MESSAGE_ID` = ' . $sqlHelper->convertToDbInteger($id);
+        }
+
+        try {
+            Application::getConnection()->query(
+                'UPDATE `' . $nameSpace::getTableName() . '` ' .
+                'SET `IS_NEW` = ' . $sqlHelper->convertToDbString(NotifyTable::NO) . ' ' .
+                'WHERE ' . implode(' AND ', $where) . ' ' .
+                'LIMIT 1'
+            );
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        clearKelnikComponentCache('messages');
+
+        return true;
+    }
+
+    public function getMessage($type, int $id)
+    {
+        if (!self::checkType($type) || !$id) {
+            return false;
+        }
+
+        try {
+            $nameSpace = NotifyTable::class;
+            $select = ['ID', 'DATE_CREATED', 'NAME', 'TEXT'];
+            $params = [
+                'select' => array_merge($select, ['IS_NEW']),
+                'filter' => [
+                    '=ID' => $id,
+                    '=USER_ID' => $this->profile->getId()
+                ]
+            ];
+
+            if ($type === 'm') {
+                $nameSpace = MessagesTable::class;
+                $select['USER'] = 'USERS.USER_ID';
+                $select['IS_NEW'] = 'USERS.IS_NEW';
+                $select[] = new ExpressionField(
+                    'FILE',
+                    'GROUP_CONCAT(%s)',
+                    'FILES.VALUE'
+                );
+                $params = [
+                    'select' => $select,
+                    'filter' => [
+                        '=ID' => $id,
+                        '=ACTIVE' => MessagesTable::YES,
+                        '=USERS.USER_ID' => $this->profile->getId()
+                    ],
+                    'group' => [
+                        'ID'
+                    ]
+                ];
+            }
+
+            $element = $nameSpace::getRow($params);
+        } catch (\Exception $e) {
+            $element = false;
+        }
+
+        if (!$element) {
+            return false;
+        }
+
+        return self::prepareMessage($element);
+    }
+
+    public static function prepareMessage(array $row): array
+    {
+        if (empty($row['ID'])) {
+            return $row;
+        }
+
+        if (!empty($row['FILE'])) {
+            try {
+                $row['FILE'] = explode(',', $row['FILE']);
+                $row['FILES'] = FileTable::getList([
+                    'filter' => [
+                        '=ID' => $row['FILE']
+                    ]
+                ])->fetchAll();
+
+                unset($row['FILE']);
+            } catch (\Exception $e) {
+            }
+        }
+
+        if (!empty($row['FILES'])) {
+            foreach ($row['FILES'] as &$v) {
+                $v['EXT'] = pathinfo($v['ORIGINAL_NAME'], PATHINFO_EXTENSION);
+                $v['SRC'] = \CFile::GetFileSRC($v);
+            }
+            unset($v);
+        }
+
+        if ($row['DATE_CREATED'] instanceof DateTime) {
+            $row['DATE_TIME_FORMAT'] = self::formatDate($row['DATE_CREATED']);
+            $row['DATE_FORMAT'] = $row['DATE_CREATED']->format('d.m.Y');
+        }
+
+        return $row;
+    }
+
     public function getList(int $year, $searchText = false, $lastMonth = false, $monthsCount = self::MONTHS_COUNT)
     {
         if (!$this->checkPermissions() || !$this->cntTotal) {
@@ -185,15 +309,9 @@ class MessageModel
         try {
             $sql = "SELECT `MSG_ID` `ID`, `REAL_ID`, `DATE_CREATED`, `MSG_YEAR`, `MSG_MONTH`, `IS_NEW`, `NAME` " .
                 "FROM ( (" .
-                $this->getEntityQuery(
-                    MessageUsersTable::class,
-                    $params
-                )->getQuery() .
+                $this->getEntityQuery(MessageUsersTable::class, $params)->getQuery() .
                 ") UNION (" .
-                $this->getEntityQuery(
-                    NotifyTable::class,
-                    $params
-                )->getQuery() .
+                $this->getEntityQuery(NotifyTable::class, $params)->getQuery() .
                 ") ) AS msg " .
                 "GROUP BY `MSG_ID` " .
                 "ORDER BY `DATE_CREATED` DESC";
@@ -219,15 +337,18 @@ class MessageModel
                 continue;
             }
 
-            $monthNum =$v['DATE_CREATED']->format('m');
+            $monthNum = $v['DATE_CREATED']->format('m');
 
             if (!isset($res[$monthNum])) {
-                $res[$monthNum]['name'] = FormatDate('f', $v['DATE_CREATED']->getTimestamp());
+                $res[$monthNum]['NAME'] = FormatDate('f', $v['DATE_CREATED']->getTimestamp());
             }
 
             $v['LINK'] = self::getElementLink($v);
-            $v['DATE'] = self::formatDate($v['DATE_CREATED']);
-            $res[$monthNum]['elements'][] = $v;
+            $v['DATE_TIME_FORMAT'] = self::formatDate($v['DATE_CREATED']);
+            $v['DATE_FORMAT'] = $v['DATE_CREATED']->format('d.m.Y');
+            $v['DATE'] = $v['DATE_CREATED']->format('Y-m-d');
+            $v['TIME'] = $v['DATE_CREATED']->format('H:i');
+            $res[$monthNum]['ELEMENTS'][] = $v;
         }
 
         return $res;
@@ -249,6 +370,11 @@ class MessageModel
         );
     }
 
+    public static function checkType($type)
+    {
+        return in_array($type, ['n', 'm']);
+    }
+
     private function getEntityQuery($nameSpace, array $params = []): Query
     {
         $isCount = true;
@@ -261,6 +387,10 @@ class MessageModel
                 $isCount = false;
                 ${$type} = $params[$type];
             }
+        }
+
+        if ($nameSpace === MessageUsersTable::class) {
+            $filter['=MESSAGE.ACTIVE'] = MessagesTable::YES;
         }
 
         if (empty($select)) {
@@ -283,7 +413,7 @@ class MessageModel
             $res = [
                 new ExpressionField(
                     'MSG_ID',
-                    'CONCAT(\'n-\', %s)',
+                    'CONCAT(\'n\', %s)',
                     'ID'
                 ),
                 'REAL_ID' => 'ID',
@@ -306,7 +436,7 @@ class MessageModel
                 $res = [
                     new ExpressionField(
                         'MSG_ID',
-                        'CONCAT(\'m-\', %s)',
+                        'CONCAT(\'m\', %s)',
                         'MESSAGE_ID'
                     ),
                     'REAL_ID' => 'MESSAGE_ID',

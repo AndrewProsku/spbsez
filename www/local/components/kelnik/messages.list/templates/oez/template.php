@@ -45,76 +45,27 @@
     </div>
 </div>
 
-
+<?php foreach ($arResult['MESSAGES'] as $month): ?>
 <div class="b-message-block-wrap j-messages">
-    <div class="b-message-block-title">Декабрь</div>
-
+    <div class="b-message-block-title"><?= $month['NAME']; ?></div>
     <div class="b-message-block">
-        <!-- Для отображения нового сообщения добавить класс is-new -->
-        <div class="b-message-block__item is-new">
+        <?php foreach ($month['ELEMENTS'] as $msg): ?>
+        <div class="b-message-block__item<?php if($msg['IS_NEW'] === \Kelnik\Messages\Model\MessagesTable::YES): ?> is-new<?php endif; ?>">
             <div class="b-message-block__item-title">
-                <a href="#" class="b-link-line">Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен</a>
+                <a href="<?= $msg['LINK']; ?>" class="b-link-line"><?= $msg['NAME']; ?></a>
             </div>
             <div class="b-message-block__item-desc">
-                <span class="b-message-block__item-time">11:30</span>
-                <time datetime="2018-12-26" class="b-message-block__item-date">26.12.2018</time>
+                <span class="b-message-block__item-time"><?= $msg['TIME']; ?></span>
+                <time datetime="<?= $msg['DATE']; ?>" class="b-message-block__item-date"><?= $msg['DATE_FORMAT']; ?></time>
             </div>
         </div>
-        <div class="b-message-block__item is-new">
-            <div class="b-message-block__item-title">
-                <a href="#" class="b-link-line">Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен</a>
-            </div>
-            <div class="b-message-block__item-desc">
-                <span class="b-message-block__item-time">11:30</span>
-                <time datetime="2018-12-26" class="b-message-block__item-date">26.12.2018</time>
-            </div>
-        </div>
-        <div class="b-message-block__item ">
-            <div class="b-message-block__item-title">
-                <a href="#" class="b-link-line">Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен</a>
-            </div>
-            <div class="b-message-block__item-desc">
-                <span class="b-message-block__item-time">11:30</span>
-                <time datetime="2018-12-26" class="b-message-block__item-date">26.12.2018</time>
-            </div>
-        </div>
-    </div>
-    <div class="b-message-block-title">Ноябрь</div>
-
-    <div class="b-message-block">
-        <!-- Для отображения нового сообщения добавить класс is-new -->
-        <div class="b-message-block__item ">
-            <div class="b-message-block__item-title">
-                <a href="#" class="b-link-line">Заявка А-11-34534. Заявка в обработке</a>
-            </div>
-            <div class="b-message-block__item-desc">
-                <span class="b-message-block__item-time">09:27</span>
-                <time datetime="2018-11-26" class="b-message-block__item-date">26.11.2018</time>
-            </div>
-        </div>
-        <div class="b-message-block__item ">
-            <div class="b-message-block__item-title">
-                <a href="#" class="b-link-line">Заявка А-11-35635. Заявка в обработке</a>
-            </div>
-            <div class="b-message-block__item-desc">
-                <span class="b-message-block__item-time">13:45</span>
-                <time datetime="2018-11-20" class="b-message-block__item-date">20.11.2018</time>
-            </div>
-        </div>
-        <div class="b-message-block__item ">
-            <div class="b-message-block__item-title">
-                <a href="#" class="b-link-line">Заявка А-11-13676. Заявка в обработке</a>
-            </div>
-            <div class="b-message-block__item-desc">
-                <span class="b-message-block__item-time">17:12</span>
-                <time datetime="2018-11-20" class="b-message-block__item-date">20.11.2018</time>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 </div>
+<?php endforeach; ?>
 
 <div class="b-message-more">
-    <button type="button" class="b-message-more__button button-add j-more" data-send="/tests/messages.json">
+    <button type="button" class="b-message-more__button button-add j-more" data-send="/api/messages/">
         Загрузить еще сообщения
     </button>
 </div>

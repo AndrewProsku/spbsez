@@ -4,9 +4,7 @@ namespace Kelnik\Messages\Model;
 
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
-use Kelnik\Userdata\Profile\ProfileModel;
 
 Loc::loadMessages(__FILE__);
 
@@ -111,18 +109,13 @@ class MessagesTable extends DataManager
         $data['DATE_CREATED'] = $data['DATE_MODIFIED'] = new Main\Type\DateTime();
         $data['USER_ID'] = $USER->GetID();
 
-        $res = parent::add($data);
-
-        if ($res->isSuccess() && $data['ACTIVE'] === self::YES) {
-            self::updateUsers($res->getId());
-        }
-
-        return $res;
+        return parent::add($data);
     }
 
     public static function update($id, array $data)
     {
         $origData = self::getById($id)->fetch();
+        $data['DATE_MODIFIED'] = new Main\Type\DateTime();
 
         if ($origData && $origData['ACTIVE'] === self::YES) {
             return (new Main\ORM\Data\UpdateResult())
@@ -131,92 +124,6 @@ class MessagesTable extends DataManager
                     );
         }
 
-        $res = parent::update($id, $data);
-
-        if ($res->isSuccess() && $data['ACTIVE'] === self::YES) {
-            self::updateUsers($id);
-            clearKelnikComponentCache('messages');
-        }
-
-        return $res;
-    }
-
-    /**
-     * @param int $id
-     * @return bool
-     * @throws Main\ArgumentTypeException
-     * @throws Main\ObjectException
-     */
-    protected static function updateUsers($id): bool
-    {
-        $id = (int) $id;
-
-        if (!$id) {
-            return false;
-        }
-
-        try {
-            Main\Application::getConnection()->query('DELETE FROM `' . MessageUsersTable::getTableName() . '` WHERE `MESSAGE_ID` = ' . $id);
-        } catch (\Exception $e) {
-        }
-
-        try {
-            $companies = MessageCompaniesTable::getList([
-                'filter' => [
-                    '=MESSAGE_ID' => $id
-                ]
-            ]);
-        } catch (\Exception $e) {
-            return false;
-        }
-
-        $companies = ArrayHelper::getColumn($companies, 'USER_ID');
-
-        if (!$companies) {
-            return false;
-        }
-
-        $tmp = \CUser::GetList(
-            ($by = 'ID'),
-            ($order = 'DESC'),
-            [
-                'GROUPS_ID' => ProfileModel::GROUP_RESIDENT,
-                ProfileModel::OWNER_FIELD => $companies
-            ],
-            [
-                'SELECT' => [
-                    ProfileModel::OWNER_FIELD
-                ],
-                'FIELDS' => [
-                    'ID'
-                ]
-            ]
-        );
-
-        if (!$tmp->AffectedRowsCount()) {
-            return false;
-        }
-
-        $users = [];
-
-        $sqlHelper = Main\Application::getConnection()->getSqlHelper();
-
-        while($row = $tmp->Fetch()) {
-            $users[] = '(' . $sqlHelper->convertToDbInteger($id) . ', ' .
-                        $sqlHelper->convertToDbInteger($row['ID']) . ', ' .
-                        $sqlHelper->convertToDbDateTime(new Main\Type\DateTime()) .
-                        ')';
-        }
-
-        try {
-            Main\Application::getConnection()->query(
-                'INSERT INTO `' . MessageUsersTable::getTableName() . '` (`MESSAGE_ID`, `USER_ID`, `DATE_MODIFIED`) ' .
-                'VALUES ' . implode($users, ', ')
-            );
-        } catch (\Exception $e) {
-            return false;
-        }
-
-        return true;
+        return parent::update($id, $data);
     }
 }

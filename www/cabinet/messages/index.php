@@ -43,7 +43,7 @@ if (!$USER->IsAuthorized()) {
 			"list" => "",
 			"year" => "#YEAR#/",
 			"search" => "search/",
-			"detail" => "#ELEMENT_TYPE#-#ELEMENT_ID#/",
+			"detail" => "#ELEMENT_TYPE##ELEMENT_ID#/",
 		)
 	),
 	false

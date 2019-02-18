@@ -66,7 +66,10 @@ class MessagesAdminInterface extends AdminInterface
                     ],
                     'USER_CNT' => [
                         'WIDGET' => new ChildWidget(),
-                        'TITLE' => Loc::getMessage('KELNIK_MESSAGES_USERS')
+                        'TITLE' => Loc::getMessage('KELNIK_MESSAGES_USERS'),
+                        'VIRTUAL' => true,
+                        'FORCE_SELECT' => true,
+                        'READONLY' => true
                     ]
                 ]
             ]
