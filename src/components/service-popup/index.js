@@ -98,8 +98,9 @@ class Service {
                         if (response.request.status === successStatus) {
                             that.showSuccessMessage();
                         } else if (response.request.status === failStatus) {
-                            // const errorMessage = response.request.errors.join('</br>');
+                            const errorMessage = response.request.errors.join('</br>');
 
+                            console.error(errorMessage);
                             // that.showErrorMessage(that.$inputResume, errorMessage);
                             // that.errorRepeatPassword(errorMessage);
                         }
