@@ -1,22 +1,47 @@
 import 'particles.js';
 
-const bgAnimation = document.querySelector('#j-particles');
-const bgAnimationv2 = document.querySelector('#j-particles_v2');
+const body = document.body;
+const html = document.documentElement;
+const backgroundHeight =
+    Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
 
-const animateBackground = function(element, tag, json) {
+const map = {
+    0: {
+        type: 'dynamic',
+        div : document.querySelector('#j-particles'),
+        tag : 'j-particles',
+        json: '../assets/particles.json'
+    },
+    1: {
+        type: 'dynamic',
+        div : document.querySelector('#j-particles_v2'),
+        tag : 'j-particles_v2',
+        json: '../assets/particles_v2.json'
+    },
+    2: {
+        type: 'static',
+        div : document.querySelector('#j-particles_static'),
+        tag : 'j-particles_static',
+        json: '../assets/particles_static.json'
+    }
+};
+
+const animateBackground = function(element) {
     const diameter = 240;
-    const radius = 120;
-
-    window.particlesJS.load(tag, json);
-
 
     window.addEventListener('mousemove', (event) => {
-        element.style['clip-path'] = `circle(${diameter}px at ${event.screenX}px ${event.screenY - radius}px)`;
+        element.style['clip-path'] = `circle(${diameter}px at ${event.pageX}px ${event.pageY}px)`;
     });
 };
 
-if (bgAnimation) {
-    animateBackground(bgAnimation, 'j-particles', '../assets/particles.json');
-} else if (bgAnimationv2) {
-    animateBackground(bgAnimationv2, 'j-particles_v2', '../assets/particles_v2.json');
+for (const particles in map) {
+    if (Object.prototype.hasOwnProperty.call(map, particles) && map[particles].div) {
+        map[particles].div.style.height = `${backgroundHeight}px`;
+
+        window.particlesJS.load(map[particles].tag, map[particles].json);
+
+        if (map[particles].type !== 'static') {
+            animateBackground(map[particles].div);
+        }
+    }
 }
