@@ -6,3 +6,4 @@ $MESS['KELNIK_REFBOOK_RESIDENT_TYPES_MENU'] = 'Типы';
 $MESS['KELNIK_REFBOOK_REVIEW_MENU'] = 'Отзывы';
 $MESS['KELNIK_REFBOOK_MODULE'] = 'Справочники';
 $MESS['KELNIK_REFBOOK_TEAM_MENU'] = 'Команда';
+$MESS['KELNIK_REFBOOK_DOCS_MENU'] = 'Документы и презентации';
