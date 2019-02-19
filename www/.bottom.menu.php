@@ -30,7 +30,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Инвесторам", 
-		"", 
+		"/investors/",
 		Array(), 
 		Array(), 
 		"" 
