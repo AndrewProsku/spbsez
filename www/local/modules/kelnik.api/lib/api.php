@@ -26,6 +26,7 @@ class Api
         'forgot',
         'changePassword',
         'vacancy',
+        'service',
         'message'
     ];
 
