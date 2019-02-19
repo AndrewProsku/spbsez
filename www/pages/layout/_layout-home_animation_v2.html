@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/alert-old-browser/ie-8-browser.css">
 <![endif]-->
 
-         <title>Сообщения от ОЭЗ</title> </head>
+            </head>
     <body>
 
         <div class="b-alert-old-browser is-hidden">
@@ -118,8 +118,7 @@
 </div>
 
         <div class="l-layout">
-
-            <header class="l-home__header inner-header j-home__header">
+            <header class="l-home__header j-home__header">
                 <div class="l-home__header-left">
     <a href="/" class="b-logo__link" title="Вернуться на главную"></a>
 </div>
@@ -211,122 +210,8 @@
 
             </header>
 
-            <main class="l-layout__content l-layout__content-inner">
-                    <div class="b-lk-nav">
-    <ul class="b-lk-nav__list">
-        <li class="b-lk-nav__item">
-            <a href="#" class="b-lk-nav__link b-link-line">
-                Профиль
-            </a>
-        </li>
-        <li class="b-lk-nav__item">
-            <a href="#" class="b-lk-nav__link b-link-line">
-                Подача отчета
-            </a>
-        </li>
-        <!-- Для отображения счетчика новых сообщений добавить класс is-new-message -->
-        <li class="b-lk-nav__item b-lk-nav__item-message is-active is-new-message">
-            <a href="#" class="b-lk-nav__link b-link-line">
-                Сообщения от ОЭЗ
-                <span class="b-lk-nav__item-new-message">1</span>
-            </a>
-        </li>
-        <li class="b-lk-nav__item">
-            <a href="#" class="b-lk-nav__link b-link-line">
-                Подать заявку
-            </a>
-        </li>
-    </ul>
-</div>
-
-    <div class="l-profile-messages">
-
-        <div class="b-title b-profile-message-title">
-            <h1>Сообщения от ОЭЗ</h1>
-        </div>
-
-        <div class="b-message-filter">
-            <div class="b-message-filter__mobile-date j-messages-select">
-                    <div class="b-select">
-        <div class="b-select__wrapper">
-            <select
-                id="message-date"
-                class="b-select__list j-select"
-                name="message-date"
-                data-placeholder=""
-                                                            >
-
-                                    <option value="2018"
-                                                                            >
-                        2018
-                    </option>
-                                    <option value="2017"
-                                                                            >
-                        2017
-                    </option>
-                                    <option value="2016"
-                                                                            >
-                        2016
-                    </option>
-                                    <option value="2015"
-                                                                            >
-                        2015
-                    </option>
-                            </select>
-        </div>
-    </div>
-            </div>
-            <div class="b-message-filter__date j-messages-tabs">
-                <ul class="b-tabs b-tabs-ajax">
-            <li class="b-tabs__item is-active j-tabs__item"
-            data-link="/tests/messages.json"
-            data-year="2018">
-            2018
-        </li>
-            <li class="b-tabs__item  j-tabs__item"
-            data-link="/tests/messages-2017.json"
-            data-year="2017">
-            2017
-        </li>
-            <li class="b-tabs__item  j-tabs__item"
-            data-link="/tests/messages.json"
-            data-year="2016">
-            2016
-        </li>
-            <li class="b-tabs__item  j-tabs__item"
-            data-link="/tests/messages.json"
-            data-year="2015">
-            2015
-        </li>
-    </ul>
-            </div>
-            <div class="b-message-filter__search">
-                <form action="" method="POST" enctype="multipart/form-data" class="b-message-filter__search-form">
-                        <input
-        id="message-search"
-        class="b-input-search"
-        type="search"
-        name=""
-        placeholder="Поиск сообщений"
-                    >
-                    <button type="submit" class="b-message-filter__search-form-button">
-                        <img src="/images/forms/search-icon.png" alt="Найти">
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <div class="b-message-block-wrap j-messages">
-                    </div>
-
-        <div class="b-message-more">
-            <button type="button" class="b-message-more__button button-add j-more" data-send="/tests/messages.json">
-                Загрузить еще сообщения
-            </button>
-        </div>
-
-    </div>
-            </main>
+            <main class="l-layout__content">
+                            </main>
 
             <footer class="l-home-footer b-footer">
                 <div class="b-footer__left">
@@ -735,9 +620,8 @@
         </div>
     </div>
 </div>
-
         </div>
-
         <script async src="/scripts/app.js"></script>
+        <div id="j-particles_v2"></div>
     </body>
 </html>
