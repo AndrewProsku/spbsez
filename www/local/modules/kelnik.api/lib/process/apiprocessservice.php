@@ -41,12 +41,16 @@ class ApiProcessService extends ApiProcessAbstract
 
         $data = [];
 
+        $types = ServiceTable::getTypes();
+
         foreach ($fields as $k => $v) {
             $data[$k] = $k == 'TYPE_ID'
                         ? (int) ArrayHelper::getValue($request, $v)
                         : htmlentities(trim(ArrayHelper::getValue($request, $v)), ENT_QUOTES, 'UTF-8');
 
-            if (empty($data[$k])) {
+            if (empty($data[$k])
+                || ($k == 'TYPE_ID' && !isset($types[$data[$k]]))
+            ) {
                 $this->errors[] = Loc::getMessage('KELNIK_API_SERVICE_ERROR_' . $k);
 
                 return false;

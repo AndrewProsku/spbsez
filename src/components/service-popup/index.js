@@ -92,17 +92,18 @@ class Service {
             if (isFormFulfilled) {
                 Utils.send(new FormData(that.$form), '/api/service/', {
                     success(response) {
-                        const successStatus = 0;
-                        const failStatus = 1;
+                        const successStatus = 1;
+                        const failStatus = 0;
 
                         if (response.request.status === successStatus) {
                             that.showSuccessMessage();
                         } else if (response.request.status === failStatus) {
                             const errorMessage = response.request.errors.join('</br>');
 
-                            console.error(errorMessage);
-                            // that.showErrorMessage(that.$inputResume, errorMessage);
-                            // that.errorRepeatPassword(errorMessage);
+                            const $popupContent = document.querySelector('.b-popup__content');
+
+                            Utils.clearHtml($popupContent);
+                            Utils.insetContent($popupContent, errorMessage);
                         }
                     },
                     error(error) {
@@ -230,10 +231,6 @@ class Service {
 
         Utils.clearHtml($popupContent);
         Utils.insetContent($popupContent, successTemplate());
-
-        $popupContent.querySelector('.j-service-popup__close').addEventListener('click', () => {
-            this.popup.close();
-        });
     }
 }
 

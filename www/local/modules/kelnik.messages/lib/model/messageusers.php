@@ -5,7 +5,6 @@ namespace Kelnik\Messages\Model;
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\Database\DataManager;
-use Kelnik\Userdata\Profile\ProfileModel;
 
 Loc::loadMessages(__FILE__);
 
@@ -40,42 +39,19 @@ class MessageUsersTable extends DataManager
                 [
                     'default_value' => self::YES
                 ]
-            )
+            ),
+
+            (new Main\ORM\Fields\Relations\Reference(
+                'MESSAGE',
+                MessagesTable::class,
+                Main\ORM\Query\Join::on('this.MESSAGE_ID', 'ref.ID')
+            ))->configureJoinType('INNER')
         ];
-    }
-
-    public static function getAdminAssocList(): array
-    {
-        $res = [];
-
-        $tmp = \CUser::GetList(
-            ($by = 'ID'),
-            ($order = 'DESC'),
-            [
-                'GROUPS_ID' => ProfileModel::GROUP_RESIDENT_ADMIN
-            ],
-            [
-                'SELECT' => [],
-                'FIELDS' => [
-                    'ID', 'WORK_COMPANY'
-                ]
-            ]
-        );
-
-        if (!$tmp->AffectedRowsCount()) {
-            return $res;
-        }
-
-        while ($row = $tmp->Fetch()) {
-            $res[$row['ID']] = '[' . $row['ID'] . '] ' . $row['WORK_COMPANY'];
-        }
-
-        return $res;
     }
 
     public static function add(array $data)
     {
-        $data['DATE_CREATED'] = $data['DATE_MODIFIED'] = new Main\Type\DateTime();
+        $data['DATE_MODIFIED'] = new Main\Type\DateTime();
 
         return parent::add($data);
     }

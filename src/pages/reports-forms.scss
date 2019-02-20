@@ -368,6 +368,8 @@
     @include padding-level(bottom, green);
     @include prefix(2, 32);
     @include suffix(2, 32);
+    display: flex;
+    flex-direction: column;
 
     @media #{$tablet-portrait} {
         @include prefix(2, 30);
@@ -378,8 +380,6 @@
         @include prefix(2, 24);
         @include suffix(2, 24);
     }
-
-    overflow: hidden;
 }
 
 .b-report-block__confirm {
@@ -449,6 +449,7 @@
     min-width: auto;
     text-align: left;
     line-height: 1;
+    margin-right: auto;
 
     &:after {
         height: 20px;
@@ -551,16 +552,16 @@ label .b-help {
     vertical-align: top;
     min-width: 190px;
     height: 48px;
+    margin-left: auto;
+    padding-right: 45px;
+    padding-left: 30px;
     font-size: 14px;
-    float: right;
-    color: $black;
     line-height: 48px;
+    color: $black;
     text-decoration: none;
     border-radius: 4px;
     border: 1px solid $grey;
     background-color: transparent;
-    padding-right: 45px;
-    padding-left: 30px;
     cursor: pointer;
 
     &:after {

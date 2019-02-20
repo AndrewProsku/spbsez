@@ -3,8 +3,8 @@ $aMenuLinks = Array(
 	Array(
 		"Профиль", 
 		"/cabinet/",
-		Array(), 
-		Array(), 
+		Array(),
+		Array("check"=>"hasAccess"),
 		"\$GLOBALS[\"USER\"]->IsAuthorized()" 
 	),
 	Array(

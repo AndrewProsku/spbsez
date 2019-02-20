@@ -93,7 +93,7 @@ class ResidentTable extends DataManager
                 'TYPE',
                 ResidentTypesTable::class,
                 [
-                    'this.TYPE_ID' => 'ref.ID'
+                    '=this.TYPE_ID' => 'ref.ID'
                 ]
             )
         ];

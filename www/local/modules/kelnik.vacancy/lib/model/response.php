@@ -76,7 +76,7 @@ class ResponseTable extends DataManager
                 'VACANCY',
                 VacancyTable::class,
                 [
-                    'this.VACANCY_ID' => 'ref.ID'
+                    '=this.VACANCY_ID' => 'ref.ID'
                 ]
             )
         ];

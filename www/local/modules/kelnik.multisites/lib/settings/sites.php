@@ -8,6 +8,7 @@ use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Main\Entity\IntegerField;
 use Bitrix\Main\Entity\ReferenceField;
 use Bitrix\Main\Entity\StringField;
+use Bitrix\Main\Entity\TextField;
 use Bitrix\Main\IO\Directory;
 use Bitrix\Main\IO\Path;
 use Bitrix\Main\Localization\Loc;
@@ -79,6 +80,12 @@ class SitesTable extends DataManager
             new StringField('TEMPLATE_ID', [
                 'title' => Loc::getMessage('KELNIK_MULTISITE_TEMPLATE_ID'),
             ]),
+            new TextField(
+                'PRESS_CONTACT',
+                [
+                    'title' => Loc::getMessage('KELNIK_MULTISITE_PRESS_CONTACT')
+                ]
+            ),
 
             // SEO
 //            new StringField('SEO_TITLE', [
