@@ -9,29 +9,22 @@
                 id: "foreign-investors-yes",
                 name: "foreign-investors",
                 value: "yes",
-                text: "Да",
-                dataAttributes: [{
-                    name: "foreign-investors",
-                    value: "yes"
-                }]
+                text: "Да"
             } %}
 
             {% include "../../forms/custom-radio/custom-radio.twig" with {
                 id: "foreign-investors-no",
                 name: "foreign-investors",
                 value: "no",
-                text: "Нет",
-                dataAttributes: [{
-                    name: "foreign-investors",
-                    value: "no"
-                }]
+                text: "Нет"
             } %}
         </div>
 
-        <div class="b-input-block b-input-block_is_untouched j-foreign-investors-field b-input-block_is_disabled">
+        <div class="b-input-block b-input-block_is_untouched b-input-block_is_disabled j-foreign-investors-field">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "investors-countries",
-                name: "investors-countries"
+                name: "investors-countries",
+                disabled: true
             } %}
             <label class="b-input-block__label" for="investors-countries">Страны</label>
         </div>
