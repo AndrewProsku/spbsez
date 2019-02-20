@@ -94,14 +94,14 @@ class StandartTable extends DataManager
                 'TYPE',
                 TypeTable::class,
                 [
-                    'this.TYPE_ID' => 'ref.ID'
+                    '=this.TYPE_ID' => 'ref.ID'
                 ]
             ),
             new ReferenceField(
                 'STATUS',
                 StatusTable::class,
                 [
-                    'this.STATUS_ID' => 'ref.ID'
+                    '=this.STATUS_ID' => 'ref.ID'
                 ]
             )
         ];

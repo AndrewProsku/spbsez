@@ -27,6 +27,9 @@ class ProfileForm extends Bbc\Basis
     ];
     protected $cacheTemplate = false;
 
+    /**
+     * @var \Kelnik\Userdata\Profile\ProfileModel
+     */
     protected $profile;
 
     protected function executeMain()
@@ -42,6 +45,12 @@ class ProfileForm extends Bbc\Basis
         } catch (\Exception $e) {
             return false;
         }
+
+        if (!$this->profile->hasAccess()) {
+            LocalRedirect('/');
+        }
+
+        $this->arResult['IS_ADMIN'] = $this->profile->isResidentAdmin();
 
         $method = 'process' . ucfirst($this->arParams['SECTION']);
 
@@ -70,7 +79,7 @@ class ProfileForm extends Bbc\Basis
 
     protected function processAdmins()
     {
-        if (!$this->profile->canEditResidentAdmin()) {
+        if (!$this->profile->canEditResident()) {
             LocalRedirect('/cabinet/');
         }
 

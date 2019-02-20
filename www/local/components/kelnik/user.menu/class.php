@@ -3,6 +3,8 @@
 namespace Kelnik\Usermenu\Components;
 
 use Bex\Bbc;
+use Kelnik\Messages\MessageModel;
+use Kelnik\Userdata\Profile\ProfileModel;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -14,7 +16,7 @@ if (!\Bitrix\Main\Loader::includeModule('bex.bbc')) {
 
 class UserMenuList extends Bbc\Basis
 {
-    protected $needModules = [];
+    protected $needModules = ['kelnik.userdata', 'kelnik.messages'];
     protected $checkParams = [];
     protected $cacheTemplate = false;
 
@@ -24,8 +26,17 @@ class UserMenuList extends Bbc\Basis
 
         $this->abortResultCache();
 
+        $this->arResult['MESSAGES'] = 0;
         $this->arResult['IS_AUTHORIZED'] = !empty($USER) && $USER instanceof \CUser
                                             ? $USER->IsAuthorized()
                                             : false;
+
+        if ($this->arResult['IS_AUTHORIZED']) {
+            $profile = ProfileModel::getInstance($USER->GetID());
+
+            if ($profile->canMessages()) {
+                $this->arResult['MESSAGES'] = MessageModel::getInstance($profile)->calcCount()->getCountNew();
+            }
+        }
     }
 }

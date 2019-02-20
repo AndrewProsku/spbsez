@@ -4,7 +4,9 @@ namespace Kelnik\Refbook\Component;
 
 use Bex\Bbc;
 use Bitrix\Main\Localization\Loc;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
+use Kelnik\Refbook\Model\DocsTable;
 use Kelnik\Refbook\Model\PartnerTable;
 use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Refbook\Model\ResidentTypesTable;
@@ -36,7 +38,8 @@ class RefbookList extends Bbc\Basis
             Types::TYPE_PARTNER => PartnerTable::class,
             Types::TYPE_RESIDENT => ResidentTable::class,
             Types::TYPE_REVIEW => ReviewTable::class,
-            Types::TYPE_TEAM => TeamTable::class
+            Types::TYPE_TEAM => TeamTable::class,
+            Types::TYPE_DOCS => DocsTable::class
         ];
 
         if (!$this->arParams['SECTION'] || !isset($classes[$this->arParams['SECTION']])) {
@@ -44,16 +47,22 @@ class RefbookList extends Bbc\Basis
         }
 
         $className = $classes[$this->arParams['SECTION']];
+        $selectFields = [
+            Types::TYPE_REVIEW => ['ID', 'NAME', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'PREVIEW'],
+            Types::TYPE_DOCS => ['ID', 'NAME', 'FILE_ID']
+        ];
 
-        $select = $this->arParams['SECTION'] == Types::TYPE_REVIEW
-                    ? ['ID', 'NAME', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'PREVIEW']
-                    : ['ID', 'NAME', 'IMAGE_ID', 'TEXT'];
+        $select = ArrayHelper::getValue(
+            $selectFields,
+            $this->arParams['SECTION'] ,
+            ['ID', 'NAME', 'IMAGE_ID', 'TEXT']
+        );
 
         $filter = [
             '=ACTIVE' => $className::YES
         ];
 
-        if ((int)$this->arParams['SECTION'] !== Types::TYPE_RESIDENT) {
+        if ($this->arParams['SECTION'] !== Types::TYPE_RESIDENT) {
             try {
                 $this->arResult['ELEMENTS'] = $className::getList(
                     [
@@ -68,7 +77,21 @@ class RefbookList extends Bbc\Basis
                 return [];
             }
 
-            $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*']);
+            $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*', 'FILE_*' => 'full']);
+
+            if ($this->arResult['ELEMENTS'] && $this->arParams['SECTION'] === Types::TYPE_DOCS) {
+                foreach ($this->arResult['ELEMENTS'] as $k => &$v) {
+                    if (empty($v['FILE_ID']['ID'])) {
+                        unset($this->arResult['ELEMENTS'][$k]);
+                        continue;
+                    }
+
+                    $v['FILE_ID']['EXT'] = strtolower(pathinfo($v['FILE_ID']['ORIGINAL_NAME'], PATHINFO_EXTENSION));
+                    $v['FILE_ID']['DATE_FORMAT'] = $v['FILE_ID']['TIMESTAMP_X']->format('d.m.Y');
+                    $v['FILE_ID']['FILE_SIZE_FORMAT'] = \CFile::FormatSize($v['FILE_ID']['FILE_SIZE']);
+                }
+                unset($v);
+            }
 
             return true;
         }

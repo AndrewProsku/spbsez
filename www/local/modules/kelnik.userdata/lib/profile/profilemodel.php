@@ -3,14 +3,15 @@
 namespace Kelnik\Userdata\Profile;
 
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Messages\MessageModel;
 
 class ProfileModel
 {
     public const GROUP_SUPER_ADMIN = 1;
     public const GROUP_ADMIN = 7;
     public const GROUP_MODERATOR = 8;
-    public const GROUP_RESIDENT_SUPER_ADMIN = 9;
-    public const GROUP_RESIDENT_ADMIN = 10;
+    public const GROUP_RESIDENT_ADMIN = 9;
+    public const GROUP_RESIDENT = 10;
 
     public const OWNER_FIELD = 'UF_ADMIN_ID';
 
@@ -186,32 +187,11 @@ class ProfileModel
 
     private function getEditableGroups()
     {
-        if ($this->canEditResidentAdmin()) {
-            return [self::GROUP_RESIDENT_ADMIN];
+        if ($this->canEditResident()) {
+            return [self::GROUP_RESIDENT];
         }
 
         return [];
-    }
-
-    public function canEditResidentAdmin()
-    {
-        return array_intersect(
-            $this->userGroups,
-            [
-                self::GROUP_RESIDENT_SUPER_ADMIN
-            ]
-        );
-    }
-
-    public function canEditResident()
-    {
-        return array_intersect(
-            $this->userGroups,
-            [
-                self::GROUP_RESIDENT_SUPER_ADMIN,
-                self::GROUP_RESIDENT_ADMIN
-            ]
-        );
     }
 
     public function isSuperAdmin()
@@ -221,10 +201,29 @@ class ProfileModel
             [
                 self::GROUP_SUPER_ADMIN,
                 self::GROUP_ADMIN,
-                self::GROUP_MODERATOR,
-                self::GROUP_RESIDENT_SUPER_ADMIN
+                self::GROUP_MODERATOR
             ]
         );
+    }
+
+    public function isResidentAdmin()
+    {
+        return in_array(self::GROUP_RESIDENT_ADMIN, $this->userGroups);
+    }
+
+    public function isResident()
+    {
+        return in_array(self::GROUP_RESIDENT, $this->userGroups);
+    }
+
+    /**
+     * Проверка возможности редактирования/создания записей резидентов
+     *
+     * @return bool
+     */
+    public function canEditResident()
+    {
+        return $this->isResidentAdmin();
     }
 
     /**
@@ -234,7 +233,8 @@ class ProfileModel
      */
     public function canReport()
     {
-        return $this->isSuperAdmin() || ArrayHelper::getValue($this->user, self::CAN_REPORT);
+        return $this->isResidentAdmin()
+                || ($this->isResident() && ArrayHelper::getValue($this->user, self::CAN_REPORT));
     }
 
     /**
@@ -244,7 +244,8 @@ class ProfileModel
      */
     public function canRequest()
     {
-        return $this->isSuperAdmin() || ArrayHelper::getValue($this->user, self::CAN_REQUEST);
+        return $this->isResidentAdmin()
+                || ($this->isResident() && ArrayHelper::getValue($this->user, self::CAN_REQUEST));
     }
 
     /**
@@ -254,7 +255,18 @@ class ProfileModel
      */
     public function canMessages()
     {
-        return $this->isSuperAdmin() || ArrayHelper::getValue($this->user, self::CAN_MSG);
+        return $this->isResidentAdmin()
+                || ($this->isResident() && ArrayHelper::getValue($this->user, self::CAN_MSG));
+    }
+
+    /**
+     * Проверка наличия ЛК у учетной записи
+     *
+     * @return bool
+     */
+    public function hasAccess()
+    {
+        return $this->isResidentAdmin() || $this->isResident();
     }
 
     /**
@@ -275,6 +287,13 @@ class ProfileModel
             }
 
             $v[4] = $this->{$v[3]['check']}() ? '' : 'false';
+
+            if (!empty($v[3]['isMessages'])) {
+                $v[3]['cnt'] = MessageModel::getInstance($this)->calcCount()->getCountNew();
+                unset($v[3]['check']);
+                continue;
+            }
+
             $v[3] = [];
         }
 
