@@ -10,7 +10,7 @@
             <?php foreach ($arResult['ELEMENTS'] as $element): ?>
                 <div class="b-files-list__item">
                     <div class="b-files-list__left">
-                        <span class="b-files-list__icon">pdf</span>
+                        <span class="b-files-list__icon"><?= $element['FILE_ID']['EXT']; ?></span>
                         <div class="b-files-list__name-wrap">
                             <a href="<?= $element['FILE_ID']['SRC']; ?>" class="b-files-list__name b-link-line"><?= $element['NAME']; ?></a>
                         </div>

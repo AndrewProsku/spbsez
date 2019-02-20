@@ -8,6 +8,7 @@ use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
 use Kelnik\Refbook\Model\DocsTable;
 use Kelnik\Refbook\Model\PartnerTable;
+use Kelnik\Refbook\Model\PresTable;
 use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Refbook\Model\ResidentTypesTable;
 use Kelnik\Refbook\Model\ReviewTable;
@@ -39,7 +40,8 @@ class RefbookList extends Bbc\Basis
             Types::TYPE_RESIDENT => ResidentTable::class,
             Types::TYPE_REVIEW => ReviewTable::class,
             Types::TYPE_TEAM => TeamTable::class,
-            Types::TYPE_DOCS => DocsTable::class
+            Types::TYPE_DOCS => DocsTable::class,
+            Types::TYPE_PRESENTATION => PresTable::class
         ];
 
         if (!$this->arParams['SECTION'] || !isset($classes[$this->arParams['SECTION']])) {
@@ -49,7 +51,8 @@ class RefbookList extends Bbc\Basis
         $className = $classes[$this->arParams['SECTION']];
         $selectFields = [
             Types::TYPE_REVIEW => ['ID', 'NAME', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'PREVIEW'],
-            Types::TYPE_DOCS => ['ID', 'NAME', 'FILE_ID']
+            Types::TYPE_DOCS => ['ID', 'NAME', 'FILE_ID'],
+            Types::TYPE_PRESENTATION => ['ID', 'NAME', 'FILE_ID']
         ];
 
         $select = ArrayHelper::getValue(
@@ -79,7 +82,9 @@ class RefbookList extends Bbc\Basis
 
             $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*', 'FILE_*' => 'full']);
 
-            if ($this->arResult['ELEMENTS'] && $this->arParams['SECTION'] === Types::TYPE_DOCS) {
+            if ($this->arResult['ELEMENTS']
+                && in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION])
+            ) {
                 foreach ($this->arResult['ELEMENTS'] as $k => &$v) {
                     if (empty($v['FILE_ID']['ID'])) {
                         unset($this->arResult['ELEMENTS'][$k]);
