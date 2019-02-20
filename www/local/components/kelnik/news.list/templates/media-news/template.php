@@ -5,11 +5,9 @@
         <?php foreach($arResult['ELEMENTS'] as $arItem): ?>
             <div class="b-news__item b-news-item">
                 <div class="b-news-item__top">
-                    <?php if(!empty($arItem['IMAGE_PREVIEW_PATH'])): ?>
                     <div class="b-news-item__image">
-                        <img src="<?= $arItem['IMAGE_PREVIEW_PATH']; ?>" alt="">
+                        <img src="<?= !empty($arItem['IMAGE_PREVIEW_PATH']) ? $arItem['IMAGE_PREVIEW_PATH'] : '/images/news/no-img.svg'; ?>" alt="">
                     </div>
-                    <?php endif; ?>
                     <div class="b-news-item__title">
                         <a href="<?= $arItem['DETAIL_PAGE_URL']; ?>" class="b-link-line"><?= $arItem['NAME']; ?></a>
                     </div>
