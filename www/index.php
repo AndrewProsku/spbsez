@@ -78,7 +78,7 @@ $APPLICATION->SetTitle("Главная");
                 "ELEMENTS_COUNT" => "4",
                 "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
-                "CACHE_TIME" => "360000",
+                "CACHE_TIME" => "3600",
                 "USE_AJAX" => "N",
                 "AJAX_TYPE" => "DEFAULT",
                 "AJAX_TEMPLATE_PAGE" => "",
@@ -88,7 +88,7 @@ $APPLICATION->SetTitle("Главная");
                 "SEF_URL_TEMPLATES" => array(
                     "detail" => "#ELEMENT_CODE#/"
                 ),
-                "SEF_FOLDER" => "/news/"
+                "SEF_FOLDER" => "/media/news/"
             ),
             array()
         ); ?>
@@ -112,7 +112,7 @@ $APPLICATION->SetTitle("Главная");
                 "SECTION" => "2",
                 "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
-                "CACHE_TIME" => "360000"
+                "CACHE_TIME" => "3600"
             ),
             array()
         ); ?>
@@ -124,7 +124,7 @@ $APPLICATION->SetTitle("Главная");
                 "SECTION" => "3",
                 "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
-                "CACHE_TIME" => "360000"
+                "CACHE_TIME" => "3600"
             ),
             array()
         ); ?>
@@ -361,7 +361,7 @@ $APPLICATION->SetTitle("Главная");
                 "SECTION" => "1",
                 "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
-                "CACHE_TIME" => "360000"
+                "CACHE_TIME" => "3600"
             ),
             array()
         ); ?>
