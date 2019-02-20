@@ -104,10 +104,6 @@ class Service {
 
                             Utils.clearHtml($popupContent);
                             Utils.insetContent($popupContent, errorMessage);
-
-                            document.querySelector('.b-popup__close').addEventListener('click', () => {
-                                this.popup.close();
-                            });
                         }
                     },
                     error(error) {
