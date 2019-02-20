@@ -70,7 +70,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         $el = new \CUser();
 
         $dbData['ACTIVE'] = 'Y';
-        $dbData['GROUP_ID'] = [ProfileModel::GROUP_RESIDENT_ADMIN];
+        $dbData['GROUP_ID'] = [ProfileModel::GROUP_RESIDENT];
         $dbData[ProfileModel::OWNER_FIELD] = $this->profile->getId();
         $dbData['PASSWORD'] = randString(8);
 
@@ -348,7 +348,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
     {
         $this->lastError = '';
 
-        if (!$this->profile->canEditResidentAdmin()) {
+        if (!$this->profile->canEditResident()) {
             $this->lastError = Loc::getMessage('KELNIK_PROFILE_HAS_NO_ACCESS');
 
             return false;

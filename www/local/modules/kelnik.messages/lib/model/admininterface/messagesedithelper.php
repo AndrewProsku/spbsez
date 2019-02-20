@@ -1,8 +1,14 @@
 <?php
 namespace Kelnik\Messages\Model\AdminInterface;
 
+use Bitrix\Main\Application;
+use Bitrix\Main\Type\DateTime;
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
+use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Messages\Model\MessageCompaniesTable;
 use Kelnik\Messages\Model\MessagesTable;
+use Kelnik\Messages\Model\MessageUsersTable;
+use Kelnik\Userdata\Profile\ProfileModel;
 
 class MessagesEditHelper extends AdminEditHelper
 {
@@ -20,10 +26,114 @@ class MessagesEditHelper extends AdminEditHelper
 
     public function hasWriteRightsElement($element = [])
     {
-        if (empty($element['ID']) || empty($element['ACTIVE']) || !$this->hasRights()) {
-            return false;
+        if (empty($element['ID']) || empty($element['ACTIVE'])) {
+            return parent::hasWriteRightsElement($element);
         }
 
         return $element['ACTIVE'] !== MessagesTable::YES;
+    }
+
+    public function saveElement($id = null)
+    {
+        $res = parent::saveElement($id);
+
+        $data = $res->getData();
+
+        if ($res->isSuccess() && $data['ACTIVE'] === MessagesTable::YES) {
+            self::updateUsers($id);
+            clearKelnikComponentCache('messages');
+        }
+
+        return $res;
+    }
+
+    public function deleteElement($id)
+    {
+        $res = parent::deleteElement($id);
+
+        if ($res->isSuccess()) {
+            self::updateUsers($id);
+            clearKelnikComponentCache('messages');
+        }
+
+        return $res;
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     * @throws \Bitrix\Main\ArgumentTypeException
+     */
+    protected static function updateUsers($id): bool
+    {
+        $id = (int) $id;
+
+        if (!$id) {
+            return false;
+        }
+
+        try {
+            Application::getConnection()->query('DELETE FROM `' . MessageUsersTable::getTableName() . '` WHERE `MESSAGE_ID` = ' . $id);
+        } catch (\Exception $e) {
+        }
+
+        try {
+            $companies = MessageCompaniesTable::getList([
+                'filter' => [
+                    '=MESSAGE_ID' => $id
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        $companies = ArrayHelper::getColumn($companies, 'USER_ID');
+
+        if (!$companies) {
+            return false;
+        }
+
+        $tmp = \CUser::GetList(
+            ($by = 'ID'),
+            ($order = 'DESC'),
+            [
+                'GROUPS_ID' => ProfileModel::GROUP_RESIDENT,
+                ProfileModel::OWNER_FIELD => $companies
+            ],
+            [
+                'SELECT' => [
+                    ProfileModel::OWNER_FIELD
+                ],
+                'FIELDS' => [
+                    'ID'
+                ]
+            ]
+        );
+
+        if (!$tmp->AffectedRowsCount()) {
+            return false;
+        }
+
+        $users = [];
+
+        $sqlHelper = Application::getConnection()->getSqlHelper();
+
+        while($row = $tmp->Fetch()) {
+            $users[] = '(' . $sqlHelper->convertToDbInteger($id) . ', ' .
+                $sqlHelper->convertToDbInteger($row['ID']) . ', ' .
+                $sqlHelper->convertToDbDateTime(new DateTime()) .
+                ')';
+        }
+
+        try {
+            Application::getConnection()->query(
+                'INSERT INTO `' . MessageUsersTable::getTableName() . '` (`MESSAGE_ID`, `USER_ID`, `DATE_MODIFIED`) ' .
+                'VALUES ' . implode($users, ', ')
+            );
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 }

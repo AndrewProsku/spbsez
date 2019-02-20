@@ -1,3 +1,3 @@
 <?php
 
-$MESS['KELNIK_REFBOOK_NAME'] = 'Справочник';
+$MESS['KELNIK_VACANCIES_NAME'] = 'Вакансии';

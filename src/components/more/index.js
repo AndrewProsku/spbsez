@@ -41,14 +41,12 @@ class More {
         this.button.addEventListener('click', (event) => {
             event.preventDefault();
 
-            this._download();
+            this._download(event.target.dataset.year);
         });
     }
 
-    _download() {
-        this.requestUrl = this.button.dataset.send;
-
-        Utils.send(`step=${this.step}`, this.requestUrl, {
+    _download(year) {
+        Utils.send(`step=${this.step}&year=${year}`, this.button.dataset.send, {
             success: (response) => {
                 this._stepsCount();
                 Utils.insetContent(this.content, this.template(response));

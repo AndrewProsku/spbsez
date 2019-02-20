@@ -81,14 +81,14 @@ class DocsTable extends DataManager
                 'USER',
                 Main\UserTable::class,
                 [
-                    'this.USER_ID' => 'ref.ID'
+                    '=this.USER_ID' => 'ref.ID'
                 ]
             ),
             new Main\Entity\ReferenceField(
                 'FILE',
                 Main\FileTable::class,
                 [
-                    'this.FILE_ID' => 'ref.ID'
+                    '=this.FILE_ID' => 'ref.ID'
                 ]
             )
         ];

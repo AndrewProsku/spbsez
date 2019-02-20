@@ -46,10 +46,8 @@ class TabsAjax {
     }
 
     _changeTab(newTab) {
-        const requestUrl = newTab.dataset.link;
-
         if (!newTab.classList.contains('is-active')) {
-            this._download(requestUrl, newTab);
+            this._download(`${newTab.dataset.link}?year=${newTab.dataset.year}`, newTab);
         }
     }
 
@@ -70,7 +68,7 @@ class TabsAjax {
                 Utils.insetContent(this.content, this.template(response));
 
                 if (this.moreBtn) {
-                    this.moreBtn.dataset.send = response.data.MORE_URL;
+                    this.moreBtn.dataset.year = response.data.YEAR;
                     this.moreBtn.style.display = response.data.IS_END ? 'none' : 'block';
                 }
 

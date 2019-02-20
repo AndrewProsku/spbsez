@@ -74,7 +74,7 @@ $APPLICATION->SetTitle("Управляющая компания");
                     "SECTION" => "4",
                     "CACHE_GROUPS" => "N",
                     "CACHE_TYPE" => "A",
-                    "CACHE_TIME" => "360000"
+                    "CACHE_TIME" => "3600"
                 ),
                 array()
             ); ?>
