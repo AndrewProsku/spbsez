@@ -46,10 +46,10 @@
                         </div>
 
                         <div class="glide__cust-dots j-glide-dots" data-glide-el="controls[nav]">
-                            <button class="glide__cust-dot" data-glide-dir="=0" type="button"></button>
-                            <button class="glide__cust-dot" data-glide-dir="=1" type="button"></button>
-                            <button class="glide__cust-dot" data-glide-dir="=2" type="button"></button>
-                            <button class="glide__cust-dot" data-glide-dir="=3" type="button"></button>
+                            <?php $i = 0; ?>
+                            <?php foreach ($arResult['IMAGES'] as $img): ?>
+                            <button class="glide__cust-dot" data-glide-dir="=<?= $i++; ?>" type="button"></button>
+                            <?php endforeach; ?>
                         </div>
                     </div>
 
