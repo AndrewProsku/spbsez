@@ -10,6 +10,7 @@
       {
         "blocks": [
           {
+            "type": "foreign-investors",
             "fields": [
               {
                 "id": "foreign-investors-yes",
@@ -21,7 +22,7 @@
               },
               {
                 "id": "investors-countries",
-                "value": "Гондурас"
+                "value": null
               }
             ]
           },
@@ -297,7 +298,7 @@
                   },
                   {
                     "id": "construction-permission-file[25]",
-                    "value": "permission.pdf"
+                    "value": null
                   },
                   {
                     "id": "construction-permission-date[25]",
@@ -322,6 +323,27 @@
                   },
                   {
                     "id": "construction-permission-date[27]",
+                    "value": null
+                  }
+                ]
+              },
+              {
+                "stageID": 28,
+                "fields": [
+                  {
+                    "id": "construction-stage[28]",
+                    "value": "stage6"
+                  },
+                  {
+                    "id": "construction-permission-num[28]",
+                    "value": "3333"
+                  },
+                  {
+                    "id": "construction-permission-file[28]",
+                    "value": null
+                  },
+                  {
+                    "id": "construction-permission-date[28]",
                     "value": null
                   }
                 ]
@@ -459,6 +481,55 @@
               {
                 "id": "degrees-employees",
                 "value": "123"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "results",
+        "blocks": [
+          {
+            "type": "results",
+            "ID": 1,
+            "fields": [
+              {
+                "id": "result-type[1]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой"
+              },
+              {
+                "id": "result-description[1]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой"
+              },
+              {
+                "id": "result-date[1]",
+                "value": "6/11/2014"
+              },
+              {
+                "id": "result-commercialization[1]",
+                "value": "Не раскрывается"
+              }
+            ]
+          },
+          {
+            "type": "results",
+            "ID": 2,
+            "fields": [
+              {
+                "id": "result-type[2]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой"
+              },
+              {
+                "id": "result-description[2]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой"
+              },
+              {
+                "id": "result-date[2]",
+                "value": "6/11/2014"
+              },
+              {
+                "id": "result-commercialization[2]",
+                "value": "Не раскрывается"
               }
             ]
           }

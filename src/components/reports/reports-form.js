@@ -7,6 +7,8 @@ import templateForm3 from './templates/form-3.twig';
 import templateForm4 from './templates/form-4.twig';
 import templateForm5 from './templates/form-5.twig';
 import templateForm6 from './templates/form-6.twig';
+import templateForm7 from './templates/form-7.twig';
+import templateResultBlock from './templates/result-block.twig';
 import Utils from '../../common/scripts/utils';
 
 
@@ -26,8 +28,11 @@ class ReportForm {
         this.filterGroupClass = 'j-reports-select-group';
         this.filterFakeInputClass = 'b-mini-filter__fake';
         this.filterFakeInputSuccessClass = 'b-mini-filter__fake_is_success';
-        // this.newsItemClass = 'b-news-item';
+        this.addResultClass = 'j-add-result';
+        this.submitReportClass = 'j-report-submit';
 
+
+        // this.isReportFulfilled = false;
         this.forms = [{
             isApproved: false,
             template  : null
@@ -46,9 +51,13 @@ class ReportForm {
         }, {
             isApproved: false,
             template  : null
+        }, {
+            isVisited : false,
+            isApproved: false,
+            template  : null
         }];
 
-        this.unitialForm = 5;
+        this.unitialForm = 0;
 
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
@@ -62,7 +71,7 @@ class ReportForm {
 
     init(options) {
         this.target = options.target;
-        const that = this;
+        this.submitReportButton = document.querySelector(`.${this.submitReportClass}`);
 
         // Табы
         this.filter = document.querySelector(`.${this.filterClass}`);
@@ -70,19 +79,76 @@ class ReportForm {
         this.groups = Array.from(document.querySelectorAll(`.${this.filterGroupClass}`));
         this.filterFakeInputs = Array.from(document.querySelectorAll(`.${this.filterFakeInputClass}`));
 
-        // по умолчанию поля считаются валидными
-        // иначе добавляеся поле isInvalid и массив errors
+
+        this.getInitialInputsValues();
+        this.bindFilterEvents();
+
+        mediator.subscribe('resultBlockDeleted', () => {
+            this.resultBlockDeletedHandler();
+        });
+
+        this.submitReportButton.addEventListener('click', this.submitReports);
+    }
+
+    resultBlockDeletedHandler() {
+        const resultsForm = 6;
+        const resultsBlocks = this.forms[resultsForm].template.querySelectorAll(`.${this.formsBlockClass}`);
+        let resultBlocksCounter = resultsBlocks.length;
+
+        Array.from(resultsBlocks).forEach((block) => {
+            block.querySelector('.b-report-block__header').dataset.number = resultBlocksCounter;
+            // eslint-disable-next-line no-magic-numbers
+            resultBlocksCounter -= 1;
+        });
+    }
+
+    getInitialInputsValues() {
+        const that = this;
+
         Utils.send('', '/tests/reports/all.json', {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
                 }
-                const forms = response.data.forms;
+                const responseForms = response.data.forms;
 
-                forms.forEach((formData, i) => {
+                responseForms.forEach((formData, i) => {
                     that.forms[i].template = that.createForm(i);
 
-                    that.initFormBlocks(formData.blocks, that.forms[i].template);
+                    if (formData.type && (formData.type === 'results')) {
+                        const addResultButton = that.forms[i].template.querySelector(`.${that.addResultClass}`);
+
+                        if (Array.isArray(formData.blocks)) {
+                            formData.blocks.forEach((blockData, num) => {
+                                const shiftForNumber = 1;
+                                const blockNumber = num + shiftForNumber;
+
+                                addResultButton.insertAdjacentHTML('afterend', templateResultBlock({
+                                    id    : blockData.ID,
+                                    number: blockNumber
+                                }));
+                            });
+                            const formBlocks = that.forms[i].template.querySelectorAll(`.${that.formsBlockClass}`);
+
+                            formData.blocks.reverse().forEach((blockData, blockNumber) => {
+                                const reportBlock = new ReportBlock();
+
+                                reportBlock.init({
+                                    target: formBlocks[blockNumber],
+                                    blockData,
+                                    formID: 6
+                                });
+                            });
+                        }
+                    } else {
+                        that.initFormBlocks(formData.blocks, that.forms[i].template, i);
+                    }
+
+                    that.setFormStatus(i);
+                });
+
+                mediator.subscribe('blockStatusChanged', (formID) => {
+                    that.setFormStatus(formID);
                 });
 
                 that.insertForm(that.unitialForm);
@@ -91,8 +157,6 @@ class ReportForm {
                 console.error(error);
             }
         });
-
-        this.bindFilterEvents();
     }
 
     bindFilterEvents() {
@@ -157,6 +221,11 @@ class ReportForm {
             case 'form6':
                 formNumber = 5;
                 break;
+            case 'form7':
+                formNumber = 6;
+                this.forms[6].isVisited = true;
+                this.setFormStatus(6);
+                break;
             default: break;
         }
         /* eslint-enable no-magic-numbers */
@@ -200,36 +269,8 @@ class ReportForm {
 
     insertForm(formNumber) {
         Utils.insetContent(this.target, this.forms[formNumber].template);
-
-        // this.initCustomElements();
+        this.target.dataset.currentForm = formNumber;
     }
-
-    // initCustomElements() {
-    // Инициализация Select
-    // Приходится инициализировать select здесь т.к. компонет похоже не может инциализироваться в компоненте не вставленном
-    // на страницу
-    // if (this.target.querySelectorAll('.j-reports-form-select').length) {
-    //     const select = new Select({
-    //         element: '.j-select',
-    //
-    //         disableSearch: true
-    //     });
-    //
-    //     select.init();
-    // }
-
-    // const permissionFileInputs = Array.from(this.target.querySelectorAll('.j-construction-permission-file'));
-    //
-    // if (permissionFileInputs.length) {
-    //     permissionFileInputs.forEach((permissionInput) => {
-    //         const fileInput = new InputFile();
-    //
-    //         fileInput.init({
-    //             target: permissionInput
-    //         });
-    //     });
-    // }
-    // }
 
     createForm(formNumber) {
         // Создание шаблона формы
@@ -255,33 +296,114 @@ class ReportForm {
             case 5:
                 template.innerHTML = templateForm6();
                 break;
+            case 6:
+                template.innerHTML = templateForm7();
+                this.createResultFormTemplate(template);
+
+                break;
             default:
                 template.innerHTML = templateForm1();
                 break;
         }
         /* eslint-enable no-magic-numbers */
 
-        // Слежение за состояним блоков (заполнен/не заполнен)
-        // И изменение кнопок-фильтров
-        const formBlocks = Array.from(template.querySelectorAll(`.${this.formsBlockClass}`));
-
-        mediator.subscribe('blockStatusChanged', () => {
-            for (let i = 0; i < formBlocks.length; i++) {
-                if (formBlocks[i].dataset.approved !== 'true') {
-                    this.forms[formNumber].isApproved = false;
-                    this.filterFakeInputs[formNumber].classList.remove(this.filterFakeInputSuccessClass);
-
-                    return;
-                }
-            }
-            this.forms[formNumber].isApproved = true;
-            this.filterFakeInputs[formNumber].classList.add(this.filterFakeInputSuccessClass);
-        });
-
         return template;
     }
 
-    initFormBlocks(blocksData, formTemplate) {
+    createResultFormTemplate(template) {
+        const that = this;
+        const addResultButton = template.querySelector(`.${this.addResultClass}`);
+
+        addResultButton.addEventListener('click', () => {
+            Utils.send('action=addResult', '/tests/reports/add-result.json', {
+                success(response) {
+                    if (response.request.status === that.FAIL_STATUS) {
+                        return;
+                    }
+                    const blocksAmount = template.querySelectorAll(`.${that.formsBlockClass}`).length;
+                    const shiftForNumber = 1;
+                    const blockNumber = blocksAmount + shiftForNumber;
+
+                    addResultButton.insertAdjacentHTML('afterend', templateResultBlock({
+                        id    : response.data.ID,
+                        number: blockNumber
+                    }));
+
+                    const reportBlock = new ReportBlock();
+
+                    reportBlock.init({
+                        target   : addResultButton.nextSibling,
+                        blockData: response.data,
+                        formID   : 6
+                    });
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
+        });
+    }
+
+    setFormStatus(formID) {
+        const formBlocks = Array.from(this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`));
+        const resultsFormID = 6;
+
+        // Если форма с результатаими интеллектурьной деятельности еще не была посещена
+        // она не может считаться заполненной
+        if (formID === resultsFormID) {
+            if (!this.forms[resultsFormID].isVisited) {
+                this.forms[formID].isApproved = false;
+                this.filterFakeInputs[formID].classList.remove(this.filterFakeInputSuccessClass);
+                this.setReportStatus();
+
+                return;
+            }
+        }
+
+        for (let blockNum = 0; blockNum < formBlocks.length; blockNum++) {
+            if (formBlocks[blockNum].dataset.approved !== 'true') {
+                this.forms[formID].isApproved = false;
+                this.filterFakeInputs[formID].classList.remove(this.filterFakeInputSuccessClass);
+                this.setReportStatus();
+
+                return;
+            }
+        }
+        this.forms[formID].isApproved = true;
+        this.filterFakeInputs[formID].classList.add(this.filterFakeInputSuccessClass);
+
+        this.setReportStatus();
+    }
+
+    setReportStatus() {
+        for (let i = 0; i < this.forms.length; i++) {
+            if (!this.forms[i].isApproved) {
+                this.submitReportButton.disabled = true;
+
+                return;
+            }
+        }
+        this.submitReportButton.disabled = false;
+    }
+
+    submitReports() {
+        const that = this;
+
+        Utils.send('action=confirmReport', '/tests/reports/input-update.json', {
+            success(response) {
+                if (!response.request.status === that.SUCCESS_STATUS) {
+                    return true;
+                }
+
+                return true;
+            },
+            error(error) {
+                console.error(error);
+            }
+        });
+    }
+
+    initFormBlocks(blocksData, formTemplate, formID) {
         const formBlocks = Array.from(formTemplate.querySelectorAll(`.${this.formsBlockClass}`));
 
         blocksData.forEach((blockData, i) => {
@@ -289,7 +411,8 @@ class ReportForm {
 
             reportBlock.init({
                 target: formBlocks[i],
-                blockData
+                blockData,
+                formID
             });
         });
     }

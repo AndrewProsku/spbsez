@@ -131,7 +131,7 @@
             outline: 0;
 
             + .b-input-block__label {
-                opacity: 1;
+                color: $black;
             }
         }
 
@@ -139,6 +139,10 @@
         &.is-success {
             color: $blue;
         }
+    }
+
+    textarea {
+        resize: vertical;
     }
 
     select {
@@ -220,7 +224,8 @@
     display: block;
     order: 0;
     padding-top: 12px;
-    opacity: 0.72;
+    color: rgba($black, 0.72);
+    //opacity: 0.72;
     padding-left: 16px;
     padding-right: 16px;
 
@@ -373,6 +378,8 @@
         @include prefix(2, 24);
         @include suffix(2, 24);
     }
+
+    overflow: hidden;
 }
 
 .b-report-block__confirm {
@@ -468,14 +475,19 @@
         display: block;
         font-size: 16px;
         line-height: 24px;
-        width: 100%;
-        height: 100%;
+        width: 24px;
+        height: 24px;
         font-family: $font-bold;
+        color: $blue;
     }
 
     &:hover {
         background-color: $bg-select;
     }
+}
+
+label .b-help {
+    border: 1px solid $light-grey;
 }
 
 .button_without_icon {
@@ -495,6 +507,10 @@
 
 .b-reports-filter .b-mini-filter__group {
     margin-bottom: 0;
+}
+
+.b-report-form__add-result {
+    @include margin-level(bottom, green);
 }
 
 .b-report-form__delete {
@@ -524,5 +540,61 @@
     @media #{$tablet-portrait} {
         width: 31px;
         height: 31px;
+    }
+}
+
+.b-report-block__delete {
+    @include transition(color);
+    @include margin-level(top, dark-yellow);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    min-width: 190px;
+    height: 48px;
+    font-size: 14px;
+    float: right;
+    color: $black;
+    line-height: 48px;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid $grey;
+    background-color: transparent;
+    padding-right: 45px;
+    padding-left: 30px;
+    cursor: pointer;
+
+    &:after {
+        @include transition(right, transform);
+        transform: rotate(45deg);
+        content: "+";
+        font-size: 20px;
+        position: absolute;
+        top: 0;
+        right: 15%;
+    }
+
+    &:hover {
+        color: $blue;
+
+        &:after {
+            right: 7%;
+            transform: rotate(135deg);
+        }
+    }
+
+    &:active {
+        box-shadow: inset 0 2px 4px rgba($blue, 0.48);
+    }
+
+    @media #{$tablet-portrait} {
+        height: 56px;
+        font-size: 18px;
+        line-height: 56px;
+        padding-right: 80px;
+        padding-left: 30px;
+
+        &:after {
+            font-size: 24px;
+        }
     }
 }

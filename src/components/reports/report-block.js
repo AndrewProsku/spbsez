@@ -26,11 +26,12 @@ class ReportBlock {
         this.stageAddButtonClass = 'j-report-stage-add';
         this.stageDeleteButtonClass = 'j-delete-stage';
         this.fileInputClass = 'j-file-input-block';
+        this.resultDeleteButtonClass = 'j-delete-result';
+        this.disabledInputClass = 'b-input-block_is_disabled';
 
         /**
          * Данные о состоянии инпутов блока, полученные от сервера
          */
-        // this.blockData = {};
         this.inputsData = {};
         this.inputsStatus = {};
 
@@ -40,34 +41,17 @@ class ReportBlock {
 
     init(options) {
         this.target = options.target;
-        // this.blockData = options.blockData;
+        this.formID = options.formID;
         const blockData = options.blockData;
 
-        // Инициализация блока со стадиями строительства
         if (blockData.type) {
             switch (blockData.type) {
-                // Инициализация блока со стадиями строительства
+                case 'foreign-investors': {
+                    this.initForeignInvestorsBlock(blockData);
+                    break;
+                }
                 case 'construction-stage': {
-                    this.inputsData.fields = [];
-                    blockData.stages.forEach((stage) => {
-                        this.inputsData.fields.push(stage.fields);
-                        let hasExtraForm = false;
-
-                        stage.fields.forEach((field) => {
-                            this.inputsData.fields.push(field);
-                            // eslint-disable-next-line no-magic-numbers
-                            if (field.id.indexOf('construction-stage') !== -1) {
-                                hasExtraForm = field.value === 'stage4' || field.value === 'stage6';
-                            }
-                        });
-                        // eslint-disable-next-line no-magic-numbers
-                        const isStagesDeletable = blockData.stages.length > 1;
-
-                        this.insertStageForm(stage.stageID, hasExtraForm, isStagesDeletable);
-                    });
-
-                    // Добавление новой стадии строительства
-                    this.addStage();
+                    this.initConstructionStageBlock(blockData);
                     break;
                 }
                 case 'export-countries': {
@@ -78,6 +62,10 @@ class ReportBlock {
                     this.initInnovationsBlock(blockData);
                     break;
                 }
+                case 'results': {
+                    this.initResultBlock(blockData);
+                    break;
+                }
                 default:
                     this.inputsData = blockData;
                     break;
@@ -86,12 +74,70 @@ class ReportBlock {
             this.inputsData = blockData;
         }
 
-        this.inputs = Array.from(this.target.querySelectorAll('input, select'));
+        this.inputs = Array.from(this.target.querySelectorAll('input, select, textarea'));
         this._getInputsValues();
         this._bindInputsEvents(this.inputs);
 
         // Инициализация тултипов
         this.initTooltips();
+    }
+
+    initForeignInvestorsBlock(data) {
+        this.inputsData.fields = [];
+        const radios = Array.from(this.target.querySelectorAll('input[type=radio]'));
+        const investorCountries = this.target.querySelector('.j-foreign-investors-field');
+        const investorCountriesField = investorCountries.querySelector('input');
+
+        radios.forEach((radio) => {
+            radio.addEventListener('change', (event) => {
+                if (event.target.value === 'yes') {
+                    investorCountries.classList.remove('b-input-block_is_disabled');
+                    investorCountriesField.disabled = false;
+
+                    this.inputsStatus['investors-countries'] = this.getInputStatus(investorCountriesField);
+                    this.setBlockStatus();
+                } else {
+                    investorCountries.classList.add('b-input-block_is_disabled');
+                    investorCountriesField.disabled = true;
+
+                    delete this.inputsStatus['investors-countries'];
+                    this.setBlockStatus();
+                }
+            });
+        });
+        data.fields.forEach((field) => {
+            if (field.id === 'foreign-investors-yes' ||
+                field.id === 'foreign-investors-no') {
+                this.inputsData.fields.push(field);
+            } else if (field.id === 'investors-countries') {
+                if (!investorCountriesField.disabled) {
+                    this.inputsData.fields.push(field);
+                }
+            }
+        });
+    }
+
+    initConstructionStageBlock(data) {
+        this.inputsData.fields = [];
+        data.stages.forEach((stage) => {
+            this.inputsData.fields.push(stage.fields);
+            let hasExtraForm = false;
+
+            stage.fields.forEach((field) => {
+                this.inputsData.fields.push(field);
+                // eslint-disable-next-line no-magic-numbers
+                if (field.id.indexOf('construction-stage') !== -1) {
+                    hasExtraForm = field.value === 'stage4' || field.value === 'stage6';
+                }
+            });
+            // eslint-disable-next-line no-magic-numbers
+            const isStagesDeletable = data.stages.length > 1;
+
+            this.insertStageForm(stage.stageID, hasExtraForm, isStagesDeletable);
+        });
+
+        // Добавление новой стадии строительства
+        this.addStage();
     }
 
     initExportCountriesBlock(data) {
@@ -124,6 +170,33 @@ class ReportBlock {
         });
 
         this.addInnovation();
+    }
+
+    initResultBlock(data) {
+        const deleteButton = this.target.querySelector(`.${this.resultDeleteButtonClass}`);
+
+        deleteButton.addEventListener('click', (event) => {
+            const that = this;
+            const dataToSend = `action=delResult&id=${event.target.dataset.id}`;
+
+            Utils.send(dataToSend, '/tests/reports/input-update.json', {
+                success(response) {
+                    if (response.request.status === that.FAIL_STATUS) {
+                        return;
+                    }
+
+                    Utils.removeElement(that.target);
+                    mediator.publish('resultBlockDeleted', that.formID);
+                    mediator.publish('blockStatusChanged', that.formID);
+                    delete this;
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
+        });
+
+        this.inputsData = data;
     }
 
     initSelect(input) {
@@ -163,52 +236,25 @@ class ReportBlock {
             switch (input.type) {
                 case 'text':
                 case 'email':
-                case 'tel': {
+                case 'tel':
+                case 'textarea': {
                     this.bindTextInputsEvents(input);
                     break;
                 }
                 case 'file': {
-                    // Инициализация компонента
-                    const that = this;
-                    const fileInputBlock = input.closest('.b-input-block');
-                    const fileInput = new InputFile();
-
-                    fileInput.init({
-                        target: fileInputBlock
-                    });
-
-                    input.addEventListener('change', (event) => {
-                        event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
-                        const formData = new FormData(event.target.closest('form'));
-
-                        Utils.send(formData, '/tests/reports/input-update.json', {
-                            // success(response) {
-                            //     if (!response.request.status === that.SUCCESS_STATUS) {}
-                            // },
-                            error(error) {
-                                console.error(error);
-                            }
-                        });
-                    });
-
-                    fileInputBlock.querySelector('.b-input-file__delete').addEventListener('click', (event) => {
-                        event.preventDefault();
-                        const permissionForm = event.target.closest(`.${that.permissionFormClass}`);
-                        const dataToSend = `action=delPermissionDoc&id=${permissionForm.dataset.stageId}`;
-
-                        Utils.send(dataToSend, '/tests/reports/input-update.json', {
-                            // success(response) {
-                            // },
-                            error(error) {
-                                console.error(error);
-                            }
-                        });
-                    });
+                    this.initFileInputsEvents(input);
 
                     break;
                 }
                 case 'select-one': {
                     this.initSelect(input);
+                    break;
+                }
+                case 'radio': {
+                    // this.bindTextInputsEvents(input);
+                    input.addEventListener('change', (event) => {
+                        this.sendNewValue(event.target);
+                    });
                     break;
                 }
                 default: break;
@@ -225,6 +271,53 @@ class ReportBlock {
         });
     }
 
+    initFileInputsEvents(input) {
+        const that = this;
+        const fileInputBlock = input.closest('.b-input-block');
+        const fileInput = new InputFile();
+
+        fileInput.init({
+            target: fileInputBlock
+        });
+
+        input.addEventListener('change', (event) => {
+            event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
+            const formData = new FormData(event.target.closest('form'));
+
+            Utils.send(formData, '/tests/reports/input-update.json', {
+                success(response) {
+                    if (!response.request.status === that.SUCCESS_STATUS) {
+                        return true;
+                    }
+
+                    return true;
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
+        });
+
+        fileInputBlock.querySelector('.b-input-file__delete').addEventListener('click', (event) => {
+            event.preventDefault();
+            const permissionForm = event.target.closest(`.${that.permissionFormClass}`);
+            const dataToSend = `action=delPermissionDoc&id=${permissionForm.dataset.stageId}`;
+
+            Utils.send(dataToSend, '/tests/reports/input-update.json', {
+                success(response) {
+                    if (!response.request.status === that.SUCCESS_STATUS) {
+                        return true;
+                    }
+
+                    return true;
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
+        });
+    }
+
     /**
      * Заполнение инпутов данными с сервера и выставлнеие статуса блоку формы (зеленый фон)
      */
@@ -235,9 +328,6 @@ class ReportBlock {
                     switch (input.type) {
                         case 'radio': {
                             input.checked = fieldData.checked;
-                            // if (input.checked) {
-                            //     mediator.publish('radioChecked', input);
-                            // }
                             break;
                         }
                         case 'select-one': {
@@ -262,8 +352,9 @@ class ReportBlock {
                 }
             });
             // Выставление статуса инпутам
-            // Скипаем поля, находящиеся в дополнительной форме
-            if (!input.closest(`.${this.permissionFormClass}`)) {
+            // Скипаем поля, находящиеся в дополнительной форме и задисейбленные поля
+            if (!input.closest(`.${this.permissionFormClass}`) &&
+                !input.closest(`.${this.disabledInputClass}`)) {
                 this.inputsStatus[input.id] = this.getInputStatus(input);
             }
         });
@@ -303,7 +394,7 @@ class ReportBlock {
                 // this.isBlockApproved = false;
                 this.target.dataset.approved = 'false';
                 this.target.classList.remove(this.approveClass);
-                mediator.publish('blockStatusChanged');
+                mediator.publish('blockStatusChanged', this.formID);
 
                 return;
             }
@@ -312,7 +403,7 @@ class ReportBlock {
         // this.isBlockApproved = true;
         this.target.dataset.approved = 'true';
         this.target.classList.add(this.approveClass);
-        mediator.publish('blockStatusChanged');
+        mediator.publish('blockStatusChanged', this.formID);
     }
 
     sendNewValue(input) {
@@ -620,7 +711,7 @@ class ReportBlock {
     removeInnovation(input) {
         const that = this;
         const innovationsBlock = this.target.querySelector(`.j-innovations-block`);
-        const dataToSend = `action=delInnovation&id=${input.dataset.groupId}`;
+        const dataToSend = `action=delInnovation&id=${input.dataset.id}`;
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
 
         Utils.send(dataToSend, '/tests/reports/input-update.json', {
