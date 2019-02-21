@@ -1,4 +1,3 @@
-// import $ from 'jquery';
 import Mediator from 'common/scripts/mediator';
 import ReportBlock from './report-block';
 import templateForm1 from './templates/form-1.twig';
@@ -21,15 +20,18 @@ class ReportForm {
         // Табы
         this.filterClass = 'j-reports-filter';
         this.filterSelectsClass = 'j-reports-select';
-        // this.reportsContainerClass = 'j-reports-container';
         this.filterSelectsTitleClass = 'j-reports-select-title';
         this.filterGroupClass = 'j-reports-select-group';
         this.activeGroup = 'b-mini-filter__group_is_active';
         this.filterGroupClass = 'j-reports-select-group';
         this.filterFakeInputClass = 'b-mini-filter__fake';
         this.filterFakeInputSuccessClass = 'b-mini-filter__fake_is_success';
+
         this.addResultClass = 'j-add-result';
         this.submitReportClass = 'j-report-submit';
+
+        this.residentNameField = document.querySelector('.j-report-resident-name input');
+        this.oezNameField = document.querySelector('.j-report-oez-name input');
 
 
         // this.isReportFulfilled = false;
@@ -79,7 +81,7 @@ class ReportForm {
         this.groups = Array.from(document.querySelectorAll(`.${this.filterGroupClass}`));
         this.filterFakeInputs = Array.from(document.querySelectorAll(`.${this.filterFakeInputClass}`));
 
-
+        // this.getReportNamesValues();
         this.getInitialInputsValues();
         this.bindFilterEvents();
 
@@ -90,20 +92,15 @@ class ReportForm {
         this.submitReportButton.addEventListener('click', this.submitReports);
     }
 
-    resultBlockDeletedHandler() {
-        const resultsForm = 6;
-        const resultsBlocks = this.forms[resultsForm].template.querySelectorAll(`.${this.formsBlockClass}`);
-        let resultBlocksCounter = resultsBlocks.length;
-
-        Array.from(resultsBlocks).forEach((block) => {
-            block.querySelector('.b-report-block__header').dataset.number = resultBlocksCounter;
-            // eslint-disable-next-line no-magic-numbers
-            resultBlocksCounter -= 1;
-        });
-    }
-
     getInitialInputsValues() {
         const that = this;
+
+        this.residentNameField.addEventListener('change', (event) => {
+            this.sendNewValues(event.target);
+        });
+        this.oezNameField.addEventListener('change', (event) => {
+            this.sendNewValues(event.target);
+        });
 
         Utils.send('', '/tests/reports/all.json', {
             success(response) {
@@ -112,34 +109,18 @@ class ReportForm {
                 }
                 const responseForms = response.data.forms;
 
+                if (response.data.residentName) {
+                    that.residentNameField.value = response.data.residentName;
+                }
+                if (response.data.oezName) {
+                    that.oezNameField.value = response.data.oezName;
+                }
+
                 responseForms.forEach((formData, i) => {
                     that.forms[i].template = that.createForm(i);
 
                     if (formData.type && (formData.type === 'results')) {
-                        const addResultButton = that.forms[i].template.querySelector(`.${that.addResultClass}`);
-
-                        if (Array.isArray(formData.blocks)) {
-                            formData.blocks.forEach((blockData, num) => {
-                                const shiftForNumber = 1;
-                                const blockNumber = num + shiftForNumber;
-
-                                addResultButton.insertAdjacentHTML('afterend', templateResultBlock({
-                                    id    : blockData.ID,
-                                    number: blockNumber
-                                }));
-                            });
-                            const formBlocks = that.forms[i].template.querySelectorAll(`.${that.formsBlockClass}`);
-
-                            formData.blocks.reverse().forEach((blockData, blockNumber) => {
-                                const reportBlock = new ReportBlock();
-
-                                reportBlock.init({
-                                    target: formBlocks[blockNumber],
-                                    blockData,
-                                    formID: 6
-                                });
-                            });
-                        }
+                        that.initResultsForm(formData, i);
                     } else {
                         that.initFormBlocks(formData.blocks, that.forms[i].template, i);
                     }
@@ -152,6 +133,49 @@ class ReportForm {
                 });
 
                 that.insertForm(that.unitialForm);
+            },
+            error(error) {
+                console.error(error);
+            }
+        });
+    }
+
+    initResultsForm(data, formID) {
+        const addResultButton = this.forms[formID].template.querySelector(`.${this.addResultClass}`);
+
+        if (Array.isArray(data.blocks)) {
+            data.blocks.forEach((blockData, num) => {
+                const shiftForNumber = 1;
+                const blockNumber = num + shiftForNumber;
+
+                addResultButton.insertAdjacentHTML('afterend', templateResultBlock({
+                    id    : blockData.ID,
+                    number: blockNumber
+                }));
+            });
+            const formBlocks = this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`);
+
+            data.blocks.reverse().forEach((blockData, blockNumber) => {
+                const reportBlock = new ReportBlock();
+
+                reportBlock.init({
+                    target: formBlocks[blockNumber],
+                    blockData,
+                    formID
+                });
+            });
+        }
+    }
+
+    sendNewValues(input) {
+        const dataToSend = `action=update&${input.id}=${input.value}`;
+        const that = this;
+
+        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+            success(response) {
+                if (response.request.status === that.SUCCESS_STATUS) {
+                    that.setReportStatus();
+                }
             },
             error(error) {
                 console.error(error);
@@ -344,6 +368,18 @@ class ReportForm {
         });
     }
 
+    resultBlockDeletedHandler() {
+        const resultsForm = 6;
+        const resultsBlocks = this.forms[resultsForm].template.querySelectorAll(`.${this.formsBlockClass}`);
+        let resultBlocksCounter = resultsBlocks.length;
+
+        Array.from(resultsBlocks).forEach((block) => {
+            block.querySelector('.b-report-block__header').dataset.number = resultBlocksCounter;
+            // eslint-disable-next-line no-magic-numbers
+            resultBlocksCounter -= 1;
+        });
+    }
+
     setFormStatus(formID) {
         const formBlocks = Array.from(this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`));
         const resultsFormID = 6;
@@ -376,6 +412,12 @@ class ReportForm {
     }
 
     setReportStatus() {
+        if (!this.residentNameField.value || !this.oezNameField.value) {
+            this.submitReportButton.disabled = true;
+
+            return;
+        }
+
         for (let i = 0; i < this.forms.length; i++) {
             if (!this.forms[i].isApproved) {
                 this.submitReportButton.disabled = true;
