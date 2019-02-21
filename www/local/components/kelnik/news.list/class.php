@@ -6,6 +6,7 @@ use Bex\Bbc;
 use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Page\Asset;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\ImageResizer\Resizer;
 use Kelnik\News\Categories\CategoriesTable;
 use Kelnik\News\News\NewsTable;
@@ -132,7 +133,7 @@ class NewsList extends Bbc\Basis
             unset($rsElements);
 
             try {
-                $this->arResult['TAGS'] = TagsTable::getList($f = [
+                $this->arResult['TAGS'] = TagsTable::getList([
                     'select' => [
                         'ID', 'NAME',
                         new ExpressionField(
@@ -157,7 +158,10 @@ class NewsList extends Bbc\Basis
                 $this->arResult['TAGS'] = [];
             }
 
-            $this->arResult['TAGS'] = $this->prepareTags($this->arResult['TAGS']);
+            $this->arResult['TAGS'] = TagsTable::prepareTags(
+                $this->arResult['TAGS'],
+                ArrayHelper::getValue($this->arParams, 'SEF_FOLDER', '')
+            );
         }
 
         if ($this->arParams['SET_404'] === 'Y' && !$this->arResult['ELEMENTS']) {
@@ -223,25 +227,5 @@ class NewsList extends Bbc\Basis
         }
 
         return '?ID=' . $el['ID'];
-    }
-
-    protected function prepareTags(array $tags)
-    {
-        if (!$tags) {
-            return $tags;
-        }
-
-        foreach ($tags as &$v) {
-            $v['NEWS_IDS'] = explode(',', $v['NEWS_IDS']);
-            if (empty($this->arParams['SEF_FOLDER'])) {
-                $v['LINK'] = '?tag=' . $v['ID'];
-                continue;
-            }
-
-            $v['LINK'] = $this->arParams['SEF_FOLDER'] . 'tag-' . (isset($v['ALIAS']) ? $v['ALIAS'] : $v['ID']) . '/';
-        }
-        unset($v);
-
-        return $tags;
     }
 }

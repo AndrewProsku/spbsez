@@ -16,4 +16,12 @@ $arUrlRewrite=array (
     'PATH' => '/cabinet/messages/index.php',
     'SORT' => 100,
   ),
+  2 => 
+  array (
+    'CONDITION' => '#^/media/news/#',
+    'RULE' => '',
+    'ID' => 'kelnik:news',
+    'PATH' => '/media/news/index.php',
+    'SORT' => 100,
+  ),
 );
