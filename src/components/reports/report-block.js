@@ -39,9 +39,11 @@ class ReportBlock {
         this.FAIL_STATUS = 0;
     }
 
+    /* eslint-disable max-statements */
     init(options) {
         this.target = options.target;
         this.formID = options.formID;
+        this.isReadonly = options.isReadonly || false;
         const blockData = options.blockData;
 
         if (blockData.type) {
@@ -78,9 +80,16 @@ class ReportBlock {
         this._getInputsValues();
         this._bindInputsEvents(this.inputs);
 
+        if (this.isReadonly) {
+            this.inputs.forEach((input) => {
+                input.disabled = true;
+            });
+        }
+
         // Инициализация тултипов
         this.initTooltips();
     }
+    /* eslint-enable max-statements */
 
     initForeignInvestorsBlock(data) {
         this.inputsData.fields = [];
@@ -106,6 +115,10 @@ class ReportBlock {
             });
         });
         data.fields.forEach((field) => {
+            if (field.id === 'foreign-investors-yes' && field.checked) {
+                investorCountries.classList.remove('b-input-block_is_disabled');
+                investorCountriesField.disabled = false;
+            }
             if (field.id === 'foreign-investors-yes' ||
                 field.id === 'foreign-investors-no') {
                 this.inputsData.fields.push(field);
@@ -131,13 +144,14 @@ class ReportBlock {
                 }
             });
             // eslint-disable-next-line no-magic-numbers
-            const isStagesDeletable = data.stages.length > 1;
+            const isStagesDeletable = data.stages.length > 1 && !this.isReadonly;
 
             this.insertStageForm(stage.stageID, hasExtraForm, isStagesDeletable);
         });
 
-        // Добавление новой стадии строительства
-        this.addStage();
+        if (!this.isReadonly) {
+            this.addStage();
+        }
     }
 
     initExportCountriesBlock(data) {
@@ -148,12 +162,14 @@ class ReportBlock {
                 this.inputsData.fields.push(field);
             });
             // eslint-disable-next-line no-magic-numbers
-            const isGroupDeletable = data.groups.length > 1;
+            const isGroupDeletable = data.groups.length > 1 && !this.isReadonly;
 
             this.insertExportGroupForm(group.ID, isGroupDeletable);
         });
 
-        this.addExportGroup();
+        if (!this.isReadonly) {
+            this.addExportGroup();
+        }
     }
 
     initInnovationsBlock(data) {
@@ -164,49 +180,55 @@ class ReportBlock {
                 this.inputsData.fields.push(field);
             });
             // eslint-disable-next-line no-magic-numbers
-            const isInnovationDeletable = data.innovations.length > 1;
+            const isInnovationDeletable = data.innovations.length > 1 && !this.isReadonly;
 
             this.insertInnovationForm(innovation.ID, isInnovationDeletable);
         });
-
-        this.addInnovation();
+        if (!this.isReadonly) {
+            this.addInnovation();
+        }
     }
 
     initResultBlock(data) {
-        const deleteButton = this.target.querySelector(`.${this.resultDeleteButtonClass}`);
+        if (!this.isReadonly) {
+            const deleteButton = this.target.querySelector(`.${this.resultDeleteButtonClass}`);
 
-        deleteButton.addEventListener('click', (event) => {
-            const that = this;
-            const dataToSend = `action=delResult&id=${event.target.dataset.id}`;
+            deleteButton.addEventListener('click', (event) => {
+                const that = this;
+                const dataToSend = `action=delResult&id=${event.target.dataset.id}`;
 
-            Utils.send(dataToSend, '/tests/reports/input-update.json', {
-                success(response) {
-                    if (response.request.status === that.FAIL_STATUS) {
-                        return;
+                Utils.send(dataToSend, '/tests/reports/input-update.json', {
+                    success(response) {
+                        if (response.request.status === that.FAIL_STATUS) {
+                            return;
+                        }
+
+                        Utils.removeElement(that.target);
+                        mediator.publish('resultBlockDeleted', that.formID);
+                        mediator.publish('blockStatusChanged', that.formID);
+                        delete this;
+                    },
+                    error(error) {
+                        console.error(error);
                     }
-
-                    Utils.removeElement(that.target);
-                    mediator.publish('resultBlockDeleted', that.formID);
-                    mediator.publish('blockStatusChanged', that.formID);
-                    delete this;
-                },
-                error(error) {
-                    console.error(error);
-                }
+                });
             });
-        });
+        }
 
         this.inputsData = data;
     }
 
     initSelect(input) {
+        if (this.isReadonly) {
+            input.disabled = true;
+        }
         new Select({
             element: $(input),
 
             disableSearch: true
         }).init();
         // eslint-disable-next-line no-magic-numbers
-        if (input.id.indexOf('construction-stage') !== -1) {
+        if (!this.isReadonly && (input.id.indexOf('construction-stage') !== -1)) {
             input.onchange = this.stageSelectHandler.bind(this);
         }
     }

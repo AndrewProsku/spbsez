@@ -16,15 +16,15 @@
             "fields": [
               {
                 "id": "foreign-investors-yes",
-                "checked": false
-              },
-              {
-                "id": "foreign-investors-no",
                 "checked": true
               },
               {
+                "id": "foreign-investors-no",
+                "checked": false
+              },
+              {
                 "id": "investors-countries",
-                "value": null
+                "value": "Казахстан, Франция, США"
               }
             ]
           },
@@ -328,27 +328,6 @@
                     "value": null
                   }
                 ]
-              },
-              {
-                "stageID": 28,
-                "fields": [
-                  {
-                    "id": "construction-stage[28]",
-                    "value": "stage6"
-                  },
-                  {
-                    "id": "construction-permission-num[28]",
-                    "value": "3333"
-                  },
-                  {
-                    "id": "construction-permission-file[28]",
-                    "value": null
-                  },
-                  {
-                    "id": "construction-permission-date[28]",
-                    "value": null
-                  }
-                ]
               }
             ]
           }
@@ -429,6 +408,19 @@
                     "value": "9601 10 000 0"
                   }
                 ]
+              },
+              {
+                "ID": 6,
+                "fields": [
+                  {
+                    "id": "export-countries[6]",
+                    "value": "Финляндия"
+                  },
+                  {
+                    "id": "export-code[6]",
+                    "value": "9601 10 000 0"
+                  }
+                ]
               }
             ]
           },
@@ -453,6 +445,15 @@
                   {
                     "id": "innovation[5]",
                     "value": "Инновация"
+                  }
+                ]
+              },
+              {
+                "ID": 6,
+                "fields": [
+                  {
+                    "id": "innovation[6]",
+                    "value": "Инновационная инновация"
                   }
                 ]
               }

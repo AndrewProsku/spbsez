@@ -23,12 +23,13 @@ class ReportForm {
         this.filterSelectsTitleClass = 'j-reports-select-title';
         this.filterGroupClass = 'j-reports-select-group';
         this.activeGroup = 'b-mini-filter__group_is_active';
-        this.filterGroupClass = 'j-reports-select-group';
         this.filterFakeInputClass = 'b-mini-filter__fake';
         this.filterFakeInputSuccessClass = 'b-mini-filter__fake_is_success';
 
         this.addResultClass = 'j-add-result';
+        this.resultsContainerClass = 'j-report-results';
         this.submitReportClass = 'j-report-submit';
+
 
         this.residentNameField = document.querySelector('.j-report-resident-name input');
         this.oezNameField = document.querySelector('.j-report-oez-name input');
@@ -76,14 +77,22 @@ class ReportForm {
         this.submitReportButton = document.querySelector(`.${this.submitReportClass}`);
 
         // Табы
-        this.filter = document.querySelector(`.${this.filterClass}`);
-        this.filterSelect = document.querySelector(`.${this.filterSelectsClass}`);
+        this.filters = Array.from(document.querySelectorAll(`.${this.filterClass}`));
         this.groups = Array.from(document.querySelectorAll(`.${this.filterGroupClass}`));
-        this.filterFakeInputs = Array.from(document.querySelectorAll(`.${this.filterFakeInputClass}`));
+        this.filterFakeInputs = [];
 
-        // this.getReportNamesValues();
+
+        if (Object.prototype.hasOwnProperty.call(this.target.dataset, 'readOnly')) {
+            this.type = 'readonly';
+            this.residentNameField.disabled = true;
+            this.oezNameField.disabled = true;
+        }
+
         this.getInitialInputsValues();
-        this.bindFilterEvents();
+        this.filters.forEach((filter) => {
+            this.filterFakeInputs.push(Array.from(filter.querySelectorAll(`.${this.filterFakeInputClass}`)));
+            this.bindFilterEvents(filter);
+        });
 
         mediator.subscribe('resultBlockDeleted', () => {
             this.resultBlockDeletedHandler();
@@ -141,16 +150,18 @@ class ReportForm {
     }
 
     initResultsForm(data, formID) {
-        const addResultButton = this.forms[formID].template.querySelector(`.${this.addResultClass}`);
+        const resultsContainer = this.forms[formID].template.querySelector(`.${this.resultsContainerClass}`);
+        const isReadonly = this.type === 'readonly';
 
         if (Array.isArray(data.blocks)) {
             data.blocks.forEach((blockData, num) => {
                 const shiftForNumber = 1;
                 const blockNumber = num + shiftForNumber;
 
-                addResultButton.insertAdjacentHTML('afterend', templateResultBlock({
+                resultsContainer.insertAdjacentHTML('afterBegin', templateResultBlock({
                     id    : blockData.ID,
-                    number: blockNumber
+                    number: blockNumber,
+                    isReadonly
                 }));
             });
             const formBlocks = this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`);
@@ -161,7 +172,8 @@ class ReportForm {
                 reportBlock.init({
                     target: formBlocks[blockNumber],
                     blockData,
-                    formID
+                    formID,
+                    isReadonly
                 });
             });
         }
@@ -183,13 +195,18 @@ class ReportForm {
         });
     }
 
-    bindFilterEvents() {
-        this.filter.addEventListener('change', (event) => {
-            this.changeForm(event.target.id);
+    bindFilterEvents(filter) {
+        const filterSelect = filter.querySelector(`.${this.filterSelectsClass}`);
+
+        filter.addEventListener('change', (event) => {
+            this.filters.forEach((reportFilter) => {
+                reportFilter.querySelector(`input[value="${event.target.value}"]`).checked = true;
+            });
+            this.changeForm(event.target.value);
             this._setTitlesInSelects();
         });
 
-        this.filterSelect.addEventListener('click', (event) => {
+        filterSelect.addEventListener('click', (event) => {
             this._switchSelect(event.target);
         });
     }
@@ -309,28 +326,37 @@ class ReportForm {
                 template.innerHTML = templateForm2();
                 break;
             case 2:
-                template.innerHTML = templateForm3();
+                template.innerHTML = templateForm3({
+                    readonly: this.type === 'readonly'
+                });
                 break;
             case 3:
-                template.innerHTML = templateForm4();
+                template.innerHTML = templateForm4({
+                    readonly: this.type === 'readonly'
+                });
                 break;
             case 4:
-                template.innerHTML = templateForm5();
+                template.innerHTML = templateForm5({
+                    readonly: this.type === 'readonly'
+                });
                 break;
             case 5:
                 template.innerHTML = templateForm6();
                 break;
             case 6:
-                template.innerHTML = templateForm7();
-                this.createResultFormTemplate(template);
-
+                template.innerHTML = templateForm7({
+                    readonly: this.type === 'readonly'
+                });
+                if (this.type !== 'readonly') {
+                    this.createResultFormTemplate(template);
+                }
                 break;
             default:
                 template.innerHTML = templateForm1();
                 break;
         }
-        /* eslint-enable no-magic-numbers */
 
+        /* eslint-enable no-magic-numbers */
         return template;
     }
 
@@ -356,9 +382,10 @@ class ReportForm {
                     const reportBlock = new ReportBlock();
 
                     reportBlock.init({
-                        target   : addResultButton.nextSibling,
-                        blockData: response.data,
-                        formID   : 6
+                        target    : addResultButton.nextSibling,
+                        blockData : response.data,
+                        formID    : 6,
+                        isReadonly: that.type === 'readonly'
                     });
                 },
                 error(error) {
@@ -389,7 +416,10 @@ class ReportForm {
         if (formID === resultsFormID) {
             if (!this.forms[resultsFormID].isVisited) {
                 this.forms[formID].isApproved = false;
-                this.filterFakeInputs[formID].classList.remove(this.filterFakeInputSuccessClass);
+                this.filters.forEach((filter, i) => {
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                });
                 this.setReportStatus();
 
                 return;
@@ -399,14 +429,21 @@ class ReportForm {
         for (let blockNum = 0; blockNum < formBlocks.length; blockNum++) {
             if (formBlocks[blockNum].dataset.approved !== 'true') {
                 this.forms[formID].isApproved = false;
-                this.filterFakeInputs[formID].classList.remove(this.filterFakeInputSuccessClass);
+                this.filters.forEach((filter, i) => {
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                });
+
                 this.setReportStatus();
 
                 return;
             }
         }
         this.forms[formID].isApproved = true;
-        this.filterFakeInputs[formID].classList.add(this.filterFakeInputSuccessClass);
+        this.filters.forEach((filter, i) => {
+            this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputSuccessClass);
+            this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputSuccessClass);
+        });
 
         this.setReportStatus();
     }
@@ -447,6 +484,7 @@ class ReportForm {
 
     initFormBlocks(blocksData, formTemplate, formID) {
         const formBlocks = Array.from(formTemplate.querySelectorAll(`.${this.formsBlockClass}`));
+        const isReadonly = this.type === 'readonly';
 
         blocksData.forEach((blockData, i) => {
             const reportBlock = new ReportBlock();
@@ -454,7 +492,8 @@ class ReportForm {
             reportBlock.init({
                 target: formBlocks[i],
                 blockData,
-                formID
+                formID,
+                isReadonly
             });
         });
     }

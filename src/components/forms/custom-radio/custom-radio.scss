@@ -71,6 +71,10 @@ $radio-icon-border-color: #b4b7d0;
 
     .b-custom-radio__icon {
         opacity: .78;
+
+        @media #{$laptop} {
+            background-color: $white;
+        }
     }
 
     .b-custom-radio__text {

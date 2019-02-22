@@ -42,6 +42,8 @@
                 </label>
             </div>
         </div>
+        {% if not isReadonly %}
         <button class="b-report-block__delete j-delete-result" type="button" data-id="{{ id }}">Удалить</button>
+        {% endif %}
     </div>
 </section>
