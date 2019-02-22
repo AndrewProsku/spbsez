@@ -23,7 +23,6 @@ class ReportForm {
         this.filterSelectsTitleClass = 'j-reports-select-title';
         this.filterGroupClass = 'j-reports-select-group';
         this.activeGroup = 'b-mini-filter__group_is_active';
-        this.filterGroupClass = 'j-reports-select-group';
         this.filterFakeInputClass = 'b-mini-filter__fake';
         this.filterFakeInputSuccessClass = 'b-mini-filter__fake_is_success';
 
@@ -78,10 +77,10 @@ class ReportForm {
         this.submitReportButton = document.querySelector(`.${this.submitReportClass}`);
 
         // Табы
-        this.filter = document.querySelector(`.${this.filterClass}`);
-        this.filterSelect = document.querySelector(`.${this.filterSelectsClass}`);
+        this.filters = Array.from(document.querySelectorAll(`.${this.filterClass}`));
         this.groups = Array.from(document.querySelectorAll(`.${this.filterGroupClass}`));
-        this.filterFakeInputs = Array.from(document.querySelectorAll(`.${this.filterFakeInputClass}`));
+        this.filterFakeInputs = [];
+
 
         if (Object.prototype.hasOwnProperty.call(this.target.dataset, 'readOnly')) {
             this.type = 'readonly';
@@ -89,9 +88,11 @@ class ReportForm {
             this.oezNameField.disabled = true;
         }
 
-        // this.getReportNamesValues();
         this.getInitialInputsValues();
-        this.bindFilterEvents();
+        this.filters.forEach((filter) => {
+            this.filterFakeInputs.push(Array.from(filter.querySelectorAll(`.${this.filterFakeInputClass}`)));
+            this.bindFilterEvents(filter);
+        });
 
         mediator.subscribe('resultBlockDeleted', () => {
             this.resultBlockDeletedHandler();
@@ -194,13 +195,18 @@ class ReportForm {
         });
     }
 
-    bindFilterEvents() {
-        this.filter.addEventListener('change', (event) => {
-            this.changeForm(event.target.id);
+    bindFilterEvents(filter) {
+        const filterSelect = filter.querySelector(`.${this.filterSelectsClass}`);
+
+        filter.addEventListener('change', (event) => {
+            this.filters.forEach((reportFilter) => {
+                reportFilter.querySelector(`input[value="${event.target.value}"]`).checked = true;
+            });
+            this.changeForm(event.target.value);
             this._setTitlesInSelects();
         });
 
-        this.filterSelect.addEventListener('click', (event) => {
+        filterSelect.addEventListener('click', (event) => {
             this._switchSelect(event.target);
         });
     }
@@ -410,7 +416,10 @@ class ReportForm {
         if (formID === resultsFormID) {
             if (!this.forms[resultsFormID].isVisited) {
                 this.forms[formID].isApproved = false;
-                this.filterFakeInputs[formID].classList.remove(this.filterFakeInputSuccessClass);
+                this.filters.forEach((filter, i) => {
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                });
                 this.setReportStatus();
 
                 return;
@@ -420,14 +429,21 @@ class ReportForm {
         for (let blockNum = 0; blockNum < formBlocks.length; blockNum++) {
             if (formBlocks[blockNum].dataset.approved !== 'true') {
                 this.forms[formID].isApproved = false;
-                this.filterFakeInputs[formID].classList.remove(this.filterFakeInputSuccessClass);
+                this.filters.forEach((filter, i) => {
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                });
+
                 this.setReportStatus();
 
                 return;
             }
         }
         this.forms[formID].isApproved = true;
-        this.filterFakeInputs[formID].classList.add(this.filterFakeInputSuccessClass);
+        this.filters.forEach((filter, i) => {
+            this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputSuccessClass);
+            this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputSuccessClass);
+        });
 
         this.setReportStatus();
     }

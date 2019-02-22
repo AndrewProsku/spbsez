@@ -272,7 +272,10 @@
     border-radius: 4px;
     background-color: $dark-white;
     border: 1px solid transparent;
-    @include margin-level(bottom, green);
+
+    &:not(:last-child) {
+        @include margin-level(bottom, green);
+    }
 
     &_status_approved {
         border-color: rgba($green, 0.32);
@@ -479,6 +482,7 @@
     width: 24px;
     height: 24px;
     text-align: center;
+    vertical-align: center;
     margin-left: 10px;
     line-height: 24px;
     background-color: $white;
@@ -502,6 +506,19 @@
     &:hover {
         background-color: $bg-select;
     }
+
+    @media #{$mobile-only} {
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+
+        &:before {
+            width: 18px;
+            height: 18px;
+            font-size: 14px;
+            line-height: 18px;
+        }
+    }
 }
 
 label .b-help {
@@ -521,6 +538,10 @@ label .b-help {
 .b-mini-filter.b-reports-filter {
     margin-bottom: 0;
     @include padding-level(bottom, green);
+
+    &_position_bottom {
+        @include padding-level(bottom, cyan);
+    }
 }
 
 .b-reports-filter .b-mini-filter__group {
