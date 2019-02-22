@@ -4,76 +4,43 @@
 <?php if (empty($arResult['ELEMENTS'])): return; endif; ?>
 
 <form action="#" class="b-news__filter b-mini-filter j-news-filter">
-    <div class="b-mini-filter__group j-news-select-group">
-        <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span
-                    class="j-news-select-title">Все</span></div>
+    <?php if($arResult['YEARS']): ?>
+        <div class="b-mini-filter__group j-news-select-group">
+            <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span
+                        class="j-news-select-title">Все</span></div>
 
-        <div class="b-mini-filter__group-wrap">
-            <div class="b-mini-filter__item">
-                <input type="checkbox" name="years[]" value="2018" data-text="2018" id="years2018"
-                       class="b-mini-filter__input">
-                <label for="years2018" class="b-mini-filter__fake">2018</label>
-            </div>
-
-            <div class="b-mini-filter__item">
-                <input type="checkbox" name="years[]" value="2017" data-text="2017" id="years2017"
-                       class="b-mini-filter__input">
-                <label for="years2017" class="b-mini-filter__fake">2017</label>
-            </div>
-
-            <div class="b-mini-filter__item">
-                <input type="checkbox" name="years[]" value="2016" data-text="2016" id="years2016"
-                       class="b-mini-filter__input">
-                <label for="years2016" class="b-mini-filter__fake">2016</label>
-            </div>
-
-            <div class="b-mini-filter__item">
-                <input type="checkbox" name="years[]" value="2015" data-text="2015" id="years2015"
-                       class="b-mini-filter__input">
-                <label for="years2015" class="b-mini-filter__fake">2015</label>
+            <div class="b-mini-filter__group-wrap">
+                <?php foreach ($arResult['YEARS'] as $year): ?>
+                    <div class="b-mini-filter__item">
+                        <input type="checkbox"
+                               name="years[]"
+                               value="<?= $year['NAME']; ?>"
+                               data-text="<?= $year['NAME']; ?>"
+                               id="years<?= $year['NAME']; ?>"
+                               class="b-mini-filter__input">
+                        <label for="years<?= $year['NAME']; ?>" class="b-mini-filter__fake"><?= $year['NAME']; ?></label>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
-    </div>
-
+    <?php endif; ?>
+    <?php if($arResult['YEARS']): ?>
     <div class="b-mini-filter__group j-news-select-group">
 
         <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span
                     class="j-news-select-title">Все</span></div>
 
         <div class="b-mini-filter__group-wrap">
-
-            <div class="b-mini-filter__item">
-                <input type="checkbox" name="types[]" value="anons" data-text="Анонс" id="typesAnons"
-                       class="b-mini-filter__input">
-                <label for="typesAnons" class="b-mini-filter__fake">Анонс</label>
-            </div>
-
-            <div class="b-mini-filter__item">
-                <input type="checkbox" name="types[]" value="press" data-text="Пресс-релиз" id="typesPress"
-                       class="b-mini-filter__input">
-                <label for="typesPress" class="b-mini-filter__fake">Пресс-релиз</label>
-            </div>
-
-            <div class="b-mini-filter__item">
-                <input type="checkbox" name="types[]" value="resid" data-text="Новости резидентов"
-                       id="typesResid" class="b-mini-filter__input">
-                <label for="typesResid" class="b-mini-filter__fake">Новости резидентов</label>
-            </div>
-
-            <div class="b-mini-filter__item">
-                <input type="checkbox" name="types[]" value="news" data-text="Новости" id="typesNews"
-                       class="b-mini-filter__input">
-                <label for="typesNews" class="b-mini-filter__fake">Новости</label>
-            </div>
-
-            <div class="b-mini-filter__item">
-                <input type="checkbox" name="types[]" value="about" data-text="СМИ о нас" id="typesAbout"
-                       class="b-mini-filter__input">
-                <label for="typesAbout" class="b-mini-filter__fake">СМИ о нас</label>
-            </div>
+            <?php foreach ($arResult['TAGS'] as $tag): ?>
+                <div class="b-mini-filter__item">
+                    <input type="checkbox" name="types[]" value="<?= $tag['ID']; ?>" data-text="<?= $tag['NAME']; ?>" id="types<?=$tag['ID']; ?>"
+                           class="b-mini-filter__input">
+                    <label for="types<?=$tag['ID']; ?>" class="b-mini-filter__fake"><?= $tag['NAME']; ?></label>
+                </div>
+            <?php endforeach; ?>
         </div>
-
     </div>
+    <?php endif; ?>
 </form>
 
 <div class="b-news__content j-news-container">

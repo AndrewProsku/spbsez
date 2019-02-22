@@ -31,34 +31,33 @@ class NewsList extends Bbc\Basis
     protected $cacheTemplate = false;
     protected $needModules = ['kelnik.news', 'iblock', 'kelnik.imageresizer'];
     protected $checkParams = [
-        'SECTION_ID' => ['type' => 'int', 'error' => false],
-        'ACTION' => ['type' => 'string', 'error' => false]
+        'SECTION_ID' => ['type' => 'int', 'error' => false]
     ];
 
     protected function executeMain()
     {
-        $this->setResultCacheKeys(['ELEMENTS', 'TAGS']);
+        $this->setResultCacheKeys(['ELEMENTS', 'TAGS', 'YEARS']);
         $filter = $this->getParamsFilters();
 
         if ($this->arParams['SECTION_ID']) {
             $filter['=CAT_ID'] = $this->arParams['SECTION_ID'];
-            $filter['=SECTION_ACTIVE'] = CategoriesTable::YES;
+            $filter['=CAT.ACTIVE'] = CategoriesTable::YES;
+        }
+        unset($filter['SECTION_ID']);
+
+        $this->arResult['YEARS'] = $this->getYears($filter);
+        $activeElements = self::getActiveElements($this->arResult['YEARS']);
+
+        $this->arResult['CNT'] = count($activeElements);
+
+        if (!$activeElements) {
+            return true;
         }
 
-        if ($this->arParams['ACTION'] === 'Y') {
-            $filter['=ACTION'] = NewsTable::YES;
-        }
-
-        $this->arResult['CNT'] = NewsTable::getRow(
-            [
-                'select' => [
-                    'SECTION_ID' => 'CAT_ID',
-                    'SECTION_CODE' => 'CAT.CODE',
-                    'SECTION_ACTIVE' => 'CAT.ACTIVE',
-                    new ExpressionField('CNT', 'COUNT(%s)', 'ID')
-                ],
-                'filter' => $filter
-            ]
+        $this->arResult['TAGS'] = self::getTags($activeElements);
+        $this->arResult['TAGS'] = TagsTable::prepareTags(
+            $this->arResult['TAGS'],
+            ArrayHelper::getValue($this->arParams, 'SEF_FOLDER', '')
         );
 
         $this->arResult['PAGE'] = !empty($_REQUEST['page'])
@@ -85,10 +84,11 @@ class NewsList extends Bbc\Basis
                         'SECTION_ID'     => 'CAT_ID',
                         'SECTION_CODE'   => 'CAT.CODE',
                         'ELEMENT_ID'     => 'ID',
-                        'ELEMENT_CODE'   => 'CODE',
-                        'SECTION_ACTIVE' => 'CAT.ACTIVE'
+                        'ELEMENT_CODE'   => 'CODE'
                     ],
-                    'filter' => $filter,
+                    'filter' => [
+                        '=ID' => $activeElements
+                    ],
                     'order'  => $this->getParamsSort(),
                     'limit'  => $limit,
                     'offset' => $offset
@@ -131,37 +131,6 @@ class NewsList extends Bbc\Basis
                 $ids[$element['ID']] = $element['ID'];
             }
             unset($rsElements);
-
-            try {
-                $this->arResult['TAGS'] = TagsTable::getList([
-                    'select' => [
-                        'ID', 'NAME',
-                        new ExpressionField(
-                            'NEWS_IDS',
-                            'GROUP_CONCAT(%s SEPARATOR \',\')',
-                            'NEWS_TAG.ENTITY_ID'
-                        )
-                    ],
-                    'filter' => [
-                        '=ACTIVE' => TagsTable::YES,
-                        '=NEWS_TAG.ENTITY_ID' => array_values($ids)
-                    ],
-                    'group' => [
-                        'ID'
-                    ],
-                    'order' => [
-                        'SORT' => 'ASC',
-                        'NAME' => 'ASC'
-                    ]
-                ])->fetchAll();
-            } catch (\Exception $e) {
-                $this->arResult['TAGS'] = [];
-            }
-
-            $this->arResult['TAGS'] = TagsTable::prepareTags(
-                $this->arResult['TAGS'],
-                ArrayHelper::getValue($this->arParams, 'SEF_FOLDER', '')
-            );
         }
 
         if ($this->arParams['SET_404'] === 'Y' && !$this->arResult['ELEMENTS']) {
@@ -227,5 +196,84 @@ class NewsList extends Bbc\Basis
         }
 
         return '?ID=' . $el['ID'];
+    }
+
+    public static function getTags(array $activeElements): array
+    {
+        if (!$activeElements) {
+            return [];
+        }
+
+        try {
+            return TagsTable::getList([
+                'select' => [
+                    'ID', 'NAME',
+                    new ExpressionField(
+                        'NEWS_IDS',
+                        'GROUP_CONCAT(%s SEPARATOR \',\')',
+                        'NEWS_TAG.ENTITY_ID'
+                    )
+                ],
+                'filter' => [
+                    '=ACTIVE' => TagsTable::YES,
+                    '=NEWS_TAG.ENTITY_ID' => $activeElements
+                ],
+                'group' => [
+                    'ID'
+                ],
+                'order' => [
+                    'SORT' => 'ASC',
+                    'NAME' => 'ASC'
+                ]
+            ])->fetchAll();
+        } catch (\Exception $e) {
+        }
+
+        return [];
+    }
+
+    public function getYears(array $filter): array
+    {
+        try {
+            return NewsTable::getList([
+                'select' => [
+                    new ExpressionField(
+                        'NAME',
+                        'YEAR(%s)',
+                        'DATE_SHOW'
+                    ),
+                    new ExpressionField(
+                        'ELEMENTS',
+                        'GROUP_CONCAT(%s)',
+                        'ID'
+                    )
+                ],
+                'filter' => $filter,
+                'group' => [
+                    'NAME'
+                ],
+                'order' => [
+                    'NAME' => 'DESC'
+                ]
+            ])->fetchAll();
+        } catch (\Exception $e) {
+        }
+
+        return [];
+    }
+
+    public static function getActiveElements(array $years): array
+    {
+        if (!$years) {
+            return [];
+        }
+
+        return explode(
+            ',',
+            implode(
+                ',',
+                array_column($years, 'ELEMENTS')
+            )
+        );
     }
 }
