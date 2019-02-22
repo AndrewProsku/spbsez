@@ -28,15 +28,18 @@ const map = {
 
 const animateBackground = function(element) {
     const diameter = 240;
+    const radius = 120;
 
     window.addEventListener('mousemove', (event) => {
-        element.style['clip-path'] = `circle(${diameter}px at ${event.pageX}px ${event.pageY}px)`;
+        element.style['clip-path'] = `circle(${diameter}px at ${event.screenX}px ${event.screenY - radius}px)`;
     });
 };
 
 for (const particles in map) {
     if (Object.prototype.hasOwnProperty.call(map, particles) && map[particles].div) {
-        map[particles].div.style.height = `${backgroundHeight}px`;
+        if (map[particles].type === 'static') {
+            map[particles].div.style.height = `${backgroundHeight}px`;
+        }
 
         window.particlesJS.load(map[particles].tag, map[particles].json);
 
