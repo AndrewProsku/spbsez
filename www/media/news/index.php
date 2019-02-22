@@ -25,7 +25,8 @@ $APPLICATION->SetTitle("Новости");
         "SORT_ORDER_1" => "DESC",
         "SORT_BY_2" => "ID",
         "SORT_ORDER_2" => "ASC",
-        "USE_AJAX" => "N"
+        "USE_AJAX" => "N",
+        "USE_ADVANCE_FILTER" => "Y"
     )
 );?>
 

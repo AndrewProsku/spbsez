@@ -40,3 +40,4 @@ $MESS['KELNIK_NEWS_LIST_ADD_SECTIONS_CHAIN'] = 'Устанавливать в х
 $MESS['KELNIK_NEWS_LIST_SORT_DATE_SHOW'] = 'Дата';
 $MESS['KELNIK_NEWS_LIST_SORT_ID'] = 'ID';
 $MESS['KELNIK_NEWS_LIST_IS_ACTION'] = 'Акции';
+$MESS['KELNIK_NEWS_LIST_USE_ADVANCE_FILTER'] = 'Использовать фильтр по годам и тегам';

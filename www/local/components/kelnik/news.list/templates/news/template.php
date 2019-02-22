@@ -17,6 +17,7 @@
                                value="<?= $year['NAME']; ?>"
                                data-text="<?= $year['NAME']; ?>"
                                id="years<?= $year['NAME']; ?>"
+                               <?php if(!empty($year['SELECTED'])): ?> checked="checked"<?php endif; ?>
                                class="b-mini-filter__input">
                         <label for="years<?= $year['NAME']; ?>" class="b-mini-filter__fake"><?= $year['NAME']; ?></label>
                     </div>
@@ -33,7 +34,12 @@
         <div class="b-mini-filter__group-wrap">
             <?php foreach ($arResult['TAGS'] as $tag): ?>
                 <div class="b-mini-filter__item">
-                    <input type="checkbox" name="types[]" value="<?= $tag['ID']; ?>" data-text="<?= $tag['NAME']; ?>" id="types<?=$tag['ID']; ?>"
+                    <input type="checkbox"
+                           name="types[]"
+                           value="<?= $tag['ID']; ?>"
+                           data-text="<?= $tag['NAME']; ?>"
+                           id="types<?=$tag['ID']; ?>"
+                           <?php if(!empty($tag['SELECTED'])): ?> checked="checked"<?php endif; ?>
                            class="b-mini-filter__input">
                     <label for="types<?=$tag['ID']; ?>" class="b-mini-filter__fake"><?= $tag['NAME']; ?></label>
                 </div>
@@ -69,6 +75,6 @@
     <?php endforeach; ?>
 </div>
 
-<div class="b-news__button">
+<div class="b-news__button"<?php if(!$arResult['MORE']): ?> style="display:none;"<?php endif; ?>>
     <a href="#" class="button button_theme_gray button_icon_refresh j-news-load-more">Загрузить еще новости</a>
 </div>
