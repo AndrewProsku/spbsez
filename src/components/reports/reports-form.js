@@ -28,7 +28,9 @@ class ReportForm {
         this.filterFakeInputSuccessClass = 'b-mini-filter__fake_is_success';
 
         this.addResultClass = 'j-add-result';
+        this.resultsContainerClass = 'j-report-results';
         this.submitReportClass = 'j-report-submit';
+
 
         this.residentNameField = document.querySelector('.j-report-resident-name input');
         this.oezNameField = document.querySelector('.j-report-oez-name input');
@@ -80,6 +82,12 @@ class ReportForm {
         this.filterSelect = document.querySelector(`.${this.filterSelectsClass}`);
         this.groups = Array.from(document.querySelectorAll(`.${this.filterGroupClass}`));
         this.filterFakeInputs = Array.from(document.querySelectorAll(`.${this.filterFakeInputClass}`));
+
+        if (Object.prototype.hasOwnProperty.call(this.target.dataset, 'readOnly')) {
+            this.type = 'readonly';
+            this.residentNameField.disabled = true;
+            this.oezNameField.disabled = true;
+        }
 
         // this.getReportNamesValues();
         this.getInitialInputsValues();
@@ -141,16 +149,18 @@ class ReportForm {
     }
 
     initResultsForm(data, formID) {
-        const addResultButton = this.forms[formID].template.querySelector(`.${this.addResultClass}`);
+        const resultsContainer = this.forms[formID].template.querySelector(`.${this.resultsContainerClass}`);
+        const isReadonly = this.type === 'readonly';
 
         if (Array.isArray(data.blocks)) {
             data.blocks.forEach((blockData, num) => {
                 const shiftForNumber = 1;
                 const blockNumber = num + shiftForNumber;
 
-                addResultButton.insertAdjacentHTML('afterend', templateResultBlock({
+                resultsContainer.insertAdjacentHTML('afterBegin', templateResultBlock({
                     id    : blockData.ID,
-                    number: blockNumber
+                    number: blockNumber,
+                    isReadonly
                 }));
             });
             const formBlocks = this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`);
@@ -161,7 +171,8 @@ class ReportForm {
                 reportBlock.init({
                     target: formBlocks[blockNumber],
                     blockData,
-                    formID
+                    formID,
+                    isReadonly
                 });
             });
         }
@@ -309,28 +320,37 @@ class ReportForm {
                 template.innerHTML = templateForm2();
                 break;
             case 2:
-                template.innerHTML = templateForm3();
+                template.innerHTML = templateForm3({
+                    readonly: this.type === 'readonly'
+                });
                 break;
             case 3:
-                template.innerHTML = templateForm4();
+                template.innerHTML = templateForm4({
+                    readonly: this.type === 'readonly'
+                });
                 break;
             case 4:
-                template.innerHTML = templateForm5();
+                template.innerHTML = templateForm5({
+                    readonly: this.type === 'readonly'
+                });
                 break;
             case 5:
                 template.innerHTML = templateForm6();
                 break;
             case 6:
-                template.innerHTML = templateForm7();
-                this.createResultFormTemplate(template);
-
+                template.innerHTML = templateForm7({
+                    readonly: this.type === 'readonly'
+                });
+                if (this.type !== 'readonly') {
+                    this.createResultFormTemplate(template);
+                }
                 break;
             default:
                 template.innerHTML = templateForm1();
                 break;
         }
-        /* eslint-enable no-magic-numbers */
 
+        /* eslint-enable no-magic-numbers */
         return template;
     }
 
@@ -356,9 +376,10 @@ class ReportForm {
                     const reportBlock = new ReportBlock();
 
                     reportBlock.init({
-                        target   : addResultButton.nextSibling,
-                        blockData: response.data,
-                        formID   : 6
+                        target    : addResultButton.nextSibling,
+                        blockData : response.data,
+                        formID    : 6,
+                        isReadonly: that.type === 'readonly'
                     });
                 },
                 error(error) {
@@ -447,6 +468,7 @@ class ReportForm {
 
     initFormBlocks(blocksData, formTemplate, formID) {
         const formBlocks = Array.from(formTemplate.querySelectorAll(`.${this.formsBlockClass}`));
+        const isReadonly = this.type === 'readonly';
 
         blocksData.forEach((blockData, i) => {
             const reportBlock = new ReportBlock();
@@ -454,7 +476,8 @@ class ReportForm {
             reportBlock.init({
                 target: formBlocks[i],
                 blockData,
-                formID
+                formID,
+                isReadonly
             });
         });
     }

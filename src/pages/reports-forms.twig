@@ -70,12 +70,15 @@
             </div>
         </form>
 
-        <button class="button button_icon_check b-report-approve" type="button">Подтвердить данные формы</button>
+        {#<button class="button button_icon_check b-report-approve" type="button">Подтвердить данные формы</button>#}
 
-        <div class="b-report-form j-report-form" data-current-form>
-            {#{% include "./templates/form-1.twig" %}#}
-        </div>
+        {##}
+        <!--
+            data-read-only Просмотр уже принятых отчетов за предыдущие кварталы
+            data-prefilled Форма предзаполнена данными из предыдущих кварталов
+        -->
+        <div class="b-report-form j-report-form" data-current-form data-read-only></div>
 
-        <button class="button button_without_icon j-report-submit" type="button" disabled>Отправить отчет</button>
+        <button class="button button_without_icon b-report-submit j-report-submit" type="button" disabled>Отправить отчет</button>
     </div>
 {% endblock %}

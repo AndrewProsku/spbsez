@@ -37,6 +37,10 @@
     max-width: 1280px;
 }
 
+.b-reports-filter + .b-report-form {
+    padding-top: 0;
+}
+
 .b-report-form__title {
     @include font-size("h2");
     @include margin-level(bottom, yellow);
@@ -49,6 +53,10 @@
 
 .b-report-form__title + .b-report-form__subtitle {
     margin-top: -8px;
+}
+
+.b-report-submit {
+    max-width: 1280px;
 }
 
 .b-inputs-row {
@@ -83,6 +91,11 @@
             }
         }
     }
+}
+
+.b-innovations-block .b-input-block + .b-input-block:not(:first-child),
+.b-inputs-row + .b-inputs-row:not(:first-child) {
+    margin-top: 9px;
 }
 
 .b-input-block {
@@ -171,6 +184,10 @@
         //height: 80px;
         //padding-top: 36px;
     }
+}
+
+[data-read-only] .b-input-block:hover {
+    background-color: $white;
 }
 
 .b-input-block_is_disabled {
