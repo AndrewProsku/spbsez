@@ -3,21 +3,21 @@
 
         <div class="b-news-item__top">
             <div class="b-news-item__image">
-                <img src="{{ novelty.image }}" alt="">
+                <img src="{{ novelty.IMAGE_PREVIEW_PATH }}" alt="{{ novelty.NAME }}">
             </div>
             <div class="b-news-item__title">
-                <a href="{{ novelty.link }}"><span>{{ novelty.title }}</span></a>
+                <a href="{{ novelty.DETAIL_PAGE_URL }}"><span>{{ novelty.NAME }}</span></a>
             </div>
         </div>
 
         <ul class="b-news-item__tags">
             <li class="b-news-item__date">
                 {% include '../media/time.svg.twig' %}
-                {{ novelty.date }}
+                {{ novelty.DATE_SHOW_FORMAT }}
             </li>
 
-            {% for tag in novelty.tags %}
-                <li><a href="{{ tag.link}}">{{ tag.name }}</a></li>
+            {% for tag in novelty.TAGS %}
+                <li><a href="{{ tag.LINK}}">{{ tag.NAME }}</a></li>
             {% endfor %}
         </ul>
     </div>

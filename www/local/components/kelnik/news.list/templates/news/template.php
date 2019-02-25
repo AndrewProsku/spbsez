@@ -3,7 +3,9 @@
 } ?>
 <?php if (empty($arResult['ELEMENTS'])): return; endif; ?>
 
-<form action="#" class="b-news__filter b-mini-filter j-news-filter">
+<form action="#" method="post" enctype="application/x-www-form-urlencoded" class="b-news__filter b-mini-filter j-news-filter">
+    <input type="hidden" name="sect" value="<?= $arParams['SECTION_ID']; ?>">
+    <input type="hidden" name="compid" value="<?= $arParams['AJAX_COMPONENT_ID']; ?>">
     <?php if($arResult['YEARS']): ?>
         <div class="b-mini-filter__group j-news-select-group">
             <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span
@@ -13,7 +15,7 @@
                 <?php foreach ($arResult['YEARS'] as $year): ?>
                     <div class="b-mini-filter__item">
                         <input type="checkbox"
-                               name="years[]"
+                               name="year[]"
                                value="<?= $year['NAME']; ?>"
                                data-text="<?= $year['NAME']; ?>"
                                id="years<?= $year['NAME']; ?>"
@@ -25,7 +27,7 @@
             </div>
         </div>
     <?php endif; ?>
-    <?php if($arResult['YEARS']): ?>
+    <?php if($arResult['TAGS']): ?>
     <div class="b-mini-filter__group j-news-select-group">
 
         <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span
@@ -35,7 +37,7 @@
             <?php foreach ($arResult['TAGS'] as $tag): ?>
                 <div class="b-mini-filter__item">
                     <input type="checkbox"
-                           name="types[]"
+                           name="tag[]"
                            value="<?= $tag['ID']; ?>"
                            data-text="<?= $tag['NAME']; ?>"
                            id="types<?=$tag['ID']; ?>"
@@ -66,8 +68,7 @@
                     <svg id="SVGDoc" width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 14 14"><defs><path d="M277.851,977.063c-0.227,0.603 -0.351,1.256 -0.351,1.937c0,3.038 2.463,5.5 5.5,5.5c3.038,0 5.5,-2.462 5.5,-5.5c0,-3.037 -2.462,-5.5 -5.5,-5.5c-0.855,0 -1.666,0.196 -2.388,0.544" id="Path-0"/><path d="M282.75,976.5v3h2.25" id="Path-1"/></defs><desc>Generated with Avocode.</desc><g transform="matrix(1,0,0,1,-276,-972)"><g><title>Group 5</title><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g><g><title>Stroke 3</title><use xlink:href="#Path-1" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g><g><title>Stroke 1</title><use xlink:href="#Path-0" fill-opacity="0" fill="#ffffff" stroke-linejoin="miter" stroke-linecap="round" stroke-opacity="1" stroke="#662d91" stroke-miterlimit="50" stroke-width="1.5"/></g></g></svg>
                     <?= $arItem['DATE_SHOW_FORMAT']; ?>
                 </li>
-                <?php foreach ($arResult['TAGS'] as $tag): ?>
-                    <?php if(!in_array($arItem['ID'], $tag['NEWS_IDS'])): continue; endif; ?>
+                <?php foreach ($arItem['TAGS'] as $tag): ?>
                     <li><a href="<?= $tag['LINK']; ?>"><?= $tag['NAME']; ?></a></li>
                 <?php endforeach; ?>
             </ul>

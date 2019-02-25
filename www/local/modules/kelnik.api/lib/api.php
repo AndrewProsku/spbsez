@@ -27,7 +27,8 @@ class Api
         'changePassword',
         'vacancy',
         'service',
-        'message'
+        'message',
+        'news'
     ];
 
     protected $requireModules = [
@@ -43,6 +44,9 @@ class Api
         ],
         'kelnik.messages' => [
             'messages'
+        ],
+        'kelnik.news' => [
+            'news'
         ]
     ];
 
