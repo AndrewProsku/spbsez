@@ -10,14 +10,14 @@
         <h2 class="b-reports-subtitle">1 квартал, 2018</h2>
 
         <div class="b-inputs-row b-report-oez">
-            <div class="b-input-block">
+            <div class="b-input-block j-report-resident-name">
                 {% include "../components/forms/input-text/input-text.twig" with {
                     id: "resident-name",
                     name: "resident-name"
                 } %}
                 <label class="b-input-block__label" for="resident-name">Наименование резидента ОЭЗ</label>
             </div>
-            <div class="b-input-block">
+            <div class="b-input-block j-report-oez-name">
                 {% include "../components/forms/input-text/input-text.twig" with {
                     id: "oez-name",
                     name: "oez-name"
@@ -33,33 +33,38 @@
 
                 <div class="b-mini-filter__group-wrap">
                     <div class="b-mini-filter__item">
-                        <input type="radio" name="reports-forms" value="form1" data-text="Ф-1 Общая" id="form1" class="b-mini-filter__input" checked>
-                        <label for="form1" class="b-mini-filter__fake b-mini-filter__fake_is_success">Ф-1 Общая</label>
+                        <input type="radio" name="reports-forms" value="form1" data-text="Ф-1 Общая" id="form1-1" class="b-mini-filter__input" checked>
+                        <label for="form1-1" class="b-mini-filter__fake b-mini-filter__fake_is_success">Ф-1 Общая</label>
                     </div>
 
                     <div class="b-mini-filter__item">
-                        <input type="radio" name="reports-forms" value="form2" data-text="Ф-2 Налоги" id="form2" class="b-mini-filter__input">
-                        <label for="form2" class="b-mini-filter__fake">Ф-2 Налоги</label>
+                        <input type="radio" name="reports-forms" value="form2" data-text="Ф-2 Налоги" id="form2-1" class="b-mini-filter__input">
+                        <label for="form2-1" class="b-mini-filter__fake">Ф-2 Налоги</label>
                     </div>
 
                     <div class="b-mini-filter__item">
-                        <input type="radio" name="reports-forms" value="form3" data-text="Ф-3 Стройка" id="form3" class="b-mini-filter__input">
-                        <label for="form3" class="b-mini-filter__fake">Ф-3 Стройка</label>
+                        <input type="radio" name="reports-forms" value="form3" data-text="Ф-3 Стройка" id="form3-1" class="b-mini-filter__input">
+                        <label for="form3-1" class="b-mini-filter__fake">Ф-3 Стройка</label>
                     </div>
 
                     <div class="b-mini-filter__item">
-                        <input type="radio" name="reports-forms" value="form4" data-text="Ф-4 Аренда" id="form4" class="b-mini-filter__input">
-                        <label for="form4" class="b-mini-filter__fake">Ф-4 Аренда</label>
+                        <input type="radio" name="reports-forms" value="form4" data-text="Ф-4 Аренда" id="form4-1" class="b-mini-filter__input">
+                        <label for="form4-1" class="b-mini-filter__fake">Ф-4 Аренда</label>
                     </div>
 
                     <div class="b-mini-filter__item">
-                        <input type="radio" name="reports-forms" value="form5" data-text="Ф-5 ППТ, ТВ и ПТ" id="form5" class="b-mini-filter__input">
-                        <label for="form5" class="b-mini-filter__fake">Ф-5 ППТ, ТВ и ПТ</label>
+                        <input type="radio" name="reports-forms" value="form5" data-text="Ф-5 ППТ, ТВ и ПТ" id="form5-1" class="b-mini-filter__input">
+                        <label for="form5-1" class="b-mini-filter__fake">Ф-5 ППТ, ТВ и ПТ</label>
                     </div>
 
                     <div class="b-mini-filter__item">
-                        <input type="radio" name="reports-forms" value="form6" data-text="Ф-6 ТВ-3" id="form6" class="b-mini-filter__input">
-                        <label for="form6" class="b-mini-filter__fake">Ф-6 ТВ-3</label>
+                        <input type="radio" name="reports-forms" value="form6" data-text="Ф-6 ТВ-3" id="form6-1" class="b-mini-filter__input">
+                        <label for="form6-1" class="b-mini-filter__fake">Ф-6 ТВ-3</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="radio" name="reports-forms" value="form7" data-text="Ф-7 ТВД и ИД" id="form7-1" class="b-mini-filter__input">
+                        <label for="form7-1" class="b-mini-filter__fake">Ф-7 ТВД и ИД</label>
                     </div>
                 </div>
             </div>
@@ -67,10 +72,58 @@
 
         <button class="button button_icon_check b-report-approve" type="button">Подтвердить данные формы</button>
 
-        <div class="b-report-form j-report-form">
-            {#{% include "./templates/form-1.twig" %}#}
-        </div>
+        {##}
+        <!--
+            data-read-only Просмотр уже принятых отчетов за предыдущие кварталы
+            data-prefilled Форма предзаполнена данными из предыдущих кварталов
+        -->
+        <div class="b-report-form j-report-form" data-current-form></div>
 
-        <button class="button button_without_icon" type="button" disabled>Отправить отчет</button>
+        <form action="#" class="b-reports-filter b-reports-filter_position_bottom b-mini-filter j-reports-filter">
+
+            <div class="b-mini-filter__group j-reports-select-group">
+
+                <div class="b-mini-filter__values j-reports-select" data-title-default="Ф-1 Общая"><span class="j-reports-select-title">Ф-1 Общая</span></div>
+
+                <div class="b-mini-filter__group-wrap">
+                    <div class="b-mini-filter__item">
+                        <input type="radio" name="reports-forms" value="form1" data-text="Ф-1 Общая" id="form1-2" class="b-mini-filter__input" checked>
+                        <label for="form1-2" class="b-mini-filter__fake b-mini-filter__fake_is_success">Ф-1 Общая</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="radio" name="reports-forms" value="form2" data-text="Ф-2 Налоги" id="form2-2" class="b-mini-filter__input">
+                        <label for="form2-2" class="b-mini-filter__fake">Ф-2 Налоги</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="radio" name="reports-forms" value="form3" data-text="Ф-3 Стройка" id="form3-2" class="b-mini-filter__input">
+                        <label for="form3-2" class="b-mini-filter__fake">Ф-3 Стройка</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="radio" name="reports-forms" value="form4" data-text="Ф-4 Аренда" id="form4-2" class="b-mini-filter__input">
+                        <label for="form4-2" class="b-mini-filter__fake">Ф-4 Аренда</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="radio" name="reports-forms" value="form5" data-text="Ф-5 ППТ, ТВ и ПТ" id="form5-2" class="b-mini-filter__input">
+                        <label for="form5-2" class="b-mini-filter__fake">Ф-5 ППТ, ТВ и ПТ</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="radio" name="reports-forms" value="form6" data-text="Ф-6 ТВ-3" id="form6-2" class="b-mini-filter__input">
+                        <label for="form6-2" class="b-mini-filter__fake">Ф-6 ТВ-3</label>
+                    </div>
+
+                    <div class="b-mini-filter__item">
+                        <input type="radio" name="reports-forms" value="form7" data-text="Ф-7 ТВД и ИД" id="form7-2" class="b-mini-filter__input">
+                        <label for="form7-2" class="b-mini-filter__fake">Ф-7 ТВД и ИД</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <button class="button button_without_icon b-report-submit j-report-submit" type="button" disabled>Отправить отчет</button>
     </div>
 {% endblock %}

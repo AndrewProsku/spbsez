@@ -6,22 +6,25 @@
     ]
   },
   "data": {
+    "residentName": "ООО «Биокад»",
+    "oezName": "ОЭЗ ТВТ в г. Санкт-Петербурге",
     "forms": [
       {
         "blocks": [
           {
+            "type": "foreign-investors",
             "fields": [
               {
                 "id": "foreign-investors-yes",
-                "checked": false
-              },
-              {
-                "id": "foreign-investors-no",
                 "checked": true
               },
               {
+                "id": "foreign-investors-no",
+                "checked": false
+              },
+              {
                 "id": "investors-countries",
-                "value": "Гондурас"
+                "value": "Казахстан, Франция, США"
               }
             ]
           },
@@ -297,7 +300,7 @@
                   },
                   {
                     "id": "construction-permission-file[25]",
-                    "value": "permission.pdf"
+                    "value": null
                   },
                   {
                     "id": "construction-permission-date[25]",
@@ -405,6 +408,19 @@
                     "value": "9601 10 000 0"
                   }
                 ]
+              },
+              {
+                "ID": 6,
+                "fields": [
+                  {
+                    "id": "export-countries[6]",
+                    "value": "Финляндия"
+                  },
+                  {
+                    "id": "export-code[6]",
+                    "value": "9601 10 000 0"
+                  }
+                ]
               }
             ]
           },
@@ -429,6 +445,15 @@
                   {
                     "id": "innovation[5]",
                     "value": "Инновация"
+                  }
+                ]
+              },
+              {
+                "ID": 6,
+                "fields": [
+                  {
+                    "id": "innovation[6]",
+                    "value": "Инновационная инновация"
                   }
                 ]
               }
@@ -459,6 +484,55 @@
               {
                 "id": "degrees-employees",
                 "value": "123"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "results",
+        "blocks": [
+          {
+            "type": "results",
+            "ID": 1,
+            "fields": [
+              {
+                "id": "result-type[1]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой"
+              },
+              {
+                "id": "result-description[1]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой"
+              },
+              {
+                "id": "result-date[1]",
+                "value": "6/11/2014"
+              },
+              {
+                "id": "result-commercialization[1]",
+                "value": "Не раскрывается"
+              }
+            ]
+          },
+          {
+            "type": "results",
+            "ID": 2,
+            "fields": [
+              {
+                "id": "result-type[2]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой"
+              },
+              {
+                "id": "result-description[2]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой"
+              },
+              {
+                "id": "result-date[2]",
+                "value": "6/11/2014"
+              },
+              {
+                "id": "result-commercialization[2]",
+                "value": "Не раскрывается"
               }
             ]
           }

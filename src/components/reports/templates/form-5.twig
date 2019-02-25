@@ -31,10 +31,11 @@
     </div>
     <div class="b-report-block__body">
         <div class="j-export-groups-block"></div>
-
+        {% if not readonly %}
         <button class="button-add button-add_theme_white b-report-block__add j-export-group-add" type="button">
             Добавить еще группу «Страны-Код ТН ВЭД»
         </button>
+        {% endif %}
     </div>
 </section>
 {# 3 #}
@@ -45,7 +46,7 @@
         </h3>
     </div>
     <div class="b-report-block__body">
-        <div class="b-radio-row j-foreign-investors-switch">
+        <div class="b-radio-row">
             {% include "../../forms/custom-radio/custom-radio.twig" with {
                 id: "high-tech-production-yes",
                 name: "high-tech-production",
@@ -68,11 +69,12 @@
         <h3 class="b-report-block__title">Наименование технологических инноваций</h3>
     </div>
     <div class="b-report-block__body">
-        <div class="j-innovations-block"></div>
-
+        <div class="b-innovations-block j-innovations-block"></div>
+        {% if not readonly %}
         <button class="button-add button-add_theme_white b-report-block__add j-innovation-add" type="button">
             Добавить еще технологическую инновацию
         </button>
+        {% endif %}
     </div>
 </section>
 {# 5 #}

@@ -1,0 +1,49 @@
+<section class="b-report-block j-report-block" data-id="{{ id }}">
+    <div class="b-report-block__header" data-number="{{ number }}">
+        <h3 class="b-report-block__title">Наименование (вид)  результата ИД на территории ОЭЗ</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-group">
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/textarea/textarea.twig" with {
+                    id: "result-type["~ id ~"]",
+                    name: "result-type["~ id ~"]",
+                    rows: "3"
+                } %}
+                <label class="b-input-block__label" for="result-type{{ id }}">
+                    Вид результата<span class="b-help j-help">Вид результата</span>
+                </label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/textarea/textarea.twig" with {
+                    id: "result-description["~ id ~"]",
+                    name: "result-description["~ id ~"]",
+                    rows: "3"
+                } %}
+                <label class="b-input-block__label" for="result-description{{ id }}">
+                    Краткое описание результата ИД
+                </label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "result-date["~ id ~"]",
+                    name: "result-date["~ id ~"]"
+                } %}
+                <label class="b-input-block__label" for="result-date{{ id }}">Дата регистрации результата ИД</label>
+            </div>
+            <div class="b-input-block b-input-block_is_untouched">
+                {% include "../../forms/textarea/textarea.twig" with {
+                    id: "result-commercialization["~ id ~"]",
+                    name: "result-commercialization["~ id ~"]",
+                    rows: "3"
+                } %}
+                <label class="b-input-block__label" for="result-commercialization{{ id }}">
+                    Информация о коммерциализации результатов ИД<span class="b-help j-help">Информация о коммерциализации результатов ИД</span>
+                </label>
+            </div>
+        </div>
+        {% if not isReadonly %}
+        <button class="b-report-block__delete j-delete-result" type="button" data-id="{{ id }}">Удалить</button>
+        {% endif %}
+    </div>
+</section>

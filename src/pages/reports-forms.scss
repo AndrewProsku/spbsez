@@ -37,6 +37,10 @@
     max-width: 1280px;
 }
 
+.b-reports-filter + .b-report-form {
+    padding-top: 0;
+}
+
 .b-report-form__title {
     @include font-size("h2");
     @include margin-level(bottom, yellow);
@@ -49,6 +53,10 @@
 
 .b-report-form__title + .b-report-form__subtitle {
     margin-top: -8px;
+}
+
+.b-report-submit {
+    max-width: 1280px;
 }
 
 .b-inputs-row {
@@ -83,6 +91,11 @@
             }
         }
     }
+}
+
+.b-innovations-block .b-input-block + .b-input-block:not(:first-child),
+.b-inputs-row + .b-inputs-row:not(:first-child) {
+    margin-top: 9px;
 }
 
 .b-input-block {
@@ -131,7 +144,7 @@
             outline: 0;
 
             + .b-input-block__label {
-                opacity: 1;
+                color: $black;
             }
         }
 
@@ -139,6 +152,10 @@
         &.is-success {
             color: $blue;
         }
+    }
+
+    textarea {
+        resize: vertical;
     }
 
     select {
@@ -167,6 +184,10 @@
         //height: 80px;
         //padding-top: 36px;
     }
+}
+
+[data-read-only] .b-input-block:hover {
+    background-color: $white;
 }
 
 .b-input-block_is_disabled {
@@ -220,7 +241,8 @@
     display: block;
     order: 0;
     padding-top: 12px;
-    opacity: 0.72;
+    color: rgba($black, 0.72);
+    //opacity: 0.72;
     padding-left: 16px;
     padding-right: 16px;
 
@@ -250,7 +272,10 @@
     border-radius: 4px;
     background-color: $dark-white;
     border: 1px solid transparent;
-    @include margin-level(bottom, green);
+
+    &:not(:last-child) {
+        @include margin-level(bottom, green);
+    }
 
     &_status_approved {
         border-color: rgba($green, 0.32);
@@ -363,6 +388,8 @@
     @include padding-level(bottom, green);
     @include prefix(2, 32);
     @include suffix(2, 32);
+    display: flex;
+    flex-direction: column;
 
     @media #{$tablet-portrait} {
         @include prefix(2, 30);
@@ -442,6 +469,7 @@
     min-width: auto;
     text-align: left;
     line-height: 1;
+    margin-right: auto;
 
     &:after {
         height: 20px;
@@ -454,6 +482,7 @@
     width: 24px;
     height: 24px;
     text-align: center;
+    vertical-align: center;
     margin-left: 10px;
     line-height: 24px;
     background-color: $white;
@@ -468,14 +497,32 @@
         display: block;
         font-size: 16px;
         line-height: 24px;
-        width: 100%;
-        height: 100%;
+        width: 24px;
+        height: 24px;
         font-family: $font-bold;
+        color: $blue;
     }
 
     &:hover {
         background-color: $bg-select;
     }
+
+    @media #{$mobile-only} {
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+
+        &:before {
+            width: 18px;
+            height: 18px;
+            font-size: 14px;
+            line-height: 18px;
+        }
+    }
+}
+
+label .b-help {
+    border: 1px solid $light-grey;
 }
 
 .button_without_icon {
@@ -491,10 +538,18 @@
 .b-mini-filter.b-reports-filter {
     margin-bottom: 0;
     @include padding-level(bottom, green);
+
+    &_position_bottom {
+        @include padding-level(bottom, cyan);
+    }
 }
 
 .b-reports-filter .b-mini-filter__group {
     margin-bottom: 0;
+}
+
+.b-report-form__add-result {
+    @include margin-level(bottom, green);
 }
 
 .b-report-form__delete {
@@ -524,5 +579,61 @@
     @media #{$tablet-portrait} {
         width: 31px;
         height: 31px;
+    }
+}
+
+.b-report-block__delete {
+    @include transition(color);
+    @include margin-level(top, dark-yellow);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    min-width: 190px;
+    height: 48px;
+    margin-left: auto;
+    padding-right: 45px;
+    padding-left: 30px;
+    font-size: 14px;
+    line-height: 48px;
+    color: $black;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid $grey;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:after {
+        @include transition(right, transform);
+        transform: rotate(45deg);
+        content: "+";
+        font-size: 20px;
+        position: absolute;
+        top: 0;
+        right: 15%;
+    }
+
+    &:hover {
+        color: $blue;
+
+        &:after {
+            right: 7%;
+            transform: rotate(135deg);
+        }
+    }
+
+    &:active {
+        box-shadow: inset 0 2px 4px rgba($blue, 0.48);
+    }
+
+    @media #{$tablet-portrait} {
+        height: 56px;
+        font-size: 18px;
+        line-height: 56px;
+        padding-right: 80px;
+        padding-left: 30px;
+
+        &:after {
+            font-size: 24px;
+        }
     }
 }

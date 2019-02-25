@@ -104,10 +104,6 @@ class Service {
 
                             Utils.clearHtml($popupContent);
                             Utils.insetContent($popupContent, errorMessage);
-
-                            $popupContent.querySelector('.b-popup__close').addEventListener('click', () => {
-                                this.popup.close();
-                            });
                         }
                     },
                     error(error) {
@@ -235,10 +231,6 @@ class Service {
 
         Utils.clearHtml($popupContent);
         Utils.insetContent($popupContent, successTemplate());
-
-        $popupContent.querySelector('.b-popup__close').addEventListener('click', () => {
-            this.popup.close();
-        });
     }
 }
 

@@ -1,4 +1,3 @@
-// import $ from 'jquery';
 import Mediator from 'common/scripts/mediator';
 import ReportBlock from './report-block';
 import templateForm1 from './templates/form-1.twig';
@@ -7,6 +6,8 @@ import templateForm3 from './templates/form-3.twig';
 import templateForm4 from './templates/form-4.twig';
 import templateForm5 from './templates/form-5.twig';
 import templateForm6 from './templates/form-6.twig';
+import templateForm7 from './templates/form-7.twig';
+import templateResultBlock from './templates/result-block.twig';
 import Utils from '../../common/scripts/utils';
 
 
@@ -19,15 +20,22 @@ class ReportForm {
         // Табы
         this.filterClass = 'j-reports-filter';
         this.filterSelectsClass = 'j-reports-select';
-        // this.reportsContainerClass = 'j-reports-container';
         this.filterSelectsTitleClass = 'j-reports-select-title';
         this.filterGroupClass = 'j-reports-select-group';
         this.activeGroup = 'b-mini-filter__group_is_active';
-        this.filterGroupClass = 'j-reports-select-group';
         this.filterFakeInputClass = 'b-mini-filter__fake';
         this.filterFakeInputSuccessClass = 'b-mini-filter__fake_is_success';
-        // this.newsItemClass = 'b-news-item';
 
+        this.addResultClass = 'j-add-result';
+        this.resultsContainerClass = 'j-report-results';
+        this.submitReportClass = 'j-report-submit';
+
+
+        this.residentNameField = document.querySelector('.j-report-resident-name input');
+        this.oezNameField = document.querySelector('.j-report-oez-name input');
+
+
+        // this.isReportFulfilled = false;
         this.forms = [{
             isApproved: false,
             template  : null
@@ -46,9 +54,13 @@ class ReportForm {
         }, {
             isApproved: false,
             template  : null
+        }, {
+            isVisited : false,
+            isApproved: false,
+            template  : null
         }];
 
-        this.unitialForm = 5;
+        this.unitialForm = 0;
 
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
@@ -62,27 +74,71 @@ class ReportForm {
 
     init(options) {
         this.target = options.target;
-        const that = this;
+        this.submitReportButton = document.querySelector(`.${this.submitReportClass}`);
 
         // Табы
-        this.filter = document.querySelector(`.${this.filterClass}`);
-        this.filterSelect = document.querySelector(`.${this.filterSelectsClass}`);
+        this.filters = Array.from(document.querySelectorAll(`.${this.filterClass}`));
         this.groups = Array.from(document.querySelectorAll(`.${this.filterGroupClass}`));
-        this.filterFakeInputs = Array.from(document.querySelectorAll(`.${this.filterFakeInputClass}`));
+        this.filterFakeInputs = [];
 
-        // по умолчанию поля считаются валидными
-        // иначе добавляеся поле isInvalid и массив errors
+
+        if (Object.prototype.hasOwnProperty.call(this.target.dataset, 'readOnly')) {
+            this.type = 'readonly';
+            this.residentNameField.disabled = true;
+            this.oezNameField.disabled = true;
+        }
+
+        this.getInitialInputsValues();
+        this.filters.forEach((filter) => {
+            this.filterFakeInputs.push(Array.from(filter.querySelectorAll(`.${this.filterFakeInputClass}`)));
+            this.bindFilterEvents(filter);
+        });
+
+        mediator.subscribe('resultBlockDeleted', () => {
+            this.resultBlockDeletedHandler();
+        });
+
+        this.submitReportButton.addEventListener('click', this.submitReports);
+    }
+
+    getInitialInputsValues() {
+        const that = this;
+
+        this.residentNameField.addEventListener('change', (event) => {
+            this.sendNewValues(event.target);
+        });
+        this.oezNameField.addEventListener('change', (event) => {
+            this.sendNewValues(event.target);
+        });
+
         Utils.send('', '/tests/reports/all.json', {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
                 }
-                const forms = response.data.forms;
+                const responseForms = response.data.forms;
 
-                forms.forEach((formData, i) => {
+                if (response.data.residentName) {
+                    that.residentNameField.value = response.data.residentName;
+                }
+                if (response.data.oezName) {
+                    that.oezNameField.value = response.data.oezName;
+                }
+
+                responseForms.forEach((formData, i) => {
                     that.forms[i].template = that.createForm(i);
 
-                    that.initFormBlocks(formData.blocks, that.forms[i].template);
+                    if (formData.type && (formData.type === 'results')) {
+                        that.initResultsForm(formData, i);
+                    } else {
+                        that.initFormBlocks(formData.blocks, that.forms[i].template, i);
+                    }
+
+                    that.setFormStatus(i);
+                });
+
+                mediator.subscribe('blockStatusChanged', (formID) => {
+                    that.setFormStatus(formID);
                 });
 
                 that.insertForm(that.unitialForm);
@@ -91,17 +147,66 @@ class ReportForm {
                 console.error(error);
             }
         });
-
-        this.bindFilterEvents();
     }
 
-    bindFilterEvents() {
-        this.filter.addEventListener('change', (event) => {
-            this.changeForm(event.target.id);
+    initResultsForm(data, formID) {
+        const resultsContainer = this.forms[formID].template.querySelector(`.${this.resultsContainerClass}`);
+        const isReadonly = this.type === 'readonly';
+
+        if (Array.isArray(data.blocks)) {
+            data.blocks.forEach((blockData, num) => {
+                const shiftForNumber = 1;
+                const blockNumber = num + shiftForNumber;
+
+                resultsContainer.insertAdjacentHTML('afterBegin', templateResultBlock({
+                    id    : blockData.ID,
+                    number: blockNumber,
+                    isReadonly
+                }));
+            });
+            const formBlocks = this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`);
+
+            data.blocks.reverse().forEach((blockData, blockNumber) => {
+                const reportBlock = new ReportBlock();
+
+                reportBlock.init({
+                    target: formBlocks[blockNumber],
+                    blockData,
+                    formID,
+                    isReadonly
+                });
+            });
+        }
+    }
+
+    sendNewValues(input) {
+        const dataToSend = `action=update&${input.id}=${input.value}`;
+        const that = this;
+
+        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+            success(response) {
+                if (response.request.status === that.SUCCESS_STATUS) {
+                    that.setReportStatus();
+                }
+            },
+            error(error) {
+                console.error(error);
+            }
+        });
+    }
+
+    bindFilterEvents(filter) {
+        const filterSelect = filter.querySelector(`.${this.filterSelectsClass}`);
+
+        filter.addEventListener('change', (event) => {
+            this.filters.forEach((reportFilter) => {
+                reportFilter.querySelector(`input[value="${event.target.value}"]`).checked = true;
+            });
+            this.changeForm(event.target.value);
             this._setTitlesInSelects();
         });
 
-        this.filterSelect.addEventListener('click', (event) => {
+        filterSelect.addEventListener('click', (event) => {
             this._switchSelect(event.target);
         });
     }
@@ -157,6 +262,11 @@ class ReportForm {
             case 'form6':
                 formNumber = 5;
                 break;
+            case 'form7':
+                formNumber = 6;
+                this.forms[6].isVisited = true;
+                this.setFormStatus(6);
+                break;
             default: break;
         }
         /* eslint-enable no-magic-numbers */
@@ -200,36 +310,8 @@ class ReportForm {
 
     insertForm(formNumber) {
         Utils.insetContent(this.target, this.forms[formNumber].template);
-
-        // this.initCustomElements();
+        this.target.dataset.currentForm = formNumber;
     }
-
-    // initCustomElements() {
-    // Инициализация Select
-    // Приходится инициализировать select здесь т.к. компонет похоже не может инциализироваться в компоненте не вставленном
-    // на страницу
-    // if (this.target.querySelectorAll('.j-reports-form-select').length) {
-    //     const select = new Select({
-    //         element: '.j-select',
-    //
-    //         disableSearch: true
-    //     });
-    //
-    //     select.init();
-    // }
-
-    // const permissionFileInputs = Array.from(this.target.querySelectorAll('.j-construction-permission-file'));
-    //
-    // if (permissionFileInputs.length) {
-    //     permissionFileInputs.forEach((permissionInput) => {
-    //         const fileInput = new InputFile();
-    //
-    //         fileInput.init({
-    //             target: permissionInput
-    //         });
-    //     });
-    // }
-    // }
 
     createForm(formNumber) {
         // Создание шаблона формы
@@ -244,52 +326,174 @@ class ReportForm {
                 template.innerHTML = templateForm2();
                 break;
             case 2:
-                template.innerHTML = templateForm3();
+                template.innerHTML = templateForm3({
+                    readonly: this.type === 'readonly'
+                });
                 break;
             case 3:
-                template.innerHTML = templateForm4();
+                template.innerHTML = templateForm4({
+                    readonly: this.type === 'readonly'
+                });
                 break;
             case 4:
-                template.innerHTML = templateForm5();
+                template.innerHTML = templateForm5({
+                    readonly: this.type === 'readonly'
+                });
                 break;
             case 5:
                 template.innerHTML = templateForm6();
+                break;
+            case 6:
+                template.innerHTML = templateForm7({
+                    readonly: this.type === 'readonly'
+                });
+                if (this.type !== 'readonly') {
+                    this.createResultFormTemplate(template);
+                }
                 break;
             default:
                 template.innerHTML = templateForm1();
                 break;
         }
+
         /* eslint-enable no-magic-numbers */
-
-        // Слежение за состояним блоков (заполнен/не заполнен)
-        // И изменение кнопок-фильтров
-        const formBlocks = Array.from(template.querySelectorAll(`.${this.formsBlockClass}`));
-
-        mediator.subscribe('blockStatusChanged', () => {
-            for (let i = 0; i < formBlocks.length; i++) {
-                if (formBlocks[i].dataset.approved !== 'true') {
-                    this.forms[formNumber].isApproved = false;
-                    this.filterFakeInputs[formNumber].classList.remove(this.filterFakeInputSuccessClass);
-
-                    return;
-                }
-            }
-            this.forms[formNumber].isApproved = true;
-            this.filterFakeInputs[formNumber].classList.add(this.filterFakeInputSuccessClass);
-        });
-
         return template;
     }
 
-    initFormBlocks(blocksData, formTemplate) {
+    createResultFormTemplate(template) {
+        const that = this;
+        const addResultButton = template.querySelector(`.${this.addResultClass}`);
+
+        addResultButton.addEventListener('click', () => {
+            Utils.send('action=addResult', '/tests/reports/add-result.json', {
+                success(response) {
+                    if (response.request.status === that.FAIL_STATUS) {
+                        return;
+                    }
+                    const blocksAmount = template.querySelectorAll(`.${that.formsBlockClass}`).length;
+                    const shiftForNumber = 1;
+                    const blockNumber = blocksAmount + shiftForNumber;
+
+                    addResultButton.insertAdjacentHTML('afterend', templateResultBlock({
+                        id    : response.data.ID,
+                        number: blockNumber
+                    }));
+
+                    const reportBlock = new ReportBlock();
+
+                    reportBlock.init({
+                        target    : addResultButton.nextSibling,
+                        blockData : response.data,
+                        formID    : 6,
+                        isReadonly: that.type === 'readonly'
+                    });
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
+        });
+    }
+
+    resultBlockDeletedHandler() {
+        const resultsForm = 6;
+        const resultsBlocks = this.forms[resultsForm].template.querySelectorAll(`.${this.formsBlockClass}`);
+        let resultBlocksCounter = resultsBlocks.length;
+
+        Array.from(resultsBlocks).forEach((block) => {
+            block.querySelector('.b-report-block__header').dataset.number = resultBlocksCounter;
+            // eslint-disable-next-line no-magic-numbers
+            resultBlocksCounter -= 1;
+        });
+    }
+
+    setFormStatus(formID) {
+        const formBlocks = Array.from(this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`));
+        const resultsFormID = 6;
+
+        // Если форма с результатаими интеллектурьной деятельности еще не была посещена
+        // она не может считаться заполненной
+        if (formID === resultsFormID) {
+            if (!this.forms[resultsFormID].isVisited) {
+                this.forms[formID].isApproved = false;
+                this.filters.forEach((filter, i) => {
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                });
+                this.setReportStatus();
+
+                return;
+            }
+        }
+
+        for (let blockNum = 0; blockNum < formBlocks.length; blockNum++) {
+            if (formBlocks[blockNum].dataset.approved !== 'true') {
+                this.forms[formID].isApproved = false;
+                this.filters.forEach((filter, i) => {
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                    this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                });
+
+                this.setReportStatus();
+
+                return;
+            }
+        }
+        this.forms[formID].isApproved = true;
+        this.filters.forEach((filter, i) => {
+            this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputSuccessClass);
+            this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputSuccessClass);
+        });
+
+        this.setReportStatus();
+    }
+
+    setReportStatus() {
+        if (!this.residentNameField.value || !this.oezNameField.value) {
+            this.submitReportButton.disabled = true;
+
+            return;
+        }
+
+        for (let i = 0; i < this.forms.length; i++) {
+            if (!this.forms[i].isApproved) {
+                this.submitReportButton.disabled = true;
+
+                return;
+            }
+        }
+        this.submitReportButton.disabled = false;
+    }
+
+    submitReports() {
+        const that = this;
+
+        Utils.send('action=confirmReport', '/tests/reports/input-update.json', {
+            success(response) {
+                if (!response.request.status === that.SUCCESS_STATUS) {
+                    return true;
+                }
+
+                return true;
+            },
+            error(error) {
+                console.error(error);
+            }
+        });
+    }
+
+    initFormBlocks(blocksData, formTemplate, formID) {
         const formBlocks = Array.from(formTemplate.querySelectorAll(`.${this.formsBlockClass}`));
+        const isReadonly = this.type === 'readonly';
 
         blocksData.forEach((blockData, i) => {
             const reportBlock = new ReportBlock();
 
             reportBlock.init({
                 target: formBlocks[i],
-                blockData
+                blockData,
+                formID,
+                isReadonly
             });
         });
     }
