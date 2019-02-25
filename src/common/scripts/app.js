@@ -623,7 +623,6 @@ if (messageButton) {
     });
 }
 
-
 mediator.subscribe('openPopup', (popup) => {
     if (popup.popup.classList.contains('b-popup_theme_message')) {
         const message = new Message();
@@ -743,9 +742,7 @@ if (accordionLinks) {
  *  Инициализация фильтрации и подгрузки новостей
  */
 if (document.querySelector('.j-news-filter') || document.querySelector('.j-news-load-more')) {
-    const news = new News();
-
-    news.init();
+    (new News()).init();
 }
 
 /**

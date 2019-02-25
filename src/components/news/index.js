@@ -12,8 +12,6 @@ class News {
         this.activeGroup = 'b-mini-filter__group_is_active';
         this.newsItemClass = 'b-news-item';
         this.contantLoadClass = 'b-news__content_is_load';
-
-        this.formData = new FormData();
     }
 
     init() {
@@ -58,12 +56,9 @@ class News {
 
     _sendFilter() {
         const that = this;
-        const dataSend = new FormData(this.filter);
+        const formData = new FormData(this.filter);
 
-        this.formData = dataSend;
-        // this._runLoaderContant();
-
-        Utils.send(dataSend, '/tests/news.json', {
+        Utils.send(formData, '/api/news/', {
             success(response) {
                 const {data} = response;
 
@@ -75,20 +70,21 @@ class News {
             complete() {
                 // that._stopLoaderContant();
             }
-        }, 'GET');
+        }, this.filter.getAttribute('method') || 'post');
     }
 
     _loadMore() {
         const that = this;
         const news = this.newsContainer.querySelectorAll(`.${this.newsItemClass}`);
+        const formData = new FormData(this.filter);
 
         this._disableButton();
 
         if (news.length) {
-            this.formData.append('countShowNews', `${news.length}`);
+            formData.append('showed', `${news.length}`);
         }
 
-        Utils.send(this.formData, '/tests/news.json', {
+        Utils.send(formData, '/api/news/', {
             success(response) {
                 const {data} = response;
 
@@ -100,7 +96,7 @@ class News {
             complete() {
                 that._enableButton();
             }
-        }, 'GET');
+        }, this.filter.getAttribute('method') || 'post');
     }
 
     _switchSelect(select) {

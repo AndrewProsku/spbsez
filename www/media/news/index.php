@@ -8,7 +8,7 @@ $APPLICATION->SetTitle("Новости");
     "kelnik:news",
     "media",
     Array(
-        "AJAX_COMPONENT_ID" => "",
+        "AJAX_COMPONENT_ID" => "news-list",
         "AJAX_TEMPLATE_PAGE" => "",
         "AJAX_TYPE" => "DEFAULT",
         "CACHE_GROUPS" => "N",

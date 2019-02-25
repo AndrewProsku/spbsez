@@ -50,12 +50,6 @@ class NewsTable extends DataManager
                 ]
             ),
             new IntegerField(
-                'OBJECT_ID',
-                [
-                    'title' => Loc::getMessage('KELNIK_NEWS_OBJECT')
-                ]
-            ),
-            new IntegerField(
                 'CREATED_BY',
                 [
                     'title' => Loc::getMessage('KELNIK_NEWS_CREATED_BY'),
