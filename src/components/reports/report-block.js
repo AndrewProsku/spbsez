@@ -46,6 +46,10 @@ class ReportBlock {
         this.isReadonly = options.isReadonly || false;
         const blockData = options.blockData;
 
+        mediator.subscribe('formApproved', (formID) => {
+            this.approveFormHandler(formID);
+        });
+
         if (blockData.type) {
             switch (blockData.type) {
                 case 'foreign-investors': {
@@ -91,6 +95,20 @@ class ReportBlock {
     }
     /* eslint-enable max-statements */
 
+    approveFormHandler(formID) {
+        if (formID === this.formID) {
+            this.inputs.forEach((input) => {
+                delete input.dataset.prefilled;
+
+                if (!input.closest(`.${this.permissionFormClass}`) &&
+                    !input.closest(`.${this.disabledInputClass}`)) {
+                    this.inputsStatus[input.id] = this.getInputStatus(input);
+                }
+            });
+            this.setBlockStatus();
+        }
+    }
+
     initForeignInvestorsBlock(data) {
         this.inputsData.fields = [];
         const radios = Array.from(this.target.querySelectorAll('input[type=radio]'));
@@ -99,6 +117,11 @@ class ReportBlock {
 
         radios.forEach((radio) => {
             radio.addEventListener('change', (event) => {
+                radios.forEach((input) => {
+                    delete input.dataset.prefilled;
+                });
+                delete investorCountriesField.dataset.prefilled;
+
                 if (event.target.value === 'yes') {
                     investorCountries.classList.remove('b-input-block_is_disabled');
                     investorCountriesField.disabled = false;
@@ -127,6 +150,14 @@ class ReportBlock {
                     this.inputsData.fields.push(field);
                 }
             }
+        });
+        investorCountriesField.addEventListener('change', () => {
+            radios.forEach((radio) => {
+                delete radio.dataset.prefilled;
+                this.inputsStatus[radio.id] = this.getInputStatus(radio);
+            });
+            delete investorCountriesField.dataset.prefilled;
+            this.inputsStatus[investorCountriesField.id] = this.getInputStatus(investorCountriesField);
         });
     }
 
@@ -273,8 +304,14 @@ class ReportBlock {
                     break;
                 }
                 case 'radio': {
-                    // this.bindTextInputsEvents(input);
                     input.addEventListener('change', (event) => {
+                        if (Object.hasOwnProperty.call(input.dataset, 'prefilled')) {
+                            const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
+
+                            Array.from(checkboxGroup).forEach((checkbox) => {
+                                delete checkbox.dataset.prefilled;
+                            });
+                        }
                         this.sendNewValue(event.target);
                     });
                     break;
@@ -288,7 +325,13 @@ class ReportBlock {
         input.addEventListener('focus', (event) => {
             event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
         });
+        input.addEventListener('blur', (event) => {
+            if (Object.hasOwnProperty.call(input.dataset, 'prefilled')) {
+                event.target.closest('.b-input-block').classList.add(this.untouchedIputClass);
+            }
+        });
         input.addEventListener('change', (event) => {
+            delete input.dataset.prefilled;
             this.sendNewValue(event.target);
         });
     }
@@ -349,10 +392,16 @@ class ReportBlock {
                 if (input.id === fieldData.id) {
                     switch (input.type) {
                         case 'radio': {
+                            if (fieldData.isPrefilled) {
+                                input.dataset.prefilled = '';
+                            }
                             input.checked = fieldData.checked;
                             break;
                         }
                         case 'select-one': {
+                            if (fieldData.isPrefilled && !input.closest(`.${this.permissionFormClass}`)) {
+                                input.dataset.prefilled = '';
+                            }
                             input.value = fieldData.value;
                             break;
                         }
@@ -367,9 +416,14 @@ class ReportBlock {
                             }
                             break;
                         }
-                        default:
+                        default: {
+                            if (fieldData.isPrefilled) {
+                                input.closest('.b-input-block').classList.add(this.untouchedIputClass);
+                                input.dataset.prefilled = '';
+                            }
                             input.value = fieldData.value;
                             break;
+                        }
                     }
                 }
             });
@@ -388,19 +442,21 @@ class ReportBlock {
             case 'radio': {
                 const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
 
+                if (Object.hasOwnProperty.call(input.dataset, 'prefilled')) {
+                    return 'prefilled';
+                }
                 for (let i = 0; i < checkboxGroup.length; i++) {
                     if (checkboxGroup[i].checked) {
                         return 'filled';
                     }
                 }
 
-                if (input.closest('.b-radio-row').querySelector('input[type="radio"]')) {
-                    return 'filled';
-                }
                 break;
             }
             default: {
-                if (input.value) {
+                if (Object.hasOwnProperty.call(input.dataset, 'prefilled')) {
+                    return 'prefilled';
+                } else if (input.value) {
                     return 'filled';
                 }
                 break;
@@ -413,17 +469,21 @@ class ReportBlock {
     setBlockStatus() {
         for (const key in this.inputsStatus) {
             if (this.inputsStatus[key] !== 'filled') {
-                // this.isBlockApproved = false;
-                this.target.dataset.approved = 'false';
+                delete this.target.dataset.prefilled;
+                delete this.target.dataset.approved;
                 this.target.classList.remove(this.approveClass);
+
+                if (this.inputsStatus[key] === 'prefilled') {
+                    this.target.dataset.prefilled = '';
+                }
                 mediator.publish('blockStatusChanged', this.formID);
 
                 return;
             }
         }
 
-        // this.isBlockApproved = true;
-        this.target.dataset.approved = 'true';
+        delete this.target.dataset.prefilled;
+        this.target.dataset.approved = '';
         this.target.classList.add(this.approveClass);
         mediator.publish('blockStatusChanged', this.formID);
     }
@@ -439,9 +499,17 @@ class ReportBlock {
 
                     // that.showErrorMessage(input, errorMessage);
                 } else if (response.request.status === that.SUCCESS_STATUS) {
-                    that.inputsStatus[input.id] = that.getInputStatus(input);
+                    if (input.type === 'radio') {
+                        const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
+
+                        Array.from(checkboxGroup).forEach((checkbox) => {
+                            that.inputsStatus[checkbox.id] = that.getInputStatus(checkbox);
+                        });
+                    } else {
+                        that.inputsStatus[input.id] = that.getInputStatus(input);
+                    }
+
                     that.setBlockStatus();
-                    // that.removeErrorMessage(input);
                 }
             },
             error(error) {
@@ -523,6 +591,10 @@ class ReportBlock {
     }
 
     stageSelectHandler(event) {
+        if (Object.hasOwnProperty.call(event.target.dataset, 'prefilled')) {
+            delete event.target.dataset.prefilled;
+        }
+
         const selectWrapper = event.target.closest(`.${this.stageSelectClass}`);
         const stageID = selectWrapper.dataset.stageId;
         const needExtraForm = event.target.value === 'stage4' || event.target.value === 'stage6';

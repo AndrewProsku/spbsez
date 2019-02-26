@@ -4,7 +4,7 @@
     </div>
     <div class="b-report-block__body">
         <div class="b-input-group">
-            <div class="b-input-block b-input-block_is_untouched">
+            <div class="b-input-block ">
                 {% include "../../forms/textarea/textarea.twig" with {
                     id: "result-type["~ id ~"]",
                     name: "result-type["~ id ~"]",
@@ -14,7 +14,7 @@
                     Вид результата<span class="b-help j-help">Вид результата</span>
                 </label>
             </div>
-            <div class="b-input-block b-input-block_is_untouched">
+            <div class="b-input-block ">
                 {% include "../../forms/textarea/textarea.twig" with {
                     id: "result-description["~ id ~"]",
                     name: "result-description["~ id ~"]",
@@ -24,14 +24,14 @@
                     Краткое описание результата ИД
                 </label>
             </div>
-            <div class="b-input-block b-input-block_is_untouched">
+            <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "result-date["~ id ~"]",
                     name: "result-date["~ id ~"]"
                 } %}
                 <label class="b-input-block__label" for="result-date{{ id }}">Дата регистрации результата ИД</label>
             </div>
-            <div class="b-input-block b-input-block_is_untouched">
+            <div class="b-input-block ">
                 {% include "../../forms/textarea/textarea.twig" with {
                     id: "result-commercialization["~ id ~"]",
                     name: "result-commercialization["~ id ~"]",

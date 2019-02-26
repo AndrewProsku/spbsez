@@ -178,7 +178,7 @@
         "max-lines-per-function": ["error", { "max": 50, "skipBlankLines": true, "skipComments": true, "IIFEs": true }],
         "max-nested-callbacks": ["error", 10],
         "max-params": ["error", 4],
-        "max-statements": ["error", 20, { "ignoreTopLevelFunctions": true }],
+        "max-statements": ["error", 25, { "ignoreTopLevelFunctions": true }],
         "max-statements-per-line": ["error", { "max": 1 }],
         "multiline-comment-style": ["error", "separate-lines"],
         "multiline-ternary": ["error", "always-multiline"],

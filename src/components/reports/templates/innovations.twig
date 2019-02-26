@@ -1,7 +1,7 @@
 {% if deletable %}
     <button type="button" class="b-report-form__delete j-delete-innovation" data-id="{{ ID }}"></button>
 {% endif %}
-<div class="b-input-block b-input-block_is_untouched" data-id="{{ ID }}">
+<div class="b-input-block " data-id="{{ ID }}">
     {% include "../../forms/input-text/input-text.twig" with {
         id: "innovation["~ ID ~"]",
         name: "innovation["~ ID ~"]"

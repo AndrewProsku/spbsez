@@ -1,7 +1,7 @@
 {% if deletable %}
     <button type="button" class="b-report-form__delete j-delete-stage" data-stage-id="{{ stageID }}"></button>
 {% endif %}
-<div class="b-input-block b-report-stage-select b-input-block_is_untouched j-reports-form-select" data-stage-id="{{ stageID }}">
+<div class="b-input-block b-report-stage-select  j-reports-form-select" data-stage-id="{{ stageID }}">
     {% include "../../forms/select/select.twig" with {
         id: "construction-stage["~ stageID ~"]",
         name: "construction-stage["~ stageID ~"]",
