@@ -29,6 +29,7 @@ class ReportForm {
         this.addResultClass = 'j-add-result';
         this.resultsContainerClass = 'j-report-results';
         this.submitReportClass = 'j-report-submit';
+        this.approveReportClass = 'j-report-approve';
 
 
         this.residentNameField = document.querySelector('.j-report-resident-name input');
@@ -60,7 +61,7 @@ class ReportForm {
             template  : null
         }];
 
-        this.unitialForm = 0;
+        this.initialForm = 0;
 
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
@@ -89,6 +90,7 @@ class ReportForm {
         }
 
         this.getInitialInputsValues();
+
         this.filters.forEach((filter) => {
             this.filterFakeInputs.push(Array.from(filter.querySelectorAll(`.${this.filterFakeInputClass}`)));
             this.bindFilterEvents(filter);
@@ -111,7 +113,7 @@ class ReportForm {
             this.sendNewValues(event.target);
         });
 
-        Utils.send('', '/tests/reports/all.json', {
+        Utils.send('', '/tests/reports/all-prefilled.json', {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
@@ -141,7 +143,10 @@ class ReportForm {
                     that.setFormStatus(formID);
                 });
 
-                that.insertForm(that.unitialForm);
+                that.insertForm(that.initialForm);
+                const formBlocks = that.forms[that.initialForm].template.querySelectorAll(`.${that.formsBlockClass}`);
+
+                that.toggleApproveFormButton(formBlocks, that.initialForm);
             },
             error(error) {
                 console.error(error);
@@ -270,7 +275,12 @@ class ReportForm {
             default: break;
         }
         /* eslint-enable no-magic-numbers */
+
         this.replaceForm(formNumber);
+
+        const formBlocks = Array.from(this.forms[formNumber].template.querySelectorAll(`.${this.formsBlockClass}`));
+
+        this.toggleApproveFormButton(formBlocks, formNumber);
     }
 
     _setTitlesInSelects() {
@@ -407,6 +417,50 @@ class ReportForm {
         });
     }
 
+    toggleApproveFormButton(formBlocks, formNumber) {
+        const that = this;
+
+        for (let blockNum = 0; blockNum < formBlocks.length; blockNum++) {
+            if (Object.hasOwnProperty.call(formBlocks[blockNum].dataset, 'prefilled')) {
+                if (document.querySelector('.j-report-approve')) {
+                    document.querySelector('.j-report-approve').setAttribute('data-form-id', formNumber);
+                } else {
+                    const approveFormButton = document.createElement('button');
+
+                    approveFormButton.classList.add('button', 'button_icon_check');
+                    approveFormButton.classList.add('b-report-approve', 'j-report-approve');
+                    approveFormButton.setAttribute('type', 'button');
+                    approveFormButton.setAttribute('data-form-id', formNumber);
+                    approveFormButton.innerHTML = 'Подтвердить данные формы';
+
+                    approveFormButton.addEventListener('click', () => {
+                        const formID = approveFormButton.dataset.formId;
+                        const dataToSend = `action=confirmForm&formID=${formID}`;
+
+                        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+                            success(response) {
+                                if (response.request.status === that.SUCCESS_STATUS) {
+                                    mediator.publish('formApproved', Number(formID));
+                                }
+                            },
+                            error(error) {
+                                console.error(error);
+                            }
+                        });
+                    });
+
+                    this.target.parentNode.insertBefore(approveFormButton, this.target);
+                }
+                break;
+            }
+            // eslint-disable-next-line no-magic-numbers
+            if ((blockNum === formBlocks.length - 1) &&
+                document.querySelector('.j-report-approve')) {
+                Utils.removeElement(document.querySelector('.j-report-approve'));
+            }
+        }
+    }
+
     setFormStatus(formID) {
         const formBlocks = Array.from(this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`));
         const resultsFormID = 6;
@@ -426,8 +480,13 @@ class ReportForm {
             }
         }
 
+        this.toggleApproveFormButton(formBlocks, formID);
+
         for (let blockNum = 0; blockNum < formBlocks.length; blockNum++) {
-            if (formBlocks[blockNum].dataset.approved !== 'true') {
+            if (Object.hasOwnProperty.call(formBlocks[blockNum].dataset, 'prefilled')) {
+                this.forms[formID].isApproved = false;
+            }
+            if (!Object.hasOwnProperty.call(formBlocks[blockNum].dataset, 'approved')) {
                 this.forms[formID].isApproved = false;
                 this.filters.forEach((filter, i) => {
                     this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
@@ -448,6 +507,9 @@ class ReportForm {
         this.setReportStatus();
     }
 
+    /**
+     * Включает/отключает отправку кнопку отправки отчета
+     */
     setReportStatus() {
         if (!this.residentNameField.value || !this.oezNameField.value) {
             this.submitReportButton.disabled = true;
