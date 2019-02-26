@@ -88,7 +88,8 @@ $APPLICATION->SetTitle("Главная");
                 "SEF_URL_TEMPLATES" => array(
                     "detail" => "#ELEMENT_CODE#/"
                 ),
-                "SEF_FOLDER" => "/media/news/"
+                "SEF_FOLDER" => "/media/news/",
+                "USE_ADVANCE_FILTER" => "N"
             ),
             array()
         ); ?>

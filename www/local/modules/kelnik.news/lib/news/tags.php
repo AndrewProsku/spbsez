@@ -67,7 +67,7 @@ class TagsTable extends DataManager
         ];
     }
 
-    public static function prepareTags(array $tags, $folder = '')
+    public static function prepareTags(array $tags, $folder = '/')
     {
         if (!$tags) {
             return $tags;
@@ -77,12 +77,8 @@ class TagsTable extends DataManager
             if (isset($v['NEWS_IDS'])) {
                 $v['NEWS_IDS'] = explode(',', $v['NEWS_IDS']);
             }
-            if ($folder) {
-                $v['LINK'] = '?tag=' . $v['ID'];
-                continue;
-            }
 
-            $v['LINK'] = $folder . 'tag-' . (isset($v['ALIAS']) ? $v['ALIAS'] : $v['ID']) . '/';
+            $v['LINK'] = $folder . '?tag=' . (isset($v['ALIAS']) ? $v['ALIAS'] : $v['ID']);
         }
         unset($v);
 

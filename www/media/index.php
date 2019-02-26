@@ -31,7 +31,8 @@ $APPLICATION->SetTitle("Новости");
                 "SEF_URL_TEMPLATES" => array(
                     "detail" => "#ELEMENT_CODE#/"
                 ),
-                "SEF_FOLDER" => "/media/news/"
+                "SEF_FOLDER" => "/media/news/",
+                "USE_ADVANCE_FILTER" => "N"
             ),
             array()
         ); ?>
@@ -62,7 +63,8 @@ $APPLICATION->SetTitle("Новости");
                 "SEF_URL_TEMPLATES" => array(
                     "detail" => "#ELEMENT_CODE#/"
                 ),
-                "SEF_FOLDER" => "/media/articles/"
+                "SEF_FOLDER" => "/media/articles/",
+                "USE_ADVANCE_FILTER" => "N"
             ),
             array()
         ); ?>

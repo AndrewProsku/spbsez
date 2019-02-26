@@ -142,6 +142,12 @@ try
                 'TYPE' => 'CHECKBOX',
                 'DEFAULT' => 'N'
             ],
+            'USE_ADVANCE_FILTER' => [
+                'PARENT' => 'OTHERS',
+                'NAME' => Loc::getMessage('KELNIK_NEWS_LIST_USE_ADVANCE_FILTER'),
+                'TYPE' => 'CHECKBOX',
+                'DEFAULT' => 'N'
+            ],
             'CACHE_GROUPS' => [
                 'PARENT' => 'CACHE_SETTINGS',
                 'NAME' => Loc::getMessage('KELNIK_NEWS_LIST_CACHE_GROUPS'),

@@ -3,6 +3,7 @@
 namespace Kelnik\News\Component;
 
 use Bex\Bbc;
+use Bitrix\Main\Context;
 use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Page\Asset;
@@ -34,16 +35,52 @@ class NewsList extends Bbc\Basis
         'SECTION_ID' => ['type' => 'int', 'error' => false]
     ];
 
+    public function onPrepareComponentParams($arParams)
+    {
+        $arParams['A_FILTER']['YEAR'] = false;
+        $arParams['A_FILTER']['TAG'] = false;
+
+        if ($arParams['USE_ADVANCE_FILTER'] == 'Y') {
+            $fields = [
+                'tag' => 'TAG',
+                'year' => 'YEAR'
+            ];
+            $request = Context::getCurrent()->getRequest();
+
+            $isAjax = strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
+            foreach ($fields as $k => $v) {
+                $arParams['A_FILTER'][$v] = $isAjax && $request->isPost()
+                                            ? $request->getPost($k)
+                                            : $request->getQuery($k);
+
+                if (is_array($arParams['A_FILTER'][$v])) {
+                    $arParams['A_FILTER'][$v] = array_map('intval', $arParams['A_FILTER'][$v]);
+                    continue;
+                }
+
+                if ($k !== 'year') {
+                    continue;
+                }
+
+                $arParams['A_FILTER'][$v] = (int) $arParams['A_FILTER'][$v];
+            }
+        }
+
+        return parent::onPrepareComponentParams($arParams);
+    }
+
     protected function executeMain()
     {
-        $this->setResultCacheKeys(['ELEMENTS', 'TAGS', 'YEARS']);
-        $filter = $this->getParamsFilters();
+        $this->setResultCacheKeys(['ELEMENTS', 'TAGS', 'YEARS', 'CNT']);
+        $filter = [
+            '=ACTIVE' => NewsTable::YES
+        ];
 
         if ($this->arParams['SECTION_ID']) {
             $filter['=CAT_ID'] = $this->arParams['SECTION_ID'];
             $filter['=CAT.ACTIVE'] = CategoriesTable::YES;
         }
-        unset($filter['SECTION_ID']);
 
         $this->arResult['YEARS'] = $this->getYears($filter);
         $activeElements = self::getActiveElements($this->arResult['YEARS']);
@@ -60,45 +97,94 @@ class NewsList extends Bbc\Basis
             ArrayHelper::getValue($this->arParams, 'SEF_FOLDER', '')
         );
 
-        $this->arResult['PAGE'] = !empty($_REQUEST['page'])
-                                    ? (int)$_REQUEST['page']
-                                    : 1;
-
         $onPage = !empty($this->arParams['ELEMENTS_COUNT'])
                     ? (int)$this->arParams['ELEMENTS_COUNT']
                     : NewsTable::ITEMS_ON_PAGE;
 
-        $limit = $this->isAjax()
-                    ? $onPage * 2
-                    : ($onPage * $this->arResult['PAGE']) + $onPage;
+        $limit = $onPage + 1;
 
         $offset = $this->isAjax()
-                    ? $onPage * ($this->arResult['PAGE'] - 1)
+                    ? ArrayHelper::getValue($_REQUEST, 'showed', 0)
                     : 0;
 
         try {
-            $rsElements = NewsTable::getList(
-                [
+            $select = [
+                '*',
+                'SECTION_ID'     => 'CAT_ID',
+                'SECTION_CODE'   => 'CAT.CODE',
+                'ELEMENT_ID'     => 'ID',
+                'ELEMENT_CODE'   => 'CODE'
+            ];
+            $filter = [
+                '=ID' => $activeElements
+            ];
+
+            $reCount = false;
+
+            if ($this->arParams['A_FILTER']['YEAR']) {
+                $reCount = true;
+                $filter['=YEAR'] = $this->arParams['A_FILTER']['YEAR'];
+                $select[] = new ExpressionField(
+                    'YEAR',
+                    'YEAR(%s)',
+                    'DATE_SHOW'
+                );
+
+                foreach ($this->arResult['YEARS'] as  &$v) {
+                    $v['SELECTED'] = is_array($this->arParams['A_FILTER']['YEAR']) && in_array((int)$v['NAME'], $this->arParams['A_FILTER']['YEAR'])
+                                     || (int)$v['NAME'] === $this->arParams['A_FILTER']['YEAR'];
+                }
+                unset($v);
+            }
+
+            if ($this->arParams['A_FILTER']['TAG']) {
+                $reCount = true;
+                $filter['=TAGS.VALUE'] = $this->arParams['A_FILTER']['TAG'];
+                foreach ($this->arResult['TAGS'] as  &$v) {
+                    $v['SELECTED'] = is_array($this->arParams['A_FILTER']['TAG']) && in_array((int)$v['ID'], $this->arParams['A_FILTER']['TAG'])
+                        || $v['ID'] == $this->arParams['A_FILTER']['TAG'];
+                }
+                unset($v);
+            }
+
+            if ($reCount) {
+                $this->arResult['CNT'] = NewsTable::getRow([
                     'select' => [
-                        '*',
-                        'SECTION_ID'     => 'CAT_ID',
-                        'SECTION_CODE'   => 'CAT.CODE',
-                        'ELEMENT_ID'     => 'ID',
-                        'ELEMENT_CODE'   => 'CODE'
+                        new ExpressionField(
+                            'CNT',
+                            'COUNT(DISTINCT %s)',
+                            'ID'
+                        ),
+                        new ExpressionField(
+                            'YEAR',
+                            'YEAR(%s)',
+                            'DATE_SHOW'
+                        )
                     ],
-                    'filter' => [
-                        '=ID' => $activeElements
-                    ],
-                    'order'  => $this->getParamsSort(),
-                    'limit'  => $limit,
-                    'offset' => $offset
-                ]
-            )->FetchAll();
+                    'filter' => $filter
+                ]);
+                $this->arResult['CNT'] = ArrayHelper::getValue($this->arResult['CNT'], 'CNT', 0);
+            }
+
+            if ($this->arResult['CNT']) {
+                $rsElements = NewsTable::getList($r =
+                    [
+                        'select' => $select,
+                        'filter' => $filter,
+                        'order' => $this->getParamsSort(),
+                        'limit' => $limit,
+                        'offset' => $offset
+                    ]
+                )->FetchAll();
+            }
         } catch (\Exception $e) {
             $rsElements = [];
         }
 
         $this->arResult['ELEMENTS'] = [];
+        if (!$this->isAjax() && $this->arParams['SET_404'] === 'Y' && !$rsElements) {
+            $this->return404();
+        }
 
         if ($rsElements) {
             $ids = $tags = [];
@@ -109,6 +195,9 @@ class NewsList extends Bbc\Basis
             );
 
             foreach ($rsElements as $element) {
+                if (empty($element['IMAGE_PREVIEW_PATH'])) {
+                    $element['IMAGE_PREVIEW_PATH'] = '/images/news/no-img.svg';
+                }
                 $element['DETAIL_PAGE_URL'] = $this->getElementUrl($element);
                 if (is_array($element['IMAGE_PREVIEW']) && !empty($element['IMAGE_PREVIEW'])) {
                     $element['IMAGE_PREVIEW_PATH'] = Resizer::getResizedPath(
@@ -127,40 +216,49 @@ class NewsList extends Bbc\Basis
                         $element['DATE_SHOW_FORMAT'] .= ' ' . $element['DATE_SHOW']->format('Y');
                     }
                 }
+                $element['TAGS'] = [];
+
+                foreach ($this->arResult['TAGS'] as $tag) {
+                    if(!in_array($element['ID'], $tag['NEWS_IDS'])) {
+                        continue;
+                    }
+
+                    $element['TAGS'][] = [
+                        'LINK' => $tag['LINK'],
+                        'NAME' => $tag['NAME']
+                    ];
+                }
+
                 $this->arResult['ELEMENTS'][] = $element;
                 $ids[$element['ID']] = $element['ID'];
             }
             unset($rsElements);
         }
 
-        if ($this->arParams['SET_404'] === 'Y' && !$this->arResult['ELEMENTS']) {
-            $this->return404();
-        }
-
         $this->arResult['MORE_TEXT'] = $this->arResult['MORE'] = false;
         $newsCnt = count($this->arResult['ELEMENTS']);
 
         if ($newsCnt > $onPage) {
-            $this->arResult['MORE'] = $newsCnt - ($onPage * $this->arResult['PAGE']);
+            $this->arResult['MORE'] = $newsCnt - $onPage;
+        }
 
-            if ($this->arResult['MORE']) {
-                $this->arResult['MORE_TEXT'] = PluralHelper::pluralForm(
-                    $this->arResult['MORE'],
-                    [
-                        Loc::getMessage('KELNIK_NEWS_LIST_p1'),
-                        Loc::getMessage('KELNIK_NEWS_LIST_p2'),
-                        Loc::getMessage('KELNIK_NEWS_LIST_p3'),
-                    ]
-                );
-
-                $this->arResult['ELEMENTS'] = array_slice($this->arResult['ELEMENTS'], 0, $onPage * $this->arResult['PAGE']);
-            }
+        if ($this->arResult['MORE']) {
+            $this->arResult['ELEMENTS'] = array_slice($this->arResult['ELEMENTS'], 0, $onPage);
         }
     }
 
     protected function executeEpilog()
     {
-        //TODO: set canonical
+        if ($this->isAjax() || !Context::getCurrent()->getRequest()->getQueryList()->toArray()) {
+            return;
+        }
+
+        Asset::getInstance()->addString(
+            '<link rel="canonical" href="' .
+            (\CMain::IsHTTPS() ? 'https' : 'http') .
+            '://' .  $_SERVER['HTTP_HOST'] .
+            $this->arParams['SEF_FOLDER'] . '">'
+        );
     }
 
     public function getElementUrl($el)

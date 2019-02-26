@@ -8,7 +8,7 @@ $APPLICATION->SetTitle("Новости");
     "kelnik:news",
     "media",
     Array(
-        "AJAX_COMPONENT_ID" => "",
+        "AJAX_COMPONENT_ID" => "news-list",
         "AJAX_TEMPLATE_PAGE" => "",
         "AJAX_TYPE" => "DEFAULT",
         "CACHE_GROUPS" => "N",
@@ -25,7 +25,8 @@ $APPLICATION->SetTitle("Новости");
         "SORT_ORDER_1" => "DESC",
         "SORT_BY_2" => "ID",
         "SORT_ORDER_2" => "ASC",
-        "USE_AJAX" => "N"
+        "USE_AJAX" => "N",
+        "USE_ADVANCE_FILTER" => "Y"
     )
 );?>
 
