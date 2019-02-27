@@ -1,0 +1,46 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"About SEZ",
+		"/en/about/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Инфраструктура", 
+		"", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+    Array(
+        "Services",
+        "/en/services/",
+        Array(),
+        Array(),
+        ""
+    ),
+    Array(
+        "Investors",
+        "/en/investors/",
+        Array(),
+        Array(),
+        ""
+    ),
+    Array(
+        "Mass Media",
+        "/en/media/",
+        Array(),
+        Array(),
+        "false"
+    ),
+    Array(
+        "Contacts",
+        "/en/contacts/",
+        Array(),
+        Array(),
+        ""
+    )
+);
+?>

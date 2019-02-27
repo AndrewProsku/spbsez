@@ -29,28 +29,16 @@
                 )
             );?>
         </div>
-        <div class="b-language">
-            <span class="b-language__link">
-                Ru
-            </span>
-            <ul class="b-language__list">
-                <li class="b-language__item is-active">
-                    <a href="#" class="b-language__item-link b-link-line">
-                        Рус
-                    </a>
-                </li>
-                <li class="b-language__item">
-                    <a href="#" class="b-language__item-link b-link-line">
-                        Eng
-                    </a>
-                </li>
-                <li class="b-language__item">
-                    <a href="#" class="b-language__item-link b-link-line">
-                        中國
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <? $APPLICATION->IncludeComponent(
+            "kelnik:lang.menu",
+            "oez",
+            array(
+                "COMPONENT_TEMPLATE" => "oez",
+                "CACHE_TYPE" => "A",
+                "CACHE_TIME" => "3600"
+            ),
+            array()
+        ); ?>
         <div class="b-close-menu-warp j-close-menu">
             <div class="b-close-menu">
                 <div class="b-close-menu__line"></div>

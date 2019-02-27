@@ -3,35 +3,23 @@
 } ?>
 <div class="l-home__header-right">
     <div class="b-account">
-        <a href="/cabinet/<?php if($arResult['MESSAGES']): ?>messages/<?php endif; ?>" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?> is-auth<?php endif; ?>">
+        <a href="<?= LANG_DIR; ?>cabinet/<?php if($arResult['MESSAGES']): ?>messages/<?php endif; ?>" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?> is-auth<?php endif; ?>">
             <span class="b-account__link-icon">
                <?php if($arResult['MESSAGES']): ?> <span class="b-account__messages"><?= $arResult['MESSAGES']; ?></span><?php endif; ?>
             </span>
-            <span class="b-account__link-text">Личный кабинет</span>
+            <span class="b-account__link-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_CABINET'); ?></span>
         </a>
     </div>
-    <div class="b-language">
-        <span class="b-language__link">
-            Ru
-        </span>
-        <ul class="b-language__list">
-            <li class="b-language__item is-active">
-                <a href="#" class="b-language__item-link b-link-line">
-                    Рус
-                </a>
-            </li>
-            <li class="b-language__item">
-                <a href="#" class="b-language__item-link b-link-line">
-                    Eng
-                </a>
-            </li>
-            <li class="b-language__item">
-                <a href="#" class="b-language__item-link b-link-line">
-                    中國
-                </a>
-            </li>
-        </ul>
-    </div>
+    <? $APPLICATION->IncludeComponent(
+        "kelnik:lang.menu",
+        "oez",
+        array(
+            "COMPONENT_TEMPLATE" => "oez",
+            "CACHE_TYPE" => "A",
+            "CACHE_TIME" => "3600"
+        ),
+        array()
+    ); ?>
     <div class="b-burger-wrap j-burger-click">
         <div class="b-burger">
             <div class="b-burger__line"></div>
