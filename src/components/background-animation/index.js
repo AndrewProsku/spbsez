@@ -1,30 +1,8 @@
 import 'particles.js';
 
-const body = document.body;
-const html = document.documentElement;
-const backgroundHeight =
-    Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-
-const map = {
-    0: {
-        type: 'dynamic',
-        div : document.querySelector('#j-particles'),
-        tag : 'j-particles',
-        json: '../assets/particles.json'
-    },
-    1: {
-        type: 'dynamic',
-        div : document.querySelector('#j-particles_v2'),
-        tag : 'j-particles_v2',
-        json: '../assets/particles_v2.json'
-    },
-    2: {
-        type: 'static',
-        div : document.querySelector('#j-particles_static'),
-        tag : 'j-particles_static',
-        json: '../assets/particles_static.json'
-    }
-};
+const node = document.querySelector('#j-particles');
+const id = 'j-particles';
+const json = '../assets/particles.json';
 
 const animateBackground = function(element) {
     const diameter = 240;
@@ -35,16 +13,7 @@ const animateBackground = function(element) {
     });
 };
 
-for (const particles in map) {
-    if (Object.prototype.hasOwnProperty.call(map, particles) && map[particles].div) {
-        if (map[particles].type === 'static') {
-            map[particles].div.style.height = `${backgroundHeight}px`;
-        }
+window.particlesJS.load(id, json);
 
-        window.particlesJS.load(map[particles].tag, map[particles].json);
+animateBackground(node);
 
-        if (map[particles].type !== 'static') {
-            animateBackground(map[particles].div);
-        }
-    }
-}
