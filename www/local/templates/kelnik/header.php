@@ -1,19 +1,17 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
-define("PATH_TO_404", "/404.php"); ?>
+define("PATH_TO_404", '/404.php'); ?>
 <!doctype html>
-<html lang="ru">
+<html lang="<?= LANGUAGE_ID; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta name="cmsmagazine" content="f2d72d3408f63252b7c735ac5b026ced">
-    <link type="text/plain" rel="author" href="/humans.txt">
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title><?php $APPLICATION->ShowTitle() ?></title>
     <?php
         $APPLICATION->SetAdditionalCSS("/styles/app.css");
-        $isRegularPage = !in_array($APPLICATION->GetCurDir(), ['/']) || defined('ERROR_404');
+        $isRegularPage = !in_array($APPLICATION->GetCurDir(), [LANG_DIR]) || defined('ERROR_404');
         $showAnimation = $APPLICATION->GetProperty('showAnimation') === true || defined('ERROR_404');
     ?>
 
@@ -27,7 +25,10 @@ define("PATH_TO_404", "/404.php"); ?>
     <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
     <link rel="icon" sizes="192x192" href="/favicons/touch-icon-192x192.png">
 
-    <? $APPLICATION->ShowHead(); ?>
+    <?php
+        $APPLICATION->ShowHead();
+        \Bitrix\Main\Localization\Loc::loadMessages(__DIR__ . DIRECTORY_SEPARATOR . 'kelnik.php');
+    ?>
 </head>
 <body>
     <div id="panel"><?$APPLICATION->ShowPanel();?></div>
@@ -35,7 +36,7 @@ define("PATH_TO_404", "/404.php"); ?>
     <div class="l-layout">
         <header class="l-home__header<?php if($isRegularPage): ?> inner-header<?php endif; ?> j-home__header">
             <div class="l-home__header-left">
-                <a href="/" class="b-logo__link" title="Вернуться на главную"></a>
+                <a href="<?= LANG_DIR; ?>" class="b-logo__link lang-<?=LANGUAGE_ID; ?>" title="<?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_BACK_TO_MAIN'); ?>"></a>
             </div>
             <div class="l-home__header-center">
                 <?$APPLICATION->IncludeComponent(

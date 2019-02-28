@@ -260,11 +260,9 @@ if (docWrap.length) {
 const mapWrapper = document.querySelector('.j-yandex-map');
 
 if (mapWrapper) {
-    yandexMapLoad()
+    yandexMapLoad(mapWrapper.dataset.lang || 'ru')
         .then((ymaps) => {
-            const yandexMap = new YandexMap(ymaps);
-
-            yandexMap.init({wrapper: mapWrapper});
+            (new YandexMap(ymaps)).init({wrapper: mapWrapper});
         })
         .catch((error) => {
             console.error(`При загрузке яндекс карт произошла ошибка: ${error}`);

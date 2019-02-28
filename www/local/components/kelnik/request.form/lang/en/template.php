@@ -1,0 +1,12 @@
+<?php
+
+$MESS['KELNIK_REQ_TMPL_HEADER'] = 'Leave an application';
+$MESS['KELNIK_REQ_TMPL_SUBJECT'] = 'Subject';
+$MESS['KELNIK_REQ_TMPL_COMMENT'] = 'Comment';
+$MESS['KELNIK_REQ_TMPL_COMPANY'] = 'Company';
+$MESS['KELNIK_REQ_TMPL_SUBMIT'] = 'Send';
+$MESS['KELNIK_REQ_TMPL_PHONE_MASK'] = '+___ _____________';
+$MESS['KELNIK_REQ_TMPL_PHONE'] = 'Pone';
+$MESS['KELNIK_REQ_TMPL_EMAIL'] = 'E-mail';
+$MESS['KELNIK_REQ_TMPL_POSITION'] = 'Position';
+$MESS['KELNIK_REQ_TMPL_NAME'] = 'Name';

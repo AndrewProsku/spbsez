@@ -5,7 +5,7 @@
 
 <section class="b-team">
     <div class="b-team__title b-title">
-        <h2>Команда</h2>
+        <h2><?= $arResult['HEADER']; ?></h2>
     </div>
     <div class="b-team__wrapper">
         <?php foreach ($arResult['ELEMENTS'] as $element): ?>

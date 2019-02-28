@@ -2,6 +2,27 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Контакты");
 $APPLICATION->SetPageProperty('title', 'Контакты | АООЭЗ');
+$yMapJson = [
+    "center" => [59.942099, 30.186182],
+    "scrollwheel" => false,
+    "fullScreenControl" => false,
+    "customZoomControl" => true,
+    "htmlMarkers" => [
+        [
+            "title" => "Новоорловская",
+            "layout" => "secondary",
+            "coords" => [60.053400, 30.231714]
+        ],
+        [
+            "title" => "Нойдорф",
+            "layout" => "secondary",
+            "coords" => [59.840573, 30.005940]
+        ]
+    ],
+    "markers" => []
+];
+
+$yMapJson = base64_encode(json_encode($yMapJson));
 ?>
     <div class="l-contacts">
         <div class="l-contacts__map-wrapper">
@@ -9,7 +30,7 @@ $APPLICATION->SetPageProperty('title', 'Контакты | АООЭЗ');
                 <h1><?= $APPLICATION->ShowTitle(false); ?></h1>
             </div>
             <div class="l-contacts__map">
-                <div class="l-contacts__yandex-map b-yandex-map j-yandex-map" data-ajax="/tests/yandex-map.json">
+                <div class="l-contacts__yandex-map b-yandex-map j-yandex-map" data-json="<?= $yMapJson; ?>">
                     <div id="first" class="b-yandex-map__base"></div>
                 </div>
             </div>

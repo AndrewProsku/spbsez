@@ -39,6 +39,13 @@ class TeamAdminInterface extends AdminInterface
                         'FILTER'   => '%',
                         'REQUIRED' => true
                     ],
+                    'NAME_EN'     => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 40,
+                        'FILTER'   => '%',
+                        'REQUIRED' => true,
+                        'HEADER' => false
+                    ],
                     'SORT'     => [
                         'WIDGET'  => new NumberWidget(),
                         'DEFAULT' => 500,
@@ -52,6 +59,12 @@ class TeamAdminInterface extends AdminInterface
                     'TEXT'     => [
                         'WIDGET'   => new StringWidget(),
                         'SIZE'     => 40,
+                        'FILTER'   => false
+                    ],
+                    'TEXT_EN'     => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 40,
+                        'HEADER' => false,
                         'FILTER'   => false
                     ]
                 ],

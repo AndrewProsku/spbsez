@@ -85,7 +85,7 @@ $APPLICATION->SetTitle("Управляющая компания");
                 <div class="b-ask-for-advice__text">
                     <p>Обратитесь за консультацией по процедуре получения статуса резидента ОЭЗ «Санкт-Петербург» к нашим специалистам</p>
                 </div>
-                <a href="#" class="b-ask-for-advice__link button">Контакты отдела</a>
+                <a href="/contacts/#managment" class="b-ask-for-advice__link button">Контакты отдела</a>
             </section>
         </div>
 

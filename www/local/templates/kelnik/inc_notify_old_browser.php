@@ -20,14 +20,12 @@
         </div>
 
         <h2 class="b-alert-old-browser__title">
-            Упс! Сайт может работать некорректно
+            <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_OLD_BROWSER_HEADER'); ?>
         </h2>
 
         <div class="b-alert-old-browser__text">
             <p>
-                Ваш браузер устарел и не поддерживает некоторые современные технологии сайта. Чтобы работали все
-                функции,
-                обновите браузер или скачайте другой из проверенных:
+                <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_OLD_BROWSER_BODY'); ?>
             </p>
         </div>
 
@@ -40,7 +38,7 @@
                     <!--[if (gt IE 9)|!(IE)]><!-->
                     <img src="/images/alert-old-browser/yandex.svg" alt="yandex">
                     <!--<![endif]-->
-                    <p class="b-alert-old-browser__browser-name">Яндекс.Браузер</p>
+                    <p class="b-alert-old-browser__browser-name"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_OLD_BROWSER_YANDEX'); ?></p>
                 </a>
             </li>
             <li class="b-alert-old-browser__browser">
@@ -81,7 +79,7 @@
         </ul>
 
         <button class="b-alert-old-browser__ignore-button">
-            Все равно перейти на сайт
+            <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_OLD_BROWSER_LINK'); ?>
         </button>
     </div>
 </div>

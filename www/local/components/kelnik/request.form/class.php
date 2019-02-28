@@ -62,7 +62,7 @@ class RequestForm extends Bbc\Basis
         }
 
         if (!$profile->canRequest()) {
-            LocalRedirect('/cabinet/');
+            LocalRedirect(LANG_DIR . 'cabinet/');
         }
 
         if ($request->isPost()) {

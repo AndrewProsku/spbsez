@@ -43,9 +43,7 @@ class Authorization {
             const isFormFulfilled = this.checkForm();
 
             if (isFormFulfilled) {
-                const dataToSend = $(event.target).serialize();
-
-                this.toLogin(dataToSend);
+                this.toLogin(`${$(event.target).serialize()}&lang=${document.documentElement.lang}`);
             }
         });
 

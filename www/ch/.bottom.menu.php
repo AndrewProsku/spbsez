@@ -1,0 +1,46 @@
+<?
+$aMenuLinks = Array(
+	Array(
+        "About SEZ",
+        "/ch/about/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Infrastructure",
+		"/ch/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Services",
+		"/ch/services/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Investors",
+		"/ch/investors/",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Mass Media",
+		"/ch/media/",
+		Array(), 
+		Array(), 
+		"false"
+	),
+	Array(
+		"联系方式",
+		"/ch/contacts/",
+		Array(), 
+		Array(), 
+		"" 
+	)
+);
+?>

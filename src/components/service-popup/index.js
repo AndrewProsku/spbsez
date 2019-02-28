@@ -89,28 +89,34 @@ class Service {
             const that = this;
             const isFormFulfilled = this.checkForm();
 
-            if (isFormFulfilled) {
-                Utils.send(new FormData(that.$form), '/api/service/', {
-                    success(response) {
-                        const successStatus = 1;
-                        const failStatus = 0;
-
-                        if (response.request.status === successStatus) {
-                            that.showSuccessMessage();
-                        } else if (response.request.status === failStatus) {
-                            const errorMessage = response.request.errors.join('</br>');
-
-                            const $popupContent = document.querySelector('.b-popup__content');
-
-                            Utils.clearHtml($popupContent);
-                            Utils.insetContent($popupContent, errorMessage);
-                        }
-                    },
-                    error(error) {
-                        console.error(error);
-                    }
-                });
+            if (!isFormFulfilled) {
+                return;
             }
+
+            const formData = new FormData(that.$form);
+
+            formData.set('lang', document.documentElement.lang);
+
+            Utils.send(formData, '/api/service/', {
+                success(response) {
+                    const successStatus = 1;
+                    const failStatus = 0;
+
+                    if (response.request.status === successStatus) {
+                        that.showSuccessMessage();
+                    } else if (response.request.status === failStatus) {
+                        const errorMessage = response.request.errors.join('</br>');
+
+                        const $popupContent = document.querySelector('.b-popup__content');
+
+                        Utils.clearHtml($popupContent);
+                        Utils.insetContent($popupContent, errorMessage);
+                    }
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
         });
 
         this._checkName();

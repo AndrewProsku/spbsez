@@ -46,9 +46,9 @@ class NewPassword {
                 return;
             }
 
-            const dataToSend = $(event.target).serialize();
-
-            Utils.send(dataToSend, '/api/changePassword/', {
+            Utils.send(`${$(event.target).serialize()}&lang=${document.documentElement.lang}`,
+                '/api/changePassword/',
+                {
                 success(response) {
                     const successStatus = 1;
                     const failStatus = 0;
