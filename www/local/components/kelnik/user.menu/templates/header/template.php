@@ -2,14 +2,16 @@
     die();
 } ?>
 <div class="l-home__header-right">
-    <div class="b-account">
-        <a href="<?= LANG_DIR; ?>cabinet/<?php if($arResult['MESSAGES']): ?>messages/<?php endif; ?>" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?> is-auth<?php endif; ?>">
-            <span class="b-account__link-icon">
-               <?php if($arResult['MESSAGES']): ?> <span class="b-account__messages"><?= $arResult['MESSAGES']; ?></span><?php endif; ?>
-            </span>
-            <span class="b-account__link-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_CABINET'); ?></span>
-        </a>
-    </div>
+    <?php if(LANGUAGE_ID !== 'ch'): ?>
+        <div class="b-account">
+            <a href="<?= LANG_DIR; ?>cabinet/<?php if($arResult['MESSAGES']): ?>messages/<?php endif; ?>" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?> is-auth<?php endif; ?>">
+                <span class="b-account__link-icon">
+                   <?php if($arResult['MESSAGES']): ?> <span class="b-account__messages"><?= $arResult['MESSAGES']; ?></span><?php endif; ?>
+                </span>
+                <span class="b-account__link-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_CABINET'); ?></span>
+            </a>
+        </div>
+    <?php endif; ?>
     <? $APPLICATION->IncludeComponent(
         "kelnik:lang.menu",
         "oez",

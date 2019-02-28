@@ -71,29 +71,35 @@ class Message {
             const isFormFulfilled = this.checkForm();
 
             /* eslint-disable consistent-return */
-            if (isFormFulfilled) {
-                Utils.send(new FormData(that.$form), '/api/message/', {
-                    success(response) {
-                        const successStatus = 1;
-
-                        if (response.request.status === successStatus) {
-                            that.showSuccessMessage();
-
-                            return true;
-                        }
-
-                        const errorMessage = response.request.errors.join('</br>');
-
-                        that.showErrorMessage(that.$inputResume, errorMessage);
-                        that.errorRepeatPassword(errorMessage);
-
-                        return false;
-                    },
-                    error(error) {
-                        console.error(error);
-                    }
-                });
+            if (!isFormFulfilled) {
+                return;
             }
+
+            const formData = new FormData(that.$form);
+
+            formData.set('lang', document.documentElement.lang);
+
+            Utils.send(formData, '/api/message/', {
+                success(response) {
+                    const successStatus = 1;
+
+                    if (response.request.status === successStatus) {
+                        that.showSuccessMessage();
+
+                        return true;
+                    }
+
+                    const errorMessage = response.request.errors.join('</br>');
+
+                    that.showErrorMessage(that.$inputResume, errorMessage);
+                    that.errorRepeatPassword(errorMessage);
+
+                    return false;
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
             /* eslint-enable consistent-return */
         });
         this.$inputFIO.addEventListener('change', (event) => {

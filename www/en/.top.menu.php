@@ -8,11 +8,11 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Инфраструктура", 
-		"", 
-		Array(), 
-		Array(), 
-		"" 
+		"Infrastructure",
+		"/en/",
+		Array(),
+		Array(),
+		""
 	),
     Array(
         "Services",
@@ -22,7 +22,7 @@ $aMenuLinks = Array(
         ""
     ),
     Array(
-        "Investors",
+        "For Investors",
         "/en/investors/",
         Array(),
         Array(),

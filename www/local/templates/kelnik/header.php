@@ -1,7 +1,7 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 define("PATH_TO_404", '/404.php'); ?>
 <!doctype html>
-<html lang="ru">
+<html lang="<?= LANGUAGE_ID; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -36,7 +36,7 @@ define("PATH_TO_404", '/404.php'); ?>
     <div class="l-layout">
         <header class="l-home__header<?php if($isRegularPage): ?> inner-header<?php endif; ?> j-home__header">
             <div class="l-home__header-left">
-                <a href="<?= LANG_DIR; ?>" class="b-logo__link" title="<?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_BACK_TO_MAIN'); ?>"></a>
+                <a href="<?= LANG_DIR; ?>" class="b-logo__link lang-<?=LANGUAGE_ID; ?>" title="<?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_BACK_TO_MAIN'); ?>"></a>
             </div>
             <div class="l-home__header-center">
                 <?$APPLICATION->IncludeComponent(

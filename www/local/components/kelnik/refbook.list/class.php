@@ -3,6 +3,7 @@
 namespace Kelnik\Refbook\Component;
 
 use Bex\Bbc;
+use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
@@ -33,6 +34,11 @@ class RefbookList extends Bbc\Basis
         'SECTION' => ['type' => 'int', 'error' => false]
     ];
 
+    protected function executeProlog()
+    {
+        $this->addCacheAdditionalId(Context::getCurrent()->getLanguage());
+    }
+
     protected function executeMain()
     {
         $classes = [
@@ -52,7 +58,8 @@ class RefbookList extends Bbc\Basis
         $selectFields = [
             Types::TYPE_REVIEW => ['ID', 'NAME', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'PREVIEW'],
             Types::TYPE_DOCS => ['ID', 'NAME', 'FILE_ID'],
-            Types::TYPE_PRESENTATION => ['ID', 'NAME', 'FILE_ID']
+            Types::TYPE_PRESENTATION => ['ID', 'NAME', 'FILE_ID'],
+            Types::TYPE_TEAM => ['ID', 'NAME', 'IMAGE_ID', 'TEXT', 'NAME_EN', 'TEXT_EN']
         ];
 
         $select = ArrayHelper::getValue(
@@ -64,6 +71,8 @@ class RefbookList extends Bbc\Basis
         $filter = [
             '=ACTIVE' => $className::YES
         ];
+
+        $this->arResult['HEADER'] = Loc::getMessage('KELNIK_REFBOOK_HEADER_' . $this->arParams['SECTION']);
 
         if ($this->arParams['SECTION'] !== Types::TYPE_RESIDENT) {
             try {
@@ -78,6 +87,13 @@ class RefbookList extends Bbc\Basis
                 )->FetchAll();
             } catch (\Exception $e) {
                 return [];
+            }
+
+            if ($this->arParams['SECTION'] === Types::TYPE_TEAM) {
+                $this->arResult['ELEMENTS'] = $this->replaceFields(
+                    $this->arResult['ELEMENTS'],
+                    strtoupper(Context::getCurrent()->getLanguage())
+                );
             }
 
             $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*', 'FILE_*' => 'full']);
@@ -154,5 +170,25 @@ class RefbookList extends Bbc\Basis
         });
 
         $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*']);
+    }
+
+    protected function replaceFields(array $data, $langId)
+    {
+        if (!$data || !$langId) {
+            return $data;
+        }
+
+        foreach ($data as &$v) {
+            foreach ($v as $key => $val) {
+                if (!isset($v[$key . '_' . $langId])) {
+                    continue;
+                }
+                $v[$key] = $v[$key . '_' . $langId];
+                unset($v[$key . '_' . $langId]);
+            }
+        }
+        unset($v);
+
+        return $data;
     }
 }
