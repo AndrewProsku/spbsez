@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Профиль");
 $APPLICATION->SetPageProperty('title', 'Личный кабинет | АОСОЭЗ');
 if (!$USER->IsAuthorized()) {
-    LocalRedirect('/cabinet/auth/');
+    LocalRedirect(LANG_DIR . 'cabinet/auth/');
 }
 ?>
 
@@ -58,8 +58,6 @@ if (!$USER->IsAuthorized()) {
     ); ?>
 
 </div>
-<div class="l-profile-logout">
-    <button class="button-logout j-logout" type="button">Выйти из личного кабинета</button>
-</div>
+<?php $APPLICATION->IncludeFile('inc_account_logout.php'); ?>
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

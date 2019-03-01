@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle('Восстановление пароля');
 $APPLICATION->SetPageProperty('title', 'Восстановление пароля | АООЭЗ');
 if ($USER->IsAuthorized()) {
-    LocalRedirect('/cabinet/');
+    LocalRedirect(LANG_DIR . 'cabinet/');
 }
 ?>
 
@@ -41,7 +41,7 @@ if ($USER->IsAuthorized()) {
     ); ?>
 
     <div class="password-recovery-block j-password-recovery-button password-recovery-block_is_hidden">
-        <a href="/cabinet/auth/" class="button password-recovery__button">
+        <a href="<?= LANG_DIR; ?>cabinet/auth/" class="button password-recovery__button">
             Войти в личный кабинет
         </a>
     </div>

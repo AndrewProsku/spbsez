@@ -99,7 +99,7 @@ class kelnik_refbook extends CModule
             INDEX `ALIAS` (`ALIAS`)
         ) COLLATE='utf8_general_ci' ENGINE=InnoDB;");
 
-        $this->getConnection()->query("CREATE TABLE `kelnik_refbook_team` (
+        $this->getConnection()->query("CREATE TABLE `" . \Kelnik\Refbook\Model\TeamTable::getTableName() . "` (
             `ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
             `SORT` INT(11) NOT NULL DEFAULT '500',
             `IMAGE_ID` INT(11) UNSIGNED NULL DEFAULT '0',
@@ -111,15 +111,30 @@ class kelnik_refbook extends CModule
             INDEX `ACTIVE` (`ACTIVE`)
         ) COLLATE='utf8_general_ci' ENGINE=InnoDB");
 
-        $this->getConnection()->query("CREATE TABLE `kelnik_refbook_docs` (
+        $this->getConnection()->query("CREATE TABLE `" . \Kelnik\Refbook\Model\DocsTable::getTableName() . "` (
             `ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
             `SORT` INT(11) NOT NULL DEFAULT '500',
             `FILE_ID` INT(11) UNSIGNED NULL DEFAULT '0',
             `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
+            `SITE_ID` VARCHAR(2) NULL DEFAULT 's1',
             `NAME` VARCHAR(255) NULL DEFAULT NULL,
             PRIMARY KEY (`ID`),
             INDEX `SORT` (`SORT`),
-            INDEX `ACTIVE` (`ACTIVE`)
+            INDEX `ACTIVE` (`ACTIVE`),
+	        INDEX `SITE_ID` (`SITE_ID`)
+        ) COLLATE='utf8_general_ci' ENGINE=InnoDB");
+
+        $this->getConnection()->query("CREATE TABLE `" . \Kelnik\Refbook\Model\PresTable::getTableName() . "` (
+            `ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `SORT` INT(11) NOT NULL DEFAULT '500',
+            `FILE_ID` INT(11) UNSIGNED NULL DEFAULT '0',
+            `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
+            `SITE_ID` VARCHAR(2) NULL DEFAULT 's1',
+            `NAME` VARCHAR(255) NULL DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            INDEX `SORT` (`SORT`),
+            INDEX `ACTIVE` (`ACTIVE`),
+	        INDEX `SITE_ID` (`SITE_ID`)
         ) COLLATE='utf8_general_ci' ENGINE=InnoDB");
 
         //$this->InstallFiles();
@@ -135,6 +150,7 @@ class kelnik_refbook extends CModule
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\ReviewTable::getTableName());
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\TeamTable::getTableName());
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\DocsTable::getTableName());
+        $this->getConnection()->dropTable(\Kelnik\Refbook\Model\PresTable::getTableName());
 
         //$this->UnInstallFiles();
 

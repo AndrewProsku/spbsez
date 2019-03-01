@@ -18,3 +18,4 @@ $MESS['KELNIK_TMPL_FORM_EMAIL'] = 'E-mail';
 $MESS['KELNIK_TMPL_FORM_PHONE'] = 'Phone';
 $MESS['KELNIK_TMPL_FORM_SEND'] = 'Send';
 $MESS['KELNIK_TMPL_PHONE_MASK'] = '+___ _____________';
+$MESS['KELNIK_TMPL_PROFILE_SIGN_OUT'] = 'Sign out of personal account';

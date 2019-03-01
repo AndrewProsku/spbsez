@@ -71,6 +71,10 @@ class RefbookList extends Bbc\Basis
         $filter = [
             '=ACTIVE' => $className::YES
         ];
+        
+        if (in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION])) {
+            $filter['=SITE_ID'] = SITE_ID;
+        }
 
         $this->arResult['HEADER'] = Loc::getMessage('KELNIK_REFBOOK_HEADER_' . $this->arParams['SECTION']);
 

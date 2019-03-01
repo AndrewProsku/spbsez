@@ -1,0 +1,3 @@
+<?
+$sSectionName="Password recovery";
+?>
