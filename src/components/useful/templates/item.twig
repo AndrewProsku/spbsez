@@ -1,0 +1,12 @@
+{% for item in useful %}
+    <div class="b-useful__item j-useful-item">
+
+        {% include '../../useful-item/useful-item.twig' with {
+            modify: "b-useful-item_gray_date",
+            title: item.title,
+            text: item.text,
+            date: item.date
+        } %}
+
+    </div>
+{% endfor %}
