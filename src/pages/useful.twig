@@ -1,0 +1,16 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Полезная информация</title> {% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    <div class="l-useful">
+        <div class="l-useful-single__back"><a href="#">{% include '../components/news/media/arrow.svg' %} Назад в медиа</a></div>
+
+        <div class="l-useful-single__title b-title"><h1>Полезная информация</h1></div>
+
+        {% include '../components/useful/useful.twig' %}
+    </div>
+{% endblock %}

@@ -64,6 +64,8 @@ class Message {
         }
     }
 
+    /* eslint-disable max-lines-per-function */
+
     _bindEvents() {
         this.$form.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -102,9 +104,11 @@ class Message {
             });
             /* eslint-enable consistent-return */
         });
+
         this.$inputFIO.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'fio');
         });
+
         this.$inputEmail.addEventListener('change', (event) => {
             const isValidEmail = event.target.checkValidity();
             const emailStr = '^[-._a-zA-Za-яA-я0-9]{2,}@(?:[a-zA-Za-яА-Я0-9][-a-z-A-Z-a-я-А-Я0-9]+\\.)+[a-za-я]{2,6}$';
@@ -116,6 +120,7 @@ class Message {
                 this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });
+
         this.$inputPhone.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'phone');
             const regPhone = new RegExp('\\+7\\s\\d{3}\\s\\d{3}-\\d{2}-\\d{2}', 'u');
@@ -124,10 +129,13 @@ class Message {
                 this.showErrorMessage(event.target, this.incorrectPhoneMessage);
             }
         });
+
         this.$textarea.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'text');
         });
     }
+
+    /* eslint-enable max-lines-per-function */
 
     inputChangeHandler(event, inputName) {
         if (event.target.value.length) {
