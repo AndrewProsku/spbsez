@@ -10,18 +10,26 @@ $arUrlRewrite=array (
   ),
   0 => 
   array (
-    'CONDITION' => '#^/cabinet/messages/#',
+    'CONDITION' => '#^(/|/en/)cabinet/messages/#',
     'RULE' => '',
     'ID' => 'kelnik:messages',
     'PATH' => '/cabinet/messages/index.php',
     'SORT' => 100,
   ),
-  2 => 
+  3 => 
   array (
-    'CONDITION' => '#^/media/news/#',
+    'CONDITION' => '#^(/|/en/)media/articles/#',
     'RULE' => '',
     'ID' => 'kelnik:news',
-    'PATH' => '/media/news/index.php',
+    'PATH' => LANG_DIR . 'media/articles/index.php',
+    'SORT' => 100,
+  ),
+  2 => 
+  array (
+    'CONDITION' => '#^(/|/en/)media/news/#',
+    'RULE' => '',
+    'ID' => 'kelnik:news',
+    'PATH' => LANG_DIR . 'media/news/index.php',
     'SORT' => 100,
   ),
 );

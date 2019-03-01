@@ -48,6 +48,12 @@ class ResidentAdminInterface extends AdminInterface
                         'FILTER'   => '%',
                         'REQUIRED' => true
                     ],
+                    'NAME_EN'     => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 40,
+                        'FILTER'   => '%',
+                        'REQUIRED' => true
+                    ],
                     'PLACE' => [
                         'WIDGET' => new ComboBoxWidget(),
                         'VARIANTS' => ResidentTable::getPlaces()
@@ -70,6 +76,11 @@ class ResidentAdminInterface extends AdminInterface
                         'FILTER' => false
                     ],
                     'TEXT' => [
+                        'WIDGET' => new VisualEditorWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ],
+                    'TEXT_EN' => [
                         'WIDGET' => new VisualEditorWidget(),
                         'HEADER' => false,
                         'FILTER' => false

@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle('Сообщения от ОЭЗ');
 $APPLICATION->SetPageProperty('title', 'Сообщения от ОЭЗ | АООЭЗ');
 if (!$USER->IsAuthorized()) {
-    LocalRedirect('/cabinet/auth/');
+    LocalRedirect(LANG_DIR . 'cabinet/auth/');
 }
 ?>
 
@@ -35,7 +35,7 @@ if (!$USER->IsAuthorized()) {
 		"COMPONENT_TEMPLATE" => "oez",
 		"USE_SEARCH" => "Y",
 		"SEF_MODE" => "Y",
-		"SEF_FOLDER" => "/cabinet/messages/",
+		"SEF_FOLDER" => LANG_DIR . "cabinet/messages/",
 		"LIST_DATE_FORMAT" => "H:i d.m.Y",
 		"SET_404" => "Y",
 		"DETAIL_DATE_FORMAT" => "d.m.Y, H:i",

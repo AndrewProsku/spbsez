@@ -54,6 +54,12 @@ class DocsTable extends DataManager
                 ]
             ),
             new Main\Entity\StringField(
+                'SITE_ID',
+                [
+                    'title' => Loc::getMessage('KELNIK_DOCS_SITE'),
+                ]
+            ),
+            new Main\Entity\StringField(
                 'NAME',
                 [
                     'title' => Loc::getMessage('KELNIK_DOCS_NAME'),
