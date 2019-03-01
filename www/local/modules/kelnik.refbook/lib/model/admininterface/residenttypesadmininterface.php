@@ -38,6 +38,12 @@ class ResidentTypesAdminInterface extends AdminInterface
                         'FILTER'   => '%',
                         'REQUIRED' => true
                     ],
+                    'NAME_EN'     => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 40,
+                        'FILTER'   => '%',
+                        'REQUIRED' => true
+                    ],
                     'SORT'     => [
                         'WIDGET'  => new NumberWidget(),
                         'DEFAULT' => 500,

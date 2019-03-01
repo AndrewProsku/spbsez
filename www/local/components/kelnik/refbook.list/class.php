@@ -34,11 +34,6 @@ class RefbookList extends Bbc\Basis
         'SECTION' => ['type' => 'int', 'error' => false]
     ];
 
-    protected function executeProlog()
-    {
-        $this->addCacheAdditionalId(Context::getCurrent()->getLanguage());
-    }
-
     protected function executeMain()
     {
         $classes = [
@@ -126,6 +121,7 @@ class RefbookList extends Bbc\Basis
                 'select' => [
                     '*',
                     'TYPE_NAME' => 'TYPE.NAME',
+                    'TYPE_NAME_EN' => 'TYPE.NAME_EN',
                     'TYPE_SORT' => 'TYPE.SORT'
                 ],
                 'filter' => [
@@ -152,6 +148,7 @@ class RefbookList extends Bbc\Basis
                 $this->arResult['TYPES'][$v['TYPE_ID']] = [
                     'ID' => $v['TYPE_ID'],
                     'NAME' => $v['TYPE_NAME'],
+                    'NAME_EN' => $v['TYPE_NAME_EN'],
                     'SORT' => $v['TYPE_SORT']
                 ];
             }
@@ -164,6 +161,15 @@ class RefbookList extends Bbc\Basis
             $v['PLACE_LINK'] = ResidentTable::getPlaceLink($v['PLACE']);
         }
         unset($v);
+
+        $langId = strtoupper(Context::getCurrent()->getLanguage());
+
+        foreach (['ELEMENTS', 'TYPES'] as $type) {
+            $this->arResult[$type] = $this->replaceFields(
+                $this->arResult[$type],
+                $langId
+            );
+        }
 
         usort($this->arResult['TYPES'], function ($a, $b) {
             if ($a == $b) {

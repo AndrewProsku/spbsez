@@ -316,41 +316,41 @@ $APPLICATION->SetPageProperty('title', 'Special Economic Zone | SEZ');
                             <div class="l-home-plots__all-map-icon-wrap">
                                 <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
                             <span class="b-tooltip">
-                                Новоорловская
+                                Novoorlovskaya
                             </span>
                                 </a>
                                 <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
                             <span class="b-tooltip">
-                                Нойдорф
+                                Noydorf
                             </span>
                                 </a>
                                 <div class="l-home-plots__all-map-icon icon-port">
                                     <div class="b-tooltip">
-                                        Порт
+                                        Sea port
                                     </div>
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-one">
                                     <div class="b-tooltip">
-                                        Вокзал
+                                        Railway station
                                     </div>
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-center-city">
                                     <div class="b-tooltip">
-                                        Центр города
+                                        City center
                                     </div>
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
                                     <div class="b-tooltip b-tooltip_position_left">
-                                        Ладожский вокзал
+                                        Ladozhsky Railway Station
                                     </div>
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-airport">
                                     <div class="b-tooltip">
-                                        Аэропорт
+                                        Airport
                                     </div>
                                 </div>
                             </div>
@@ -360,36 +360,37 @@ $APPLICATION->SetPageProperty('title', 'Special Economic Zone | SEZ');
                     <div class="l-home-plots__content">
                         <div class="l-home-plots__title">
                             <a href="#" class="b-link-line">
-                                Участок «Новоорловская»
+                                Novoorlovskaya site
                             </a>
                         </div>
                         <div class="l-home-plots__desc">
                             <div class="l-home-plots__desc-item">
                                 <p>
-                                    <strong>163,33 га</strong> <span>площадь участка</span>
+                                    <strong>163,33 ha</strong> <span>site area</span>
                                 </p>
                             </div>
                             <div class="l-home-plots__desc-item">
                                 <p>
-                                    <strong>20 км</strong> <span>от центра</span>
+                                    <strong>20 km</strong> <span>to the city center</span>
                                 </p>
                             </div>
                             <div class="l-home-plots__desc-item">
                                 <p>
-                                    <strong>Приморский район</strong> <span>В лесопарке «Новоорловский»</span>
+                                    <strong>Primorsky District</strong> <span>In Novoorlovsky urban forest</span>
                                 </p>
                             </div>
                         </div>
                         <div class="l-home-plots__text">
                             <p>
-                                Развитая транспортная инфраструктура. Менее 10 минут до выезда на КАД.
-                                30 минут до центра города на автотранспорте. 20 минут
-                                до метро на автотранспорте
+                                Developed transport infrastructure. Less than 10
+                                minutes to the St. Petersburg Ring Road. 30
+                                minutes by motor vehicle to the city center. 20
+                                minutes by motor vehicle to the metro station
                             </p>
                         </div>
                         <div class="l-home-plots__link">
                             <a href="#" class="b-link-line">
-                                Узнать больше
+                                Learn more
                             </a>
                         </div>
                     </div>
@@ -402,41 +403,41 @@ $APPLICATION->SetPageProperty('title', 'Special Economic Zone | SEZ');
                             <div class="l-home-plots__all-map-icon-wrap">
                                 <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
                             <span class="b-tooltip">
-                                Новоорловская
+                                Novoorlovskaya
                             </span>
                                 </a>
                                 <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
                             <span class="b-tooltip">
-                                Нойдорф
+                                Noydorf
                             </span>
                                 </a>
                                 <div class="l-home-plots__all-map-icon icon-port">
                                     <div class="b-tooltip">
-                                        Порт
+                                        Sea port
                                     </div>
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-one">
                                     <div class="b-tooltip">
-                                        Вокзал
+                                        Railway station
                                     </div>
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-center-city">
                                     <div class="b-tooltip">
-                                        Центр города
+                                        City center
                                     </div>
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
                                     <div class="b-tooltip b-tooltip_position_left">
-                                        Ладожский вокзал
+                                        Ladozhsky Railway Station
                                     </div>
                                 </div>
 
                                 <div class="l-home-plots__all-map-icon icon-airport">
                                     <div class="b-tooltip">
-                                        Аэропорт
+                                        Airport
                                     </div>
                                 </div>
                             </div>
@@ -446,35 +447,37 @@ $APPLICATION->SetPageProperty('title', 'Special Economic Zone | SEZ');
                     <div class="l-home-plots__content">
                         <div class="l-home-plots__title">
                             <a href="#" class="b-link-line">
-                                Участок «Нойдорф»
+                                Noydorf site
                             </a>
                         </div>
                         <div class="l-home-plots__desc">
                             <div class="l-home-plots__desc-item">
                                 <p>
-                                    <strong>18,99 га</strong> <span>площадь участка</span>
+                                    <strong>18,99 ha</strong> <span>site area</span>
                                 </p>
                             </div>
                             <div class="l-home-plots__desc-item">
                                 <p>
-                                    <strong>30 км</strong> <span>от центра</span>
+                                    <strong>30 km</strong> <span>to the city center</span>
                                 </p>
                             </div>
                             <div class="l-home-plots__desc-item">
                                 <p>
-                                    <strong>Стрельна</strong> <span>юго — запад Петербурга</span>
+                                    <strong>Strelna</strong> <span>South-West of St. Petersburg</span>
                                 </p>
                             </div>
                         </div>
                         <div class="l-home-plots__text">
                             <p>
-                                В окружении развитой городской инфраструктуры и культурного наследия. Менее
-                                10 минут до выезда на КАД. 20 минут на автотранспорте до аэропорта
+                                Surrounded by the developed urban infrastructure
+                                and cultural heritage. Less than 10 minutes to the
+                                St. Petersburg Ring Road. 20 minutes by motor
+                                vehicle to the airport
                             </p>
                         </div>
                         <div class="l-home-plots__link">
                             <a href="#" class="b-link-line">
-                                Узнать больше
+                                Learn more
                             </a>
                         </div>
                     </div>
@@ -482,45 +485,45 @@ $APPLICATION->SetPageProperty('title', 'Special Economic Zone | SEZ');
             </div>
 
             <div class="l-home-plots__all-map">
-                <div class="l-home-plots__all-map-images">
+                <div class="l-home-plots__all-map-images lang-<?= LANGUAGE_ID; ?>">
                     <div class="l-home-plots__all-map-icon-wrap">
                         <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-novoorlovskaya">
                             <span class="b-tooltip">
-                                Новоорловская
+                                Novoorlovskaya
                             </span>
                         </a>
                         <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-neudorf">
                             <span class="b-tooltip">
-                                Нойдорф
+                                Noydorf
                             </span>
                         </a>
                         <div class="l-home-plots__all-map-icon icon-port">
                             <div class="b-tooltip">
-                                Порт
+                                Sea port
                             </div>
                         </div>
 
                         <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-one">
                             <div class="b-tooltip">
-                                Вокзал
+                                Railway station
                             </div>
                         </div>
 
                         <div class="l-home-plots__all-map-icon icon-center-city">
                             <div class="b-tooltip">
-                                Центр города
+                                City center
                             </div>
                         </div>
 
                         <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
                             <div class="b-tooltip b-tooltip_position_left">
-                                Ладожский вокзал
+                                Ladozhsky Railway Station
                             </div>
                         </div>
 
                         <div class="l-home-plots__all-map-icon icon-airport">
                             <div class="b-tooltip">
-                                Аэропорт
+                                Airport
                             </div>
                         </div>
                     </div>

@@ -53,6 +53,12 @@ class ResidentTypesTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_RESIDENT_NAME'),
                 ]
             ),
+            new Main\Entity\StringField(
+                'NAME_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_NAME_EN'),
+                ]
+            ),
 
             new Main\Entity\ReferenceField(
                 'RESIDENTS',

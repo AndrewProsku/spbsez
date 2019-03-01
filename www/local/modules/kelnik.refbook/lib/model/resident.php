@@ -75,17 +75,30 @@ class ResidentTable extends DataManager
                 ]
             ),
             new Main\Entity\StringField(
+                'NAME_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_NAME_EN'),
+                ]
+            ),
+            new Main\Entity\StringField(
                 'SITE',
                 [
                     'title' => Loc::getMessage('KELNIK_RESIDENT_SITE'),
                 ]
             ),
             new Main\Entity\StringField('TEXT_TEXT_TYPE'),
+            new Main\Entity\StringField('TEXT_EN_TEXT_TYPE'),
 
             new Main\Entity\TextField(
                 'TEXT',
                 [
                     'title' => Loc::getMessage('KELNIK_RESIDENT_TEXT'),
+                ]
+            ),
+            new Main\Entity\TextField(
+                'TEXT_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_TEXT_EN'),
                 ]
             ),
 

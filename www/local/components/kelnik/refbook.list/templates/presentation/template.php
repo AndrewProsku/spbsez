@@ -4,7 +4,7 @@
 <?php if(empty($arResult['ELEMENTS'])): return; endif; ?>
 
 <div class="b-presentations__info">
-    <div class="b-presentations__title">Презентации</div>
+    <div class="b-presentations__title"><?= $arResult['HEADER']; ?></div>
     <div class="b-presentations__files">
         <div class="b-files-list ">
             <?php foreach ($arResult['ELEMENTS'] as $element): ?>
