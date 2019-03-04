@@ -10,7 +10,7 @@ use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Requests\Model\ServiceTable;
 use Kelnik\Requests\Model\StandartTable;
 use Kelnik\Requests\Model\TypeTable;
-use Kelnik\Userdata\Profile\ProfileModel;
+use Kelnik\Userdata\Profile\ProfileEnvelope;
 use Kelnik\Userdata\Profile\ProfileSectionRequests;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
@@ -55,7 +55,7 @@ class RequestForm extends Bbc\Basis
         }
 
         try {
-            $profile = ProfileModel::getInstance($USER->GetID());
+            $profile = ProfileEnvelope::getInstance($USER->GetID());
             $sectionRequests = new ProfileSectionRequests($profile);
         } catch (\Exception $exception) {
             return false;

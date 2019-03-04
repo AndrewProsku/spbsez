@@ -14,5 +14,6 @@
  */
 
 return [
-    'kelnik.admin_helper' => null
+    'kelnik.admin_helper' => null,
+    'kelnik.userdata' => null
 ];

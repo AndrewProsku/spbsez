@@ -2,9 +2,10 @@
 
 namespace Kelnik\Report\Model;
 
-use Bitrix\Main\Entity\IntegerField;
-use Bitrix\Main\Entity\StringField;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Fields\EnumField;
+use Bitrix\Main\ORM\Fields\IntegerField;
+use Bitrix\Main\ORM\Fields\StringField;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
@@ -30,35 +31,22 @@ class StatusTable extends DataManager
     public static function getMap()
     {
         return [
-            new IntegerField(
-                'ID',
-                [
-                    'primary' => true,
-                    'autocomplete' => true,
-                    'title' => Loc::getMessage('KELNIK_REPORT_ID')
-                ]
-            ),
-            new IntegerField(
-                'SORT',
-                [
-                    'title' => Loc::getMessage('KELNIK_REPORT_SORT'),
-                    'default_value' => self::SORT_DEFAULT
-                ]
-            ),
-            new StringField(
-                'ACTIVE',
-                [
-                    'title' => Loc::getMessage('KELNIK_REPORT_ACTIVE'),
-                    'values' => [self::NO, self::YES],
-                    'default_value' => self::YES
-                ]
-            ),
-            new StringField(
-                'NAME',
-                [
-                    'title' => Loc::getMessage('KELNIK_REPORT_NAME')
-                ]
-            )
+            (new IntegerField('ID'))
+                ->configureAutocomplete(true)
+                ->configurePrimary(true)
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_ID')),
+
+            (new IntegerField('SORT'))
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_SORT'))
+                ->configureDefaultValue(self::SORT_DEFAULT),
+
+            (new EnumField('ACTIVE'))
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_ACTIVE'))
+                ->configureValues([self::NO, self::YES])
+                ->configureDefaultValue(self::YES),
+
+            (new StringField('NAME'))
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME'))
         ];
     }
 }

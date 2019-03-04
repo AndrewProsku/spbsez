@@ -4,9 +4,9 @@ namespace Kelnik\Messages\Components;
 
 use Bex\Bbc\Basis;
 use Bitrix\Iblock\Component\Tools;
-use Kelnik\Messages\MessageModel;
+use Kelnik\Messages\MessageEnvelope;
 use Kelnik\Requests\Model\NotifyTable;
-use Kelnik\Userdata\Profile\ProfileModel;
+use Kelnik\Userdata\Profile\ProfileEnvelope;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -25,7 +25,7 @@ class MessagesDetail extends Basis
         'ELEMENT_ID' => ['type' => 'int']
     ];
     /**
-     * @var ProfileModel
+     * @var ProfileEnvelope
      */
     private $profile;
 
@@ -34,7 +34,7 @@ class MessagesDetail extends Basis
         global $USER;
 
         $this->addCacheAdditionalId($USER->GetID());
-        $this->profile = ProfileModel::getInstance($USER->GetID());
+        $this->profile = ProfileEnvelope::getInstance($USER->GetID());
     }
 
     protected function executeMain()
@@ -45,7 +45,7 @@ class MessagesDetail extends Basis
             LocalRedirect('/cabinet/');
         }
 
-        $messages = MessageModel::getInstance($this->profile);
+        $messages = MessageEnvelope::getInstance($this->profile);
         $messages->dateFormat = $this->arParams['DATE_FORMAT'];
         $this->arResult['ELEMENT'] = $messages->getMessage($this->arParams['ELEMENT_TYPE'], $this->arParams['ELEMENT_ID']);
 
@@ -65,6 +65,6 @@ class MessagesDetail extends Basis
             return;
         }
 
-        MessageModel::getInstance($this->profile)->setViewed($this->arParams['ELEMENT_TYPE'], $this->arParams['ELEMENT_ID']);
+        MessageEnvelope::getInstance($this->profile)->setViewed($this->arParams['ELEMENT_TYPE'], $this->arParams['ELEMENT_ID']);
     }
 }

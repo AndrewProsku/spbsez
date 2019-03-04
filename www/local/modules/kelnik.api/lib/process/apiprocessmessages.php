@@ -4,8 +4,8 @@ namespace Kelnik\Api\Process;
 
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
-use Kelnik\Messages\MessageModel;
-use Kelnik\Userdata\Profile\ProfileModel;
+use Kelnik\Messages\MessageEnvelope;
+use Kelnik\Userdata\Profile\ProfileEnvelope;
 
 /**
  * Class ApiProcessMessages
@@ -20,12 +20,12 @@ class ApiProcessMessages extends ApiProcessAbstract
     {
         global $USER;
 
-        $messages = MessageModel::getInstance(
-            ProfileModel::getInstance($USER->GetID())
+        $messages = MessageEnvelope::getInstance(
+            ProfileEnvelope::getInstance($USER->GetID())
         );
         $messages->calcCount();
 
-        $offset = (int) ArrayHelper::getValue($request, 'step', 0) * MessageModel::MONTHS_COUNT;
+        $offset = (int) ArrayHelper::getValue($request, 'step', 0) * MessageEnvelope::MONTHS_COUNT;
         $year   = (int) ArrayHelper::getValue($request, 'year', date('Y'));
         $months = count($messages->getMonthsByYear($year));
 
@@ -48,7 +48,7 @@ class ApiProcessMessages extends ApiProcessAbstract
         );
 
         $this->data['YEAR'] = $year;
-        $this->data['IS_END'] = $months <= $offset + MessageModel::MONTHS_COUNT;
+        $this->data['IS_END'] = $months <= $offset + MessageEnvelope::MONTHS_COUNT;
 
         return true;
     }

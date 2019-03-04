@@ -2,21 +2,20 @@
 
 namespace Kelnik\Report\Model;
 
-use Bitrix\Main\Entity\IntegerField;
-use Bitrix\Main\Entity\StringField;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Fields\IntegerField;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
-class StatusTable extends DataManager
+class ReportFieldsTable extends DataManager
 {
     /**
      * @return string
      */
     public static function getTableName()
     {
-        return 'kelnik_report';
+        return 'kelnik_report_fields';
     }
 
     /**
@@ -25,14 +24,10 @@ class StatusTable extends DataManager
     public static function getMap()
     {
         return [
-            new IntegerField(
-                'ID',
-                [
-                    'primary' => true,
-                    'autocomplete' => true,
-                    'title' => Loc::getMessage('KELNIK_REPORT_ID')
-                ]
-            )
+            (new IntegerField('ID'))
+                ->configureAutocomplete(true)
+                ->configurePrimary(true)
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_ID'))
         ];
     }
 }

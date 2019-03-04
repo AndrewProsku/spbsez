@@ -39,11 +39,17 @@ class kelnik_report extends CModule
 
         ModuleManager::registerModule($this->MODULE_ID);
         Loader::includeModule($this->MODULE_ID);
+
+        self::InstallFiles();
+        self::InstallDB();
     }
 
     public function DoUninstall()
     {
         Loader::includeModule($this->MODULE_ID);
+
+        self::UnInstallDB();
+        self::UnInstallFiles();
 
         ModuleManager::unRegisterModule($this->MODULE_ID);
     }
@@ -55,10 +61,37 @@ class kelnik_report extends CModule
 
     public function InstallFiles()
     {
+        foreach (['js', 'css'] as $folder) {
+            CopyDirFiles(
+                __DIR__ . DIRECTORY_SEPARATOR . $folder,
+                implode(
+                    DIRECTORY_SEPARATOR,
+                    [
+                        Application::getDocumentRoot(),
+                        'bitrix',
+                        $folder,
+                        $this->MODULE_ID
+                    ]
+                )
+            );
+        }
     }
 
     public function UnInstallFiles()
     {
+        foreach (['js', 'css'] as $folder) {
+            DeleteDirFilesEx(
+                implode(
+                    DIRECTORY_SEPARATOR,
+                    [
+                        Application::getDocumentRoot(),
+                        'bitrix',
+                        $folder,
+                        $this->MODULE_ID
+                    ]
+                )
+            );
+        }
     }
 
     public function InstallDB()

@@ -5,7 +5,7 @@ use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
-use Kelnik\Userdata\Profile\ProfileModel;
+use Kelnik\Userdata\Profile\ProfileEnvelope;
 use Kelnik\Userdata\Profile\ProfileSectionAdmins;
 use Kelnik\Userdata\Profile\ProfileSectionContacts;
 use Kelnik\Userdata\Profile\ProfileSectionDocs;
@@ -20,7 +20,7 @@ use Kelnik\Userdata\Profile\ProfileSectionDocs;
 class ApiProcessProfile extends ApiProcessAbstract
 {
     /**
-     * @var ProfileModel
+     * @var ProfileEnvelope
      */
     protected $profile;
 
@@ -46,7 +46,7 @@ class ApiProcessProfile extends ApiProcessAbstract
         $action = trim(ArrayHelper::getValue($request, 'action'));
 
         try {
-            $this->profile = ProfileModel::getInstance($USER->GetID());
+            $this->profile = ProfileEnvelope::getInstance($USER->GetID());
             $this->initSection($action);
         } catch (\Exception $e) {
             return false;
@@ -234,7 +234,7 @@ class ApiProcessProfile extends ApiProcessAbstract
         }
 
         $this->data = $this->admins->getById($res);
-        unset($this->data[ProfileModel::OWNER_FIELD]);
+        unset($this->data[ProfileEnvelope::OWNER_FIELD]);
 
         return true;
     }
@@ -254,7 +254,7 @@ class ApiProcessProfile extends ApiProcessAbstract
 
         if (is_numeric($res)) {
             $this->data = $this->admins->getById($res);
-            unset($this->data[ProfileModel::OWNER_FIELD]);
+            unset($this->data[ProfileEnvelope::OWNER_FIELD]);
         }
 
         return true;
