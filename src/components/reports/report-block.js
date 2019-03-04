@@ -2,6 +2,7 @@ import $ from 'jquery';
 import InputFile from 'components/forms/file';
 import Mediator from 'common/scripts/mediator';
 import Select from 'components/forms/select';
+import templateError from './templates/input-error.twig';
 import templateExportForm from './templates/export-countries.twig';
 import templateInnovationForm from './templates/innovations.twig';
 import templatePermissionForm from './templates/permission-form.twig';
@@ -18,7 +19,7 @@ class ReportBlock {
         this.inputs = null;
 
         this.approveClass = 'b-report-block_status_approved';
-        this.rejectClass = 'b-report-block_status_rejected';
+        this.errorClass = 'b-report-block_status_error';
         this.untouchedIputClass = 'b-input-block_is_untouched';
         this.stageBlockClass = 'j-report-stage-block';
         this.stageSelectClass = 'j-reports-form-select';
@@ -44,7 +45,13 @@ class ReportBlock {
         this.target = options.target;
         this.formID = options.formID;
         this.isReadonly = options.isReadonly || false;
+        this.isRejected = options.blockData.rejected || false;
         const blockData = options.blockData;
+
+
+        mediator.subscribe('formApproved', (formID) => {
+            this.approveFormHandler(formID);
+        });
 
         if (blockData.type) {
             switch (blockData.type) {
@@ -91,6 +98,20 @@ class ReportBlock {
     }
     /* eslint-enable max-statements */
 
+    approveFormHandler(formID) {
+        if (formID === this.formID) {
+            this.inputs.forEach((input) => {
+                delete input.dataset.prefilled;
+
+                if (!input.closest(`.${this.permissionFormClass}`) &&
+                    !input.closest(`.${this.disabledInputClass}`)) {
+                    this.inputsStatus[input.id] = this.getInputStatus(input);
+                }
+            });
+            this.setBlockStatus();
+        }
+    }
+
     initForeignInvestorsBlock(data) {
         this.inputsData.fields = [];
         const radios = Array.from(this.target.querySelectorAll('input[type=radio]'));
@@ -99,6 +120,11 @@ class ReportBlock {
 
         radios.forEach((radio) => {
             radio.addEventListener('change', (event) => {
+                radios.forEach((input) => {
+                    delete input.dataset.prefilled;
+                });
+                delete investorCountriesField.dataset.prefilled;
+
                 if (event.target.value === 'yes') {
                     investorCountries.classList.remove('b-input-block_is_disabled');
                     investorCountriesField.disabled = false;
@@ -127,6 +153,14 @@ class ReportBlock {
                     this.inputsData.fields.push(field);
                 }
             }
+        });
+        investorCountriesField.addEventListener('change', () => {
+            radios.forEach((radio) => {
+                delete radio.dataset.prefilled;
+                this.inputsStatus[radio.id] = this.getInputStatus(radio);
+            });
+            delete investorCountriesField.dataset.prefilled;
+            this.inputsStatus[investorCountriesField.id] = this.getInputStatus(investorCountriesField);
         });
     }
 
@@ -273,8 +307,14 @@ class ReportBlock {
                     break;
                 }
                 case 'radio': {
-                    // this.bindTextInputsEvents(input);
                     input.addEventListener('change', (event) => {
+                        if (Utils.keyExist(input.dataset, 'prefilled')) {
+                            const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
+
+                            Array.from(checkboxGroup).forEach((checkbox) => {
+                                delete checkbox.dataset.prefilled;
+                            });
+                        }
                         this.sendNewValue(event.target);
                     });
                     break;
@@ -288,7 +328,13 @@ class ReportBlock {
         input.addEventListener('focus', (event) => {
             event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
         });
+        input.addEventListener('blur', (event) => {
+            if (Utils.keyExist(input.dataset, 'prefilled')) {
+                event.target.closest('.b-input-block').classList.add(this.untouchedIputClass);
+            }
+        });
         input.addEventListener('change', (event) => {
+            delete input.dataset.prefilled;
             this.sendNewValue(event.target);
         });
     }
@@ -340,6 +386,7 @@ class ReportBlock {
         });
     }
 
+    /* eslint-disable max-lines-per-function, max-statements */
     /**
      * Заполнение инпутов данными с сервера и выставлнеие статуса блоку формы (зеленый фон)
      */
@@ -349,16 +396,30 @@ class ReportBlock {
                 if (input.id === fieldData.id) {
                     switch (input.type) {
                         case 'radio': {
+                            if (fieldData.error) {
+                                this.handleErrorField(input, fieldData.error, 'radio');
+                            } else if (fieldData.isPrefilled) {
+                                input.dataset.prefilled = '';
+                            }
                             input.checked = fieldData.checked;
                             break;
                         }
                         case 'select-one': {
+                            if (fieldData.error) {
+                                this.handleErrorField(input, fieldData.error);
+                            } else if (fieldData.isPrefilled && !input.closest(`.${this.permissionFormClass}`)) {
+                                input.dataset.prefilled = '';
+                            }
                             input.value = fieldData.value;
                             break;
                         }
                         case 'file': {
                             const fileInputWrapper = input.closest(`.${this.fileInputClass}`);
                             const pseudoInput = fileInputWrapper.querySelector('.b-input-file__text');
+
+                            if (fieldData.error) {
+                                this.handleErrorField(input, fieldData.error);
+                            }
 
                             pseudoInput.textContent = fieldData.value;
                             if (fieldData.value) {
@@ -367,20 +428,75 @@ class ReportBlock {
                             }
                             break;
                         }
-                        default:
+                        default: {
+                            if (fieldData.error) {
+                                this.handleErrorField(input, fieldData.error);
+                            } else if (fieldData.isPrefilled) {
+                                input.closest('.b-input-block').classList.add(this.untouchedIputClass);
+                                input.dataset.prefilled = '';
+                            }
                             input.value = fieldData.value;
                             break;
+                        }
                     }
                 }
             });
             // Выставление статуса инпутам
-            // Скипаем поля, находящиеся в дополнительной форме и задисейбленные поля
-            if (!input.closest(`.${this.permissionFormClass}`) &&
-                !input.closest(`.${this.disabledInputClass}`)) {
+            // Скипаем задисейбленные поля
+            if (!input.closest(`.${this.disabledInputClass}`)) {
                 this.inputsStatus[input.id] = this.getInputStatus(input);
             }
         });
         this.setBlockStatus();
+    }
+    /* eslint-enable max-lines-per-function, max-statements */
+
+    handleErrorField(input, errorMessage, type) {
+        this.target.classList.add(this.errorClass);
+        this.target.classList.remove(this.approveClass);
+        this.target.dataset.hasError = '';
+        delete this.target.dataset.approved;
+        input.dataset.hasError = '';
+
+        let inputBlock = null;
+        let errorBlock = null;
+
+        if (type === 'radio') {
+            inputBlock = input.closest('.b-radio-row');
+
+            inputBlock.insertAdjacentHTML('afterend', templateError({
+                errorMessage
+            }));
+
+            errorBlock = inputBlock.nextElementSibling;
+        } else {
+            inputBlock = input.closest('.b-input-block');
+            Utils.insetContent(inputBlock, templateError({
+                errorMessage
+            }));
+
+            errorBlock = inputBlock.querySelector('.b-input-error');
+        }
+
+        errorBlock.querySelector('.b-input-error__confirm').addEventListener('click', () => {
+            const dataToSend = `action=confirmField&${$(input).serialize()}`;
+            const that = this;
+
+            Utils.send(dataToSend, '/tests/reports/input-update.json', {
+                success(response) {
+                    if (response.request.status === that.SUCCESS_STATUS) {
+                        delete input.dataset.hasError;
+                        Utils.removeElement(errorBlock);
+
+                        that.inputsStatus[input.id] = that.getInputStatus(input);
+                        that.setBlockStatus();
+                    }
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
+        });
     }
 
     getInputStatus(input) {
@@ -388,45 +504,102 @@ class ReportBlock {
             case 'radio': {
                 const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
 
+                if (Utils.keyExist(input.dataset, 'hasError')) {
+                    return 'hasError';
+                } else if (Utils.keyExist(input.dataset, 'prefilled')) {
+                    return 'prefilled';
+                }
                 for (let i = 0; i < checkboxGroup.length; i++) {
                     if (checkboxGroup[i].checked) {
                         return 'filled';
                     }
                 }
 
-                if (input.closest('.b-radio-row').querySelector('input[type="radio"]')) {
-                    return 'filled';
-                }
                 break;
             }
             default: {
-                if (input.value) {
+                if (Utils.keyExist(input.dataset, 'hasError')) {
+                    return 'hasError';
+                } else if (Utils.keyExist(input.dataset, 'prefilled')) {
+                    return 'prefilled';
+                } else if (input.value) {
                     return 'filled';
                 }
                 break;
             }
         }
 
-        return 'empty';
+        // Дополнительные поля в блоках "Стадия строительства" не обяательны для заполнения
+        // поэтому если в них нет ошибок они считаются заполненными
+        return input.closest(`.${this.permissionFormClass}`) ? 'filled' : 'empty';
     }
 
+    /* eslint-disable max-lines-per-function, max-statements */
     setBlockStatus() {
-        for (const key in this.inputsStatus) {
-            if (this.inputsStatus[key] !== 'filled') {
-                // this.isBlockApproved = false;
-                this.target.dataset.approved = 'false';
-                this.target.classList.remove(this.approveClass);
-                mediator.publish('blockStatusChanged', this.formID);
+        let hasEmpty = false;
 
-                return;
+        for (const key in this.inputsStatus) {
+            if (Utils.keyExist(this.inputsStatus, key)) {
+                switch (this.inputsStatus[key]) {
+                    case 'hasError': {
+                        delete this.target.dataset.approved;
+                        delete this.target.dataset.prefilled;
+                        this.target.dataset.hasError = '';
+
+                        this.target.classList.remove(this.approveClass);
+                        this.target.classList.add(this.errorClass);
+
+                        mediator.publish('blockStatusChanged', this.formID);
+
+                        return;
+                    }
+                    case 'prefilled': {
+                        delete this.target.dataset.approved;
+                        delete this.target.dataset.hasError;
+                        this.target.dataset.prefilled = '';
+
+                        this.target.classList.remove(this.approveClass);
+                        this.target.classList.remove(this.errorClass);
+
+                        mediator.publish('blockStatusChanged', this.formID);
+
+                        return;
+                    }
+                    case 'filled': {
+                        if (hasEmpty) {
+                            break;
+                        }
+                        delete this.target.dataset.hasError;
+                        delete this.target.dataset.prefilled;
+                        this.target.dataset.approved = '';
+
+                        this.target.classList.remove(this.errorClass);
+                        this.target.classList.add(this.approveClass);
+
+                        break;
+                    }
+                    case 'empty': {
+                        if (hasEmpty) {
+                            break;
+                        }
+                        delete this.target.dataset.prefilled;
+                        delete this.target.dataset.hasError;
+                        delete this.target.dataset.approved;
+
+                        this.target.classList.remove(this.approveClass);
+                        this.target.classList.remove(this.errorClass);
+
+                        hasEmpty = true;
+                        break;
+                    }
+                    default: break;
+                }
             }
         }
 
-        // this.isBlockApproved = true;
-        this.target.dataset.approved = 'true';
-        this.target.classList.add(this.approveClass);
         mediator.publish('blockStatusChanged', this.formID);
     }
+    /* eslint-enable max-lines-per-function, max-statements */
 
     sendNewValue(input) {
         const dataToSend = `action=update&${$(input).serialize()}`;
@@ -439,9 +612,17 @@ class ReportBlock {
 
                     // that.showErrorMessage(input, errorMessage);
                 } else if (response.request.status === that.SUCCESS_STATUS) {
-                    that.inputsStatus[input.id] = that.getInputStatus(input);
+                    if (input.type === 'radio') {
+                        const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
+
+                        Array.from(checkboxGroup).forEach((checkbox) => {
+                            that.inputsStatus[checkbox.id] = that.getInputStatus(checkbox);
+                        });
+                    } else {
+                        that.inputsStatus[input.id] = that.getInputStatus(input);
+                    }
+
                     that.setBlockStatus();
-                    // that.removeErrorMessage(input);
                 }
             },
             error(error) {
@@ -523,6 +704,10 @@ class ReportBlock {
     }
 
     stageSelectHandler(event) {
+        if (Utils.keyExist(event.target.dataset, 'prefilled')) {
+            delete event.target.dataset.prefilled;
+        }
+
         const selectWrapper = event.target.closest(`.${this.stageSelectClass}`);
         const stageID = selectWrapper.dataset.stageId;
         const needExtraForm = event.target.value === 'stage4' || event.target.value === 'stage6';

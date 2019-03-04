@@ -84,3 +84,8 @@
         }
     }
 }
+
+.b-input-file__text:empty:before {
+    content: 'A';
+    color: transparent;
+}

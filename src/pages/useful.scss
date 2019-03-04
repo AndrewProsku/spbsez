@@ -1,0 +1,60 @@
+@mixin innerPadding() {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    width: 100%;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.l-useful {
+    @include row();
+    @include padding-level(top, blue);
+}
+
+.l-useful-single__back {
+    @include innerPadding();
+    @include padding-level(bottom, red);
+    display: inline-block;
+    width: auto;
+
+    a {
+        @include font-size(p3);
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+
+        &:hover {
+            &:before {
+                margin-right: 10px;
+            }
+        }
+
+        svg {
+            position: relative;
+            top: -1px;
+            height: auto;
+            margin-right: 23px;
+        }
+    }
+}
+
+.l-useful-single__title {
+    @include innerPadding();
+    @include margin-level(bottom, green);
+    margin-top: 0;
+    padding-top: 10px;
+    padding-bottom: 0;
+
+    h1 {
+        max-width: 1060px;
+    }
+}

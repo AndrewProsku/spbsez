@@ -96,40 +96,6 @@
     @include margin-level(bottom, cyan);
 }
 
-.b-useful__caption-wrap {
-    @include margin-level(bottom, red);
-}
-
-.b-useful__caption {
-    @include font-size(p1);
-
-    color: $blue;
-}
-
-.b-useful__text {
-    @include font-size(p2);
-    @include margin-level(bottom, dark-yellow);
-}
-
-.b-useful__date {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.b-useful__date span {
-    display: flex;
-    align-items: center;
-    background-color: $white;
-    border-radius: 16px;
-    padding: 7px 22px;
-    margin-right: 15px;
-}
-
-.b-useful__date svg,
-.b-useful__date img {
-    margin-right: 15px;
-}
-
 .b-presentations {
     @include row();
     justify-content: space-between;

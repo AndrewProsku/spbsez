@@ -89,6 +89,10 @@ class News {
                 const {data} = response;
 
                 that._insertHtmlNews(data);
+
+                if (!data.showMore) {
+                    that._hideLoadMore();
+                }
             },
             error(error) {
                 console.error(error);
@@ -169,6 +173,10 @@ class News {
 
     _stopLoaderContant() {
         this.newsContainer.classList.remove(this.contantLoadClass);
+    }
+
+    _hideLoadMore() {
+        Utils.hide(this.loadMore);
     }
 }
 

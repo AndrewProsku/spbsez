@@ -1,0 +1,29 @@
+@mixin innerPadding() {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    width: 100%;
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+
+.b-useful {
+    width: 100%;
+    @include innerPadding();
+}
+
+.b-useful__item {
+    @include margin-level(bottom, cyan);
+}
+
+.b-useful__load-more {
+    @include margin-level(bottom, pink);
+}

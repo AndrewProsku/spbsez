@@ -103,27 +103,33 @@ class Vacancy {
             const that = this;
             const isFormFulfilled = this.checkForm();
 
-            if (isFormFulfilled) {
-                Utils.send(new FormData(that.$form), '/api/vacancy/', {
-                    success(response) {
-                        const successStatus = 1;
-                        const failStatus = 0;
-
-                        if (response.request.status === successStatus) {
-                            that.showSuccessMessage();
-                        } else if (response.request.status === failStatus) {
-                            const errorMessage = response.request.errors.join('</br>');
-
-                            // Нужно подумать как разделть ошибки по типу полей к которым они относятся
-                            that.showErrorMessage(that.$inputResume, errorMessage);
-                            that.errorRepeatPassword(errorMessage);
-                        }
-                    },
-                    error(error) {
-                        console.error(error);
-                    }
-                });
+            if (!isFormFulfilled) {
+                return;
             }
+
+            const formData = new FormData(that.$form);
+
+            formData.set('lang', document.documentElement.lang);
+
+            Utils.send(formData, '/api/vacancy/', {
+                success(response) {
+                    const successStatus = 1;
+                    const failStatus = 0;
+
+                    if (response.request.status === successStatus) {
+                        that.showSuccessMessage();
+                    } else if (response.request.status === failStatus) {
+                        const errorMessage = response.request.errors.join('</br>');
+
+                        // Нужно подумать как разделть ошибки по типу полей к которым они относятся
+                        that.showErrorMessage(that.$inputResume, errorMessage);
+                        that.errorRepeatPassword(errorMessage);
+                    }
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
         });
 
         this.$inputFIO.addEventListener('change', (event) => {

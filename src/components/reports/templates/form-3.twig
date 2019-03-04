@@ -1,11 +1,11 @@
 <div class="b-report-form__title">Отчет об объектах строительства резидентов</div>
 {# 1 #}
-<section class="b-report-block j-report-block">
+<section class="b-report-block j-report-block" id="block-1">
     <div class="b-report-block__header" data-number="1">
         <h3 class="b-report-block__title">Площадь требуемого земельного участка в соответствии с заявкой,&#160;га</h3>
     </div>
     <div class="b-report-block__body">
-        <div class="b-input-block b-input-block_is_untouched">
+        <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "area-application",
                 name: "area-application"
@@ -15,20 +15,20 @@
     </div>
 </section>
 {# 2 #}
-<section class="b-report-block j-report-block">
+<section class="b-report-block j-report-block" id="block-2">
     <div class="b-report-block__header" data-number="2">
         <h3 class="b-report-block__title">Площадь земельного участка, выданного резиденту,&#160;га&#160;факт</h3>
     </div>
     <div class="b-report-block__body">
         <div class="b-inputs-row">
-            <div class="b-input-block b-input-block_is_untouched">
+            <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "area-rent",
                     name: "area-rent"
                 } %}
                 <label class="b-input-block__label" for="area-rent">В аренду,&#160;га</label>
             </div>
-            <div class="b-input-block b-input-block_is_untouched">
+            <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "area-property",
                     name: "area-property"
@@ -39,12 +39,12 @@
     </div>
 </section>
 {# 3 #}
-<section class="b-report-block j-report-block">
+<section class="b-report-block j-report-block" id="block-3">
     <div class="b-report-block__header" data-number="3">
         <h3 class="b-report-block__title">Наименование объекта капитального строительства в соответствии с бизнес-планом</h3>
     </div>
     <div class="b-report-block__body">
-        <div class="b-input-block b-input-block_is_untouched">
+        <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "object-name-plan",
                 name: "object-name-plan"
@@ -54,12 +54,12 @@
     </div>
 </section>
 {# 4 #}
-<section class="b-report-block j-report-block">
+<section class="b-report-block j-report-block" id="block-4">
     <div class="b-report-block__header" data-number="4">
         <h3 class="b-report-block__title">Мощность объекта капитального строительства,&#160;м²</h3>
     </div>
     <div class="b-report-block__body">
-        <div class="b-input-block b-input-block_is_untouched">
+        <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "capital-object",
                 name: "capital-object"
@@ -69,12 +69,12 @@
     </div>
 </section>
 {# 5 #}
-<section class="b-report-block j-report-block">
+<section class="b-report-block j-report-block" id="block-5">
     <div class="b-report-block__header" data-number="5">
         <h3 class="b-report-block__title">Сроки строительства в соответствии с бизнес-планом</h3>
     </div>
     <div class="b-report-block__body">
-        <div class="b-input-block b-input-block_is_untouched">
+        <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "construction-period",
                 name: "construction-period"
@@ -84,7 +84,7 @@
     </div>
 </section>
 {# 6 #}
-<section class="b-report-block j-report-block">
+<section class="b-report-block j-report-block"  id="block-6">
     <div class="b-report-block__header" data-number="6">
         <h3 class="b-report-block__title">Текущая стадия строительства объекта<div class="b-help j-help">С начала деятельности в качестве резидента</div></h3>
     </div>

@@ -1,12 +1,13 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
 } ?>
+<?php if(LANGUAGE_ID !== 'ch'): ?>
 <div class="b-account j-account-auth">
-    <a href="/cabinet/<?php if($arResult['MESSAGES']): ?>messages/<?php endif; ?>" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?>  is-auth j-account-auth<?php endif; ?>">
+    <a href="<?= LANG_DIR; ?>cabinet/<?php if($arResult['MESSAGES']): ?>messages/<?php endif; ?>" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?>  is-auth j-account-auth<?php endif; ?>">
         <span class="b-account__link-icon">
            <?php if($arResult['MESSAGES']): ?> <span class="b-account__messages"><?= $arResult['MESSAGES']; ?></span><?php endif; ?>
         </span>
-        <span class="b-account__link-text">Личный кабинет</span>
+        <span class="b-account__link-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_CABINET'); ?></span>
     </a>
     <?$APPLICATION->IncludeComponent(
         "bitrix:menu",
@@ -24,3 +25,4 @@
         )
     );?>
 </div>
+<?php endif; ?>

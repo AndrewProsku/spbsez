@@ -1,9 +1,11 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
 } ?>
-
+<?php
+\Bitrix\Main\Localization\Loc::loadMessages(__DIR__ . '/../../template.php');
+?>
 <div id="#service" class="b-service-popup">
-    <h3 class="b-service-popup__header">Оставить заявку</h3>
+    <h3 class="b-service-popup__header"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_HEADER'); ?></h3>
     <form method="post" enctype="multipart/form-data" class="b-service-response-form j-service-form">
         <div class="b-service-response-form__inputs">
             <div class="b-form-block j-service-title-select">
@@ -19,10 +21,8 @@
                         </select>
                     </div>
                 </div>
-                <label for="service-title" class="b-form-block__label">
-                    Цель обращения
-                </label>
-                <span class="b-form-block__error-text">Текст подсказки</span>
+                <label for="service-title" class="b-form-block__label"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_SUBJECT'); ?></label>
+                <span class="b-form-block__error-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_SUBJECT'); ?></span>
             </div>
             <div class="b-form-block j-service-text b-input-textarea">
                 <textarea id="text"
@@ -32,8 +32,8 @@
                           cols=""
                           placeholder=""></textarea>
 
-                <label for="admin-fio" class="b-form-block__label">Комментарий</label>
-                <span class="b-form-block__error-text">Комментарий</span>
+                <label for="admin-fio" class="b-form-block__label"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_COMMENT'); ?></label>
+                <span class="b-form-block__error-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_COMMENT'); ?></span>
             </div>
             <div class="b-form-block j-service-company">
                 <input id="company"
@@ -44,8 +44,8 @@
                        autocomplete=""
                        value=""
                        placeholder="">
-                <label for="admin-fio" class="b-form-block__label">Компания</label>
-                <span class="b-form-block__error-text">Компания</span>
+                <label for="admin-fio" class="b-form-block__label"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_COMPANY'); ?></label>
+                <span class="b-form-block__error-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_COMPANY'); ?></span>
             </div>
             <div class="b-form-block j-service-fio">
                 <input id="service-fio"
@@ -56,8 +56,8 @@
                        autocomplete=""
                        value=""
                        placeholder="">
-                <label for="admin-fio" class="b-form-block__label">ФИО</label>
-                <span class="b-form-block__error-text">Имя</span>
+                <label for="admin-fio" class="b-form-block__label"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_NAME'); ?></label>
+                <span class="b-form-block__error-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_NAME'); ?></span>
             </div>
             <div class="b-form-block j-service-position">
                 <input id="position"
@@ -68,16 +68,16 @@
                        autocomplete=""
                        value=""
                        placeholder="">
-                <label for="email" class="b-form-block__label">Должность</label>
-                <span class="b-form-block__error-text">Текст подсказки</span>
+                <label for="email" class="b-form-block__label"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_POSITION'); ?></label>
+                <span class="b-form-block__error-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_POSITION'); ?></span>
             </div>
             <div class="b-form-block j-service-email">
                 <input id="service-email"
                        class="b-input-email"
                        type="email"
                        name="email">
-                <label for="email" class="b-form-block__label">Эл. почта</label>
-                <span class="b-form-block__error-text">Текст подсказки</span>
+                <label for="email" class="b-form-block__label"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_EMAIL'); ?></label>
+                <span class="b-form-block__error-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_EMAIL'); ?></span>
             </div>
             <div class="b-form-block j-service-phone">
                 <input id="service-phone"
@@ -85,12 +85,12 @@
                        type="tel"
                        name="phone"
                        autocomplete="tel"
-                       placeholder="+7 ___ ___-__-__">
-                <label for="admin-phone" class="b-form-block__label">Телефон</label>
-                <span class="b-form-block__error-text">Текст подсказки</span>
+                       placeholder="<?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_PHONE_MASK'); ?>">
+                <label for="admin-phone" class="b-form-block__label"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_PHONE'); ?></label>
+                <span class="b-form-block__error-text"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_PHONE'); ?></span>
             </div>
         </div>
 
-        <button class="button b-service__button j-service-submit">Оставить заявку</button>
+        <button class="button b-service__button j-service-submit"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REQ_TMPL_SUBMIT'); ?></button>
     </form>
 </div>

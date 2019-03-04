@@ -6,6 +6,7 @@
 <form action="#" method="post" enctype="application/x-www-form-urlencoded" class="b-news__filter b-mini-filter j-news-filter">
     <input type="hidden" name="sect" value="<?= $arParams['SECTION_ID']; ?>">
     <input type="hidden" name="compid" value="<?= $arParams['AJAX_COMPONENT_ID']; ?>">
+    <input type="hidden" name="lang" value="<?= LANGUAGE_ID; ?>">
     <?php if($arResult['YEARS']): ?>
         <div class="b-mini-filter__group j-news-select-group">
             <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span

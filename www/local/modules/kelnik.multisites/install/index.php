@@ -63,14 +63,21 @@ class kelnik_multisites extends CModule
 
         $this->getConnection()->query("CREATE TABLE `" . SitesTable::getTableName() . "` (
             `ID` INT(11) NOT NULL AUTO_INCREMENT,
+            `MAIN_VIDEO_MP4` INT(11) NULL DEFAULT '0',
+            `MAIN_VIDEO_OGV` INT(11) NULL DEFAULT '0',
+            `MAIN_VIDEO_WEBM` INT(11) NULL DEFAULT '0',
             `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N' COLLATE 'utf8_unicode_ci',
             `NAME` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `PHONE` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `ADDRESS` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+            `SOCIAL_INST` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+            `SOCIAL_FACEBOOK` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `TEMPLATE_ID` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SEO_TITLE` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SEO_DESCRIPTION` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SEO_KEYWORDS` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+            `PRESS_CONTACT` TEXT NULL COLLATE 'utf8_unicode_ci',
+            `PRESS_CONTACT_EN` TEXT NULL COLLATE 'utf8_unicode_ci',
             PRIMARY KEY (`ID`),
             INDEX `ACTIVE` (`ACTIVE`)
         ) COLLATE='utf8_unicode_ci' ENGINE=InnoDB;");
