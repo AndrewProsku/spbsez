@@ -4,7 +4,7 @@ const node = document.querySelector('#j-particles');
 
 if (node) {
     const id = 'j-particles';
-    const json = './assets/particles.json';
+    const json = './../assets/particles.json';
 
     const animateBackground = function(element) {
         const diameter = 240;
