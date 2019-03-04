@@ -40,7 +40,7 @@ class ReportBlock {
         this.FAIL_STATUS = 0;
     }
 
-    /* eslint-disable max-statements */
+    /* eslint-disable max-statements, max-lines-per-function */
     init(options) {
         this.target = options.target;
         this.formID = options.formID;
@@ -57,6 +57,10 @@ class ReportBlock {
             switch (blockData.type) {
                 case 'foreign-investors': {
                     this.initForeignInvestorsBlock(blockData);
+                    break;
+                }
+                case 'taxes': {
+                    this.initTaxesBlock(blockData);
                     break;
                 }
                 case 'construction-stage': {
@@ -96,7 +100,7 @@ class ReportBlock {
         // Инициализация тултипов
         this.initTooltips();
     }
-    /* eslint-enable max-statements */
+    /* eslint-enable max-statements, max-lines-per-function */
 
     approveFormHandler(formID) {
         if (formID === this.formID) {
@@ -161,6 +165,55 @@ class ReportBlock {
             });
             delete investorCountriesField.dataset.prefilled;
             this.inputsStatus[investorCountriesField.id] = this.getInputStatus(investorCountriesField);
+        });
+    }
+
+    initTaxesBlock(data) {
+        this.inputsData = data;
+        const taxesAllInput = this.target.querySelector('#taxes-all');
+        const taxesYearInput = this.target.querySelector('#taxes-year');
+        let allTaxes = 0;
+        let yearTaxes = 0;
+        const NOT_FOUND = -1;
+
+        const taxesAllInputs = Array.from(this.target.querySelectorAll('.j-taxes-all input'));
+        const taxesYearInputs = Array.from(this.target.querySelectorAll('.j-taxes-year input'));
+
+        taxesAllInputs.forEach((input, i, inputs) => {
+            this.calculateTaxes(input, inputs, taxesAllInput);
+        });
+        taxesYearInputs.forEach((input, i, inputs) => {
+            this.calculateTaxes(input, inputs, taxesYearInput);
+        });
+
+        this.inputsData.fields.forEach((field) => {
+            if (field.id.indexOf('-all') !== NOT_FOUND) {
+                allTaxes += Number(field.value);
+            } else if (field.id.indexOf('-year') !== NOT_FOUND) {
+                yearTaxes += Number(field.value);
+            }
+        });
+        taxesAllInput.value = allTaxes;
+        taxesYearInput.value = yearTaxes;
+    }
+
+    calculateTaxes(currentInput, allInputs, resultInput) {
+        let previousValue = currentInput.value;
+
+        currentInput.addEventListener('focus', (event) => {
+            previousValue = event.target.value;
+        });
+        currentInput.addEventListener('change', (event) => {
+            if ($.isNumeric(event.target.value)) {
+                let newValue = 0;
+
+                allInputs.forEach((input) => {
+                    newValue += Number(input.value);
+                });
+                resultInput.value = newValue;
+            } else {
+                event.target.value = previousValue;
+            }
         });
     }
 
@@ -607,11 +660,7 @@ class ReportBlock {
 
         Utils.send(dataToSend, '/tests/reports/input-update.json', {
             success(response) {
-                if (response.request.status === that.FAIL_STATUS) {
-                    // const errorMessage = response.request.errors.join('</br>');
-
-                    // that.showErrorMessage(input, errorMessage);
-                } else if (response.request.status === that.SUCCESS_STATUS) {
+                if (response.request.status === that.SUCCESS_STATUS) {
                     if (input.type === 'radio') {
                         const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
 
