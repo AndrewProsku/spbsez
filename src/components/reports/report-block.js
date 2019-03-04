@@ -198,13 +198,22 @@ class ReportBlock {
     }
 
     calculateTaxes(currentInput, allInputs, resultInput) {
-        currentInput.addEventListener('change', () => {
-            let newValue = 0;
+        let previousValue = currentInput.value;
 
-            allInputs.forEach((input) => {
-                newValue += Number(input.value);
-            });
-            resultInput.value = newValue;
+        currentInput.addEventListener('focus', (event) => {
+            previousValue = event.target.value;
+        });
+        currentInput.addEventListener('change', (event) => {
+            if ($.isNumeric(event.target.value)) {
+                let newValue = 0;
+
+                allInputs.forEach((input) => {
+                    newValue += Number(input.value);
+                });
+                resultInput.value = newValue;
+            } else {
+                event.target.value = previousValue;
+            }
         });
     }
 
