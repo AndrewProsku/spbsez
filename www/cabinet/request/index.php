@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle('Подать заявку');
 $APPLICATION->SetPageProperty('title', 'Подать заявку | АООЭЗ');
 if (!$USER->IsAuthorized()) {
-    LocalRedirect('/cabinet/auth/');
+    LocalRedirect(LANG_DIR . 'cabinet/auth/');
 }
 ?>
 
@@ -58,9 +58,7 @@ if (!$USER->IsAuthorized()) {
 
         </div>
     </div>
-    <div class="l-profile-logout">
-        <button class="button-logout j-logout" type="button">Выйти из личного кабинета</button>
-    </div>
+    <?php $APPLICATION->IncludeFile('inc_account_logout.php'); ?>
 </div>
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

@@ -3,6 +3,7 @@ namespace Kelnik\Api\Process;
 
 use Bitrix\Main\Context;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\News\Categories\CategoriesTable;
 use Kelnik\News\Component\NewsList;
 
 /**
@@ -16,23 +17,32 @@ class ApiProcessNews extends ApiProcessAbstract
 {
     public function execute(array $request): bool
     {
-        $contextRequest = Context::getCurrent()->getRequest();
+        $lang = Context::getCurrent()->getLanguage();
+        $sect = (int) ArrayHelper::getValue($request, 'sect', CategoriesTable::NEWS_RU);
+        $isNews = in_array($sect, [CategoriesTable::NEWS_RU, CategoriesTable::NEWS_EN]);
+        $sefFolder = '/media/';
+
+        if ($lang !== LANGUAGE_ID) {
+            $sefFolder = '/' . $lang . $sefFolder;
+        };
+
+        $sefFolder .= $isNews ? 'news/' : 'articles/';
 
         \CBitrixComponent::includeComponentClass('kelnik:news.list');
 
         $component = new NewsList();
-        $component->initComponentTemplate('media-news');
+        //$component->initComponentTemplate('media-news');
         $component->arParams = $component->onPrepareComponentParams([
             "AJAX_PARAM_NAME" => "compid",
-            "AJAX_COMPONENT_ID" => "news-list",
+            "AJAX_COMPONENT_ID" => ArrayHelper::getValue($request, 'compid', 'news-list'),
             "AJAX_TEMPLATE_PAGE" => "",
             "AJAX_TYPE" => "JSON",
             "CACHE_GROUPS" => "N",
             "CACHE_TIME" => "3600",
             "CACHE_TYPE" => "N",
             "ELEMENTS_COUNT" => "6",
-            "SECTION_ID" => (int) $contextRequest->getPost('sect'),
-            "SEF_FOLDER" => "/media/news/",
+            "SECTION_ID" => $sect,
+            "SEF_FOLDER" => $sefFolder,
             "SEF_MODE" => "N",
             "SEF_URL_TEMPLATES" => Array("detail"=>"#ELEMENT_CODE#/","index"=>"","section"=>""),
             "SET_404" => "N",
@@ -42,7 +52,7 @@ class ApiProcessNews extends ApiProcessAbstract
             "SORT_BY_2" => "ID",
             "SORT_ORDER_2" => "ASC",
             "USE_AJAX" => "N",
-            "USE_ADVANCE_FILTER" => "Y"
+            "USE_ADVANCE_FILTER" => $isNews ? 'Y' : 'N'
         ]);
 
         $component->executeComponent();

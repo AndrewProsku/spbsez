@@ -3,6 +3,7 @@
 namespace Kelnik\Refbook\Component;
 
 use Bex\Bbc;
+use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
@@ -52,7 +53,8 @@ class RefbookList extends Bbc\Basis
         $selectFields = [
             Types::TYPE_REVIEW => ['ID', 'NAME', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'PREVIEW'],
             Types::TYPE_DOCS => ['ID', 'NAME', 'FILE_ID'],
-            Types::TYPE_PRESENTATION => ['ID', 'NAME', 'FILE_ID']
+            Types::TYPE_PRESENTATION => ['ID', 'NAME', 'FILE_ID'],
+            Types::TYPE_TEAM => ['ID', 'NAME', 'IMAGE_ID', 'TEXT', 'NAME_EN', 'TEXT_EN']
         ];
 
         $select = ArrayHelper::getValue(
@@ -64,6 +66,12 @@ class RefbookList extends Bbc\Basis
         $filter = [
             '=ACTIVE' => $className::YES
         ];
+        
+        if (in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION])) {
+            $filter['=SITE_ID'] = SITE_ID;
+        }
+
+        $this->arResult['HEADER'] = Loc::getMessage('KELNIK_REFBOOK_HEADER_' . $this->arParams['SECTION']);
 
         if ($this->arParams['SECTION'] !== Types::TYPE_RESIDENT) {
             try {
@@ -78,6 +86,13 @@ class RefbookList extends Bbc\Basis
                 )->FetchAll();
             } catch (\Exception $e) {
                 return [];
+            }
+
+            if ($this->arParams['SECTION'] === Types::TYPE_TEAM) {
+                $this->arResult['ELEMENTS'] = $this->replaceFields(
+                    $this->arResult['ELEMENTS'],
+                    strtoupper(Context::getCurrent()->getLanguage())
+                );
             }
 
             $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*', 'FILE_*' => 'full']);
@@ -106,6 +121,7 @@ class RefbookList extends Bbc\Basis
                 'select' => [
                     '*',
                     'TYPE_NAME' => 'TYPE.NAME',
+                    'TYPE_NAME_EN' => 'TYPE.NAME_EN',
                     'TYPE_SORT' => 'TYPE.SORT'
                 ],
                 'filter' => [
@@ -132,6 +148,7 @@ class RefbookList extends Bbc\Basis
                 $this->arResult['TYPES'][$v['TYPE_ID']] = [
                     'ID' => $v['TYPE_ID'],
                     'NAME' => $v['TYPE_NAME'],
+                    'NAME_EN' => $v['TYPE_NAME_EN'],
                     'SORT' => $v['TYPE_SORT']
                 ];
             }
@@ -145,6 +162,15 @@ class RefbookList extends Bbc\Basis
         }
         unset($v);
 
+        $langId = strtoupper(Context::getCurrent()->getLanguage());
+
+        foreach (['ELEMENTS', 'TYPES'] as $type) {
+            $this->arResult[$type] = $this->replaceFields(
+                $this->arResult[$type],
+                $langId
+            );
+        }
+
         usort($this->arResult['TYPES'], function ($a, $b) {
             if ($a == $b) {
                 return 0;
@@ -154,5 +180,25 @@ class RefbookList extends Bbc\Basis
         });
 
         $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*']);
+    }
+
+    protected function replaceFields(array $data, $langId)
+    {
+        if (!$data || !$langId) {
+            return $data;
+        }
+
+        foreach ($data as &$v) {
+            foreach ($v as $key => $val) {
+                if (!isset($v[$key . '_' . $langId])) {
+                    continue;
+                }
+                $v[$key] = $v[$key . '_' . $langId];
+                unset($v[$key . '_' . $langId]);
+            }
+        }
+        unset($v);
+
+        return $data;
     }
 }

@@ -60,9 +60,21 @@ class TeamTable extends DataManager
                 ]
             ),
             new Main\Entity\StringField(
+                'NAME_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_TEAM_NAME_EN'),
+                ]
+            ),
+            new Main\Entity\StringField(
                 'TEXT',
                 [
                     'title' => Loc::getMessage('KELNIK_TEAM_DESCR'),
+                ]
+            ),
+            new Main\Entity\StringField(
+                'TEXT_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_TEAM_DESCR_EN'),
                 ]
             )
         ];

@@ -1,8 +1,8 @@
-export default function() {
+export default function(lang) {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
 
-        script.src = `https://api-maps.yandex.ru/2.1/?lang=ru_RU`;
+        script.src = `https://api-maps.yandex.ru/2.1/?lang=${lang}_RU`;
         script.async = true;
         script.defer = true;
         script.type = 'text/javascript';

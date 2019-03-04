@@ -27,6 +27,7 @@ import Service from '../../components/service-popup';
 import servicePopupTemplate from '../../components/service-popup/service-popup.twig';
 import TabsAjax from 'components/tabs/tabs-ajax';
 import templateMessages from 'components/messages/messages.twig';
+import Useful from '../../components/useful';
 import Utils from './utils';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
@@ -260,11 +261,9 @@ if (docWrap.length) {
 const mapWrapper = document.querySelector('.j-yandex-map');
 
 if (mapWrapper) {
-    yandexMapLoad()
+    yandexMapLoad(mapWrapper.dataset.lang || 'ru')
         .then((ymaps) => {
-            const yandexMap = new YandexMap(ymaps);
-
-            yandexMap.init({wrapper: mapWrapper});
+            (new YandexMap(ymaps)).init({wrapper: mapWrapper});
         })
         .catch((error) => {
             console.error(`При загрузке яндекс карт произошла ошибка: ${error}`);
@@ -743,6 +742,13 @@ if (accordionLinks) {
  */
 if (document.querySelector('.j-news-filter') || document.querySelector('.j-news-load-more')) {
     (new News()).init();
+}
+
+/**
+ *  Инициализация фильтрации и подгрузки новостей
+ */
+if (document.querySelector('.j-useful-content')) {
+    (new Useful()).init();
 }
 
 /**

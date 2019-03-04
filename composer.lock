@@ -477,11 +477,11 @@
         },
         {
             "name": "kelnik/module-text",
-            "version": "3.0.3",
+            "version": "3.0.4",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.kelnik.pro:bitrix/kelnik.module.text.git",
-                "reference": "7928e7993d36dbc2a14ac6730b78a53c00325060"
+                "reference": "b8dd4b92b210d10437a0a6ed1b923e99a815585b"
             },
             "require": {
                 "bitrix-expert/bbc": "<=2",
@@ -503,7 +503,7 @@
                 }
             ],
             "description": "Bitrix module. Text blocks",
-            "time": "2018-11-20T11:19:00+00:00"
+            "time": "2019-02-28T09:32:44+00:00"
         },
         {
             "name": "kelnik/module.admin_helper",

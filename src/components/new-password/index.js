@@ -46,27 +46,27 @@ class NewPassword {
                 return;
             }
 
-            const dataToSend = $(event.target).serialize();
+            Utils.send(`${$(event.target).serialize()}&lang=${document.documentElement.lang}`,
+                '/api/changePassword/',
+                {
+                    success(response) {
+                        const successStatus = 1;
+                        const failStatus = 0;
 
-            Utils.send(dataToSend, '/api/changePassword/', {
-                success(response) {
-                    const successStatus = 1;
-                    const failStatus = 0;
+                        if (response.request.status === successStatus) {
+                            that.$successButton.classList.remove('password-recovery-block_is_hidden');
+                            that.showSuccessMessage();
+                            Utils.removeElement(that.$form);
+                        } else if (response.request.status === failStatus) {
+                            const errorMessage = response.request.errors.join('</br>');
 
-                    if (response.request.status === successStatus) {
-                        that.$successButton.classList.remove('password-recovery-block_is_hidden');
-                        that.showSuccessMessage();
-                        Utils.removeElement(that.$form);
-                    } else if (response.request.status === failStatus) {
-                        const errorMessage = response.request.errors.join('</br>');
-
-                        that.errorRepeatPassword(errorMessage);
+                            that.errorRepeatPassword(errorMessage);
+                        }
+                    },
+                    error(error) {
+                        console.error(error);
                     }
-                },
-                error(error) {
-                    console.error(error);
-                }
-            });
+                });
         });
 
         this.$inputNewPassword.addEventListener('change', (event) => {

@@ -1,0 +1,3 @@
+<?
+$sSectionName="For Investors";
+?>

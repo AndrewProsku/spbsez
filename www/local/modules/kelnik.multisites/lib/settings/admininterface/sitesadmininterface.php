@@ -110,6 +110,11 @@ class SitesAdminInterface extends AdminInterface
                         'HEADER' => false,
                         'FILTER' => false
                     ],
+                    'PRESS_CONTACT_EN' => [
+                        'WIDGET' => new VisualEditorWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ],
 
                     'TEMPLATE_ID' => array(
                         'WIDGET' => new ComboBoxWidget(),

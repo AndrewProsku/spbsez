@@ -13,6 +13,7 @@ class Api
 {
     protected static $instance;
     protected $event;
+    protected $lang;
     protected $errors = [];
     protected $data = [];
 
@@ -74,6 +75,11 @@ class Api
         header('Content-type:application/json; charset=UTF-8');
 
         $this->event = ArrayHelper::getValue($_REQUEST, 'event', false);
+        $this->lang  = ArrayHelper::getValue($_REQUEST, 'lang', LANGUAGE_ID);
+
+        if ($this->lang !== LANGUAGE_ID) {
+            Context::getCurrent()->setLanguage($this->lang);
+        }
 
         if (!$this->event) {
             $this->errors[] = Loc::getMessage('KELNIK_API_EVENT_REQUIRED');

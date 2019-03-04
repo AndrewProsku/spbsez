@@ -1,8 +1,8 @@
     </main>
     <footer class="l-home-footer b-footer">
         <div class="b-footer__left">
-            <a href="/" class="b-footer__logo">
-                <img src="/images/home/logo-white.svg" alt="Особая Экономическая зона">
+            <a href="<?= LANG_DIR; ?>" class="b-footer__logo">
+                <img src="/images/home/logo-white-<?= LANGUAGE_ID; ?>.svg" alt="<?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SEZ'); ?>">
             </a>
         </div>
         <div class="b-footer__center">
@@ -22,10 +22,12 @@
                 )
             );?>
             <div class="b-footer__copyright">
-                <span class="b-footer__copyright-text">© <?= date('Y'); ?>, ОЭЗ «Санкт-Петербург»</span>
-                <a href="#" class="b-footer__copyright-link">Раскрытие информации</a>
+                <span class="b-footer__copyright-text">© <?= date('Y'); ?>, <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_FOOTER_SEZ'); ?></span>
+                <?php if(LANG_DIR == '/'): ?>
+                    <a href="#" class="b-footer__copyright-link">Раскрытие информации</a>
+                <?php endif; ?>
                 <button class="b-footer__copyright-link j-message-button" data-href="#message">
-                    Написать сообщение
+                    <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_WRITE_MESSAGES'); ?>
                 </button>
             </div>
         </div>

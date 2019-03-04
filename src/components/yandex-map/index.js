@@ -62,6 +62,11 @@ class YandexMap {
         this.content = this.mapWrapper.querySelector(this.base);
         this.id = this.content.id;
         this.url = this.mapWrapper.dataset.ajax;
+        this.json = this.mapWrapper.dataset.json || {};
+
+        if (this.json) {
+            this.json = JSON.parse(atob(this.json));
+        }
 
         this.completeSettings(outerOptions, () => {
             this.initYandexMap(() => {
@@ -74,7 +79,6 @@ class YandexMap {
                 this.handleLocationLinks();
             });
         });
-
     }
 
     /**
@@ -106,11 +110,13 @@ class YandexMap {
             this.connectSettings(this.getScriptSettings(outerOptions));
             this.getServerSettings(this.url, initCallback);
 
-        } else {
-            this.connectSettings(this.setDefaultSettings());
-            this.connectSettings(this.getScriptSettings(outerOptions));
-            initCallback()
+            return;
         }
+
+        this.connectSettings(this.setDefaultSettings());
+        this.connectSettings(this.getScriptSettings(outerOptions));
+        this.connectSettings(this.json);
+        initCallback();
     }
 
     /**

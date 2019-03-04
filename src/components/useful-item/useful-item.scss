@@ -1,0 +1,38 @@
+.b-useful-item_gray_date {
+    .b-useful-item__date span {
+        background-color: $bg-grey;
+    }
+}
+
+.b-useful-item__caption-wrap {
+    @include margin-level(bottom, red);
+}
+
+.b-useful-item__caption {
+    @include font-size(p1);
+    color: $blue;
+}
+
+.b-useful-item__text {
+    @include font-size(p2);
+    @include margin-level(bottom, dark-yellow);
+}
+
+.b-useful-item__date {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.b-useful-item__date span {
+    display: flex;
+    align-items: center;
+    background-color: $white;
+    border-radius: 16px;
+    padding: 7px 22px;
+    margin-right: 15px;
+}
+
+.b-useful-item__date svg,
+.b-useful-item__date img {
+    margin-right: 15px;
+}

@@ -16,6 +16,11 @@ Loc::loadMessages(__FILE__);
  */
 class CategoriesTable extends DataManager
 {
+    public const NEWS_RU = 1;
+    public const NEWS_EN = 3;
+    public const ARTICLES_RU = 2;
+    public const ARTICLES_EN = 4;
+
     /**
      * {@inheritdoc}
      */
