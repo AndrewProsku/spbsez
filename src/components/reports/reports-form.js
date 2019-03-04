@@ -140,7 +140,7 @@ class ReportForm {
             this.sendNewValues(event.target);
         });
 
-        Utils.send('', '/tests/reports/all-rejected.json', {
+        Utils.send('', '/tests/reports/all.json', {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
