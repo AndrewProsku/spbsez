@@ -125,54 +125,47 @@
       {
         "blocks": [
           {
+            "type": "taxes",
             "fields": [
               {
-                "id": "taxes-all",
-                "value": "123"
-              },
-              {
-                "id": "taxes-year",
-                "value": "123"
-              },
-              {
                 "id": "taxes-federal-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-federal-year",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-regional-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-regional-year",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-local-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-local-year",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-offbudget-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-offbudget-year",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-nds-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-nds-year",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -180,35 +173,35 @@
             "fields": [
               {
                 "id": "taxes-breaks-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-breaks-year",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-breaks-federal-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-breaks-federal-year",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-breaks-local-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-breaks-local-year",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-breaks-offbudget-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "taxes-breaks-offbudget-year",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -216,11 +209,11 @@
             "fields": [
               {
                 "id": "custom-duties-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "custom-duties-year",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -228,11 +221,11 @@
             "fields": [
               {
                 "id": "custom-duties-breaks-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "custom-duties-breaks-year",
-                "value": "123"
+                "value": 123
               }
             ]
           }
@@ -244,7 +237,7 @@
             "fields": [
               {
                 "id": "area-application",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -252,11 +245,11 @@
             "fields": [
               {
                 "id": "area-rent",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "area-property",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -264,7 +257,7 @@
             "fields": [
               {
                 "id": "object-name-plan",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -272,7 +265,7 @@
             "fields": [
               {
                 "id": "capital-object",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -339,7 +332,7 @@
             "fields": [
               {
                 "id": "office-application",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -347,7 +340,7 @@
             "fields": [
               {
                 "id": "office-rent",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -385,11 +378,11 @@
             "fields": [
               {
                 "id": "export-volume-all",
-                "value": "123"
+                "value": 123
               },
               {
                 "id": "export-volume-year",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -463,7 +456,7 @@
             "fields": [
               {
                 "id": "high-productive-jobs",
-                "value": "40"
+                "value": 40
               }
             ]
           }
@@ -475,7 +468,7 @@
             "fields": [
               {
                 "id": "intangible-assets",
-                "value": "123"
+                "value": 123
               }
             ]
           },
@@ -483,7 +476,7 @@
             "fields": [
               {
                 "id": "degrees-employees",
-                "value": "123"
+                "value": 123
               }
             ]
           }
