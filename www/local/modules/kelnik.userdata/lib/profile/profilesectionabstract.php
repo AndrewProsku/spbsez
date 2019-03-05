@@ -10,7 +10,7 @@ abstract class ProfileSectionAbstract
     protected $profile;
     protected $lastError = '';
 
-    public function __construct(ProfileEnvelope &$profile)
+    public function __construct(Profile &$profile)
     {
         $this->profile = $profile;
     }

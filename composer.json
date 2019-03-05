@@ -17,7 +17,8 @@
     "friendsofphp/php-cs-fixer": "*",
     "sebastian/phpcpd": "*",
     "phpmetrics/phpmetrics": "*",
-    "phpmd/phpmd" : "@stable"
+    "phpmd/phpmd" : "@stable",
+    "symfony/console": "*"
   },
   "extra": {
     "bitrix-dir": "www/bitrix",

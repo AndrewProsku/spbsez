@@ -26,19 +26,7 @@ class ReportRouter extends BasisRouter
         ];
 
         $this->componentVariables = [
-            'SECTION_ID',
-            'SECTION_CODE',
-            'ELEMENT_ID',
-            'ELEMENT_CODE'
+            'ELEMENT_ID'
         ];
-    }
-
-    protected function executeProlog()
-    {
-        foreach (['SECTION_ID', 'SECTION_CODE'] as $field) {
-            if (!isset($this->variables[$field]) && !empty($this->arParams[$field])) {
-                $this->variables[$field] = $this->arParams[$field];
-            }
-        }
     }
 }

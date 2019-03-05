@@ -11,15 +11,15 @@ use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Messages\Model\MessagesTable;
 use Kelnik\Messages\Model\MessageUsersTable;
 use Kelnik\Requests\Model\NotifyTable;
-use Kelnik\Userdata\Profile\ProfileEnvelope;
+use Kelnik\Userdata\Profile\Profile;
 
-class MessageEnvelope
+class MessageService
 {
     public const MONTHS_COUNT = 2;
     public const BASE_URL = '/cabinet/messages/';
 
     /**
-     * @var ProfileEnvelope
+     * @var Profile
      */
     private $profile;
 
@@ -54,12 +54,12 @@ class MessageEnvelope
     private static $instance;
     private static $settings = [];
 
-    private function __construct(ProfileEnvelope $profile)
+    private function __construct(Profile $profile)
     {
         $this->profile = $profile;
     }
 
-    public static function getInstance(ProfileEnvelope $profile)
+    public static function getInstance(Profile $profile)
     {
         if (!empty(self::$instance[$profile->getId()])) {
             return self::$instance[$profile->getId()];

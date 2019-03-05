@@ -26,9 +26,9 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         'SECOND_NAME',
         'LAST_NAME',
         'PERSONAL_PHONE',
-        ProfileEnvelope::CAN_MSG,
-        ProfileEnvelope::CAN_REPORT,
-        ProfileEnvelope::CAN_REQUEST,
+        Profile::CAN_MSG,
+        Profile::CAN_REPORT,
+        Profile::CAN_REQUEST,
     ];
 
     /**
@@ -48,7 +48,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         if (!$data) {
             $data = [
                 'ID' => self::getFakeId(),
-                ProfileEnvelope::OWNER_FIELD => $this->profile->getId(),
+                Profile::OWNER_FIELD => $this->profile->getId(),
                 'STATUS_NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_ADMIN'),
                 'NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_DEFAULT_NAME'),
                 'FULL_NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_DEFAULT_NAME')
@@ -70,8 +70,8 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         $el = new \CUser();
 
         $dbData['ACTIVE'] = 'Y';
-        $dbData['GROUP_ID'] = [ProfileEnvelope::GROUP_RESIDENT];
-        $dbData[ProfileEnvelope::OWNER_FIELD] = $this->profile->getId();
+        $dbData['GROUP_ID'] = [Profile::GROUP_RESIDENT];
+        $dbData[Profile::OWNER_FIELD] = $this->profile->getId();
         $dbData['PASSWORD'] = randString(8);
 
         $res = $el->Add($dbData);
@@ -189,7 +189,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
                 }
                 unset($res[$k]);
             }
-            $res['FULL_NAME'] = ProfileEnvelope::getFullName($res);
+            $res['FULL_NAME'] = Profile::getFullName($res);
             $res['STATUS_NAME'] = Loc::getMessage('KELNIK_PROFILE_STATUS_ADMIN');
         }
 
@@ -250,7 +250,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         }
 
         $row = array_merge($row, $data);
-        $row['FULL_NAME'] = ProfileEnvelope::getFullName($row);
+        $row['FULL_NAME'] = Profile::getFullName($row);
 
         if (!empty($row['EMAIL'])) {
             return $this->convertFakeToReal($row);
@@ -292,7 +292,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         $rows = [];
         foreach ($tmp as $v) {
             $v = unserialize(base64_decode($v));
-            $v['FULL_NAME'] = ProfileEnvelope::getFullName($v);
+            $v['FULL_NAME'] = Profile::getFullName($v);
             $rows[$v['ID']] = $v;
         }
 
@@ -386,7 +386,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
             $row = \CUser::GetByID($id)->Fetch();
         }
 
-        if (!$row || (int)$row[ProfileEnvelope::OWNER_FIELD] !== $this->profile->getId()) {
+        if (!$row || (int)$row[Profile::OWNER_FIELD] !== $this->profile->getId()) {
             $this->lastError = Loc::getMessage('KELNIK_PROFILE_ADMIN_ROW_NOT_EXISTS');
 
             return false;

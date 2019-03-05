@@ -3,9 +3,9 @@
 namespace Kelnik\Userdata\Profile;
 
 use Kelnik\Helpers\ArrayHelper;
-use Kelnik\Messages\MessageEnvelope;
+use Kelnik\Messages\MessageService;
 
-class ProfileEnvelope
+class Profile
 {
     public const GROUP_SUPER_ADMIN = 1;
     public const GROUP_ADMIN = 7;
@@ -101,6 +101,15 @@ class ProfileEnvelope
     public function getId()
     {
         return $this->userId;
+    }
+
+    public function getCompanyId()
+    {
+        if ($this->isResidentAdmin()) {
+            return $this->getId();
+        }
+
+        return $this->getField('UF_ADMIN_ID');
     }
 
     public function update(array $data)
@@ -289,7 +298,7 @@ class ProfileEnvelope
             $v[4] = $this->{$v[3]['check']}() ? '' : 'false';
 
             if (!empty($v[3]['isMessages'])) {
-                $v[3]['cnt'] = MessageEnvelope::getInstance($this)->calcCount()->getCountNew();
+                $v[3]['cnt'] = MessageService::getInstance($this)->calcCount()->getCountNew();
                 unset($v[3]['check']);
                 continue;
             }

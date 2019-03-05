@@ -7,7 +7,7 @@ use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Query\Join;
 use Kelnik\Helpers\Database\DataManager;
-use Kelnik\Userdata\Profile\ProfileEnvelope;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
@@ -50,7 +50,7 @@ class MessageCompaniesTable extends DataManager
             ($by = 'ID'),
             ($order = 'DESC'),
             [
-                'GROUPS_ID' => ProfileEnvelope::GROUP_RESIDENT_ADMIN
+                'GROUPS_ID' => Profile::GROUP_RESIDENT_ADMIN
             ],
             [
                 'SELECT' => [],
@@ -79,7 +79,7 @@ class MessageCompaniesTable extends DataManager
             ($by = 'ID'),
             ($order = 'DESC'),
             [
-                'GROUPS_ID' => ProfileEnvelope::GROUP_RESIDENT_ADMIN
+                'GROUPS_ID' => Profile::GROUP_RESIDENT_ADMIN
             ],
             [
                 'SELECT' => [],

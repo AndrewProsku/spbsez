@@ -8,7 +8,7 @@ use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Messages\Model\MessageCompaniesTable;
 use Kelnik\Messages\Model\MessagesTable;
 use Kelnik\Messages\Model\MessageUsersTable;
-use Kelnik\Userdata\Profile\ProfileEnvelope;
+use Kelnik\Userdata\Profile\Profile;
 
 class MessagesEditHelper extends AdminEditHelper
 {
@@ -97,12 +97,12 @@ class MessagesEditHelper extends AdminEditHelper
             ($by = 'ID'),
             ($order = 'DESC'),
             [
-                'GROUPS_ID' => ProfileEnvelope::GROUP_RESIDENT,
-                ProfileEnvelope::OWNER_FIELD => $companies
+                'GROUPS_ID' => Profile::GROUP_RESIDENT,
+                Profile::OWNER_FIELD => $companies
             ],
             [
                 'SELECT' => [
-                    ProfileEnvelope::OWNER_FIELD
+                    Profile::OWNER_FIELD
                 ],
                 'FIELDS' => [
                     'ID'

@@ -7,26 +7,39 @@ if (!$USER->IsAuthorized()) {
 }
 ?>
 
-<div class="l-profile-document__wrap-flex">
-    <div class="l-profile-document__wrap-top">
-        <?$APPLICATION->IncludeComponent(
-            "bitrix:menu",
-            "submenu-cabinet",
-            Array(
-                "ALLOW_MULTI_SELECT" => "N",
-                "DELAY" => "N",
-                "MAX_LEVEL" => "1",
-                "MENU_CACHE_GET_VARS" => array(""),
-                "MENU_CACHE_TIME" => "3600",
-                "MENU_CACHE_TYPE" => "A",
-                "MENU_CACHE_USE_GROUPS" => "Y",
-                "ROOT_MENU_TYPE" => "left",
-                "USE_EXT" => "Y"
-            )
-        );?>
-    </div>
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:menu",
+        "submenu-cabinet",
+        Array(
+            "ALLOW_MULTI_SELECT" => "N",
+            "DELAY" => "N",
+            "MAX_LEVEL" => "1",
+            "MENU_CACHE_GET_VARS" => array(""),
+            "MENU_CACHE_TIME" => "3600",
+            "MENU_CACHE_TYPE" => "A",
+            "MENU_CACHE_USE_GROUPS" => "Y",
+            "ROOT_MENU_TYPE" => "left",
+            "USE_EXT" => "Y"
+        )
+    );?>
 
-    <?php $APPLICATION->IncludeFile('inc_account_logout.php'); ?>
-</div>
+    <? $APPLICATION->IncludeComponent(
+        "kelnik:report",
+        ".default",
+        array(
+            "COMPONENT_TEMPLATE" => ".default",
+            "SEF_MODE" => "Y",
+            "SEF_FOLDER" => "/cabinet/report/",
+            "CACHE_TYPE" => "A",
+            "CACHE_TIME" => "3600",
+            "SET_404" => "Y",
+            "SEF_URL_TEMPLATES" => array(
+                "index" => "",
+                "detail" => "#ELEMENT_ID#/",
+            )
+        ),
+        false
+    ); ?>
+
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
