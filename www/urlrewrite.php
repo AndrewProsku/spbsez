@@ -16,20 +16,36 @@ $arUrlRewrite=array (
     'PATH' => '/cabinet/messages/index.php',
     'SORT' => 100,
   ),
-  3 => 
+  5 => 
   array (
-    'CONDITION' => '#^(/|/en/)media/articles/#',
+    'CONDITION' => '#^/en/media/articles/#',
     'RULE' => '',
     'ID' => 'kelnik:news',
-    'PATH' => LANG_DIR . 'media/articles/index.php',
+    'PATH' => '/en/media/articles/index.php',
+    'SORT' => 100,
+  ),
+  3 => 
+  array (
+    'CONDITION' => '#^/media/articles/#',
+    'RULE' => '',
+    'ID' => 'kelnik:news',
+    'PATH' => '/media/articles/index.php',
+    'SORT' => 100,
+  ),
+  4 => 
+  array (
+    'CONDITION' => '#^/en/media/news/#',
+    'RULE' => '',
+    'ID' => 'kelnik:news',
+    'PATH' => '/en/media/news/index.php',
     'SORT' => 100,
   ),
   2 => 
   array (
-    'CONDITION' => '#^(/|/en/)media/news/#',
+    'CONDITION' => '#^/media/news/#',
     'RULE' => '',
     'ID' => 'kelnik:news',
-    'PATH' => LANG_DIR . 'media/news/index.php',
+    'PATH' => '/media/news/index.php',
     'SORT' => 100,
   ),
 );

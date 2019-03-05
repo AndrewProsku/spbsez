@@ -1,0 +1,8 @@
+<div class="b-report-comments">
+    <h3 class="b-report-comments__title">Замечания</h3>
+    <div class="b-report-comments__body">
+        {% for block in blocks %}
+            <a href="#block-{{ block }}">Пункт №{{ block }}</a>
+        {% endfor %}
+    </div>
+</div>

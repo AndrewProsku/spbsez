@@ -1,12 +1,12 @@
-{% for item in useful %}
+{% for item in news %}
     <div class="b-useful__item j-useful-item">
 
         {% include '../../useful-item/useful-item.twig' with {
             modify: "b-useful-item_gray_date",
-            title: item.title,
-            text: item.text,
-            date: item.date,
-            link: item.link
+            title: item.NAME,
+            text: item.TEXT_PREVIEW,
+            date: item.DATE_SHOW_FORMAT,
+            link: item.DETAIL_PAGE_URL
         } %}
 
     </div>

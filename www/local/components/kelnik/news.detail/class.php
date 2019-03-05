@@ -111,7 +111,7 @@ class NewsDetail extends Bbc\Basis
         }
 
         $this->arResult = $element;
-        $this->arResult['SEO_TAGS']['TITLE'] = htmlentities($element['NAME'], ENT_QUOTES, 'UTF-8');
+        $this->arResult['SEO_TAGS']['TITLE'] = htmlentities($element['NAME'], ENT_QUOTES, 'UTF-8') . ' | АООЭЗ';
 
         $this->setSeoTags();
         $this->setResultCacheKeys([

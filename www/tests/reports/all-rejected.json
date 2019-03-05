@@ -56,7 +56,7 @@
               },
               {
                 "id": "invests-plan-year",
-                "value": 213213
+                "value": 2342
               },
               {
                 "id": "capital-invests-plan-all",
@@ -76,11 +76,12 @@
               },
               {
                 "id": "invests-year",
-                "value": 324
+                "value": null
               },
               {
                 "id": "capital-invests-all",
-                "value": null
+                "value": 23423,
+                "error": "В предыдущем отчете капитальных вложений было 100. Перепроверьте данные."
               },
               {
                 "id": "capital-invests-year",
@@ -116,7 +117,8 @@
             "fields": [
               {
                 "id": "salary",
-                "value": 1232
+                "value": 1232,
+                "error": "В предыдущем отчете з/п сотрудников была 80 000 \u20BD. Перепроверьте данные"
               }
             ]
           }
@@ -125,47 +127,55 @@
       {
         "blocks": [
           {
-            "type": "taxes",
             "fields": [
               {
+                "id": "taxes-all",
+                "value": "123"
+              },
+              {
+                "id": "taxes-year",
+                "value": "123"
+              },
+              {
                 "id": "taxes-federal-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-federal-year",
-                "value": 123
+                "value": "123",
+                "error": "Текст ошибки. Перепроверьте данные"
               },
               {
                 "id": "taxes-regional-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-regional-year",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-local-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-local-year",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-offbudget-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-offbudget-year",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-nds-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-nds-year",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -173,35 +183,35 @@
             "fields": [
               {
                 "id": "taxes-breaks-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-breaks-year",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-breaks-federal-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-breaks-federal-year",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-breaks-local-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-breaks-local-year",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-breaks-offbudget-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "taxes-breaks-offbudget-year",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -209,11 +219,11 @@
             "fields": [
               {
                 "id": "custom-duties-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "custom-duties-year",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -221,11 +231,11 @@
             "fields": [
               {
                 "id": "custom-duties-breaks-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "custom-duties-breaks-year",
-                "value": 123
+                "value": "123"
               }
             ]
           }
@@ -237,7 +247,7 @@
             "fields": [
               {
                 "id": "area-application",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -245,11 +255,11 @@
             "fields": [
               {
                 "id": "area-rent",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "area-property",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -257,7 +267,7 @@
             "fields": [
               {
                 "id": "object-name-plan",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -265,7 +275,7 @@
             "fields": [
               {
                 "id": "capital-object",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -289,11 +299,13 @@
                   },
                   {
                     "id": "construction-permission-num[25]",
-                    "value": "4 8 15 16 23 42"
+                    "value": "4 8 15 16 23 42 42",
+                    "error": "Текст ошибки. Перепроверьте данные"
                   },
                   {
                     "id": "construction-permission-file[25]",
-                    "value": null
+                    "value": "file.doc",
+                    "error": "Текст ошибки. Перепроверьте данные"
                   },
                   {
                     "id": "construction-permission-date[25]",
@@ -332,7 +344,7 @@
             "fields": [
               {
                 "id": "office-application",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -340,7 +352,7 @@
             "fields": [
               {
                 "id": "office-rent",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -378,11 +390,11 @@
             "fields": [
               {
                 "id": "export-volume-all",
-                "value": 123
+                "value": "123"
               },
               {
                 "id": "export-volume-year",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -456,7 +468,7 @@
             "fields": [
               {
                 "id": "high-productive-jobs",
-                "value": 40
+                "value": "40"
               }
             ]
           }
@@ -468,7 +480,7 @@
             "fields": [
               {
                 "id": "intangible-assets",
-                "value": 123
+                "value": "123"
               }
             ]
           },
@@ -476,7 +488,7 @@
             "fields": [
               {
                 "id": "degrees-employees",
-                "value": 123
+                "value": "123"
               }
             ]
           }
@@ -495,11 +507,12 @@
               },
               {
                 "id": "result-description[1]",
-                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой"
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой",
+                "error": "Текст ошибки. Перепроверьте данные"
               },
               {
                 "id": "result-date[1]",
-                "value": "6/11/2014"
+                "value": "6/11/2013"
               },
               {
                 "id": "result-commercialization[1]",

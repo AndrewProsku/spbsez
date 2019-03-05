@@ -32,8 +32,6 @@ class Useful {
         const that = this;
         const items = this.container.querySelectorAll(`.${this.itemClass}`);
         const formData = new FormData();
-        const action = this.main.dataset.action;
-        const method = this.main.dataset.method;
 
         this._disableButton();
 
@@ -41,7 +39,7 @@ class Useful {
             formData.append('showed', `${items.length}`);
         }
 
-        Utils.send(formData, action, {
+        Utils.send(formData, this.main.dataset.action, {
             success(response) {
                 const {data} = response;
 
@@ -57,7 +55,7 @@ class Useful {
             complete() {
                 that._enableButton();
             }
-        }, method);
+        }, this.main.dataset.method);
     }
 
     _insertHtmlNews(data) {
