@@ -4,6 +4,7 @@ import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
+import Disclosure from '../../components/disclosure/disclosure';
 import Glide from '@glidejs/glide';
 import GlideCarousel from '../../components/glide-carousel';
 import InputTel from '../../components/forms/telephone/telephone';
@@ -762,5 +763,22 @@ if (reportFormEl) {
 
     reportForm.init({
         target: reportFormEl
+    });
+}
+
+
+/**
+ * Инициализация страниц "Раскрытие информации"
+ */
+
+const disclosureItems = Array.from(document.querySelectorAll('.j-disclosure-block'));
+
+if (disclosureItems.length) {
+    disclosureItems.forEach((target) => {
+        const disclosureRegulated = new Disclosure();
+
+        disclosureRegulated.init({
+            target
+        });
     });
 }
