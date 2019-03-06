@@ -1,0 +1,96 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Раскрытие информации - Закупочная иформация</title> {% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    {# Блок с подменю #}
+
+    {% include '../components/page-submenu/page-submenu.twig' with {
+        subitems: [{
+            href: '#',
+            name: 'Особая&nbsp;экономическая&nbsp;зона'
+        },{
+            href: '#',
+            name: 'Управляющая&nbsp;компания'
+        },{
+            href: '#',
+            name: 'Вакансии'
+        },{
+            href: '#',
+            name: 'Раскрытие&nbsp;информации',
+            active: true
+        }
+        ]
+    } %}
+
+    <div class="l-disclosure">
+        <div class="b-title"> {#b-about-title#}
+            <h1>Раскрытие информации</h1>
+        </div>
+
+        {# Блок ссылок #}
+
+        {% include '../components/accordion-links/accordion-links.twig' with {
+            title: 'Внутренние документы',
+            modify: "b-profile__links",
+            items: [{
+                active: "is-active",
+                text: "Внутренние документы"
+            },{
+                text: "Раскрытие информации в сфере регулируемых видов деятельности"
+            },{
+                text: "Закупочная информация"
+            }]
+        } %}
+
+        <div class="b-disclosure-title b-title">
+            <h2>Внутренние документы</h2>
+        </div>
+
+        <!-- Здесь для подгрузки правильной икоки для файла у блока .b-profile-document__item
+                     должен быть класс модификатор типа b-profile-document__item_ext_[расширение файла]-->
+        <div class="b-profile-document__list b-profile-documents">
+            <div class="b-profile-document__item b-profile-document__item_ext_pdf">
+                <div class="b-profile-document__item-title">
+                    <a href="#" class="b-profile-document__item-title-link b-link-line">Устав АО "ОЭЗ Санкт-Петербург"</a>
+                    <span class="b-profile-document__item-title-weight">5,5 мб</span>
+                </div>
+                <div class="b-profile-document__item-desc">
+                    <time datetime="2018-12-12" class="b-profile-document__item-date">12.12.2018</time>
+                </div>
+            </div>
+            <div class="b-profile-document__item b-profile-document__item_ext_pdf">
+                <div class="b-profile-document__item-title">
+                    <a href="#" class="b-profile-document__item-title-link b-link-line">Регистрационное свидетельство</a>
+                    <span class="b-profile-document__item-title-weight">5,5 мб</span>
+                </div>
+                <div class="b-profile-document__item-desc">
+                    <time datetime="2018-12-12" class="b-profile-document__item-date">12.12.2018</time>
+                </div>
+            </div>
+            <div class="b-profile-document__item b-profile-document__item_ext_doc">
+                <div class="b-profile-document__item-title">
+                    <a href="#" class="b-profile-document__item-title-link b-link-line">Генеральная договоренность</a>
+                    <span class="b-profile-document__item-title-weight">5,5 мб</span>
+                </div>
+                <div class="b-profile-document__item-desc">
+                    <time datetime="2018-12-12" class="b-profile-document__item-date">12.12.2018</time>
+                </div>
+            </div>
+            <div class="b-profile-document__item b-profile-document__item_ext_doc">
+                <div class="b-profile-document__item-title">
+                    <a href="#" class="b-profile-document__item-title-link b-link-line">Учредительный договор</a>
+                    <span class="b-profile-document__item-title-weight">5,5 мб</span>
+                </div>
+                <div class="b-profile-document__item-desc">
+                    <time datetime="2018-12-12" class="b-profile-document__item-date">12.12.2018</time>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
