@@ -49,9 +49,9 @@ class ReportsAdminInterface extends AdminInterface
                         'FILTER' => true,
                         'HIDE_WHEN_CREATE' => true
                     ],
-                    'QUARTER' => [
+                    'TYPE' => [
                         'WIDGET' => new ComboBoxWidget(),
-                        'VARIANTS' => ReportsTable::getQuarters(),
+                        'VARIANTS' => ReportsTable::getTypes(),
                         'READONLY' => true,
                         'FILTER' => true,
                         'HIDE_WHEN_CREATE' => true

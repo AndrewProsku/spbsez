@@ -29,7 +29,7 @@ if (!$USER->IsAuthorized()) {
         array(
             "COMPONENT_TEMPLATE" => ".default",
             "SEF_MODE" => "Y",
-            "SEF_FOLDER" => "/cabinet/report/",
+            "SEF_FOLDER" => LANG_DIR . "cabinet/report/",
             "CACHE_TYPE" => "A",
             "CACHE_TIME" => "3600",
             "SET_404" => "Y",

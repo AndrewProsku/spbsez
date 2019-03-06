@@ -4,8 +4,13 @@ namespace Kelnik\Report\Component;
 
 use Bex\Bbc;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Objectify\Collection;
+use Bitrix\Main\Type\DateTime;
+use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportsTable;
-use Kelnik\Report\Reports;
+use Kelnik\Report\Model\Status;
+use Kelnik\Report\Model\StatusTable;
 use Kelnik\Userdata\Profile\Profile;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
@@ -53,12 +58,15 @@ class ReportList extends Bbc\Basis
 
         try {
             $reports = ReportsTable::getList([
+                'select' => [
+                    '*', 'STATUS'
+                ],
                 'filter' => [
                     '=COMPANY_ID' => $this->profile->getCompanyId()
                 ],
                 'order' => [
                     'YEAR' => 'DESC',
-                    'QUARTER' => 'ASC'
+                    'TYPE' => 'ASC'
                 ]
             ])->fetchCollection();
         } catch (\Exception $e) {
@@ -71,18 +79,98 @@ class ReportList extends Bbc\Basis
 
         $this->arResult['DISABLED'] = false;
 
+        Report::setUrlTemplate(
+            $this->arParams['SEF_FOLDER'] .
+            ArrayHelper::getValue($this->getParent()->arParams, 'SEF_URL_TEMPLATES.detail', '')
+        );
+
+        $reports = $this->checkList($reports);
+
+        $this->arResult['REPORTS'] = $this->prepareReports($reports);
+    }
+
+    /**
+     * Подготовка списка отчетов по годам
+     *
+     * @param Collection $reports
+     * @return array
+     */
+    protected function prepareReports(Collection $reports)
+    {
+        $res = [];
+
         foreach ($reports as $v) {
             $year = $v->getYear();
 
-            if (!isset($this->arResult['REPORTS'][$year])) {
-                $this->arResult['REPORTS'][$year] = [
+            if (!isset($res[$year])) {
+                $res[$year] = [
                     'NAME' => $year,
-                    'IS_ARCHIVE' => $v->getIsArchive(),
+                    'IS_COMPLETE' => true,
                     'ELEMENTS' => []
                 ];
             }
 
-            $this->arResult['REPORTS'][$year]['ELEMENTS'][] = $v;
+            if (!$v->isComplete()) {
+                $res[$year]['IS_COMPLETE'] = false;
+            }
+
+            $res[$year]['ELEMENTS'][$v->getType()] = $v;
         }
+
+        return $res;
+    }
+
+    /**
+     * Проверка списка отчетов на отсутствие требуемых.
+     *
+     * @param Collection $reports
+     * @return array|Collection
+     * @throws \Bitrix\Main\ArgumentException
+     * @throws \Bitrix\Main\SystemException
+     */
+    protected function checkList(Collection $reports)
+    {
+        if (!$reports->count()) {
+            return $reports;
+        }
+
+        $types   = array_keys(ReportsTable::getTypes());
+        $curYear = (int) date('Y');
+        $curTime = mktime(0, 0, 0, 4, 2, 2019);
+        $defStatus = (new Status())->wakeUp(StatusTable::NEW);
+
+        $reportsByYear = [];
+
+        foreach ($reports as $report) {
+            $reportsByYear[$report->getYear()][$report->getType()] = $report->getType();
+        }
+
+        if (!isset($reportsByYear[$curYear])) {
+            $reportsByYear[$curYear] = $curYear;
+        }
+
+
+        foreach ($reportsByYear as $year => $yearTypes) {
+            $typePeriod = ReportsTable::getTypePeriod($year);
+
+            foreach ($types as $type) {
+                if (isset($yearTypes[$type])
+                    || $curTime > $typePeriod[$type]['end']
+                    || $curTime < $typePeriod[$type]['start']
+                ) {
+                    continue;
+                }
+
+                $reports->add(
+                    (new Report())
+                    ->setId(-1)
+                    ->setYear($year)
+                    ->setType($type)
+                    ->setStatus($defStatus)
+                );
+            }
+        }
+
+        return $reports;
     }
 }

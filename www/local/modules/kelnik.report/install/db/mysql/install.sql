@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `kelnik_report` (
   `CREATED_BY` int(11) unsigned NOT NULL DEFAULT '0',
   `MODIFIED_BY` int(11) unsigned NOT NULL DEFAULT '0',
   `STATUS_ID` int(11) unsigned NOT NULL DEFAULT '0',
-  `QUARTER` tinyint(1) unsigned NOT NULL,
+  `TYPE` tinyint(1) unsigned NOT NULL,
   `YEAR` year(4) NOT NULL,
   `DATE_CREATED` datetime NOT NULL,
   `DATE_MODIFIED` datetime NOT NULL,
@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS `kelnik_report` (
   PRIMARY KEY (`ID`),
   KEY `USER_ID` (`MODIFIED_BY`),
   KEY `STATUS_ID` (`STATUS_ID`),
-  KEY `QUARTER` (`QUARTER`),
   KEY `YEAR` (`YEAR`),
-  KEY `COMPANY_ID` (`COMPANY_ID`)
+  KEY `COMPANY_ID` (`COMPANY_ID`),
+  KEY `TYPE` (`TYPE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 

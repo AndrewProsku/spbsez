@@ -6,6 +6,7 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Fields\EnumField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\StringField;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
@@ -48,5 +49,36 @@ class StatusTable extends DataManager
             (new StringField('NAME'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME'))
         ];
+    }
+
+    public static function getObjectClass()
+    {
+        return Status::class;
+    }
+
+    public static function getCssClassById($id)
+    {
+        return ArrayHelper::getValue(
+            [
+                self::NEW => 'b-quarter_status_to-fill',
+                self::IN_PROGRESS => 'b-quarter_status_check',
+                self::DONE => 'b-quarter_status_approved',
+                self::DECLINED => 'b-quarter_status_rejected'
+            ],
+            $id,
+            'b-quarter_status_approved'
+        );
+    }
+
+    public static function getButtonNameById($id)
+    {
+        return ArrayHelper::getValue(
+            [
+                self::NEW => Loc::getMessage('KELNIK_REPORT_STATUS_BUTTON_NAME_FILL'),
+                self::DECLINED => Loc::getMessage('KELNIK_REPORT_STATUS_BUTTON_NAME_EDIT')
+            ],
+            $id,
+            Loc::getMessage('KELNIK_REPORT_STATUS_BUTTON_NAME_VIEW')
+        );
     }
 }
