@@ -5,6 +5,7 @@ use Bitrix\Main\Application;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Messages\MessageService;
 use Kelnik\Messages\Model\MessageCompaniesTable;
 use Kelnik\Messages\Model\MessagesTable;
 use Kelnik\Messages\Model\MessageUsersTable;
@@ -41,7 +42,6 @@ class MessagesEditHelper extends AdminEditHelper
 
         if ($res->isSuccess() && $data['ACTIVE'] === MessagesTable::YES) {
             self::updateUsers($id);
-            clearKelnikComponentCache('messages');
         }
 
         return $res;
@@ -53,7 +53,6 @@ class MessagesEditHelper extends AdminEditHelper
 
         if ($res->isSuccess()) {
             self::updateUsers($id);
-            clearKelnikComponentCache('messages');
         }
 
         return $res;
@@ -74,10 +73,6 @@ class MessagesEditHelper extends AdminEditHelper
 
         try {
             Application::getConnection()->query('DELETE FROM `' . MessageUsersTable::getTableName() . '` WHERE `MESSAGE_ID` = ' . $id);
-        } catch (\Exception $e) {
-        }
-
-        try {
             $companies = MessageCompaniesTable::getList([
                 'filter' => [
                     '=MESSAGE_ID' => $id

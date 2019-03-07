@@ -27,27 +27,32 @@ class MessagesList extends Basis
         'IS_SEARCH' => ['type' => 'string', 'error' => false]
     ];
 
+    /**
+     * @var Profile
+     */
+    protected $profile;
+
     protected function executeProlog()
     {
         global $USER;
 
         $this->addCacheAdditionalId($USER->GetID());
         $this->arParams['YEAR'] = date('Y');
+
+        $this->profile = Profile::getInstance($USER->GetID());
     }
 
     protected function executeMain()
     {
-        global $USER;
-
         $this->setResultCacheKeys(['YEARS', 'MESSAGES', 'QUERY', 'CNT', 'CNT_WORD', 'SHOW_MORE']);
 
-        $profile = Profile::getInstance($USER->GetID());
-
-        if (!$profile->canMessages()) {
+        if (!$this->profile->canMessages()) {
             LocalRedirect(LANG_DIR . 'cabinet/');
         }
 
-        $messages = MessageService::getInstance($profile);
+        self::registerCacheTag('kelnik:messages_list_' . $this->profile->getId());
+
+        $messages = MessageService::getInstance($this->profile);
         $messages->calcCount();
         $messages->sefFolder = $this->arParams['SEF_FOLDER'];
         $messages->dateFormat = $this->arParams['DATE_FORMAT'];

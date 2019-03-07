@@ -31,8 +31,10 @@ class MessageCompaniesTable extends DataManager
                 ->configureAutocomplete(true)
                 ->configurePrimary(true),
 
-            new IntegerField('MESSAGE_ID'),
-            new IntegerField('USER_ID'),
+            (new IntegerField('MESSAGE_ID'))
+                ->configureDefaultValue(0),
+            (new IntegerField('USER_ID'))
+                ->configureDefaultValue(0),
 
             (new Reference(
                 'MESSAGE',

@@ -3,13 +3,12 @@
 namespace Kelnik\Report\Component;
 
 use Bex\Bbc;
+use Bitrix\Main\Application;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Objectify\Collection;
-use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportsTable;
-use Kelnik\Report\Model\Status;
 use Kelnik\Report\Model\StatusTable;
 use Kelnik\Userdata\Profile\Profile;
 
@@ -48,6 +47,11 @@ class ReportList extends Bbc\Basis
         if (!$this->profile->canReport()) {
             LocalRedirect(LANG_DIR . 'cabinet/');
         }
+
+        Report::setUrlTemplate(
+            $this->arParams['SEF_FOLDER'] .
+            ArrayHelper::getValue($this->getParent()->arParams, 'SEF_URL_TEMPLATES.detail', '')
+        );
     }
 
     protected function executeMain()
@@ -55,6 +59,8 @@ class ReportList extends Bbc\Basis
         $this->arResult['DISABLED'] = true;
         $this->arResult['REPORTS']  = [];
         $this->arResult['YEAR']     = date('Y');
+
+        self::registerCacheTag('kelnik:report_list_' . $this->profile->getCompanyId());
 
         try {
             $reports = ReportsTable::getList([
@@ -79,14 +85,9 @@ class ReportList extends Bbc\Basis
 
         $this->arResult['DISABLED'] = false;
 
-        Report::setUrlTemplate(
-            $this->arParams['SEF_FOLDER'] .
-            ArrayHelper::getValue($this->getParent()->arParams, 'SEF_URL_TEMPLATES.detail', '')
+        $this->arResult['REPORTS'] = $this->prepareReports(
+            $this->checkList($reports)
         );
-
-        $reports = $this->checkList($reports);
-
-        $this->arResult['REPORTS'] = $this->prepareReports($reports);
     }
 
     /**
@@ -117,6 +118,9 @@ class ReportList extends Bbc\Basis
             $res[$year]['ELEMENTS'][$v->getType()] = $v;
         }
 
+        ksort($res);
+        $res = array_reverse($res);
+
         return $res;
     }
 
@@ -134,10 +138,10 @@ class ReportList extends Bbc\Basis
             return $reports;
         }
 
-        $types   = array_keys(ReportsTable::getTypes());
-        $curYear = (int) date('Y');
-        $curTime = mktime(0, 0, 0, 4, 2, 2019);
-        $defStatus = (new Status())->wakeUp(StatusTable::NEW);
+        $types     = array_keys(ReportsTable::getTypes());
+        $curYear   = (int) date('Y');
+        $curTime   = mktime(0, 0, 0, 4, 2, 2019);// time();
+        $defStatus = StatusTable::getByPrimary(StatusTable::NEW)->fetchObject();
 
         $reportsByYear = [];
 
@@ -163,7 +167,7 @@ class ReportList extends Bbc\Basis
 
                 $reports->add(
                     (new Report())
-                    ->setId(-1)
+                    ->setId(0)
                     ->setYear($year)
                     ->setType($type)
                     ->setStatus($defStatus)

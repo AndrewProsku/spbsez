@@ -178,7 +178,7 @@ class ReportsTreeHelper extends AdminBaseHelper
                 'quantity' => -1,
                 'ID' => $k,
                 'NAME' => '<a target="_blank" href="' . ReportsEditHelper::getUrl(['ID' => $k]) . '">' . $val['NAME'] . '</a>',
-                'QUARTER' => ReportsTable::prepareType($val['QUARTER']) . ' ' . $val['YEAR'],
+                'QUARTER' => ReportsTable::getTypeName($val['QUARTER']) . ' ' . $val['YEAR'],
                 'STATUS' => $val['STATUS_NAME']
             ];
         }

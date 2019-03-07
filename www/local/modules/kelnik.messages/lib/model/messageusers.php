@@ -32,8 +32,10 @@ class MessageUsersTable extends DataManager
             (new IntegerField('ID'))
                 ->configureAutocomplete(true)
                 ->configurePrimary(true),
-            new IntegerField('MESSAGE_ID'),
-            new IntegerField('USER_ID'),
+            (new IntegerField('MESSAGE_ID'))
+                ->configureDefaultValue(0),
+            (new IntegerField('USER_ID'))
+                ->configureDefaultValue(0),
             new DatetimeField('DATE_MODIFIED'),
             (new StringField('IS_NEW'))
                 ->configureDefaultValue(self::YES),

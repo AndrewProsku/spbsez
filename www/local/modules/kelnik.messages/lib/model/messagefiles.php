@@ -27,8 +27,10 @@ class MessageFilesTable extends DataManager
             (new IntegerField('ID'))
                 ->configureAutocomplete(true)
                 ->configurePrimary(true),
-            new IntegerField('ENTITY_ID'),
-            new IntegerField('VALUE')
+            (new IntegerField('ENTITY_ID'))
+                ->configureDefaultValue(0),
+            (new IntegerField('VALUE'))
+                ->configureDefaultValue(0)
         ];
     }
 }

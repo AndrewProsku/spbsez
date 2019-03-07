@@ -36,6 +36,7 @@ class MessagesDetail extends Basis
 
         $this->addCacheAdditionalId($USER->GetID());
         $this->profile = Profile::getInstance($USER->GetID());
+
     }
 
     protected function executeMain()
@@ -45,6 +46,8 @@ class MessagesDetail extends Basis
         if (!$this->profile->canMessages()) {
             LocalRedirect(LANG_DIR . 'cabinet/');
         }
+
+        self::registerCacheTag('kelnik:messages_d_' . $this->profile->getId() . '_' . $this->arParams['ELEMENT_TYPE'] . $this->arParams['ELEMENT_ID']);
 
         $messages = MessageService::getInstance($this->profile);
         $messages->dateFormat = $this->arParams['DATE_FORMAT'];

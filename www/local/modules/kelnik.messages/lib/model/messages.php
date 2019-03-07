@@ -39,7 +39,8 @@ class MessagesTable extends DataManager
                 ->configureTitle(Loc::getMessage('KELNIK_MESSAGES_ID')),
 
             (new IntegerField('USER_ID'))
-                ->configureTitle(Loc::getMessage('KELNIK_MESSAGES_USER_ID')),
+                ->configureTitle(Loc::getMessage('KELNIK_MESSAGES_USER_ID'))
+                ->configureDefaultValue(0),
 
             (new DatetimeField('DATE_CREATED'))
                 ->configureTitle(Loc::getMessage('KELNIK_MESSAGES_DATE_CREATED')),

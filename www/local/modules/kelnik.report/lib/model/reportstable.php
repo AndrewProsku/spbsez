@@ -2,7 +2,10 @@
 
 namespace Kelnik\Report\Model;
 
+use Bitrix\Main\Application;
+use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Event;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
@@ -13,6 +16,7 @@ use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
@@ -47,10 +51,12 @@ class ReportsTable extends DataManager
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_COMPANY')),
 
             (new IntegerField('CREATED_BY'))
-                ->configureTitle(Loc::getMessage('KELNIK_REPORT_CREATED_BY')),
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_CREATED_BY'))
+                ->configureDefaultValue(self::getUserId()),
 
             (new IntegerField('MODIFIED_BY'))
-                ->configureTitle(Loc::getMessage('KELNIK_REPORT_MODIFIED_BY')),
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_MODIFIED_BY'))
+                ->configureDefaultValue(self::getUserId()),
 
             (new IntegerField('STATUS_ID'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_STATUS')),
@@ -63,10 +69,12 @@ class ReportsTable extends DataManager
                 ->configureDefaultValue(date('Y')),
 
             (new DatetimeField('DATE_CREATED'))
-                ->configureTitle(Loc::getMessage('KELNIK_REPORT_DATE_CREATED')),
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_DATE_CREATED'))
+                ->configureDefaultValue(new DateTime()),
 
             (new DatetimeField('DATE_MODIFIED'))
-                ->configureTitle(Loc::getMessage('KELNIK_REPORT_DATE_MODIFIED')),
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_DATE_MODIFIED'))
+                ->configureDefaultValue(new DateTime()),
 
             (new BooleanField('IS_LOCKED'))
                 ->configureStorageValues(self::NO, self::YES)
@@ -94,6 +102,46 @@ class ReportsTable extends DataManager
         return Report::class;
     }
 
+    public static function onAfterAdd(Event $event)
+    {
+        self::clearComponentCache($event);
+        parent::onAfterAdd($event);
+    }
+
+    public static function onAfterUpdate(Event $event)
+    {
+        self::clearComponentCache($event);
+        parent::onAfterUpdate($event);
+    }
+
+    public static function onBeforeDelete(Event $event)
+    {
+        self::clearComponentCache($event);
+        parent::onBeforeDelete($event);
+    }
+
+    protected static function clearComponentCache(Event $event)
+    {
+        global $USER;
+
+        try {
+            $id = ArrayHelper::getValue($event->getParameter('id'), 'ID', 0);
+            $companyId = Context::getCurrent()->getRequest()->isAdminSection()
+                        ? ReportsTable::getByPrimary($id)->fetchObject()->getCompanyId()
+                        : Profile::getInstance($USER->GetID())->getCompanyId();
+
+            if (!$id && !$companyId) {
+                return;
+            }
+
+            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:report_list_' . $companyId);
+            if ($id) {
+                Application::getInstance()->getTaggedCache()->clearByTag('kelnik:report_' . $companyId . '_' . $id);
+            }
+        } catch (\Exception $e) {
+        }
+    }
+
     public static function getTypes()
     {
         return [
@@ -105,7 +153,7 @@ class ReportsTable extends DataManager
         ];
     }
 
-    public static function prepareType($number)
+    public static function getTypeName($number)
     {
         return ArrayHelper::getValue(self::getTypes(), $number, '');
     }
@@ -138,5 +186,14 @@ class ReportsTable extends DataManager
                 'end' => mktime(23, 59, 59, 4, 31, $year + 1)
             ]
         ];
+    }
+
+    protected static function getUserId()
+    {
+        global $USER;
+
+        return !empty($USER) && $USER->IsAuthorized()
+                ? $USER->GetID()
+                : 0;
     }
 }

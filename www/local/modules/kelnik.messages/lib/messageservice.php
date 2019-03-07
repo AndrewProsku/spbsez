@@ -193,7 +193,7 @@ class MessageService
             return false;
         }
 
-        clearKelnikComponentCache('messages');
+        self::clearComponentCache($this->profile->getId());
 
         return true;
     }
@@ -554,5 +554,19 @@ class MessageService
     private function checkPermissions()
     {
         return $this->profile->canMessages();
+    }
+
+    public static function clearComponentCache($users)
+    {
+        if (!is_array($users)) {
+            $users = [$users];
+        }
+        try {
+            $tagCache = Application::getInstance()->getTaggedCache();
+            foreach ($users as $userId) {
+                $tagCache->clearByTag('kelnik:messages_list_' . $userId);
+            }
+        } catch (\Exception $e) {
+        }
     }
 }
