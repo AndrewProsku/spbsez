@@ -1,0 +1,137 @@
+.l-infrastructure {
+    @include padding-level(top, blue);
+    @include padding-level(bottom, pink);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-infrastructure-places {
+    display: flex;
+    flex-direction: column;
+
+    @media #{$tablet-portrait} {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.b-infrastructure-place:not(:last-child) {
+    margin-bottom: 36px;;
+
+    @media #{$tablet-portrait} {
+        margin-bottom: 0;
+    }
+}
+
+.b-infrastructure-place {
+    @media #{$tablet-portrait} {
+        @include column(15, 32);
+    }
+
+    @media #{$tablet-portrait} {
+        @include column(14, 30);
+    }
+
+    @media #{$tablet-portrait} {
+        @include column(12, 28);
+    }
+}
+
+.b-infrastructure-place__img {
+    @media #{$tablet-portrait} {
+        @include padding-level(bottom, yellow);
+    }
+}
+
+.b-infrastructure-place__title {
+    @include padding-level(bottom, red);
+
+    h2 {
+        @include font-size('p2');
+        font-family: $font-bold;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+}
+
+.b-infrastructure-place__name {
+    @include font-size('h2');
+    @include padding-level(bottom, yellow);
+    margin-bottom: 0;
+}
+
+.b-icons-list {
+    @media #{$tablet-portrait} {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+.b-icons-list__item {
+    @include column(32, 32);
+    margin-bottom: 24px;
+    display: flex;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    @media #{$tablet-portrait} {
+        flex-basis: 50%;
+    }
+}
+
+.b-icons-list__item:first-child {
+    flex-basis: 40%;
+}
+
+.b-icons-list__item:nth-child(2) {
+    flex-basis: 40%;
+    order: 3;
+}
+
+.b-icons-list__item:nth-child(3) {
+    flex-basis: 55%;
+    order: 2;
+}
+
+.b-icons-list__item:nth-child(4) {
+    flex-basis: 55%;
+    order: 4;
+}
+
+
+.b-icons-list__img {
+    width: 64px;
+    height: 64px;
+    margin-right: 21px;
+}
+
+.b-icons-list__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.b-icons-list__title {
+    @include font-size('p2');
+    font-family: $font-bold;
+    font-weight: 700;
+    color: $blue;
+    margin-bottom: 5px;
+}
+
+.b-icons-list__description {
+    @include font-size('p4');
+}
