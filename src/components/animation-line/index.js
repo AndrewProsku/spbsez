@@ -30,7 +30,7 @@ class AnimationLine {
     }
 
     _raiseAnimationLayer() {
-        this.animatedLines.style.zIndex = 1;
+        this.animatedLines.style.zIndex = 0;
     }
 
     _getPositionsDifference() {
