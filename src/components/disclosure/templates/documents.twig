@@ -1,0 +1,11 @@
+{% for file in FILES %}
+    <div class="b-profile-document__item b-profile-document__item_ext_{{ file.FILE_DATA.EXT }}">
+        <div class="b-profile-document__item-title">
+            <a href="{{ file.FILE_DATA.SRC }}" class="b-profile-document__item-title-link b-link-line">{{ file.FILE_DATA.ORIGINAL_NAME }}</a>
+            <span class="b-profile-document__item-title-weight">{{ file.FILE_DATA.FILE_SIZE_FORMAT }}</span>
+        </div>
+        <div class="b-profile-document__item-desc">
+            <time datetime="{{ file.DATE_MODIFIED_FORMAT }}" class="b-profile-document__item-date">{{ file.DATE_MODIFIED_FORMAT_HUMAN }}</time>
+        </div>
+    </div>
+{% endfor %}

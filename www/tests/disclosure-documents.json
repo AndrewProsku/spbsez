@@ -1,0 +1,47 @@
+{
+  "request": {
+    "status": 1,
+    "errors": ["Ошибка из респонса", "Все пропало!!11"]
+  },
+  "data": {
+    "FILES": [
+      {
+        "FILE_DATA": {
+          "EXT": "pdf",
+          "ORIGINAL_NAME": "Годовой отчет за 2017 год",
+          "FILE_SIZE_FORMAT": "118.82 КБ",
+          "SRC": "/upload/kelnik.userdata/985/98585a1cf1258108096b255e0590b654.pdf"
+        },
+        "DATE_MODIFIED_FORMAT": "2018-06-29",
+        "DATE_MODIFIED_FORMAT_HUMAN": "29.06.2018"
+      }, {
+        "FILE_DATA": {
+          "EXT": "pdf",
+          "ORIGINAL_NAME": "Аудиторское заключение к годовой бухгалтерской отчетности за 2017 год",
+          "FILE_SIZE_FORMAT": "5.7 Мб",
+          "SRC": "/upload/kelnik.userdata/985/98585a1cf1258108096b255e0590b654.pdf"
+        },
+        "DATE_MODIFIED_FORMAT": "2018-10-24",
+        "DATE_MODIFIED_FORMAT_HUMAN": "24.10.2018"
+      }, {
+        "FILE_DATA": {
+          "EXT": "pdf",
+          "ORIGINAL_NAME": "Бухгалтерская отчетность за 2017 год",
+          "FILE_SIZE_FORMAT": "5.7 Мб",
+          "SRC": "/upload/kelnik.userdata/985/98585a1cf1258108096b255e0590b654.pdf"
+        },
+        "DATE_MODIFIED_FORMAT": "2018-10-24",
+        "DATE_MODIFIED_FORMAT_HUMAN": "24.10.2018"
+      }, {
+        "FILE_DATA": {
+          "EXT": "pdf",
+          "ORIGINAL_NAME": "Аудиторское заключение за 2017 год",
+          "FILE_SIZE_FORMAT": "5.7 Мб",
+          "SRC": "/upload/kelnik.userdata/985/98585a1cf1258108096b255e0590b654.pdf"
+        },
+        "DATE_MODIFIED_FORMAT": "2018-10-24",
+        "DATE_MODIFIED_FORMAT_HUMAN": "24.10.2018"
+      }
+    ]
+  }
+}

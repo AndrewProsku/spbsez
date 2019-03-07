@@ -1,0 +1,10 @@
+{% for procurement in PROCUREMENTS %}
+    <div class="b-disclosure-content-item j-disclosure-content-item">
+        <div class="b-disclosure-content-item__title">
+            <a href="{{ procurement.SRC }}" class="b-link-line">{{ procurement.TITLE }}</a>
+        </div>
+        <div class="b-disclosure-content-item__desc">
+            <time datetime="{{ procurement.DATE_MODIFIED_FORMAT }}" class="b-disclosure-content-item__date">{{ procurement.DATE_MODIFIED_FORMAT_HUMAN }}</time>
+        </div>
+    </div>
+{% endfor %}

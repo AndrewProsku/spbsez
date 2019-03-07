@@ -158,7 +158,8 @@
 .b-profile-document__item-title {
     @include font-size('p3');
     position: relative;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     vertical-align: top;
     width: 100%;
     white-space: nowrap;

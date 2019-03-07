@@ -1,9 +1,9 @@
 import '../styles/app.scss';
-import '../../components/background-animation';
 import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
+import Disclosure from '../../components/disclosure/disclosure';
 import Glide from '@glidejs/glide';
 import GlideCarousel from '../../components/glide-carousel';
 import InputTel from '../../components/forms/telephone/telephone';
@@ -14,6 +14,7 @@ import messagePopupTemplate from '../../components/message-popup/message-popup.t
 import More from 'components/more';
 import NewPassword from '../../components/new-password';
 import News from '../../components/news';
+import Particles from '../../components/background-animation';
 import PasswordRecovery from '../../components/password-recovery';
 import Popup from 'components/popup';
 import ProfileAdministrators from '../../components/profile-administrators';
@@ -35,6 +36,12 @@ import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
 
 const mediator = new Mediator();
+
+const particlesNode = document.querySelector('.j-particles');
+
+if (particlesNode) {
+    new Particles(particlesNode).init();
+}
 
 /**
  * Полифилл метода closest()
@@ -762,5 +769,22 @@ if (reportFormEl) {
 
     reportForm.init({
         target: reportFormEl
+    });
+}
+
+
+/**
+ * Инициализация страниц "Раскрытие информации"
+ */
+
+const disclosureItems = Array.from(document.querySelectorAll('.j-disclosure-block'));
+
+if (disclosureItems.length) {
+    disclosureItems.forEach((target) => {
+        const disclosureRegulated = new Disclosure();
+
+        disclosureRegulated.init({
+            target
+        });
     });
 }

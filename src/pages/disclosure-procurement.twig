@@ -1,0 +1,169 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Раскрытие информации</title> {% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    {# Блок с подменю #}
+
+    {% include '../components/page-submenu/page-submenu.twig' with {
+        subitems: [{
+            href: '#',
+            name: 'Особая&nbsp;экономическая&nbsp;зона'
+        },{
+            href: '#',
+            name: 'Управляющая&nbsp;компания'
+        },{
+            href: '#',
+            name: 'Вакансии'
+        },{
+            href: '#',
+            name: 'Раскрытие&nbsp;информации',
+            active: true
+        }
+        ]
+    } %}
+
+    <div class="l-disclosure">
+        <div class="b-title"> {#b-about-title#}
+            <h1>Раскрытие информации</h1>
+        </div>
+
+        {# Блок ссылок #}
+
+        {% include '../components/accordion-links/accordion-links.twig' with {
+            title: 'Закупочная информация',
+            modify: "b-profile__links",
+            items: [{
+                text: "Внутренние документы"
+            },{
+                text: "Раскрытие информации в сфере регулируемых видов деятельности"
+            },{
+                active: "is-active",
+                text: "Закупочная информация"
+            }]
+        } %}
+
+        <div class="b-disclosure-block b-disclosure-block_with_note j-disclosure-block">
+            <div class="b-disclosure-block__content">
+                <div class="b-disclosure-title b-title">
+                    <h2>Документы о закупочной деятельности</h2>
+                </div>
+                <form action="#" class="b-disclosure-filter b-mini-filter j-disclosure-filter"  data-send="/tests/disclosure-documents.json">
+                    <div class="b-mini-filter__group j-disclosure-select-group">
+                        <div class="b-mini-filter__values j-disclosure-select" data-title-default="2018"><span class="j-disclosure-select-title">2018</span></div>
+                        <div class="b-mini-filter__group-wrap">
+                            <div class="b-mini-filter__item">
+                                <input type="radio" name="disclosure-procurement-activity" value="2018" data-text="2018" id="procurement-activity2018" checked class="b-mini-filter__input">
+                                <label for="procurement-activity2018" class="b-mini-filter__fake">2018</label>
+                            </div>
+
+                            <div class="b-mini-filter__item">
+                                <input type="radio" name="disclosure-procurement-activity" value="2017" data-text="2017" id="procurement-activity2017" class="b-mini-filter__input">
+                                <label for="procurement-activity2017" class="b-mini-filter__fake">2017</label>
+                            </div>
+
+                            <div class="b-mini-filter__item">
+                                <input type="radio" name="disclosure-procurement-activity" value="2016" data-text="2016" id="procurement-activity2016" class="b-mini-filter__input">
+                                <label for="procurement-activity2016" class="b-mini-filter__fake">2016</label>
+                            </div>
+
+                            <div class="b-mini-filter__item">
+                                <input type="radio" name="disclosure-procurement-activity" value="2015" data-text="2015" id="procurement-activity2015" class="b-mini-filter__input">
+                                <label for="procurement-activity2015" class="b-mini-filter__fake">2015</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- Здесь для подгрузки правильной икоки для файла у блока .b-profile-document__item
+                         должен быть класс модификатор типа b-profile-document__item_ext_[расширение файла]-->
+                <div class="b-profile-documents j-disclosure-content">
+                    <div class="b-profile-document__item b-profile-document__item_ext_pdf">
+                        <div class="b-profile-document__item-title">
+                            <a href="#" class="b-profile-document__item-title-link b-link-line">Положение о закупках товаров, работ, услуг АО "ОЭЗ" в ред. от 01.03.2017</a>
+                            <span class="b-profile-document__item-title-weight">5,5 мб</span>
+                        </div>
+                        <div class="b-profile-document__item-desc">
+                            <time datetime="2018-12-12" class="b-profile-document__item-date">12.12.2018</time>
+                        </div>
+                    </div>
+                    <div class="b-profile-document__item b-profile-document__item_ext_pdf">
+                        <div class="b-profile-document__item-title">
+                            <a href="#" class="b-profile-document__item-title-link b-link-line">Перечень внесенных изменений №7 от 01.03.2017</a>
+                            <span class="b-profile-document__item-title-weight">5,5 мб</span>
+                        </div>
+                        <div class="b-profile-document__item-desc">
+                            <time datetime="2018-12-12" class="b-profile-document__item-date">12.12.2018</time>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="b-disclosure-block__note">Закупки <br>ОЭЗ Санкт-Петербурга смотрите на сайте — <a class="b-link-line" href="http://zakupki.gov.ru" target="_blank">zakupki.gov.ru</a></div>
+        </div>
+
+        <div class="b-disclosure-block  j-disclosure-block  j-disclosure-procurement">
+            <div class="b-disclosure-title b-title">
+                <h2>Информация о закупках</h2>
+            </div>
+            <form action="#" class="b-disclosure-filter b-mini-filter j-disclosure-filter" data-send="/tests/disclosure-procurements.json">
+                <div class="b-mini-filter__group j-disclosure-select-group">
+                    <div class="b-mini-filter__values j-disclosure-select" data-title-default="2018"><span class="j-disclosure-select-title">2018</span></div>
+                    <div class="b-mini-filter__group-wrap">
+                        <div class="b-mini-filter__item">
+                            <input type="radio" name="disclosure-procurement" value="2018" data-text="2018" id="procurement2018" checked class="b-mini-filter__input">
+                            <label for="procurement2018" class="b-mini-filter__fake">2018</label>
+                        </div>
+
+                        <div class="b-mini-filter__item">
+                            <input type="radio" name="disclosure-procurement" value="2017" data-text="2017" id="procurement2017" class="b-mini-filter__input">
+                            <label for="procurement2017" class="b-mini-filter__fake">2017</label>
+                        </div>
+
+                        <div class="b-mini-filter__item">
+                            <input type="radio" name="disclosure-procurement" value="2016" data-text="2016" id="procurement2016" class="b-mini-filter__input">
+                            <label for="procurement2016" class="b-mini-filter__fake">2016</label>
+                        </div>
+
+                        <div class="b-mini-filter__item">
+                            <input type="radio" name="disclosure-procurement" value="2015" data-text="2015" id="procurement2015" class="b-mini-filter__input">
+                            <label for="procurement2015" class="b-mini-filter__fake">2015</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="b-profile-document__list j-disclosure-content">
+                <div class="b-disclosure-content-item j-disclosure-content-item">
+                    <div class="b-disclosure-content-item__title">
+                        <a href="#" class="b-link-line">Оказание услуг по предоставлению технического заключения на предмет функционально-технических характеристик объекта (движимое или недвижимое) на сооружение - наружные сети электроснабжения, протяженностью 171 метр, расположенное на Паратунском ЭПЛРЗ по адресу: Камчатский край, Елизовский район, п. Термальный, на реке Трезубец</a>
+                    </div>
+                    <div class="b-disclosure-content-item__desc">
+                        <time datetime="2018-12-12" class="b-disclosure-content-item__date">12.12.2018</time>
+                    </div>
+                </div>
+                <div class="b-disclosure-content-item j-disclosure-content-item">
+                    <div class="b-disclosure-content-item__title">
+                        <a href="#" class="b-link-line">
+                            Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ в течен</a>
+                    </div>
+                    <div class="b-disclosure-content-item__desc">
+                        <time datetime="2018-12-12" class="b-disclosure-content-item__date">12.12.2018</time>
+                    </div>
+                </div>
+                <div class="b-disclosure-content-item j-disclosure-content-item">
+                    <div class="b-disclosure-content-item__title">
+                        <a href="#" class="b-link-line">
+                            Объем инвестиций и капитальных вложений в период деятельности заявителя в ОЭЗ</a>
+                    </div>
+                    <div class="b-disclosure-content-item__desc">
+                        <time datetime="2018-12-12" class="b-disclosure-content-item__date">12.12.2018</time>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="b-disclosure-more button-add j-disclosure-load-more" data-send="/tests/disclosure-procurements.json">Загрузить еще закупки</button>
+        </div>
+    </div>
+{% endblock %}
