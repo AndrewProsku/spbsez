@@ -67,7 +67,6 @@ class Report extends EO_Reports
 
         $this->setIsLocked(true)
             ->setModifiedBy($USER->GetID())
-            ->setDateModified(new DateTime())
             ->save();
     }
 
@@ -82,7 +81,6 @@ class Report extends EO_Reports
 
         $this->setIsLocked(false)
             ->setModifiedBy($USER->GetID())
-            ->setDateModified(new DateTime())
             ->save();
     }
 
