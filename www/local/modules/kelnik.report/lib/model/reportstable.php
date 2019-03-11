@@ -25,8 +25,13 @@ class ReportsTable extends DataManager
     public const TYPE_1 = 1;
     public const TYPE_2 = 2;
     public const TYPE_3 = 3;
-    public const TYPE_SEMI_ANNUAL = 4;
+    public const TYPE_PRELIMINARY_ANNUAL = 4;
     public const TYPE_ANNUAL = 5;
+
+    public const NEW_ROW_PREFIX = 'new-';
+    public const LOCK_TIME_LEFT = 900; // 15 min
+
+    protected static $completeYear = [];
 
     /**
      * @return string
@@ -84,8 +89,8 @@ class ReportsTable extends DataManager
             (new StringField('NAME'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME')),
 
-            (new StringField('NAME_RESIDENT'))
-                ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME_RESIDENT')),
+            (new StringField('NAME_SEZ'))
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME_SEZ')),
 
             (new Reference(
                 'STATUS',
@@ -100,6 +105,17 @@ class ReportsTable extends DataManager
     public static function getObjectClass()
     {
         return Report::class;
+    }
+
+    public static function update($id, $data)
+    {
+        $data['DATE_MODIFIED'] = new DateTime();
+
+        if (!Context::getCurrent()->getRequest()->isAdminSection()) {
+            $data['MODIFIED_BY'] = self::getUserId();
+        }
+
+        return parent::update($id, $data);
     }
 
     public static function onAfterAdd(Event $event)
@@ -145,11 +161,11 @@ class ReportsTable extends DataManager
     public static function getTypes()
     {
         return [
-            self::TYPE_1 => Loc::getMessage('KELNIK_REPORT_TYPE_1'),
-            self::TYPE_2 => Loc::getMessage('KELNIK_REPORT_TYPE_2'),
-            self::TYPE_3 => Loc::getMessage('KELNIK_REPORT_TYPE_3'),
-            self::TYPE_SEMI_ANNUAL => Loc::getMessage('KELNIK_REPORT_TYPE_SEMI_ANNUAL'),
-            self::TYPE_ANNUAL => Loc::getMessage('KELNIK_REPORT_TYPE_ANNUAL')
+            self::TYPE_1                  => Loc::getMessage('KELNIK_REPORT_TYPE_1'),
+            self::TYPE_2                  => Loc::getMessage('KELNIK_REPORT_TYPE_2'),
+            self::TYPE_3                  => Loc::getMessage('KELNIK_REPORT_TYPE_3'),
+            self::TYPE_PRELIMINARY_ANNUAL => Loc::getMessage('KELNIK_REPORT_TYPE_SEMI_ANNUAL'),
+            self::TYPE_ANNUAL             => Loc::getMessage('KELNIK_REPORT_TYPE_ANNUAL')
         ];
     }
 
@@ -165,23 +181,23 @@ class ReportsTable extends DataManager
         }
 
         return [
-            self::TYPE_1 => [
+            self::TYPE_1                  => [
                 'start' => mktime(0, 0, 0, 4, 1, $year),
                 'end' => mktime(23, 59, 59, 4, 31, $year)
             ],
-            self::TYPE_2 => [
+            self::TYPE_2                  => [
                 'start' => mktime(0, 0, 0, 7, 1, $year),
                 'end' => mktime(23, 59, 59, 7, 31, $year)
             ],
-            self::TYPE_3 => [
+            self::TYPE_3                  => [
                 'start' => mktime(0, 0, 0, 9, 1, $year),
                 'end' => mktime(23, 59, 59, 9, 30, $year)
             ],
-            self::TYPE_SEMI_ANNUAL => [
+            self::TYPE_PRELIMINARY_ANNUAL => [
                 'start' => mktime(0, 0, 0, 1, 8, $year + 1),
                 'end' => mktime(23, 59, 59, 1, 31, $year + 1)
             ],
-            self::TYPE_ANNUAL => [
+            self::TYPE_ANNUAL             => [
                 'start' => mktime(0, 0, 0, 4, 1, $year + 1),
                 'end' => mktime(23, 59, 59, 4, 31, $year + 1)
             ]
@@ -195,5 +211,50 @@ class ReportsTable extends DataManager
         return !empty($USER) && $USER->IsAuthorized()
                 ? $USER->GetID()
                 : 0;
+    }
+
+    /**
+     * Проверка списка отчетов за год.
+     * Если список отчетов пуст, либо все отчеты приняты, год считается как сдан.
+     *
+     * @param int $companyId
+     * @param int $year
+     * @return bool
+     */
+    public static function yearIsComplete(int $companyId, int $year)
+    {
+        if (isset(self::$completeYear[$companyId . '_' . $year])) {
+            return self::$completeYear[$companyId . '_' . $year];
+        }
+
+        try {
+            $reports = self::getList([
+                'filter' => [
+                    '=YEAR'       => $year,
+                    '=COMPANY_ID' => $companyId
+                ],
+                'order' => [
+                    'TYPE' => 'ASC'
+                ]
+            ])->fetchCollection();
+        } catch (\Exception $e) {
+            $reports = [];
+        }
+
+        if (!$reports->count()) {
+            return self::$completeYear[$companyId . '_' . $year] = true;
+        }
+
+        if ($reports->count() < count(self::getTypes())) {
+            return self::$completeYear[$companyId . '_' . $year] = false;
+        }
+
+        foreach ($reports as $report) {
+            if (!$report->isComplete()) {
+                return self::$completeYear[$companyId . '_' . $year] = false;
+            }
+        }
+
+        return self::$completeYear[$companyId . '_' . $year] = true;
     }
 }

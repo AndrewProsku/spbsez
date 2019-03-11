@@ -37,7 +37,7 @@ class ReportsAdminInterface extends AdminInterface
                         'REQUIRED' => true,
                         'EDIT_LINK' => true
                     ],
-                    'NAME_RESIDENT' => [
+                    'NAME_SEZ' => [
                         'WIDGET' => new StringWidget(),
                         'SIZE' => 40,
                         'FILTER' => '%',

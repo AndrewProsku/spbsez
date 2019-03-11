@@ -8,8 +8,7 @@
     </div>
     <div class="b-reports-empty">
         Резидент заполняет отчеты 4 раза в&nbsp;год.
-        Следующий отчетный период во&nbsp;2-м квартале 2019 года.
-        Пришлем уведомление в&nbsp;«<a class="b-link-line" href="<?= $this->__component->getParent()->arParams['SEF_FOLDER']; ?>">Сообщения от&nbsp;ОЭЗ</a>», когда наступит отчетный период.
+        Пришлем уведомление в&nbsp;«<a class="b-link-line" href="<?= LANG_DIR . 'cabinet/messages/'; ?>">Сообщения от&nbsp;ОЭЗ</a>», когда наступит отчетный период.
     </div>
     <?php return; ?>
 <?php endif; ?>
@@ -31,10 +30,10 @@
 
     <div class="b-quarters">
         <?php foreach ($year['ELEMENTS'] as $report): ?>
-            <section class="b-quarter <?= $report->getStatus()->getCssClass(); ?>">
-                <h3 class="b-quarter__title"><?= $report->getTypeName(); ?></h3>
-                <div class="b-quarter__label"><?= $report->getStatus()->getName(); ?></div>
-                <a class="button b-quarter__button button_icon_pen" href="<?= $report->getLink(); ?>"><?= $report->getStatus()->getButtonName(); ?></a>
+            <section class="b-quarter <?= $report['STATUS_CSS_CLASS']; ?>">
+                <h3 class="b-quarter__title"><?= $report['TYPE_NAME']; ?></h3>
+                <div class="b-quarter__label"><?= $report['STATUS_NAME']; ?></div>
+                <a class="button b-quarter__button button_icon_pen" href="<?= $report['LINK']; ?>"><?= $report['STATUS_BUTTON_NAME']; ?></a>
             </section>
         <?php endforeach; ?>
     </div>
@@ -49,10 +48,10 @@
     <h3 class="b-reports-year"><?= $year['NAME']; ?></h3>
     <div class="b-quarters">
         <?php foreach ($year['ELEMENTS'] as $report): ?>
-            <section class="b-quarter <?= $report->getStatus()->getCssClass(); ?>">
-                <h3 class="b-quarter__title"><?= $report->getTypeName(); ?></h3>
-                <div class="b-quarter__label"><?= $report->getStatus()->getName(); ?></div>
-                <a class="button b-quarter__button button_icon_pen" href="<?= $report->getLink(); ?>"><?= $report->getStatus()->getButtonName(); ?></a>
+            <section class="b-quarter <?= $report['STATUS_CSS_CLASS']; ?>">
+                <h3 class="b-quarter__title"><?= $report['TYPE_NAME']; ?></h3>
+                <div class="b-quarter__label"><?= $report['STATUS_NAME']; ?></div>
+                <a class="button b-quarter__button button_icon_pen" href="<?= $report['LINK']; ?>"><?= $report['STATUS_BUTTON_NAME']; ?></a>
             </section>
         <?php endforeach; ?>
     </div>

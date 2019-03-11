@@ -3,7 +3,6 @@
 namespace Kelnik\Report\Component;
 
 use Bex\Bbc;
-use Bitrix\Main\Application;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Objectify\Collection;
 use Kelnik\Helpers\ArrayHelper;
@@ -56,12 +55,17 @@ class ReportList extends Bbc\Basis
 
     protected function executeMain()
     {
-        $this->arResult['DISABLED'] = true;
         $this->arResult['REPORTS']  = [];
         $this->arResult['YEAR']     = date('Y');
 
         self::registerCacheTag('kelnik:report_list_' . $this->profile->getCompanyId());
 
+        $this->arResult['REPORTS'] = $this->getReports();
+        $this->arResult['DISABLED'] = !count($this->arResult['REPORTS']);
+    }
+
+    protected function getReports()
+    {
         try {
             $reports = ReportsTable::getList([
                 'select' => [
@@ -76,16 +80,14 @@ class ReportList extends Bbc\Basis
                 ]
             ])->fetchCollection();
         } catch (\Exception $e) {
-            return;
+            return [];
         }
 
         if (!$reports->count()) {
-            return;
+            return [];
         }
 
-        $this->arResult['DISABLED'] = false;
-
-        $this->arResult['REPORTS'] = $this->prepareReports(
+        return $this->prepareReports(
             $this->checkList($reports)
         );
     }
@@ -93,10 +95,10 @@ class ReportList extends Bbc\Basis
     /**
      * Подготовка списка отчетов по годам
      *
-     * @param Collection $reports
+     * @param \Kelnik\Report\Model\EO_Reports_Collection $reports
      * @return array
      */
-    protected function prepareReports(Collection $reports)
+    protected function prepareReports(\Kelnik\Report\Model\EO_Reports_Collection $reports)
     {
         $res = [];
 
@@ -115,17 +117,21 @@ class ReportList extends Bbc\Basis
                 $res[$year]['IS_COMPLETE'] = false;
             }
 
-            $res[$year]['ELEMENTS'][$v->getType()] = $v;
+            // У битрикса плохо с кешированием объектов,
+            // переводим в массив
+            //
+            $res[$year]['ELEMENTS'][$v->getType()] = $v->getArray();
         }
 
         ksort($res);
-        $res = array_reverse($res);
 
-        return $res;
+        return array_reverse($res);
     }
 
     /**
      * Проверка списка отчетов на отсутствие требуемых.
+     * Если отчет отсутствует, то в список добавляется "виртуальный" отчет,
+     * с ссылкой на создание реального отчета
      *
      * @param Collection $reports
      * @return array|Collection
@@ -140,6 +146,7 @@ class ReportList extends Bbc\Basis
 
         $types     = array_keys(ReportsTable::getTypes());
         $curYear   = (int) date('Y');
+        // TODO: restore real date
         $curTime   = mktime(0, 0, 0, 4, 2, 2019);// time();
         $defStatus = StatusTable::getByPrimary(StatusTable::NEW)->fetchObject();
 

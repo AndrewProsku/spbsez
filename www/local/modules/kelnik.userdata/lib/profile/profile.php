@@ -23,6 +23,7 @@ class Profile
     private $user;
     private $userGroups = [];
     private $lastError = '';
+    private $companyName = false;
 
     private static $instance = [];
 
@@ -110,6 +111,23 @@ class Profile
         }
 
         return $this->getField('UF_ADMIN_ID');
+    }
+
+    public function getCompanyName()
+    {
+        if (false !== $this->companyName) {
+            return $this->companyName;
+        }
+
+        $this->companyName = $this->getField('WORK_COMPANY');
+
+        if ($this->isResident()) {
+            $adminInfo = \CUser::GetByID($this->getCompanyId())->Fetch();
+
+            $this->companyName = ArrayHelper::getValue($adminInfo, 'WORK_COMPANY', '');
+        }
+
+        return $this->companyName;
     }
 
     public function update(array $data)

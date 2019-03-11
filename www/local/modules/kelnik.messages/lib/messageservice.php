@@ -16,7 +16,7 @@ use Kelnik\Userdata\Profile\Profile;
 class MessageService
 {
     public const MONTHS_COUNT = 2;
-    public const BASE_URL = '/cabinet/messages/';
+    public const BASE_URL = 'cabinet/messages/';
 
     /**
      * @var Profile
@@ -396,9 +396,14 @@ class MessageService
         return $res;
     }
 
+    public static function getBaseUrl()
+    {
+        return LANG_DIR . self::BASE_URL;
+    }
+
     public static function getElementLink(array $el)
     {
-        return ArrayHelper::getValue(self::$settings, 'sefFolder', self::BASE_URL) . $el['ID'] . '/';
+        return ArrayHelper::getValue(self::$settings, 'sefFolder', self::getBaseUrl()) . $el['ID'] . '/';
     }
 
     public static function formatDate(DateTime $elementDate)

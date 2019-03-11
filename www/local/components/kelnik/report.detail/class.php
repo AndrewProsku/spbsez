@@ -3,8 +3,6 @@
 namespace Kelnik\Report\Component;
 
 use Bex\Bbc;
-use Bitrix\Main\Application;
-use Bitrix\Main\Context;
 use Bitrix\Main\Loader;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Report\Model\Report;
@@ -38,12 +36,12 @@ class ReportDetail extends Bbc\Basis
 
     public function onPrepareComponentParams($arParams)
     {
-        $arParams['CREATE_ELEMENT_TYPE'] = (int) Context::getCurrent()->getRequest()->getQuery('t');
-
         try {
             Loader::includeModule('kelnik.report');
 
-            if ($arParams['ELEMENT_ID']
+            $arParams['CREATE_ELEMENT_TYPE'] = (int) str_replace(ReportsTable::NEW_ROW_PREFIX, '', $arParams['ELEMENT_ID']);
+
+            if ((int) $arParams['ELEMENT_ID']
                 || !in_array($arParams['CREATE_ELEMENT_TYPE'], array_keys(ReportsTable::getTypes()))
             ) {
                 $arParams['CREATE_ELEMENT_TYPE'] = 0;
@@ -65,13 +63,23 @@ class ReportDetail extends Bbc\Basis
 
         $this->profile = Profile::getInstance($USER->GetID());
 
+        Report::setUrlTemplate(
+            $this->arParams['SEF_FOLDER'] .
+            ArrayHelper::getValue($this->getParent()->arParams, 'SEF_URL_TEMPLATES.detail', '')
+        );
+
+        // Если отчет существует, то показываем карточку отчета
+        //
         if ($this->arParams['ELEMENT_ID']) {
             return true;
         }
 
-        $res = $this->processReport($this->arParams['CREATE_ELEMENT_TYPE']);
+        // Поверяем возможность создания отчета.
+        // Если создали, то переходим на карточку.
+        //
+        $res = $this->processNewReport($this->arParams['CREATE_ELEMENT_TYPE']);
 
-        if (false !== $res) {
+        if (is_string($res)) {
             LocalRedirect($res);
         }
 
@@ -82,11 +90,41 @@ class ReportDetail extends Bbc\Basis
     {
         self::registerCacheTag('kelnik:report_' . $this->profile->getCompanyId() . '_' . $this->arParams['ELEMENT_ID']);
 
-        $element = [];
+        /* @var Report */
+        $report = $this->getReport($this->arParams['ELEMENT_ID']);
+        $prevYearRequired = false;
 
-//        if (!$element && $this->arParams['SET_404'] === 'Y') {
-//            $this->return404();
-//        }
+        if (!$report && $this->arParams['SET_404'] === 'Y') {
+            $this->return404();
+        }
+
+        if ($report->getType() === ReportsTable::TYPE_1) {
+            $prevYearRequired = !ReportsTable::yearIsComplete($this->profile->getCompanyId(), $report->getYear() - 1);
+        }
+
+        // Не заполнен предыдущий год
+        //
+        if ($prevYearRequired) {
+            $this->abortResultCache();
+            $this->arResult['PREV_YEAR_REQUIRED'] = true;
+
+            return true;
+        }
+
+        if ($report->isLocked() && $report->getModifiedBy() !== $this->profile->getId()) {
+            $this->abortResultCache();
+            $this->arResult['IS_LOCKED'] = true;
+
+            return true;
+        }
+
+        if (!$report->getIsLocked()) {
+            $this->abortResultCache();
+
+            $report->lock();
+        }
+
+        $this->arResult['REPORT'] = $report->getArray();
     }
 
     /**
@@ -100,18 +138,20 @@ class ReportDetail extends Bbc\Basis
      * @throws \Bitrix\Main\ObjectPropertyException
      * @throws \Bitrix\Main\SystemException
      */
-    protected function processReport(int $elementType)
+    protected function processNewReport(int $elementType)
     {
+        if (!in_array($elementType, array_keys(ReportsTable::getTypes()))) {
+            return false;
+        }
+
         Report::setUrlTemplate(
             $this->arParams['SEF_FOLDER'] .
             ArrayHelper::getValue($this->getParent()->arParams, 'SEF_URL_TEMPLATES.detail', '')
         );
 
-        $isAnnual = false;
         $year = (int) date('Y');
 
-        if (in_array($elementType, [ReportsTable::TYPE_ANNUAL, ReportsTable::TYPE_SEMI_ANNUAL])) {
-            $isAnnual = true;
+        if (in_array($elementType, [ReportsTable::TYPE_ANNUAL, ReportsTable::TYPE_PRELIMINARY_ANNUAL])) {
             $year--;
         }
 
@@ -130,18 +170,28 @@ class ReportDetail extends Bbc\Basis
             return $report->getLink();
         }
 
-        // Если это квартальный отчет, то проверяем сдан ли отчет за прошлый год
+        // Проверяем попадаем ли под даты периода
         //
-        if (!$isAnnual) {
-            // TODO: check prev year reports
+        $typePeriod = ArrayHelper::getValue(ReportsTable::getTypePeriod($year), $elementType, []);
+        // TODO: restore real date
+        $curTime    = mktime(0, 0, 0, 4, 2, 2019);// time();
+
+        if (!$typePeriod
+            || $curTime <= $typePeriod['start']
+            || $curTime >= $typePeriod['end']
+        ) {
+            return false;
         }
 
+        // Создаем отчет
+        //
         try {
             $report = new Report();
             $report->setYear($year)
                     ->setType($elementType)
                     ->setStatusId(StatusTable::NEW)
                     ->setCompanyId($this->profile->getCompanyId())
+                    ->setName($this->profile->getCompanyName())
                     ->setModifiedBy($this->profile->getId());
 
             $res = $report->save();
@@ -154,4 +204,26 @@ class ReportDetail extends Bbc\Basis
 
         return false;
     }
+
+    protected function getReport(int $id)
+    {
+        try {
+            $res = ReportsTable::getList([
+                'select' => [
+                    '*', 'STATUS'
+                ],
+                'filter' => [
+                    '=ID' => $id,
+                    '=COMPANY_ID' => $this->profile->getCompanyId()
+                ],
+                'limit' => 1
+            ])->fetchObject();
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return $res;
+    }
+
+
 }

@@ -1,7 +1,7 @@
 <?php
 $MESS['KELNIK_REPORT_ID'] = 'ID';
-$MESS['KELNIK_REPORT_NAME'] = 'Наименование';
-$MESS['KELNIK_REPORT_NAME_RESIDENT'] = 'Наименование резидента';
+$MESS['KELNIK_REPORT_NAME'] = 'Наименование резидента ОЭЗ';
+$MESS['KELNIK_REPORT_NAME_SEZ'] = 'Наименование ОЭЗ';
 $MESS['KELNIK_REPORT_STATUS'] = 'Статус';
 $MESS['KELNIK_REPORT_DATE_CREATED'] = 'Создано';
 $MESS['KELNIK_REPORT_DATE_MODIFIED'] = 'Изменено';

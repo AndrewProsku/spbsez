@@ -48,6 +48,9 @@ class Api
         ],
         'kelnik.news' => [
             'news'
+        ],
+        'kelnik.report' => [
+            'report'
         ]
     ];
 
