@@ -14,7 +14,7 @@ Loc::loadMessages(__FILE__);
 class StatusTable extends DataManager
 {
     public const NEW = 1;
-    public const IN_PROGRESS = 2;
+    public const CHECKING = 2;
     public const DONE = 3;
     public const DECLINED = 4;
 
@@ -60,9 +60,9 @@ class StatusTable extends DataManager
     {
         return ArrayHelper::getValue(
             [
-                self::NEW => 'b-quarter_status_to-fill',
-                self::IN_PROGRESS => 'b-quarter_status_check',
-                self::DONE => 'b-quarter_status_approved',
+                self::NEW      => 'b-quarter_status_to-fill',
+                self::CHECKING => 'b-quarter_status_check',
+                self::DONE     => 'b-quarter_status_approved',
                 self::DECLINED => 'b-quarter_status_rejected'
             ],
             $id,

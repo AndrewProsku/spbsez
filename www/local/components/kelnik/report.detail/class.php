@@ -3,7 +3,9 @@
 namespace Kelnik\Report\Component;
 
 use Bex\Bbc;
+use Bitrix\Iblock\Component\Tools;
 use Bitrix\Main\Loader;
+use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportsTable;
@@ -58,7 +60,7 @@ class ReportDetail extends Bbc\Basis
         global $USER;
 
         if (!$this->arParams['ELEMENT_ID'] && !$this->arParams['CREATE_ELEMENT_TYPE']) {
-            $this->return404(true);
+            $this->show404();
         }
 
         $this->profile = Profile::getInstance($USER->GetID());
@@ -83,19 +85,20 @@ class ReportDetail extends Bbc\Basis
             LocalRedirect($res);
         }
 
-        $this->return404(true);
+        $this->show404();
     }
 
     protected function executeMain()
     {
-        self::registerCacheTag('kelnik:report_' . $this->profile->getCompanyId() . '_' . $this->arParams['ELEMENT_ID']);
+        $this->setResultCacheKeys(['PREV_YEAR_REQUIRED', 'IS_LOCKED', 'TIME_LEFT', 'ORDER']);
+        $this->abortCache();
+//        self::registerCacheTag('kelnik:report_' . $this->profile->getCompanyId() . '_' . $this->arParams['ELEMENT_ID']);
 
-        /* @var Report */
-        $report = $this->getReport($this->arParams['ELEMENT_ID']);
+        $report = ReportsTable::getReport($this->profile->getCompanyId(), $this->arParams['ELEMENT_ID']);
         $prevYearRequired = false;
 
-        if (!$report && $this->arParams['SET_404'] === 'Y') {
-            $this->return404();
+        if ((!$report || !$report->hasAccess()) && $this->arParams['SET_404'] === 'Y') {
+            $this->show404();
         }
 
         if ($report->getType() === ReportsTable::TYPE_1) {
@@ -105,22 +108,21 @@ class ReportDetail extends Bbc\Basis
         // Не заполнен предыдущий год
         //
         if ($prevYearRequired) {
-            $this->abortResultCache();
             $this->arResult['PREV_YEAR_REQUIRED'] = true;
 
             return true;
         }
 
-        if ($report->isLocked() && $report->getModifiedBy() !== $this->profile->getId()) {
-            $this->abortResultCache();
+        if ($report->isLocked() && !$report->isLastModifier()) {
             $this->arResult['IS_LOCKED'] = true;
+            $this->arResult['TIME_LEFT'] = FormatDate('idiff', time(), $report->getLockExpiredTime());
 
             return true;
         }
 
-        if (!$report->getIsLocked()) {
-            $this->abortResultCache();
+        $this->arResult['EDITABLE'] = $report->canEdit();
 
+        if ($this->arResult['EDITABLE']) {
             $report->lock();
         }
 
@@ -173,8 +175,7 @@ class ReportDetail extends Bbc\Basis
         // Проверяем попадаем ли под даты периода
         //
         $typePeriod = ArrayHelper::getValue(ReportsTable::getTypePeriod($year), $elementType, []);
-        // TODO: restore real date
-        $curTime    = mktime(0, 0, 0, 4, 2, 2019);// time();
+        $curTime    = ReportsTable::getCurrentTime();
 
         if (!$typePeriod
             || $curTime <= $typePeriod['start']
@@ -192,7 +193,8 @@ class ReportDetail extends Bbc\Basis
                     ->setStatusId(StatusTable::NEW)
                     ->setCompanyId($this->profile->getCompanyId())
                     ->setName($this->profile->getCompanyName())
-                    ->setModifiedBy($this->profile->getId());
+                    ->setModifiedBy($this->profile->getId())
+                    ->setDateModified(new DateTime());
 
             $res = $report->save();
 
@@ -205,25 +207,13 @@ class ReportDetail extends Bbc\Basis
         return false;
     }
 
-    protected function getReport(int $id)
+    protected function show404()
     {
-        try {
-            $res = ReportsTable::getList([
-                'select' => [
-                    '*', 'STATUS'
-                ],
-                'filter' => [
-                    '=ID' => $id,
-                    '=COMPANY_ID' => $this->profile->getCompanyId()
-                ],
-                'limit' => 1
-            ])->fetchObject();
-        } catch (\Exception $e) {
-            return false;
-        }
-
-        return $res;
+        Tools::process404(
+            'Not Found',
+            true,
+            true,
+            true
+        );
     }
-
-
 }

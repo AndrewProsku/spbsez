@@ -110,7 +110,7 @@ class Profile
             return $this->getId();
         }
 
-        return $this->getField('UF_ADMIN_ID');
+        return (int) $this->getField('UF_ADMIN_ID');
     }
 
     public function getCompanyName()

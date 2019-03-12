@@ -146,8 +146,7 @@ class ReportList extends Bbc\Basis
 
         $types     = array_keys(ReportsTable::getTypes());
         $curYear   = (int) date('Y');
-        // TODO: restore real date
-        $curTime   = mktime(0, 0, 0, 4, 2, 2019);// time();
+        $curTime   = ReportsTable::getCurrentTime();
         $defStatus = StatusTable::getByPrimary(StatusTable::NEW)->fetchObject();
 
         $reportsByYear = [];

@@ -110,10 +110,7 @@ class ReportsTable extends DataManager
     public static function update($id, $data)
     {
         $data['DATE_MODIFIED'] = new DateTime();
-
-        if (!Context::getCurrent()->getRequest()->isAdminSection()) {
-            $data['MODIFIED_BY'] = self::getUserId();
-        }
+        $data['MODIFIED_BY'] = self::getUserId();
 
         return parent::update($id, $data);
     }
@@ -204,13 +201,41 @@ class ReportsTable extends DataManager
         ];
     }
 
-    protected static function getUserId()
+    public static function getUserId()
     {
         global $USER;
 
-        return !empty($USER) && $USER->IsAuthorized()
-                ? $USER->GetID()
-                : 0;
+        return (int) $USER->GetID();
+    }
+
+    /**
+     * @param int $companyId
+     * @param int $id
+     * @param bool $getFields
+     * @return Report|bool
+     */
+    public static function getReport(int $companyId, int $id)
+    {
+        if (!$id || !$companyId) {
+            return false;
+        }
+
+        try {
+            $res = self::getList([
+                'select' => [
+                    '*', 'STATUS'
+                ],
+                'filter' => [
+                    '=ID' => $id,
+                    '=COMPANY_ID' => $companyId
+                ],
+                'limit' => 1
+            ])->fetchObject();
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return $res;
     }
 
     /**
@@ -256,5 +281,11 @@ class ReportsTable extends DataManager
         }
 
         return self::$completeYear[$companyId . '_' . $year] = true;
+    }
+
+    public static function getCurrentTime()
+    {
+        // TODO: restore real date
+        return mktime(0, 0, 0, 4, 2, 2019); // time();
     }
 }

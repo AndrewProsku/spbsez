@@ -765,9 +765,7 @@ if (document.querySelector('.j-useful-content')) {
 const reportFormEl = document.querySelector('.j-report-form');
 
 if (reportFormEl) {
-    const reportForm = new ReportForm();
-
-    reportForm.init({
+    (new ReportForm()).init({
         target: reportFormEl
     });
 }

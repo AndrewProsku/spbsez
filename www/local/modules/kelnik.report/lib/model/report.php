@@ -10,17 +10,17 @@ use Kelnik\Userdata\Profile\Profile;
  * Class Report
  * @package Kelnik\Report\Model
  *
- * @method object setId(int $id)
- * @method object setYear(int $year)
- * @method object setStatusId(int $id)
- * @method object setType(int $id)
- * @method object setCompanyId(int $id)
- * @method object setModifiedBy(int $id)
- * @method object setDateModified(\Bitrix\Main\Type\DateTime $dtime)
- * @method object setDateCreated(\Bitrix\Main\Type\DateTime $dtime)
- * @method object setName(string $name)
- * @method object setNameSez(string $name)
- * @method object setIsLocked(bool $state)
+ * @method Report setId(int $id)
+ * @method Report setYear(int $year)
+ * @method Report setStatusId(int $id)
+ * @method Report setType(int $id)
+ * @method Report setCompanyId(int $id)
+ * @method Report setModifiedBy(int $id)
+ * @method Report setDateModified(\Bitrix\Main\Type\DateTime $dtime)
+ * @method Report setDateCreated(\Bitrix\Main\Type\DateTime $dtime)
+ * @method Report setName(string $name)
+ * @method Report setNameSez(string $name)
+ * @method Report setIsLocked(bool $state)
  *
  * @method \Bitrix\Main\ORM\Data\DeleteResult delete()
  * @method \Bitrix\Main\ORM\Data\AddResult save()
@@ -36,6 +36,7 @@ use Kelnik\Userdata\Profile\Profile;
  * @method int getCompanyId()
  * @method \Bitrix\Main\Type\DateTime getDateModified()
  * @method \Bitrix\Main\Type\DateTime getDateCreated()
+ * @method Fields getFields()
  */
 class Report extends EO_Reports
 {
@@ -46,42 +47,54 @@ class Report extends EO_Reports
         self::$elementUrlTemplate = $urlTmpl;
     }
 
-    public function isComplete()
-    {
-        return $this->getStatusId() == StatusTable::DONE;
-    }
-
     public function getTypeName()
     {
         return ReportsTable::getTypeName($this->getType());
     }
 
     /**
-     * Заблокировать возможность изменения записи всем, кроме автора
+     * Заблокировать возможность изменения записи всем, кроме автора.
+     * Время блокировки в @see ReportsTable::LOCK_TIME_LEFT
      *
+     * @return \Bitrix\Main\ORM\Data\AddResult
      * @throws \Bitrix\Main\ObjectException
      */
     public function lock()
     {
-        global $USER;
-
-        $this->setIsLocked(true)
-            ->setModifiedBy($USER->GetID())
-            ->save();
+        return $this->setIsLocked(true)
+                    ->setModifiedBy(ReportsTable::getUserId())
+                    ->setDateModified(new DateTime())
+                    ->save();
     }
 
     /**
      * Снять блокировку с отчета
      *
+     * @return \Bitrix\Main\ORM\Data\AddResult
      * @throws \Bitrix\Main\ObjectException
      */
     public function unLock()
     {
-        global $USER;
+        return $this->setIsLocked(false)
+                    ->setModifiedBy(ReportsTable::getUserId())
+                    ->setDateModified(new DateTime())
+                    ->save();
+    }
 
-        $this->setIsLocked(false)
-            ->setModifiedBy($USER->GetID())
-            ->save();
+    /**
+     * @return bool
+     */
+    protected function lockIsExpired()
+    {
+        return $this->getLockExpiredTime() < time();
+    }
+
+    /**
+     * @return int
+     */
+    public function getLockExpiredTime()
+    {
+        return $this->getDateModified()->getTimestamp() + ReportsTable::LOCK_TIME_LEFT;
     }
 
     /**
@@ -91,32 +104,66 @@ class Report extends EO_Reports
      */
     public function isLocked()
     {
-        return $this->getIsLocked() && !$this->lockExpired();
+        return $this->getIsLocked() && !$this->lockIsExpired();
     }
 
     /**
+     * Отчет сдан
+     *
      * @return bool
      */
-    protected function lockExpired()
+    public function isComplete()
     {
-        return $this->getDateModified()->getTimestamp() < (time() - ReportsTable::LOCK_TIME_LEFT);
+        return $this->getStatusId() == StatusTable::DONE;
     }
 
     /**
-     * Проверяем возможность редактировая отчета
+     * Отчет на проверке администратором
+     *
+     * @return bool
+     */
+    public function isChecking()
+    {
+        return $this->getStatusId() === StatusTable::CHECKING;
+    }
+
+    /**
+     * Проверка последнего автора правок
      *
      * @param int $userId
      * @return bool
      */
-    public function canEdit(int $userId)
+    public function isLastModifier(int $userId = 0)
     {
-        global $USER;
+        if (!$userId) {
+            $userId = ReportsTable::getUserId();
+        }
 
-        if ($this->isComplete()) {
+        return $this->getModifiedBy() === Profile::getInstance($userId)->getId();
+    }
+
+    /**
+     * Проверяем возможность редактирования отчета
+     *
+     * @param int $userId
+     * @return bool
+     */
+    public function canEdit(int $userId = 0)
+    {
+        if ($this->isComplete() || $this->isChecking()) {
             return false;
         }
 
-        $profile = Profile::getInstance($userId ? $userId : $USER->GetID());
+        return $this->hasAccess($userId);
+    }
+
+    public function hasAccess(int $userId = 0)
+    {
+        if (!$userId) {
+            $userId = ReportsTable::getUserId();
+        }
+
+        $profile = Profile::getInstance($userId);
 
         if (!$profile->canReport()
             || $profile->getCompanyId() !== $this->getCompanyId()
@@ -124,7 +171,7 @@ class Report extends EO_Reports
             return false;
         }
 
-        return !$this->isLocked() || $this->lockExpired();
+        return true;
     }
 
     /**
@@ -155,7 +202,7 @@ class Report extends EO_Reports
             $res['STATUS_NAME'] = $this->getStatus()->getName();
             $res['STATUS_BUTTON_NAME'] = $this->getStatus()->getButtonName();
             $res['STATUS_CSS_CLASS'] = $this->getStatus()->getCssClass();
-            unset($res['STATUS']);
+            unset($res['STATUS'], $res['FIELDS']);
         }
 
         foreach (['DATE_CREATED', 'DATE_MODIFIED'] as $field) {
