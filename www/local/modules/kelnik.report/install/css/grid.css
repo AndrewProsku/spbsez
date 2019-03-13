@@ -1,0 +1,51 @@
+.grid-table .kelnik-tree-space {
+    display: inline-block;
+    height: 16px;
+    width: 20px;
+}
+.grid-table .kelnik-tree-left {
+    display: table-cell;
+    float: left;
+    height: 100%;
+}
+.grid-table .kelnik-tree-right {
+    display: table-cell;
+}
+.grid-table .kelnik-tree-no-sub {
+    color: #9cc3e0;
+    margin: 0 5px 0 16px;
+}
+.grid-table .kelnik-tree-sub {
+    color: #9cc3e0;
+    margin: 3px 10px 0 10px;
+}
+.grid-table div.kelnik-tree-right a {
+    color: #222;
+    font-size: 14px;
+    line-height: 24px;
+}
+.grid-table .kelnik-tree-corner {
+    transition: transform 0.2s ease-out;
+}
+.grid-table .kelnik-tree-block.open .kelnik-tree-corner {
+    transform: rotate(90deg);
+}
+.grid-table .kelnik-tree-block.open .kelnik-tree-sub:before {
+    content: '\f07c';
+}
+.grid-table .url {
+    color: #696969;
+}
+.grid-table td .fa {
+    font-size: 1.3rem;
+}
+.grid-table td .label {
+    font-size: 0.812rem;
+    border-radius: 3px;
+}
+.grid-table td .label .fa {
+    font-size: 0.812rem;
+}
+.grid-table td.grid-actions .fa {
+    font-size: 1.5rem;
+}

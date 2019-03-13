@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS `kelnik_report_status` (
+  `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `SORT` int(11) DEFAULT '500',
+  `ACTIVE` enum('Y','N') DEFAULT 'N',
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `SORT` (`SORT`),
+  KEY `ACTIVE` (`ACTIVE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+CREATE TABLE IF NOT EXISTS `kelnik_report` (
+  `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `COMPANY_ID` int(11) unsigned NOT NULL DEFAULT '0',
+  `CREATED_BY` int(11) unsigned NOT NULL DEFAULT '0',
+  `MODIFIED_BY` int(11) unsigned NOT NULL DEFAULT '0',
+  `STATUS_ID` int(11) unsigned NOT NULL DEFAULT '0',
+  `TYPE` tinyint(1) unsigned NOT NULL,
+  `YEAR` year(4) NOT NULL,
+  `DATE_CREATED` datetime NOT NULL,
+  `DATE_MODIFIED` datetime NOT NULL,
+  `IS_LOCKED` enum('Y','N') NOT NULL DEFAULT 'N',
+  `NAME` varchar(255) DEFAULT NULL,
+  `NAME_RESIDENT` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `USER_ID` (`MODIFIED_BY`),
+  KEY `STATUS_ID` (`STATUS_ID`),
+  KEY `YEAR` (`YEAR`),
+  KEY `COMPANY_ID` (`COMPANY_ID`),
+  KEY `TYPE` (`TYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+

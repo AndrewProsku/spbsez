@@ -27,3 +27,5 @@ $MESS['KELNIK_API_SERVICE_ERROR_BODY'] = 'Не заполнено поле Ко�
 $MESS['KELNIK_API_SERVICE_ERROR_TYPE_ID'] = 'Не указана Цель обращения';
 $MESS['KELNIK_API_SERVICE_ERROR_COMPANY'] = 'Не заполнено поле Компания';
 $MESS['KELNIK_API_SERVICE_ERROR_POSITION'] = 'Не заполнено поле Должность';
+
+$MESS['KELNIK_API_REPORT_NOT_FOUND'] = 'Отчет не найден';
