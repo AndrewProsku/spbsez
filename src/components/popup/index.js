@@ -29,7 +29,11 @@ class Popup {
      * Вешаем слушателей событий
      */
     bindEvents() {
-        this.target.addEventListener('click', this.makeOpen.bind(this));
+        this.target.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            this.makeOpen();
+        });
 
         document.addEventListener('keyup', (element) => {
             this.closeOnPressButton(element);
