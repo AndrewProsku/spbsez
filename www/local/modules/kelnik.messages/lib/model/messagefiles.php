@@ -2,8 +2,8 @@
 
 namespace Kelnik\Messages\Model;
 
-use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Fields\IntegerField;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
@@ -24,15 +24,13 @@ class MessageFilesTable extends DataManager
     public static function getMap()
     {
         return [
-            new Main\Entity\IntegerField(
-                'ID',
-                [
-                    'primary' => true,
-                    'autocomplete' => true
-                ]
-            ),
-            new Main\Entity\IntegerField('ENTITY_ID'),
-            new Main\Entity\IntegerField('VALUE')
+            (new IntegerField('ID'))
+                ->configureAutocomplete(true)
+                ->configurePrimary(true),
+            (new IntegerField('ENTITY_ID'))
+                ->configureDefaultValue(0),
+            (new IntegerField('VALUE'))
+                ->configureDefaultValue(0)
         ];
     }
 }

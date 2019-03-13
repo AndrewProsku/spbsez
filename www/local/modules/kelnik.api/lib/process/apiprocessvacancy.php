@@ -51,6 +51,7 @@ class ApiProcessVacancy extends ApiProcessAbstract
 
         if (empty($userFile['tmp_name']) || !is_uploaded_file($userFile['tmp_name'])) {
             $this->errors[] = Loc::getMessage('KELNIK_API_VACANCY_ERROR_FILE');
+
             return false;
         }
 
@@ -62,6 +63,7 @@ class ApiProcessVacancy extends ApiProcessAbstract
             ResponseTable::add($data);
         } catch (\Exception $e) {
             $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+
             return false;
         }
 

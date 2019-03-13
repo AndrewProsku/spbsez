@@ -46,7 +46,6 @@ try
                 'TYPE' => 'LIST',
                 'VALUES' => CategoriesTable::getComponentList()
             ],
-            'OBJECT_ID' => [],
             'SECTION_CODE' => [
                 'PARENT' => 'BASE',
                 'NAME' => Loc::getMessage('KELNIK_NEWS_LIST_SECTION_CODE'),
@@ -158,23 +157,6 @@ try
                 'DEFAULT' => 360000
             ]
         ]
-    ];
-
-    if (!\Bitrix\Main\Loader::includeModule('kelnik.estate')) {
-        unset($arComponentParameters['PARAMETERS']['OBJECT_ID']);
-        return;
-    }
-
-    $arComponentParameters['PARAMETERS']['OBJECT_ID'] = [
-        'PARENT' => 'BASE',
-        'NAME' => Loc::getMessage('KELNIK_NEWS_LIST_OBJECT_ID'),
-        'TYPE' => 'LIST',
-        'VALUES' => array_merge(
-            [
-                0 => ''
-            ],
-            \Kelnik\Estate\Object\ObjectTable::getAdminAssocList()
-        )
     ];
 }
 catch (Exception $e)

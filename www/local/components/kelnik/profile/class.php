@@ -4,7 +4,7 @@ namespace Kelnik\User\Components;
 
 use Bex\Bbc;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Userdata\Profile\ProfileModel;
+use Kelnik\Userdata\Profile\Profile;
 use Kelnik\Userdata\Model\DocsTable;
 use Kelnik\Userdata\Profile\ProfileSectionAdmins;
 use Kelnik\Userdata\Profile\ProfileSectionDocs;
@@ -28,7 +28,7 @@ class ProfileForm extends Bbc\Basis
     protected $cacheTemplate = false;
 
     /**
-     * @var \Kelnik\Userdata\Profile\ProfileModel
+     * @var \Kelnik\Userdata\Profile\Profile
      */
     protected $profile;
 
@@ -41,7 +41,7 @@ class ProfileForm extends Bbc\Basis
         }
 
         try {
-            $this->profile = ProfileModel::getInstance($USER->GetID());
+            $this->profile = Profile::getInstance($USER->GetID());
         } catch (\Exception $e) {
             return false;
         }
