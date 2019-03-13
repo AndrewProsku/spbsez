@@ -617,15 +617,17 @@ mediator.subscribe('openPopup', (popup) => {
  * Инициализация попапа "Написать сообщение" в футере
  */
 
-const messageButton = document.querySelector('.j-message-button');
+const messageButtons = Array.from(document.querySelectorAll('.j-message-button'));
 
-if (messageButton) {
-    const messagePopup = new Popup();
+if (messageButtons) {
+    messageButtons.forEach((messageButton) => {
+        const messagePopup = new Popup();
 
-    messagePopup.init({
-        target              : messageButton,
-        template            : messagePopupTemplate,
-        closeButtonAriaLabel: 'Закрыть'
+        messagePopup.init({
+            target              : messageButton,
+            template            : messagePopupTemplate,
+            closeButtonAriaLabel: 'Закрыть'
+        });
     });
 }
 

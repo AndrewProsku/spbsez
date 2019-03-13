@@ -92,7 +92,6 @@
     @include prefix(2, 36);
     @include suffix(2, 36);
     @include padding-level(top, pink);
-    @include padding-level(bottom, pink);
     width: 100%;
 
     @media #{$laptop} {
@@ -109,6 +108,7 @@
 .l-investors__department {
     @include prefix(2, 36);
     @include suffix(2, 36);
+    @include padding-level(top, pink);
     @include margin-level(bottom, pink);
     width: 100%;
 
