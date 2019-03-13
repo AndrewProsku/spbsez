@@ -78,6 +78,7 @@ class MessagesEditHelper extends AdminEditHelper
                     '=MESSAGE_ID' => $id
                 ]
             ]);
+            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:messagesList');
         } catch (\Exception $e) {
             return false;
         }

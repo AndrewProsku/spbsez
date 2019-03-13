@@ -50,7 +50,8 @@ class MessagesList extends Basis
             LocalRedirect(LANG_DIR . 'cabinet/');
         }
 
-        self::registerCacheTag('kelnik:messages_list_' . $this->profile->getId());
+        self::registerCacheTag('kelnik:messagesList');
+        self::registerCacheTag('kelnik:messagesList_' . $this->profile->getId());
 
         $messages = MessageService::getInstance($this->profile);
         $messages->calcCount();
