@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Раскрытие информации в сфере регулируемых видов деятельности");
-$APPLICATION->SetPageProperty('title', "Раскрытие информации | Раскрытие информации в сфере регулируемых видов деятельности | АООЭЗ");
+$APPLICATION->SetTitle("Закупочная информация");
+$APPLICATION->SetPageProperty('title', "Раскрытие информации | Закупочная информация | АООЭЗ");
 ?>
     <?$APPLICATION->IncludeComponent(
         "bitrix:menu",
@@ -42,69 +42,37 @@ $APPLICATION->SetPageProperty('title', "Раскрытие информации 
 
         <? $APPLICATION->IncludeComponent(
             "kelnik:infodocs.list",
-            "docs-reg",
+            "docs-proc",
             array(
-                "COMPONENT_TEMPLATE" => "docs-reg",
-                "SECTION" => "2",
+                "COMPONENT_TEMPLATE" => "docs-proc",
+                "SECTION" => "6",
                 "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
                 "CACHE_TIME" => "3600",
                 "SHOW_FILTER" => "Y",
-                "USE_AJAX" => "Y",
+                "USE_AJAX" => "N",
                 "AJAX_TYPE" => "JSON",
                 "AJAX_TEMPLATE_PAGE" => "",
                 "AJAX_COMPONENT_ID" => ""
             ),
             false
         ); ?>
+
         <? $APPLICATION->IncludeComponent(
-            "kelnik:infodocs.list",
-            "docs-reg",
+            "kelnik:infoproc.list",
+            "procurements",
             array(
-                "COMPONENT_TEMPLATE" => "docs-reg",
-                "SECTION" => "3",
+                "COMPONENT_TEMPLATE" => "procurements",
+                "YEAR" => "",
+                "SHOW_FILTER" => "Y",
+                "ELEMENTS_COUNT" => "10",
                 "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
                 "CACHE_TIME" => "3600",
-                "SHOW_FILTER" => "Y",
-                "USE_AJAX" => "Y",
-                "AJAX_TYPE" => "JSON",
+                "USE_AJAX" => "N",
+                "AJAX_TYPE" => "DEFAULT",
                 "AJAX_TEMPLATE_PAGE" => "",
-                "AJAX_COMPONENT_ID" => ""
-            ),
-            false
-        ); ?>
-        <? $APPLICATION->IncludeComponent(
-            "kelnik:infodocs.list",
-            "docs-reg",
-            array(
-                "COMPONENT_TEMPLATE" => "docs-reg",
-                "SECTION" => "4",
-                "CACHE_GROUPS" => "N",
-                "CACHE_TYPE" => "A",
-                "CACHE_TIME" => "3600",
-                "SHOW_FILTER" => "Y",
-                "USE_AJAX" => "Y",
-                "AJAX_TYPE" => "JSON",
-                "AJAX_TEMPLATE_PAGE" => "",
-                "AJAX_COMPONENT_ID" => ""
-            ),
-            false
-        ); ?>
-        <? $APPLICATION->IncludeComponent(
-            "kelnik:infodocs.list",
-            "docs-reg",
-            array(
-                "COMPONENT_TEMPLATE" => "docs-reg",
-                "SECTION" => "5",
-                "CACHE_GROUPS" => "N",
-                "CACHE_TYPE" => "A",
-                "CACHE_TIME" => "3600",
-                "SHOW_FILTER" => "Y",
-                "USE_AJAX" => "Y",
-                "AJAX_TYPE" => "JSON",
-                "AJAX_TEMPLATE_PAGE" => "",
-                "AJAX_COMPONENT_ID" => ""
+                "AJAX_COMPONENT_ID" => "info-proc"
             ),
             false
         ); ?>

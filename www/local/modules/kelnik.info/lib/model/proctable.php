@@ -9,6 +9,8 @@ Loc::loadMessages(__FILE__);
 
 class ProcTable extends DataManager
 {
+    public const ITEMS_PER_PAGE = 10;
+
     /**
      * @return string
      */
@@ -66,6 +68,22 @@ class ProcTable extends DataManager
                 ]
             ),
         ];
+    }
+
+    public static function getYearsList()
+    {
+        return self::getAssoc([
+            'select' => [
+                new Main\Entity\ExpressionField(
+                    'NAME',
+                    'DISTINCT YEAR(%s)',
+                    'DATE_SHOW'
+                )
+            ],
+            'order' => [
+                'DATE_SHOW' => 'DESC'
+            ]
+        ], 'NAME', 'NAME');
     }
 
     public static function clearComponentCache(Main\ORM\Event $event)

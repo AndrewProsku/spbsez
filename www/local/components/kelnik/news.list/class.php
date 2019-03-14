@@ -11,8 +11,6 @@ use Kelnik\Helpers\ArrayHelper;
 use Kelnik\ImageResizer\Resizer;
 use Kelnik\News\Categories\CategoriesTable;
 use Kelnik\News\News\NewsTable;
-use Kelnik\Helpers\BitrixHelper;
-use Kelnik\Helpers\PluralHelper;
 use Kelnik\News\News\TagsTable;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {

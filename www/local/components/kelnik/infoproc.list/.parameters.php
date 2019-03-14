@@ -18,59 +18,59 @@ try
     $arComponentParameters = [
         'GROUPS' => [
             'AJAX' => [
-                'NAME' => Loc::getMessage('KELNIK_INFO_LIST_GROUP_AJAX')
+                'NAME' => Loc::getMessage('KELNIK_INFO_PROC_LIST_GROUP_AJAX')
             ]
         ],
         'PARAMETERS' => [
-            'SECTION' => [
-                'PARENT' => 'BASE',
-                'NAME' => Loc::getMessage('KELNIK_INFO_SECTION'),
-                'TYPE' => 'LIST',
-                'VALUES' => \Kelnik\Info\Model\TypesTable::getAdminAssocList()
-            ],
             'YEAR' => [
                 'PARENT' => 'BASE',
-                'NAME' => Loc::getMessage('KELNIK_INFO_YEAR'),
+                'NAME' => Loc::getMessage('KELNIK_INFO_PROC_YEAR'),
                 'TYPE' => 'LIST',
-                'VALUES' => \Kelnik\Info\Model\DocsTable::getYearsList(),
+                'VALUES' => \Kelnik\Info\Model\ProcTable::getYearsList(),
                 'ADDITIONAL_VALUES' => 'Y'
             ],
             'SHOW_FILTER' => [
                 'PARENT' => 'BASE',
-                'NAME' => Loc::getMessage('KELNIK_INFO_SHOW_FILTER'),
+                'NAME' => Loc::getMessage('KELNIK_INFO_PROC_SHOW_FILTER'),
                 'TYPE' => 'CHECKBOX',
                 'DEFAULT' => 'N'
             ],
+            'ELEMENTS_COUNT' => [
+                'PARENT' => 'BASE',
+                'NAME' => Loc::getMessage('KELNIK_INFO_PROC_COUNT'),
+                'TYPE' => 'STRING',
+                'DEFAULT' => \Kelnik\Info\Model\ProcTable::ITEMS_PER_PAGE
+            ],
             'USE_AJAX' => [
                 'PARENT' => 'AJAX',
-                'NAME' => Loc::getMessage('KELNIK_INFO_LIST_USE_AJAX'),
+                'NAME' => Loc::getMessage('KELNIK_INFO_PROC_LIST_USE_AJAX'),
                 'TYPE' => 'CHECKBOX',
                 'DEFAULT' => 'Y'
             ],
             'AJAX_TYPE' => [
                 'PARENT' => 'AJAX',
-                'NAME' => Loc::getMessage('KELNIK_INFO_LIST_AJAX_TYPE'),
+                'NAME' => Loc::getMessage('KELNIK_INFO_PROC_LIST_AJAX_TYPE'),
                 'TYPE' => 'LIST',
                 'VALUES' => [
-                    'DEFAULT' => Loc::getMessage('KELNIK_INFO_LIST_AJAX_TYPE_DEFAULT'),
-                    'JSON' => Loc::getMessage('KELNIK_INFO_LIST_AJAX_TYPE_JSON')
+                    'DEFAULT' => Loc::getMessage('KELNIK_INFO_PROC_LIST_AJAX_TYPE_DEFAULT'),
+                    'JSON' => Loc::getMessage('KELNIK_INFO_PROC_LIST_AJAX_TYPE_JSON')
                 ]
             ],
             'AJAX_TEMPLATE_PAGE' => [
                 'PARENT' => 'AJAX',
-                'NAME' => Loc::getMessage('KELNIK_INFO_LIST_AJAX_TEMPLATE_PAGE'),
+                'NAME' => Loc::getMessage('KELNIK_INFO_PROC_LIST_AJAX_TEMPLATE_PAGE'),
                 'TYPE' => 'STRING',
                 'DEFAULT' => ''
             ],
             'AJAX_COMPONENT_ID' => [
                 'PARENT' => 'AJAX',
-                'NAME' => Loc::getMessage('KELNIK_INFO_LIST_AJAX_COMPONENT_ID'),
+                'NAME' => Loc::getMessage('KELNIK_INFO_PROC_LIST_AJAX_COMPONENT_ID'),
                 'TYPE' => 'STRING',
                 'DEFAULT' => ''
             ],
             'CACHE_GROUPS' => [
                 'PARENT' => 'CACHE_SETTINGS',
-                'NAME' => Loc::getMessage('KELNIK_INFO_LIST_CACHE_GROUPS'),
+                'NAME' => Loc::getMessage('KELNIK_INFO_PROC_LIST_CACHE_GROUPS'),
                 'TYPE' => 'CHECKBOX',
                 'DEFAULT' => 'N'
             ],

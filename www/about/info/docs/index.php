@@ -52,7 +52,12 @@ $APPLICATION->SetPageProperty('title', "Раскрытие информации 
                 "SECTION" => "1",
                 "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
-                "CACHE_TIME" => "3600"
+                "CACHE_TIME" => "3600",
+                "SHOW_FILTER" => "N",
+                "USE_AJAX" => "N",
+                "AJAX_TYPE" => "DEFAULT",
+                "AJAX_TEMPLATE_PAGE" => "",
+                "AJAX_COMPONENT_ID" => ""
             ),
             false
         ); ?>

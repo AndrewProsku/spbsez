@@ -85,6 +85,22 @@ class DocsTable extends DataManager
         ];
     }
 
+    public static function getYearsList()
+    {
+        return self::getAssoc([
+            'select' => [
+                new Main\Entity\ExpressionField(
+                    'NAME',
+                    'DISTINCT YEAR(%s)',
+                    'DATE_SHOW'
+                )
+            ],
+            'order' => [
+                'DATE_SHOW' => 'DESC'
+            ]
+        ], 'NAME', 'NAME');
+    }
+
     public static function clearComponentCache(Main\ORM\Event $event)
     {
         if (!Main\Context::getCurrent()->getRequest()->isAdminSection()) {
