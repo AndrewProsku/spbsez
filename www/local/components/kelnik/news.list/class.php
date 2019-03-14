@@ -146,7 +146,8 @@ class NewsList extends Bbc\Basis
                 $reCount = true;
                 $filter['=TAGS.VALUE'] = $this->arParams['A_FILTER']['TAG'];
                 foreach ($this->arResult['TAGS'] as  &$v) {
-                    $v['SELECTED'] = is_array($this->arParams['A_FILTER']['TAG']) && in_array((int)$v['ID'], $this->arParams['A_FILTER']['TAG'])
+                    $v['SELECTED'] = is_array($this->arParams['A_FILTER']['TAG'])
+                        && in_array((int)$v['ID'], $this->arParams['A_FILTER']['TAG'])
                         || $v['ID'] == $this->arParams['A_FILTER']['TAG'];
                 }
                 unset($v);
@@ -172,13 +173,14 @@ class NewsList extends Bbc\Basis
             }
 
             if ($this->arResult['CNT']) {
-                $rsElements = NewsTable::getList($r =
+                $rsElements = NewsTable::getList(
                     [
                         'select' => $select,
                         'filter' => $filter,
                         'order' => $this->getParamsSort(),
                         'limit' => $limit,
-                        'offset' => $this->offset
+                        'offset' => $this->offset,
+                        'group' => ['ID']
                     ]
                 )->FetchAll();
             }
