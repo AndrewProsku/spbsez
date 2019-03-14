@@ -27,6 +27,8 @@ class NewsList extends Bbc\Basis
 {
     use Bbc\Traits\Elements;
 
+    protected $offset = 0;
+
     protected $cacheTemplate = false;
     protected $needModules = ['kelnik.news', 'iblock', 'kelnik.imageresizer'];
     protected $checkParams = [
@@ -68,6 +70,15 @@ class NewsList extends Bbc\Basis
         return parent::onPrepareComponentParams($arParams);
     }
 
+    protected function executeProlog()
+    {
+        if ($this->isAjax()) {
+            $this->offset = (int)ArrayHelper::getValue($_REQUEST, 'showed', 0);
+        }
+
+        $this->addCacheAdditionalId($this->offset);
+    }
+
     protected function executeMain()
     {
         $this->setResultCacheKeys(['ELEMENTS', 'TAGS', 'YEARS', 'CNT']);
@@ -100,10 +111,6 @@ class NewsList extends Bbc\Basis
                     : NewsTable::ITEMS_ON_PAGE;
 
         $limit = $onPage + 1;
-
-        $offset = $this->isAjax()
-                    ? ArrayHelper::getValue($_REQUEST, 'showed', 0)
-                    : 0;
 
         try {
             $select = [
@@ -171,7 +178,7 @@ class NewsList extends Bbc\Basis
                         'filter' => $filter,
                         'order' => $this->getParamsSort(),
                         'limit' => $limit,
-                        'offset' => $offset
+                        'offset' => $this->offset
                     ]
                 )->FetchAll();
             }

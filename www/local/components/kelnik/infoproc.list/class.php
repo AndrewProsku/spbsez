@@ -31,7 +31,9 @@ class InfoProcList extends Bbc\Basis
 
     protected function executeProlog()
     {
-        $this->offset = (int) ArrayHelper::getValue($_REQUEST, 'showed', 0);
+        if ($this->isAjax()) {
+            $this->offset = (int)ArrayHelper::getValue($_REQUEST, 'showed', 0);
+        }
 
         $this->addCacheAdditionalId($this->offset);
     }
