@@ -29,7 +29,9 @@ class Api
         'vacancy',
         'service',
         'message',
-        'news'
+        'news',
+        'infoDocs',
+        'infoProc'
     ];
 
     protected $requireModules = [
@@ -52,6 +54,10 @@ class Api
         'kelnik.report' => [
             'report',
             'profile'
+        ],
+        'kelnik.info' => [
+            'infoDocs',
+            'infoProc'
         ]
     ];
 

@@ -47,7 +47,8 @@ class MessagesDetail extends Basis
             LocalRedirect(LANG_DIR . 'cabinet/');
         }
 
-        self::registerCacheTag('kelnik:messages_d_' . $this->profile->getId() . '_' . $this->arParams['ELEMENT_TYPE'] . $this->arParams['ELEMENT_ID']);
+        self::registerCacheTag('kelnik:messagesList');
+        self::registerCacheTag('kelnik:messagesRow_' . $this->profile->getId() . '_' . $this->arParams['ELEMENT_TYPE'] . $this->arParams['ELEMENT_ID']);
 
         $messages = MessageService::getInstance($this->profile);
         $messages->dateFormat = $this->arParams['DATE_FORMAT'];

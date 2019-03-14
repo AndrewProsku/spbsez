@@ -67,6 +67,10 @@ class Disclosure {
             formData.append('showed', `${items.length}`);
         }
 
+        if (this.loadMore.dataset.ajaxParam) {
+            formData.append(`${this.loadMore.dataset.ajaxParam}`, `${this.loadMore.dataset.ajaxParamValue}`);
+        }
+
         Utils.send(formData, this.loadMore.dataset.send, {
             success(response) {
                 if (response.request.status === that.SUCCESS_STATUS) {
@@ -88,7 +92,7 @@ class Disclosure {
         }, 'post');
     }
 
-    _onClickOutside() {
+    _onClickOutside(event) {
         const group = event.target.closest(`.${this.selectGroupClass}`);
 
         if (!group) {
@@ -100,13 +104,24 @@ class Disclosure {
         const that = this;
         const formData = new FormData(this.filter);
 
-
         Utils.send(formData, this.filter.dataset.send, {
             success(response) {
                 if (response.request.status === that.SUCCESS_STATUS) {
                     const {data} = response;
 
                     that._replaceHtmlContent(data);
+
+                    if (!that.loadMore) {
+                        return;
+                    }
+
+                    if (!data.showMore) {
+                        Utils.hide(that.loadMore);
+
+                        return;
+                    }
+
+                    Utils.show(that.loadMore);
                 }
             },
             error(error) {

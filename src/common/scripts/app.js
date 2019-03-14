@@ -781,9 +781,7 @@ const disclosureItems = Array.from(document.querySelectorAll('.j-disclosure-bloc
 
 if (disclosureItems.length) {
     disclosureItems.forEach((target) => {
-        const disclosureRegulated = new Disclosure();
-
-        disclosureRegulated.init({
+        (new Disclosure()).init({
             target
         });
     });

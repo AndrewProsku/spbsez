@@ -3,7 +3,6 @@
 namespace Kelnik\Multisites\Settings;
 
 use Bitrix\Main\Application;
-use Bitrix\Main\Entity\BooleanField;
 use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Main\Entity\IntegerField;
 use Bitrix\Main\Entity\ReferenceField;
