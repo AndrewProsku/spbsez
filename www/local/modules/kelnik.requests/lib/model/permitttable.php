@@ -13,18 +13,15 @@ use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
-/**
- * Модель заявок на обратный звонок.
- */
-class StandartTable extends DataManager
+class PermittTable extends DataManager
 {
-    const REQUEST_TIME_LEFT = 60; // 1min
+    const REQUEST_TIME_LEFT = 60; // 1 min
     /**
      * {@inheritdoc}
      */
     public static function getTableName()
     {
-        return 'kelnik_request';
+        return 'kelnik_request_permit';
     }
 
     /**
@@ -71,6 +68,18 @@ class StandartTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_REQ_DATE_MODIFIED')
                 ]
             ),
+            new DatetimeField(
+                'DATE_START',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_DATE_START')
+                ]
+            ),
+            new DatetimeField(
+                'DATE_FINISH',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_DATE_FINISH')
+                ]
+            ),
             new StringField(
                 'CODE',
                 [
@@ -81,12 +90,6 @@ class StandartTable extends DataManager
                 'NAME',
                 [
                     'title' => Loc::getMessage('KELNIK_REQ_NAME')
-                ]
-            ),
-            new TextField(
-                'BODY',
-                [
-                    'title' => Loc::getMessage('KELNIK_REQ_BODY')
                 ]
             ),
 
@@ -131,8 +134,9 @@ class StandartTable extends DataManager
         return implode(
             '-',
             [
+                'p',
                 date('ymd-Hi'),
-                (int)$USER->GetID(),
+                (int) $USER->GetID(),
                 (int) $typeId
             ]
         );

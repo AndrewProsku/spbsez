@@ -8,3 +8,4 @@ $MESS['KELNIK_REQ_SERVICE'] = 'Заявки по услугам';
 $MESS['KELNIK_REQ_TYPES'] = 'Темы';
 $MESS['KELNIK_REQ_STATUSES'] = 'Статусы заявок';
 $MESS['KELNIK_REQ'] = 'Заявки';
+$MESS['KELNIK_REQ_AREAS'] = 'Территория для проезда';

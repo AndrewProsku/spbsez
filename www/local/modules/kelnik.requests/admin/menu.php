@@ -2,6 +2,8 @@
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
+use Kelnik\Requests\Model\AdminInterface\AreaEditHelper;
+use Kelnik\Requests\Model\AdminInterface\AreaListHelper;
 use Kelnik\Requests\Model\AdminInterface\ServiceEditHelper;
 use Kelnik\Requests\Model\AdminInterface\ServiceListHelper;
 use Kelnik\Requests\Model\AdminInterface\SiteMsgListHelper;
@@ -67,7 +69,7 @@ return [
                 'text' => Loc::getMessage('KELNIK_REQ_SERVICE'),
                 'url' => ServiceListHelper::getUrl(),
                 'more_url' => [
-                    ServiceListHelper::getUrl(),
+                    ServiceEditHelper::getUrl(),
                 ]
             ],
             [
@@ -79,6 +81,17 @@ return [
                 'url' => TypeListHelper::getUrl(),
                 'more_url' => [
                     TypeEditHelper::getUrl(),
+                ]
+            ],
+            [
+                'parent_menu' => 'global_menu_content',
+                'sort' => 100,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_REQ_AREAS'),
+                'url' => AreaListHelper::getUrl(),
+                'more_url' => [
+                    AreaEditHelper::getUrl(),
                 ]
             ],
             [
