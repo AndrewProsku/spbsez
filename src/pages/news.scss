@@ -42,8 +42,6 @@
 .l-news__useful {
     @include prefix(2, 36);
     @include suffix(2, 36);
-    @include padding-level(top, pink);
-    @include padding-level(bottom, pink);
     background-color: $bg-grey;
     width: 100%;
 

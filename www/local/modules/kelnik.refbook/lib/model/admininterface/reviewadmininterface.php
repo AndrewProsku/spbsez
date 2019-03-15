@@ -83,6 +83,33 @@ class ReviewAdminInterface extends AdminInterface
                     ]
                 ],
             ],
+            'MAIN_EN' => [
+                'NAME'   => Loc::getMessage('KELNIK_FIELDS_MAIN_EN'),
+                'FIELDS' => [
+                    'NAME_EN'        => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 40,
+                        'FILTER'   => '%',
+                        'REQUIRED' => true
+                    ],
+                    'COMMENT_EN'     => [
+                        'WIDGET' => new StringWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false,
+                        'SIZE'   => 80
+                    ],
+                    'PREVIEW_EN'     => [
+                        'WIDGET' => new VisualEditorWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ],
+                    'BODY_EN'        => [
+                        'WIDGET' => new VisualEditorWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ]
+                ],
+            ],
         ];
     }
 
