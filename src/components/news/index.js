@@ -131,6 +131,10 @@ class News {
             return input.value === id;
         })[first];
 
+        if (!foundInput) {
+            return;
+        }
+
         foundInput.checked = true;
     }
 
