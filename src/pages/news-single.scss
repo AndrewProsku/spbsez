@@ -119,6 +119,10 @@
 .l-news-single__press-office {
     @include innerPadding();
     @include margin-level(bottom, pink);
+
+    .b-contact-info {
+        background-color: $bg-grey;
+    }
 }
 
 .b-news-tags {
