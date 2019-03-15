@@ -16,7 +16,7 @@
                 <?php foreach ($arResult['YEARS'] as $year): ?>
                     <div class="b-mini-filter__item">
                         <input type="checkbox"
-                               name="year[]"
+                               name="year"
                                value="<?= $year['NAME']; ?>"
                                data-text="<?= $year['NAME']; ?>"
                                id="years<?= $year['NAME']; ?>"
@@ -38,7 +38,7 @@
             <?php foreach ($arResult['TAGS'] as $tag): ?>
                 <div class="b-mini-filter__item">
                     <input type="checkbox"
-                           name="tag[]"
+                           name="tag"
                            value="<?= $tag['ID']; ?>"
                            data-text="<?= $tag['NAME']; ?>"
                            id="types<?=$tag['ID']; ?>"
@@ -70,7 +70,7 @@
                     <?= $arItem['DATE_SHOW_FORMAT']; ?>
                 </li>
                 <?php foreach ($arItem['TAGS'] as $tag): ?>
-                    <li><a href="<?= $tag['LINK']; ?>"><?= $tag['NAME']; ?></a></li>
+                    <li><a href="<?= $tag['LINK']; ?>" class="j-news-tag" data-tag="<?= $tag['ID']; ?>"><?= $tag['NAME']; ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>
