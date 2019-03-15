@@ -4,6 +4,8 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Requests\Model\AdminInterface\AreaEditHelper;
 use Kelnik\Requests\Model\AdminInterface\AreaListHelper;
+use Kelnik\Requests\Model\AdminInterface\PermitListHelper;
+use Kelnik\Requests\Model\AdminInterface\PermitEditHelper;
 use Kelnik\Requests\Model\AdminInterface\ServiceEditHelper;
 use Kelnik\Requests\Model\AdminInterface\ServiceListHelper;
 use Kelnik\Requests\Model\AdminInterface\SiteMsgListHelper;
@@ -48,6 +50,17 @@ return [
                 'url' => StandartListHelper::getUrl(),
                 'more_url' => [
                     StandartEditHelper::getUrl(),
+                ]
+            ],
+            [
+                'parent_menu' => 'global_menu_content',
+                'sort' => 100,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_REQ_PERMIT'),
+                'url' => PermitListHelper::getUrl(),
+                'more_url' => [
+                    PermitEditHelper::getUrl(),
                 ]
             ],
             [

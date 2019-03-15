@@ -5,10 +5,9 @@ namespace Kelnik\User\Components;
 use Bex\Bbc;
 use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Requests\Model\AreaTable;
 use Kelnik\Requests\Model\ServiceTable;
-use Kelnik\Requests\Model\StandartTable;
 use Kelnik\Requests\Model\TypeTable;
 use Kelnik\Userdata\Profile\Profile;
 use Kelnik\Userdata\Profile\ProfileSectionRequests;
@@ -33,7 +32,7 @@ class RequestForm extends Bbc\Basis
     {
         global $USER;
 
-        if ($this->arParams['SUB_TYPE'] === 'service') {
+        if ($this->arParams['SUB_TYPE'] === TypeTable::SUB_TYPE_SERVICE) {
             $this->arResult['TYPES'] = ServiceTable::getTypes();
 
             return true;
@@ -103,10 +102,14 @@ class RequestForm extends Bbc\Basis
             }
         }
 
-        $this->arResult['TYPES'] = TypeTable::getAssoc([
+        $typesTable = $this->arParams['SUB_TYPE'] === TypeTable::SUB_TYPE_STANDARD
+                        ? TypeTable::class
+                        : AreaTable::class;
+
+        $this->arResult['TYPES'] = $typesTable::getAssoc([
             'select' => ['ID', 'NAME'],
             'filter' => [
-                '=ACTIVE' => TypeTable::YES
+                '=ACTIVE' => $typesTable::YES
             ],
             'order' => [
                 'SORT' => 'ASC'

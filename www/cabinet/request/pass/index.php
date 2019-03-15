@@ -47,12 +47,12 @@ if (!$USER->IsAuthorized()) {
 
             <? $APPLICATION->IncludeComponent(
                 "kelnik:request.form",
-                ".default",
+                "permit",
                 array(
                     "COMPONENT_TEMPLATE" => ".default",
                     "CACHE_TYPE" => "N",
                     "CACHE_TIME" => "3600",
-                    "SUB_TYPE" => "standard"
+                    "SUB_TYPE" => "permit"
                 ),
                 array()
             ); ?>

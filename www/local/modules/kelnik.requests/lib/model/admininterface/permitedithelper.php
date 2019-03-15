@@ -3,10 +3,11 @@
 namespace Kelnik\Requests\Model\AdminInterface;
 
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
+use Kelnik\Requests\Model\PermitTable;
 
-class StandartEditHelper extends AdminEditHelper
+class PermitEditHelper extends AdminEditHelper
 {
-    protected static $model = '\Kelnik\Requests\Model\StandartTable';
+    protected static $model = PermitTable::class;
 
     protected function hasWriteRightsElement($element = array())
     {

@@ -6,25 +6,22 @@ use Bitrix\Main\Entity\DatetimeField;
 use Bitrix\Main\Entity\IntegerField;
 use Bitrix\Main\Entity\ReferenceField;
 use Bitrix\Main\Entity\StringField;
-use Bitrix\Main\Entity\TextField;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
+use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
-/**
- * Модель заявок на обратный звонок.
- */
-class StandartTable extends DataManager
+class PermitPassTable extends DataManager
 {
-    const REQUEST_TIME_LEFT = 60; // 1min
     /**
      * {@inheritdoc}
      */
     public static function getTableName()
     {
-        return 'kelnik_request';
+        return 'kelnik_request_permit_pass';
     }
 
     /**
@@ -41,69 +38,48 @@ class StandartTable extends DataManager
                 ]
             ),
             new IntegerField(
-                'TYPE_ID',
+                'PERMIT_ID',
                 [
-                    'title' => Loc::getMessage('KELNIK_REQ_TYPE')
-                ]
-            ),
-            new IntegerField(
-                'STATUS_ID',
-                [
-                    'title' => Loc::getMessage('KELNIK_REQ_STATUS'),
-                    'default_value' => StatusTable::REQUEST_STATUS_NEW
-                ]
-            ),
-            new IntegerField(
-                'USER_ID',
-                [
-                    'title' => Loc::getMessage('KELNIK_REQ_USER')
-                ]
-            ),
-            new DatetimeField(
-                'DATE_CREATED',
-                [
-                    'title' => Loc::getMessage('KELNIK_REQ_DATE_CREATED')
-                ]
-            ),
-            new DatetimeField(
-                'DATE_MODIFIED',
-                [
-                    'title' => Loc::getMessage('KELNIK_REQ_DATE_MODIFIED')
+                    'title' => Loc::getMessage('KELNIK_REQ_PERMIT_ID'),
+                    'default_value' => 0
                 ]
             ),
             new StringField(
-                'CODE',
+                'FIO',
                 [
-                    'title' => Loc::getMessage('KELNIK_REQ_CODE')
+                    'title' => Loc::getMessage('KELNIK_REQ_FIO')
                 ]
             ),
             new StringField(
-                'NAME',
+                'ORG_NAME',
                 [
-                    'title' => Loc::getMessage('KELNIK_REQ_NAME')
+                    'title' => Loc::getMessage('KELNIK_REQ_ORG_NAME')
                 ]
             ),
-            new TextField(
-                'BODY',
+            new StringField(
+                'CAR_VENDOR',
                 [
-                    'title' => Loc::getMessage('KELNIK_REQ_BODY')
+                    'title' => Loc::getMessage('KELNIK_REQ_CAR_VENDOR')
+                ]
+            ),
+            new StringField(
+                'CAR_NUMBER',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_CAR_NUMBER')
+                ]
+            ),
+            new StringField(
+                'PERSON',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_PERSON')
                 ]
             ),
 
-            new ReferenceField(
-                'TYPE',
-                TypeTable::class,
-                [
-                    '=this.TYPE_ID' => 'ref.ID'
-                ]
-            ),
-            new ReferenceField(
-                'STATUS',
-                StatusTable::class,
-                [
-                    '=this.STATUS_ID' => 'ref.ID'
-                ]
-            )
+            (new Reference(
+                'PERMIT',
+                PermitTable::class,
+                Join::on('this.PERMIT_ID', 'ref.ID')
+            ))->configureJoinType('INNER')
         ];
     }
 
@@ -111,6 +87,7 @@ class StandartTable extends DataManager
     {
         $data['DATE_CREATED'] = $data['DATE_MODIFIED'] = new DateTime();
         $data['CODE'] = self::getNewCode((int) $data['TYPE_ID']);
+
         if (!isset($data['STATUS_ID'])) {
             $data['STATUS_ID'] = StatusTable::REQUEST_STATUS_NEW;
         }
@@ -121,6 +98,7 @@ class StandartTable extends DataManager
     public static function update($primary, array $data)
     {
         $data['DATE_MODIFIED'] = new DateTime();
+
         return parent::update($primary, $data);
     }
 
@@ -131,7 +109,7 @@ class StandartTable extends DataManager
         return implode(
             '-',
             [
-                's' . (int) $typeId,
+                'p' . (int) $typeId,
                 (int) $USER->GetID(),
                 randString(5)
             ]

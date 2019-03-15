@@ -4,16 +4,17 @@ namespace Kelnik\Requests\Model;
 
 use Bitrix\Main\Entity\DatetimeField;
 use Bitrix\Main\Entity\IntegerField;
-use Bitrix\Main\Entity\ReferenceField;
 use Bitrix\Main\Entity\StringField;
-use Bitrix\Main\Entity\TextField;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Fields\Relations\OneToMany;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
+use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
-class PermittTable extends DataManager
+class PermitTable extends DataManager
 {
     const REQUEST_TIME_LEFT = 60; // 1 min
     /**
@@ -40,7 +41,8 @@ class PermittTable extends DataManager
             new IntegerField(
                 'TYPE_ID',
                 [
-                    'title' => Loc::getMessage('KELNIK_REQ_TYPE')
+                    'title' => Loc::getMessage('KELNIK_REQ_TYPE'),
+                    'default_value' => 0
                 ]
             ),
             new IntegerField(
@@ -53,18 +55,21 @@ class PermittTable extends DataManager
             new IntegerField(
                 'USER_ID',
                 [
-                    'title' => Loc::getMessage('KELNIK_REQ_USER')
+                    'title' => Loc::getMessage('KELNIK_REQ_USER'),
+                    'default_value' => 0
                 ]
             ),
             new DatetimeField(
                 'DATE_CREATED',
                 [
+                    'default_value' => new DateTime(),
                     'title' => Loc::getMessage('KELNIK_REQ_DATE_CREATED')
                 ]
             ),
             new DatetimeField(
                 'DATE_MODIFIED',
                 [
+                    'default_value' => new DateTime(),
                     'title' => Loc::getMessage('KELNIK_REQ_DATE_MODIFIED')
                 ]
             ),
@@ -92,21 +97,44 @@ class PermittTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_REQ_NAME')
                 ]
             ),
-
-            new ReferenceField(
-                'TYPE',
-                TypeTable::class,
+            new StringField(
+                'TARGET',
                 [
-                    '=this.TYPE_ID' => 'ref.ID'
+                    'title' => Loc::getMessage('KELNIK_REQ_TARGET')
                 ]
             ),
-            new ReferenceField(
+            new StringField(
+                'EXECUTIVE_COMPANY',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_EXECUTIVE_COMPANY')
+                ]
+            ),
+            new StringField(
+                'EXECUTIVE_VISIT',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_EXECUTIVE_VISIT')
+                ]
+            ),
+            new StringField(
+                'PHONE',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_PHONE')
+                ]
+            ),
+
+            (new Reference(
+                'TYPE',
+                TypeTable::class,
+                Join::on('this.TYPE_ID', 'ref.ID')
+            ))->configureJoinType('LEFT'),
+
+            (new Reference(
                 'STATUS',
                 StatusTable::class,
-                [
-                    '=this.STATUS_ID' => 'ref.ID'
-                ]
-            )
+                Join::on('this.STATUS_ID', 'ref.ID')
+            ))->configureJoinType('LEFT'),
+
+            (new OneToMany('PASS', PermitPassTable::class, 'PERMIT'))
         ];
     }
 
@@ -114,6 +142,7 @@ class PermittTable extends DataManager
     {
         $data['DATE_CREATED'] = $data['DATE_MODIFIED'] = new DateTime();
         $data['CODE'] = self::getNewCode((int) $data['TYPE_ID']);
+
         if (!isset($data['STATUS_ID'])) {
             $data['STATUS_ID'] = StatusTable::REQUEST_STATUS_NEW;
         }
@@ -124,6 +153,7 @@ class PermittTable extends DataManager
     public static function update($primary, array $data)
     {
         $data['DATE_MODIFIED'] = new DateTime();
+
         return parent::update($primary, $data);
     }
 
@@ -134,10 +164,9 @@ class PermittTable extends DataManager
         return implode(
             '-',
             [
-                'p',
-                date('ymd-Hi'),
+                'p' . (int) $typeId,
                 (int) $USER->GetID(),
-                (int) $typeId
+                randString(5)
             ]
         );
     }
