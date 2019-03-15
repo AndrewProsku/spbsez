@@ -48,12 +48,6 @@ class ResidentAdminInterface extends AdminInterface
                         'FILTER'   => '%',
                         'REQUIRED' => true
                     ],
-                    'NAME_EN'     => [
-                        'WIDGET'   => new StringWidget(),
-                        'SIZE'     => 40,
-                        'FILTER'   => '%',
-                        'REQUIRED' => true
-                    ],
                     'PLACE' => [
                         'WIDGET' => new ComboBoxWidget(),
                         'VARIANTS' => ResidentTable::getPlaces()
@@ -77,6 +71,23 @@ class ResidentAdminInterface extends AdminInterface
                     ],
                     'TEXT' => [
                         'WIDGET' => new VisualEditorWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ]
+                ]
+            ],
+            'MAIN_EN' => [
+                'NAME'   => Loc::getMessage('KELNIK_FIELDS_MAIN_EN'),
+                'FIELDS' => [
+                    'NAME_EN'     => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 40,
+                        'FILTER'   => '%',
+                        'REQUIRED' => true
+                    ],
+                    'IMAGE_ID_EN' => [
+                        'WIDGET' => new FileWidget(),
+                        'IMAGE' => true,
                         'HEADER' => false,
                         'FILTER' => false
                     ],

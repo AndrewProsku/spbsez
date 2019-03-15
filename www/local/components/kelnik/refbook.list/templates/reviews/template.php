@@ -23,9 +23,11 @@
                                 </div>
                                 <div class="b-slider-reviews__person-content">
                                     <?php if(!empty($element['PREVIEW'])): ?>
-                                    <div class="b-slider-reviews__person-text"><?= $element['PREVIEW']; ?></div>
+                                        <div class="b-slider-reviews__person-text"><?= $element['PREVIEW']; ?></div>
                                     <?php endif; ?>
-                                    <a href="/reviews/<?= $element['ALIAS'] ? $element['ALIAS'] . '/' : '?id=' . $element['ID']; ?>" class="b-slider-reviews__person-link b-link-line-two">Отзыв полностью</a>
+                                    <?php if(LANGUAGE_ID == 'ru'): ?>
+                                        <a href="javascript:;" class="b-slider-reviews__person-link b-link-line-two">Отзыв полностью</a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -44,8 +46,10 @@
             </div>
 
             <div class="b-slider-reviews__dots" data-glide-el="controls[nav]">
-                <button class="b-slider-reviews__dot" data-glide-dir="=0" type="button"></button>
-                <button class="b-slider-reviews__dot" data-glide-dir="=1" type="button"></button>
+                <?php $i = 0; ?>
+                <?php foreach ($arResult['ELEMENTS'] as $element): ?>
+                    <button class="b-slider-reviews__dot" data-glide-dir="=<?= $i++; ?>" type="button"></button>
+                <?php endforeach; ?>
             </div>
 
         </div>

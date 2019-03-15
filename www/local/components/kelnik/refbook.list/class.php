@@ -26,7 +26,7 @@ if (!\Bitrix\Main\Loader::includeModule('bex.bbc')) {
 
 Loc::loadMessages(__FILE__);
 
-class RefbookList extends Bbc\Basis
+class RefBookList extends Bbc\Basis
 {
     protected $cacheTemplate = false;
     protected $needModules = ['kelnik.refbook'];
@@ -36,25 +36,21 @@ class RefbookList extends Bbc\Basis
 
     protected function executeMain()
     {
-        $classes = [
-            Types::TYPE_PARTNER => PartnerTable::class,
-            Types::TYPE_RESIDENT => ResidentTable::class,
-            Types::TYPE_REVIEW => ReviewTable::class,
-            Types::TYPE_TEAM => TeamTable::class,
-            Types::TYPE_DOCS => DocsTable::class,
-            Types::TYPE_PRESENTATION => PresTable::class
-        ];
+        $classes = Types::getClassesByTypeList();
 
         if (!$this->arParams['SECTION'] || !isset($classes[$this->arParams['SECTION']])) {
             return false;
         }
 
+        self::registerCacheTag('kelnik:refBookList_' . $this->arParams['SECTION']);
+
         $className = $classes[$this->arParams['SECTION']];
         $selectFields = [
-            Types::TYPE_REVIEW => ['ID', 'NAME', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'PREVIEW'],
+            Types::TYPE_REVIEW => ['ID', 'NAME', 'NAME_EN', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'COMMENT_EN', 'PREVIEW', 'PREVIEW_EN', 'BODY'],
             Types::TYPE_DOCS => ['ID', 'NAME', 'FILE_ID'],
             Types::TYPE_PRESENTATION => ['ID', 'NAME', 'FILE_ID'],
-            Types::TYPE_TEAM => ['ID', 'NAME', 'IMAGE_ID', 'TEXT', 'NAME_EN', 'TEXT_EN']
+            Types::TYPE_TEAM => ['ID', 'NAME', 'IMAGE_ID', 'TEXT', 'NAME_EN', 'TEXT_EN'],
+            Types::TYPE_PARTNER => ['ID', 'NAME', 'IMAGE_ID', 'IMAGE_ID_EN', 'NAME_EN']
         ];
 
         $select = ArrayHelper::getValue(
@@ -72,6 +68,7 @@ class RefbookList extends Bbc\Basis
         }
 
         $this->arResult['HEADER'] = Loc::getMessage('KELNIK_REFBOOK_HEADER_' . $this->arParams['SECTION']);
+        $this->arResult['MORE'] = Loc::getMessage('KELNIK_REFBOOK_MORE_' . $this->arParams['SECTION']);
 
         if ($this->arParams['SECTION'] !== Types::TYPE_RESIDENT) {
             try {
@@ -88,12 +85,10 @@ class RefbookList extends Bbc\Basis
                 return [];
             }
 
-            if ($this->arParams['SECTION'] === Types::TYPE_TEAM) {
-                $this->arResult['ELEMENTS'] = $this->replaceFields(
-                    $this->arResult['ELEMENTS'],
-                    strtoupper(Context::getCurrent()->getLanguage())
-                );
-            }
+            $this->arResult['ELEMENTS'] = $this->replaceFields(
+                $this->arResult['ELEMENTS'],
+                strtoupper(Context::getCurrent()->getLanguage())
+            );
 
             $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*', 'FILE_*' => 'full']);
 
@@ -190,7 +185,7 @@ class RefbookList extends Bbc\Basis
 
         foreach ($data as &$v) {
             foreach ($v as $key => $val) {
-                if (!isset($v[$key . '_' . $langId])) {
+                if (empty($v[$key . '_' . $langId])) {
                     continue;
                 }
                 $v[$key] = $v[$key . '_' . $langId];

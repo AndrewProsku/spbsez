@@ -4,7 +4,6 @@ namespace Kelnik\Refbook\Model;
 
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
