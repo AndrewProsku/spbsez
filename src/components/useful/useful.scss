@@ -18,6 +18,8 @@
 .b-useful {
     width: 100%;
     @include innerPadding();
+    @include padding-level(top, pink);
+    @include padding-level(bottom, pink);
 }
 
 .b-useful__item {
