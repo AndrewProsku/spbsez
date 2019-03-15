@@ -19,7 +19,7 @@
                         <div class="b-select__wrapper">
                             <select id="territory"
                                 class="b-select__list j-select"
-                                name="TERRITORY_ID"
+                                name="area"
                                 data-placeholder="">
                                 <?php foreach ($arResult['TYPES'] as $type): ?>
                                 <option value="<?= $type['ID']; ?>"<?php if(!empty($arResult['FORM']['TERRITORY'] == $type['ID'])): ?> selected<?php endif; ?>><?= $type['NAME']; ?></option>
@@ -36,12 +36,12 @@
                     <input id="organization"
                         class="b-input-text"
                         type="text"
-                        name="NAME"
+                        name="name"
                         maxlength=""
                         autocomplete=""
-                        value=""
+                        value="<?= $arResult['FORM']['NAME']; ?>"
                         placeholder=""
-                        required>
+                        required >
 
                     <label for="theme-request" class="b-form-block__label">
                         Организация, подающая заявку
@@ -53,12 +53,12 @@
                     <input id="visitTime"
                         class="b-input-text"
                         type="text"
-                        name="visitTime"
+                        name="timeFrom"
                         maxlength=""
                         autocomplete=""
-                        value=""
+                        value="<?= $arResult['FORM']['TIME_FROM']; ?>"
                         placeholder=""
-                        required                                          data-date="true">
+                        required data-date="true">
 
                     <label for="theme-request" class="b-form-block__label">
                         Дата и время визита
@@ -67,16 +67,15 @@
                 </div>
 
                 <div class="b-form-block">
-                    <input
-                        id="visitTarget"
+                    <input id="visitTarget"
                         class="b-input-text"
                         type="text"
                         name="visitTarget"
                         maxlength=""
                         autocomplete=""
-                        value=""
+                        value="<?= $arResult['FORM']['TARGET']; ?>"
                         placeholder=""
-                        required                                         >
+                        required >
 
                     <label for="theme-request" class="b-form-block__label">
                         Цель визита
@@ -85,16 +84,15 @@
                 </div>
 
                 <div class="b-form-block">
-                    <input
-                        id="executiveCompany"
+                    <input id="executiveCompany"
                         class="b-input-text"
                         type="text"
                         name="executiveCompany"
                         maxlength=""
                         autocomplete=""
-                        value=""
+                        value="<?= $arResult['FORM']['EXECUTIVE_COMPANY']; ?>"
                         placeholder=""
-                        required                                         >
+                        required >
 
                     <label for="theme-request" class="b-form-block__label">
                         Должностное лицо компании, подающее заявку
@@ -103,17 +101,15 @@
                 </div>
 
                 <div class="b-form-block b-form-block_theme_grey">
-                    <input
-                        id="executiveVisit"
+                    <input id="executiveVisit"
                         class="b-input-text"
                         type="text"
                         name="executiveVisit"
                         maxlength=""
                         autocomplete=""
-                        value=""
+                        value="<?= $arResult['FORM']['EXECUTIVE_VISIT']; ?>"
                         placeholder=""
-                        required                                         >
-
+                        required >
                     <label for="theme-request" class="b-form-block__label">
                         Должностное лицо компании, ответственное за визит
                     </label>
@@ -121,15 +117,13 @@
                 </div>
 
                 <div class="b-form-block">
-                    <input
-                        id="phone"
+                    <input id="phone"
                         class="b-input-phone"
                         type="tel"
                         name="phone"
+                        value="<?= $arResult['FORM']['PHONE']; ?>"
                         autocomplete="tel"
-                        placeholder="+7 ___ ___-__-__"
-                    >
-
+                        placeholder="+7 ___ ___-__-__">
                     <label for="phone" class="b-form-block__label">Телефон</label>
                     <span class="b-form-block__error-text">Текст подсказки</span>
                 </div>
@@ -137,24 +131,19 @@
 
             <div class="b-add-request__pass">
                 <h4>Пропуск</h4>
-
                 <div class="b-add-request__pass-container j-pass-container">
-
                     <div class="b-add-request__pass__item">
-
                         <div class="b-form-block__half-wrap b-form-block__half-wrap_is_top">
                             <div class="b-form-block">
-                                <input
-                                    id="fio"
+                                <input id="fio"
                                     class="b-input-text"
                                     type="text"
-                                    name="fio[]"
+                                    name="pass[fio][]"
                                     maxlength=""
                                     autocomplete=""
                                     value=""
                                     placeholder=""
-                                    required                                         >
-
+                                    required >
                                 <label for="theme-request" class="b-form-block__label">
                                     ФИО
                                 </label>
@@ -162,17 +151,15 @@
                             </div>
 
                             <div class="b-form-block">
-                                <input
-                                    id="organizationPass"
+                                <input id="organizationPass"
                                     class="b-input-text"
                                     type="text"
-                                    name="organizationPass[]"
+                                    name="pass[organizationPass][]"
                                     maxlength=""
                                     autocomplete=""
                                     value=""
                                     placeholder=""
-                                    required                                         >
-
+                                    required >
                                 <label for="theme-request" class="b-form-block__label">
                                     Организация
                                 </label>
@@ -182,17 +169,15 @@
 
                         <div class="b-form-block__half-wrap b-form-block__half-wrap_is_center">
                             <div class="b-form-block">
-                                <input
-                                    id="carModel"
+                                <input id="carModel"
                                     class="b-input-text"
                                     type="text"
-                                    name="carModel[]"
+                                    name="pass[carModel][]"
                                     maxlength=""
                                     autocomplete=""
                                     value=""
                                     placeholder=""
-                                    required                                         >
-
+                                    required >
                                 <label for="theme-request" class="b-form-block__label">
                                     Марка автомобиля
                                 </label>
@@ -200,17 +185,15 @@
                             </div>
 
                             <div class="b-form-block">
-                                <input
-                                    id="stateNumber"
+                                <input id="stateNumber"
                                     class="b-input-text"
                                     type="text"
-                                    name="stateNumber[]"
+                                    name="pass[stateNumber][]"
                                     maxlength=""
                                     autocomplete=""
                                     value=""
                                     placeholder=""
-                                    required                                         >
-
+                                    required >
                                 <label for="theme-request" class="b-form-block__label">
                                     Гос. номер
                                 </label>
@@ -219,32 +202,26 @@
                         </div>
 
                         <div class="b-form-block">
-                            <input
-                                id="accompanying"
+                            <input id="accompanying"
                                 class="b-input-text"
                                 type="text"
-                                name="accompanying[]"
+                                name="pass[accompanying][]"
                                 maxlength=""
                                 autocomplete=""
                                 value=""
                                 placeholder=""
-                                required                                         >
-
+                                required >
                             <label for="theme-request" class="b-form-block__label">
                                 Фамилия и инициалы сопровождающего лица
                             </label>
                             <span class="b-form-block__error-text">Текст подсказки</span>
                         </div>
-
                     </div>
-
                 </div>
-
                 <div class="b-profile-add">
                     <button class="button-add j-add-pass" type="button">Добавить еще пропуск</button>
                 </div>
             </div>
-
             <button type="submit" class="button b-add-request__form-button">
                 Подать заявку
             </button>

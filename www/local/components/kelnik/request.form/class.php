@@ -39,14 +39,10 @@ class RequestForm extends Bbc\Basis
         }
 
         $request = Context::getCurrent()->getRequest();
+
         $this->arResult['ERRORS'] = [
             'FIELDS' => [],
             'TEXT' => []
-        ];
-        $arResult['FORM'] = [
-            'NAME' => '',
-            'THEME' => 0,
-            'MESSAGE' => ''
         ];
 
         if (!$USER->IsAuthorized()) {
@@ -56,6 +52,7 @@ class RequestForm extends Bbc\Basis
         try {
             $profile = Profile::getInstance($USER->GetID());
             $sectionRequests = new ProfileSectionRequests($profile);
+            $sectionRequests->setFormType($this->arParams['SUB_TYPE']);
         } catch (\Exception $exception) {
             return false;
         }
@@ -66,24 +63,8 @@ class RequestForm extends Bbc\Basis
 
         if ($request->isPost()) {
             $this->abortCache();
-            $postData = $request->getPostList()->toArray();
-            foreach ($arResult['FORM'] as $k => $v) {
-                $postKey = strtolower($k);
 
-                $row = ArrayHelper::getValue($postData, $postKey);
-                $row = $postKey == 'theme'
-                        ? (int) $row
-                        : htmlentities($row, ENT_QUOTES, 'UTF-8');
-                $this->arResult['FORM'][$k] = $row;
-
-                if ($postKey == 'message' && mb_strlen($row) < 4) {
-                    $row = null;
-                }
-
-                if (!$row) {
-                    $this->arResult['ERRORS']['FIELDS'][$k] = Loc::getMessage('KELNIK_REQ_FIELD_REQUIRED');
-                }
-            }
+            $formData = $sectionRequests->prepareData($request->getPostList()->toArray());
 
             if (!$sectionRequests->canAddNewRow()) {
                 $this->arResult['ERRORS']['TEXT'][] = Loc::getMessage('KELNIK_REQ_TIME_LEFT');

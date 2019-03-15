@@ -5,7 +5,7 @@
         <div class="b-form-block">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "fio",
-                name: "fio[]",
+                name: "pass[fio][]",
                 required: "true"
             } %}
 
@@ -18,7 +18,7 @@
         <div class="b-form-block">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "organizationPass",
-                name: "organizationPass[]",
+                name: "pass[organizationPass][]",
                 required: "true"
             } %}
 
@@ -33,7 +33,7 @@
         <div class="b-form-block">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "carModel",
-                name: "carModel[]",
+                name: "pass[carModel][]",
                 required: "true"
             } %}
 
@@ -46,7 +46,7 @@
         <div class="b-form-block">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "stateNumber",
-                name: "stateNumber[]",
+                name: "pass[stateNumber][]",
                 required: "true"
             } %}
 
@@ -60,7 +60,7 @@
     <div class="b-form-block">
         {% include "../../forms/input-text/input-text.twig" with {
             id: "accompanying",
-            name: "accompanying[]",
+            name: "pass[accompanying][]",
             required: "true"
         } %}
 
