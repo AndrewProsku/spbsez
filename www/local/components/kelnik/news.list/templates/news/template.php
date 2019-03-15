@@ -3,7 +3,7 @@
 } ?>
 <?php if (empty($arResult['ELEMENTS'])): return; endif; ?>
 
-<form action="#" method="post" enctype="application/x-www-form-urlencoded" class="b-news__filter b-mini-filter j-news-filter">
+<form action="/api/news/" method="post" enctype="application/x-www-form-urlencoded" class="b-news__filter b-mini-filter j-news-filter">
     <input type="hidden" name="sect" value="<?= $arParams['SECTION_ID']; ?>">
     <input type="hidden" name="compid" value="<?= $arParams['AJAX_COMPONENT_ID']; ?>">
     <input type="hidden" name="lang" value="<?= LANGUAGE_ID; ?>">
