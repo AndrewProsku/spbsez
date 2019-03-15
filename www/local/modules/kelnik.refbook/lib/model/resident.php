@@ -5,7 +5,6 @@ namespace Kelnik\Refbook\Model;
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
-use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
@@ -51,6 +50,12 @@ class ResidentTable extends DataManager
                 'IMAGE_ID',
                 [
                     'title' => Loc::getMessage('KELNIK_RESIDENT_IMAGE'),
+                ]
+            ),
+            new Main\Entity\IntegerField(
+                'IMAGE_ID_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_IMAGE_EN'),
                 ]
             ),
             new Main\Entity\IntegerField(

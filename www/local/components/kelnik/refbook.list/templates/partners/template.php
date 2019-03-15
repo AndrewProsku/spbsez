@@ -3,7 +3,7 @@
 } ?>
 <?php if(empty($arResult['ELEMENTS'])): return; endif; ?>
 <div class="l-home-partners l-home__block">
-    <h2>Партнеры</h2>
+    <h2><?= $arResult['HEADER']; ?></h2>
     <div class="b-carousel b-carousel_theme_partners">
         <div class="glide j-partners-carousel">
             <div class="glide__track b-carousel__track" data-glide-el="track">
@@ -26,9 +26,10 @@
                 <button class="b-carousel__arrow b-carousel__arrow-right" data-glide-dir="&#62;" type="button"></button>
             </div>
             <div class="b-carousel__dots" data-glide-el="controls[nav]">
-                <button class="b-carousel__dot" data-glide-dir="=0" type="button"></button>
-                <button class="b-carousel__dot" data-glide-dir="=1" type="button"></button>
-                <button class="b-carousel__dot" data-glide-dir="=2" type="button"></button>
+                <?php $i = 0; ?>
+                <?php foreach ($arResult['ELEMENTS'] as $element): ?>
+                <button class="b-carousel__dot" data-glide-dir="=<?= $i++; ?>" type="button"></button>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
