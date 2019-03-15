@@ -75,7 +75,7 @@ class News {
         const that = this;
         const formData = new FormData(this.filter);
         const action = this.filter.getAttribute('action');
-        const queryString = new URLSearchParams(formData).toString();
+        const queryLink = this._setUrl();
 
         Utils.send(formData, action, {
             success(response) {
@@ -89,9 +89,20 @@ class News {
             },
             complete() {
                 // that._stopLoaderContant();
-                window.history.pushState(null, null, `?${queryString}`);
+                window.history.pushState(null, null, `?${queryLink}`);
             }
         }, this.filter.getAttribute('method') || 'post');
+    }
+
+    _setUrl() {
+        const url = new URLSearchParams();
+        const inputs = this.filter.querySelectorAll('input:checked');
+
+        inputs.forEach((input) => {
+            url.append(input.getAttribute('name'), input.value);
+        });
+
+        return url.toString();
     }
 
     _loadMore() {
