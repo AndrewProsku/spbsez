@@ -181,6 +181,14 @@
 .b-invest-resident__step-tag svg {
     fill: $white;
     margin-right: 15px;
+    position: relative;
+    top: -1px;
+}
+
+.b-invest-resident__step-tag img {
+    margin-right: 10px;
+    position: relative;
+    top: -2px;
 }
 
 .b-invest-resident__package {
