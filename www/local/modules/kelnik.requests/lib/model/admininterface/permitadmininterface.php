@@ -11,7 +11,7 @@ use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\AdminHelper\Widget\UserWidget;
 use Kelnik\Requests\Model\StatusTable;
 use Kelnik\Requests\Model\TypeTable;
-use Kelnik\Requests\Widget\PassWidget;
+use Kelnik\Requests\Widget\passwidget;
 
 Loc::loadMessages(__FILE__);
 
@@ -116,7 +116,7 @@ class PermitAdminInterface extends AdminInterface
                 'NAME' => Loc::getMessage('KELNIK_REQ_TAB_PASSES'),
                 'FIELDS' => [
                     'PASS' => [
-                        'WIDGET' => new PassWidget(),
+                        'WIDGET' => new passwidget(),
                         'TITLE' => Loc::getMessage('KELNIK_REQ_FIELD_PASSES'),
                         'MULTIPLE' => true,
                         'MULTIPLE_FIELDS' => [
