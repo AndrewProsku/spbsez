@@ -3,8 +3,8 @@
 namespace Kelnik\Usermenu\Components;
 
 use Bex\Bbc;
-use Kelnik\Messages\MessageModel;
-use Kelnik\Userdata\Profile\ProfileModel;
+use Kelnik\Messages\MessageService;
+use Kelnik\Userdata\Profile\Profile;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -32,10 +32,10 @@ class UserMenuList extends Bbc\Basis
                                             : false;
 
         if ($this->arResult['IS_AUTHORIZED']) {
-            $profile = ProfileModel::getInstance($USER->GetID());
+            $profile = Profile::getInstance($USER->GetID());
 
             if ($profile->canMessages()) {
-                $this->arResult['MESSAGES'] = MessageModel::getInstance($profile)->calcCount()->getCountNew();
+                $this->arResult['MESSAGES'] = MessageService::getInstance($profile)->calcCount()->getCountNew();
             }
         }
     }

@@ -52,6 +52,7 @@ class CurrentSite
                 $this->data['PHONE_F'] = '+7' . substr($this->data['PHONE_F'], -10);
             }
         }
+
         return $this->data;
     }
 
@@ -61,6 +62,7 @@ class CurrentSite
         if (isset($this->data[$upName])) {
             return $this->data[$upName];
         }
+
         return false;
     }
 }

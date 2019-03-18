@@ -17,7 +17,7 @@
             </li>
 
             {% for tag in novelty.TAGS %}
-                <li><a href="{{ tag.LINK}}">{{ tag.NAME }}</a></li>
+                <li><a href="#" class="j-news-tag" data-tag="{{ tag.ID }}">{{ tag.NAME }}</a></li>
             {% endfor %}
         </ul>
     </div>

@@ -24,5 +24,20 @@ abstract class ApiProcessAbstract
         ];
     }
 
+    protected function initComponent($componentName, $arParams, $tmpl = false): \CBitrixComponent
+    {
+        $className = \CBitrixComponent::includeComponentClass($componentName);
+
+        /* @var \CBitrixComponent */
+        $component = new $className();
+
+        $component->initComponent($componentName, $tmpl);
+        $component->onIncludeComponentLang();
+        $component->arParams = $component->onPrepareComponentParams($arParams);
+        $component->__prepareComponentParams($component->arParams);
+
+        return $component;
+    }
+
     abstract public function execute(array $request): bool;
 }

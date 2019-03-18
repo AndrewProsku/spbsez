@@ -41,7 +41,11 @@
             position: relative;
             top: -1px;
             height: auto;
-            margin-right: 23px;
+            margin-right: 10px;
+
+            @media #{$tablet-portrait} {
+                margin-right: 23px;
+            }
         }
     }
 }
@@ -54,7 +58,7 @@
     padding-bottom: 0;
 
     h1 {
-        @include font-size(h1-inner);
+        @include font-size(h2);
         max-width: 1060px;
     }
 }
@@ -115,6 +119,10 @@
 .l-news-single__press-office {
     @include innerPadding();
     @include margin-level(bottom, pink);
+
+    .b-contact-info {
+        background-color: $bg-grey;
+    }
 }
 
 .b-news-tags {

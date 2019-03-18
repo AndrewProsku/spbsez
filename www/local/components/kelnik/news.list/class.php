@@ -11,8 +11,6 @@ use Kelnik\Helpers\ArrayHelper;
 use Kelnik\ImageResizer\Resizer;
 use Kelnik\News\Categories\CategoriesTable;
 use Kelnik\News\News\NewsTable;
-use Kelnik\Helpers\BitrixHelper;
-use Kelnik\Helpers\PluralHelper;
 use Kelnik\News\News\TagsTable;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
@@ -28,6 +26,8 @@ Loc::loadMessages(__FILE__);
 class NewsList extends Bbc\Basis
 {
     use Bbc\Traits\Elements;
+
+    protected $offset = 0;
 
     protected $cacheTemplate = false;
     protected $needModules = ['kelnik.news', 'iblock', 'kelnik.imageresizer'];
@@ -70,6 +70,15 @@ class NewsList extends Bbc\Basis
         return parent::onPrepareComponentParams($arParams);
     }
 
+    protected function executeProlog()
+    {
+        if ($this->isAjax()) {
+            $this->offset = (int)ArrayHelper::getValue($_REQUEST, 'showed', 0);
+        }
+
+        $this->addCacheAdditionalId($this->offset);
+    }
+
     protected function executeMain()
     {
         $this->setResultCacheKeys(['ELEMENTS', 'TAGS', 'YEARS', 'CNT']);
@@ -102,10 +111,6 @@ class NewsList extends Bbc\Basis
                     : NewsTable::ITEMS_ON_PAGE;
 
         $limit = $onPage + 1;
-
-        $offset = $this->isAjax()
-                    ? ArrayHelper::getValue($_REQUEST, 'showed', 0)
-                    : 0;
 
         try {
             $select = [
@@ -141,7 +146,8 @@ class NewsList extends Bbc\Basis
                 $reCount = true;
                 $filter['=TAGS.VALUE'] = $this->arParams['A_FILTER']['TAG'];
                 foreach ($this->arResult['TAGS'] as  &$v) {
-                    $v['SELECTED'] = is_array($this->arParams['A_FILTER']['TAG']) && in_array((int)$v['ID'], $this->arParams['A_FILTER']['TAG'])
+                    $v['SELECTED'] = is_array($this->arParams['A_FILTER']['TAG'])
+                        && in_array((int)$v['ID'], $this->arParams['A_FILTER']['TAG'])
                         || $v['ID'] == $this->arParams['A_FILTER']['TAG'];
                 }
                 unset($v);
@@ -167,13 +173,14 @@ class NewsList extends Bbc\Basis
             }
 
             if ($this->arResult['CNT']) {
-                $rsElements = NewsTable::getList($r =
+                $rsElements = NewsTable::getList(
                     [
                         'select' => $select,
                         'filter' => $filter,
                         'order' => $this->getParamsSort(),
                         'limit' => $limit,
-                        'offset' => $offset
+                        'offset' => $this->offset,
+                        'group' => ['ID']
                     ]
                 )->FetchAll();
             }
@@ -224,6 +231,7 @@ class NewsList extends Bbc\Basis
                     }
 
                     $element['TAGS'][] = [
+                        'ID' => $tag['ID'],
                         'LINK' => $tag['LINK'],
                         'NAME' => $tag['NAME']
                     ];

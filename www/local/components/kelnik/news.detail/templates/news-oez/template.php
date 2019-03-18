@@ -80,16 +80,17 @@
 
         </div>
     </div>
-
-    <? $APPLICATION->IncludeComponent(
-        'kelnik:site.info',
-        'press-contact',
-        array(
-            "COMPONENT_TEMPLATE" => "press-contact",
-            "CACHE_TYPE" => "A",
-            "CACHE_TIME" => "360000"
-        ),
-        array()
-    ); ?>
+    <div class="l-news-single__press-office">
+        <? $APPLICATION->IncludeComponent(
+            'kelnik:site.info',
+            'press-contact',
+            array(
+                "COMPONENT_TEMPLATE" => "press-contact",
+                "CACHE_TYPE" => "A",
+                "CACHE_TIME" => "360000"
+            ),
+            array()
+        ); ?>
+    </div>
 
 </div>

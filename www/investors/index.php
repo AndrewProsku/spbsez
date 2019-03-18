@@ -91,8 +91,10 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__rate" id="investors-rate">
+    <div class="l-investors__rate">
         <div class="b-reduced-rates">
+            <div id="investors-rate"></div>
+
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -105,8 +107,10 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__post" id="investors-post">
+    <div class="l-investors__post">
         <div class="b-invest-post">
+            <div id="investors-post"></div>
+
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -119,8 +123,10 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__conditions" id="investors-conditions">
+    <div class="l-investors__conditions">
         <div class="b-invest-conditions">
+            <div id="investors-conditions"></div>
+
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -133,8 +139,10 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__infrastructure" id="investors-infrastructure">
+    <div class="l-investors__infrastructure">
         <div class="b-invest-infr">
+            <div id="investors-infrastructure"></div>
+
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -147,9 +155,10 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__benefits" id="investors-benefits">
+    <div class="l-investors__benefits">
         <div class="b-invest-benefits">
             <div class="b-invest-benefits__content">
+                <div id="investors-benefits"></div>
                 <? $APPLICATION->IncludeComponent(
                     "kelnik:textblocks",
                     "",
@@ -163,8 +172,10 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__resident" id="investors-resident">
+    <div class="l-investors__resident">
         <div class="b-invest-resident">
+            <div id="investors-resident"></div>
+
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -177,7 +188,7 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__documents" id="investors-documents">
+    <div class="l-investors__documents">
         <? $APPLICATION->IncludeComponent(
             "kelnik:refbook.list",
             "docs",
@@ -192,8 +203,10 @@ $APPLICATION->SetTitle("Инвесторам");
         ); ?>
     </div>
 
-    <div class="l-investors__department" id="investors-department">
+    <div class="l-investors__department">
         <div class="b-invest-depart">
+            <div id="investors-department"></div>
+
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",

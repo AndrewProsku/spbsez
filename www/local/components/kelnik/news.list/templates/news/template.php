@@ -3,7 +3,7 @@
 } ?>
 <?php if (empty($arResult['ELEMENTS'])): return; endif; ?>
 
-<form action="#" method="post" enctype="application/x-www-form-urlencoded" class="b-news__filter b-mini-filter j-news-filter">
+<form action="/api/news/" method="post" enctype="application/x-www-form-urlencoded" class="b-news__filter b-mini-filter j-news-filter">
     <input type="hidden" name="sect" value="<?= $arParams['SECTION_ID']; ?>">
     <input type="hidden" name="compid" value="<?= $arParams['AJAX_COMPONENT_ID']; ?>">
     <input type="hidden" name="lang" value="<?= LANGUAGE_ID; ?>">
@@ -16,7 +16,7 @@
                 <?php foreach ($arResult['YEARS'] as $year): ?>
                     <div class="b-mini-filter__item">
                         <input type="checkbox"
-                               name="year[]"
+                               name="year"
                                value="<?= $year['NAME']; ?>"
                                data-text="<?= $year['NAME']; ?>"
                                id="years<?= $year['NAME']; ?>"
@@ -70,7 +70,7 @@
                     <?= $arItem['DATE_SHOW_FORMAT']; ?>
                 </li>
                 <?php foreach ($arItem['TAGS'] as $tag): ?>
-                    <li><a href="<?= $tag['LINK']; ?>"><?= $tag['NAME']; ?></a></li>
+                    <li><a href="<?= $tag['LINK']; ?>" class="j-news-tag" data-tag="<?= $tag['ID']; ?>"><?= $tag['NAME']; ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>

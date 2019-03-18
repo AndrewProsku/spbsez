@@ -12,7 +12,7 @@
 
             {% include '../components/investor-info/investor-info.twig' with {
                 title: "Особая экономическая зона технико-внедренческого типа",
-                img: "/images/investors-info/investors-info-1.png",
+                img: "/images/investors-info/investors-3.png",
                 text: "Резиденты ОЭЗ «Санкт-Петербург» должны осуществлять технико-внедренческую деятельность, под которой подразумевается: инновационная деятельность, создание, производство и реализация научно-технической продукции, создание и реализация программ для электронных вычислительных машин, баз данных, топологий интегральных микросхем, информационных систем, а также оказание услуг по их внедрению и обслуживанию.",
                 anchors: [
                     {
@@ -110,34 +110,34 @@
             {% include '../components/income-tax/income-tax.twig' %}
         </div>
 
-        <div class="l-investors__rate" id="investors-rate">
+        <div class="l-investors__rate">
             {% include '../components/reduced-rates/reduced-rates.twig' %}
         </div>
 
-        <div class="l-investors__post" id="investors-post">
+        <div class="l-investors__post">
             {% include '../components/invest-post/invest-post.twig' %}
         </div>
 
-        <div class="l-investors__conditions" id="investors-conditions">
+        <div class="l-investors__conditions">
             {% include '../components/invest-conditions/invest-conditions.twig' %}
         </div>
 
-        <div class="l-investors__infrastructure" id="investors-infrastructure">
+        <div class="l-investors__infrastructure">
             {% include '../components/invest-infr/invest-infr.twig' %}
         </div>
 
-        <div class="l-investors__benefits" id="investors-benefits">
+        <div class="l-investors__benefits">
             {% include '../components/invest-benefits/invest-benefits.twig' %}
         </div>
 
-        <div class="l-investors__resident" id="investors-resident">
+        <div class="l-investors__resident">
             {% include '../components/invest-resident/invest-resident.twig' %}
         </div>
 
-        <div class="l-investors__documents" id="investors-documents">
+        <div class="l-investors__documents">
 
             <div class="b-invest-documents">
-                <h2 class="b-invest-documents__title">Документы и презентации</h2>
+                <h2 class="b-invest-documents__title" id="investors-documents">Документы и презентации</h2>
 
                 <div class="b-invest-documents__file">
 
@@ -164,10 +164,10 @@
 
         </div>
 
-        <div class="l-investors__department" id="investors-department">
+        <div class="l-investors__department">
 
             <div class="b-invest-depart">
-                <h2 class="b-invest-depart__title">Отдел по работе с резидентами</h2>
+                <h2 class="b-invest-depart__title" id="investors-department">Отдел по работе с резидентами</h2>
 
                 <div class="b-invest-depart__text">Обратитесь за консультацией по процедуре получения статуса резидента ОЭЗ «Санкт-Петербург»</div>
 
@@ -207,7 +207,7 @@
                 </div>
 
                 <div class="b-invest-depart__button">
-                    <a href="#" class="button">Написать сообщение</a>
+                    <a href="#" class="button j-message-button" data-href="#message">Написать сообщение</a>
                 </div>
             </div>
 

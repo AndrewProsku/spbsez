@@ -22,6 +22,13 @@ $aMenuLinks = Array(
         ""
     ),
     Array(
+        "Residents",
+        "/en/residents/",
+        Array(),
+        Array(),
+        ""
+    ),
+    Array(
         "For Investors",
         "/en/investors/",
         Array(),

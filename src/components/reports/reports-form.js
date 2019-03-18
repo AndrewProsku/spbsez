@@ -18,6 +18,8 @@ class ReportForm {
     constructor() {
         this.target = null;
         this.formsBlockClass = 'j-report-block';
+        this.reportId = 0;
+
         // Табы
         this.filterClass = 'j-reports-filter';
         this.filterSelectsClass = 'j-reports-select';
@@ -33,7 +35,6 @@ class ReportForm {
         this.submitReportClass = 'j-report-submit';
         this.approveReportClass = 'j-report-approve';
         this.commentsBlockClass = 'b-report-comments';
-
 
         this.residentNameField = document.querySelector('.j-report-resident-name input');
         this.oezNameField = document.querySelector('.j-report-oez-name input');
@@ -79,12 +80,12 @@ class ReportForm {
     init(options) {
         this.target = options.target;
         this.submitReportButton = document.querySelector(`.${this.submitReportClass}`);
+        this.reportId = parseInt(this.target.dataset.reportId, 10);
 
         // Табы
         this.filters = Array.from(document.querySelectorAll(`.${this.filterClass}`));
         this.groups = Array.from(document.querySelectorAll(`.${this.filterGroupClass}`));
         this.filterFakeInputs = [];
-
 
         if (Utils.keyExist(this.target.dataset, 'readOnly')) {
             this.type = 'readonly';
@@ -140,18 +141,22 @@ class ReportForm {
             this.sendNewValues(event.target);
         });
 
-        Utils.send('', '/tests/reports/all.json', {
+        Utils.send(`a=get&id=${that.reportId}`, '/api/report/', {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
                 }
                 const responseForms = response.data.forms;
 
-                if (response.data.residentName) {
-                    that.residentNameField.value = response.data.residentName;
+                if (response.data.NAME) {
+                    that.residentNameField.value = response.data.NAME;
                 }
-                if (response.data.oezName) {
-                    that.oezNameField.value = response.data.oezName;
+                if (response.data.NAME_SEZ) {
+                    that.oezNameField.value = response.data.NAME_SEZ;
+                }
+
+                if (!responseForms.length) {
+                    return;
                 }
 
                 responseForms.forEach((formData, i) => {

@@ -6,8 +6,8 @@ use Bex\Bbc\Basis;
 use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\PluralHelper;
-use Kelnik\Messages\MessageModel;
-use Kelnik\Userdata\Profile\ProfileModel;
+use Kelnik\Messages\MessageService;
+use Kelnik\Userdata\Profile\Profile;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -27,27 +27,33 @@ class MessagesList extends Basis
         'IS_SEARCH' => ['type' => 'string', 'error' => false]
     ];
 
+    /**
+     * @var Profile
+     */
+    protected $profile;
+
     protected function executeProlog()
     {
         global $USER;
 
         $this->addCacheAdditionalId($USER->GetID());
         $this->arParams['YEAR'] = date('Y');
+
+        $this->profile = Profile::getInstance($USER->GetID());
     }
 
     protected function executeMain()
     {
-        global $USER;
-
         $this->setResultCacheKeys(['YEARS', 'MESSAGES', 'QUERY', 'CNT', 'CNT_WORD', 'SHOW_MORE']);
 
-        $profile = ProfileModel::getInstance($USER->GetID());
-
-        if (!$profile->canMessages()) {
-            LocalRedirect('/cabinet/');
+        if (!$this->profile->canMessages()) {
+            LocalRedirect(LANG_DIR . 'cabinet/');
         }
 
-        $messages = MessageModel::getInstance($profile);
+        self::registerCacheTag('kelnik:messagesList');
+        self::registerCacheTag('kelnik:messagesList_' . $this->profile->getId());
+
+        $messages = MessageService::getInstance($this->profile);
         $messages->calcCount();
         $messages->sefFolder = $this->arParams['SEF_FOLDER'];
         $messages->dateFormat = $this->arParams['DATE_FORMAT'];
@@ -77,6 +83,6 @@ class MessagesList extends Basis
 
         $this->arResult['YEARS'] = $messages->getYears();
         $this->arResult['MESSAGES'] = $messages::prepareList($messages->getList($this->arParams['YEAR']));
-        $this->arResult['SHOW_MORE'] = count($messages->getMonthsByYear($this->arParams['YEAR'])) > MessageModel::MONTHS_COUNT;
+        $this->arResult['SHOW_MORE'] = count($messages->getMonthsByYear($this->arParams['YEAR'])) > MessageService::MONTHS_COUNT;
     }
 }

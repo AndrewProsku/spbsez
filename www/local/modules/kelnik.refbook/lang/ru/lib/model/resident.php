@@ -5,6 +5,7 @@ $MESS["KELNIK_RESIDENT_SORT"] = "Индекс сортировки";
 $MESS["KELNIK_RESIDENT_NAME"] = "Название";
 $MESS["KELNIK_RESIDENT_NAME_EN"] = "Название (англ.)";
 $MESS["KELNIK_RESIDENT_IMAGE"] = "Логотип";
+$MESS["KELNIK_RESIDENT_IMAGE_EN"] = "Логотип (англ.)";
 $MESS["KELNIK_RESIDENT_TYPE"] = "Тип";
 $MESS["KELNIK_RESIDENT_PLACE"] = "Место расположения";
 $MESS['KELNIK_RESIDENT_TEXT'] = 'Краткое описание';

@@ -3,6 +3,12 @@
 namespace Kelnik\Refbook;
 
 use Bitrix\Main\SiteTable;
+use Kelnik\Refbook\Model\DocsTable;
+use Kelnik\Refbook\Model\PartnerTable;
+use Kelnik\Refbook\Model\PresTable;
+use Kelnik\Refbook\Model\ResidentTable;
+use Kelnik\Refbook\Model\ReviewTable;
+use Kelnik\Refbook\Model\TeamTable;
 
 class Types
 {
@@ -37,5 +43,17 @@ class Types
         }
 
         return $res;
+    }
+
+    public static function getClassesByTypeList(): array
+    {
+        return [
+            self::TYPE_PARTNER => PartnerTable::class,
+            self::TYPE_RESIDENT => ResidentTable::class,
+            self::TYPE_REVIEW => ReviewTable::class,
+            self::TYPE_TEAM => TeamTable::class,
+            self::TYPE_DOCS => DocsTable::class,
+            self::TYPE_PRESENTATION => PresTable::class
+        ];
     }
 }

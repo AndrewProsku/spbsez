@@ -5,10 +5,11 @@ use Bitrix\Main\Application;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Messages\MessageService;
 use Kelnik\Messages\Model\MessageCompaniesTable;
 use Kelnik\Messages\Model\MessagesTable;
 use Kelnik\Messages\Model\MessageUsersTable;
-use Kelnik\Userdata\Profile\ProfileModel;
+use Kelnik\Userdata\Profile\Profile;
 
 class MessagesEditHelper extends AdminEditHelper
 {
@@ -41,7 +42,6 @@ class MessagesEditHelper extends AdminEditHelper
 
         if ($res->isSuccess() && $data['ACTIVE'] === MessagesTable::YES) {
             self::updateUsers($id);
-            clearKelnikComponentCache('messages');
         }
 
         return $res;
@@ -53,7 +53,6 @@ class MessagesEditHelper extends AdminEditHelper
 
         if ($res->isSuccess()) {
             self::updateUsers($id);
-            clearKelnikComponentCache('messages');
         }
 
         return $res;
@@ -74,15 +73,12 @@ class MessagesEditHelper extends AdminEditHelper
 
         try {
             Application::getConnection()->query('DELETE FROM `' . MessageUsersTable::getTableName() . '` WHERE `MESSAGE_ID` = ' . $id);
-        } catch (\Exception $e) {
-        }
-
-        try {
             $companies = MessageCompaniesTable::getList([
                 'filter' => [
                     '=MESSAGE_ID' => $id
                 ]
             ]);
+            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:messagesList');
         } catch (\Exception $e) {
             return false;
         }
@@ -97,12 +93,12 @@ class MessagesEditHelper extends AdminEditHelper
             ($by = 'ID'),
             ($order = 'DESC'),
             [
-                'GROUPS_ID' => ProfileModel::GROUP_RESIDENT,
-                ProfileModel::OWNER_FIELD => $companies
+                'GROUPS_ID' => Profile::GROUP_RESIDENT,
+                Profile::OWNER_FIELD => $companies
             ],
             [
                 'SELECT' => [
-                    ProfileModel::OWNER_FIELD
+                    Profile::OWNER_FIELD
                 ],
                 'FIELDS' => [
                     'ID'

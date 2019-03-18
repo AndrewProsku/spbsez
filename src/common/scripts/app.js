@@ -472,12 +472,8 @@ if (animationBg) {
 const anchorSelector = Array.from(document.querySelectorAll('.j-anchor-link'));
 
 if (anchorSelector.length) {
-    anchorSelector.forEach((item) => {
-        const anchor = new Anchor();
-
-        anchor.init({
-            target: item
-        });
+    new Anchor().init({
+        targets: anchorSelector
     });
 }
 
@@ -642,15 +638,17 @@ mediator.subscribe('openPopup', (popup) => {
  * Инициализация попапа "Написать сообщение" в футере
  */
 
-const messageButton = document.querySelector('.j-message-button');
+const messageButtons = Array.from(document.querySelectorAll('.j-message-button'));
 
-if (messageButton) {
-    const messagePopup = new Popup();
+if (messageButtons) {
+    messageButtons.forEach((messageButton) => {
+        const messagePopup = new Popup();
 
-    messagePopup.init({
-        target              : messageButton,
-        template            : messagePopupTemplate,
-        closeButtonAriaLabel: 'Закрыть'
+        messagePopup.init({
+            target              : messageButton,
+            template            : messagePopupTemplate,
+            closeButtonAriaLabel: 'Закрыть'
+        });
     });
 }
 
@@ -790,9 +788,7 @@ if (document.querySelector('.j-useful-content')) {
 const reportFormEl = document.querySelector('.j-report-form');
 
 if (reportFormEl) {
-    const reportForm = new ReportForm();
-
-    reportForm.init({
+    (new ReportForm()).init({
         target: reportFormEl
     });
 }
@@ -806,9 +802,7 @@ const disclosureItems = Array.from(document.querySelectorAll('.j-disclosure-bloc
 
 if (disclosureItems.length) {
     disclosureItems.forEach((target) => {
-        const disclosureRegulated = new Disclosure();
-
-        disclosureRegulated.init({
+        (new Disclosure()).init({
             target
         });
     });
