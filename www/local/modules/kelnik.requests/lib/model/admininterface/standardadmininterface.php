@@ -15,7 +15,7 @@ use Kelnik\Requests\Model\TypeTable;
 
 Loc::loadMessages(__FILE__);
 
-class StandartAdminInterface extends AdminInterface
+class StandardAdminInterface extends AdminInterface
 {
     /**
      * {@inheritdoc}
@@ -88,8 +88,8 @@ class StandartAdminInterface extends AdminInterface
     public function helpers()
     {
         return [
-            '\Kelnik\Requests\Model\AdminInterface\StandartListHelper',
-            '\Kelnik\Requests\Model\AdminInterface\StandartEditHelper'
+            '\Kelnik\Requests\Model\AdminInterface\StandardListHelper',
+            '\Kelnik\Requests\Model\AdminInterface\StandardEditHelper'
         ];
     }
 }

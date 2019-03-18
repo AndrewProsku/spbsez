@@ -10,8 +10,8 @@ use Kelnik\Requests\Model\AdminInterface\ServiceEditHelper;
 use Kelnik\Requests\Model\AdminInterface\ServiceListHelper;
 use Kelnik\Requests\Model\AdminInterface\SiteMsgListHelper;
 use Kelnik\Requests\Model\AdminInterface\SiteMsgEditHelper;
-use Kelnik\Requests\Model\AdminInterface\StandartListHelper;
-use Kelnik\Requests\Model\AdminInterface\StandartEditHelper;
+use Kelnik\Requests\Model\AdminInterface\StandardListHelper;
+use Kelnik\Requests\Model\AdminInterface\StandardEditHelper;
 use Kelnik\Requests\Model\AdminInterface\StatusEditHelper;
 use Kelnik\Requests\Model\AdminInterface\StatusListHelper;
 use Kelnik\Requests\Model\AdminInterface\TypeEditHelper;
@@ -33,7 +33,7 @@ return [
     [
         "parent_menu" => "global_menu_content",
         "sort"        => 240,
-        "url"         => StandartListHelper::getUrl(),
+        "url"         => StandardListHelper::getUrl(),
         "text"        => Loc::getMessage('KELNIK_REQ_MODULE'),
         "title"       => Loc::getMessage('KELNIK_REQ_MODULE_TITLE'),
         "icon"        => "kelnik-admin-menu_icon",
@@ -47,9 +47,9 @@ return [
                 'icon' => 'iblock_menu_icon',
                 'page_icon' => 'iblock_menu_icon',
                 'text' => Loc::getMessage('KELNIK_REQ_STANDART'),
-                'url' => StandartListHelper::getUrl(),
+                'url' => StandardListHelper::getUrl(),
                 'more_url' => [
-                    StandartEditHelper::getUrl(),
+                    StandardEditHelper::getUrl(),
                 ]
             ],
             [

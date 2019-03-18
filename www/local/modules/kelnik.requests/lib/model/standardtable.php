@@ -16,7 +16,7 @@ Loc::loadMessages(__FILE__);
 /**
  * Модель заявок на обратный звонок.
  */
-class StandartTable extends DataManager
+class StandardTable extends DataManager
 {
     const REQUEST_TIME_LEFT = 60; // 1min
     /**

@@ -8,10 +8,10 @@ use Kelnik\AdminHelper\Widget\ComboBoxWidget;
 use Kelnik\AdminHelper\Widget\DateTimeWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
-use Kelnik\AdminHelper\Widget\TextAreaWidget;
 use Kelnik\AdminHelper\Widget\UserWidget;
 use Kelnik\Requests\Model\StatusTable;
 use Kelnik\Requests\Model\TypeTable;
+use Kelnik\Requests\Widget\PassWidget;
 
 Loc::loadMessages(__FILE__);
 
@@ -110,6 +110,23 @@ class PermitAdminInterface extends AdminInterface
                         'HEADER' => false,
                         'READONLY' => true
                     ],
+                ]
+            ],
+            'PASSES' => [
+                'NAME' => Loc::getMessage('KELNIK_REQ_TAB_PASSES'),
+                'FIELDS' => [
+                    'PASS' => [
+                        'WIDGET' => new PassWidget(),
+                        'TITLE' => Loc::getMessage('KELNIK_REQ_FIELD_PASSES'),
+                        'MULTIPLE' => true,
+                        'MULTIPLE_FIELDS' => [
+                            'ENTITY_ID' => 'PERMIT_ID',
+                            'VALUE' => 'FIO'
+                        ],
+                        'READONLY' => true,
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ]
                 ]
             ]
         ];

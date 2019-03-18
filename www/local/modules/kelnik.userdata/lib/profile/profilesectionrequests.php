@@ -9,7 +9,7 @@ use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Requests\Model\PermitPassTable;
 use Kelnik\Requests\Model\PermitTable;
-use Kelnik\Requests\Model\StandartTable;
+use Kelnik\Requests\Model\StandardTable;
 use Kelnik\Requests\Model\TypeTable;
 
 class ProfileSectionRequests extends ProfileSectionAbstract
@@ -20,7 +20,7 @@ class ProfileSectionRequests extends ProfileSectionAbstract
     protected $formErrors = [];
 
     protected $types = [
-        TypeTable::SUB_TYPE_STANDARD => StandartTable::class,
+        TypeTable::SUB_TYPE_STANDARD => StandardTable::class,
         TypeTable::SUB_TYPE_PERMIT => PermitTable::class
     ];
 
