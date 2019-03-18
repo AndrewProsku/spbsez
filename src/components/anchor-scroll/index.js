@@ -7,41 +7,65 @@
 import $ from 'jquery';
 
 class Anchor {
-    /**
-     * @param {Object} options - outer options
-     */
+    constructor() {
+        this.$body = $('body, html');
+        this.headerSelector = '.j-home__header';
+    }
+
     init(options) {
-        const defaultSpeed = 300;
-        const defaultFrameCount = 20;
+        this.targets = Array.from(options.targets);
 
-        this.target = options.target;
-        this.animationTime = options.speed || defaultSpeed;
-        this.framesCount = options.framesCount || defaultFrameCount;
-
-        if (!this.target) {
+        if (!this.targets) {
             return;
         }
 
         this._bindEvents();
+        this._urlHashScroll();
     }
 
     _bindEvents() {
-        const $body = $('body, html');
-        const headerHeight = document.querySelector('.j-home__header').clientHeight;
-        const hrefTarget = $(this.target.getAttribute('href'));
+        this.targets.forEach((target) => {
+            target.addEventListener('click', (event) => {
+                event.preventDefault();
 
-        if (!hrefTarget.length) {
+                this._goScroll(target.getAttribute('href'));
+            });
+        });
+    }
+
+    _urlHashScroll() {
+        const href = window.location.hash;
+        const duration = 10;
+
+        if (!href) {
             return;
         }
 
-        const scrollTarget = hrefTarget.offset().top - headerHeight;
+        this._goScroll(href, duration);
+    }
 
-        this.target.addEventListener('click', (event) => {
-            event.preventDefault();
-            $body.animate({
-                scrollTop: scrollTarget
-            }, 'slow');
-        });
+    _goScroll(href, duration = 'slow') {
+        const hrefTarget = $(href);
+        const scrollTarget = this._getScrollTop(hrefTarget);
+
+        this._scroll(scrollTarget, duration);
+    }
+
+    _getScrollTop(href) {
+        const headerHeight = document.querySelector(this.headerSelector).clientHeight;
+        const hrefTarget = $(href);
+
+        if (!hrefTarget.length) {
+            return false;
+        }
+
+        return hrefTarget.offset().top - headerHeight;
+    }
+
+    _scroll(scrollTarget, duration = 'slow') {
+        this.$body.animate({
+            scrollTop: scrollTarget
+        }, duration);
     }
 }
 
