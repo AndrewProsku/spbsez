@@ -25,7 +25,7 @@
 }
 
 .b-advantages_theme_gradient {
-    background-image: linear-gradient(to top, $blue 0%, $violet 55%, $violet 30%);
+    background-image: linear-gradient(to right, $blue 0%, $violet 100%);
 
     @media #{$tablet-portrait} {
         flex-direction: row-reverse;
@@ -41,11 +41,20 @@
             @include post(2, 33);
         }
     }
+
+    .b-advantages__item {
+        color: $white;
+
+        &:before {
+            background-image: none;
+            background-color: $white;
+        }
+    }
 }
 
 .b-advantages__title h2 {
     @include margin-level(top, cyan);
-    @include margin-level(bottom, green);
+    @include margin-level(bottom, cyan);
     @include font-size("h2");
 
     @media #{$tablet-portrait} {
@@ -121,5 +130,70 @@
         width: 52px;
         height: 2px;
         background-image: linear-gradient($gradient-linear);
+    }
+}
+
+.b-advantages__list {
+    @include row();
+}
+
+.b-advantages__text + .b-advantages__list {
+    @include padding-level(top, cyan);
+}
+
+.b-advantages__item {
+    @include font-size("p3");
+    @include padding-level(top, orange);
+    position: relative;
+    width: 100%;
+
+    @media #{$tablet-portrait} {
+        @include column(10, 21);
+    }
+
+    @media #{$laptop} {
+        @include column(6, 20);
+    }
+
+    &:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 52px;
+        height: 2px;
+        background-image: linear-gradient($gradient-linear);
+    }
+
+    &:not(:first-child) {
+        @include margin-level(top, green);
+    }
+
+    &:nth-child(2) {
+        @media #{$tablet-portrait} {
+            margin-top: 0;
+        }
+    }
+
+    &:nth-child(3) {
+        @media #{$laptop} {
+            margin-top: 0;
+        }
+    }
+
+    &:nth-child(2n + 1) {
+        @media #{$tablet-portrait} {
+            @include post(1, 21);
+        }
+
+        @media #{$laptop} {
+            margin-right: 0;
+        }
+    }
+
+    &:not(:nth-child(3n)) {
+        @media #{$laptop} {
+            @include post(1, 20);
+        }
     }
 }

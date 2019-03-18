@@ -29,7 +29,6 @@ import servicePopupTemplate from '../../components/service-popup/service-popup.t
 import TabsAjax from 'components/tabs/tabs-ajax';
 import templateMessages from 'components/messages/messages.twig';
 import Useful from '../../components/useful';
-import Utils from './utils';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
 import YandexMap from 'components/yandex-map';
@@ -276,6 +275,18 @@ if (mapWrapper) {
             console.error(`При загрузке яндекс карт произошла ошибка: ${error}`);
         });
 }
+
+const noidorfMapWrapper = document.querySelector('.j-yandex-map-noidorf');
+
+if (noidorfMapWrapper) {
+    yandexMapLoad(noidorfMapWrapper.dataset.lang || 'ru')
+        .then((ymaps) => {
+            (new YandexMap(ymaps)).init({wrapper: noidorfMapWrapper, zoom: 12});
+        })
+        .catch((error) => {
+            console.error(`При загрузке яндекс карт произошла ошибка: ${error}`);
+        });
+}
 /* eslint-enable */
 
 
@@ -360,9 +371,12 @@ if (reviewsCarouselEl) {
 }
 
 const newsCarouselEl = document.querySelector('.j-news-slider');
+const areaCarouselEl = document.querySelector('.j-area-slider');
 
-if (newsCarouselEl) {
-    const newsCarousel = new Glide('.j-news-slider', {
+if (newsCarouselEl || areaCarouselEl) {
+    const sliderClass = newsCarouselEl ? '.j-news-slider' : '.j-area-slider';
+
+    const glideInstance = new Glide(sliderClass, {
         type   : 'carousel',
         startAt: 0,
         perView: 1,
@@ -375,8 +389,8 @@ if (newsCarouselEl) {
 
     glideCarousel.init();
 
-    newsCarousel.mount();
-    newsCarousel.on('move.after', () => {
+    glideInstance.mount();
+    glideInstance.on('move.after', () => {
         glideCarousel.setControlsPosition();
     });
 }
@@ -385,16 +399,9 @@ if (newsCarouselEl) {
 /**
  * Добавляем класс для контена главного экрана,
  * чтобы увеличить значение отступа на величну панелей управления в мобильных браузерах
+ * @param {node} mainScreenContent - элемент с текстовым контентом главного экрана
  */
-const mainScreenContent = document.querySelector('.b-main-screen-content');
-
-if (mainScreenContent) {
-    if (Utils.isMobile()) {
-        mainScreenContent.classList.add('b-main-screen-content_is_mobile');
-    }
-
-    /* На главном экране рассчитываем padding-top */
-
+const fixMainScreenHeight = function(mainScreenContent) {
     const innerHeightWindow = window.innerHeight;
 
     mainScreenContent.style.paddingTop = `${innerHeightWindow}px`;
@@ -404,6 +411,18 @@ if (mainScreenContent) {
 
         mainScreenContent.style.paddingTop = `${resizeWindowHeight}px`;
     });
+};
+
+const homeMainScreenContent = document.querySelector('.b-main-screen-content');
+const residentPageTitle = document.querySelector('.b-area-main-screen__title');
+const areaMainScreen = document.querySelector('.j-area-main-screen');
+
+if (homeMainScreenContent) {
+    fixMainScreenHeight(homeMainScreenContent);
+}
+
+if (residentPageTitle) {
+    fixMainScreenHeight(residentPageTitle);
 }
 
 /**
@@ -414,6 +433,12 @@ const bgAnimationLines = document.querySelector('.j-animation-block');
 
 if (bgAnimationLines && homeMainScreen) {
     const animatedLines = new AnimatedLines(bgAnimationLines, homeMainScreen);
+
+    animatedLines.init();
+}
+
+if (bgAnimationLines && areaMainScreen) {
+    const animatedLines = new AnimatedLines(bgAnimationLines, areaMainScreen);
 
     animatedLines.init();
 }
@@ -782,3 +807,29 @@ if (disclosureItems.length) {
         });
     });
 }
+
+
+/**
+ * Первый экран на страницах резидентов
+ */
+
+const residentMainScreen = document.querySelector('.j-area-main-screen');
+
+if (residentMainScreen) {
+    const getOverlayScrollTop = function() {
+        const yOffset = self.pageYOffset;
+        const maxYOffset = 100;
+        const offset = yOffset ||
+            (document.documentElement && document.documentElement.scrollTop) ||
+            (document.body && document.body.scrollTop);
+
+        if (offset > maxYOffset) {
+            residentMainScreen.classList.add('is-active-overlay');
+        } else {
+            residentMainScreen.classList.remove('is-active-overlay');
+        }
+    };
+
+    window.addEventListener('scroll', getOverlayScrollTop);
+}
+

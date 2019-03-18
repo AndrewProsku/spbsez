@@ -1,0 +1,223 @@
+.l-infrastructure {
+    @include padding-level(top, blue);
+    @include padding-level(bottom, pink);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-infrastructure-places {
+    display: flex;
+    flex-direction: column;
+
+    @media #{$tablet-portrait} {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.b-infrastructure-place:not(:last-child) {
+    margin-bottom: 36px;;
+
+    @media #{$tablet-portrait} {
+        margin-bottom: 0;
+    }
+}
+
+.b-infrastructure-place {
+    @media #{$tablet-portrait} {
+        @include column(15, 32);
+    }
+
+    @media #{$tablet-portrait} {
+        @include column(14, 30);
+    }
+
+    @media #{$tablet-portrait} {
+        @include column(12, 28);
+    }
+}
+
+.b-infrastructure-place__img {
+    @media #{$tablet-portrait} {
+        @include padding-level(bottom, yellow);
+    }
+}
+
+.b-infrastructure-place__title {
+    @include padding-level(bottom, red);
+
+    h2 {
+        @include font-size('p2');
+        font-family: $font-bold;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+}
+
+.b-infrastructure-place__name {
+    @include font-size('h2');
+    @include padding-level(bottom, yellow);
+    margin-bottom: 0;
+}
+
+.b-icons-list {
+    @media #{$tablet-portrait} {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+.b-icons-list__item {
+    @include column(32, 32);
+    margin-bottom: 24px;
+    display: flex;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    @media #{$tablet-portrait} {
+        flex-basis: 50%;
+    }
+}
+
+.b-icons-list__item:first-child {
+    flex-basis: 40%;
+}
+
+.b-icons-list__item:nth-child(2) {
+    flex-basis: 40%;
+    order: 3;
+}
+
+.b-icons-list__item:nth-child(3) {
+    flex-basis: 55%;
+    order: 2;
+}
+
+.b-icons-list__item:nth-child(4) {
+    flex-basis: 55%;
+    order: 4;
+}
+
+
+.b-icons-list__img {
+    width: 64px;
+    height: 64px;
+    margin-right: 21px;
+}
+
+.b-icons-list__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.b-icons-list__title {
+    @include font-size('p2');
+    font-family: $font-bold;
+    font-weight: 700;
+    color: $blue;
+    margin-bottom: 5px;
+}
+
+.b-icons-list__description {
+    @include font-size('p4');
+}
+
+
+// Площадки на карте
+.l-infrastructure-map {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.b-infrastructure-map {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    //height: 100%;
+}
+
+.b-infrastructure-map__title {
+    @include padding-level(top, green);
+    @include padding-level(bottom, green);
+    @include prefix(4, 36);
+    @include suffix(3, 36);
+    background-color: $white;
+
+    @media #{$tablet-portrait}  {
+        @include padding-level(top, cyan);
+        box-sizing: content-box;
+        width: column(9, 36);
+        position: absolute;
+        z-index: 1;
+        background-color: transparent;
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-infrastructure-map__title h1 {
+    margin: 0;
+    @include font-size("h2");
+    letter-spacing: -0.009em;
+}
+
+.b-infrastructure-map__content {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    //height: 100%;
+    flex-grow: 1;
+    background-color: $grey;
+
+    @media #{$tablet-portrait} {
+         min-height: 480px;
+    }
+
+    @media #{$laptop} {
+         min-height: 660px;
+    }
+
+    @media #{$fullhd} {
+         min-height: 940px;
+    }
+}
+
+.b-infrastructure-map__yandex-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%
+}
+
+.b-infrastructure-switch {
+    padding-bottom: 16px;
+
+    @media #{$tablet-portrait} {
+        display: none;
+    }
+}
