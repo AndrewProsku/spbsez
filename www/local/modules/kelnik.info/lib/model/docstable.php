@@ -5,6 +5,7 @@ namespace Kelnik\Info\Model;
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
@@ -101,7 +102,7 @@ class DocsTable extends DataManager
         ], 'NAME', 'NAME');
     }
 
-    public static function clearComponentCache(Main\ORM\Event $event)
+    public static function clearComponentCache(Main\Entity\Event $event)
     {
         if (!Main\Context::getCurrent()->getRequest()->isAdminSection()) {
             return;

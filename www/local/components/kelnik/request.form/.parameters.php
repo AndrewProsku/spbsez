@@ -6,7 +6,9 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     exit;
 }
 
-if (!\Bitrix\Main\Loader::includeModule('bex.bbc')) {
+if (!\Bitrix\Main\Loader::includeModule('bex.bbc')
+    || !\Bitrix\Main\Loader::includeModule('kelnik.requests')
+) {
     return false;
 }
 
@@ -16,8 +18,15 @@ try {
 
     $arComponentParameters = [
         'PARAMETERS' => [
+            'SUB_TYPE' => [
+                'PARENT' => 'BASE',
+                'NAME' => Loc::getMessage('KELNIK_REQ_SUB_TYPE'),
+                'TYPE' => 'LIST',
+                'VALUES' => \Kelnik\Requests\Model\TypeTable::getFormTypes(),
+                'DEFAULT' => \Kelnik\Requests\Model\TypeTable::SUB_TYPE_STANDARD
+            ],
             'CACHE_TIME' => [
-                'DEFAULT' => 360000
+                'DEFAULT' => 3600
             ]
         ]
     ];
