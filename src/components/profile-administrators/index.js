@@ -1,7 +1,10 @@
 import $ from 'jquery';
 import InputTel from '../../components/forms/telephone/telephone';
+import Language from '../language';
 import templateAdmin from './administrator.twig';
 import Utils from '../../common/scripts/utils';
+
+const Lang = new Language();
 
 class ProfileAdministrators {
     constructor() {
@@ -264,7 +267,7 @@ class ProfileAdministrators {
     }
 
     showEmptyPage() {
-        const template = `<div class="b-empty-page j-empty-page is-active"><p>Администраторов пока нет</p></div>`;
+        const template = `<div class="b-empty-page j-empty-page is-active"><p>${Lang.get('lk.noAdmins')}</p></div>`;
         const emptyPageBlock = new DOMParser().parseFromString(template, 'text/html').body.firstChild;
 
         this.$administrators.parentNode.insertBefore(emptyPageBlock, this.$administrators);

@@ -66,6 +66,14 @@
         margin-top: -7px;
         margin-left: -11px;
     }
+
+    &.lang-en {
+        background-image: url("/images/home/en-logo/Logo-nav-top.svg");
+    }
+
+    &.lang-ch {
+        background-image: url("/images/home/ch-logo/Logo-nav-top.svg");
+    }
 }
 
 .b-mobile-menu__header-right {
