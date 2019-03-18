@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160">
+  <defs>
+    <path id="a" d="M235.398 7371.607c29.11 29.11 75.63 29.796 111.318-5.892 35.687-35.687 35.002-82.209 5.892-111.32-29.11-29.11-75.637-29.801-111.325 5.886-35.687 35.688-35.002 82.21-5.885 111.326z"/>
+    <path id="c" d="M331.906 7314.001a6.248 6.248 0 0 1 6.248-6.248c.38.002.758.041 1.13.118-3.079-21.53-21.519-37.521-43.267-37.521-21.749 0-40.189 15.99-43.267 37.52.372-.076.75-.115 1.13-.117a6.248 6.248 0 1 1 0 12.496 5.779 5.779 0 0 1-1.13-.117c3.078 21.53 21.518 37.52 43.267 37.52 21.748 0 40.188-15.99 43.266-37.52-.371.076-.75.115-1.129.117a6.248 6.248 0 0 1-6.248-6.248z"/>
+    <path id="d" d="M278.03 7331.963l35.933-35.933"/>
+    <path id="e" d="M295.27 7335.263l20.533-20.533"/>
+    <path id="f" d="M276.2 7313.267l19.067-19.067"/>
+    <linearGradient id="b" x1="252.72" x2="339.28" y1="7314" y2="7314" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#373e99"/>
+      <stop offset="1" stop-color="#662e91"/>
+    </linearGradient>
+  </defs>
+  <use fill="#efeff4" xlink:href="#a" transform="translate(-214 -7233)"/>
+  <use fill="url(#b)" xlink:href="#c" transform="translate(-214 -7233)"/>
+  <use fill="#fff" fill-opacity="0" stroke="#fff" stroke-linecap="round" stroke-miterlimit="50" stroke-width="4" xlink:href="#d" transform="translate(-214 -7233)"/>
+  <use fill="#fff" fill-opacity="0" stroke="#fff" stroke-linecap="round" stroke-miterlimit="50" stroke-width="4" xlink:href="#e" transform="translate(-214 -7233)"/>
+  <use fill="#fff" fill-opacity="0" stroke="#fff" stroke-linecap="round" stroke-miterlimit="50" stroke-width="4" xlink:href="#f" transform="translate(-214 -7233)"/>
+</svg>
