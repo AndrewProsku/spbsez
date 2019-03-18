@@ -1,0 +1,1065 @@
+.l-infrastructure-resident {
+	
+}
+
+/*====================================
+ Первый экран
+ =====================================*/
+.b-area-main-screen {
+    @include transition(background-color);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    @media #{$laptop} {
+        background-image: none;
+    }
+
+    &.is-active-overlay {
+        background-color: rgba($dark-black, 0.3);
+    }
+
+    .b-page-submenu {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        background-color: rgba(239, 239, 244, 0.32);
+
+        &:after {
+            display: none;
+        }
+    }
+
+    .b-page-submenu__block {
+        overflow-x: initial;
+    }
+
+    .b-page-submenu__item:last-child {
+        padding-right: 0;
+    }
+
+    .b-page-submenu__item:not(.is-active) a {
+        color: $white;
+        background-image: linear-gradient(to top, rgba($white, 0.12) 0%, rgba($white, 0.12) 50%, rgba($white, 0) 35%);
+        @media #{$tablet-portrait} {
+            &:hover {
+                background-image: linear-gradient(to top, rgba($white, 1) 2px, rgba($white, 0) 10%, rgba($white, 0) 70%);
+            }
+        }
+
+        @media ($touch-only) {
+            &:hover {
+                background-image: linear-gradient(to top, rgba($white, 0.12) 0%, rgba($white, 0.12) 55%, rgba($white, 0) 30%);
+            }
+        }
+    }
+}
+
+.b-area-main-screen__video-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/infrastructure/noidorf-main-screen-1920.jpg');
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    overflow: hidden;
+    z-index: -1;
+
+    @media #{$laptop} {
+        background-image: none;
+    }
+}
+
+.b-area-main-screen__video {
+    display: none;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+
+    @media #{$laptop} {
+        display: block;
+    }
+
+    @media (min-aspect-ratio: 16/9) and (max-aspect-ratio: 16/9) {
+        width: 300%;
+        height: 300%;
+        top: -100%;
+        left: -100%;
+    }
+
+    /* Если есть поддержка object-fit (Chrome/Chrome для Android, Safari в iOS 8 и Opera), используем его: */
+    @supports (object-fit: cover) {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.b-area-main-screen__title {
+    padding-top: 95vh;
+    margin-top: -176px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: content-box;
+
+    @media #{$tablet-portrait} {
+        margin-top: -208px;
+    }
+
+    @media #{$laptop} {
+        margin-top: -260px;
+    }
+
+    @media #{$laptop-wide} {
+        margin-top: -300px;
+    }
+
+    @media #{$fullhd} {
+        margin-top: -320px;
+    }
+
+    h1 {
+        @include font-size('h1');
+        margin-bottom: 0;
+        color: white;
+    }
+
+    &::after {
+        @include margin-level(top, green);
+        @include margin-level(bottom, green);
+        content: '';
+        display: block;
+        width: 16px;
+        height: 36px;
+        margin-left: auto;
+        margin-right: auto;
+        background-image: url('/images/infrastructure/mouse.svg');
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+    }
+}
+
+
+/*====================================
+  Конетент
+ =====================================*/
+.b-area-background {
+    background-color: $white;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+
+    @media #{$laptop} {
+        background-size: cover;
+    }
+}
+
+.b-area-main-features,
+.b-area-traits,
+.b-area-rent {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    position: relative;
+    z-index: 1;
+
+    @media #{$tablet-portrait} {
+        @include suffix(3, 36);
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(4, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        //@include suffix(4, 36); // 5?
+    }
+}
+
+.b-area-main-features {
+    @include padding-level(top, pink);
+    @include padding-level(bottom, violet);
+    display: flex;
+    flex-direction: column;
+
+    @media #{$tablet-portrait} {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.b-area-main-feature {
+    font-family: $font-bold;
+    font-weight: 700;
+
+    @media #{$mobile-only} {
+        padding-bottom: 32px;
+    }
+
+    @media #{$tablet-portrait} {
+        &:not(:last-child) {
+            //@include suffix(2, 36);
+            padding-right: 30px;
+        }
+    }
+}
+
+.b-area-main-feature br {
+    @media #{$laptop} {
+        display: none;
+    }
+}
+
+.b-area-main-feature__value {
+    font-size: 48px;
+    color: $blue;
+
+    @media #{$tablet-portrait} {
+        font-size: 64px;
+    }
+
+    @media #{$laptop} {
+        font-size: 80px;
+    }
+
+    @media #{$fullhd} {
+        font-size: 120px;
+    }
+}
+
+.b-area-main-feature__description {
+    @include font-size('h4');
+    white-space: nowrap;
+}
+
+/*=== Список особенностей площадки ===*/
+
+.b-area-traits {
+    @include padding-level(bottom, violet);
+    display: flex;
+    flex-direction: column;
+
+    @media #{$tablet-portrait} {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    @media #{$laptop} {
+        justify-content: space-between;
+    }
+}
+
+.b-area-trait {
+    @include font-size('p1');
+    @include margin-level(bottom, blue);
+
+    @media #{$mobile-only} {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    @media #{$tablet-portrait} {
+        //width: 50%;
+        width: column(14, 31);
+
+        /*&:nth-child(odd) {
+            @include suffix(3, 31);
+        }*/
+    }
+
+    @media #{$laptop} {
+        width: column(6, 29);
+        padding-right: 0;
+
+        &:nth-child(n + 4) {
+            margin-bottom: 0;
+        }
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 8px;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+
+        @media #{$tablet-portrait} {
+            width: 88px;
+            height: 88px;
+            margin-bottom: 16px;
+        }
+    }
+}
+
+.b-area-trait_icon_buy:before {
+    background-image: url('/images/infrastructure/pref-buy.svg');
+}
+
+.b-area-trait_icon_engineering:before {
+    background-image: url('/images/infrastructure/pref-engineering.svg');
+}
+
+.b-area-trait_icon_location-noidorf:before {
+    background-image: url('/images/infrastructure/pref-location-noidorf.svg');
+}
+
+.b-area-trait_icon_location-novoorlov:before {
+    background-image: url('/images/infrastructure/pref-location-novoorlov.svg');
+}
+
+.b-area-trait_icon_road:before {
+    background-image: url('/images/infrastructure/pref-road.svg');
+}
+
+.b-area-trait_icon_posts:before {
+    background-image: url('/images/infrastructure/pref-posts.svg');
+}
+
+.b-area-trait_icon_customs:before {
+    background-image: url('/images/infrastructure/pref-customs.svg');
+}
+
+.b-area-trait_icon_gas:before {
+    background-image: url('/images/infrastructure/pref-gas.svg');
+}
+
+.b-area-trait_icon_office:before {
+    background-image: url('/images/infrastructure/pref-office.svg');
+}
+
+/*=== Преимущества в аренде ===*/
+
+.b-area-rent {
+    @include padding-level(top, violet);
+    @include padding-level(bottom, pink);
+    background-color: $bg-grey;
+    overflow: hidden;
+}
+
+.b-area-rent .b-animation-block {
+    position: absolute;
+    transform: rotate(10deg) scale(0.5, 0.5);
+    overflow: initial;
+
+    @media #{$laptop} {
+        transform: rotate(10deg) scale(0.8, 0.8);
+    }
+
+    @media #{$fullhd} {
+        transform: rotate(10deg) scale(1, 1);
+    }
+}
+
+.b-area-rent__title {
+    @include padding-level(bottom, cyan);
+
+    h2 {
+        @include font-size('h2');
+        margin-bottom: 0;
+    }
+}
+
+.b-area-rent__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.b-area-rent__item {
+    @include font-size('p1');
+
+    &:before {
+        content: '';
+        display: block;
+        width: 107px;
+        height: 2px;
+        @include margin-level(bottom, green);
+        background-image: linear-gradient($gradient-linear);
+    }
+
+    strong {
+        color: $blue;
+    }
+
+    @media #{$mobile-only} {
+        @include padding-level(bottom, blue);
+    }
+
+    @media #{$tablet-portrait} {
+        @include suffix(2, 32);
+        width: 50%;
+    }
+
+    @media #{$laptop} {
+        @include suffix(2, 29);
+    }
+
+    @media #{$laptop} {
+        @include suffix(1, 28);
+    }
+}
+
+/*=== Информациооные блоки с картинками и текстом ===*/
+
+.b-area-descr {
+    @include padding-level(both, pink);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include row();
+    justify-content: flex-start;
+    position: relative;
+    z-index: 3;
+
+    @media #{$tablet-portrait} {
+        @include suffix(1, 36);
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(1, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(1, 36); // в offers 1.5
+    }
+}
+
+.b-area-descr_theme_grey {
+    background-color: $bg-grey;
+    overflow: hidden;
+
+    .b-animation-block {
+        position: absolute;
+        transform: rotate(10deg) scale(0.5, 0.5);
+        overflow: initial;
+
+        @media #{$laptop} {
+            transform: rotate(10deg) scale(0.8, 0.8);
+        }
+
+        @media #{$fullhd} {
+            transform: rotate(10deg) scale(1, 1);
+        }
+    }
+}
+/*.b-area-desc__wrapper {
+    @media #{$tablet-portrait} {
+        @include row();
+        justify-content: space-between;
+    }
+}*/
+
+.b-area-descr__img {
+    width: 80%;
+    order: 1;
+
+    @media #{$tablet-portrait} {
+        @include column(10, 33);
+        order: 3;
+    }
+}
+
+.b-area-descr__block {
+    order: 3;
+
+    @media #{$tablet-portrait} {
+        @include column(21, 33);
+        @include post(2, 33);
+        order: 2;
+    }
+
+    @media #{$laptop} {
+        @include column(20, 33);
+    }
+}
+
+.b-area-descr__title {
+    order: 2;
+
+    @media #{$tablet-portrait} {
+        @include post(12, 33);
+        order: 1;
+    }
+
+    @media #{$laptop} {
+        @include post(13, 33);
+        flex-basis: 100%;
+    }
+}
+
+.b-area-descr__title h2 {
+    @include margin-level(both, blue);
+    @include font-size("h2");
+
+    @media #{$tablet-portrait} {
+        @include margin-level(top, reset);
+    }
+}
+
+.b-area-descr__subtitle {
+    @include margin-level(top, blue);
+    @include margin-level(bottom, cyan);
+}
+
+.b-area-descr__text {
+    @include margin-level(bottom, cyan);
+}
+
+.b-area-descr__text p {
+    @include margin-level(bottom, green);
+    @include font-size("p1");
+
+    &:last-of-type {
+        @include margin-level(bottom, reset);
+    }
+}
+
+.b-area-descr__text_with_marker {
+    @include prefix(3, 32);
+    position: relative;
+
+    &:before {
+        @include column(2, 32);
+        content: "";
+        width: 100%;
+        height: 2px;
+        background-image: linear-gradient($gradient-linear);
+        position: absolute;
+        top: 12px;
+        left: 0;
+    }
+
+    @media #{$tablet-portrait} {
+        @include prefix(3, 23);
+
+        &:before {
+            @include column(2, 23);
+            top: 14px;
+        }
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 19);
+
+        &:before {
+            @include column(2, 19);
+        }
+    }
+
+    @media #{$fullhd} {
+        @include prefix(3, 18);
+
+        &:before {
+            @include column(2, 18);
+            top: 16px;
+        }
+    }
+}
+
+.b-area-descr__main-feature {
+    @include padding-level(top, green);
+    @include padding-level(bottom, blue);
+}
+
+.b-area-descr__main-feature-title {
+    @include margin-level(bottom, yellow);
+    @include font-size('h2');
+    font-family: $font-bold;
+    font-weight: 700;
+    color: $blue;
+}
+
+.b-area-descr__main-feature-text {
+    @include padding-level(top, orange);
+    position: relative;
+    font-size: 16px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        display: block;
+        width: 104px;
+        height: 2px;
+        @include margin-level(bottom, green);
+        background-image: linear-gradient($gradient-linear);
+    }
+
+    @media #{$laptop} {
+        font-size: 18px;
+    }
+
+    @media #{$fullhd} {
+        font-size: 20px;
+    }
+}
+
+.b-area-descr__list {
+    @include row();
+    @include margin-level(bottom, blue);
+}
+
+.b-area-descr__item {
+    @include font-size("p3");
+    @include padding-level(top, orange);
+    position: relative;
+    width: 100%;
+
+    @media #{$tablet-portrait} {
+        @include column(10, 21);
+    }
+
+    @media #{$laptop} {
+        @include column(6, 20);
+    }
+
+    &:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 52px;
+        height: 2px;
+        background-image: linear-gradient($gradient-linear);
+    }
+
+    &:not(:first-child) {
+        @include margin-level(top, green);
+    }
+
+    &:nth-child(2) {
+        @media #{$tablet-portrait} {
+            margin-top: 0;
+        }
+    }
+
+    &:nth-child(3) {
+        @media #{$laptop} {
+            margin-top: 0;
+        }
+    }
+
+    &:nth-child(2n + 1) {
+        @media #{$tablet-portrait} {
+            @include post(1, 21);
+        }
+
+        @media #{$laptop} {
+            margin-right: 0;
+        }
+    }
+
+    &:not(:nth-child(3n)) {
+        @media #{$laptop} {
+            @include post(1, 20);
+        }
+    }
+}
+
+.b-area-descr__big-list {
+    @include row();
+}
+
+.b-area-descr__big-item {
+    @include font-size("p2");
+    @include padding-level(top, orange);
+    position: relative;
+    width: 100%;
+
+    @media #{$laptop} {
+        @include column(9, 20);
+        @include post(1, 20);
+    }
+
+    &:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 52px;
+        height: 2px;
+        background-image: linear-gradient($gradient-linear);
+    }
+
+    &:not(:first-child) {
+        @include margin-level(top, green);
+    }
+
+    &:nth-child(2) {
+        @media #{$laptop} {
+            margin-top: 0;
+        }
+    }
+}
+
+.b-area-descr__big-item strong {
+    color: $blue;
+}
+
+.b-area-descr__icons-list {
+    order: 3;
+
+    @media #{$laptop} {
+        @include padding-level(top, cyan);
+    }
+}
+
+.b-area-engine-list {
+    @include row();
+}
+
+.b-area-engine-item {
+    @media #{$mobile-only} {
+        &:not(:last-child) {
+            @include margin-level(bottom, blue);
+        }
+    }
+
+
+    @media #{$tablet-portrait} {
+        @include column(16, 33);
+    }
+
+    @media #{$laptop} {
+        @include column(9, 31);
+        @include post(1, 31);
+    }
+
+    &:nth-child(n + 3) {
+        @media #{$tablet-portrait} {
+            @include margin-level(top, blue);
+        }
+    }
+
+    &:nth-child(3) {
+        @media #{$laptop} {
+            margin-top: 0;
+        }
+    }
+
+    &:nth-child(odd) {
+        @media #{$tablet-portrait} {
+            @include post(1, 33);
+        }
+    }
+
+    &:nth-child(3n) {
+        @media #{$laptop} {
+            margin-right: 0;
+        }
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        width: 120px;
+        height: 120px;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+
+        @media #{$laptop} {
+            width: 160px;
+            height: 160px;
+        }
+    }
+
+    &_icon_electricity:before {
+        background-image: url('/images/infrastructure/electr.svg');
+    }
+    &_icon_heating:before {
+        background-image: url('/images/infrastructure/heating.svg');
+    }
+    &_icon_water:before {
+        background-image: url('/images/infrastructure/water.svg');
+    }
+    &_icon_sanitation:before {
+        background-image: url('/images/infrastructure/sanitation.svg');
+    }
+    &_icon_network:before {
+        background-image: url('/images/infrastructure/network.svg');
+    }
+    &_icon_security:before {
+        background-image: url('/images/infrastructure/security.svg');
+    }
+}
+
+.b-area-engine-item__title {
+    @include margin-level(both, orange);
+    @include font-size("h4");
+    font-family: $font-bold;
+}
+
+.b-area-engine-item__text p {
+    @include font-size("p2");
+    margin-bottom: 16px;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+/*=== Информациооные блоки с картинками и текстом ===*/
+.b-area-centre {
+    @include padding-level(both, pink);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    position: relative;
+    z-index: 1;
+
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-area-centre__title {
+    order: 2;
+
+    @media #{$tablet-portrait} {
+        @include post(12, 33);
+        order: 1;
+    }
+
+    @media #{$laptop} {
+        @include post(13, 33);
+        flex-basis: 100%;
+    }
+}
+
+.b-area-centre__title h2 {
+    @include margin-level(bottom, cyan);
+    @include font-size("h2");
+}
+
+
+.b-area-centre__list {
+    @include row();
+}
+
+.b-area-centre__item {
+    @include padding-level(top, cyan);
+    @include column(15, 32);
+
+    @media #{$tablet-portrait} {
+        @include column(12, 32);
+
+        &:nth-child(odd) {
+            @include post(2, 32);
+
+            @media #{$tablet-portrait} {
+                @include post(5, 32);
+            }
+        }
+    }
+
+    @media #{$laptop} {
+        @include column(6, 30);
+        @include post(2, 30);
+
+        &:nth-child(odd) {
+            @include post(2, 30);
+        }
+
+        &:nth-child(4n) {
+            @media #{$laptop} {
+                margin-right: 0;
+            }
+        }
+    }
+
+    @media #{$fullhd} {
+        @include column(5, 28);
+        @include post(2, 28);
+
+        &:nth-child(odd) {
+            @include post(2, 28);
+        }
+    }
+}
+
+.b-area-centre__item-title {
+    @include font-size("h2");
+    @include padding-level(bottom, yellow);
+    color: $blue;
+    position: relative;
+    white-space: nowrap;
+
+    &:after {
+        content: "";
+        display: block;
+        width: 104px;
+        height: 2px;
+        position: absolute;
+        bottom: 0;
+        background-image: linear-gradient(to right, $blue 0%, $violet 100%);
+    }
+}
+
+.b-area-centre__item-text {
+    @include padding-level(top, orange);
+    @include font-size("p2");
+}
+
+
+/*=== Расположение ===*/
+
+.b-area-map {
+    position: relative;
+    z-index: 2;
+}
+
+.b-area-map__content {
+    width: 100%;
+    min-height: 370px;
+    //height: 100%;
+    flex-grow: 1;
+    background-color: $grey;
+
+    @media #{$tablet-portrait} {
+        min-height: 890px;
+    }
+
+    @media #{$fullhd} {
+        min-height: 1080px;
+    }
+}
+
+.b-area-map .b-yandex-map__zoom-controls {
+    @media #{$tablet-portrait} {
+        display: none;
+    }
+    @media #{$laptop} {
+        display: flex;
+        transform: translate(-16px, 411px)
+    }
+
+    @media #{$fullhd} {
+        transform: translate(-34px, 506px);
+    }
+}
+
+.b-area-map__description {
+    @include padding-level(both, green);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    background-image: linear-gradient(to right, $blue 0%, $violet 100%);
+    color: $white;
+
+    @media #{$tablet-portrait} {
+        @include margin-level(bottom, green);
+        @include push(2, 36);
+        @include post(2, 36);
+        @include prefix(2, 32);
+        @include suffix(3, 32);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    @media #{$laptop} {
+        @include push(3, 36);
+        @include post(3, 36);
+        @include prefix(1, 30);
+        @include suffix(1, 30);
+    }
+
+    @media #{$fullhd} {
+        @include push(4, 36);
+        @include post(4, 36);
+        @include prefix(1, 28);
+        @include suffix(1, 28);
+    }
+}
+
+.b-area-map__description-list {
+    @include row();
+}
+
+.b-area-map__description-item {
+    @include margin-level(bottom, orange);
+    @include font-size("p3");
+    position: relative;
+    padding-top: 8px;
+    width: 100%;
+
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        height: 2px;
+        width: 52px;
+        background-color: $white;
+    }
+
+    @media #{$tablet-portrait} {
+        @include post(1, 30);
+        padding-top:  16px;
+        width: 50%;
+    }
+
+    @media #{$laptop} {
+        @include column(5, 28);
+        @include post(2, 28);
+
+        &:nth-child(4n) {
+            @include column(7, 28);
+            margin-right: 0;
+        }
+    }
+
+    @media #{$fullhd} {
+        @include column(5, 26);
+        @include post(2, 26);
+
+        &:nth-child(4n) {
+            @include column(5, 26);
+        }
+    }
+}
+
+.b-area-map__address {
+    @include font-size("p1");
+    @include prefix(4, 36);
+    background-image: url('/images/infrastructure/marker.svg');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 17px 23px;
+
+    @media #{$tablet-portrait} {
+        @include prefix(2, 32);
+    }
+
+    @media #{$laptop} {
+        @include prefix(1, 30);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(0.5, 28);
+    }
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160">
+  <defs>
+    <path id="a" d="M235.398 6844.607c29.11 29.11 75.63 29.796 111.318-5.892 35.687-35.687 35.002-82.209 5.892-111.32-29.11-29.11-75.637-29.801-111.325 5.886-35.687 35.688-35.002 82.21-5.885 111.326z"/>
+    <path id="c" d="M276.922 6836L289 6789.953h-25L292.938 6736h26.328l-18.422 34.203h28.937L276.921 6836z"/>
+    <linearGradient id="b" x1="264" x2="329.78" y1="6786" y2="6786" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#373e99"/>
+      <stop offset="1" stop-color="#662e91"/>
+    </linearGradient>
+  </defs>
+  <use fill="#efeff4" xlink:href="#a" transform="translate(-214 -6706)"/>
+  <use fill="url(#b)" xlink:href="#c" transform="translate(-214 -6706)"/>
+</svg>

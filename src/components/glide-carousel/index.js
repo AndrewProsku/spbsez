@@ -29,16 +29,25 @@ class GlideCarousel {
         return image.offsetHeight;
     }
 
+    _isMobile() {
+        const tabletBreakpoint = 680;
+
+        return document.documentElement.clientWidth < tabletBreakpoint;
+    }
+
     setDotsPosition() {
         const imgHeight = this._getActiveImageHeight();
         const marginBottom = 35;
+        const marginBottomMobile = 8;
 
         if (!imgHeight) {
             return;
         }
 
         this.dots.classList.add(this.dotsShowClass);
-        this.dots.style.top = `${imgHeight - marginBottom}px`;
+        this.dots.style.top = this._isMobile() ?
+            `${imgHeight + marginBottomMobile}px` :
+            `${imgHeight - marginBottom}px`;
     }
 
     setArrowPosition() {

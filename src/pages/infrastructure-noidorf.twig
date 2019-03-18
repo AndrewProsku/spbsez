@@ -1,0 +1,273 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Инфраструктура — Площадка «Нойдорф»</title> {% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    <div class="b-area-main-screen j-area-main-screen">
+        <div class="b-area-main-screen__video-wrapper">
+            <video class="b-area-main-screen__video" width="100%" height="auto" preload="auto" autoplay="autoplay" loop="loop" muted>
+                <source src="/video/infra_noidorf.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+            </video>
+        </div>
+        {% include '../components/page-submenu/page-submenu.twig' with {
+            subitems: [{
+                href: '#',
+                name: 'Площадка «Новоорловская»'
+            }, {
+                href: '#',
+                name: 'Площадка «Нойдорф»',
+                active: true
+            }]
+        } %}
+        <div class="b-area-main-screen__title">
+            <h1>Площадка «Нойдорф»</h1>
+        </div>
+    </div>
+    <div class="b-area-background">
+        <div class="b-area-main-features">
+            <div class="b-area-main-feature">
+                <div class="b-area-main-feature__value">18,99га</div>
+                <div class="b-area-main-feature__description">площадь территории</div>
+            </div>
+            <div class="b-area-main-feature">
+                <div class="b-area-main-feature__value">11</div>
+                <div class="b-area-main-feature__description">резидентов</div>
+            </div>
+            <div class="b-area-main-feature">
+                <div class="b-area-main-feature__value">0</div>
+                <div class="b-area-main-feature__description">свободных </br>участков</div>
+            </div>
+        </div>
+        <div class="b-area-traits">
+            <div class="b-area-trait b-area-trait_icon_buy">Выкуп земельного участка за 25% от кадастровой стоимости</div>
+            <div class="b-area-trait b-area-trait_icon_engineering">Готовые инженерные сети и коммуникации</div>
+            <div class="b-area-trait b-area-trait_icon_location-noidorf">Удобная локация</div>
+            <div class="b-area-trait b-area-trait_icon_road">Дорожная инфраструктура</div>
+            <div class="b-area-trait b-area-trait_icon_posts">2 контрольно-пропускных пункта</div>
+            <div class="b-area-trait b-area-trait_icon_customs">Таможенный пост</div>
+            <div class="b-area-trait b-area-trait_icon_gas">Газовая котельная</div>
+            <div class="b-area-trait b-area-trait_icon_office">Административно-деловой центр</div>
+        </div>
+        <section class="b-area-rent">
+            {% include "../components/animation-line/animation-line.twig" %}
+            <div class="b-area-rent__title"><h2>Преференции по аренде земельного участка</h2></div>
+            <div class="b-area-rent__list">
+                <div class="b-area-rent__item">Понижающий коэффициент на аренду <strong>в течение 5 лет</strong> с момента получения статуса резидента</div>
+                <div class="b-area-rent__item">Максимальный размер арендной платы за земельные участки — <strong>2% от кадастровой стоимости</strong> в год</div>
+            </div>
+        </section>
+        <section class="b-area-map">
+            <div class="b-infrastructure-map__title">
+                <h2>Расположение</h2>
+            </div>
+            <div class="b-area-map__content">
+                <div class="b-infrastructure-map__yandex-map j-yandex-map-noidorf" data-json="eyJjZW50ZXIiOls1OS44MzUxNTQsMzAuMDYzMzcyXSwic2Nyb2xsd2hlZWwiOmZhbHNlLCJmdWxsU2NyZWVuQ29udHJvbCI6ZmFsc2UsImN1c3RvbVpvb21Db250cm9sIjp0cnVlLCJodG1sTWFya2VycyI6W3sidGl0bGUiOiJcdTA0MWRcdTA0M2VcdTA0MzlcdTA0MzRcdTA0M2VcdTA0NDBcdTA0NDQiLCJsYXlvdXQiOiJzZWNvbmRhcnkiLCJjb29yZHMiOls1OS44NDA1NzMsMzAuMDA1OTQwXX0seyJ0aXRsZSI6Ilx1MDQxZlx1MDQzNVx1MDQ0Mlx1MDQ0MFx1MDQzZVx1MDQzNFx1MDQzMlx1MDQzZVx1MDQ0MFx1MDQzNVx1MDQ0NiIsImxheW91dCI6InRleHQiLCJjb29yZHMiOls1OS44NjY4NjcsMjkuOTI0NzE0XX1dLCJtYXJrZXJzIjpbXSwicm91dGVzIjpbeyJwb2ludHMiOltbNTkuODQwNTczLDMwLjAwNTk0MF0sWzU5LjgxNzU4MSwyOS45MjgxODldXSwiZmluaXNoTWFya2VyIjp7InRpdGxlIjoiXHUwMDMyXHUwMDMwIFx1MDQzY1x1MDQzOFx1MDQzZFx1MDQ0M1x1MDQ0MiBcdTA0MzRcdTA0M2UgXHUwNDFhXHUwNDEwXHUwNDE0IiwidGhlbWUiOiJ2aW9sZXQifSwiYWN0aXZlU3Ryb2tlV2lkdGgiOjYsImFjdGl2ZVN0cm9rZUNvbG9yIjoicmdiYSg0OCw2NCwxNTQsMC40OCkifSx7InBvaW50cyI6W1s1OS43OTk3NzQsMzAuMjczMDI5XSxbNTkuODM0NjQwLDMwLjI3NjcwOV0sWzU5Ljg0MDU3MywzMC4wMDU5NDBdXSwidmlhUG9pbnQiOnsidGl0bGUiOiJcdTAwMzJcdTAwMzAgXHUwNDNjXHUwNDM4XHUwNDNkXHUwNDQzXHUwNDQyIFx1MDQzZVx1MDQ0MiBcdTA0MzBcdTA0NGRcdTA0NDBcdTA0M2VcdTA0M2ZcdTA0M2VcdTA0NDBcdTA0NDJcdTA0MzAiLCJ0aGVtZSI6InBpbmsifSwiYWN0aXZlU3Ryb2tlV2lkdGgiOjYsImFjdGl2ZVN0cm9rZUNvbG9yIjoicmdiYSgxMDIsNDUsMTQ1LDAuNDgpIn1dfQo=">
+                    <div id="first" class="b-yandex-map__base"></div>
+                </div>
+            </div>
+            <div class="b-area-map__description">
+                <ul class="b-area-map__description-list">
+                    <li class="b-area-map__description-item">Площадка окружена развитой социальной инфраструктурой</li>
+                    <li class="b-area-map__description-item">Удобная транспортная инфраструктура</li>
+                    <li class="b-area-map__description-item">Непосредственная близость от объектов культурного наследия</li>
+                    <li class="b-area-map__description-item">Земельные участки в административных границах Санкт-Петербурга</li>
+                </ul>
+                <div class="b-area-map__address">198515, Россия, Санкт-Петербург, пос. Стрельна, ул. Связи, д. 34А</div>
+            </div>
+        </section>
+        <section class="b-area-descr">
+            <div class="b-area-descr__title">
+                <h2>Инженерная инфраструктура</h2>
+            </div>
+            <div class="b-area-descr__img">
+                <img src="/images/infrastructure/noidorf-engine.png" alt="Нойдорф">
+            </div>
+            <div class="b-area-descr__block">
+                <div class="b-area-descr__text b-area-descr__text_with_marker">
+                    <p>Подготовленная инженерная инфраструктура обеспечивает компаниям-резидентам возможность технологического присоединения к инженерным сетям. Точки для подключения к инженерным сетям находятся вблизи границ участка резидента.</p>
+                    <div class="b-area-descr__main-feature">
+                        <h3 class="b-area-descr__main-feature-title">30% экономия инвестиций</h3>
+                        <div class="b-area-descr__main-feature-text">в создание научно-производственной базы</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="b-area-descr__icons-list b-area-engine-list">
+                <li class="b-area-engine-item b-area-engine-item_icon_electricity">
+                    <h4 class="b-area-engine-item__title">Электроснабжение</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Восемь трансформаторных подстанций мощностью 2х1250 кВА и КЛ 10/0,4кВ.</p>
+                        <p>РП-740, присоединенная мощность 12,8 МВА.</p>
+                        <p>Категория надежности электроснабжения II.</p>
+                    </div>
+                </li>
+                <li class="b-area-engine-item b-area-engine-item_icon_heating">
+                    <h4 class="b-area-engine-item__title">Теплоснабжение</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Собственная газовая котельная мощностью 18 Гкал</p>
+                    </div>
+                </li>
+                <li class="b-area-engine-item b-area-engine-item_icon_water">
+                    <h4 class="b-area-engine-item__title">Водоснабжение</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Водоснабжение обеспечивает ГУП «Водоканал Санкт-Петербурга» 990 м³ в сутки</p>
+                    </div>
+                </li>
+                <li class="b-area-engine-item b-area-engine-item_icon_sanitation">
+                    <h4 class="b-area-engine-item__title">Канализация</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Предусмотрены хозяйственно-бытовая и ливневая канализации.</p>
+                    </div>
+                </li>
+                <li class="b-area-engine-item b-area-engine-item_icon_network">
+                    <h4 class="b-area-engine-item__title">Сети связи</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Система кабельной канализации между узлами связи операторов и объектами резидентов общей протяжённостью более 15 км.</p>
+                    </div>
+                </li>
+                <li class="b-area-engine-item b-area-engine-item_icon_security">
+                    <h4 class="b-area-engine-item__title">Комплексная безопасность</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Интегрированной системой безопасности на обеих площадках.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="b-area-descr b-area-descr_theme_grey">
+            {% include "../components/animation-line/animation-line.twig" %}
+            <div class="b-area-descr__title">
+                <h2>Таможенный пост</h2>
+            </div>
+            <div class="b-area-descr__img">
+                <img src="/images/infrastructure/noidorf-customs.png" alt="Таможенный пост">
+            </div>
+            <div class="b-area-descr__block">
+                <div class="b-area-descr__text">
+                    <p>На территории ОЭЗ «Санкт-Петербург» применяется таможенная процедура «свободная таможенная зона», позволяющая на льготных условиях ввозить оборудование и компоненты для резидентов ОЭЗ.</p>
+                </div>
+                <h3 class="b-area-descr__subtitle">На площадке «Нойдорф» действует Петродворцовый таможенный пост</h3>
+                <ul class="b-area-descr__list">
+                    <li class="b-area-descr__item">2 автомобильных контрольно-пропускных пункта</li>
+                    <li class="b-area-descr__item">1 зона таможенного контроля</li>
+                    <li class="b-area-descr__item">Стоянка на 6 большегрузных автомобилей</li>
+                    <li class="b-area-descr__item">Досмотровая площадка с навесом</li>
+                    <li class="b-area-descr__item">Автомобильные весы с установкой радиационного контроля «Янтарь»</li>
+                </ul>
+                <h3 class="b-area-descr__subtitle">Преимущества процедуры свободной таможенной зоны (СТЗ) для резидентов ОЭЗ:</h3>
+                <ul class="b-area-descr__big-list">
+                    <li class="b-area-descr__big-item"><strong>Отсрочка выплаты</strong> таможенных пошлин</li>
+                    <li class="b-area-descr__big-item"><strong>Отсутствие затрат</strong> на склад временного хранения</li>
+                    <li class="b-area-descr__big-item"><strong>Гибкая система уплаты таможенных платежей:</strong> выплата таможенной пошлины и НДС происходит либо целиком за окончательный продукт либо только за его иностранные компоненты</strong> на склад временного хранения</li>
+                    <li class="b-area-descr__big-item"><strong>Возможность беспошлинного размещения иностранных товаров</strong> на территории ОЭЗ практически неограниченное количество времени</li>
+                    <li class="b-area-descr__big-item"><strong>Собственный таможенный пост</strong></li>
+                </ul>
+            </div>
+        </section>
+        <section class="b-area-centre">
+            <div class="b-area-centre__title">
+                <h2>Административно-деловой центр</h2>
+            </div>
+            {% include '../components/glide-carousel/glide-carousel.twig' with {
+                    modify: "j-area-slider",
+                    slides: [
+                        {
+                            img: "/images/infrastructure/noidorf-slide-1.jpg",
+                            text: "Здание административно-делового центра. Главный вход."
+                        },
+                        {
+                            img: "/images/infrastructure/noidorf-slide-1.jpg",
+                            text: "Здание административно-делового центра. Главный вход."
+                        }
+                    ],
+                    arrow: true,
+                    dots: true
+                } %}
+            <ul class="b-area-centre__list">
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">B+</div>
+                    <div class="b-area-centre__item-text">Класс</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">7 этажей</div>
+                    <div class="b-area-centre__item-text">Этажность</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">14 975 м²</div>
+                    <div class="b-area-centre__item-text">Общая площадь</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">нет</div>
+                    <div class="b-area-centre__item-text">Свободная площадь</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">170 мест</div>
+                    <div class="b-area-centre__item-text">Открытая парковка</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">3 метра</div>
+                    <div class="b-area-centre__item-text">Высота потолков</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">100 Вт/1 м²</div>
+                    <div class="b-area-centre__item-text">Энергетическая мощность</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">300 кг/1 м²</div>
+                    <div class="b-area-centre__item-text">Нагрузка на перекрытия</div>
+                </li>
+            </ul>
+        </section>
+        <section class="b-advantages b-advantages_theme_gradient">
+            <div class="b-advantages__img">
+                <img src="/images/infrastructure/noidorf-business.png " alt="Помещение бизнес центра">
+            </div>
+            <div class="b-advantages__block">
+                <div class="b-advantages__title">
+                    <h2>В бизнес-центре</h2>
+                </div>
+                <ul class="b-advantages__list">
+                    <li class="b-advantages__item">Офисные помещения с отделкой</li>
+                    <li class="b-advantages__item">Открытый наземный и подземный паркинг</li>
+                    <li class="b-advantages__item">Интернет и телефония</li>
+                    <li class="b-advantages__item">Центр обработки данных </li>
+                    <li class="b-advantages__item">Кафе и конференц-зал</li>
+                    <li class="b-advantages__item">Уборка офисов</li>
+                </ul>
+            </div>
+        </section>
+        <section class="b-advantages">
+            <div class="b-advantages__img">
+                <img src="/images/infrastructure/noidorf-comfort.png" alt="Помещение бизнес центра">
+            </div>
+            <div class="b-advantages__block">
+                <div class="b-advantages__title">
+                    <h2>Комфорт и безопасность</h2>
+                </div>
+                <ul class="b-advantages__list">
+                    <li class="b-advantages__item">Приточно-вытяжная система вентиляции</li>
+                    <li class="b-advantages__item">Централизованная система кондиционирования воздуха</li>
+                    <li class="b-advantages__item">Система оповещения пожарной безопасности</li>
+                </ul>
+            </div>
+        </section>
+        <section class="b-advantages b-advantages_theme_gradient">
+            <div class="b-advantages__img">
+                <img src="/images/infrastructure/noidorf-security.png " alt="Фото контрольно-пропускного пункта">
+            </div>
+            <div class="b-advantages__block">
+                <div class="b-advantages__title">
+                    <h2>Круглосуточная охрана</h2>
+                </div>
+                <div class="b-advantages__text">
+                    <p>В особой экономической зоне действует система контрольно-пропускных пунктов (КПП), предотвращающая свободное проникновение посторонних лиц на территорию. Проезд автотранспорта сторонних организаций и служб доставки осуществляется по предварительному согласованию с диспетчерской службой Управляющей компании. Кроме того, оба входа в бизнес-центр оборудованы системой контроля и управлением доступа в здание.</p>
+                </div>
+                <ul class="b-advantages__list">
+                    <li class="b-advantages__item">Видеонаблюдение</li>
+                    <li class="b-advantages__item">Система КПП и система контроля доступа</li>
+                    <li class="b-advantages__item">Охрана 24 часа</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+{% endblock %}

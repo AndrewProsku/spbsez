@@ -3,7 +3,10 @@
  */
 
 import hyperform from 'hyperform';
+import Language from '../../language';
 import Utils from 'common/scripts/utils';
+
+const Lang = new Language();
 
 class Validation {
     constructor() {
@@ -13,7 +16,7 @@ class Validation {
 
     init(options) {
         this.input = options.target;
-        this.errorMessage = options.error || 'Введите текст в поле ввода';
+        this.errorMessage = options.error || Lang.get('validation.required');
         this.inputWrap = this.input.closest('div');
         this.errorWrap = this.inputWrap.querySelector(`.${this.errorWrapClass}`);
 

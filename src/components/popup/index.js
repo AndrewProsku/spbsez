@@ -8,9 +8,12 @@
  * DEPENDENCIES
  */
 import $ from 'jquery';
+import Language from '../language';
 import Mediator from 'common/scripts/mediator';
 import template from 'components/popup/popup.twig';
 import Utils from 'common/scripts/utils';
+
+const Lang = new Language();
 
 const mediator = new Mediator();
 
@@ -20,7 +23,7 @@ class Popup {
         this.template = options.template || template;
         this.templateContent = options.templateContent || false;
         this.target = options.target;
-        this.closeButtonAriaLabel = options.closeButtonAriaLabel || 'Закрыть всплывающее окно';
+        this.closeButtonAriaLabel = options.closeButtonAriaLabel || Lang.get('popup.closeAriaLabel');
         this.stateClass = 'b-popup_state_open';
         this.bindEvents();
     }
@@ -241,13 +244,13 @@ class Popup {
     errorHandler(typeError) {
         const errorList = [{
             type: 'internet',
-            html: '<h1>Вы не подключены к интернету. Повторите запрос позднее</h1>'
+            html: `<h1>${Lang.get('popup.errors.internet')}</h1>`
         }, {
             type: 'server',
-            html: '<h1>На сервере произошла ошибка. Повторите запрос позднее</h1>'
+            html: `<h1>${Lang.get('popup.errors.server')}</h1>`
         }, {
             type: 'data',
-            html: '<h1>На сервере произошла ошибка. Повторите запрос позднее</h1>'
+            html: `<h1>${Lang.get('popup.errors.data')}</h1>`
         }];
 
         errorList.forEach((item) => {
