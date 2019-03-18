@@ -1,7 +1,10 @@
 import InputTel from '../forms/telephone/telephone';
+import Language from '../language';
 import Select from 'components/forms/select';
 import successTemplate from './success.twig';
 import Utils from '../../common/scripts/utils';
+
+const Lang = new Language();
 
 class Service {
     constructor() {
@@ -31,9 +34,9 @@ class Service {
             text : false
         };
 
-        this.emptyErrorMessage = 'Поле не может быть пустым';
-        this.incorrectEmailMessage = 'Некорректный email адрес';
-        this.incorrectPhoneMessage = 'Номер телефона введен не полностью';
+        this.emptyErrorMessage = Lang.get('validation.required');
+        this.incorrectEmailMessage = Lang.get('validation.email');
+        this.incorrectPhoneMessage = Lang.get('validation.phone');
     }
 
     init(options) {

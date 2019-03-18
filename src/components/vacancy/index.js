@@ -1,8 +1,11 @@
 import InputFile from 'components/forms/file';
 import InputTel from 'components/forms/telephone/telephone';
+import Language from '../language';
 import Select from 'components/forms/select';
 import successTemplate from './success.twig';
 import Utils from '../../common/scripts/utils';
+
+const Lang = new Language();
 
 class Vacancy {
     constructor() {
@@ -30,8 +33,9 @@ class Vacancy {
             resume: false
         };
 
-        this.emptyErrorMessage = 'Поле не может быть пустым';
-        this.incorrectEmailMessage = 'Некорректный email адрес';
+        this.lang = document.querySelector('html').getAttribute('lang') || 'ru';
+        this.emptyErrorMessage = Lang.get('validation.required');
+        this.incorrectEmailMessage = Lang.get('validation.email');
     }
 
     init(options) {
