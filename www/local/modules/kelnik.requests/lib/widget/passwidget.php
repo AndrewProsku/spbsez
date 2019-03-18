@@ -9,7 +9,7 @@ use Kelnik\Requests\Model\PermitPassTable;
 
 Loc::loadMessages(__FILE__);
 
-class PassWidget extends StringWidget
+class passwidget extends StringWidget
 {
     static protected $defaults = [
         'FILTER'       => '%', //Фильтрация по подстроке, а не по точному соответствию.
