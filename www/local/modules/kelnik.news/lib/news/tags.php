@@ -78,7 +78,7 @@ class TagsTable extends DataManager
                 $v['NEWS_IDS'] = explode(',', $v['NEWS_IDS']);
             }
 
-            $v['LINK'] = $folder . '?tag=' . (isset($v['ALIAS']) ? $v['ALIAS'] : $v['ID']);
+            $v['LINK'] = $folder . '?tag[]=' . (isset($v['ALIAS']) ? $v['ALIAS'] : $v['ID']);
         }
         unset($v);
 

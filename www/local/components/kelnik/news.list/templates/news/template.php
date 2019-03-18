@@ -38,7 +38,7 @@
             <?php foreach ($arResult['TAGS'] as $tag): ?>
                 <div class="b-mini-filter__item">
                     <input type="checkbox"
-                           name="tag"
+                           name="tag[]"
                            value="<?= $tag['ID']; ?>"
                            data-text="<?= $tag['NAME']; ?>"
                            id="types<?=$tag['ID']; ?>"

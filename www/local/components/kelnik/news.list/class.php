@@ -231,6 +231,7 @@ class NewsList extends Bbc\Basis
                     }
 
                     $element['TAGS'][] = [
+                        'ID' => $tag['ID'],
                         'LINK' => $tag['LINK'],
                         'NAME' => $tag['NAME']
                     ];
