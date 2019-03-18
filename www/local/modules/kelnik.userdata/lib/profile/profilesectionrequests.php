@@ -7,6 +7,7 @@ namespace Kelnik\Userdata\Profile;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Requests\Model\PermitPassTable;
 use Kelnik\Requests\Model\PermitTable;
 use Kelnik\Requests\Model\StandartTable;
 use Kelnik\Requests\Model\TypeTable;
@@ -16,7 +17,7 @@ class ProfileSectionRequests extends ProfileSectionAbstract
     protected $formType = null;
     protected $entityClass;
 
-    protected $errors = [];
+    protected $formErrors = [];
 
     protected $types = [
         TypeTable::SUB_TYPE_STANDARD => StandartTable::class,
@@ -25,7 +26,7 @@ class ProfileSectionRequests extends ProfileSectionAbstract
 
     public function setFormType($type)
     {
-        if (isset($this->types[$type])) {
+        if (!isset($this->types[$type])) {
             return;
         }
 
@@ -35,24 +36,23 @@ class ProfileSectionRequests extends ProfileSectionAbstract
 
     public function prepareData(array $postData)
     {
-        $this->errors = [];
+        $this->formErrors = [];
         $res = [];
 
-        foreach ($this->getFormFields() as $k => $v) {
-            $postKey = strtolower($k);
+        $fields = $this->getFormFields();
 
-            $row = ArrayHelper::getValue($postData, $postKey);
-            $row = $postKey == 'theme'
-                    ? (int) $row
-                    : htmlentities($row, ENT_QUOTES, 'UTF-8');
-            $res[$k] = $row;
+        foreach ($fields as $k => $field) {
 
-            if ($postKey == 'message' && mb_strlen($row) < 4) {
+            $row = self::getField($postData, $field);
+
+            if ($k == 'message' && mb_strlen($row) < 4) {
                 $row = null;
             }
 
+            $res[$k] = $row;
+
             if (!$row) {
-                $this->errors[$k] = Loc::getMessage('KELNIK_REQ_FIELD_REQUIRED');
+                $this->formErrors[$k] = Loc::getMessage('KELNIK_REQ_FIELD_REQUIRED');
             }
         }
 
@@ -95,34 +95,144 @@ class ProfileSectionRequests extends ProfileSectionAbstract
         return ArrayHelper::getValue($res->getData(), 'CODE', false);
     }
 
+    public function addPermit(array $data)
+    {
+        $child = ArrayHelper::getValue($data, '_PASS_');
+        unset($data['_PASS_']);
+
+        $db = PermitTable::getEntity()->getConnection();
+        $db->startTransaction();
+
+        try {
+            $data['USER_ID'] = $this->profile->getId();
+            $res = PermitTable::add($data);
+
+            if (!$res->isSuccess()) {
+                $db->rollbackTransaction();
+                return false;
+            }
+
+            if ($child) {
+                foreach ($child as $row) {
+                    $row['PERMIT_ID'] = $res->getId();
+                    PermitPassTable::add($row);
+                }
+            }
+        } catch (\Exception $e) {
+            $db->rollbackTransaction();
+            return false;
+        }
+
+        $db->commitTransaction();
+
+        return ArrayHelper::getValue($res->getData(), 'CODE', false);
+    }
+
     protected function getFormFields()
     {
         $res = [
-            'NAME' => 'name',
-            'TYPE_ID' => 'theme',
-            'BODY' => 'message'
+            'NAME' => [
+                'name' => 'name'
+            ],
+            'TYPE_ID' => [
+                'name' => 'theme',
+                'type' => 'int'
+            ],
+            'BODY' => [
+                'name' => 'message'
+            ]
         ];
 
-        if ($this->types === TypeTable::SUB_TYPE_PERMIT) {
+        if ($this->formType === TypeTable::SUB_TYPE_PERMIT) {
             $res = [
-                'TYPE_ID' => 'area',
-                'NAME' => 'name',
-                'DATE_START' => 'timeFrom',
-                'TARGET' => 'visitTarget',
-                'EXECUTIVE_COMPANY' => 'executiveCompany',
-                'EXECUTIVE_VISIT' => 'executiveVisit',
-                'PHONE' => 'phone',
+                'TYPE_ID' => [
+                    'name' => 'area'
+                ],
+                'NAME' => [
+                    'name' => 'name'
+                ],
+                'DATE_START' => [
+                    'name' => 'timeFrom',
+                    'type' => 'date'
+                ],
+                'TARGET' => [
+                    'name' => 'visitTarget'
+                ],
+                'EXECUTIVE_COMPANY' => [
+                    'name' => 'executiveCompany'
+                ],
+                'EXECUTIVE_VISIT' => [
+                    'name' => 'executiveVisit'
+                ],
+                'PHONE' => [
+                    'name' => 'phone'
+                ],
                 '_PASS_' => [
-                    'FIO' => 'fio',
-                    'ORG_NAME' => 'organizationPass',
-                    'CAR_VENDOR' => 'carModel',
-                    'CAR_NUMBER' => 'stateNumber',
-                    'PERSON' => 'accompanying'
+                    'type' => 'child',
+                    'key' => 'pass',
+                    'fields' => [
+                        'FIO' => [
+                            'name' => 'fio'
+                        ],
+                        'ORG_NAME' => [
+                            'name' => 'organizationPass'
+                        ],
+                        'CAR_VENDOR' => [
+                            'name' => 'carModel'
+                        ],
+                        'CAR_NUMBER' => [
+                            'name' => 'stateNumber'
+                        ],
+                        'PERSON' => [
+                            'name' => 'accompanying'
+                        ]
+                    ]
                 ]
             ];
         }
 
         return $res;
+    }
+
+    protected static function getField(array $data, array $field)
+    {
+        $val = ArrayHelper::getValue($data, $field['name']);
+
+        if (empty($field['type']) || $field['type'] === 'string') {
+            return htmlentities(trim($val), ENT_QUOTES, 'UTF-8');
+        }
+
+        if ($field['type'] === 'array') {
+            return $val;
+        }
+
+        if ($field['type'] === 'date') {
+            return DateTime::createFromText($val);
+        }
+
+        if ($field['type'] === 'child') {
+            if (empty($field['fields']) || empty($field['key'])) {
+                return [];
+            }
+            $fields = $field['fields'];
+            $childCnt = count(ArrayHelper::getValue($data, $field['key'] . '.' . $fields[key($fields)]['name'], 0));
+
+            $res = [];
+
+            for ($i = 0; $i < $childCnt; $i++) {
+                foreach ($fields as $childKey => $childField) {
+                    $childField['name'] .= '.' . $i;
+                    $row[$childKey] = htmlentities(self::getField($data[$field['key']], $childField), ENT_QUOTES, 'UTF-8');
+                }
+                $res[] = $row;
+            }
+
+            return $res;
+        }
+
+        return $field['type'] === 'float'
+                ? (float) $val
+                : (int) $val;
     }
 
     /**
@@ -143,10 +253,11 @@ class ProfileSectionRequests extends ProfileSectionAbstract
                 ]
             ]);
         } catch (\Exception $e) {
-            $lastRequest = DateTime::createFromTimestamp(time() - $this->entityClass::REQUEST_TIME_LEFT);
         }
 
-        return $lastRequest;
+        return !empty($lastRequest['DATE_CREATED'])
+                ? $lastRequest['DATE_CREATED']
+                : DateTime::createFromTimestamp(time() - $this->entityClass::REQUEST_TIME_LEFT - 10);
     }
 
     /**
@@ -156,8 +267,11 @@ class ProfileSectionRequests extends ProfileSectionAbstract
      */
     public function canAddNewRow()
     {
-        $lastRequest = $this->getLastRequest();
+        return (time() - $this->getLastRequest()->getTimestamp()) > $this->entityClass::REQUEST_TIME_LEFT;
+    }
 
-        return !(time() - $lastRequest->getTimestamp()) < $this->entityClass::REQUEST_TIME_LEFT;
+    public function getFormErrors()
+    {
+        return $this->formErrors;
     }
 }

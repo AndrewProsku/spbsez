@@ -110,7 +110,8 @@ class StandartTable extends DataManager
     public static function add(array $data)
     {
         $data['DATE_CREATED'] = $data['DATE_MODIFIED'] = new DateTime();
-        $data['CODE'] = self::getNewCode((int) $data['TYPE_ID']);
+        $data['CODE'] = self::getNewCode((int) $data['TYPE_ID'], isset($data['USER_ID']) ? $data['USER_ID'] : false);
+
         if (!isset($data['STATUS_ID'])) {
             $data['STATUS_ID'] = StatusTable::REQUEST_STATUS_NEW;
         }
@@ -121,18 +122,23 @@ class StandartTable extends DataManager
     public static function update($primary, array $data)
     {
         $data['DATE_MODIFIED'] = new DateTime();
+
         return parent::update($primary, $data);
     }
 
-    protected static function getNewCode($typeId)
+    public static function getNewCode($typeId, $userId)
     {
         global $USER;
+
+        $userId = false === $userId
+            ? (int) $USER->GetID()
+            : (int) $userId;
 
         return implode(
             '-',
             [
                 's' . (int) $typeId,
-                (int) $USER->GetID(),
+                $userId,
                 randString(5)
             ]
         );

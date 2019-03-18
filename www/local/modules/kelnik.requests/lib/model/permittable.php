@@ -56,7 +56,7 @@ class PermitTable extends DataManager
                 'USER_ID',
                 [
                     'title' => Loc::getMessage('KELNIK_REQ_USER'),
-                    'default_value' => 0
+                    'default_value' => self::getUserId()
                 ]
             ),
             new DatetimeField(
@@ -141,7 +141,7 @@ class PermitTable extends DataManager
     public static function add(array $data)
     {
         $data['DATE_CREATED'] = $data['DATE_MODIFIED'] = new DateTime();
-        $data['CODE'] = self::getNewCode((int) $data['TYPE_ID']);
+        $data['CODE'] = self::getNewCode((int) $data['TYPE_ID'], isset($data['USER_ID']) ? $data['USER_ID'] : false);
 
         if (!isset($data['STATUS_ID'])) {
             $data['STATUS_ID'] = StatusTable::REQUEST_STATUS_NEW;
@@ -157,17 +157,28 @@ class PermitTable extends DataManager
         return parent::update($primary, $data);
     }
 
-    protected static function getNewCode($typeId)
+    public static function getNewCode($typeId, $userId = false)
     {
         global $USER;
+
+        $userId = false === $userId
+                    ? (int) $USER->GetID()
+                    : (int) $userId;
 
         return implode(
             '-',
             [
                 'p' . (int) $typeId,
-                (int) $USER->GetID(),
+                $userId,
                 randString(5)
             ]
         );
+    }
+
+    protected static function getUserId()
+    {
+        global $USER;
+
+        return (int) $USER->GetID();
     }
 }

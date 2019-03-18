@@ -28,6 +28,33 @@ class RequestForm extends Bbc\Basis
     ];
     protected $cacheTemplate = false;
 
+    /**
+     * @var Profile
+     */
+    protected $profile;
+
+    /**
+     * @var ProfileSectionRequests
+     */
+    protected $sectionRequests;
+
+    protected function executeProlog()
+    {
+        global $USER;
+
+        try {
+            $this->profile = Profile::getInstance($USER->GetID());
+            $this->sectionRequests = new ProfileSectionRequests($this->profile);
+            $this->sectionRequests->setFormType($this->arParams['SUB_TYPE']);
+        } catch (\Exception $exception) {
+            return false;
+        }
+
+        if (!$this->profile->canRequest()) {
+            LocalRedirect(LANG_DIR . 'cabinet/');
+        }
+    }
+
     protected function executeMain()
     {
         global $USER;
@@ -49,35 +76,20 @@ class RequestForm extends Bbc\Basis
             return false;
         }
 
-        try {
-            $profile = Profile::getInstance($USER->GetID());
-            $sectionRequests = new ProfileSectionRequests($profile);
-            $sectionRequests->setFormType($this->arParams['SUB_TYPE']);
-        } catch (\Exception $exception) {
-            return false;
-        }
-
-        if (!$profile->canRequest()) {
-            LocalRedirect(LANG_DIR . 'cabinet/');
-        }
-
         if ($request->isPost()) {
             $this->abortCache();
 
-            $formData = $sectionRequests->prepareData($request->getPostList()->toArray());
+            $this->arResult['FORM'] = $this->sectionRequests->prepareData($request->getPostList()->toArray());
+            $this->arResult['ERRORS']['FIELDS'] = $this->sectionRequests->getFormErrors();
 
-            if (!$sectionRequests->canAddNewRow()) {
+            if (!$this->sectionRequests->canAddNewRow()) {
                 $this->arResult['ERRORS']['TEXT'][] = Loc::getMessage('KELNIK_REQ_TIME_LEFT');
             }
 
             if (!$this->arResult['ERRORS']['FIELDS'] && !$this->arResult['ERRORS']['TEXT']) {
-                $this->arResult['REQUEST_ID'] = $sectionRequests->add([
-                    'TYPE_ID' => (int) $this->arResult['FORM']['THEME'],
-                    'NAME'    => $this->arResult['FORM']['NAME'],
-                    'BODY'    => $this->arResult['FORM']['MESSAGE']
-                ]);
+                $this->arResult['REQUEST_ID'] = $this->sectionRequests->add($this->arResult['FORM']);
 
-                $this->arResult['USER_EMAIL'] = $profile->getField('EMAIL');
+                $this->arResult['USER_EMAIL'] = $this->profile->getField('EMAIL');
 
                 return true;
             }
@@ -86,6 +98,16 @@ class RequestForm extends Bbc\Basis
         $typesTable = $this->arParams['SUB_TYPE'] === TypeTable::SUB_TYPE_STANDARD
                         ? TypeTable::class
                         : AreaTable::class;
+
+        if ($this->arParams['SUB_TYPE'] === TypeTable::SUB_TYPE_PERMIT) {
+            if (empty($this->arResult['FORM']['_PASS_'])) {
+                $this->arResult['FORM']['_PASS_'] = [[]];
+            }
+
+            if (!empty($this->arResult['FORM']['DATE_START'])) {
+                $this->arResult['FORM']['DATE_START'] = $this->arResult['FORM']['DATE_START']->format('d.m.Y, H:i');
+            }
+        }
 
         $this->arResult['TYPES'] = $typesTable::getAssoc([
             'select' => ['ID', 'NAME'],
