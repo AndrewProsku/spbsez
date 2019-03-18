@@ -447,12 +447,8 @@ if (animationBg) {
 const anchorSelector = Array.from(document.querySelectorAll('.j-anchor-link'));
 
 if (anchorSelector.length) {
-    anchorSelector.forEach((item) => {
-        const anchor = new Anchor();
-
-        anchor.init({
-            target: item
-        });
+    new Anchor().init({
+        targets: anchorSelector
     });
 }
 
