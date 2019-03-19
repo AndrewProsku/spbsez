@@ -40,7 +40,7 @@ if ($USER->IsAuthorized()) {
         array()
     ); ?>
 
-    <div class="password-recovery-block j-password-recovery-button password-recovery-block_is_hidden">
+    <div class="password-recovery-block password-recovery-block-padding j-password-recovery-button password-recovery-block_is_hidden">
         <a href="<?= LANG_DIR; ?>cabinet/auth/" class="button password-recovery__button">
             Войти в личный кабинет
         </a>
