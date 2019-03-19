@@ -93,7 +93,7 @@ class ResponseTable extends DataManager
         return parent::add($data);
     }
 
-    public static function OnAfterAdd(Main\Entity\Event $event)
+    public static function onAfterAdd(Main\Entity\Event $event)
     {
         try {
             \Bitrix\Main\Mail\Event::sendImmediate([

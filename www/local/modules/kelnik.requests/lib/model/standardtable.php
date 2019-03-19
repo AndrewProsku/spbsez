@@ -12,6 +12,7 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Requests\Events;
 use Kelnik\Requests\Model\AdminInterface\StandardEditHelper;
 
 Loc::loadMessages(__FILE__);
@@ -122,16 +123,14 @@ class StandardTable extends DataManager
         return parent::add($data);
     }
 
-    public static function OnAfterAdd(Event $event)
+    public static function onAfterAdd(Event $event)
     {
         try {
             \Bitrix\Main\Mail\Event::sendImmediate([
                 'EVENT_NAME' => 'STANDARD_REQUEST',
                 'LID' => SITE_ID,
                 'FIELDS' => [
-                    'LINK' => getSiteBaseUrl() . StandardEditHelper::getUrl([
-                        'ID' => ArrayHelper::getValue($event->getParameters(), 'id', 0)
-                    ])
+                    'LINK' => self::getUrl(ArrayHelper::getValue($event->getParameters(), 'id', 0))
                 ]
             ]);
         } catch (\Exception $e) {
@@ -145,6 +144,18 @@ class StandardTable extends DataManager
         $data['DATE_MODIFIED'] = new DateTime();
 
         return parent::update($primary, $data);
+    }
+
+    public static function onBeforeUpdate(Event $event)
+    {
+        Events::setStatus($event);
+        parent::onBeforeUpdate($event);
+    }
+
+    public static function onAfterUpdate(Event $event)
+    {
+        Events::sendNotify($event);
+        parent::onAfterAdd($event);
     }
 
     public static function getNewCode($typeId, $userId)
@@ -163,5 +174,10 @@ class StandardTable extends DataManager
                 randString(5)
             ]
         );
+    }
+
+    public static function getUrl($id)
+    {
+        return getSiteBaseUrl() . StandardEditHelper::getUrl(['ID' => $id]);
     }
 }

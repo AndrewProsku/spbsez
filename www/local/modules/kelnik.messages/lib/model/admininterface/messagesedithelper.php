@@ -2,6 +2,7 @@
 namespace Kelnik\Messages\Model\AdminInterface;
 
 use Bitrix\Main\Application;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
 use Kelnik\Helpers\ArrayHelper;
@@ -25,13 +26,16 @@ class MessagesEditHelper extends AdminEditHelper
         return parent::hasWriteRights();
     }
 
-    public function hasWriteRightsElement($element = [])
+    protected function editAction()
     {
-        if (empty($element['ID']) || empty($element['ACTIVE'])) {
-            return parent::hasWriteRightsElement($element);
+        if (!empty($this->data['ACTIVE']) && $this->data['ACTIVE'] !== MessagesTable::YES) {
+            $this->setContext(AdminEditHelper::OP_EDIT_ACTION_BEFORE);
+            $this->addErrors(Loc::getMessage('KELNIK_ADMIN_HELPER_EDIT_WRITE_FORBIDDEN'));
+
+            return false;
         }
 
-        return $element['ACTIVE'] !== MessagesTable::YES;
+        return parent::editAction();
     }
 
     public function saveElement($id = null)
