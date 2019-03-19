@@ -13,6 +13,7 @@ use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Requests\Events;
 use Kelnik\Requests\Model\AdminInterface\PermitEditHelper;
 
 Loc::loadMessages(__FILE__);
@@ -153,16 +154,14 @@ class PermitTable extends DataManager
         return parent::add($data);
     }
 
-    public static function OnAfterAdd(Event $event)
+    public static function onAfterAdd(Event $event)
     {
         try {
             \Bitrix\Main\Mail\Event::sendImmediate([
                 'EVENT_NAME' => 'PERMIT_PASS_REQUEST',
                 'LID' => SITE_ID,
                 'FIELDS' => [
-                    'LINK' => getSiteBaseUrl() . PermitEditHelper::getUrl([
-                        'ID' => ArrayHelper::getValue($event->getParameters(), 'id', 0)
-                    ])
+                    'LINK' => self::getUrl(ArrayHelper::getValue($event->getParameters(), 'id', 0))
                 ]
             ]);
         } catch (\Exception $e) {
@@ -176,6 +175,18 @@ class PermitTable extends DataManager
         $data['DATE_MODIFIED'] = new DateTime();
 
         return parent::update($primary, $data);
+    }
+
+    public static function onBeforeUpdate(Event $event)
+    {
+        Events::setStatus($event);
+        parent::onBeforeUpdate($event);
+    }
+
+    public static function onAfterUpdate(Event $event)
+    {
+        Events::sendNotify($event);
+        parent::onAfterAdd($event);
     }
 
     public static function getNewCode($typeId, $userId = false)
@@ -201,5 +212,10 @@ class PermitTable extends DataManager
         global $USER;
 
         return (int) $USER->GetID();
+    }
+
+    public static function getUrl($id)
+    {
+        return getSiteBaseUrl() . PermitEditHelper::getUrl(['ID' => $id]);
     }
 }

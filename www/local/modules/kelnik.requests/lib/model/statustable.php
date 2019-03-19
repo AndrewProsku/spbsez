@@ -5,6 +5,7 @@ namespace Kelnik\Requests\Model;
 use Bitrix\Main\Entity\IntegerField;
 use Bitrix\Main\Entity\StringField;
 use Bitrix\Main\Localization\Loc;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
@@ -59,5 +60,12 @@ class StatusTable extends DataManager
                 ]
             )
         ];
+    }
+
+    public static function getNameById($id)
+    {
+        return $id
+                ? ArrayHelper::getValue(self::getRowById($id), 'NAME')
+                : 0;
     }
 }

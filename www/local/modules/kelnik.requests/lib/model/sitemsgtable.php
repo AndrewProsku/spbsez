@@ -89,7 +89,7 @@ class SiteMsgTable extends DataManager
         return parent::add($data);
     }
 
-    public static function OnAfterAdd(Event $event)
+    public static function onAfterAdd(Event $event)
     {
         try {
             \Bitrix\Main\Mail\Event::sendImmediate([

@@ -112,16 +112,14 @@ class ServiceTable extends DataManager
         return parent::add($data);
     }
 
-    public static function OnAfterAdd(Event $event)
+    public static function onAfterAdd(Event $event)
     {
         try {
             \Bitrix\Main\Mail\Event::sendImmediate([
                 'EVENT_NAME' => 'MESSAGE_SERVICE_FORM',
                 'LID' => SITE_ID,
                 'FIELDS' => [
-                    'LINK' => getSiteBaseUrl() . ServiceEditHelper::getUrl([
-                        'ID' => ArrayHelper::getValue($event->getParameters(), 'id', 0)
-                    ])
+                    'LINK' => self::getUrl(ArrayHelper::getValue($event->getParameters(), 'id', 0))
                 ]
             ]);
         } catch (\Exception $e) {
@@ -159,5 +157,10 @@ class ServiceTable extends DataManager
             self::TYPE_CONFERENCE => Loc::getMessage('KELNIK_REQ_TYPE_2'),
             self::TYPE_DPC => Loc::getMessage('KELNIK_REQ_TYPE_3')
         ];
+    }
+
+    public static function getUrl($id)
+    {
+        return getSiteBaseUrl() . ServiceEditHelper::getUrl(['ID' => $id]);
     }
 }

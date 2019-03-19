@@ -2,14 +2,34 @@
 
 namespace Kelnik\Requests\Model\AdminInterface;
 
+use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
 
 class StandardEditHelper extends AdminEditHelper
 {
     protected static $model = '\Kelnik\Requests\Model\StandardTable';
 
-    protected function hasWriteRightsElement($element = array())
+    public function show()
     {
-        return !empty($element['ID']);
+        if (empty($this->data['ID'])) {
+            $this->addErrors(Loc::getMessage('KELNIK_ADMIN_HELPER_ACCESS_FORBIDDEN'));
+            $this->showMessages();
+
+            return false;
+        }
+
+        return parent::show();
+    }
+
+    protected function editAction()
+    {
+        if (empty($this->data['ID'])) {
+            $this->setContext(AdminEditHelper::OP_EDIT_ACTION_BEFORE);
+            $this->addErrors(Loc::getMessage('KELNIK_ADMIN_HELPER_EDIT_WRITE_FORBIDDEN'));
+
+            return false;
+        }
+
+        return parent::editAction();
     }
 }
