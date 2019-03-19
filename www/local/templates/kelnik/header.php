@@ -56,6 +56,9 @@ define("PATH_TO_404", '/404.php'); ?>
 </head>
 <body>
     <div id="panel"><?$APPLICATION->ShowPanel();?></div>
+    <?php if($showAnimation): ?>
+    <div id="j-particles" class="background-particles j-particles"></div>
+    <?php endif; ?>
     <?php include 'inc_notify_old_browser.php'; ?>
     <div class="l-layout">
         <header class="l-home__header<?php if($isRegularPage): ?> inner-header<?php endif; ?> j-home__header">
@@ -91,4 +94,3 @@ define("PATH_TO_404", '/404.php'); ?>
             ); ?>
         </header>
         <main class="l-layout__content<? if($isRegularPage): ?> l-layout__content-inner<?php endif; ?>">
-            <?php if($showAnimation): include 'inc_animation.php'; endif; ?>
