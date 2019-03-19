@@ -53,7 +53,7 @@ class ApiProcessReport extends ApiProcessAbstract
             return false;
         }
 
-        $this->profile = Profile::getInstance($USER->GetID());
+        $this->profile = Profile::getInstance((int)$USER->GetID());
         $this->report  = ReportsTable::getReport($this->profile->getCompanyId(), $this->id);
 
         if (!$this->report || !$this->report->hasAccess()) {

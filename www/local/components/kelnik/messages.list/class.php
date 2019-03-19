@@ -39,7 +39,7 @@ class MessagesList extends Basis
         $this->addCacheAdditionalId($USER->GetID());
         $this->arParams['YEAR'] = date('Y');
 
-        $this->profile = Profile::getInstance($USER->GetID());
+        $this->profile = Profile::getInstance((int)$USER->GetID());
     }
 
     protected function executeMain()

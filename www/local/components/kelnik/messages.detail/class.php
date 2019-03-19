@@ -35,7 +35,7 @@ class MessagesDetail extends Basis
         global $USER;
 
         $this->addCacheAdditionalId($USER->GetID());
-        $this->profile = Profile::getInstance($USER->GetID());
+        $this->profile = Profile::getInstance((int)$USER->GetID());
 
     }
 
