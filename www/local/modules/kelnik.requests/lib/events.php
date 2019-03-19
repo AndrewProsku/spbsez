@@ -77,7 +77,7 @@ class Events
                 return false;
             }
 
-            $res = \Bitrix\Main\Mail\Event::sendImmediate($r = [
+            \Bitrix\Main\Mail\Event::sendImmediate([
                 'EVENT_NAME' => $mailEvents[$entityName],
                 'LID' => Context::getCurrent()->getRequest()->isAdminSection() ? 's1' : SITE_ID,
                 'FIELDS' => [
