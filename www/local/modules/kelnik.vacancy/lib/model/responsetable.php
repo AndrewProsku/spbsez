@@ -97,7 +97,7 @@ class ResponseTable extends DataManager
     {
         try {
             \Bitrix\Main\Mail\Event::sendImmediate([
-                'EVENT_NAME' => 'MESSAGE_SERVICE_FORM',
+                'EVENT_NAME' => 'VACANCY_RESPONSE',
                 'LID' => SITE_ID,
                 'FIELDS' => [
                     'VACANCY_NAME' => ArrayHelper::getValue(
