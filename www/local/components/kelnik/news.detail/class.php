@@ -55,6 +55,8 @@ class NewsDetail extends Bbc\Basis
             $this->return404();
         }
 
+        self::registerCacheTag('kelnik:newsRow_' . $element['ID']);
+
         $element['IMAGES'] = ImageToNewsTable::getList([
             'select' => [
                 'VALUE'
@@ -111,7 +113,7 @@ class NewsDetail extends Bbc\Basis
         }
 
         $this->arResult = $element;
-        $this->arResult['SEO_TAGS']['TITLE'] = htmlentities($element['NAME'], ENT_QUOTES, 'UTF-8') . ' | АООЭЗ';
+        $this->arResult['SEO_TAGS']['TITLE'] = $element['NAME'] . ' | АООЭЗ';
 
         $this->setSeoTags();
         $this->setResultCacheKeys([
@@ -119,6 +121,7 @@ class NewsDetail extends Bbc\Basis
             'CODE',
             'NAME',
             'SECTION_ID',
+            'SEO_TAGS'
         ]);
     }
 }

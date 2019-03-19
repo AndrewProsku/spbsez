@@ -13,7 +13,7 @@ class Particles {
             return;
         }
 
-        window.particlesJS.load('j-particles', './../assets/particles.json');
+        window.particlesJS.load('j-particles', '/assets/particles.json');
 
         this._bindEvents();
     }

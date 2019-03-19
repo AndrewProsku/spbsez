@@ -43,7 +43,7 @@ class RequestForm extends Bbc\Basis
         global $USER;
 
         try {
-            $this->profile = Profile::getInstance($USER->GetID());
+            $this->profile = Profile::getInstance((int)$USER->GetID());
             $this->sectionRequests = new ProfileSectionRequests($this->profile);
             $this->sectionRequests->setFormType($this->arParams['SUB_TYPE']);
         } catch (\Exception $exception) {

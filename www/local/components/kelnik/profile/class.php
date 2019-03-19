@@ -41,7 +41,7 @@ class ProfileForm extends Bbc\Basis
         }
 
         try {
-            $this->profile = Profile::getInstance($USER->GetID());
+            $this->profile = Profile::getInstance((int)$USER->GetID());
         } catch (\Exception $e) {
             return false;
         }

@@ -41,7 +41,7 @@ class ReportList extends Bbc\Basis
         $this->addCacheAdditionalId($USER->GetID());
         $this->addCacheAdditionalId(date('Y'));
 
-        $this->profile = Profile::getInstance($USER->GetID());
+        $this->profile = Profile::getInstance((int)$USER->GetID());
 
         if (!$this->profile->canReport()) {
             LocalRedirect(LANG_DIR . 'cabinet/');
@@ -58,7 +58,7 @@ class ReportList extends Bbc\Basis
         $this->arResult['REPORTS']  = [];
         $this->arResult['YEAR']     = date('Y');
 
-        self::registerCacheTag('kelnik:report_list_' . $this->profile->getCompanyId());
+        self::registerCacheTag('kelnik:reportList_' . $this->profile->getCompanyId());
 
         $this->arResult['REPORTS'] = $this->getReports();
         $this->arResult['DISABLED'] = !count($this->arResult['REPORTS']);

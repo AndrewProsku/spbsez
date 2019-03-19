@@ -96,7 +96,7 @@ class MessagesTable extends DataManager
         global $USER;
 
         $data['DATE_CREATED'] = $data['DATE_MODIFIED'] = new DateTime();
-        $data['USER_ID'] = $USER->GetID();
+        $data['USER_ID'] = (int)$USER->GetID();
 
         return parent::add($data);
     }

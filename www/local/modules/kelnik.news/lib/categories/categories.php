@@ -105,7 +105,7 @@ class CategoriesTable extends DataManager
     {
         global $USER;
 
-        return $USER->GetID();
+        return (int)$USER->GetID();
     }
 
     public static function getFilePath()
