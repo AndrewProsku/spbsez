@@ -5,7 +5,7 @@ namespace Kelnik\Messages\Components;
 use Bex\Bbc\Basis;
 use Bitrix\Iblock\Component\Tools;
 use Kelnik\Messages\MessageService;
-use Kelnik\Requests\Model\NotifyTable;
+use Kelnik\Messages\Model\NotifyTable;
 use Kelnik\Userdata\Profile\Profile;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
