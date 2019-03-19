@@ -102,7 +102,7 @@ class NotifyTable extends DataManager
     public static function clearComponentCache(Event $event)
     {
         try {
-            $rowData = self::getRowById((int) ArrayHelper::getValue($event->getParameters(), 'id.ID', 0));
+            $rowData = self::getRowById((int) ArrayHelper::getValue($event->getParameters(), 'id', 0));
             $userId = (int)ArrayHelper::getValue($rowData, 'USER_ID', 0);
 
             Application::getInstance()->getTaggedCache()->clearByTag('kelnik:messagesList_' . $userId);
