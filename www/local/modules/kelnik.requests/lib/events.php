@@ -2,6 +2,8 @@
 
 namespace Kelnik\Requests;
 
+
+use Bitrix\Main\Context;
 use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
@@ -36,6 +38,11 @@ class Events
         return true;
     }
 
+    /**
+     * Отправка уведомлений при смен статуса стандартной заявки и заявки на пропуск
+     * @param Event $event
+     * @return bool
+     */
     public static function sendNotify(Event $event)
     {
         $className = $event->getEntity()->getDataClass();
@@ -70,9 +77,9 @@ class Events
                 return false;
             }
 
-            \Bitrix\Main\Mail\Event::sendImmediate([
+            $res = \Bitrix\Main\Mail\Event::sendImmediate($r = [
                 'EVENT_NAME' => $mailEvents[$entityName],
-                'LID' => SITE_ID,
+                'LID' => Context::getCurrent()->getRequest()->isAdminSection() ? 's1' : SITE_ID,
                 'FIELDS' => [
                     'EMAIL_TO' => $profile->getField('EMAIL'),
                     'CODE' => $code,
