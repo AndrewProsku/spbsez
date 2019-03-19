@@ -4,7 +4,8 @@ include realpath(__DIR__ . '/../../../vendor/autoload.php');
 
 AddEventHandler("main", "OnBeforeEventAdd", "OnBeforeEventAddHandler");
 
-function OnBeforeEventAddHandler(&$event, &$lid, $arFields) {
+function OnBeforeEventAddHandler(&$event, &$lid, $arFields)
+{
     if ($event == "FAVORITES") {
         require_once realpath(__DIR__ . '/lib/mail_attach/mail_attach.php');
         SendAttache($event, $lid, $arFields, "/upload/pdf/{$arFields['FILE_NAME']}");
@@ -16,6 +17,9 @@ function OnBeforeEventAddHandler(&$event, &$lid, $arFields) {
 if (!function_exists('getSiteBaseUrl')) {
     function getSiteBaseUrl()
     {
-        return (IsHTTPS() ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+        return empty($_SERVER)
+            ? ''
+            : (($_SERVER['SERVER_PORT'] == 443 || strtolower($_SERVER['HTTPS']) == 'on') ? 'https' : 'http') .
+                '://' . $_SERVER['HTTP_HOST'];
     }
 }
