@@ -182,7 +182,7 @@ class Popup {
             }
         };
 
-        Utils.send(sentData, url, callback);
+        Utils.send(sentData, url, callback, 'get');
 
         return true;
     }
