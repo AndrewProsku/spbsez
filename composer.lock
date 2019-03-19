@@ -426,7 +426,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.kelnik.pro:bitrix/kelnik.module.helpers.git",
-                "reference": "3ca8c41000906a6875c2ba07ccfb963e35230372"
+                "reference": "b68958f72dcf3a40af389954d5caa0092b22fdf3"
             },
             "require": {
                 "ext-json": "*",
@@ -444,7 +444,7 @@
                 }
             ],
             "description": "Kelnik Helper lib",
-            "time": "2019-03-18T09:40:39+00:00"
+            "time": "2019-03-19T10:23:37+00:00"
         },
         {
             "name": "kelnik/module-image-resizer",
