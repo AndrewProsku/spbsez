@@ -63,6 +63,8 @@ class Residents {
         } else if (this.selectedCategories.has(categoryId)) {
             this.selectedCategories.delete(categoryId);
             this.$residentsPage.classList.remove(`category-${categoryId}`);
+
+            this._checkActiveTabs();
         }
     }
 
@@ -101,6 +103,22 @@ class Residents {
                 resident.removeEventListener('mouseleave', this.onResidentMouseLeave);
             }
         });
+    }
+
+    // Если нет активных табов то показываем все
+    _checkActiveTabs() {
+        const classResidentsPage = Array.from(this.$residentsPage.classList).join(', ');
+        const notSearch = -1;
+
+        if (!classResidentsPage.length) {
+            return;
+        }
+
+        if (classResidentsPage.search('category-') !== notSearch) {
+            return;
+        }
+
+        this.$residentsPage.classList.add('all-categories');
     }
 }
 
