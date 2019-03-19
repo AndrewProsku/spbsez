@@ -58,7 +58,7 @@ class ReportList extends Bbc\Basis
         $this->arResult['REPORTS']  = [];
         $this->arResult['YEAR']     = date('Y');
 
-        self::registerCacheTag('kelnik:report_list_' . $this->profile->getCompanyId());
+        self::registerCacheTag('kelnik:reportList_' . $this->profile->getCompanyId());
 
         $this->arResult['REPORTS'] = $this->getReports();
         $this->arResult['DISABLED'] = !count($this->arResult['REPORTS']);

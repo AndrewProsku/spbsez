@@ -2,7 +2,10 @@
 
 namespace Kelnik\News\News;
 
+use Bitrix\Main\Application;
+use Bitrix\Main\Context;
 use Bitrix\Main\Entity\DatetimeField;
+use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Main\Entity\IntegerField;
 use Bitrix\Main\Entity\ReferenceField;
@@ -10,6 +13,7 @@ use Bitrix\Main\Entity\StringField;
 use Bitrix\Main\Entity\TextField;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
 use Kelnik\News\Categories\CategoriesTable;
 
@@ -209,5 +213,18 @@ class NewsTable extends DataManager
     public static function getFilePath()
     {
         return __FILE__;
+    }
+
+    public static function clearComponentCache(Event $event)
+    {
+        if (!Context::getCurrent()->getRequest()->isAdminSection()) {
+            return;
+        }
+
+        try {
+            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:newsList_' . ArrayHelper::getValue($event->getParameters(), 'fields.CAT_ID', 0));
+            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:newsRow_' . ArrayHelper::getValue($event->getParameters(), 'fields.ID', 0));
+        } catch (\Exception $e) {
+        }
     }
 }
