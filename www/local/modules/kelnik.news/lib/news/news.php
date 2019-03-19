@@ -200,7 +200,7 @@ class NewsTable extends DataManager
     {
         global $USER;
 
-        return $USER->GetID();
+        return (int)$USER->GetID();
     }
 
     /**

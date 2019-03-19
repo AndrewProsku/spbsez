@@ -63,7 +63,7 @@ class ReportDetail extends Bbc\Basis
             $this->show404();
         }
 
-        $this->profile = Profile::getInstance($USER->GetID());
+        $this->profile = Profile::getInstance((int)$USER->GetID());
 
         Report::setUrlTemplate(
             $this->arParams['SEF_FOLDER'] .

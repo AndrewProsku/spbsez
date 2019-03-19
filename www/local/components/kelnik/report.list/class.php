@@ -41,7 +41,7 @@ class ReportList extends Bbc\Basis
         $this->addCacheAdditionalId($USER->GetID());
         $this->addCacheAdditionalId(date('Y'));
 
-        $this->profile = Profile::getInstance($USER->GetID());
+        $this->profile = Profile::getInstance((int)$USER->GetID());
 
         if (!$this->profile->canReport()) {
             LocalRedirect(LANG_DIR . 'cabinet/');

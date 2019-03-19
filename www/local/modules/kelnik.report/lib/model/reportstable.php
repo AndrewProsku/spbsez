@@ -123,7 +123,7 @@ class ReportsTable extends DataManager
             $id = ArrayHelper::getValue($event->getParameter('id'), 'ID', 0);
             $companyId = Context::getCurrent()->getRequest()->isAdminSection()
                         ? ReportsTable::getByPrimary($id)->fetchObject()->getCompanyId()
-                        : Profile::getInstance($USER->GetID())->getCompanyId();
+                        : Profile::getInstance((int)$USER->GetID())->getCompanyId();
 
             if (!$id && !$companyId) {
                 return;

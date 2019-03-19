@@ -21,7 +21,7 @@ class ApiProcessMessages extends ApiProcessAbstract
         global $USER;
 
         $messages = MessageService::getInstance(
-            Profile::getInstance($USER->GetID())
+            Profile::getInstance((int)$USER->GetID())
         );
         $messages->calcCount();
 
