@@ -3,12 +3,15 @@
 namespace Kelnik\Requests\Model;
 
 use Bitrix\Main\Entity\DatetimeField;
+use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Entity\IntegerField;
 use Bitrix\Main\Entity\StringField;
 use Bitrix\Main\Entity\TextField;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Requests\Model\AdminInterface\SiteMsgEditHelper;
 
 Loc::loadMessages(__FILE__);
 
@@ -84,6 +87,24 @@ class SiteMsgTable extends DataManager
         $data['DATE_CREATED'] = $data['DATE_MODIFIED'] = new DateTime();
 
         return parent::add($data);
+    }
+
+    public static function OnAfterAdd(Event $event)
+    {
+        try {
+            \Bitrix\Main\Mail\Event::sendImmediate([
+                'EVENT_NAME' => 'MESSAGE_FORM',
+                'LID' => SITE_ID,
+                'FIELDS' => [
+                    'LINK' => getSiteBaseUrl() . SiteMsgEditHelper::getUrl([
+                        'ID' => ArrayHelper::getValue($event->getParameters(), 'id', 0)
+                    ])
+                ]
+            ]);
+        } catch (\Exception $e) {
+        }
+
+        parent::onAfterAdd($event);
     }
 
     public static function update($primary, array $data)

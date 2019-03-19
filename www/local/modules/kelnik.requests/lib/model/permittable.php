@@ -3,6 +3,7 @@
 namespace Kelnik\Requests\Model;
 
 use Bitrix\Main\Entity\DatetimeField;
+use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Entity\IntegerField;
 use Bitrix\Main\Entity\StringField;
 use Bitrix\Main\Localization\Loc;
@@ -10,7 +11,9 @@ use Bitrix\Main\ORM\Fields\Relations\OneToMany;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Requests\Model\AdminInterface\PermitEditHelper;
 
 Loc::loadMessages(__FILE__);
 
@@ -148,6 +151,24 @@ class PermitTable extends DataManager
         }
 
         return parent::add($data);
+    }
+
+    public static function OnAfterAdd(Event $event)
+    {
+        try {
+            \Bitrix\Main\Mail\Event::sendImmediate([
+                'EVENT_NAME' => 'VACANCY_RESPONSE',
+                'LID' => SITE_ID,
+                'FIELDS' => [
+                    'LINK' => getSiteBaseUrl() . PermitEditHelper::getUrl([
+                        'ID' => ArrayHelper::getValue($event->getParameters(), 'id', 0)
+                    ])
+                ]
+            ]);
+        } catch (\Exception $e) {
+        }
+
+        parent::onAfterAdd($event);
     }
 
     public static function update($primary, array $data)

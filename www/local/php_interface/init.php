@@ -12,3 +12,10 @@ function OnBeforeEventAddHandler(&$event, &$lid, $arFields) {
         $lid = 'null';
     }
 }
+
+if (!function_exists('getSiteBaseUrl')) {
+    function getSiteBaseUrl()
+    {
+        return (IsHTTPS() ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+    }
+}
