@@ -17,15 +17,20 @@ class Events
 
     public static function setStatus(Event $event)
     {
-        $entityName = strtoupper($event->getEntity()->getName());
-        $rowId = (int) ArrayHelper::getValue($event->getParameters(), 'fields.ID', 0);
-        $statusId = (int) ArrayHelper::getValue($event->getParameters(), 'fields.STATUS_ID', 0);
+        try {
+            $className = $event->getEntity()->getDataClass();
+            $entityName = strtoupper($event->getEntity()->getName());
+            $rowId = (int)ArrayHelper::getValue($event->getParameters(), 'id.ID', 0);
+            $rowData = $className::getRowById($rowId);
+            $statusId = (int)ArrayHelper::getValue($rowData, 'STATUS_ID', 0);
 
-        if (!$rowId || !$statusId) {
-            return;
+            if (!$rowId || !$statusId) {
+                return;
+            }
+
+            static::$statusId[$entityName][$rowId] = $statusId;
+        } catch (\Exception $e) {
         }
-
-        static::$statusId[$entityName][$rowId] = $statusId;
     }
 
     public static function sendNotify(Event $event)
@@ -34,7 +39,7 @@ class Events
         $fields = ArrayHelper::getValue($event->getParameters(), 'fields');
         $entityName = strtoupper($event->getEntity()->getName());
 
-        $rowId = (int) ArrayHelper::getValue($fields, 'ID', 0);
+        $rowId = (int) ArrayHelper::getValue($event->getParameters(), 'id.ID', 0);
         $statusId = (int) ArrayHelper::getValue($fields, 'STATUS_ID', 0);
         $oldStatusId = (int) ArrayHelper::getValue(static::$statusId, $entityName . '.' . $rowId, 0);
 
