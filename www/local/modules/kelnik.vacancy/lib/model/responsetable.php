@@ -4,7 +4,9 @@ namespace Kelnik\Vacancy\Model;
 
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Vacancy\Model\AdminInterface\ResponseEditHelper;
 
 Loc::loadMessages(__FILE__);
 
@@ -89,6 +91,30 @@ class ResponseTable extends DataManager
         }
 
         return parent::add($data);
+    }
+
+    public static function OnAfterAdd(Main\Entity\Event $event)
+    {
+        try {
+            \Bitrix\Main\Mail\Event::sendImmediate([
+                'EVENT_NAME' => 'MESSAGE_SERVICE_FORM',
+                'LID' => SITE_ID,
+                'FIELDS' => [
+                    'VACANCY_NAME' => ArrayHelper::getValue(
+                        VacancyTable::getRowById(
+                            ArrayHelper::getValue($event->getParameters(), 'fields.VACANCY_ID', 0)
+                        ),
+                        'NAME'
+                    ),
+                    'LINK' => getSiteBaseUrl() . ResponseEditHelper::getUrl([
+                        'ID' => ArrayHelper::getValue($event->getParameters(), 'id', 0)
+                    ])
+                ]
+            ]);
+        } catch (\Exception $e) {
+        }
+
+        parent::onAfterAdd($event);
     }
 
     public static function userCanAddRow($userHash)
