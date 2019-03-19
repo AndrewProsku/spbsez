@@ -24,12 +24,10 @@ define("PATH_TO_404", '/404.php'); ?>
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
     <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
     <link rel="icon" sizes="192x192" href="/favicons/touch-icon-192x192.png">
-
     <?php
         $APPLICATION->ShowHead();
         \Bitrix\Main\Localization\Loc::loadMessages(__DIR__ . DIRECTORY_SEPARATOR . 'kelnik.php');
     ?>
-
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -52,7 +50,6 @@ define("PATH_TO_404", '/404.php'); ?>
         gtag('js', new Date());
         gtag('config', 'UA-136324578-1');
     </script>
-
 </head>
 <body>
     <div id="panel"><?$APPLICATION->ShowPanel();?></div>

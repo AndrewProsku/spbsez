@@ -129,7 +129,7 @@ class ReportsTable extends DataManager
                 return;
             }
 
-            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:report_list_' . $companyId);
+            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:reportList_' . $companyId);
             if ($id) {
                 Application::getInstance()->getTaggedCache()->clearByTag('kelnik:report_' . $companyId . '_' . $id);
             }
