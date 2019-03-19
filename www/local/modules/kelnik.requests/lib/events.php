@@ -25,12 +25,15 @@ class Events
             $statusId = (int)ArrayHelper::getValue($rowData, 'STATUS_ID', 0);
 
             if (!$rowId || !$statusId) {
-                return;
+                return false;
             }
 
             static::$statusId[$entityName][$rowId] = $statusId;
         } catch (\Exception $e) {
+            return false;
         }
+
+        return true;
     }
 
     public static function sendNotify(Event $event)
@@ -48,8 +51,12 @@ class Events
         }
 
         try {
-            $profile = Profile::getInstance((int) $fields['USER_ID']);
             $rowData = $className::getRowById($rowId);
+            if (!$rowData) {
+                return false;
+            }
+
+            $profile = Profile::getInstance((int) $rowData['USER_ID']);
 
             $code = ArrayHelper::getValue($rowData, 'CODE');
             $statusName = StatusTable::getNameById($statusId);
