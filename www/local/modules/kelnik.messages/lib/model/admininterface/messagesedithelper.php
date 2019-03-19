@@ -111,14 +111,20 @@ class MessagesEditHelper extends AdminEditHelper
         }
 
         $users = [];
-
         $sqlHelper = Application::getConnection()->getSqlHelper();
+
+        foreach ($companies as $row) {
+            $users[] = '(' . $sqlHelper->convertToDbInteger($id) . ', ' .
+                        $sqlHelper->convertToDbInteger($row) . ', ' .
+                        $sqlHelper->convertToDbDateTime(new DateTime()) .
+                        ')';
+        }
 
         while($row = $tmp->Fetch()) {
             $users[] = '(' . $sqlHelper->convertToDbInteger($id) . ', ' .
-                $sqlHelper->convertToDbInteger($row['ID']) . ', ' .
-                $sqlHelper->convertToDbDateTime(new DateTime()) .
-                ')';
+                        $sqlHelper->convertToDbInteger($row['ID']) . ', ' .
+                        $sqlHelper->convertToDbDateTime(new DateTime()) .
+                        ')';
         }
 
         try {

@@ -569,7 +569,7 @@ class MessageService
         try {
             $tagCache = Application::getInstance()->getTaggedCache();
             foreach ($users as $userId) {
-                $tagCache->clearByTag('kelnik:messages_list_' . $userId);
+                $tagCache->clearByTag('kelnik:messagesList_' . $userId);
             }
         } catch (\Exception $e) {
         }
