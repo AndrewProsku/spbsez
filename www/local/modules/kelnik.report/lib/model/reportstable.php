@@ -4,8 +4,8 @@ namespace Kelnik\Report\Model;
 
 use Bitrix\Main\Application;
 use Bitrix\Main\Context;
+use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ORM\Event;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
@@ -115,25 +115,7 @@ class ReportsTable extends DataManager
         return parent::update($id, $data);
     }
 
-    public static function onAfterAdd(Event $event)
-    {
-        self::clearComponentCache($event);
-        parent::onAfterAdd($event);
-    }
-
-    public static function onAfterUpdate(Event $event)
-    {
-        self::clearComponentCache($event);
-        parent::onAfterUpdate($event);
-    }
-
-    public static function onBeforeDelete(Event $event)
-    {
-        self::clearComponentCache($event);
-        parent::onBeforeDelete($event);
-    }
-
-    protected static function clearComponentCache(Event $event)
+    public static function clearComponentCache(Event $event)
     {
         global $USER;
 
