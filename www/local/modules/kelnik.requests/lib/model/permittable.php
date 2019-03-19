@@ -157,7 +157,7 @@ class PermitTable extends DataManager
     {
         try {
             \Bitrix\Main\Mail\Event::sendImmediate([
-                'EVENT_NAME' => 'VACANCY_RESPONSE',
+                'EVENT_NAME' => 'PERMIT_PASS_REQUEST',
                 'LID' => SITE_ID,
                 'FIELDS' => [
                     'LINK' => getSiteBaseUrl() . PermitEditHelper::getUrl([
