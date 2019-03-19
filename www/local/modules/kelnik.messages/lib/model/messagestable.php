@@ -2,6 +2,8 @@
 
 namespace Kelnik\Messages\Model;
 
+use Bitrix\Main\Application;
+use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Error;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Data\UpdateResult;
@@ -13,6 +15,7 @@ use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Fields\TextField;
 use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
@@ -114,5 +117,18 @@ class MessagesTable extends DataManager
         }
 
         return parent::update($id, $data);
+    }
+
+    public static function clearComponentCache(Event $event)
+    {
+        try {
+            $userId = (int)ArrayHelper::getValue($event->getParameters(), 'fields.USER_ID', 0);
+
+            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:messagesList_' . $userId);
+            Application::getInstance()->getTaggedCache()->clearByTag('bitrix:menuPersonal_' . $userId);
+        } catch (\Exception $e) {
+        }
+
+        parent::clearComponentCache($event);
     }
 }

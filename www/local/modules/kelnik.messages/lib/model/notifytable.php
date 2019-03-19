@@ -11,6 +11,7 @@ use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Fields\TextField;
+use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
 
@@ -84,7 +85,21 @@ class NotifyTable extends DataManager
         ];
     }
 
-    public static function onAfterAdd(Event $event)
+    public static function add(array $data)
+    {
+        $data['DATE_CREATED'] = $data['DATE_MODIFIED'] = new DateTime();
+
+        return parent::add($data);
+    }
+
+    public static function update($primary, array $data)
+    {
+        $data['DATE_MODIFIED'] = new DateTime();
+
+        return parent::update($primary, $data);
+    }
+
+    public static function clearComponentCache(Event $event)
     {
         try {
             $userId = (int)ArrayHelper::getValue($event->getParameters(), 'fields.USER_ID', 0);
@@ -94,6 +109,6 @@ class NotifyTable extends DataManager
         } catch (\Exception $e) {
         }
 
-        parent::onAfterAdd($event);
+        parent::clearComponentCache($event);
     }
 }
