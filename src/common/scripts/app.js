@@ -23,6 +23,8 @@ import ProfileInfo from '../../components/profile-info';
 import ProfileRequestPass from '../../components/request-pass';
 import ReportForm from '../../components/reports/reports-form';
 import Residents from '../../components/residents/';
+import reviewPopupContentTemplate from '../../components/popup/review-popup-content.twig';
+import reviewPopupTemplate from '../../components/popup/review-popup.twig';
 import Select from '../../components/forms/select/';
 import Service from '../../components/service-popup';
 import servicePopupTemplate from '../../components/service-popup/service-popup.twig';
@@ -633,6 +635,25 @@ mediator.subscribe('openPopup', (popup) => {
         vacancy.init({popup});
     }
 });
+
+/**
+ * Инициализация попапа "Отзыв полностью" в футере
+ */
+
+const openPopupReview = Array.from(document.querySelectorAll('.j-popup-review'));
+
+if (openPopupReview) {
+    openPopupReview.forEach((reviewButton) => {
+        const reviewPopup = new Popup();
+
+        reviewPopup.init({
+            target              : reviewButton,
+            template            : reviewPopupTemplate,
+            templateContent     : reviewPopupContentTemplate,
+            closeButtonAriaLabel: 'Закрыть'
+        });
+    });
+}
 
 /**
  * Инициализация попапа "Написать сообщение" в футере
