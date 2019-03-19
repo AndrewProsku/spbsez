@@ -570,6 +570,7 @@ class MessageService
             $tagCache = Application::getInstance()->getTaggedCache();
             foreach ($users as $userId) {
                 $tagCache->clearByTag('kelnik:messagesList_' . $userId);
+                $tagCache->clearByTag('bitrix:menuPersonal_' . $userId);
             }
         } catch (\Exception $e) {
         }

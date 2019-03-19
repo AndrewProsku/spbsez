@@ -155,7 +155,7 @@ class ProfileInfo {
     initCompanyInfo(data) {
         const that = this;
 
-        if (!that.companyInfo) {
+        if (!that.$companyInfo) {
             return;
         }
 

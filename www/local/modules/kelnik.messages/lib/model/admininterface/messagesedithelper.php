@@ -79,6 +79,7 @@ class MessagesEditHelper extends AdminEditHelper
                 ]
             ]);
             Application::getInstance()->getTaggedCache()->clearByTag('kelnik:messagesList');
+            Application::getInstance()->getTaggedCache()->clearByTag('bitrix:menuPersonal');
         } catch (\Exception $e) {
             return false;
         }
