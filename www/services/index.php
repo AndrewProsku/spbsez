@@ -22,8 +22,6 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__wrap">
-        <?php $APPLICATION->IncludeFile('inc_animation.php'); ?>
-
         <section class="b-offers">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -52,8 +50,6 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__wrap">
-        <?php $APPLICATION->IncludeFile('inc_animation.php'); ?>
-
         <section class="b-offers">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -82,8 +78,6 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__advantage">
-        <?php $APPLICATION->IncludeFile('inc_animation.php'); ?>
-
         <section class="b-advantages ">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -112,8 +106,6 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__advantage">
-        <?php $APPLICATION->IncludeFile('inc_animation.php'); ?>
-
         <section class="b-advantages ">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
