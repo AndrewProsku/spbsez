@@ -26,7 +26,7 @@
                                         <div class="b-slider-reviews__person-text"><?= $element['PREVIEW']; ?></div>
                                     <?php endif; ?>
                                     <?php if(LANGUAGE_ID == 'ru'): ?>
-                                        <a href="javascript:;" class="b-slider-reviews__person-link b-link-line-two">Отзыв полностью</a>
+                                        <span class="b-slider-reviews__person-link b-link-line-two j-popup-review" data-json="<?= $element['JSON']; ?>">Отзыв полностью</span>
                                     <?php endif; ?>
                                 </div>
                             </div>
