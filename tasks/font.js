@@ -17,7 +17,7 @@ const text = `
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
 abcdefghijklmnopqrstuvwxyz
 0123456789
-!@#$%^&*()_+-={}[]|":;'><?,./«»№`;
+!@#$%^&*()_+-={}[]|":;'><?,./«»№₽`;
 
 function fonts() {
     return gulp.src(config.fonts.input)
