@@ -15,7 +15,7 @@ define("PATH_TO_404", '/404.php'); ?>
         $showAnimation = $APPLICATION->GetProperty('showAnimation') === true || defined('ERROR_404');
     ?>
 
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#662D91">
     <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="32x32" href="/favicons/apple-touch-icon-32x32.png">
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
