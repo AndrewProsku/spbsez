@@ -1,0 +1,4 @@
+<?php
+
+$MESS['KELNIK_INFRASTRUCTURE_TAB_MAIN'] = 'Основное';
+$MESS['KELNIK_INFRASTRUCTURE_TAB_MAIN_EN'] = 'Основное (англ.)';
