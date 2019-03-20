@@ -15,7 +15,10 @@
                     <a href="<?= $arItem['DETAIL_PAGE_URL']; ?>" class="b-link-line"><?= $arItem['NAME']; ?></a>
                 </div>
                 <time class="l-home__news-date label-bg"><?= $arItem['DATE_SHOW_FORMAT']; ?></time>
-                <a href="#" class="l-home__news-subsection label-bg">Анонс</a>
+                <?php foreach ($arResult['TAGS'] as $tag): ?>
+                    <?php if(!in_array($arItem['ID'], $tag['NEWS_IDS'])): continue; endif; ?>
+                    <a href="<?= $tag['LINK']; ?>" class="l-home__news-subsection label-bg"><?= $tag['NAME']; ?></a>
+                <?php endforeach; ?>
             </div>
         </div>
         <?php if($arResult['ELEMENTS']): ?>
@@ -26,7 +29,10 @@
                             <a href="<?= $arItem['DETAIL_PAGE_URL']; ?>" class="b-link-line"><?= $arItem['NAME']; ?></a>
                         </div>
                         <time class="l-home__news-date label-bg"><?= $arItem['DATE_SHOW_FORMAT']; ?></time>
-                        <a href="#" class="l-home__news-subsection label-bg">Анонс</a>
+                        <?php foreach ($arResult['TAGS'] as $tag): ?>
+                            <?php if(!in_array($arItem['ID'], $tag['NEWS_IDS'])): continue; endif; ?>
+                            <a href="<?= $tag['LINK']; ?>" class="l-home__news-subsection label-bg"><?= $tag['NAME']; ?></a>
+                        <?php endforeach; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
