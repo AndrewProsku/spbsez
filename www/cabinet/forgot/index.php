@@ -25,7 +25,7 @@ if ($USER->IsAuthorized()) {
 
 <div class="l-password-recovery">
 
-    <div class="b-title b-password-recovery-title">
+    <div class="b-title b-password-recovery-title j-new-password-title">
         <h1><? $APPLICATION->ShowTitle(false); ?></h1>
     </div>
 
