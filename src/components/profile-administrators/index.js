@@ -134,15 +134,13 @@ class ProfileAdministrators {
         const textValue = [];
 
         selectAccordion.querySelectorAll('.b-checkbox-input').forEach((checkbox) => {
-            if (checkbox.checked) {
-                let label = Array.from(checkbox.nextElementSibling.getElementsByClassName('b-checkbox-text'));
+            let label = Array.from(checkbox.nextElementSibling.getElementsByClassName('b-checkbox-text'));
 
-                accessFields[checkbox.name] = checkbox.value;
+            accessFields[checkbox.name] = checkbox.checked ? checkbox.value : 0;
 
-                if (label) {
-                    label = label.shift();
-                    accesses[checkbox.id] = label.innerText;
-                }
+            if (label && accessFields[checkbox.name]) {
+                label = label.shift();
+                accesses[checkbox.id] = label.innerText;
             }
         });
 
