@@ -5,6 +5,7 @@
     '.default',
     array(
         'ELEMENT_ID' => $arResult['VARIABLES']['ELEMENT_ID'],
+        'ELEMENT_CODE' => $arResult['VARIABLES']['ELEMENT_CODE'],
         'CACHE_TYPE' => $arParams['CACHE_TYPE'],
         'CACHE_TIME' => $arParams['CACHE_TIME'],
         'SET_404' => $arParams['SET_404'],

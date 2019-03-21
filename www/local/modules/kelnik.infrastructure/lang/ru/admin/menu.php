@@ -1,4 +1,4 @@
 <?php
 $MESS['KELNIK_INFRASTRUCTURE_MENU'] = 'Инфраструктура';
 $MESS['KELNIK_INFRASTRUCTURE_MENU_PLATFORM'] = 'Площадки';
-
+$MESS['KELNIK_INFRASTRUCTURE_MENU_MAP'] = 'Элементы карты';

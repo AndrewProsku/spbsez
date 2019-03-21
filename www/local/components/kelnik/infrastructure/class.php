@@ -23,11 +23,11 @@ class InfrastructureRouter extends BasisRouter
             'index' => '',
             'section' => '',
             'map' => 'map/',
-            'detail' => '#ELEMENT_ID#/'
+            'detail' => '#ELEMENT_CODE#/'
         ];
 
         $this->componentVariables = [
-            'ELEMENT_ID'
+            'ELEMENT_ID', 'ELEMENT_CODE'
         ];
     }
 }

@@ -35,5 +35,16 @@ return [
                 \Kelnik\Infrastructure\Model\AdminInterface\PlatformEditHelper::getUrl()
             ]
         ],
+        [
+            'parent_menu' => 'kelnik_infrastructure',
+            'sort' => 180,
+            'icon' => 'iblock_menu_icon',
+            'page_icon' => 'iblock_menu_icon',
+            'text' => Loc::getMessage('KELNIK_INFRASTRUCTURE_MENU_MAP'),
+            'url' => \Kelnik\Infrastructure\Model\AdminInterface\MapListHelper::getUrl(),
+            'more_url' => [
+                \Kelnik\Infrastructure\Model\AdminInterface\MapEditHelper::getUrl()
+            ]
+        ],
     ]
 ];

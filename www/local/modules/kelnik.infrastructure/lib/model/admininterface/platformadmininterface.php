@@ -50,6 +50,11 @@ class PlatformAdminInterface extends AdminInterface
                         'REQUIRED' => true,
                         'EDIT_LINK' => true
                     ],
+                    'ALIAS' => [
+                        'WIDGET' => new StringWidget(),
+                        'FILTER' => false,
+                        'REQUIRED' => true
+                    ],
                     'MAP_COORDS_LAT' => [
                         'WIDGET' => new StringWidget(),
                         'HEADER' => false,
@@ -83,12 +88,30 @@ class PlatformAdminInterface extends AdminInterface
                     'VIDEO_ID' => [
                         'WIDGET' => new FileWidget(),
                         'HEADER' => false
+                    ],
+                    'IMAGE_BG_ID' => [
+                        'WIDGET' => new FileWidget(),
+                        'IMAGE' => true,
+                        'HEADER' => false
+                    ],
+                    'AREA_BG_ID_RU' => [
+                        'WIDGET' => new FileWidget(),
+                        'IMAGE' => true,
+                        'HEADER' => false
+                    ],
+                    'AREA_BG_ID_EN' => [
+                        'WIDGET' => new FileWidget(),
+                        'IMAGE' => true,
+                        'HEADER' => false
                     ]
                 ]
             ]
         ];
 
         foreach (PlatformTable::getFields() as $field) {
+            if (false !== strpos($field, 'HEADER')) {
+                continue;
+            }
             $res[$field] = [
                 'NAME' => Loc::getMessage('KELNIK_INFRASTRUCTURE_TAB_' . $field),
                 'FIELDS' => [],
@@ -96,6 +119,12 @@ class PlatformAdminInterface extends AdminInterface
         }
 
         foreach (PlatformTable::getLangs() as $fieldLang) {
+            $res['TEXT_GALLERY']['FIELDS']['HEADER_GALLERY_' . $fieldLang] = [
+                'WIDGET' => new StringWidget(),
+                'HEADER' => false,
+                'FILTER' => false,
+                'SIZE' => 60
+            ];
             $res['TEXT_GALLERY']['FIELDS']['IMAGES_' . $fieldLang] = [
                 'WIDGET' => new FileWidget(),
                 'IMAGE' => true,
@@ -107,9 +136,21 @@ class PlatformAdminInterface extends AdminInterface
         }
 
         foreach (PlatformTable::getFields() as $field) {
+            $isHeader = false !== strpos($field, 'HEADER');
+            $tabName = $field;
+
+            if ($isHeader) {
+                if (false !== strpos($field, 'GALLERY')) {
+                    continue;
+                }
+                $tabName = str_replace('HEADER_', 'TEXT_', $tabName);
+            }
+
             foreach (PlatformTable::getLangs() as $fieldLang) {
-                $res[$field]['FIELDS'][$field . '_' . $fieldLang] = [
-                    'WIDGET' => new VisualEditorWidget(),
+                $res[$tabName]['FIELDS'][$field . '_' . $fieldLang] = [
+                    'WIDGET' => $isHeader
+                                ? new StringWidget()
+                                : new VisualEditorWidget(),
                     'HEADER' => false,
                     'FILTER' => false,
                 ];
