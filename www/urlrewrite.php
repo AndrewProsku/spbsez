@@ -40,6 +40,14 @@ $arUrlRewrite=array (
     'PATH' => '/media/articles/index.php',
     'SORT' => 100,
   ),
+  7 => 
+  array (
+    'CONDITION' => '#^/infrastructure/#',
+    'RULE' => '',
+    'ID' => 'kelnik:infrastructure',
+    'PATH' => '/infrastructure/index.php',
+    'SORT' => 100,
+  ),
   4 => 
   array (
     'CONDITION' => '#^/en/media/news/#',

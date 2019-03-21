@@ -9,8 +9,10 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\OneToMany;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Fields\TextField;
+use Bitrix\Main\ORM\Query\Join;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
 
@@ -84,7 +86,11 @@ class PlatformTable extends DataManager
         }
 
         foreach (self::getLangs() as $fieldLang) {
-            $res[] = (new OneToMany('IMAGES_' . $fieldLang, ImagesRuTable::class, 'PLATFORM'));
+            $res[] = (new Reference(
+                'IMAGES_' . $fieldLang,
+                '\Kelnik\Infrastructure\Model\Images' . ucfirst(strtolower($fieldLang)) . 'Table',
+                Join::on('this.ID', 'ref.ENTITY_ID')
+            ))->configureJoinType('LEFT');
         }
 
         return $res;
