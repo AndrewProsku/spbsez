@@ -5,6 +5,7 @@ import Authorization from '../../components/authorization';
 import Disclosure from '../../components/disclosure/disclosure';
 import Glide from '@glidejs/glide';
 import GlideCarousel from '../../components/glide-carousel';
+import InputDate from 'components/input-date';
 import InputTel from '../../components/forms/telephone/telephone';
 import Logout from 'components/logout';
 import Mediator from 'common/scripts/mediator';
@@ -32,9 +33,9 @@ import templateMessages from 'components/messages/messages.twig';
 import Useful from '../../components/useful';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
-// import Visual from 'components/visual';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
+// import Visual from 'components/visual';
 
 const mediator = new Mediator();
 
@@ -862,3 +863,13 @@ if (residentMainScreen) {
 //     allDOM,
 //     target: allDOM.querySelector('.b-visual')
 // });
+
+const inputDateElement = Array.from(document.querySelectorAll('.j-input-date'));
+
+if (inputDateElement.length) {
+    inputDateElement.forEach((element) => {
+        const inputDate = new InputDate({target: element});
+
+        inputDate.init();
+    });
+}
