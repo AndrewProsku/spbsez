@@ -367,14 +367,17 @@ $path: '/images/home/';
 .l-home__privileges-item {
     @include margin-level(bottom, green);
 
-    &:last-child,
-    &:nth-child(5) {
+    &:last-child {
         margin-bottom: 0;
     }
 
     @media #{$tablet-portrait} {
         @include column(half);
         @include suffix(2, 29);
+
+        &:nth-child(5) {
+            margin-bottom: 0;
+        }
     }
 
     @media #{$laptop} {

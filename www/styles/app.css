@@ -2586,7 +2586,7 @@ button:focus {
   @media only screen and (min-width: 2560px) {
     .l-home__privileges-item {
       margin-bottom: 48px; } }
-  .l-home__privileges-item:last-child, .l-home__privileges-item:nth-child(5) {
+  .l-home__privileges-item:last-child {
     margin-bottom: 0; }
   @media only screen and (min-width: 670px) {
     .l-home__privileges-item {
@@ -2599,7 +2599,9 @@ button:focus {
               flex-grow: 1;
       -moz-box-sizing: border-box;
            box-sizing: border-box;
-      padding-right: 6.89655%; } }
+      padding-right: 6.89655%; }
+      .l-home__privileges-item:nth-child(5) {
+        margin-bottom: 0; } }
   @media only screen and (min-width: 1280px) {
     .l-home__privileges-item {
       display: -webkit-flex;
