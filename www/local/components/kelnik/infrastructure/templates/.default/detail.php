@@ -9,7 +9,8 @@
         'CACHE_TYPE' => $arParams['CACHE_TYPE'],
         'CACHE_TIME' => $arParams['CACHE_TIME'],
         'SET_404' => $arParams['SET_404'],
-        'SEF_FOLDER' => $arParams['SEF_FOLDER']
+        'SEF_FOLDER' => $arParams['SEF_FOLDER'],
+        'SET_SEO_TAGS' => 'Y'
     ),
     $component
 );?>

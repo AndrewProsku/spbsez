@@ -35,6 +35,7 @@
             </div>
             <div class="b-area-map__content">
                 <div class="b-infrastructure-map__yandex-map b-yandex-map b-yandex-map_theme_novoorlov j-yandex-map-noidorf"
+                     data-lang="<?= LANGUAGE_ID; ?>"
                      data-json="<?= base64_encode(json_encode($arResult['ELEMENT']['MAP_DATA'])); ?>">
                     <div id="first" class="b-yandex-map__base"></div>
                 </div>
@@ -43,19 +44,19 @@
                 <?= $arResult['ELEMENT']['TEXT_MAP']; ?>
             </div>
         </div>
-        <?php if(!empty($arResult['ELEMENT']['AREA_BG_ID_PATH'])): ?>
+        <?php if(!empty($arResult['ELEMENT']['AREA_BG_ID']['SRC'])): ?>
             <div class="b-area-plan">
                 <div class="b-area-plan__title"><h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_TERRITORY'); ?></h2></div>
-                <div class="b-visual b-visual_theme_points" data-area="novoorlovskaya">
-                    <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 1920 1080">
+                <div class="b-visual" data-area="<?= $arResult['ELEMENT']['ALIAS']; ?>">
+                    <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 <?= $arResult['ELEMENT']['AREA_BG_ID']['WIDTH']; ?> <?= $arResult['ELEMENT']['AREA_BG_ID']['HEIGHT']; ?>">
                         <image
                             class="b-visual__image"
                             x="0"
                             y="0"
-                            width="1920"
-                            height="1080"
+                            width="<?= $arResult['ELEMENT']['AREA_BG_ID']['WIDTH']; ?>"
+                            height="<?= $arResult['ELEMENT']['AREA_BG_ID']['HEIGHT']; ?>"
                             preserveAspectRatio="none"
-                            xlink:href="<?= $arResult['ELEMENT']['AREA_BG_ID_PATH']; ?>"
+                            xlink:href="<?= $arResult['ELEMENT']['AREA_BG_ID']['SRC']; ?>"
                             style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></image>
                         <?php
                             $maskFile = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'territory' . $arResult['ELEMENT']['ID'] . '.php';
@@ -77,7 +78,7 @@
         <?php if(!empty($arResult['ELEMENT']['IMAGES'])): ?>
             <section class="b-area-centre">
                 <div class="b-area-centre__title">
-                    <h2>ЦТТ «<?= $arResult['ELEMENT']['NAME']; ?>»</h2>
+                    <h2><?= $arResult['ELEMENT']['HEADER_GALLERY']; ?></h2>
                 </div>
 
                 <div class="glide j-area-slider">

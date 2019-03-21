@@ -37,7 +37,7 @@ class InfrastructureDetail extends Bbc\Basis
 
     protected function executeMain()
     {
-        $this->setResultCacheKeys(['ELEMENT', 'ELEMENTS']);
+        $this->setResultCacheKeys(['ELEMENT', 'ELEMENTS', 'SEO_TAGS']);
 
         if (!$this->arParams['ELEMENT_ID']
             && !$this->arParams['ELEMENT_CODE']
@@ -79,7 +79,7 @@ class InfrastructureDetail extends Bbc\Basis
                 [
                     'VIDEO_ID' => 'full',
                     'IMAGE_BG_ID' => 'path',
-                    'AREA_BG_ID' => 'path'
+                    'AREA_BG_ID' => 'full'
                 ]
             ));
 
@@ -137,6 +137,17 @@ class InfrastructureDetail extends Bbc\Basis
         }
 
         self::registerCacheTag('kelnik:infrastructureRow_' . $this->arResult['ELEMENT']['ID']);
+
+        $this->arResult['SEO_TAGS']['TITLE'] = implode(
+            ' | ',
+            [
+                Loc::getMessage('KELNIK_INFRA_COMP_FOLDER'),
+                Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM') . ' ' . $this->arResult['ELEMENT']['NAME'],
+                Loc::getMessage('KELNIK_INFRA_COMP_SEZ')
+            ]
+        );
+
+        $this->setSeoTags();
     }
 
     protected static function getImages(int $elementId)

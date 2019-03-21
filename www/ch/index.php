@@ -29,7 +29,6 @@ $APPLICATION->SetTitle("Main page");
         ); ?>
         <div class="b-main-screen-content">
             <div class="b-main-screen-text">
-                text
             </div>
         </div>
     </div>
