@@ -1,4 +1,3 @@
-/* stylelint-disable */
 .b-visual {
     width: 100%;
     height: 100%;
@@ -18,11 +17,10 @@
     position: absolute;
     left: 40px;
     top: 23px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .l-layout-selectors__visual {
-
     .b-visual__point {
         cursor: pointer;
     }
@@ -53,7 +51,7 @@
     color: $white;
 
     &:before {
-        content: '';
+        content: "";
         position: absolute;
         top: 3px;
         left: -19px;
@@ -88,7 +86,6 @@
     }
 }
 
-//state
 .b-visual__image_is_animated {
     transform: scale(1.4);
     animation: loader 2s infinite ease;
@@ -99,34 +96,16 @@
     transform: scale(1.15);
 }
 
-.b-visual__svg_is_blurred {
-    filter: blur(20px);
-}
-
-@keyframes loader {
-    0% {
-        opacity: .6;
-    }
-
-    50% {
-        opacity: .3;
-    }
-
-    100% {
-        opacity: .6;
-    }
-}
-
 .b-visual__masks {
     path {
-        fill:#cacee5;
-        stroke:#30409a;
-        stroke-miterlimit:10;
-        stroke-width:2px;
+        fill: #cacee5;
+        stroke: #30409a;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
         @include transition(fill);
 
         &:hover {
-            fill: rgba($blue, .38);
+            fill: rgba($blue, 0.38);
         }
 
         &.is-empty {
@@ -134,9 +113,8 @@
             stroke: #b7bddc;
 
             &:hover {
-                fill: rgba($green, .18);
+                fill: rgba($green, 0.18);
             }
         }
     }
 }
-/* stylelint-enable */
