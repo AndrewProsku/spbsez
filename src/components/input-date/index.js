@@ -1,7 +1,15 @@
+/* eslint-disable */
 class InputDate {
     constructor(options) {
+        const one = 1;
+        const defShowMonth = 3;
+
         this.target = options.target;
         this.name = this._getName();
+
+        this.showMonths = this.target.dataset.showMonths || defShowMonth;
+        this.fromYear = this.target.dataset.fromYear || new Date().getFullYear();
+        this.fromMonth = (this.target.dataset.fromMonth - one) || new Date().getMonth();
 
         this.activeDayClass = 'b-input-date__day_is_active';
         this.disabledDayClass = 'b-input-date__day_is_disabled';
@@ -28,79 +36,51 @@ class InputDate {
                 if (!this._activeDay(day)) {
                     return;
                 }
-
-                console.log('hi');
             });
         });
     }
 
     _getCalendar() {
-        const rangeMonth = 5;
-        const d = new Date(2018, 10);
-        const year = d.getFullYear();
-        const month = d.getMonth();
+        const year = this.fromYear;
+        const month = this.fromMonth;
+        const sendDate = {month: []};
 
-        const date = {month: []};
-        const test = {
-            months: [{
-                name: 'Март',
-                year: 2019,
-                weeks: [{
-                    days: [{
-                        name: 1,
-                        fullDate: '01.03.2019',
-                        disabled: true
-                    }, {
-                        name: 2,
-                        fullDate: '02.03.2019',
-                        active: true
-                    }]
-                }, {
-                    days: [{
-                        name: 1,
-                        fullDate: '01.03.2019'
-                    }, {
-                        name: 1,
-                        fullDate: '01.03.2019'
-                    }]
-                }]
-            }]
-        };
-
-        for (let i = 0; i < rangeMonth; i++) {
+        for (let i = 0; i < this.showMonths; i++) {
             const activeMonth = month + i;
             const activeDate = new Date(year, activeMonth);
             const monthNumber = activeDate.getMonth();
             const one = 1;
+            const zero = 0;
             const six = 6;
-            const seven = 7;
+            const saturday = 5;
+            const sunday = 6;
+            const weekDays = 7;
 
-            date.month[i] = {
-                name: this.monthsName[activeDate.getMonth()],
-                year: activeDate.getFullYear(),
+            sendDate.month[i] = {
+                name : this.monthsName[activeDate.getMonth()],
+                year : activeDate.getFullYear(),
                 weeks: []
             };
 
             let week = [];
-
-            let y = 0;
+            let y = zero;
 
             while (activeDate.getMonth() === monthNumber) {
                 week[y] = {
-                    name: activeDate.getDate(),
+                    name    : activeDate.getDate(),
                     fullDate: `${activeDate.getDate()}.${monthNumber}.${activeDate.getFullYear()}`
                 };
 
-                if (this._getDay(activeDate) === six || this._getDay(activeDate) === 5) {
+                if (this._getDay(activeDate) === sunday || this._getDay(activeDate) === saturday) {
                     week[y].disabled = true;
                 }
 
                 y = y + one;
 
-                if (this._getDay(activeDate) % seven === six) {
-                    date.month[i].weeks.push(week);
+                if (this._getDay(activeDate) % weekDays === six) {
+                    sendDate.month[i].weeks.push(week);
                     week = [];
-                    y = 0;
+                    y = zero;
                 }
 
                 activeDate.setDate(activeDate.getDate() + one);
@@ -108,11 +88,11 @@ class InputDate {
 
 
             if (week.length) {
-                date.month[i].weeks.push(week);
+                sendDate.month[i].weeks.push(week);
             }
         }
 
-        console.log(date);
+        console.log(sendDate);
     }
 
     _getDay(date) {
@@ -160,3 +140,4 @@ class InputDate {
 }
 
 export default InputDate;
+/* eslint-enable */
