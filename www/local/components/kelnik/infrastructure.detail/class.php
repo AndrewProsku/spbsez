@@ -8,6 +8,7 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\BitrixHelper;
 use Kelnik\Infrastructure\ElementTrait;
+use Kelnik\Infrastructure\Model\MapTable;
 use Kelnik\Infrastructure\Model\PlatformTable;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
@@ -101,7 +102,34 @@ class InfrastructureDetail extends Bbc\Basis
             }
 
             $this->arResult['ELEMENT']['IMAGES'] = array_column(self::getImages((int) $this->arResult['ELEMENT']['ID']), 'VALUE');
-
+            $this->arResult['ELEMENT']['MAP_DATA'] = array_merge_recursive(
+                [
+                    'center' => [
+                        $this->arResult['ELEMENT']['MAP_COORDS_CENTER_LAT'],
+                        $this->arResult['ELEMENT']['MAP_COORDS_CENTER_LNG']
+                    ],
+                    'scrollwheel' => false,
+                    'fullScreenControl' => false,
+                    'customZoomControl' => true,
+                    'htmlMarkers' => [
+                        [
+                            'title' => $this->arResult['ELEMENT']['NAME'],
+                            'layout' => 'secondary',
+                            'coords' => [
+                                $this->arResult['ELEMENT']['MAP_COORDS_LAT'],
+                                $this->arResult['ELEMENT']['MAP_COORDS_LNG']
+                            ]
+                        ]
+                    ],
+                    'markers' => [],
+                    'routes' => []
+                ],
+                self::getMapElements(
+                    (int) $this->arResult['ELEMENT']['ID'],
+                    $this->arResult['ELEMENT']['MAP_COORDS_LAT'],
+                    $this->arResult['ELEMENT']['MAP_COORDS_LNG']
+                )
+            );
         } catch (\Exception $e) {
             $this->abortCache();
 
@@ -131,6 +159,57 @@ class InfrastructureDetail extends Bbc\Basis
         }
 
         $res = BitrixHelper::prepareFileFields($res, ['VALUE' => 'full']);
+
+        return $res;
+    }
+
+    public static function getMapElements(int $elementId, $elementLat, $elementLng)
+    {
+        $tmp = MapTable::getList([
+            'filter' => [
+                '=PLATFORM_ID' => $elementId,
+                '=ACTIVE' => MapTable::YES
+            ]
+        ])->fetchAll();
+
+        if (!$tmp) {
+            return [];
+        }
+
+        $res = [];
+
+        foreach ($tmp as $row) {
+            if (!$row['MAP_COORDS_LAT'] || !$row['MAP_COORDS_LNG']) {
+                continue;
+            }
+
+            $row = PlatformTable::replaceFieldsByLang($row, LANGUAGE_ID);
+
+            if ($row['MAKE_ROUTE'] == MapTable::YES) {
+                $res['routes'][] = [
+                    'points' => [
+                        [$elementLat, $elementLng],
+                        [$row['MAP_COORDS_LAT'], $row['MAP_COORDS_LNG']]
+                    ],
+                    'finishMarker' => [
+                        'title' => $row['NAME'],
+                        'theme' => 'violet'
+                    ],
+                    'activeStrokeWidth' => 6,
+                    'activeStrokeColor' => 'rgba(48,64,154,0.48)'
+                ];
+                continue;
+            }
+
+            $res['htmlMarkers'][] = [
+                'title' => $row['NAME'],
+                'layout' => 'text',
+                'coords' => [
+                    $row['MAP_COORDS_LAT'],
+                    $row['MAP_COORDS_LNG']
+                ]
+            ];
+        }
 
         return $res;
     }

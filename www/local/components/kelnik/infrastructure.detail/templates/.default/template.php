@@ -35,7 +35,7 @@
             </div>
             <div class="b-area-map__content">
                 <div class="b-infrastructure-map__yandex-map b-yandex-map b-yandex-map_theme_novoorlov j-yandex-map-noidorf"
-                     data-json="eyJjZW50ZXIiOls2MC4wNTYwNDcsMzAuMjcwNzE5XSwic2Nyb2xsd2hlZWwiOmZhbHNlLCJmdWxsU2NyZWVuQ29udHJvbCI6ZmFsc2UsImN1c3RvbVpvb21Db250cm9sIjp0cnVlLCJodG1sTWFya2VycyI6W3sidGl0bGUiOiJcdTA0MWRcdTA0M2VcdTA0MzJcdTA0M2VcdTA0M2VcdTA0NDBcdTA0M2JcdTA0M2VcdTA0MzJcdTA0NDFcdTA0M2FcdTA0MzBcdTA0NGYiLCJsYXlvdXQiOiJzZWNvbmRhcnkiLCJjb29yZHMiOls2MC4wNTM0MDAsIDMwLjIzMTcxNF19XSwibWFya2VycyI6W10sInJvdXRlcyI6W3sicG9pbnRzIjpbWzYwLjA1MzQwMCwzMC4yMzE3MTRdLFs2MC4wNzIzNDgsMzAuMTgzNjc4XV0sImZpbmlzaE1hcmtlciI6eyJ0aXRsZSI6Ilx1MDAzMVx1MDAzMCBcdTA0M2NcdTA0MzhcdTA0M2RcdTA0NDNcdTA0NDIgXHUwNDNlXHUwNDQyIFx1MDQxYVx1MDQxMFx1MDQxNCIsInRoZW1lIjoidmlvbGV0In0sImFjdGl2ZVN0cm9rZVdpZHRoIjo2LCJhY3RpdmVTdHJva2VDb2xvciI6InJnYmEoNDgsNjQsMTU0LDAuNDgpIn0seyJwb2ludHMiOltbNjAuMDUzNDAwLDMwLjIzMTcxNF0sWzYwLjAzNTg1NiwzMC4zMTkzNTJdLFs1OS45NTQ5OTQsMzAuMzUwNDMwXV0sInZpYVBvaW50Ijp7InRpdGxlIjoiXHUwMDMyXHUwMDMwIFx1MDQzY1x1MDQzOFx1MDQzZFx1MDQ0M1x1MDQ0MiBcdTA0MzRcdTA0M2UgXHUwNDQ2XHUwNDM1XHUwNDNkXHUwNDQyXHUwNDQwXHUwNDMwIiwidGhlbWUiOiJwaW5rIn0sImFjdGl2ZVN0cm9rZVdpZHRoIjo2LCJhY3RpdmVTdHJva2VDb2xvciI6InJnYmEoMTAyLDQ1LDE0NSwwLjQ4KSJ9XX0=">
+                     data-json="<?= base64_encode(json_encode($arResult['ELEMENT']['MAP_DATA'])); ?>">
                     <div id="first" class="b-yandex-map__base"></div>
                 </div>
             </div>
