@@ -4,8 +4,8 @@ namespace Kelnik\Report\Model;
 
 use Bitrix\Main\Application;
 use Bitrix\Main\Context;
+use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ORM\Event;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
@@ -115,25 +115,7 @@ class ReportsTable extends DataManager
         return parent::update($id, $data);
     }
 
-    public static function onAfterAdd(Event $event)
-    {
-        self::clearComponentCache($event);
-        parent::onAfterAdd($event);
-    }
-
-    public static function onAfterUpdate(Event $event)
-    {
-        self::clearComponentCache($event);
-        parent::onAfterUpdate($event);
-    }
-
-    public static function onBeforeDelete(Event $event)
-    {
-        self::clearComponentCache($event);
-        parent::onBeforeDelete($event);
-    }
-
-    protected static function clearComponentCache(Event $event)
+    public static function clearComponentCache(Event $event)
     {
         global $USER;
 
@@ -141,13 +123,13 @@ class ReportsTable extends DataManager
             $id = ArrayHelper::getValue($event->getParameter('id'), 'ID', 0);
             $companyId = Context::getCurrent()->getRequest()->isAdminSection()
                         ? ReportsTable::getByPrimary($id)->fetchObject()->getCompanyId()
-                        : Profile::getInstance($USER->GetID())->getCompanyId();
+                        : Profile::getInstance((int)$USER->GetID())->getCompanyId();
 
             if (!$id && !$companyId) {
                 return;
             }
 
-            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:report_list_' . $companyId);
+            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:reportList_' . $companyId);
             if ($id) {
                 Application::getInstance()->getTaggedCache()->clearByTag('kelnik:report_' . $companyId . '_' . $id);
             }

@@ -37,7 +37,6 @@ $APPLICATION->SetTitle("Управляющая компания");
         </div>
 
         <div class="l-management-company__quote" id="mission">
-            <?php $APPLICATION->IncludeFile('inc_animation.php'); ?>
             <div class="b-quote">
                 <?$APPLICATION->IncludeComponent(
                     "kelnik:textblocks",

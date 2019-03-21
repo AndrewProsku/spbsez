@@ -51,7 +51,8 @@ if (!$USER->IsAuthorized()) {
                 array(
                     "COMPONENT_TEMPLATE" => ".default",
                     "CACHE_TYPE" => "N",
-                    "CACHE_TIME" => "3600"
+                    "CACHE_TIME" => "3600",
+                    "SUB_TYPE" => "standard"
                 ),
                 array()
             ); ?>

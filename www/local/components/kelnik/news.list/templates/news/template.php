@@ -16,7 +16,7 @@
                 <?php foreach ($arResult['YEARS'] as $year): ?>
                     <div class="b-mini-filter__item">
                         <input type="checkbox"
-                               name="year"
+                               name="year[]"
                                value="<?= $year['NAME']; ?>"
                                data-text="<?= $year['NAME']; ?>"
                                id="years<?= $year['NAME']; ?>"

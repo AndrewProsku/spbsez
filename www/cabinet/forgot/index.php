@@ -25,7 +25,7 @@ if ($USER->IsAuthorized()) {
 
 <div class="l-password-recovery">
 
-    <div class="b-title b-password-recovery-title">
+    <div class="b-title b-password-recovery-title j-new-password-title">
         <h1><? $APPLICATION->ShowTitle(false); ?></h1>
     </div>
 
@@ -40,7 +40,7 @@ if ($USER->IsAuthorized()) {
         array()
     ); ?>
 
-    <div class="password-recovery-block j-password-recovery-button password-recovery-block_is_hidden">
+    <div class="password-recovery-block password-recovery-block-padding j-password-recovery-button password-recovery-block_is_hidden">
         <a href="<?= LANG_DIR; ?>cabinet/auth/" class="button password-recovery__button">
             Войти в личный кабинет
         </a>

@@ -37,7 +37,6 @@ $APPLICATION->SetTitle("Managing Company");
         </div>
 
         <div class="l-management-company__quote" id="mission">
-            <?php $APPLICATION->IncludeFile('inc_animation.php'); ?>
             <div class="b-quote">
                 <?$APPLICATION->IncludeComponent(
                     "kelnik:textblocks",
@@ -83,7 +82,7 @@ $APPLICATION->SetTitle("Managing Company");
             <section class="b-ask-for-advice">
                 <h2 class="b-ask-for-advice__title b-title">Become a resident</h2>
                 <div class="b-ask-for-advice__text">
-                    <p>To become a resident of the SEZ “St. Petersburg”, please do not hesitate to contact our colleagues.</p>
+                    <p>To become a resident of the SEZ «St. Petersburg», please do not hesitate to contact our colleagues.</p>
                 </div>
                 <a href="/en/contacts/#management" class="b-ask-for-advice__link button">Department contacts</a>
             </section>

@@ -5,10 +5,9 @@ namespace Kelnik\User\Components;
 use Bex\Bbc;
 use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Requests\Model\AreaTable;
 use Kelnik\Requests\Model\ServiceTable;
-use Kelnik\Requests\Model\StandartTable;
 use Kelnik\Requests\Model\TypeTable;
 use Kelnik\Userdata\Profile\Profile;
 use Kelnik\Userdata\Profile\ProfileSectionRequests;
@@ -29,84 +28,91 @@ class RequestForm extends Bbc\Basis
     ];
     protected $cacheTemplate = false;
 
+    /**
+     * @var Profile
+     */
+    protected $profile;
+
+    /**
+     * @var ProfileSectionRequests
+     */
+    protected $sectionRequests;
+
+    protected function executeProlog()
+    {
+        global $USER;
+
+        try {
+            $this->profile = Profile::getInstance((int)$USER->GetID());
+            $this->sectionRequests = new ProfileSectionRequests($this->profile);
+            $this->sectionRequests->setFormType($this->arParams['SUB_TYPE']);
+        } catch (\Exception $exception) {
+            return false;
+        }
+
+        if (!$this->profile->canRequest()) {
+            LocalRedirect(LANG_DIR . 'cabinet/');
+        }
+    }
+
     protected function executeMain()
     {
         global $USER;
 
-        if ($this->arParams['SUB_TYPE'] === 'service') {
+        if ($this->arParams['SUB_TYPE'] === TypeTable::SUB_TYPE_SERVICE) {
             $this->arResult['TYPES'] = ServiceTable::getTypes();
 
             return true;
         }
 
         $request = Context::getCurrent()->getRequest();
+
         $this->arResult['ERRORS'] = [
             'FIELDS' => [],
             'TEXT' => []
-        ];
-        $arResult['FORM'] = [
-            'NAME' => '',
-            'THEME' => 0,
-            'MESSAGE' => ''
         ];
 
         if (!$USER->IsAuthorized()) {
             return false;
         }
 
-        try {
-            $profile = Profile::getInstance($USER->GetID());
-            $sectionRequests = new ProfileSectionRequests($profile);
-        } catch (\Exception $exception) {
-            return false;
-        }
-
-        if (!$profile->canRequest()) {
-            LocalRedirect(LANG_DIR . 'cabinet/');
-        }
-
         if ($request->isPost()) {
             $this->abortCache();
-            $postData = $request->getPostList()->toArray();
-            foreach ($arResult['FORM'] as $k => $v) {
-                $postKey = strtolower($k);
 
-                $row = ArrayHelper::getValue($postData, $postKey);
-                $row = $postKey == 'theme'
-                        ? (int) $row
-                        : htmlentities($row, ENT_QUOTES, 'UTF-8');
-                $this->arResult['FORM'][$k] = $row;
+            $this->arResult['FORM'] = $this->sectionRequests->prepareData($request->getPostList()->toArray());
+            $this->arResult['ERRORS']['FIELDS'] = $this->sectionRequests->getFormErrors();
 
-                if ($postKey == 'message' && mb_strlen($row) < 4) {
-                    $row = null;
-                }
-
-                if (!$row) {
-                    $this->arResult['ERRORS']['FIELDS'][$k] = Loc::getMessage('KELNIK_REQ_FIELD_REQUIRED');
-                }
-            }
-
-            if (!$sectionRequests->canAddNewRow()) {
+            if (!$this->sectionRequests->canAddNewRow()) {
                 $this->arResult['ERRORS']['TEXT'][] = Loc::getMessage('KELNIK_REQ_TIME_LEFT');
             }
 
             if (!$this->arResult['ERRORS']['FIELDS'] && !$this->arResult['ERRORS']['TEXT']) {
-                $this->arResult['REQUEST_ID'] = $sectionRequests->add([
-                    'TYPE_ID' => (int) $this->arResult['FORM']['THEME'],
-                    'NAME'    => $this->arResult['FORM']['NAME'],
-                    'BODY'    => $this->arResult['FORM']['MESSAGE']
-                ]);
+                $this->arResult['REQUEST_ID'] = $this->sectionRequests->add($this->arResult['FORM']);
 
-                $this->arResult['USER_EMAIL'] = $profile->getField('EMAIL');
+                $this->arResult['USER_EMAIL'] = $this->profile->getField('EMAIL');
 
                 return true;
             }
         }
 
-        $this->arResult['TYPES'] = TypeTable::getAssoc([
+        $typesTable = $this->arParams['SUB_TYPE'] === TypeTable::SUB_TYPE_STANDARD
+                        ? TypeTable::class
+                        : AreaTable::class;
+
+        if ($this->arParams['SUB_TYPE'] === TypeTable::SUB_TYPE_PERMIT) {
+            if (empty($this->arResult['FORM']['_PASS_'])) {
+                $this->arResult['FORM']['_PASS_'] = [[]];
+            }
+
+            if (!empty($this->arResult['FORM']['DATE_START'])) {
+                $this->arResult['FORM']['DATE_START'] = $this->arResult['FORM']['DATE_START']->format('d.m.Y, H:i');
+            }
+        }
+
+        $this->arResult['TYPES'] = $typesTable::getAssoc([
             'select' => ['ID', 'NAME'],
             'filter' => [
-                '=ACTIVE' => TypeTable::YES
+                '=ACTIVE' => $typesTable::YES
             ],
             'order' => [
                 'SORT' => 'ASC'

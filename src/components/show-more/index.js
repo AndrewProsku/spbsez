@@ -4,7 +4,10 @@
  * @link https://kelnik.gitbooks.io/
  */
 
+import Language from '../language';
 import Utils from 'common/scripts/utils';
+
+const Lang = new Language();
 
 class ShowMore {
     constructor() {
@@ -106,7 +109,7 @@ class ShowMore {
      * @private
      */
     _changeText(text) {
-        this.button.innerHTML = `Показать еще ${text}`;
+        this.button.innerHTML = `${Lang.get('showMore.button')} ${text}`;
     }
 
     /**

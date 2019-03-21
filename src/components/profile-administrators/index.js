@@ -1,7 +1,10 @@
 import $ from 'jquery';
 import InputTel from '../../components/forms/telephone/telephone';
+import Language from '../language';
 import templateAdmin from './administrator.twig';
 import Utils from '../../common/scripts/utils';
+
+const Lang = new Language();
 
 class ProfileAdministrators {
     constructor() {
@@ -131,15 +134,13 @@ class ProfileAdministrators {
         const textValue = [];
 
         selectAccordion.querySelectorAll('.b-checkbox-input').forEach((checkbox) => {
-            if (checkbox.checked) {
-                let label = Array.from(checkbox.nextElementSibling.getElementsByClassName('b-checkbox-text'));
+            let label = Array.from(checkbox.nextElementSibling.getElementsByClassName('b-checkbox-text'));
 
-                accessFields[checkbox.name] = checkbox.value;
+            accessFields[checkbox.name] = checkbox.checked ? checkbox.value : 0;
 
-                if (label) {
-                    label = label.shift();
-                    accesses[checkbox.id] = label.innerText;
-                }
+            if (label && accessFields[checkbox.name]) {
+                label = label.shift();
+                accesses[checkbox.id] = label.innerText;
             }
         });
 
@@ -264,7 +265,7 @@ class ProfileAdministrators {
     }
 
     showEmptyPage() {
-        const template = `<div class="b-empty-page j-empty-page is-active"><p>Администраторов пока нет</p></div>`;
+        const template = `<div class="b-empty-page j-empty-page is-active"><p>${Lang.get('lk.noAdmins')}</p></div>`;
         const emptyPageBlock = new DOMParser().parseFromString(template, 'text/html').body.firstChild;
 
         this.$administrators.parentNode.insertBefore(emptyPageBlock, this.$administrators);

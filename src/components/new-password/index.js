@@ -1,5 +1,8 @@
 import $ from 'jquery';
+import Language from '../language';
 import Utils from '../../common/scripts/utils';
+
+const Lang = new Language();
 
 class NewPassword {
     constructor() {
@@ -13,8 +16,8 @@ class NewPassword {
         this.isNewPassword = false;
         this.isRepeatPassword = false;
 
-        this.emptyErrorMessage = 'Поле не может быть пустым';
-        this.unequalErrorMessage = 'Введённые пароли не совпадают';
+        this.emptyErrorMessage = Lang.get('validation.required');
+        this.unequalErrorMessage = Lang.get('validation.passwordConfirm');
     }
 
     init() {
@@ -50,18 +53,15 @@ class NewPassword {
                 '/api/changePassword/',
                 {
                     success(response) {
-                        const successStatus = 1;
-                        const failStatus = 0;
-
-                        if (response.request.status === successStatus) {
+                        if (response.request.status) {
                             that.$successButton.classList.remove('password-recovery-block_is_hidden');
                             that.showSuccessMessage();
                             Utils.removeElement(that.$form);
-                        } else if (response.request.status === failStatus) {
-                            const errorMessage = response.request.errors.join('</br>');
 
-                            that.errorRepeatPassword(errorMessage);
+                            return;
                         }
+
+                        that.errorRepeatPassword(response.request.errors.join('</br>'));
                     },
                     error(error) {
                         console.error(error);
@@ -135,11 +135,14 @@ class NewPassword {
     }
 
     showSuccessMessage() {
-        const successMessage = `Ваш пароль успешно сохранен`;
         const $title = document.querySelector('.j-new-password-title h1');
 
+        if (!$title) {
+            return;
+        }
+
         Utils.clearHtml($title);
-        Utils.insetContent($title, successMessage);
+        Utils.insetContent($title, Lang.get('lk.savePassword'));
     }
 }
 

@@ -16,9 +16,6 @@
 return [
     'kelnik.admin_helper' => null,
     'kelnik.userdata' => null,
-    'kelnik.requests' => [
-        'excludeAdminSection' => true
-    ],
     'bex.bbc' => [
         'excludeAdminSection' => true
     ]

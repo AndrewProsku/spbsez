@@ -81,7 +81,9 @@ class NewsList extends Bbc\Basis
 
     protected function executeMain()
     {
-        $this->setResultCacheKeys(['ELEMENTS', 'TAGS', 'YEARS', 'CNT']);
+        $this->setResultCacheKeys(['ELEMENTS', 'TAGS', 'YEARS', 'CNT', 'MORE']);
+        self::registerCacheTag('kelnik:newsList_' . $this->arParams['SECTION_ID']);
+
         $filter = [
             '=ACTIVE' => NewsTable::YES
         ];

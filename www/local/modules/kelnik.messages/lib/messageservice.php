@@ -10,7 +10,7 @@ use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Messages\Model\MessagesTable;
 use Kelnik\Messages\Model\MessageUsersTable;
-use Kelnik\Requests\Model\NotifyTable;
+use Kelnik\Messages\Model\NotifyTable;
 use Kelnik\Userdata\Profile\Profile;
 
 class MessageService
@@ -569,7 +569,8 @@ class MessageService
         try {
             $tagCache = Application::getInstance()->getTaggedCache();
             foreach ($users as $userId) {
-                $tagCache->clearByTag('kelnik:messages_list_' . $userId);
+                $tagCache->clearByTag('kelnik:messagesList_' . $userId);
+                $tagCache->clearByTag('bitrix:menuPersonal_' . $userId);
             }
         } catch (\Exception $e) {
         }

@@ -46,7 +46,7 @@ class ApiProcessProfile extends ApiProcessAbstract
         $action = trim(ArrayHelper::getValue($request, 'action'));
 
         try {
-            $this->profile = Profile::getInstance($USER->GetID());
+            $this->profile = Profile::getInstance((int)$USER->GetID());
             $this->initSection($action);
         } catch (\Exception $e) {
             return false;

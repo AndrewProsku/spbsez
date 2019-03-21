@@ -2,6 +2,7 @@
 namespace Kelnik\Messages\Model\AdminInterface;
 
 use Bitrix\Main\Application;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
 use Kelnik\Helpers\ArrayHelper;
@@ -25,13 +26,16 @@ class MessagesEditHelper extends AdminEditHelper
         return parent::hasWriteRights();
     }
 
-    public function hasWriteRightsElement($element = [])
+    protected function editAction()
     {
-        if (empty($element['ID']) || empty($element['ACTIVE'])) {
-            return parent::hasWriteRightsElement($element);
+        if (!empty($this->data['ACTIVE']) && $this->data['ACTIVE'] !== MessagesTable::YES) {
+            $this->setContext(AdminEditHelper::OP_EDIT_ACTION_BEFORE);
+            $this->addErrors(Loc::getMessage('KELNIK_ADMIN_HELPER_EDIT_WRITE_FORBIDDEN'));
+
+            return false;
         }
 
-        return $element['ACTIVE'] !== MessagesTable::YES;
+        return parent::editAction();
     }
 
     public function saveElement($id = null)
@@ -79,6 +83,7 @@ class MessagesEditHelper extends AdminEditHelper
                 ]
             ]);
             Application::getInstance()->getTaggedCache()->clearByTag('kelnik:messagesList');
+            Application::getInstance()->getTaggedCache()->clearByTag('bitrix:menuPersonal');
         } catch (\Exception $e) {
             return false;
         }
@@ -111,14 +116,20 @@ class MessagesEditHelper extends AdminEditHelper
         }
 
         $users = [];
-
         $sqlHelper = Application::getConnection()->getSqlHelper();
+
+        foreach ($companies as $row) {
+            $users[] = '(' . $sqlHelper->convertToDbInteger($id) . ', ' .
+                        $sqlHelper->convertToDbInteger($row) . ', ' .
+                        $sqlHelper->convertToDbDateTime(new DateTime()) .
+                        ')';
+        }
 
         while($row = $tmp->Fetch()) {
             $users[] = '(' . $sqlHelper->convertToDbInteger($id) . ', ' .
-                $sqlHelper->convertToDbInteger($row['ID']) . ', ' .
-                $sqlHelper->convertToDbDateTime(new DateTime()) .
-                ')';
+                        $sqlHelper->convertToDbInteger($row['ID']) . ', ' .
+                        $sqlHelper->convertToDbDateTime(new DateTime()) .
+                        ')';
         }
 
         try {

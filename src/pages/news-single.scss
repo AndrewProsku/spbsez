@@ -93,11 +93,20 @@
 }
 
 .l-news-single__actions-wrap {
-    max-width: 1060px;
+    @include column(32, 32);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+
+
+    @media #{$laptop} {
+        @include column(20, 30);
+    }
+
+    @media #{$fullhd} {
+        @include column(20, 28);
+    }
 
     @media #{$tablet-portrait} {
         margin-bottom: -40px;
