@@ -1,67 +1,142 @@
+/* stylelint-disable */
 .b-visual {
-    position: relative;
-    overflow: hidden;
     width: 100%;
     height: 100%;
-}
-
-// SVG
-.b-visual__svg-wrapper {
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-}
-
-.b-visual__tooltip {
+    overflow: hidden;
     position: relative;
-    z-index: 3;
 }
 
-.b-visual__rotate-button {
-    position: absolute;
-    z-index: 2;
-    width: 100px;
-    height: 100px;
-    border: none;
-    border-radius: 50%;
-    background-color: lightblue;
-    bottom: 50px;
-    left: 50px;
-    color: white;
-    text-align: center;
-    line-height: 100px;
-    cursor: pointer;
-}
+.b-visual__svg {
+    transition-duration: 0.8s;
 
-.b-visual__parametric-button {
-    position: absolute;
-    z-index: 2;
-    width: 150px;
-    height: 100px;
-    border: none;
-    background-color: lightblue;
-    bottom: 50px;
-    right: 50px;
-    color: white;
-    text-align: center;
-    line-height: 100px;
-    cursor: pointer;
-}
-
-.b-visual__filter {
-    position: absolute;
-    z-index: 2;
-    width: auto;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-path:hover {
-    @media #{$laptop} {
-        transition: fill-opacity 0.3s ease;
-        fill-opacity: 0.8;
+    path {
         cursor: pointer;
     }
 }
+
+.b-visual__breadcrumbs {
+    position: absolute;
+    left: 40px;
+    top: 23px;
+    z-index: 2;
+}
+
+.l-layout-selectors__visual {
+
+    .b-visual__point {
+        cursor: pointer;
+    }
+
+    .b-infra-points {
+        display: none;
+
+        &.is-active {
+            display: block;
+        }
+    }
+
+    .b-infra-points__tooltip {
+        position: fixed;
+        pointer-events: none; // пока ничего не кликается внутри тултипа считаем, что нужно
+        z-index: 1;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.b-visual__pointer {
+    display: none;
+    position: absolute;
+    top: 23px;
+    left: 63%;
+    line-height: 18px;
+    color: $white;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: -19px;
+        display: block;
+        width: 8px;
+        height: 11px;
+        margin-top: 3px;
+        margin-right: 8px;
+    }
+
+    &.is-active {
+        display: block;
+    }
+
+    &.b-visual__pointer-bottom,
+    &.b-visual__pointer-bottom-right {
+        right: 65px;
+        top: auto;
+        bottom: 30px;
+        left: auto;
+
+        &:before {
+            left: auto;
+            right: -25px;
+            transform: rotate(120deg);
+        }
+    }
+
+    &.b-visual__pointer-bottom-right {
+        text-align: right;
+        bottom: 90px;
+    }
+}
+
+//state
+.b-visual__image_is_animated {
+    transform: scale(1.4);
+    animation: loader 2s infinite ease;
+}
+
+.b-visual__image-cloned_is_animated {
+    opacity: 0;
+    transform: scale(1.15);
+}
+
+.b-visual__svg_is_blurred {
+    filter: blur(20px);
+}
+
+@keyframes loader {
+    0% {
+        opacity: .6;
+    }
+
+    50% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .6;
+    }
+}
+
+.b-visual__masks {
+    path {
+        fill:#cacee5;
+        stroke:#30409a;
+        stroke-miterlimit:10;
+        stroke-width:2px;
+        @include transition(fill);
+
+        &:hover {
+            fill: rgba($blue, .38);
+        }
+
+        &.is-empty {
+            fill: $white;
+            stroke: #b7bddc;
+
+            &:hover {
+                fill: rgba($green, .18);
+            }
+        }
+    }
+}
+/* stylelint-enable */

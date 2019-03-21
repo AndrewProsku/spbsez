@@ -1,4 +1,3 @@
-import '../styles/app.scss';
 import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
@@ -33,6 +32,7 @@ import templateMessages from 'components/messages/messages.twig';
 import Useful from '../../components/useful';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
+// import Visual from 'components/visual';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
 
@@ -283,7 +283,7 @@ const noidorfMapWrapper = document.querySelector('.j-yandex-map-noidorf');
 if (noidorfMapWrapper) {
     yandexMapLoad(noidorfMapWrapper.dataset.lang || 'ru')
         .then((ymaps) => {
-            (new YandexMap(ymaps)).init({wrapper: noidorfMapWrapper, zoom: 12});
+            (new YandexMap(ymaps)).init({wrapper: noidorfMapWrapper, zoom: 11}); // 12
         })
         .catch((error) => {
             console.error(`При загрузке яндекс карт произошла ошибка: ${error}`);
@@ -854,3 +854,11 @@ if (residentMainScreen) {
     window.addEventListener('scroll', getOverlayScrollTop);
 }
 
+// const visual = new Visual();
+// const allDOM = document.body;
+// const areaPlane = new Visual();
+// Инициализация визуального
+// areaPlane.init({
+//     allDOM,
+//     target: allDOM.querySelector('.b-visual')
+// });

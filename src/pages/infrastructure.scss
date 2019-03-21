@@ -179,6 +179,12 @@
     }
 }
 
+.b-infrastructure-map__title .b-infrastructure-switch {
+    @media #{$tablet-portrait}  {
+        display: none;
+    }
+}
+
 .b-infrastructure-map__title h1 {
     margin: 0;
     @include font-size("h2");
