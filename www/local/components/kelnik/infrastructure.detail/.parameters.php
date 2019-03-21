@@ -30,6 +30,11 @@ try {
                 'NAME' => Loc::getMessage('KELNIK_INFRA_DETAIL_ELEMENT_ID'),
                 'TYPE' => 'string'
             ],
+            'ELEMENT_CODE' => [
+                'PARENT' => 'BASE',
+                'NAME' => Loc::getMessage('KELNIK_INFRA_DETAIL_ELEMENT_CODE'),
+                'TYPE' => 'string'
+            ],
             'SET_404' => [
                 'PARENT' => 'OTHERS',
                 'NAME' => Loc::getMessage('KELNIK_INFRA_DETAIL_SET_404'),

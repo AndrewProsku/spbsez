@@ -4,12 +4,16 @@ $MESS['KELNIK_INFRASTRUCTURE_SORT'] = 'Сортировка';
 $MESS['KELNIK_INFRASTRUCTURE_ACTIVE'] = 'Активен';
 $MESS['KELNIK_INFRASTRUCTURE_NAME'] = 'Название';
 $MESS['KELNIK_INFRASTRUCTURE_NAME_EN'] = 'Название (англ.)';
+$MESS['KELNIK_INFRASTRUCTURE_ALIAS'] = 'Алиас';
 
 $MESS['KELNIK_INFRASTRUCTURE_TEXT'] = 'Описание';
 $MESS['KELNIK_INFRASTRUCTURE_TEXT_EN'] = 'Описание (англ.)';
 
 $MESS['KELNIK_INFRASTRUCTURE_VIDEO'] = 'Видео';
+$MESS['KELNIK_INFRASTRUCTURE_IMAGE_BG'] = 'Подложка для видео';
 $MESS['KELNIK_INFRASTRUCTURE_IMAGE'] = 'Изображение';
+$MESS['KELNIK_INFRASTRUCTURE_AREA_BG_RU'] = 'Планировка территории';
+$MESS['KELNIK_INFRASTRUCTURE_AREA_BG_EN'] = 'Планировка территории (англ.)';
 $MESS['KELNIK_INFRASTRUCTURE_MAP_COORDS_LAT'] = 'Координаты карты (lat)';
 $MESS['KELNIK_INFRASTRUCTURE_MAP_COORDS_LNG'] = 'Координаты карты (lng)';
 $MESS['KELNIK_INFRASTRUCTURE_MAP_COORDS_CENTER_LAT'] = 'Координаты центра карты (lat)';
@@ -28,7 +32,8 @@ $tabMess = [
     'TEXT_ADVANTAGES1' => 'Преимущества 1',
     'TEXT_ADVANTAGES2' => 'Преимущества 2',
     'TEXT_ADVANTAGES3' => 'Преимущества 3',
-    'IMAGES' => 'Галерея'
+    'IMAGES' => 'Галерея',
+    'HEADER_GALLERY' => 'Заголовок галереи'
 ];
 
 foreach (\Kelnik\Infrastructure\Model\PlatformTable::getFields() as $field) {

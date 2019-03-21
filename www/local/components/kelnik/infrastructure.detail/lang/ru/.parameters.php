@@ -4,6 +4,7 @@ $MESS['KELNIK_INFRA_DETAIL_GROUP_SEO'] = 'Поисковая оптимизац�
 $MESS['KELNIK_INFRA_DETAIL_GROUP_OTHERS'] = 'Прочее';
 
 $MESS['KELNIK_INFRA_DETAIL_ELEMENT_ID'] = 'Идентификатор элемента';
+$MESS['KELNIK_INFRA_DETAIL_ELEMENT_CODE'] = 'Код элемента';
 $MESS['ELEMENT_CODE_TIP'] = 'Вместо фильтрации по идентификатору';
 $MESS['KELNIK_INFRA_DETAIL_RESULT_PROCESSING_MODE'] = 'Режим обработки результатов';
 $MESS['KELNIK_INFRA_DETAIL_RESULT_PROCESSING_MODE_DEFAULT'] = 'Обычный';
