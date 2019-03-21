@@ -1,5 +1,5 @@
 .l-infrastructure-resident {
-	
+
 }
 
 /*====================================
@@ -63,7 +63,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/images/infrastructure/noidorf-main-screen-1920.jpg');
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -73,6 +72,14 @@
     @media #{$laptop} {
         background-image: none;
     }
+}
+
+.b-area-main-screen__video-wrapper_theme_noidorf {
+    background-image: url('/images/infrastructure/noidorf-main-screen-1920.jpg');
+}
+
+.b-area-main-screen__video-wrapper_theme_novoorl {
+    background-image: url('/images/infrastructure/novoorlov-main-screen.jpg');
 }
 
 .b-area-main-screen__video {
@@ -477,6 +484,7 @@
 }
 
 .b-area-descr__block {
+    @include font-size("p2");
     order: 3;
 
     @media #{$tablet-portrait} {
@@ -932,26 +940,52 @@
     z-index: 2;
 }
 
-.b-area-map__content {
-    width: 100%;
-    min-height: 370px;
-    //height: 100%;
-    flex-grow: 1;
-    background-color: $grey;
+.b-area-map__title {
+    @include padding-level(top, violet);
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    position: absolute;
+    z-index: 1;
 
-    @media #{$tablet-portrait} {
-        min-height: 890px;
+    @media #{$tablet-portrait}  {
+        box-sizing: content-box;
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(3, 36);
     }
 
     @media #{$fullhd} {
-        min-height: 1080px;
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
+}
+
+.b-area-map__title h2 {
+    margin: 0;
+    @include font-size("h2");
+    letter-spacing: -0.009em;
+}
+
+.b-area-map__content {
+    width: 100%;
+    height: 370px;
+    position: relative;
+    background-color: $grey;
+
+    @media #{$tablet-portrait} {
+        height: 890px;
+    }
+
+    @media #{$fullhd} {
+        height: 1080px;
     }
 }
 
 .b-area-map .b-yandex-map__zoom-controls {
-    @media #{$tablet-portrait} {
-        display: none;
-    }
+    display: none;
+
     @media #{$laptop} {
         display: flex;
         transform: translate(-16px, 411px)
@@ -960,6 +994,21 @@
     @media #{$fullhd} {
         transform: translate(-34px, 506px);
     }
+}
+
+.b-yandex-map_theme_noidorf .b-yandex-map__html-text_theme_violet {
+    transform: translate(-50%, 30%);
+}
+
+.b-yandex-map_theme_noidorf .b-yandex-map__html-text_theme_pink {
+    transform: translate(-50%, -130%);
+}
+
+.b-yandex-map_theme_novoorlov  .b-yandex-map__html-text_theme_violet {
+    transform: translate(-50%, -140%);
+}
+.b-yandex-map_theme_novoorlov  .b-yandex-map__html-text_theme_pink {
+    transform: translate(-110%, -50%);
 }
 
 .b-area-map__description {
@@ -1018,7 +1067,8 @@
     }
 
     @media #{$tablet-portrait} {
-        @include post(1, 30);
+        @include column(13, 31);
+        @include post(1, 31);
         padding-top:  16px;
         width: 50%;
     }
@@ -1061,5 +1111,152 @@
 
     @media #{$fullhd} {
         @include prefix(0.5, 28);
+    }
+}
+
+/*=== Планировка территории ===*/
+
+.b-area-planoplan {
+    position: relative;
+    z-index: 2;
+
+    iframe {
+        min-height: 800px;
+        width: 100%;
+
+        @media #{$tablet-portrait} {
+            min-height: 800px;
+        }
+
+        @media #{$laptop} {
+            min-height: 720px;
+        }
+
+        @media #{$fullhd} {
+            min-height: 1080px;
+        }
+    }
+}
+
+
+.b-area-plan {
+    background-color: $bg-map;
+    position: relative;
+    z-index: 2;
+}
+
+.b-area-plan__title {
+    @include prefix(2, 36);
+    @include suffix(2, 36);
+    @include padding-level('top', violet);
+    @include padding-level('bottom', yellow);
+
+    @media #{$tablet-portrait} {
+        @include suffix(3, 36);
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(4, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+    }
+
+    h2 {
+        margin-bottom: 0;
+    }
+}
+
+.b-visual-tooltip {
+    position: absolute; //fixed
+    z-index: 5;
+    width: 280px;
+    background-color: $white;
+    box-shadow: 0 10px 20px rgba(48, 64, 154, 0.24);
+    border-radius: 4px;
+}
+
+.b-visual-tooltip_theme_empty {
+    padding: 30px;
+}
+
+.b-visual-tooltip__img {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.b-visual-tooltip__body {
+    padding: 0 30px 30px;
+}
+
+.b-visual-tooltip__title {
+    font-family: $font-bold;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.b-visual-tooltip__description {
+    font-size: 14px;
+    line-height: 24px;
+    opacity: .72;
+    padding-bottom: 7px;
+}
+
+.b-visual-tooltip__info {
+    margin-bottom: 12px;
+}
+
+.b-visual-tooltip__info-text {
+    font-size: 14px;
+    line-height: 16px;
+    opacity: .72;
+    margin-bottom: 3px;
+}
+
+.b-visual-tooltip__info-value {
+    font-family: $font-bold;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.b-visual-tooltip__site-link {
+    font-size: 14px;
+    height: 18px;
+    padding-left: 22px;
+    background-image: url("/images/residents/clip.svg");
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    background-size: 14px 7px;
+}
+
+.b-visual-tooltip__features-item {
+    font-size: 12px;
+    color: rgba($black, .72);
+    padding-left: 27px;
+    padding-bottom: 12px;
+    background-repeat: no-repeat;
+    background-position: 0 2px;
+
+    &_icon_electricity {
+        background-image: url('/images/infrastructure/electricity-no-bg.svg');
+        background-size: 10px 14px;
+        background-position: 2px 2px;
+    }
+    &_icon_heating {
+        background-image: url('/images/infrastructure/heating-no-bg.svg');
+        background-size: 12px 10px;
+    }
+    &_icon_water {
+        background-image: url('/images/infrastructure/water-no-bg.svg');
+        background-size: 9px 13px;
+        background-position: 2px 2px;
+    }
+    &_icon_sanitation {
+        background-image: url('/images/infrastructure/sanitation-no-bg.svg');
+        background-size: 12px 12px;
     }
 }
