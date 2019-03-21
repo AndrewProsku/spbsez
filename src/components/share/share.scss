@@ -14,20 +14,14 @@
     }
 }
 
-.b-share__item {
-    @include transition(opacity);
+.b-share__item,
+.ya-share2__link {
     width: 35px;
     height: 35px;
-    margin-right: 14px;
-    background-repeat: no-repeat;
-    background-position: center;
+    opacity: 0;
 
     &:last-child {
         margin-right: 0;
-    }
-
-    &:hover {
-        opacity: 0.6;
     }
 
     @media #{$tablet-portrait} {
@@ -35,14 +29,29 @@
     }
 }
 
-.b-share__item_icon_fb {
+.ya-share2__item {
+    @include transition(opacity);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 14px !important; //stylelint-disable-line
+
+    &:last-child {
+        margin-right: 0 !important; //stylelint-disable-line
+    }
+
+    &:hover {
+        opacity: 0.6 !important; //stylelint-disable-line
+    }
+}
+
+.ya-share2__item.ya-share2__item_service_facebook {
     background-image: url("/images/share/fb.png");
 }
 
-.b-share__item_icon_vk {
+.ya-share2__item.ya-share2__item_service_vkontakte {
     background-image: url("/images/share/vk.png");
 }
 
-.b-share__item_icon_odk {
+.ya-share2__item.ya-share2__item_service_odnoklassniki {
     background-image: url("/images/share/odk.png");
 }

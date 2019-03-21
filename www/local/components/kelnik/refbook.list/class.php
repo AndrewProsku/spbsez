@@ -92,21 +92,29 @@ class RefBookList extends Bbc\Basis
 
             $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*', 'FILE_*' => 'full']);
 
-            if ($this->arResult['ELEMENTS']
-                && in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION])
-            ) {
-                foreach ($this->arResult['ELEMENTS'] as $k => &$v) {
-                    if (empty($v['FILE_ID']['ID'])) {
-                        unset($this->arResult['ELEMENTS'][$k]);
-                        continue;
-                    }
-
-                    $v['FILE_ID']['EXT'] = strtolower(pathinfo($v['FILE_ID']['ORIGINAL_NAME'], PATHINFO_EXTENSION));
-                    $v['FILE_ID']['DATE_FORMAT'] = $v['FILE_ID']['TIMESTAMP_X']->format('d.m.Y');
-                    $v['FILE_ID']['FILE_SIZE_FORMAT'] = \CFile::FormatSize($v['FILE_ID']['FILE_SIZE']);
-                }
-                unset($v);
+            if (!$this->arResult['ELEMENTS']) {
+                return true;
             }
+
+
+            foreach ($this->arResult['ELEMENTS'] as $k => &$v) {
+
+                $v['JSON'] = base64_encode(json_encode($v));
+
+                if (!in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION])) {
+                    continue;
+                }
+
+                if (empty($v['FILE_ID']['ID'])) {
+                    unset($this->arResult['ELEMENTS'][$k]);
+                    continue;
+                }
+
+                $v['FILE_ID']['EXT'] = strtolower(pathinfo($v['FILE_ID']['ORIGINAL_NAME'], PATHINFO_EXTENSION));
+                $v['FILE_ID']['DATE_FORMAT'] = $v['FILE_ID']['TIMESTAMP_X']->format('d.m.Y');
+                $v['FILE_ID']['FILE_SIZE_FORMAT'] = \CFile::FormatSize($v['FILE_ID']['FILE_SIZE']);
+            }
+            unset($v);
 
             return true;
         }

@@ -75,6 +75,12 @@ class Popup {
         const dataAttributeHref = this.target.dataset.href;
         const dataAttributeAjax = this.target.dataset.ajax;
         const dataAttributeAjaxData = $.param(this.target.dataset);
+        let dataAttributeJson = this.target.dataset.json;
+
+        if (dataAttributeJson) {
+            dataAttributeJson = atob(dataAttributeJson);
+            dataAttributeJson = JSON.parse(dataAttributeJson);
+        }
 
         if (dataAttributeHref) {
             const contentId = document.getElementById(dataAttributeHref);
@@ -92,6 +98,10 @@ class Popup {
         } else if (dataAttributeAjax) {
             this.outputOnDisplay();
             this.send(dataAttributeAjaxData, this.open.bind(this));
+        } else if (dataAttributeJson) {
+            this.outputOnDisplay();
+            Popup.insetContent(this.content, this.templateContent(dataAttributeJson));
+            this.open();
         }
     }
 
