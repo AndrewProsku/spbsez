@@ -99,6 +99,8 @@ class PlatformAdminInterface extends AdminInterface
             $res['TEXT_GALLERY']['FIELDS']['IMAGES_' . $fieldLang] = [
                 'WIDGET' => new FileWidget(),
                 'IMAGE' => true,
+                'HEADER' => false,
+                'FILTER' => false,
                 'MULTIPLE' => true,
                 'TITLE' => Loc::getMessage('KELNIK_INFRASTRUCTURE_IMAGES_' . $fieldLang)
             ];
