@@ -1,0 +1,16 @@
+<div class="b-visual-tooltip" style="top: 0; left: 0;">
+    {% if image %}
+        <img class="b-visual-tooltip__img" src="{{ image.src }}" alt="{{ image.text }}">
+    {% endif %}
+    <div class="b-visual-tooltip__body">
+        <div class="b-visual-tooltip__title">{{ title }}</div>
+        <div class="b-visual-tooltip__description">{{ description }}</div>
+        <div class="b-visual-tooltip__info">
+            <div class="b-visual-tooltip__info-text">Площадь участка</div>
+            <div class="b-visual-tooltip__info-value">{{ space }}</div>
+        </div>
+        <div class="b-visual-tooltip__site-link">
+            <a href="{{ siteUrl }}" target="_blank" class="b-link-line">{{ siteName }}</a>
+        </div>
+    </div>
+</div>

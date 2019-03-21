@@ -75,7 +75,7 @@ class YandexMap {
                 this.initMarkers();
                 this.initTabs();
                 this.initCircles();
-                this.initRoute();
+                this.initRoutes();
                 this.disableMobileDrag();
                 this.handleLocationLinks();
             });
@@ -310,40 +310,12 @@ class YandexMap {
     /**
      * Отрисовка путей
      */
-    initRoute() {
-       /* const CustomLayoutClass = ymaps.templateLayoutFactory.createClass(textHtmlMarker({
-            title: '20 минут до КАД',
-            modify: 'theme_violet'
-        }));*/
-
-        // const routes = this.settings.routes;
-        /*const routes = [{
-            points: [
-                [59.840573, 30.005940],
-                [59.817581, 29.928189]
-            ],
-            wayPointFinishIconLayout: CustomLayoutClass,
-            activeStrokeWidth: 6,
-            activeStrokeColor: "rgba(48,64,154,0.48)"
-        }, {
-            points: [
-                [59.799774, 30.273029],
-                [59.834640, 30.276709],
-                [59.840573, 30.005940]
-            ],
-            customViaPoint: true,
-            wayPointFinishIconLayout: null,
-            activeStrokeWidth: 6,
-            activeStrokeColor: "rgba(102,45,145,0.48)"
-        }];*/
-
+    initRoutes() {
         if (typeof this.settings.routes !== `object`) {
             return;
         }
-        console.log('this.settings');
 
         this.settings.routes.forEach((rout) => {
-            console.log('routes');
             let FinishLayout = null;
             if (typeof rout.finishMarker === `object`) {
                 FinishLayout = ymaps.templateLayoutFactory.createClass(textHtmlMarker({
@@ -844,7 +816,7 @@ class YandexMap {
         };
 
         if (isMobile.any()) {
-            // this.map.behaviors.disable('drag');
+            this.map.behaviors.disable('drag');
         }
     }
 }
