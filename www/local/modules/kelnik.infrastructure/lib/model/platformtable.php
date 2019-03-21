@@ -63,7 +63,7 @@ class PlatformTable extends DataManager
                 ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_ALIAS'))
                 ->configureRequired(true)
                 ->configureUnique(true)
-                ->configureFormat('!^([a-z0-9_\-.])$!si'),
+                ->configureFormat('!^([a-z0-9_\-.]+)$!si'),
             (new StringField('NAME_RU'))
                 ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_NAME'))
                 ->configureSize(255),
