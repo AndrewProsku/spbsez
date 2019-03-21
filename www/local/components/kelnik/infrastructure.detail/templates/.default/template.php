@@ -64,7 +64,7 @@
         <?php endif; ?>
         <?php if(!empty($arResult['ELEMENT']['PLANOPLAN'])): ?>
         <div class="b-area-planoplan">
-            <iframe src="https://widget.planoplan.com/<?= $arResult['ELEMENT']['PLANOPLAN']; ?>" frameborder="0"></iframe>
+            <iframe src="https://widget.planoplan.com/<?= $arResult['ELEMENT']['PLANOPLAN']; ?>" frameborder="0" allowfullscreen="" scrolling="no"></iframe>
         </div>
         <?php endif; ?>
         <?= $arResult['ELEMENT']['TEXT_INFRA']; ?>
