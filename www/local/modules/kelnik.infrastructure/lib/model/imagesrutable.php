@@ -3,22 +3,18 @@
 namespace Kelnik\Infrastructure\Model;
 
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ORM\Fields\BooleanField;
-use Bitrix\Main\ORM\Fields\ExpressionField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
-use Bitrix\Main\ORM\Fields\StringField;
-use Bitrix\Main\ORM\Fields\TextField;
 use Bitrix\Main\ORM\Query\Join;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
-class PlatformTextTable extends DataManager
+class ImagesRuTable extends DataManager
 {
     public static function getTableName()
     {
-        return 'kelnik_infrastructure_platform_text';
+        return 'kelnik_infrastructure_platform_images_ru';
     }
 
     public static function getMap()
@@ -29,23 +25,15 @@ class PlatformTextTable extends DataManager
                 ->configurePrimary(true)
                 ->configureAutocomplete(true),
 
-            (new IntegerField('PLATFORM_ID'))
+            (new IntegerField('ENTITY_ID'))
                 ->configureDefaultValue(0),
-
-            (new StringField('TYPE')),
-
-            (new TextField('TEXT_RU')),
-            (new TextField('TEXT_EN')),
-
-            (new StringField('TEXT_RU_TEXT_TYPE'))
-                ->configureDefaultValue('html'),
-            (new StringField('TEXT_EN_TEXT_TYPE'))
-                ->configureDefaultValue('html'),
+            (new IntegerField('VALUE'))
+                ->configureDefaultValue(0),
 
             (new Reference(
                 'PLATFORM',
                 PlatformTable::class,
-                Join::on('this.PLATFORM_ID', 'ref.ID')
+                Join::on('this.ENTITY_ID', 'ref.ID')
             ))->configureJoinType('INNER')
         ];
     }

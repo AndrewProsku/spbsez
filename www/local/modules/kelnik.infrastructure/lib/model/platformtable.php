@@ -2,13 +2,16 @@
 
 namespace Kelnik\Infrastructure\Model;
 
+use Bitrix\Main\Application;
+use Bitrix\Main\Context;
+use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Fields\BooleanField;
-use Bitrix\Main\ORM\Fields\ExpressionField;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\OneToMany;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Fields\TextField;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
@@ -58,31 +61,30 @@ class PlatformTable extends DataManager
                 ->configureSize(50)
                 ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_MAP_COORDS_LNG')),
 
-            (new TextField('TEXT_RU'))
-                ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_TEXT')),
-            (new TextField('TEXT_EN'))
-                ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_TEXT_EN')),
+            (new StringField('MAP_COORDS_CENTER_LAT'))
+                ->configureSize(50)
+                ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_MAP_COORDS_CENTER_LAT')),
+            (new StringField('MAP_COORDS_CENTER_LNG'))
+                ->configureSize(50)
+                ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_MAP_COORDS_CENTER_LNG')),
 
-            (new StringField('TEXT_RU_TEXT_TYPE'))
-                ->configureDefaultValue('html'),
-            (new StringField('TEXT_EN_TEXT_TYPE'))
-                ->configureDefaultValue('html'),
-
-            (new OneToMany(
-                'TEXT_FIELDS',
-                PlatformTextTable::class,
-                'PLATFORM'
-            ))
+            (new StringField('PLANOPLAN'))
+                ->configureSize(255)
+                ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_PLANOPLAN')),
         ];
 
         foreach (self::getFields() as $field) {
             foreach (self::getLangs() as $fieldLang) {
-                $res[] = (new ExpressionField(
-                            $field . '_' . $fieldLang,
-                    '(SELECT `TEXT_' . $fieldLang . '` FROM `' . PlatformTextTable::getTableName() . '` WHERE `PLATFORM_ID`=%s AND `TYPE`=\'' . $field . '\')',
-                    'ID'
-                        ))->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_' . $field . '_' . $fieldLang));
+                $res[] = (new StringField($field . '_' . $fieldLang . '_TEXT_TYPE'))
+                            ->configureDefaultValue('html');
+
+                $res[] = (new TextField($field . '_' . $fieldLang))
+                            ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_' . $field . '_' . $fieldLang));
             }
+        }
+
+        foreach (self::getLangs() as $fieldLang) {
+            $res[] = (new OneToMany('IMAGES_' . $fieldLang, ImagesRuTable::class, 'PLATFORM'));
         }
 
         return $res;
@@ -96,6 +98,7 @@ class PlatformTable extends DataManager
     public static function getFields()
     {
         return [
+            'TEXT',
             'TEXT_FEATURES',
             'TEXT_TRAITS',
             'TEXT_AREA',
@@ -107,5 +110,19 @@ class PlatformTable extends DataManager
             'TEXT_ADVANTAGES2',
             'TEXT_ADVANTAGES3'
         ];
+    }
+
+    public static function clearComponentCache(Event $event)
+    {
+        if (!Context::getCurrent()->getRequest()->isAdminSection()) {
+            return;
+        }
+
+        Application::getInstance()->getTaggedCache()->clearByTag('kelnik:infrastructureList');
+        Application::getInstance()->getTaggedCache()->clearByTag(
+            'kelnik:infrastructureRow_' . ArrayHelper::getValue($event->getParameter('id'), 'ID', 0)
+        );
+
+        parent::clearComponentCache($event);
     }
 }

@@ -60,6 +60,21 @@ class PlatformAdminInterface extends AdminInterface
                         'HEADER' => false,
                         'FILTER' => false
                     ],
+                    'MAP_COORDS_CENTER_LAT' => [
+                        'WIDGET' => new StringWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ],
+                    'MAP_COORDS_CENTER_LNG' => [
+                        'WIDGET' => new StringWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ],
+                    'PLANOPLAN' => [
+                        'WIDGET' => new StringWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ],
                     'IMAGE_ID' => [
                         'WIDGET' => new FileWidget(),
                         'IMAGE' => true,
@@ -68,34 +83,33 @@ class PlatformAdminInterface extends AdminInterface
                     'VIDEO_ID' => [
                         'WIDGET' => new FileWidget(),
                         'HEADER' => false
-                    ],
-                    'TEXT_RU' => [
-                        'WIDGET' => new VisualEditorWidget(),
-                        'HEADER' => false,
-                        'FILTER' => false
-                    ],
-                    'TEXT_EN' => [
-                        'WIDGET' => new VisualEditorWidget(),
-                        'HEADER' => false
                     ]
                 ]
             ]
         ];
 
         foreach (PlatformTable::getFields() as $field) {
-            if (!isset($res[$field])) {
-                $res[$field] = [
-                    'NAME' => Loc::getMessage('KELNIK_INFRASTRUCTURE_TAB_' . $field),
-                    'FIELDS' => [],
-                ];
-            }
+            $res[$field] = [
+                'NAME' => Loc::getMessage('KELNIK_INFRASTRUCTURE_TAB_' . $field),
+                'FIELDS' => [],
+            ];
+        }
 
+        foreach (PlatformTable::getLangs() as $fieldLang) {
+            $res['TEXT_GALLERY']['FIELDS']['IMAGES_' . $fieldLang] = [
+                'WIDGET' => new FileWidget(),
+                'IMAGE' => true,
+                'MULTIPLE' => true,
+                'TITLE' => Loc::getMessage('KELNIK_INFRASTRUCTURE_IMAGES_' . $fieldLang)
+            ];
+        }
+
+        foreach (PlatformTable::getFields() as $field) {
             foreach (PlatformTable::getLangs() as $fieldLang) {
                 $res[$field]['FIELDS'][$field . '_' . $fieldLang] = [
                     'WIDGET' => new VisualEditorWidget(),
                     'HEADER' => false,
                     'FILTER' => false,
-                    'VIRTUAL' => true
                 ];
             }
         }
