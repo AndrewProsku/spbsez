@@ -9,7 +9,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Инфраструктура", 
-		"", 
+		"/infrastructure/",
 		Array(), 
 		Array(), 
 		"" 
