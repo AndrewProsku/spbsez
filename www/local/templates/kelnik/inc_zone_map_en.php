@@ -8,7 +8,7 @@
         <div class="l-home-plots__item">
 
             <div class="l-home-plots__map l-home-plots__map-novoorlovskaya">
-                <div class="l-home-plots__all-map-images">
+                <div class="l-home-plots__all-map-images lang-<?= LANGUAGE_ID; ?>">
                     <div class="l-home-plots__all-map-icon-wrap">
                         <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
                             <span class="b-tooltip">
@@ -95,7 +95,7 @@
         <div class="l-home-plots__item">
 
             <div class="l-home-plots__map l-home-plots__map-neudorf">
-                <div class="l-home-plots__all-map-images">
+                <div class="l-home-plots__all-map-images lang-<?= LANGUAGE_ID; ?>">
                     <div class="l-home-plots__all-map-icon-wrap">
                         <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
                             <span class="b-tooltip">
