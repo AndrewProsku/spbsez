@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+    <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="-912.286" y1="564.452" x2="-911.286" y2="564.452" gradientTransform="matrix(63 0 0 -63 57474.5 35592.5)">
+        <stop offset="0" stop-color="#30409a"></stop>
+        <stop offset="1" stop-color="#662d91"></stop>
+    </linearGradient>
+    <path d="M4 .5C2.1.5.5 2.1.5 4v48c0 6.4 5.1 11.5 11.5 11.5h48c1.9 0 3.5-1.6 3.5-3.5V12C63.5 5.6 58.4.5 52 .5H4z" fill="#fff" stroke="url(#a)"></path>
+    <g transform="translate(19 19)">
+        <linearGradient id="b" gradientUnits="userSpaceOnUse" x1="-909.82" y1="533.695" x2="-908.758" y2="533.695" gradientTransform="matrix(25.6 0 0 -25.6 23290.6 13675.4)">
+            <stop offset="0" stop-color="#30409a"></stop>
+            <stop offset="1" stop-color="#662e91"></stop>
+        </linearGradient>
+        <circle cx="12.8" cy="12.8" r="12.8" fill="#4f3695" stroke="url(#b)" stroke-width="3"></circle>
+        <linearGradient id="c" gradientUnits="userSpaceOnUse" x1="-873.62" y1="513.891" x2="-872.536" y2="513.891" gradientTransform="matrix(12.8 0 0 -12.8 11188.8 6590.2)">
+            <stop offset="0" stop-color="#30409a"></stop>
+            <stop offset="1" stop-color="#662e91"></stop>
+        </linearGradient>
+        <circle cx="13.4" cy="12.4" r="6.4" fill="#fff" stroke="url(#c)" stroke-width="2"></circle>
+    </g>
+</svg>
