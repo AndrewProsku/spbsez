@@ -1,4 +1,3 @@
-import '../styles/app.scss';
 import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
@@ -34,9 +33,9 @@ import templateMessages from 'components/messages/messages.twig';
 import Useful from '../../components/useful';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
-// import Visual from 'components/visual';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
+// import Visual from 'components/visual';
 
 const mediator = new Mediator();
 
