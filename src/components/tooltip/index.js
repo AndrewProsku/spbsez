@@ -2,7 +2,6 @@
  * @version 1.0alpha
  * @link https://kelnik.gitbooks.io/kelnik-documentation/content/front-end/components/tooltip.html documentation
  */
-import './tooltip.scss';
 import template from './tooltip.twig';
 import Utils from '../../common/scripts/utils';
 
