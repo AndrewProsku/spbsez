@@ -9,7 +9,6 @@ use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\ExpressionField;
 use Bitrix\Main\ORM\Fields\IntegerField;
-use Bitrix\Main\ORM\Fields\Relations\OneToMany;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Fields\TextField;
@@ -21,6 +20,9 @@ Loc::loadMessages(__FILE__);
 
 class PlatformTable extends DataManager
 {
+    public const ID_NOVOORLOVSKAYA = 1;
+    public const ID_NOIDORF = 2;
+
     public static function getTableName()
     {
         return 'kelnik_infrastructure_platform';
@@ -113,6 +115,18 @@ class PlatformTable extends DataManager
                 Join::on('this.ID', 'ref.ENTITY_ID')
             ))->configureJoinType('LEFT');
         }
+
+        $res[] = (new Reference(
+            'MAP_ELEMENTS',
+            MapTable::class,
+            Join::on('this.ID', 'ref.PLATFORM_ID')
+        ))->configureJoinType('LEFT');
+
+        $res[] = new ExpressionField(
+            'MAP_CNT',
+            'COUNT(DISTINCT %s)',
+            'MAP_ELEMENTS.ID'
+        );
 
         return $res;
     }

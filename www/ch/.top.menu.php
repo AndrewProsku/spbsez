@@ -1,39 +1,32 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"About SEZ",
+		"關於經濟特區",
 		"/ch/about/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Инфраструктура", 
+		"基礎設施",
 		"", 
 		Array(), 
 		Array(), 
 		"" 
 	),
     Array(
-        "Services",
+        "服務",
         "/ch/services/",
         Array(),
         Array(),
         ""
     ),
     Array(
-        "Investors",
+        "投資者",
         "/ch/investors/",
         Array(),
         Array(),
         ""
-    ),
-    Array(
-        "Mass Media",
-        "/ch/media/",
-        Array(),
-        Array(),
-        "false"
     ),
     Array(
         "联系方式",

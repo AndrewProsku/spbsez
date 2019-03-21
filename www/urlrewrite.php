@@ -32,6 +32,14 @@ $arUrlRewrite=array (
     'PATH' => '/en/media/articles/index.php',
     'SORT' => 100,
   ),
+  8 => 
+  array (
+    'CONDITION' => '#^/en/infrastructure/#',
+    'RULE' => '',
+    'ID' => 'kelnik:infrastructure',
+    'PATH' => '/en/infrastructure/index.php',
+    'SORT' => 100,
+  ),
   3 => 
   array (
     'CONDITION' => '#^/media/articles/#',

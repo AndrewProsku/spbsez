@@ -5,6 +5,7 @@ namespace Kelnik\Infrastructure\Model\AdminInterface;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminInterface;
 use Kelnik\AdminHelper\Widget\CheckboxWidget;
+use Kelnik\AdminHelper\Widget\ChildWidget;
 use Kelnik\AdminHelper\Widget\FileWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
@@ -103,6 +104,15 @@ class PlatformAdminInterface extends AdminInterface
                         'WIDGET' => new FileWidget(),
                         'IMAGE' => true,
                         'HEADER' => false
+                    ],
+                    'MAP_CNT' => [
+                        'WIDGET' => new ChildWidget(),
+                        'TITLE' => Loc::getMessage('KELNIK_INFRASTRUCTURE_MAPS'),
+                        'LIST_HELPER' => MapListHelper::class,
+                        'PARENT_FIELD' => 'PLATFORM_ID',
+                        'VIRTUAL' => true,
+                        'READONLY' => true,
+                        'FORCE_SELECT' => true
                     ]
                 ]
             ]
