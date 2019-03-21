@@ -57,7 +57,12 @@
                             preserveAspectRatio="none"
                             xlink:href="<?= $arResult['ELEMENT']['AREA_BG_ID_PATH']; ?>"
                             style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></image>
-                        <?php $APPLICATION->IncludeFile(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'territory_' . $arResult['ELEMENT']['ID'] . '.php'); ?>
+                        <?php
+                            $maskFile = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'territory' . $arResult['ELEMENT']['ID'] . '.php';
+                            if (file_exists($maskFile)) {
+                                include $maskFile;
+                            }
+                        ?>
                     </svg>
                 </div>
             </div>

@@ -50,7 +50,7 @@ class InfrastructureList extends Bbc\Basis
         try {
             $this->arResult['ELEMENTS'] = PlatformTable::getAssoc([
                 'select' => [
-                    'ID', 'ALIAS',
+                    'ID', 'ALIAS', 'IMAGE_ID',
                     'NAME_RU', 'NAME_EN',
                     'MAP_COORDS_LAT',
                     'MAP_COORDS_LNG',
