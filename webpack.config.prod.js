@@ -2,10 +2,7 @@
 const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const config = require('./tasks/config');
-const autoprefixer = require('autoprefixer');
 const rev = require('./tasks/rev');
 
 rev([
@@ -26,10 +23,7 @@ module.exports = {
     module: {
         rules: [{
             test: /\.css/,
-            use : [
-                MiniCssExtractPlugin.loader,
-                "css-loader"
-            ]
+            use : ['style-loader', 'css-loader']
         }, {
             test   : /\.js$/,
             exclude: /(bower_components)/,
@@ -41,30 +35,6 @@ module.exports = {
                     cacheDirectory: true
                 }
             }
-        }, {
-            test   : /\.scss$/,
-            exclude: /(bower_components)/,
-            use    : [
-                MiniCssExtractPlugin.loader,
-                {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 2,
-                        sourceMap    : true
-                    }
-                }, {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins  : [autoprefixer()],
-                        sourceMap: true
-                    }
-                }, {
-                    loader: 'sass-loader',
-                    options: {
-                        sourceMap: true
-                    }
-                }
-            ]
         }, {
             test   : /\.twig$/,
             exclude: /(node_modules|bower_components)/,
@@ -85,12 +55,8 @@ module.exports = {
         ]
     },
     plugins: [
-        new MiniCssExtractPlugin({
-          filename: './../styles/[name].css'
-        }),
         new CleanWebpackPlugin([
-            path.resolve(__dirname, config.scripts.output),
-            path.resolve(__dirname, config.styles.output)
+            path.resolve(__dirname, config.scripts.output)
         ])
       ],
     resolve: {
@@ -102,16 +68,6 @@ module.exports = {
     devtool: 'source-map',
     optimization: {
         minimizer: [
-            new OptimizeCSSAssetsPlugin({
-                cssProcessorOptions: {
-                    map: {
-                        inline: false
-                    },
-                    discardComments: {
-                        removeAll: true
-                    }
-                },
-            }),
             new UglifyJSPlugin({
                 sourceMap: true,
                 uglifyOptions: {

@@ -9,7 +9,6 @@
 /**
  * Dependencies
  */
-import './select.scss';
 import './chosen/chosen.css';
 import './chosen';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
