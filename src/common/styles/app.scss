@@ -42,6 +42,9 @@
 @import "../../pages/infrastructure-area";
 
 // Components
+@import "../../components/forms/telephone/telephone";
+// @import "../../components/forms/select/select";
+@import "../../components/tooltip/tooltip";
 
 @import "../../components/popup/popup-vacancies";
 @import "../../../node_modules/@glidejs/glide/src/assets/sass/glide.core";
@@ -61,7 +64,7 @@
 @import "../../components/page-submenu/page-submenu";
 @import "../../components/forms/input-text/input-text";
 @import "../../components/forms/email/email";
-@import "../../components/forms/telephone/telephone";
+// @import "../../components/forms/telephone/telephone";
 @import "../../components/forms/password/password";
 @import "../../components/forms/checkbox/checkbox";
 @import "../../components/forms/search/search";

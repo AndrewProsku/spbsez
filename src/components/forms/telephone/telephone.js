@@ -7,7 +7,6 @@
 /**
  * Dependencies
  */
-import './telephone.scss';
 import inputmask from 'inputmask';
 
 /**
