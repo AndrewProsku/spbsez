@@ -14823,7 +14823,8 @@ label .b-help {
   max-width: 355px; }
 
 .b-contact-info__phone {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  color: #30409a; }
 
 .b-contact-info__phone a {
   color: inherit; }
@@ -15577,7 +15578,7 @@ label .b-help {
 .b-press-office__phone {
   margin-bottom: 5px; }
   .b-press-office__phone a {
-    color: #292f30; }
+    color: #30409a; }
 
 .l-investors {
   display: -webkit-flex;
@@ -32804,7 +32805,8 @@ a.b-ask-for-advice__link {
   max-width: 355px; }
 
 .b-contact-list__phone {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  color: #30409a; }
 
 .b-contact-list__phone a {
   color: inherit; }
