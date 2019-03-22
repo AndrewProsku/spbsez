@@ -28,7 +28,20 @@ class MessagesEditHelper extends AdminEditHelper
 
     protected function editAction()
     {
-        if (!empty($this->data['ACTIVE']) && $this->data['ACTIVE'] !== MessagesTable::YES) {
+        if (empty($this->data['ID']) ) {
+            return parent::editAction();
+        }
+
+        $origData = MessagesTable::getRow([
+            'select' => ['ACTIVE'],
+            'filter' => [
+                '=ID' => $this->data['ID']
+            ]
+        ]);
+
+        if (!empty($origData['ACTIVE'])
+            && $origData['ACTIVE'] === MessagesTable::YES
+        ) {
             $this->setContext(AdminEditHelper::OP_EDIT_ACTION_BEFORE);
             $this->addErrors(Loc::getMessage('KELNIK_ADMIN_HELPER_EDIT_WRITE_FORBIDDEN'));
 
@@ -45,7 +58,7 @@ class MessagesEditHelper extends AdminEditHelper
         $data = $res->getData();
 
         if ($res->isSuccess() && $data['ACTIVE'] === MessagesTable::YES) {
-            self::updateUsers($id);
+            self::updateUsers($id ? $id : $res->getId());
         }
 
         return $res;

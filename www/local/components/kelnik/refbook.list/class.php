@@ -96,7 +96,6 @@ class RefBookList extends Bbc\Basis
                 return true;
             }
 
-
             foreach ($this->arResult['ELEMENTS'] as $k => &$v) {
 
                 $v['JSON'] = base64_encode(json_encode($v));
