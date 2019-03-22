@@ -19,8 +19,8 @@
             <div class="b-mini-filter__group-wrap">
                 <?php foreach ($arResult['YEARS'] as $element): ?>
                     <div class="b-mini-filter__item">
-                        <input type="radio" name="year" value="<?= $element['NAME']; ?>" data-text="<?= $element['NAME']; ?>" id="waterbranch<?= $element['NAME']; ?>"<?php if($element['SELECTED']): ?> checked<?php endif; ?> class="b-mini-filter__input">
-                        <label for="waterbranch<?= $element['NAME']; ?>" class="b-mini-filter__fake"><?= $element['NAME']; ?></label>
+                        <input type="radio" name="year" value="<?= $element['NAME']; ?>" data-text="<?= $element['NAME']; ?>" id="waterbranch<?= $arParams['SECTION'] . '.' . $element['NAME']; ?>"<?php if($element['SELECTED']): ?> checked<?php endif; ?> class="b-mini-filter__input">
+                        <label for="waterbranch<?= $arParams['SECTION'] . '.' . $element['NAME']; ?>" class="b-mini-filter__fake"><?= $element['NAME']; ?></label>
                     </div>
                 <?php endforeach; ?>
             </div>
