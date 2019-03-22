@@ -1,16 +1,60 @@
-$progress-bar-height: 4px;
-$progress-bar-bg-color: #e1e1e1;
-$progress-bar-active-bg-color: #000000;
+@import "source/ion.rangeSlider.scss";
+@import "source/ion.rangeSlider.skinHTML5.scss";
+
+/* stylelint-disable */
+$progress-bar-height: 3px;
+//$progress-bar-bg-color: #d4d4d4;
+$progress-bar-bg-color: #8daace;
+$progress-bar-active-bg-color: $blue;
 $progress-bar-radius: 25px;
-$handler-size: 17px;
-$handler-bg-color: $white;
+$handler-size: 18px;
+$handler-hover-bg-color: $blue;
 $handler-value-bg-color: transparent;
 $handler-value-color: $black;
 $from-to-values-visibility: false;
 $inputs-visibility: false;
+$input-height: 48px;
+
+$border-grey: #d9e4f1;
+$border-white: #d4d4d4;
 
 .b-range-slider {
     position: relative;
+    height: 18px;
+
+    .irs {
+        height: 0;
+    }
+
+    .irs-gray-left,
+    .irs-gray-right,
+    .irs-white-left,
+    .irs-white-right {
+        height: $progress-bar-height;
+        border-radius: $progress-bar-radius;
+        border: 0;
+        opacity: 1;
+        top: 33px;
+        position: absolute;
+        display: block;
+    }
+
+    .irs-gray-left,
+    .irs-gray-right {
+        width: 100%;
+        background: $border-grey;
+        z-index: 3;
+    }
+
+    .irs-white-left,
+    .irs-white-right {
+        background: $border-white;
+        z-index: 2;
+    }
+
+    .irs-pseudo-gray {
+        background: $border-grey;
+    }
 
     .irs-line {
         background: $progress-bar-bg-color;
@@ -24,6 +68,7 @@ $inputs-visibility: false;
         background: $progress-bar-active-bg-color;
         height: $progress-bar-height;
         border: 0;
+        z-index: 1;
     }
 
     .irs-bar-edge {
@@ -49,14 +94,57 @@ $inputs-visibility: false;
     }
 
     .irs-slider {
-        width: $handler-size;
-        height: $handler-size;
-        background: $handler-bg-color;
+        @include transition(background);
+        width: 18px;
+        height: 18px;
+        background: $white;
+        box-shadow: none;
+        top: 25px;
+        z-index: 4;
+        border: 3px solid rgba($blue, 0.75);
+
+        &.type_last {
+            z-index: 4;
+        }
+
+        &:hover {
+            background: $handler-hover-bg-color;
+        }
+
+        &.state_hover {
+            background: $handler-hover-bg-color;
+        }
+
+        &:before {
+            content: '';
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            background-color: transparent;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     }
 }
 
-.b-range-slider__input {
-    @if not ($inputs-visibility) {
+.b-range-slider__base {
+    position: absolute;
+    width: 100%;
+    top: -26px;
+
+    input {
         display: none;
     }
 }
+
+.b-range-slider__inputs {
+    display: none;
+}
+
+.b-range-slider__wrap-input {
+    padding-right: 1px;
+    width: 50%;
+    position: relative;
+}
+/* stylelint-enable */

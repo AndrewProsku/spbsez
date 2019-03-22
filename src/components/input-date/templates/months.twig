@@ -1,0 +1,22 @@
+{% for month in months %}
+    <div class="b-input-date__month">
+        <div class="b-input-date__month-name">{{ month.name }}, {{ month.year }}</div>
+
+        <div class="b-input-date__weeks">
+            {% for week in month.weeks %}
+
+                <ul class="b-input-date__week">
+                    {% for day in week.days %}
+                        <li class="b-input-date__day j-input-date-day
+                            {{ day.disabled ? 'b-input-date__day_is_disabled' : ' ' }}
+                            {{ day.active ? 'b-input-date__day_is_active' : ' ' }}"
+
+                            data-full-date="{{ day.fullDate }}"
+                        >{{ day.name }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endfor %}
