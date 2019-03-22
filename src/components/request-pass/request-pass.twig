@@ -41,13 +41,41 @@
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
 
-            <div class="b-form-block">
+            <div class="b-form-block {#b-form-block_is_date#}">
                 {% include "../forms/input-text/input-text.twig" with {
-                    id: "visitTime",
-                    name: "visitTime",
+                    modify: "j-input-value-from",
+                    id: "visitTimeFrom",
+                    name: "visitTimeFrom",
                     required: "true",
-                    dateMask: true
+                    dateMask: true,
                 } %}
+
+                {# TODO Доделать календать #}
+                {#{% include "../forms/input-text/input-text.twig" with {#}
+                    {#modify: "j-input-value-to",#}
+                    {#id: "visitTimeFrom",#}
+                    {#name: "visitTimeFrom",#}
+                    {#required: "true",#}
+                    {#dateMask: true,#}
+                    {#readonly: true#}
+                {#} %}#}
+
+                {# В один блок и при фокусе показывать #}
+                {#{% include '../input-date/input-date.twig' with {#}
+                    {#title: "С",#}
+                    {#fromYear: "2019",#}
+                    {#fromMonth: "1",#}
+                    {#shoMonths: "4",#}
+                    {#valueSelector: "j-input-value-from"#}
+                {#} %}#}
+
+                {#{% include '../input-date/input-date.twig' with {#}
+                    {#title: "До",#}
+                    {#fromYear: "2019",#}
+                    {#fromMonth: "1",#}
+                    {#shoMonths: "4",#}
+                    {#valueSelector: "j-input-value-from"#}
+                {#} %}#}
 
                 <label for="theme-request" class="b-form-block__label">
                     Дата и время визита
