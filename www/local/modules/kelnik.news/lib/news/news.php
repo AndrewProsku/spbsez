@@ -93,20 +93,20 @@ class NewsTable extends DataManager
                     'default_value' => new DateTime()
                 ]
             ),
-            new DatetimeField(
-                'DATE_ACTION_START',
-                [
-                    'title' => Loc::getMessage('KELNIK_NEWS_DATE_ACTION_START'),
-                    'default_value' => null
-                ]
-            ),
-            new DatetimeField(
-                'DATE_ACTION_FINISH',
-                [
-                    'title' => Loc::getMessage('KELNIK_NEWS_DATE_ACTION_FINISH'),
-                    'default_value' => null
-                ]
-            ),
+//            new DatetimeField(
+//                'DATE_ACTION_START',
+//                [
+//                    'title' => Loc::getMessage('KELNIK_NEWS_DATE_ACTION_START'),
+//                    'default_value' => null
+//                ]
+//            ),
+//            new DatetimeField(
+//                'DATE_ACTION_FINISH',
+//                [
+//                    'title' => Loc::getMessage('KELNIK_NEWS_DATE_ACTION_FINISH'),
+//                    'default_value' => null
+//                ]
+//            ),
             new DatetimeField(
                 'DATE_MODIFY',
                 [
