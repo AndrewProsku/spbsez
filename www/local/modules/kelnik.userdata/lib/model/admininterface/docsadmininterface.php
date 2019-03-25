@@ -4,10 +4,12 @@ namespace Kelnik\Userdata\Model\AdminInterface;
 
 use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminInterface;
+use Kelnik\AdminHelper\Widget\ComboBoxWidget;
 use Kelnik\AdminHelper\Widget\DateTimeWidget;
 use Kelnik\AdminHelper\Widget\FileWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\UserWidget;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
@@ -28,10 +30,20 @@ class DocsAdminInterface extends AdminInterface
                         'FILTER'           => true,
                         'HIDE_WHEN_CREATE' => true
                     ],
+                    'COMPANY_ID' => [
+                        'WIDGET' =>  new ComboBoxWidget(),
+                        'VARIANTS' => Profile::getAdminCompanyList(),
+                        'READONLY' => true,
+                        'FILTER' => true,
+                        'VIRTUAL' => true,
+                        'FORCE_SELECT' => true,
+                        'TITLE' => Loc::getMessage('KELNIK_USER_DATA_COMPANY')
+                    ],
                     'USER_ID' => [
                         'WIDGET' => new UserWidget(),
                         'REQUIRED' => true,
-                        'FILTER' => true
+                        'FILTER' => true,
+                        'SIZE' => 2
                     ],
                     'FILE_ID' => [
                         'WIDGET' => new FileWidget(),

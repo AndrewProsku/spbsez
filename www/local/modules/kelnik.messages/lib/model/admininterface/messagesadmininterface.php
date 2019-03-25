@@ -12,6 +12,7 @@ use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\AdminHelper\Widget\VisualEditorWidget;
 use Kelnik\Messages\Model\MessageCompaniesTable;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
@@ -42,7 +43,7 @@ class MessagesAdminInterface extends AdminInterface
                     ],
                     'COMPANIES' => [
                         'WIDGET' => new ComboBoxWidget(),
-                        'VARIANTS' => MessageCompaniesTable::getAdminAssocList(),
+                        'VARIANTS' => Profile::getAdminCompanyList(),
                         'TITLE' => Loc::getMessage('KELNIK_MESSAGES_COMPANIES'),
                         'HEADER' => false,
                         'REQUIRED' => true,

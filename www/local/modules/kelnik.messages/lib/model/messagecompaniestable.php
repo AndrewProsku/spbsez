@@ -44,35 +44,6 @@ class MessageCompaniesTable extends DataManager
         ];
     }
 
-    public static function getAdminAssocList(): array
-    {
-        $res = [];
-
-        $tmp = \CUser::GetList(
-            ($by = 'ID'),
-            ($order = 'DESC'),
-            [
-                'GROUPS_ID' => Profile::GROUP_RESIDENT_ADMIN
-            ],
-            [
-                'SELECT' => [],
-                'FIELDS' => [
-                    'ID', 'WORK_COMPANY'
-                ]
-            ]
-        );
-
-        if (!$tmp->AffectedRowsCount()) {
-            return $res;
-        }
-
-        while ($row = $tmp->Fetch()) {
-            $res[$row['ID']] = '[' . $row['ID'] . '] ' . $row['WORK_COMPANY'];
-        }
-
-        return $res;
-    }
-
     public static function getAdminTreeList(): array
     {
         $res = [];
