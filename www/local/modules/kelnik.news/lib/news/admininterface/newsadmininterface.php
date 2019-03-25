@@ -74,16 +74,16 @@ class NewsAdminInterface extends AdminInterface
                         'WIDGET' => new CheckboxWidget(),
                         'FILTER' => true
                     ],
-                    'DATE_ACTION_START' => [
-                        'WIDGET' => new DateTimeWidget(),
-                        'HEADER' => false,
-                        'DEFAULT' => null
-                    ],
-                    'DATE_ACTION_FINISH' => [
-                        'WIDGET' => new DateTimeWidget(),
-                        'HEADER' => false,
-                        'DEFAULT' => null
-                    ],
+//                    'DATE_ACTION_START' => [
+//                        'WIDGET' => new DateTimeWidget(),
+//                        'HEADER' => false,
+//                        'DEFAULT' => null
+//                    ],
+//                    'DATE_ACTION_FINISH' => [
+//                        'WIDGET' => new DateTimeWidget(),
+//                        'HEADER' => false,
+//                        'DEFAULT' => null
+//                    ],
                     //                    'DATE_CREATE' => array(
                     //                        'WIDGET' => new DateTimeWidget(),
                     //                        'READONLY' => true,
