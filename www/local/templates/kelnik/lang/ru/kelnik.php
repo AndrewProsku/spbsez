@@ -19,3 +19,28 @@ $MESS['KELNIK_TMPL_FORM_PHONE'] = 'Телефон';
 $MESS['KELNIK_TMPL_FORM_SEND'] = 'Отправить';
 $MESS['KELNIK_TMPL_PHONE_MASK'] = '+7 ___ ___-__-__';
 $MESS['KELNIK_TMPL_PROFILE_SIGN_OUT'] = 'Выйти из личного кабинета';
+
+$MESS['KELNIK_TMPL_SITES_LOCATION'] = 'Расположение зон';
+$MESS['KELNIK_TMPL_SITES_NOVOORLOVSKAYA'] = 'Новоорловская';
+$MESS['KELNIK_TMPL_SITES_NOIDORF'] = 'Нойдорф';
+$MESS['KELNIK_TMPL_SITES_SEA_PORT'] = 'Порт';
+$MESS['KELNIK_TMPL_SITES_RAILWAY'] = 'Вокзал';
+$MESS['KELNIK_TMPL_SITES_CENTER'] = 'Центр города';
+$MESS['KELNIK_TMPL_SITES_RAILWAY_LAD'] = 'Ладожский вокзал';
+$MESS['KELNIK_TMPL_SITES_AIRPORT'] = 'Аэропорт';
+$MESS['KELNIK_TMPL_SITES_MORE'] = 'Узнать больше';
+$MESS['KELNIK_TMPL_SITES_SITE'] = 'Участок';
+$MESS['KELNIK_TMPL_SITES_SITE_AREA'] = 'площадь участка';
+$MESS['KELNIK_TMPL_SITES_SITE_AREA_HA'] = 'га';
+$MESS['KELNIK_TMPL_SITES_SITE_KM'] = 'км';
+$MESS['KELNIK_TMPL_SITES_TO_CENTER'] = 'от центра';
+$MESS['KELNIK_TMPL_SITES_SW'] = 'юго—запад Петербурга';
+$MESS['KELNIK_TMPL_SITES_STRELNA'] = 'Стрельна';
+$MESS['KELNIK_TMPL_SITES_SITE_NOVOORLOVSKAYA'] = 'Участок «Новоорловская»';
+$MESS['KELNIK_TMPL_SITES_SITE_NOIDORF'] = 'Участок «Нойдорф»';
+$MESS['KELNIK_TMPL_SITES_DESCR_NOV'] = 'Развитая транспортная инфраструктура. Менее 10 минут до выезда на КАД.
+                        30 минут до центра города на автотранспорте. 20 минут
+                        до метро на автотранспорте';
+$MESS['KELNIK_TMPL_SITES_DESCR_NOIDORF'] = 'В окружении развитой городской инфраструктуры и культурного наследия. Менее
+                        10 минут до выезда на КАД. 20 минут на автотранспорте до аэропорта';
+$MESS['KELNIK_TMPL_SITES_PRIM'] = '<strong>Приморский район</strong> <span>В лесопарке «Новоорловский»</span>';

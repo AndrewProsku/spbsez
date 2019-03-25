@@ -303,7 +303,7 @@ $APPLICATION->SetPageProperty('title', 'Special Economic Zone | SEZ');
             </div>
         </div>
 
-        <? $APPLICATION->IncludeFile('inc_zone_map_en.php'); ?>
+        <? $APPLICATION->IncludeFile('inc_zone_map.php'); ?>
 
         <div class="b-about-government" id="government">
             <div class="b-government">
