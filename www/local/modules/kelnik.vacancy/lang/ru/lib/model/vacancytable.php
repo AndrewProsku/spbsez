@@ -3,7 +3,9 @@ $MESS["KELNIK_VACANCY_ID"] = "ID";
 $MESS["KELNIK_VACANCY_ACTIVE"] = "Активность";
 $MESS["KELNIK_VACANCY_SORT"] = "Индекс сортировки";
 $MESS["KELNIK_VACANCY_NAME"] = "Название";
-$MESS["KELNIK_VACANCY_PRICE"] = "Уровень зарплаты";
+$MESS["KELNIK_VACANCY_PRICE_MIN"] = "Уровень зарплаты (от)";
+$MESS["KELNIK_VACANCY_PRICE_MAX"] = "Уровень зарплаты (до)";
+$MESS["KELNIK_VACANCY_PRICE_TEXT"] = "Уровень зарплаты (текстом)";
 $MESS["KELNIK_VACANCY_EXPERIENCE"] = "Опыт работы";
 $MESS["KELNIK_VACANCY_EMPLOYMENT"] = "Занятость";
 
