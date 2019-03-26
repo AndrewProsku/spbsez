@@ -216,4 +216,24 @@ class Report extends EO_Reports
 
         return $res;
     }
+
+    public function getForms(): array
+    {
+        $res = [];
+        $fields = $this->getFields()->getArray();
+
+        $forms = ReportFieldsTable::getForms();
+
+        foreach ($forms as $formKey => $formConfig) {
+            $res[$formKey] = [
+                'blocks' => []
+            ];
+
+            if (isset($formConfig['type'])) {
+                $res[$formKey]['type'] = $formConfig['type'];
+            }
+        }
+
+        return $res;
+    }
 }

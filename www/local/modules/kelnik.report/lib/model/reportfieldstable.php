@@ -63,14 +63,27 @@ class ReportFieldsTable extends DataManager
     public static function getForms()
     {
         return [
-            self::FORM_COMMON => [],
-            self::FORM_TAXES => [],
-            self::FORM_BUILDING => [],
-            self::FORM_RENT => [],
-            self::FORM_INDICATORS => [],
-            self::FORM_ADDITIONAL_INDICATORS => [],
+            self::FORM_COMMON => [
+                'blocks' => []
+            ],
+            self::FORM_TAXES => [
+                'blocks' => []
+            ],
+            self::FORM_BUILDING => [
+                'blocks' => []
+            ],
+            self::FORM_RENT => [
+                'blocks' => []
+            ],
+            self::FORM_INDICATORS => [
+                'blocks' => []
+            ],
+            self::FORM_ADDITIONAL_INDICATORS => [
+                'blocks' => []
+            ],
             self::FORM_RESULT => [
-                'type' => 'results'
+                'type' => 'results',
+                'blocks' => []
             ]
         ];
     }

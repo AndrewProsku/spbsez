@@ -47,42 +47,25 @@ class ReportBlock {
         this.isReadonly = options.isReadonly || false;
         this.isRejected = options.blockData.rejected || false;
         const blockData = options.blockData;
-
+        const blockTypes = {
+            'foreign-investors' : 'initForeignInvestorsBlock',
+            taxes               : 'initTaxesBlock',
+            'construction-stage': 'initConstructionStageBlock',
+            'export-countries'  : 'initExportCountriesBlock',
+            innovations         : 'initInnovationsBlock',
+            results             : 'initResultBlock'
+        };
 
         mediator.subscribe('formApproved', (formID) => {
             this.approveFormHandler(formID);
         });
 
-        if (blockData.type) {
-            switch (blockData.type) {
-                case 'foreign-investors': {
-                    this.initForeignInvestorsBlock(blockData);
-                    break;
-                }
-                case 'taxes': {
-                    this.initTaxesBlock(blockData);
-                    break;
-                }
-                case 'construction-stage': {
-                    this.initConstructionStageBlock(blockData);
-                    break;
-                }
-                case 'export-countries': {
-                    this.initExportCountriesBlock(blockData);
-                    break;
-                }
-                case 'innovations': {
-                    this.initInnovationsBlock(blockData);
-                    break;
-                }
-                case 'results': {
-                    this.initResultBlock(blockData);
-                    break;
-                }
-                default:
-                    this.inputsData = blockData;
-                    break;
-            }
+        const methodName = Object.prototype.hasOwnProperty.call(blockTypes, blockData.type) ?
+            blockTypes[blockData.type] :
+            false;
+
+        if (blockData.type && methodName && Object.prototype.hasOwnProperty.call(this, methodName)) {
+            this[methodName](blockData);
         } else {
             this.inputsData = blockData;
         }

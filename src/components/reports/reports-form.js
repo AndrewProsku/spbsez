@@ -162,7 +162,7 @@ class ReportForm {
                 responseForms.forEach((formData, i) => {
                     that.forms[i].template = that.createForm(i);
 
-                    if (formData.type && (formData.type === 'results')) {
+                    if (formData.type && formData.type === 'results') {
                         that.initResultsForm(formData, i);
                     } else {
                         that.initFormBlocks(formData.blocks, that.forms[i].template, i);
@@ -278,36 +278,18 @@ class ReportForm {
     }
 
     changeForm(formID) {
-        let formNumber = null;
+        let formNumber = parseInt(formID.replace('form', ''), 10);
 
-        /* eslint-disable no-magic-numbers */
-        switch (formID) {
-            case 'form1':
-                formNumber = 0;
-                break;
-            case 'form2':
-                formNumber = 1;
-                break;
-            case 'form3':
-                formNumber = 2;
-                break;
-            case 'form4':
-                formNumber = 3;
-                break;
-            case 'form5':
-                formNumber = 4;
-                break;
-            case 'form6':
-                formNumber = 5;
-                break;
-            case 'form7':
-                formNumber = 6;
-                this.forms[6].isVisited = true;
-                this.setFormStatus(6);
-                break;
-            default: break;
+        formNumber--;
+
+        if (formNumber < 0) {
+            return;
         }
-        /* eslint-enable no-magic-numbers */
+
+        if (formNumber === 6) {
+            this.forms[formNumber].isVisited = true;
+            this.setFormStatus(formNumber);
+        }
 
         this.replaceForm(formNumber);
 

@@ -146,7 +146,7 @@ class DocsTreeHelper extends AdminBaseHelper
         }
     }
 
-    protected function prepareChild(array $data, $isReports = false): array
+    protected function prepareChild(array $data, $isChild = false): array
     {
         if (!$data) {
             return $data;
@@ -154,7 +154,7 @@ class DocsTreeHelper extends AdminBaseHelper
 
         $stat = [];
 
-        if (!$isReports) {
+        if (!$isChild) {
             $stat = DocsTable::getAssoc([
                 'select' => [
                     'COMPANY_ID',
@@ -167,10 +167,10 @@ class DocsTreeHelper extends AdminBaseHelper
         }
 
         foreach ($data as $k => $val) {
-            if (!$isReports) {
+            if (!$isChild) {
                 $data[$k] = [
                     'ID' => '',
-                    'NAME' => '<a href="#">' . $val . '</a>',
+                    'NAME' => '<a href="javascript:;">' . $val . '</a>',
                     'id' => 'c' . $k,
                     'parent_id' => 0,
                     'quantity' => ArrayHelper::getValue($stat, $k, 0)
@@ -182,7 +182,7 @@ class DocsTreeHelper extends AdminBaseHelper
 
             $data[$k] = [
                 'id' => $k,
-                'parent_id' => 'c'. $data['COMPANY_ID'],
+                'parent_id' => 'c'. $val['COMPANY_ID'],
                 'quantity' => -1,
                 'ID' => $k,
                 'NAME' => '<a target="_blank" href="' . $fileLink . '">' . $val['NAME'] . '</a>',

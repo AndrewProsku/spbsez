@@ -71,7 +71,7 @@ class ApiProcessReport extends ApiProcessAbstract
         $this->data['NAME_SEZ'] = $this->report->getNameSez();
 
         $this->report->fill();
-        $this->data['forms'] = $this->report->getFields()->getArray();
+        $this->data['forms'] = $this->report->getForms();
 
         return true;
     }
