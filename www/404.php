@@ -16,7 +16,7 @@ $APPLICATION->SetPageProperty('mainAdditionalClass', 'l-layout__content-inner');
         <h1><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_404'); ?></h1>
     </div>
     <div class="b-404-desc">
-        <p><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_404_TEXT', ['#MAIN_PAGE#' => LANG_DIR, '#SITE_PAGE#' => '#']); ?></p>
+        <p><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_404_TEXT', ['#MAIN_PAGE#' => LANG_DIR, '#SITE_PAGE#' => LANG_DIR . 'infrastructure/']); ?></p>
     </div>
 </div>
 

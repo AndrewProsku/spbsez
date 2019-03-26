@@ -5,12 +5,11 @@ namespace Kelnik\User\Components;
 use Bex\Bbc;
 use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Requests\Model\AreaTable;
 use Kelnik\Requests\Model\ServiceTable;
 use Kelnik\Requests\Model\TypeTable;
-use Kelnik\Userdata\Profile\Profile;
-use Kelnik\Userdata\Profile\ProfileSectionRequests;
+use Kelnik\UserData\Profile\Profile;
+use Kelnik\UserData\Profile\ProfileSectionRequests;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();

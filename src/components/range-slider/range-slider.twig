@@ -1,25 +1,46 @@
-<div
-    class="b-range-slider j-range-slider"
-    data-min="{{ min }}"
-    data-max="{{ max }}"
-    data-from="{{ from|default(min) }}"
-    data-to="{{ to|default(max) }}"
-    data-type="{{ type|default('single') }}"
-    data-postfix=" {{ postfix|default() }}"
-    data-shortformat="{{ shortformat|default() }}"
->
-    <input
-        class="b-range-slider__input j-range-slider-from"
-        type="text"
-        value="{{ from }}"
-        name="{{ name }}-from"
-    >
-    {% if type == 'double' %}
-        <input
-            class="b-range-slider__input j-range-slider-to"
-            type="text"
-            value="{{ to|default(max) }}"
-            name="{{ name }}-to"
-        >
-    {% endif %}
+<div class="b-range-slider j-range-slider {{ modify }}">
+
+    <div class="b-range-slider__inputs">
+        <div class="b-range-slider__wrap-input">
+            <input
+                class="b-range-slider__input j-range-slider-from {{ modifyInput }}"
+                type="text"
+                value="{{ from }}"
+                name="{{ name }}[min]"
+                data-validate="{{ validate }}"
+                autocomplete="off"
+                {% if digit %} data-digit="true" {% endif %}
+                {% if disabled %} disabled {% endif %}
+            >
+        </div>
+
+        {% if type == 'double' %}
+            <div class="b-range-slider__wrap-input">
+                <input
+                        class="b-range-slider__input j-range-slider-to {{ modifyInput }}"
+                        type="text"
+                        value="{{ to|default(max) }}"
+                        name="{{ name }}[max]"
+                        data-validate="{{ validate }}"
+                        autocomplete="off"
+                        {% if digit %} data-digit="true" {% endif %}
+                        {% if disabled %} disabled {% endif %}
+                >
+            </div>
+        {% endif %}
+    </div>
+    <div class="b-range-slider__base">
+        <input id="{{ name }}" type="text" class="j-range-slider-base {{ modifyInput }}" value=""
+               data-min="{{ min }}"
+               data-max="{{ max }}"
+               data-from="{{ from|default(min) }}"
+               data-to="{{ to|default(max) }}"
+               data-type="{{ type|default('single') }}"
+               data-step="{{ step|default() }}"
+               data-min-interval="{{ step|default() }}"
+                {% if prettify %} data-prettify="{{prettify}}" {% endif %}
+                {% if border_min %} data-border-min="{{ border_min }}" {% endif %}
+                {% if border_max %} data-border-max="{{ border_max }}" {% endif %}
+               autocomplete="off"/>
+    </div>
 </div>

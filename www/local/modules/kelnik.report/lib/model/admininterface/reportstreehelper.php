@@ -4,13 +4,12 @@ namespace Kelnik\Report\Model\AdminInterface;
 
 use Bitrix\Main\Context;
 use Bitrix\Main\Entity\ExpressionField;
-use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminBaseHelper;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
-use Kelnik\Messages\Model\MessageCompaniesTable;
 use Kelnik\Report\Model\ReportsTable;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(
     __DIR__ . DIRECTORY_SEPARATOR
@@ -70,7 +69,7 @@ class ReportsTreeHelper extends AdminBaseHelper
             'columns' => []
         ];
 
-        echo '<div id="kelnik_catalog_groups_result_div" class="adm-list-table-layout">';
+        echo '<div id="' . $tableId . '-div" class="adm-list-table-layout">';
         echo '<table class="adm-list-table grid-table" id="'. $tableId .'" role="grid"><thead><tr class="adm-list-table-header">';
 
         echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_REPORT_ID') . '</div></td>';
@@ -117,9 +116,7 @@ class ReportsTreeHelper extends AdminBaseHelper
 
         try {
             if (!$parentId) {
-                Loader::includeModule('kelnik.messages');
-
-                return MessageCompaniesTable::getAdminTreeList();
+                return Profile::getAdminCompanyList();
             }
 
             return ReportsTable::getAssoc([

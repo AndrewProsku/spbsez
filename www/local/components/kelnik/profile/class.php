@@ -4,10 +4,10 @@ namespace Kelnik\User\Components;
 
 use Bex\Bbc;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Userdata\Profile\Profile;
-use Kelnik\Userdata\Model\DocsTable;
-use Kelnik\Userdata\Profile\ProfileSectionAdmins;
-use Kelnik\Userdata\Profile\ProfileSectionDocs;
+use Kelnik\UserData\Profile\Profile;
+use Kelnik\UserData\Model\DocsTable;
+use Kelnik\UserData\Profile\ProfileSectionAdmins;
+use Kelnik\UserData\Profile\ProfileSectionDocs;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -28,7 +28,7 @@ class ProfileForm extends Bbc\Basis
     protected $cacheTemplate = false;
 
     /**
-     * @var \Kelnik\Userdata\Profile\Profile
+     * @var \Kelnik\UserData\Profile\Profile
      */
     protected $profile;
 

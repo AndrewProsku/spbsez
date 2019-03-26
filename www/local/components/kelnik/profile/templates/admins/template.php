@@ -80,8 +80,8 @@
                                                 class="b-checkbox-input"
                                                 type="checkbox"
                                                 value="1"
-                                                name="<?= \Kelnik\Userdata\Profile\Profile::CAN_REPORT; ?>"
-                                                <?php if($row[\Kelnik\Userdata\Profile\Profile::CAN_REPORT]): ?> checked<?php endif; ?>>
+                                                name="<?= \Kelnik\UserData\Profile\Profile::CAN_REPORT; ?>"
+                                                <?php if($row[\Kelnik\UserData\Profile\Profile::CAN_REPORT]): ?> checked<?php endif; ?>>
                                         <label for="<?= $rowId; ?>" class="b-checkbox-label">
                                             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"
                                                       viewBox="0 0 16 11">
@@ -108,8 +108,8 @@
                                                 class="b-checkbox-input"
                                                 type="checkbox"
                                                value="1"
-                                               name="<?= \Kelnik\Userdata\Profile\Profile::CAN_MSG; ?>"
-                                               <?php if($row[\Kelnik\Userdata\Profile\Profile::CAN_MSG]): ?> checked<?php endif; ?>>
+                                               name="<?= \Kelnik\UserData\Profile\Profile::CAN_MSG; ?>"
+                                               <?php if($row[\Kelnik\UserData\Profile\Profile::CAN_MSG]): ?> checked<?php endif; ?>>
                                         <label for="<?= $rowId; ?>" class="b-checkbox-label">
                                             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"
                                                       viewBox="0 0 16 11">
@@ -136,8 +136,8 @@
                                                 class="b-checkbox-input"
                                                 type="checkbox"
                                                 value="1"
-                                                name="<?= \Kelnik\Userdata\Profile\Profile::CAN_REQUEST; ?>"
-                                                <?php if($row[\Kelnik\Userdata\Profile\Profile::CAN_REQUEST]): ?> checked<?php endif; ?>>
+                                                name="<?= \Kelnik\UserData\Profile\Profile::CAN_REQUEST; ?>"
+                                                <?php if($row[\Kelnik\UserData\Profile\Profile::CAN_REQUEST]): ?> checked<?php endif; ?>>
                                         <label for="<?= $rowId; ?>" class="b-checkbox-label">
                                             <span class="b-checkbox-box"><svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"
                                                       viewBox="0 0 16 11">

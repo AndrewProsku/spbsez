@@ -1,0 +1,62 @@
+$progress-bar-height: 4px;
+$progress-bar-bg-color: #e1e1e1;
+$progress-bar-active-bg-color: #000000;
+$progress-bar-radius: 25px;
+$handler-size: 17px;
+$handler-bg-color: $white;
+$handler-value-bg-color: transparent;
+$handler-value-color: $black;
+$from-to-values-visibility: false;
+$inputs-visibility: false;
+
+.b-range-slider {
+    position: relative;
+
+    .irs-line {
+        background: $progress-bar-bg-color;
+        height: $progress-bar-height;
+        border-radius: $progress-bar-radius;
+        border: 0;
+    }
+
+    .irs-bar,
+    .irs-bar-edge {
+        background: $progress-bar-active-bg-color;
+        height: $progress-bar-height;
+        border: 0;
+    }
+
+    .irs-bar-edge {
+        border-radius: $progress-bar-radius 0 0 $progress-bar-radius;
+    }
+
+    .irs-line-left,
+    .irs-line-mid,
+    .irs-line-right {
+        height: $progress-bar-height;
+    }
+
+    .irs-min,
+    .irs-max {
+        @if not ($from-to-values-visibility) {
+            display: none;
+        }
+    }
+
+    .irs-single {
+        background: $handler-value-bg-color;
+        color: $handler-value-color;
+    }
+
+    .irs-slider {
+        width: $handler-size;
+        height: $handler-size;
+        background: $handler-bg-color;
+    }
+}
+
+.b-range-slider__input {
+    @if not ($inputs-visibility) {
+        display: none;
+    }
+}

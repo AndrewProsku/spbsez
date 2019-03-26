@@ -1,4 +1,8 @@
 <?php
 $MESS['KELNIK_USERDATA_CONTACT_MENU'] = 'Контакты';
+$MESS['KELNIK_USERDATA_CONTACT_LIST_MENU'] = 'Список';
+$MESS['KELNIK_USERDATA_CONTACT_TREE_MENU'] = 'Список по резидентам';
 $MESS['KELNIK_USERDATA_DOCS_MENU'] = 'Документы';
+$MESS['KELNIK_USERDATA_DOCS_LIST_MENU'] = 'Список';
+$MESS['KELNIK_USERDATA_DOCS_TREE_MENU'] = 'Список по резидентам';
 $MESS['KELNIK_USERDATA_MODULE'] = 'Данные резидентов';

@@ -7,7 +7,7 @@ use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\PluralHelper;
 use Kelnik\Messages\MessageService;
-use Kelnik\Userdata\Profile\Profile;
+use Kelnik\UserData\Profile\Profile;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();

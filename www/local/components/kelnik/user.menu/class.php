@@ -4,7 +4,7 @@ namespace Kelnik\Usermenu\Components;
 
 use Bex\Bbc;
 use Kelnik\Messages\MessageService;
-use Kelnik\Userdata\Profile\Profile;
+use Kelnik\UserData\Profile\Profile;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();

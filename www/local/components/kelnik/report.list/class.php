@@ -9,7 +9,7 @@ use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportsTable;
 use Kelnik\Report\Model\StatusTable;
-use Kelnik\Userdata\Profile\Profile;
+use Kelnik\UserData\Profile\Profile;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();

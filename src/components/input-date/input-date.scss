@@ -1,5 +1,5 @@
 $width: 320px;
-$widthColumn: 21px;
+$widthColumn: 32px;
 $verPadding: 20px;
 $borderWidth: 1px;
 
@@ -15,6 +15,11 @@ $marginRight: ($widthContent - ($widthColumn * 7)) / 6; // Правый отст
     box-shadow: 0 10px 20px $grey;
     padding-top: 10px;
     user-select: none;
+    position: absolute;
+    z-index: 111;
+    top: 100%;
+    left: 0;
+    display: none;
 }
 
 .b-input-date__title {
@@ -83,7 +88,6 @@ $marginRight: ($widthContent - ($widthColumn * 7)) / 6; // Правый отст
 .b-input-date__week {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 15px;
     justify-content: flex-start;
 
     &:first-child {
@@ -94,11 +98,16 @@ $marginRight: ($widthContent - ($widthColumn * 7)) / 6; // Правый отст
 .b-input-date__day {
     width: $widthColumn;
     min-width: $widthColumn;
+    height: 30px;
     margin-right: $marginRight;
     text-align: center;
     position: relative;
     cursor: pointer;
     color: $blue;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:last-child {
         margin-right: 0;
@@ -130,5 +139,59 @@ $marginRight: ($widthContent - ($widthColumn * 7)) / 6; // Правый отст
 .b-input-date__addition {
     padding: 10px $verPadding;
     background-color: $bg-select;
-    height: 80px;
+    height: 83px;
+}
+
+.b-input-date__time {
+    .irs-slider {
+        top: 19px;
+        width: 20px;
+        height: 20px;
+        background: $blue !important; // stylelint-disable-line
+        border: none;
+        box-shadow: none;
+
+        &:hover {
+            background: $blue !important; // stylelint-disable-line
+        }
+    }
+
+    .irs-bar {
+        top: 28px;
+        height: 2px;
+        border: none;
+        background: $blue;
+    }
+
+    .irs-bar-edge {
+        top: 28px;
+        height: 2px;
+        border: none;
+        background: $blue;
+    }
+
+    .irs-line {
+        top: 28px;
+        height: 2px;
+        border: none;
+        background: $blue;
+    }
+
+    .irs-from,
+    .irs-to,
+    .irs-single {
+        @include font-size(p3);
+        top: 40px;
+        background: transparent;
+        color: $blue;
+        font-weight: 700;
+    }
+
+    .irs-min,
+    .irs-max {
+        @include font-size(p4);
+        background: transparent;
+        color: rgba($black, 0.48);
+        padding: 0;
+    }
 }

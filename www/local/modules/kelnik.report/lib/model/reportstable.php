@@ -16,7 +16,7 @@ use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
-use Kelnik\Userdata\Profile\Profile;
+use Kelnik\UserData\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 

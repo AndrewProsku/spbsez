@@ -99,7 +99,7 @@ $APPLICATION->SetTitle("Main page");
         array()
     ); ?>
 
-    <? $APPLICATION->IncludeFile('inc_zone_map_en.php'); ?>
+    <? $APPLICATION->IncludeFile('inc_zone_map.php'); ?>
 
     <? $APPLICATION->IncludeComponent(
         "kelnik:refbook.list",
