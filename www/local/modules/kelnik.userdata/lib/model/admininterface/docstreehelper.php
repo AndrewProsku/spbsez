@@ -1,28 +1,32 @@
 <?php
 
-namespace Kelnik\Report\Model\AdminInterface;
+namespace Kelnik\UserData\Model\AdminInterface;
 
 use Bitrix\Main\Context;
 use Bitrix\Main\Entity\ExpressionField;
+use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Type\DateTime;
 use Kelnik\AdminHelper\Helper\AdminBaseHelper;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
-use Kelnik\Report\Model\ReportsTable;
+use Kelnik\UserData\Model\DocsTable;
 use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(
     __DIR__ . DIRECTORY_SEPARATOR
-    . '..' . DIRECTORY_SEPARATOR . 'reports.php'
+    . '..' . DIRECTORY_SEPARATOR . 'docstable.php'
 );
 
-class ReportsTreeHelper extends AdminBaseHelper
+class DocsTreeHelper extends AdminBaseHelper
 {
-    protected static $model = ReportsTable::class;
+    protected static $model = DocsTable::class;
 
     public function show()
     {
         global $APPLICATION;
+
+        !Loader::includeModule('kelnik.report');
 
         if (!$this->hasWriteRights()) {
             $this->addErrors(Loc::getMessage('KELNIK_ADMIN_HELPER_ACCESS_FORBIDDEN'));
@@ -61,7 +65,7 @@ class ReportsTreeHelper extends AdminBaseHelper
         $APPLICATION->SetAdditionalCSS(getLocalPath('css/kelnik.report/fontawesome/css/all.css'));
         $APPLICATION->SetAdditionalCSS(getLocalPath('css/kelnik.report/grid.css'));
 
-        $tableId = 'kelnik-reports';
+        $tableId = 'kelnik-docs';
 
         $params = [
             'url' => self::getUrl(),
@@ -72,10 +76,10 @@ class ReportsTreeHelper extends AdminBaseHelper
         echo '<div id="' . $tableId . '-div" class="adm-list-table-layout">';
         echo '<table class="adm-list-table grid-table" id="'. $tableId .'" role="grid"><thead><tr class="adm-list-table-header">';
 
-        echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_REPORT_ID') . '</div></td>';
-        echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_REPORT_NAME') . '</div></td>';
-        echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_REPORT_QUARTER') . '</div></td>';
-        echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_REPORT_STATUS') . '</div></td>';
+        echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_USERDATA_ID') . '</div></td>';
+        echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_USERDATA_RESIDENT') . '</div></td>';
+        echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_USERDATA_USER_ID') . '</div></td>';
+        echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_USERDATA_DATE_CREATED') . '</div></td>';
 
         echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">&nbsp;</div></td>';
         echo '</tr></thead></table>';
@@ -92,10 +96,10 @@ class ReportsTreeHelper extends AdminBaseHelper
                 'field' => 'NAME'
             ],
             [
-                'field' => 'QUARTER'
+                'field' => 'USER_NAME'
             ],
             [
-                'field' => 'STATUS'
+                'field' => 'DATE'
             ],
             [
                 'field' => 'menu',
@@ -119,11 +123,16 @@ class ReportsTreeHelper extends AdminBaseHelper
                 return Profile::getAdminCompanyList();
             }
 
-            return ReportsTable::getAssoc([
+            return DocsTable::getAssoc([
                 'select' => [
-                    'ID', 'COMPANY_ID', 'NAME',
-                    'QUARTER', 'YEAR',
-                    'STATUS_NAME' => 'STATUS.NAME'
+                    'ID',
+                    'NAME' => 'FILE.ORIGINAL_NAME',
+                    'USER_NAME',
+                    'FILE_NAME' => 'FILE.FILE_NAME',
+                    'MODILE_ID' => 'FILE.MODULE_ID',
+                    'SUBDIR' => 'FILE.SUBDIR',
+                    'FILE_SIZE' => 'FILE.FILE_SIZE',
+                    'DATE_CREATED'
                 ],
                 'filter' => [
                     '=COMPANY_ID' => $parentId
@@ -146,7 +155,7 @@ class ReportsTreeHelper extends AdminBaseHelper
         $stat = [];
 
         if (!$isReports) {
-            $stat = ReportsTable::getAssoc([
+            $stat = DocsTable::getAssoc([
                 'select' => [
                     'COMPANY_ID',
                     new ExpressionField('CNT', 'COUNT(DISTINCT %s)', 'ID')
@@ -169,14 +178,20 @@ class ReportsTreeHelper extends AdminBaseHelper
                 continue;
             }
 
+            $fileLink = \CFile::GetFileSRC($val);
+
             $data[$k] = [
                 'id' => $k,
                 'parent_id' => 'c'. $data['COMPANY_ID'],
                 'quantity' => -1,
                 'ID' => $k,
-                'NAME' => '<a target="_blank" href="' . ReportsEditHelper::getUrl(['ID' => $k]) . '">' . $val['NAME'] . '</a>',
-                'QUARTER' => ReportsTable::getTypeName($val['QUARTER']) . ' ' . $val['YEAR'],
-                'STATUS' => $val['STATUS_NAME']
+                'NAME' => '<a target="_blank" href="' . $fileLink . '">' . $val['NAME'] . '</a>',
+                'USER_NAME' => $val['USER_NAME'],
+                'DATE' => $val['DATE_CREATED'] instanceof DateTime ? $val['DATE_CREATED']->toString() : '-',
+                'menu' => '<a class="bx-core-popup-menu-item bx-core-popup-menu-item-default" href="' . DocsEditHelper::getUrl(['ID' => $val['ID']]) . '">' .
+                            '<span class="bx-core-popup-menu-item-icon adm-menu-edit"></span>' .
+                            '<span class="bx-core-popup-menu-item-text">' . Loc::getMessage('KELNIK_USERDATA_EDIT_ELEMENT') . '</span>' .
+                            '</a>'
             ];
         }
 

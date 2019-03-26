@@ -9,7 +9,7 @@ use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Messages\Model\NotifyTable;
 use Kelnik\Requests\Model\StatusTable;
-use Kelnik\Userdata\Profile\Profile;
+use Kelnik\UserData\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kelnik\Userdata\Model;
+namespace Kelnik\UserData\Model;
 
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
@@ -36,6 +36,11 @@ class DocsTable extends DataManager
     public static function getTableName()
     {
         return 'kelnik_userdata_docs';
+    }
+
+    public static function getUfId()
+    {
+        return 'USER_DOCS';
     }
 
     /**
@@ -107,6 +112,13 @@ class DocsTable extends DataManager
                 [
                     'USER.' . Profile::OWNER_FIELD,
                     'USER.' . Profile::OWNER_FIELD,
+                    'USER.ID'
+                ]
+            ),
+            new Main\Entity\ExpressionField(
+                'USER_NAME',
+                '(SELECT CONCAT(\'(\', `EMAIL`, \') \', `LAST_NAME`, \' \', `NAME`, \' \', `SECOND_NAME`) FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s)',
+                [
                     'USER.ID'
                 ]
             )

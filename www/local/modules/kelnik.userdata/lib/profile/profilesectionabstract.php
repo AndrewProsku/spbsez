@@ -1,6 +1,6 @@
 <?php
 
-namespace Kelnik\Userdata\Profile;
+namespace Kelnik\UserData\Profile;
 
 
 abstract class ProfileSectionAbstract
