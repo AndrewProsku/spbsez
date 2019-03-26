@@ -7,7 +7,7 @@ use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportsTable;
-use Kelnik\Userdata\Profile\Profile;
+use Kelnik\UserData\Profile\Profile;
 
 /**
  * Class ApiProcessReport

@@ -5,10 +5,10 @@ use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
-use Kelnik\Userdata\Profile\Profile;
-use Kelnik\Userdata\Profile\ProfileSectionAdmins;
-use Kelnik\Userdata\Profile\ProfileSectionContacts;
-use Kelnik\Userdata\Profile\ProfileSectionDocs;
+use Kelnik\UserData\Profile\Profile;
+use Kelnik\UserData\Profile\ProfileSectionAdmins;
+use Kelnik\UserData\Profile\ProfileSectionContacts;
+use Kelnik\UserData\Profile\ProfileSectionDocs;
 
 /**
  * Class ApiProcessProfile
@@ -89,7 +89,7 @@ class ApiProcessProfile extends ApiProcessAbstract
                 continue;
             }
 
-            $nameSpace = '\Kelnik\Userdata\Profile\ProfileSection' . ucfirst($model);
+            $nameSpace = '\Kelnik\UserData\Profile\ProfileSection' . ucfirst($model);
 
             if (!class_exists($nameSpace)) {
                 return;

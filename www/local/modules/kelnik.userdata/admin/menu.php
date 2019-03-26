@@ -36,9 +36,27 @@ return [
                 'icon' => 'iblock_menu_icon',
                 'page_icon' => 'iblock_menu_icon',
                 'text' => Loc::getMessage('KELNIK_USERDATA_CONTACT_MENU'),
-                'url' => ContactListHelper::getUrl(),
-                'more_url' => [
-                    ContactEditHelper::getUrl()
+                'items_id' => 'kelinik_userdata_cont',
+                'items' => [
+                    [
+                        'parent_menu' => 'kelnik_userdata_cont',
+                        'sort' => 180,
+                        'icon' => 'iblock_menu_icon',
+                        'page_icon' => 'iblock_menu_icon',
+                        'text' => Loc::getMessage('KELNIK_USERDATA_CONTACT_LIST_MENU'),
+                        'url' => ContactListHelper::getUrl(),
+                        'more_url' => [
+                            ContactEditHelper::getUrl()
+                        ]
+                    ],
+                    [
+                        'parent_menu' => 'kelinik_userdata_cont',
+                        'sort' => 180,
+                        'icon' => 'iblock_menu_icon',
+                        'page_icon' => 'iblock_menu_icon',
+                        'text' => Loc::getMessage('KELNIK_USERDATA_CONTACT_TREE_MENU'),
+                        'url' => \Kelnik\UserData\Model\AdminInterface\ContactTreeHelper::getUrl()
+                    ]
                 ]
             ],
             [
@@ -47,9 +65,27 @@ return [
                 'icon' => 'iblock_menu_icon',
                 'page_icon' => 'iblock_menu_icon',
                 'text' => Loc::getMessage('KELNIK_USERDATA_DOCS_MENU'),
-                'url' => DocsListHelper::getUrl(),
-                'more_url' => [
-                    DocsEditHelper::getUrl()
+                'items_id' => 'kelinik_userdata_docs',
+                'items' => [
+                    [
+                        'parent_menu' => 'kelinik_userdata_docs',
+                        'sort' => 180,
+                        'icon' => 'iblock_menu_icon',
+                        'page_icon' => 'iblock_menu_icon',
+                        'text' => Loc::getMessage('KELNIK_USERDATA_DOCS_LIST_MENU'),
+                        'url' => DocsListHelper::getUrl(),
+                        'more_url' => [
+                            DocsEditHelper::getUrl()
+                        ]
+                    ],
+                    [
+                        'parent_menu' => 'kelinik_userdata_docs',
+                        'sort' => 180,
+                        'icon' => 'iblock_menu_icon',
+                        'page_icon' => 'iblock_menu_icon',
+                        'text' => Loc::getMessage('KELNIK_USERDATA_DOCS_TREE_MENU'),
+                        'url' => \Kelnik\UserData\Model\AdminInterface\DocsTreeHelper::getUrl()
+                    ]
                 ]
             ]
         ]

@@ -1,13 +1,13 @@
 <?php
 
-namespace Kelnik\Userdata\Model;
+namespace Kelnik\UserData\Model;
 
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Composer\Application\Bitrix;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
@@ -36,6 +36,11 @@ class DocsTable extends DataManager
     public static function getTableName()
     {
         return 'kelnik_userdata_docs';
+    }
+
+    public static function getUfId()
+    {
+        return 'USER_DOCS';
     }
 
     /**
@@ -89,6 +94,32 @@ class DocsTable extends DataManager
                 Main\FileTable::class,
                 [
                     '=this.FILE_ID' => 'ref.ID'
+                ]
+            ),
+
+            new Main\Entity\ExpressionField(
+                'COMPANY_ID',
+                'IF(%s, %s, %s)',
+                [
+                    'USER.' . Profile::OWNER_FIELD,
+                    'USER.' . Profile::OWNER_FIELD,
+                    'USER.ID'
+                ]
+            ),
+            new Main\Entity\ExpressionField(
+                'COMPANY_NAME',
+                'IF(%s, (SELECT `WORK_COMPANY` FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s), (SELECT `WORK_COMPANY` FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s))',
+                [
+                    'USER.' . Profile::OWNER_FIELD,
+                    'USER.' . Profile::OWNER_FIELD,
+                    'USER.ID'
+                ]
+            ),
+            new Main\Entity\ExpressionField(
+                'USER_NAME',
+                '(SELECT CONCAT(\'(\', `EMAIL`, \') \', `LAST_NAME`, \' \', `NAME`, \' \', `SECOND_NAME`) FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s)',
+                [
+                    'USER.ID'
                 ]
             )
         ];

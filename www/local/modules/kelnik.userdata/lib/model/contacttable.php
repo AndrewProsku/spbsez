@@ -1,10 +1,11 @@
 <?php
 
-namespace Kelnik\Userdata\Model;
+namespace Kelnik\UserData\Model;
 
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
@@ -74,6 +75,40 @@ class ContactTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_USERDATA_EMAIL'),
                 ]
             ),
+
+            new Main\Entity\ReferenceField(
+                'USER',
+                Main\UserTable::class,
+                [
+                    '=this.USER_ID' => 'ref.ID'
+                ]
+            ),
+
+            new Main\Entity\ExpressionField(
+                'COMPANY_ID',
+                'IF(%s, %s, %s)',
+                [
+                    'USER.' . Profile::OWNER_FIELD,
+                    'USER.' . Profile::OWNER_FIELD,
+                    'USER.ID'
+                ]
+            ),
+            new Main\Entity\ExpressionField(
+                'COMPANY_NAME',
+                'IF(%s, (SELECT `WORK_COMPANY` FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s), (SELECT `WORK_COMPANY` FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s))',
+                [
+                    'USER.' . Profile::OWNER_FIELD,
+                    'USER.' . Profile::OWNER_FIELD,
+                    'USER.ID'
+                ]
+            ),
+            new Main\Entity\ExpressionField(
+                'USER_NAME',
+                '(SELECT CONCAT(\'(\', `EMAIL`, \') \', `LAST_NAME`, \' \', `NAME`, \' \', `SECOND_NAME`) FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s)',
+                [
+                    'USER.ID'
+                ]
+            )
         ];
     }
 

@@ -1,9 +1,9 @@
 <?php
-namespace Kelnik\Userdata\Model\AdminInterface;
+namespace Kelnik\UserData\Model\AdminInterface;
 
 use Kelnik\AdminHelper\Helper\AdminListHelper;
 
 class DocsListHelper extends AdminListHelper
 {
-    protected static $model = '\Kelnik\Userdata\Model\DocsTable';
+    protected static $model = '\Kelnik\UserData\Model\DocsTable';
 }

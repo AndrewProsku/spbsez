@@ -4,7 +4,7 @@ namespace Kelnik\Report\Model;
 
 
 use Bitrix\Main\Type\DateTime;
-use Kelnik\Userdata\Profile\Profile;
+use Kelnik\UserData\Profile\Profile;
 
 /**
  * Class Report

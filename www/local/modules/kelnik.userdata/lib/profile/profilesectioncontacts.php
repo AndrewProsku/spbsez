@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Kelnik\Userdata\Profile;
+namespace Kelnik\UserData\Profile;
 
 
-use Kelnik\Userdata\Model\ContactTable;
+use Kelnik\UserData\Model\ContactTable;
 
 class ProfileSectionContacts extends ProfileSectionAbstract
 {

@@ -5,7 +5,7 @@ namespace Kelnik\Api\Process;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Messages\MessageService;
-use Kelnik\Userdata\Profile\Profile;
+use Kelnik\UserData\Profile\Profile;
 
 /**
  * Class ApiProcessMessages

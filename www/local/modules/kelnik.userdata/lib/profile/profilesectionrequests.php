@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Kelnik\Userdata\Profile;
+namespace Kelnik\UserData\Profile;
 
 
 use Bitrix\Main\Localization\Loc;
