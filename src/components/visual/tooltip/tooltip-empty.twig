@@ -14,12 +14,7 @@
     </div>
     <ul class="b-visual-tooltip__features">
         {% for feature in features %}
-            <li class="b-visual-tooltip__features-item b-visual-tooltip__features-item_icon_{{feature.type}}">{{feature.title}}</li>
+            <li class="b-visual-tooltip__features-item b-visual-tooltip__features-item_icon_{{feature.icon}}">{{feature.title}}</li>
         {% endfor %}
     </ul>
 </div>
-
-{#<li class="b-visual-tooltip__features-item b-visual-tooltip__features-item_icon_heating">Теплоснабжение</li>#}
-{#<li class="b-visual-tooltip__features-item b-visual-tooltip__features-item_icon_electricity">Электроснабжение</li>#}
-{#<li class="b-visual-tooltip__features-item b-visual-tooltip__features-item_icon_water">Водоснабжение</li>#}
-{#<li class="b-visual-tooltip__features-item b-visual-tooltip__features-item_icon_sanitation">Ливневая канализация</li>#}

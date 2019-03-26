@@ -46,12 +46,11 @@ export default class Tooltip {
      * @param {Object} options - настройки тултипа
      */
     init(options) {
-        this.allDOM = options.allDOM;
         this.templateTarget = options.templateTarget;
         this.target = options.target;
         this.data = options.data;
-        this.template = this.setTemplate();
-        // this.checkTemplate();
+        this.mobileMode = options.mobileMode;
+        this.template = this.getTemplate();
     }
 
     /**
@@ -59,11 +58,20 @@ export default class Tooltip {
      */
     show() {
         Utils.insetContent(this.templateTarget, this.template(this.data));
-        this.tooltip = document.querySelector('.b-visual-tooltip');
+        this.tooltip = this.templateTarget.querySelector('.b-visual-tooltip');
+        this.tooltip.setAttribute('id', `area-${this.target.dataset.id}`);
         this.size();
+
+        if (!this.mobileMode) {
+            this.tooltip.addEventListener('mouseout', (event) => {
+                if (!event.relatedTarget.closest('.b-visual-tooltip')) {
+                    this.remove();
+                }
+            });
+        }
     }
 
-    setTemplate() {
+    getTemplate() {
         return this.target.classList.contains('is-empty') ? templateEmpty : templateResident;
     }
 
@@ -71,13 +79,8 @@ export default class Tooltip {
      * Узнает и устанавливает размеры тултипа
      */
     size() {
-        // некоторый запас ширины
-        const buffer = 5;
-
         this.width = this.tooltip.offsetWidth;
-        this.height = this.tooltip.offsetHeight;
-        this.tooltip.style.width = `${this.width + buffer}px`;
-        this.tooltip.style.height = `${this.height}px`;
+        this.height = this.tooltip.getBoundingClientRect().height;
     }
 
     /**
@@ -99,19 +102,20 @@ export default class Tooltip {
         const offset = 10;
         let top = 0;
         let left = 0;
+        const half = 2;
 
         // не дает тултипу уйти за экран сверху
-        if (coords.top - this.height - offset <= offset) {
+        if (coords.y - (this.height / half) - offset <= offset) {
             top = `${offset}px`;
         } else {
-            top = `${coords.top - this.height - offset}px`;
+            top = `${coords.y - (this.height / half) - offset}px`;
         }
 
         // не дает тултипу уйти за экран справа
-        if (coords.left + this.width + offset <= this.allDOM.offsetWidth) {
-            left = `${coords.left}px`;
+        if (coords.x + this.width - offset <= document.documentElement.offsetWidth) {
+            left = `${coords.x - offset}px`;
         } else {
-            left = `${this.allDOM.offsetWidth - this.width - offset}px`;
+            left = `${document.documentElement.offsetWidth - this.width - offset}px`;
         }
 
         return {

@@ -3,6 +3,7 @@ const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const config = require('./tasks/config');
+const webpack = require('webpack');
 const rev = require('./tasks/rev');
 
 rev([
@@ -57,12 +58,17 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin([
             path.resolve(__dirname, config.scripts.output)
-        ])
+        ]),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        })
       ],
     resolve: {
         alias: {
             components: path.resolve(__dirname, './src/components'),
-            common    : path.resolve(__dirname, './src/common')
+            common    : path.resolve(__dirname, './src/common'),
+            jquery    : 'jquery'
         }
     },
     devtool: 'source-map',
