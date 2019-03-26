@@ -33,9 +33,9 @@ import templateMessages from 'components/messages/messages.twig';
 import Useful from '../../components/useful';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
+import Visual from 'components/visual';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
-// import Visual from 'components/visual';
 
 const mediator = new Mediator();
 
@@ -855,14 +855,17 @@ if (residentMainScreen) {
     window.addEventListener('scroll', getOverlayScrollTop);
 }
 
-// const visual = new Visual();
-// const allDOM = document.body;
-// const areaPlane = new Visual();
-// Инициализация визуального
-// areaPlane.init({
-//     allDOM,
-//     target: allDOM.querySelector('.b-visual')
-// });
+
+// Инициализация плана территории
+const areaPlaneEl = document.querySelector('.b-visual');
+
+if (areaPlaneEl) {
+    const areaPlane = new Visual();
+
+    areaPlane.init({
+        target: areaPlaneEl
+    });
+}
 
 const inputDateElement = Array.from(document.querySelectorAll('.j-input-date'));
 

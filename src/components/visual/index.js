@@ -1,8 +1,4 @@
-/* временно */
-/* eslint-disable */
-
 import Tooltip from './tooltip';
-import Utils from 'common/scripts/utils';
 const tooltip = new Tooltip();
 
 export default class Visual {
@@ -20,106 +16,136 @@ export default class Visual {
          */
         this.svg = null;
 
-        this.places = null;
+        /**
+         * элемент <path> для которого был показан тултип
+         * @type {Node}
+         */
+        this.activePath = null;
+
+        /**
+         * Обработчик для закрытия выпадающих списков с привязкой к this компонента
+         * Используется для корректоного удаления обработчика при закрытии списка
+         */
+        this.closeTooltipHandlerBound = this.closeTooltipHandler.bind(this);
     }
 
     init(options) {
-        this.allDOM = options.allDOM;
-        this.target = options.target; // .b-visual
+        this.target = options.target;
         this.svg = this.target.querySelector('.b-visual__svg');
         this.masks = Array.from(this.svg.querySelectorAll('.b-visual__svg path'));
         this.area = this.target.dataset.area;
-        this.FAIL_STATUS = 0;
+        this.isThemePoints = this.target.classList.contains('b-visual_theme_points');
+        this.mobileMode = document.body.clientWidth < 669;
+        this.targetOffsetTop = this.target.getBoundingClientRect().top;
 
-        /*const that = this;
-        Utils.send(`action=getPlan`, `/tests/plan-${this.area}.json`, {
-            success(response) {
-                if (response.request.status === that.FAIL_STATUS) {
-                    return;
+        this.insertMaskTitle();
+        this.bindMasksEvents();
+    }
+
+    resizeHandler() {
+        this.targetOffsetTop = this.target.getBoundingClientRect().top;
+        const half = 2;
+
+        this.masks.forEach((path) => {
+            const halfPathHeight = path.getBoundingClientRect().height / half;
+            const centerY = path.getBoundingClientRect().top + halfPathHeight - this.target.getBoundingClientRect().top;
+            const centerX = path.getBoundingClientRect().left + (path.getBoundingClientRect().width / half);
+            const titleElement = this.target.querySelector(`#area-${path.dataset.id}`);
+
+            titleElement.style.top = `${centerY}px`;
+            titleElement.style.left = `${centerX}px`;
+        });
+    }
+
+    insertMaskTitle() {
+        window.addEventListener('resize', this.resizeHandler.bind(this));
+        const half = 2;
+
+        this.masks.forEach((path) => {
+            const halfPathHeight = path.getBoundingClientRect().height / half;
+            const centerY = path.getBoundingClientRect().top + halfPathHeight - this.target.getBoundingClientRect().top;
+            const centerX = path.getBoundingClientRect().left + (path.getBoundingClientRect().width / half);
+            const titleElement = document.createElement('div');
+
+            if (this.isThemePoints) {
+                titleElement.classList.add('b-visual__point');
+                if (path.classList.contains('is-empty')) {
+                    titleElement.classList.add('is-empty');
                 }
-
-                that.places = response.data.places;
-            },
-            error(error) {
-                console.error(error);
+            } else {
+                titleElement.classList.add('b-visual__area-title');
+                titleElement.textContent = path.dataset.title;
             }
-        });*/
 
-        this.masksBindEvents();
+            titleElement.style.top = `${centerY}px`;
+            titleElement.style.left = `${centerX}px`;
+            titleElement.setAttribute('id', `area-${path.dataset.id}`);
+
+            this.target.appendChild(titleElement);
+        });
     }
 
     /**
      * Биндит события на маски
      */
-    masksBindEvents() {
-        this.masks.forEach((path) => {
-            path.addEventListener('mouseenter', this.tooltipShow.bind(this, path));
-            // path.addEventListener('mousemove', this.tooltipPosition);
-            path.addEventListener('mouseout', this.tooltipRemove);
-        });
+    bindMasksEvents() {
+        if (this.mobileMode) {
+            this.masks.forEach((path) => {
+                path.addEventListener('click', this.tooltipShow.bind(this, path));
+            });
+        } else {
+            this.masks.forEach((path) => {
+                path.addEventListener('mouseenter', this.tooltipShow.bind(this, path));
+                path.addEventListener('mouseout', (event) => {
+                    if (!event.relatedTarget.closest('.b-visual-tooltip')) {
+                        this.tooltipRemove();
+                    }
+                });
+            });
+        }
     }
 
-    /**
-     * удаляет событие с масок
-     */
-    masksUnbindEvents() {
-        // this.masks.paths.forEach((path) => {
-        this.masks.forEach((path) => {
-            path.removeEventListener('mouseenter', this.tooltipShow);
-            // path.removeEventListener('mousemove', this.tooltipPosition);
-            path.removeEventListener('mouseout', this.tooltipRemove);
-        });
-    }
-
-    /**
-     * Показывает тултип
-     */
     tooltipShow(path) {
         const data = JSON.parse(atob(path.dataset.json));
+        const half = 2;
+
+        if (this.target.querySelector(`.b-visual-tooltip`)) {
+            tooltip.remove();
+            document.removeEventListener('click', this.closeTooltipHandlerBound);
+        }
 
         tooltip.init({
-            allDOM        : this.allDOM,
             templateTarget: this.target,
             target        : path,
-            data          : data
+            data,
+            mobileMode    : this.mobileMode
         });
+
+        const coordY = path.getBoundingClientRect().top + (path.getBoundingClientRect().height / half);
+        const coordX = path.getBoundingClientRect().right - (path.getBoundingClientRect().width / 4);
 
         tooltip.show();
         tooltip.position({
-            top : path.clientY,
-            left: path.clientX
+            x: coordX,
+            y: coordY
         });
+
+        if (this.mobileMode) {
+            this.activePath = path;
+            document.addEventListener('click', this.closeTooltipHandlerBound);
+        }
     }
 
-    imageTooltipShow(image) {
-        tooltip.initImage({
-            allDOM        : this.allDOM,
-            templateTarget: this.target,
-            target        : image,
-            data          : image.data
-        });
-
-        tooltip.showImage();
-        tooltip.position({
-            top : image.clientY,
-            left: image.clientX
-        });
+    closeTooltipHandler() {
+        if (!event.target.closest('.b-visual-tooltip') && !event.target.closest('path')) {
+            this.tooltipRemove();
+        }
     }
 
-    /**
-     * Позиционирует тултип
-     */
     tooltipPosition(path) {
         tooltip.position({
             top : path.clientY,
             left: path.clientX
-        });
-    }
-
-    imageTooltipPosition(image) {
-        tooltip.position({
-            top : image.clientY,
-            left: image.clientX
         });
     }
 
@@ -128,8 +154,6 @@ export default class Visual {
      */
     tooltipRemove() {
         tooltip.remove();
+        document.removeEventListener('click', this.closeTooltipHandlerBound);
     }
 }
-
-/* временно */
-/* eslint-enable */
