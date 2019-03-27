@@ -66,7 +66,7 @@ class ReportBlock {
             blockTypes[blockData.type] :
             false;
 
-        if (blockData.type && methodName && Object.prototype.hasOwnProperty.call(this, methodName)) {
+        if (methodName && typeof this[methodName] === 'function') {
             this[methodName](blockData);
         } else {
             this.inputsData = blockData;
