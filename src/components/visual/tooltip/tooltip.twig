@@ -1,6 +1,6 @@
 <div class="b-visual-tooltip" style="top: 0; left: 0;">
     {% if image %}
-        <img class="b-visual-tooltip__img" src="{{ image.src }}" alt="{{ image.text }}">
+        <img class="b-visual-tooltip__img" src="{{ image.url }}" alt="{{ image.text }}">
     {% endif %}
     <div class="b-visual-tooltip__body">
         <div class="b-visual-tooltip__title">{{ title }}</div>
@@ -10,7 +10,7 @@
             <div class="b-visual-tooltip__info-value">{{ space }}</div>
         </div>
         <div class="b-visual-tooltip__site-link">
-            <a href="{{ siteUrl }}" target="_blank" class="b-link-line">{{ siteName }}</a>
+            <a href="{{ site.url }}" target="_blank" class="b-link-line">{{ site.title }}</a>
         </div>
     </div>
 </div>

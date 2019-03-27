@@ -193,6 +193,51 @@ class Utils {
         /* eslint-disable */
         return check;
     }
+
+    /**
+     * Клик по элементу или мимо
+     *
+     * @param {array} selectors - Строка или масив селектор(а)ов отслеживаемых елемент(а)ов
+     * @param {function} outside - Callback если клик вне елемент(а)ов
+     * @param {function} inside - Callback если клик по елемент(у)ам
+     */
+    static clickOutside(selectors, outside = function() {}, inside = function() {}) {
+        if (!selectors) {
+            return;
+        }
+        
+        let elements = [];
+        
+        if (typeof selectors == 'string') {
+            elements.push(Array.from(document.querySelectorAll(selectors)));
+        } else {
+            Array.from(selectors).forEach((selector) => {
+                elements.push(Array.from(document.querySelectorAll(selector)));
+            });
+        }
+
+        document.addEventListener('click', (event) => {
+            let target = event.target;
+
+            do {
+                try {
+                    elements.forEach((element) => {
+                        if (element.indexOf(target) !== -1) {
+                            inside();
+
+                            throw false;
+                        }
+                    });
+                } catch(error) {
+                    return;
+                }
+
+                target = target.parentNode;
+            } while (target);
+
+            outside();
+        });
+    }
 }
 
 export default Utils;

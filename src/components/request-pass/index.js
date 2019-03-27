@@ -9,18 +9,35 @@ class RequestPass {
         this.$addPassButton = document.querySelector('.j-add-pass');
 
         this.deletePassClass = 'j-delete-pass';
+        this.inputCalendarSelector = '.j-input-calendar';
+        this.containerCalendar = document.querySelector('.j-form-block-calendars');
+        this.calendarSelector = '.j-input-date';
+        // 0 - close, 1 - open
+        this.statusCalendars = 0;
     }
 
     init() {
         this.bindEvents();
         this.initTelInput();
         this.initDateInput();
+        this._initDateCalendar();
     }
 
     bindEvents() {
         // Добавление контактного лица
         this.$addPassButton.addEventListener('click', () => {
             this.addPass();
+        });
+
+        window.onresize = () => {
+            this._hideAllCalendar();
+            this._showContainerCalendar();
+            this.statusCalendars = 0;
+        };
+
+        Utils.clickOutside([this.calendarSelector, this.inputCalendarSelector], () => {
+            this._hideAllCalendar();
+            this.statusCalendars = 0;
         });
     }
 
@@ -52,6 +69,86 @@ class RequestPass {
                 Utils.removeElement($delete.parentNode);
             });
         });
+    }
+
+    _initDateCalendar() {
+        const inputCalendars = Array.from(document.querySelectorAll(this.inputCalendarSelector));
+
+        if (!inputCalendars) {
+            return;
+        }
+
+        inputCalendars.forEach((input) => {
+            input.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                const classCalendar = input.dataset.dateClass;
+                const calendar = document.querySelector(`.${classCalendar}`);
+
+                if (!calendar) {
+                    return;
+                }
+
+                if (window.innerWidth >= 960) {
+                    if (this.statusCalendars) {
+                        this._hideContainerCalendar();
+                        this._hideAllCalendar();
+                    } else {
+                        this._showContainerCalendar();
+                        this._showAllCalendar();
+                    }
+                } else {
+                    this._hideAllCalendar(calendar);
+                    this._toggleCalendar(calendar);
+                }
+            });
+        });
+    }
+
+    _toggleCalendar(calendar) {
+        if (calendar.style.display === 'none' || !calendar.style.display) {
+            Utils.show(calendar);
+        } else {
+            Utils.hide(calendar);
+        }
+    }
+
+    _hideAllCalendar(beside) {
+        const calendars = Array.from(document.querySelectorAll(this.calendarSelector));
+
+        calendars.forEach((calendar) => {
+            if (beside === calendar) {
+                return;
+            }
+
+            Utils.hide(calendar);
+        });
+    }
+
+    _showAllCalendar() {
+        const calendars = Array.from(document.querySelectorAll(this.calendarSelector));
+
+        calendars.forEach((calendar) => {
+            Utils.show(calendar);
+        });
+    }
+
+    _showContainerCalendar() {
+        if (!this.containerCalendar) {
+            return;
+        }
+
+        Utils.show(this.containerCalendar);
+        this.statusCalendars = 1;
+    }
+
+    _hideContainerCalendar() {
+        if (!this.containerCalendar) {
+            return;
+        }
+
+        Utils.hide(this.containerCalendar);
+        this.statusCalendars = 0;
     }
 }
 

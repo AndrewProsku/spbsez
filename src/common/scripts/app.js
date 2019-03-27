@@ -33,9 +33,9 @@ import templateMessages from 'components/messages/messages.twig';
 import Useful from '../../components/useful';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
+import Visual from 'components/visual';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
-// import Visual from 'components/visual';
 
 const mediator = new Mediator();
 
@@ -855,21 +855,49 @@ if (residentMainScreen) {
     window.addEventListener('scroll', getOverlayScrollTop);
 }
 
-// const visual = new Visual();
-// const allDOM = document.body;
-// const areaPlane = new Visual();
-// Инициализация визуального
-// areaPlane.init({
-//     allDOM,
-//     target: allDOM.querySelector('.b-visual')
-// });
+
+// Инициализация плана территории
+const areaPlaneEl = document.querySelector('.b-visual');
+
+if (areaPlaneEl) {
+    const areaPlane = new Visual();
+
+    areaPlane.init({
+        target: areaPlaneEl
+    });
+}
 
 const inputDateElement = Array.from(document.querySelectorAll('.j-input-date'));
 
 if (inputDateElement.length) {
+    const inputDates = {};
+
     inputDateElement.forEach((element) => {
         const inputDate = new InputDate({target: element});
 
         inputDate.init();
+
+        inputDates[inputDate.getName()] = inputDate;
+    });
+
+    mediator.subscribe('calendar:afterDisplayDate', (calendar) => {
+        if (calendar.syncFrom) {
+            const syncCalendar = inputDates[calendar.syncFrom];
+
+            if (!calendar.dateIncreaseCheck(syncCalendar.date, syncCalendar.time)) {
+                syncCalendar.setDateTime(calendar.date, calendar.timeId, calendar.time);
+            }
+            syncCalendar.dateReductionCheck(calendar.date, calendar.time);
+        }
+
+        if (calendar.syncTo) {
+            const syncCalendar = inputDates[calendar.syncTo];
+
+            if (!calendar.dateReductionCheck(syncCalendar.date, syncCalendar.time)) {
+                calendar.writeValue(syncCalendar.date, syncCalendar.time);
+            }
+
+            syncCalendar.dateIncreaseCheck(calendar.date, calendar.time);
+        }
     });
 }
