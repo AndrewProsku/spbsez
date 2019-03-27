@@ -40,20 +40,8 @@
 }
 
 .l-news__useful {
-    @include prefix(2, 36);
-    @include suffix(2, 36);
     background-color: $bg-grey;
     width: 100%;
-
-    @media #{$laptop} {
-        @include prefix(3, 36);
-        @include suffix(3, 36);
-    }
-
-    @media #{$fullhd} {
-        @include prefix(4, 36);
-        @include suffix(4, 36);
-    }
 }
 
 .l-news-presentations {
@@ -78,7 +66,11 @@
 
 .b-useful {
     @media #{$laptop} {
-        @include column(20, 28);
+        @include column(26, 36);
+    }
+
+    @media #{$fullhd} {
+        @include column(28, 36);
     }
 }
 
