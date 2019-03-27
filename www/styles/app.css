@@ -14587,18 +14587,8 @@ label .b-help {
       padding-right: 11.11111%; } }
 
 .l-news__useful {
-  padding-left: 5.55556%;
-  padding-right: 5.55556%;
   background-color: #efeff4;
   width: 100%; }
-  @media only screen and (min-width: 1280px) {
-    .l-news__useful {
-      padding-left: 8.33333%;
-      padding-right: 8.33333%; } }
-  @media only screen and (min-width: 1920px) {
-    .l-news__useful {
-      padding-left: 11.11111%;
-      padding-right: 11.11111%; } }
 
 .l-news-presentations {
   padding-left: 5.55556%;
@@ -14657,10 +14647,22 @@ label .b-help {
 
 @media only screen and (min-width: 1280px) {
   .b-useful {
-    -webkit-flex-basis: 71.42857%;
-        -ms-flex-preferred-size: 71.42857%;
-            flex-basis: 71.42857%;
-    max-width: 71.42857%;
+    -webkit-flex-basis: 72.22222%;
+        -ms-flex-preferred-size: 72.22222%;
+            flex-basis: 72.22222%;
+    max-width: 72.22222%;
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -moz-box-sizing: border-box;
+         box-sizing: border-box; } }
+
+@media only screen and (min-width: 1920px) {
+  .b-useful {
+    -webkit-flex-basis: 77.77778%;
+        -ms-flex-preferred-size: 77.77778%;
+            flex-basis: 77.77778%;
+    max-width: 77.77778%;
     -webkit-flex-grow: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
