@@ -130,6 +130,12 @@ $marginRight: ($widthContent - ($widthColumn * 7)) / 6; // Правый отст
         border-radius: 4px;
         z-index: -1;
     }
+
+    &.error-date {
+        &:after {
+            background-color: red;
+        }
+    }
 }
 
 .b-input-date__day_is_disabled {

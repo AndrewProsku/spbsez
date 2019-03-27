@@ -870,9 +870,32 @@ if (areaPlaneEl) {
 const inputDateElement = Array.from(document.querySelectorAll('.j-input-date'));
 
 if (inputDateElement.length) {
+    const inputDates = {};
+
     inputDateElement.forEach((element) => {
         const inputDate = new InputDate({target: element});
 
         inputDate.init();
+
+        inputDates[inputDate.getName()] = inputDate;
+    });
+
+    mediator.subscribe('calendar:afterDisplayDate', (calendar) => {
+        if (calendar.syncFrom) {
+            const syncCalendar = inputDates[calendar.syncFrom];
+
+            calendar.dateIncreaseCheck(syncCalendar.date, syncCalendar.time);
+            syncCalendar.dateReductionCheck(calendar.date, calendar.time);
+        }
+
+        if (calendar.syncTo) {
+            const syncCalendar = inputDates[calendar.syncTo];
+
+            if (!calendar.dateReductionCheck(syncCalendar.date, syncCalendar.time)) {
+                calendar.writeValue(syncCalendar.date, syncCalendar.time);
+            }
+
+            syncCalendar.dateIncreaseCheck(calendar.date, calendar.time);
+        }
     });
 }

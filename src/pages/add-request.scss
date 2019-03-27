@@ -128,7 +128,86 @@
 }
 
 .b-form-block_is_date {
-    display: flex;
+    height: auto;
+    border: none;
+    position: relative;
+    padding: 0;
+
+    &:hover {
+        background-color: transparent;
+
+        @media #{$tablet-landscape} {
+            background-color: $bg-select;
+        }
+    }
+
+    .b-form-block__label {
+        display: none;
+
+        @media #{$tablet-landscape} {
+            display: block;
+        }
+    }
+
+    .b-form-block__date {
+        position: relative;
+        display: flex;
+        align-items: center;
+        border: 1px solid $grey;
+        border-bottom: 0;
+        padding: 30px 0 12px 16px;
+
+        &:hover {
+            background-color: $bg-select;
+        }
+
+        @media #{$tablet-landscape} {
+            border: none;
+            color: rgba($black, 0.48);
+            padding-top: 0;
+            padding-bottom: 0;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        .b-form-block__label {
+            display: block;
+
+            @media #{$tablet-landscape} {
+                display: none;
+            }
+        }
+    }
+
+    .b-form-block__def {
+        display: none;
+
+        @media #{$tablet-landscape} {
+            display: inline-block;
+        }
+    }
+
+    input {
+        width: 240px;
+    }
+
+    @media #{$tablet-landscape} {
+        display: flex;
+        align-items: center;
+        height: 64px;
+        padding: 30px 0 12px;
+        border: 1px solid $grey;
+    }
+
+    @media #{$laptop} {
+        height: 72px;
+    }
+
+    @media #{$laptop-wide} {
+        height: 80px;
+    }
 }
 
 .b-form-block.b-input-block.b-input-file {
@@ -403,4 +482,33 @@ label.b-form-block {
 
 .b-add-request__form-button {
     @include margin-level(top, green);
+}
+
+.b-form-block-calendar {
+    display: none;
+    position: absolute;
+    bottom: 5px;
+    left: -18px;
+
+    @media #{$tablet-portrait} {
+        left: -5px;
+    }
+
+    .b-input-date {
+        display: none;
+
+        &:first-child {
+            top: -70px;
+
+            @media #{$tablet-landscape} {
+                top: 100%;
+            }
+        }
+
+        &:last-child {
+            @media #{$tablet-landscape} {
+                left: 350px;
+            }
+        }
+    }
 }
