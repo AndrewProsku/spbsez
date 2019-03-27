@@ -884,7 +884,9 @@ if (inputDateElement.length) {
         if (calendar.syncFrom) {
             const syncCalendar = inputDates[calendar.syncFrom];
 
-            calendar.dateIncreaseCheck(syncCalendar.date, syncCalendar.time);
+            if (!calendar.dateIncreaseCheck(syncCalendar.date, syncCalendar.time)) {
+                syncCalendar.setDateTime(calendar.date, calendar.timeId, calendar.time);
+            }
             syncCalendar.dateReductionCheck(calendar.date, calendar.time);
         }
 

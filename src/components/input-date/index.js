@@ -31,6 +31,7 @@ class InputDate {
 
         this.data = '';
         this.time = '';
+        this.timeId = '';
     }
 
     init() {
@@ -201,12 +202,14 @@ class InputDate {
         ];
 
         this.time = timeValues[10];
+        this.timeId = active;
 
         $(this.timeEl).ionRangeSlider({
             values  : timeValues,
             from    : active,
             onChange: function (data) {
                 that.time = data.from_value;
+                that.timeId = data.from;
                 that._displayDateTime();
             }
         });
@@ -269,6 +272,24 @@ class InputDate {
     unErrorDate() {
         const active  = this.target.querySelector(`.${this.activeDayClass}`);
         active.classList.remove('error-date');
+    }
+
+    setDateTime(date, timeId, time) {
+        this.time = time;
+        $(this.timeEl).data("ionRangeSlider").update({from: timeId});
+
+        try {
+            this.days.forEach((day) => {
+               if (day.dataset.fullDate === date) {
+                   this.date = day.dataset.fullDate;
+                   this._toActiveDay(day);
+                   this._displayDateTime();
+                   throw false;
+               }
+            });
+        } catch(err) {
+            return false;
+        }
     }
 }
 
