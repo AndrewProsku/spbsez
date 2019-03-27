@@ -29,3 +29,4 @@ $MESS['KELNIK_API_SERVICE_ERROR_COMPANY'] = 'Не заполнено поле К
 $MESS['KELNIK_API_SERVICE_ERROR_POSITION'] = 'Не заполнено поле Должность';
 
 $MESS['KELNIK_API_REPORT_NOT_FOUND'] = 'Отчет не найден';
+$MESS['KELNIK_API_REPORT_LOCKED'] = 'В данный момент отчет редактируется другим резидентом.<br>Отчет, возможно, будет доступен для редактирования через #TIME#';

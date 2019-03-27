@@ -190,6 +190,7 @@ class ReportForm {
     initResultsForm(data, formID) {
         const resultsContainer = this.forms[formID].template.querySelector(`.${this.resultsContainerClass}`);
         const isReadonly = this.type === 'readonly';
+        const that = this;
 
         if (Array.isArray(data.blocks)) {
             data.blocks.forEach((blockData, num) => {
@@ -205,10 +206,9 @@ class ReportForm {
             const formBlocks = this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`);
 
             data.blocks.reverse().forEach((blockData, blockNumber) => {
-                const reportBlock = new ReportBlock();
-
-                reportBlock.init({
-                    target: formBlocks[blockNumber],
+                (new ReportBlock()).init({
+                    reportId: that.reportId,
+                    target  : formBlocks[blockNumber],
                     blockData,
                     formID,
                     isReadonly
@@ -218,10 +218,10 @@ class ReportForm {
     }
 
     sendNewValues(input) {
-        const dataToSend = `action=update&${input.id}=${input.value}`;
+        const dataToSend = `a=update&id=${this.reportId}&field=${input.id}&val=${input.value}`;
         const that = this;
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(dataToSend, '/api/report/', {
             success(response) {
                 if (response.request.status === that.SUCCESS_STATUS) {
                     that.toggleSubmitButton();
@@ -406,13 +406,12 @@ class ReportForm {
                         number: blockNumber
                     }));
 
-                    const reportBlock = new ReportBlock();
-
-                    reportBlock.init({
+                    (new ReportBlock()).init({
                         target    : addResultButton.nextSibling,
                         blockData : response.data,
                         formID    : 6,
-                        isReadonly: that.type === 'readonly'
+                        isReadonly: that.type === 'readonly',
+                        reportId  : that.reportId
                     });
                 },
                 error(error) {
@@ -452,7 +451,7 @@ class ReportForm {
 
                     approveFormButton.addEventListener('click', () => {
                         const formID = approveFormButton.dataset.formId;
-                        const dataToSend = `action=confirmForm&formID=${formID}`;
+                        const dataToSend = `a=confirmForm&formID=${formID}`;
 
                         Utils.send(dataToSend, '/tests/reports/input-update.json', {
                             success(response) {
@@ -597,7 +596,7 @@ class ReportForm {
     submitReports() {
         const that = this;
 
-        Utils.send('action=confirmReport', '/tests/reports/input-update.json', {
+        Utils.send('a=confirmReport', '/tests/reports/input-update.json', {
             success(response) {
                 if (!response.request.status === that.SUCCESS_STATUS) {
                     return true;
@@ -614,12 +613,12 @@ class ReportForm {
     initFormBlocks(blocksData, formTemplate, formID) {
         const formBlocks = Array.from(formTemplate.querySelectorAll(`.${this.formsBlockClass}`));
         const isReadonly = this.type === 'readonly';
+        const that = this;
 
         blocksData.forEach((blockData, i) => {
-            const reportBlock = new ReportBlock();
-
-            reportBlock.init({
-                target: formBlocks[i],
+            (new ReportBlock()).init({
+                reportId: that.reportId,
+                target  : formBlocks[i],
                 blockData,
                 formID,
                 isReadonly

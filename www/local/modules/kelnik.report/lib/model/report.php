@@ -4,6 +4,7 @@ namespace Kelnik\Report\Model;
 
 
 use Bitrix\Main\Type\DateTime;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\UserData\Profile\Profile;
 
 /**
@@ -122,7 +123,7 @@ class Report extends EO_Reports
      *
      * @return bool
      */
-    public function isChecking()
+    public function isUnderReview()
     {
         return $this->getStatusId() === StatusTable::CHECKING;
     }
@@ -150,7 +151,7 @@ class Report extends EO_Reports
      */
     public function canEdit(int $userId = 0)
     {
-        if ($this->isComplete() || $this->isChecking()) {
+        if ($this->isComplete() || $this->isUnderReview()) {
             return false;
         }
 
@@ -225,15 +226,82 @@ class Report extends EO_Reports
         $forms = ReportFieldsTable::getForms();
 
         foreach ($forms as $formKey => $formConfig) {
-            $res[$formKey] = [
+            $formData = [
                 'blocks' => []
             ];
 
             if (isset($formConfig['type'])) {
-                $res[$formKey]['type'] = $formConfig['type'];
+                $formData['type'] = $formConfig['type'];
             }
+
+            if (empty($formConfig['blocks'])) {
+                continue;
+            }
+
+            foreach ($formConfig['blocks'] as $block) {
+                $formData = $this->processBlock($formData, $fields, $block);
+            }
+
+            $res[$formKey] = $formData;
         }
 
         return $res;
+    }
+
+    protected function processBlock(array $form, array $fieldValues, array $block)
+    {
+        $newBlock = [];
+
+        if (isset($block['type'])) {
+            $newBlock['type'] = $block['type'];
+        }
+
+        // fields
+        //
+        if (!empty($block['fields'])) {
+
+            foreach ($block['fields'] as $field) {
+                $isArray = is_array($field);
+
+                $id = $isArray ? $field['id'] : $field;
+                $val = self::getFieldValue($fieldValues, $id);
+                $valField = 'value';
+
+                if ($isArray && !empty($field['suffix'])) {
+                    $id = $id . '-' . $field['suffix'];
+                }
+
+                if ($isArray && $field['type'] == 'boolean') {
+                    $val = $val == ArrayHelper::getValue($field, 'trueValue', false);
+                    $valField = 'checked';
+                }
+
+                $newBlock['fields'][] = [
+                    'id' => $id,
+                    $valField => $val
+                ];
+            }
+
+            $form['blocks'][] = $newBlock;
+
+            return $form;
+        }
+
+        // stages
+        //
+        if (!empty($block['stages'])) {
+
+        }
+
+        return $form;
+    }
+
+    protected static function getFieldValue(array $fields, $fieldName)
+    {
+        $key = array_search($fieldName, array_column($fields, 'FIELD_NAME', 'ID'));
+
+        return $key
+                ? ArrayHelper::getValue($fields, $key . '.VALUE', '')
+                : '';
     }
 }

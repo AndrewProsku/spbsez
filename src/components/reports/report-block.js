@@ -38,12 +38,14 @@ class ReportBlock {
 
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
+        this.reportId = 0;
     }
 
     /* eslint-disable max-statements, max-lines-per-function */
     init(options) {
         this.target = options.target;
         this.formID = options.formID;
+        this.reportId = options.reportId || 0;
         this.isReadonly = options.isReadonly || false;
         this.isRejected = options.blockData.rejected || false;
         const blockData = options.blockData;
@@ -638,24 +640,26 @@ class ReportBlock {
     /* eslint-enable max-lines-per-function, max-statements */
 
     sendNewValue(input) {
-        const dataToSend = `action=update&${$(input).serialize()}`;
+        const dataToSend = `a=update&id=${this.reportId}&field=${input.name}&val=${input.value}`;
         const that = this;
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(dataToSend, '/api/report/', {
             success(response) {
-                if (response.request.status === that.SUCCESS_STATUS) {
-                    if (input.type === 'radio') {
-                        const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
-
-                        Array.from(checkboxGroup).forEach((checkbox) => {
-                            that.inputsStatus[checkbox.id] = that.getInputStatus(checkbox);
-                        });
-                    } else {
-                        that.inputsStatus[input.id] = that.getInputStatus(input);
-                    }
-
-                    that.setBlockStatus();
+                if (response.request.status !== that.SUCCESS_STATUS) {
+                    return;
                 }
+
+                if (input.type === 'radio') {
+                    const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
+
+                    Array.from(checkboxGroup).forEach((checkbox) => {
+                        that.inputsStatus[checkbox.id] = that.getInputStatus(checkbox);
+                    });
+                } else {
+                    that.inputsStatus[input.id] = that.getInputStatus(input);
+                }
+
+                that.setBlockStatus();
             },
             error(error) {
                 console.error(error);
