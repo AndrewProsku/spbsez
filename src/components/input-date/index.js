@@ -1,5 +1,6 @@
 import 'ion-rangeslider';
 import $ from 'jquery';
+import Mediator from '../../common/scripts/mediator';
 import tmplMonths from './templates/months.twig';
 import Utils from '../../common/scripts/utils';
 
@@ -7,6 +8,7 @@ class InputDate {
     /* eslint-disable */
     constructor(options) {
         const defShowMonth = 3;
+        this.mediator = new Mediator();
 
         this.target = options.target;
 
@@ -17,11 +19,13 @@ class InputDate {
         this.activeDayClass = 'b-input-date__day_is_active';
         this.disabledDayClass = 'b-input-date__day_is_disabled';
 
-        this.mainSelector = '.j-input-date';
         this.contentSelector = '.j-input-date-content';
         this.daySelector = '.j-input-date-day';
         this.timeSelector = '.j-input-date-time';
         this.valueSelector = `.${this.target.dataset.valueSelector}` || '.j-input-value';
+
+        this.syncFrom = this.target.dataset.syncFrom;
+        this.syncTo = this.target.dataset.syncTo;
 
         this.monthsName = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 
@@ -38,8 +42,8 @@ class InputDate {
     }
 
     _initElements() {
-        this.main = document.querySelector(this.mainSelector);
         this.content = this.target.querySelector(this.contentSelector);
+        this.timeEl = this.target.querySelector(this.timeSelector);
         this.value = document.querySelector(this.valueSelector);
     }
 
@@ -58,12 +62,10 @@ class InputDate {
                 this._displayDateTime();
             });
         });
+    }
 
-        this.value.addEventListener('click', (event) => {
-            event.preventDefault();
-
-            this._toggleCalendar();
-        });
+    getName() {
+        return this.target.dataset.name;
     }
 
     _displayCalendar() {
@@ -200,7 +202,7 @@ class InputDate {
 
         this.time = timeValues[10];
 
-        $(this.timeSelector).ionRangeSlider({
+        $(this.timeEl).ionRangeSlider({
             values  : timeValues,
             from    : active,
             onChange: function (data) {
@@ -215,15 +217,58 @@ class InputDate {
             return;
         }
 
-        this.value.value = `${this.date}, ${this.time}`;
+        this.writeValue(this.date, this.time);
+        this.mediator.publish('calendar:afterDisplayDate', this);
     }
 
-    _toggleCalendar() {
-        if (this.main.style.display === 'none' || !this.main.style.display) {
-            Utils.show(this.main);
+    writeValue(date, time) {
+        this.value.value = `${date}, ${time}`;
+    }
+
+    // Проверяет не больше ли текущая дата от полученной
+    dateIncreaseCheck(date, time) {
+        const dateObj = new Date(`${this._reverseDate(date)} ${time}`);
+        const dateActiveObj = new Date(`${this._reverseDate(this.date)} ${this.time}`);
+
+        if (dateObj >= dateActiveObj) {
+            this.unErrorDate();
+
+            return true;
         } else {
-            Utils.hide(this.main);
+            this.errorDate();
+
+            return false;
         }
+    }
+
+    // Проверяет не меньше ли текущая дата от полученной
+    dateReductionCheck(date, time) {
+        const dateObj = new Date(`${this._reverseDate(date)} ${time}`);
+        const dateActiveObj = new Date(`${this._reverseDate(this.date)} ${this.time}`);
+
+        if (dateObj <= dateActiveObj) {
+            this.unErrorDate();
+
+            return true;
+        } else {
+            this.errorDate();
+
+            return false;
+        }
+    }
+
+    _reverseDate(date) {
+        return date.split('.').reverse().join('.');
+    }
+
+    errorDate() {
+        const active  = this.target.querySelector(`.${this.activeDayClass}`);
+        active.classList.add('error-date');
+    }
+
+    unErrorDate() {
+        const active  = this.target.querySelector(`.${this.activeDayClass}`);
+        active.classList.remove('error-date');
     }
 }
 
