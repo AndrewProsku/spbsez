@@ -1,9 +1,0 @@
-[2019-03-26 15:03:05] Catch exception: 
-Bitrix\Main\LoaderException: Failed include module "kelnik.imageresizer" in /var/www/oez/www/bitrix/modules/bex.bbc/lib/traits/common.php:86
-Stack trace:
-#0 /var/www/oez/www/bitrix/modules/bex.bbc/lib/basis.php(92): Bex\Bbc\Basis->includeModules()
-#1 /var/www/oez/www/bitrix/modules/bex.bbc/lib/basis.php(127): Bex\Bbc\Basis->executeBasis()
-#2 /var/www/oez/www/bitrix/modules/main/classes/general/component.php(638): Bex\Bbc\Basis->executeComponent()
-#3 /var/www/oez/www/bitrix/modules/main/classes/general/main.php(1037): CBitrixComponent->includeComponent('main', Array, Array)
-#4 /var/www/oez/www/index.php(94): CAllMain->IncludeComponent('kelnik:news.lis...', 'main', Array, Array)
-#5 {main}

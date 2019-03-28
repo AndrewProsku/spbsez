@@ -19,6 +19,7 @@ class ReportForm {
         this.target = null;
         this.formsBlockClass = 'j-report-block';
         this.reportId = 0;
+        this.baseUrl = '/api/report/';
 
         // Табы
         this.filterClass = 'j-reports-filter';
@@ -81,6 +82,7 @@ class ReportForm {
         this.target = options.target;
         this.submitReportButton = document.querySelector(`.${this.submitReportClass}`);
         this.reportId = parseInt(this.target.dataset.reportId, 10);
+        this.baseUrl = options.baseUrl || this.baseUrl;
 
         // Табы
         this.filters = Array.from(document.querySelectorAll(`.${this.filterClass}`));
@@ -141,7 +143,7 @@ class ReportForm {
             this.sendNewValues(event.target);
         });
 
-        Utils.send(`a=get&id=${that.reportId}`, '/api/report/', {
+        Utils.send(`a=get&id=${that.reportId}`, that.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
@@ -218,10 +220,9 @@ class ReportForm {
     }
 
     sendNewValues(input) {
-        const dataToSend = `a=update&id=${this.reportId}&field=${input.id}&val=${input.value}`;
         const that = this;
 
-        Utils.send(dataToSend, '/api/report/', {
+        Utils.send(`a=update&id=${this.reportId}&field=${input.id}&val=${input.value}`, that.baseUrl, {
             success(response) {
                 if (response.request.status === that.SUCCESS_STATUS) {
                     that.toggleSubmitButton();
@@ -411,7 +412,8 @@ class ReportForm {
                         blockData : response.data,
                         formID    : 6,
                         isReadonly: that.type === 'readonly',
-                        reportId  : that.reportId
+                        reportId  : that.reportId,
+                        baseUrl   : that.baseUrl
                     });
                 },
                 error(error) {
@@ -618,6 +620,7 @@ class ReportForm {
         blocksData.forEach((blockData, i) => {
             (new ReportBlock()).init({
                 reportId: that.reportId,
+                baseUrl : that.baseUrl,
                 target  : formBlocks[i],
                 blockData,
                 formID,

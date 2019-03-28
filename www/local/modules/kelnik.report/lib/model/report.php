@@ -38,6 +38,7 @@ use Kelnik\UserData\Profile\Profile;
  * @method \Bitrix\Main\Type\DateTime getDateModified()
  * @method \Bitrix\Main\Type\DateTime getDateCreated()
  * @method Fields getFields()
+ * @method FieldsGroup getGroups()
  */
 class Report extends EO_Reports
 {
@@ -222,8 +223,9 @@ class Report extends EO_Reports
     {
         $res = [];
         $fields = $this->getFields()->getArray();
+        $groups = $this->getGroups()->getArray();
 
-        $forms = ReportFieldsTable::getForms();
+        $forms = ReportFieldsTable::getFormConfig();
 
         foreach ($forms as $formKey => $formConfig) {
             $formData = [
@@ -239,7 +241,10 @@ class Report extends EO_Reports
             }
 
             foreach ($formConfig['blocks'] as $block) {
-                $formData = $this->processBlock($formData, $fields, $block);
+                $formData['blocks'] = array_merge(
+                    $formData['blocks'],
+                    $this->processBlock($formKey, $fields, $groups, $block)
+                );
             }
 
             $res[$formKey] = $formData;
@@ -248,8 +253,9 @@ class Report extends EO_Reports
         return $res;
     }
 
-    protected function processBlock(array $form, array $fieldValues, array $block)
+    protected function processBlock(int $formNum, array $values, array $groups, array $block)
     {
+        $res = [];
         $newBlock = [];
 
         if (isset($block['type'])) {
@@ -264,7 +270,7 @@ class Report extends EO_Reports
                 $isArray = is_array($field);
 
                 $id = $isArray ? $field['id'] : $field;
-                $val = self::getFieldValue($fieldValues, $id);
+                $val = self::getFieldValue($values, $id);
                 $valField = 'value';
 
                 if ($isArray && !empty($field['suffix'])) {
@@ -282,23 +288,59 @@ class Report extends EO_Reports
                 ];
             }
 
-            $form['blocks'][] = $newBlock;
+            $res[] = $newBlock;
 
-            return $form;
+            return $res;
         }
 
-        // stages
+        // multiple
         //
-        if (!empty($block['stages'])) {
+        if (!empty($block['multiple'])) {
 
+            $ids = ArrayHelper::getValue($groups, $block['multiple']['name'] . '.' . $formNum, []);
+            $rows = [];
+
+            foreach ($ids as $id) {
+                $fields = [];
+                foreach ($block['multiple']['fields'] as $field) {
+                    $fields[] = [
+                        'id'    => $field . '[' . $id . ']',
+                        'value' => self::getFieldValue($values, $field, $id)
+                    ];
+                }
+
+                $rows[$id] = [
+                    $block['multiple']['id'] => $id,
+                    'fields' => $fields
+                ];
+            }
+
+            $newBlock = [
+                'type' => $block['type'],
+                $block['multiple']['name'] => array_values($rows)
+            ];
+
+            $res[] = $newBlock;
         }
 
-        return $form;
+        return $res;
     }
 
-    protected static function getFieldValue(array $fields, $fieldName)
+    protected static function getFieldValue(array $fields, $fieldName, $groupId = 0)
     {
-        $key = array_search($fieldName, array_column($fields, 'FIELD_NAME', 'ID'));
+        if ($groupId) {
+            foreach ($fields as $field) {
+                if ($field['NAME'] != $fieldName || $field['GROUP_ID'] != $groupId) {
+                    continue;
+                }
+
+                return $field['VALUE'];
+            }
+
+            return '';
+        }
+
+        $key = array_search($fieldName, array_column($fields, 'NAME', 'ID'));
 
         return $key
                 ? ArrayHelper::getValue($fields, $key . '.VALUE', '')

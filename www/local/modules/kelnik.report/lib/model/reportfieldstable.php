@@ -48,9 +48,9 @@ class ReportFieldsTable extends DataManager
             (new IntegerField('REPORT_ID'))
                 ->configureRequired(true),
 
-            (new StringField('PARENT_FIELD_NAME'))
-                ->configureSize(100),
-            (new StringField('FIELD_NAME'))
+            (new IntegerField('GROUP_ID'))
+                ->configureDefaultValue(0),
+            (new StringField('NAME'))
                 ->configureSize(100),
             (new StringField('VALUE'))
                 ->configureSize(255),
@@ -63,7 +63,7 @@ class ReportFieldsTable extends DataManager
         ];
     }
 
-    public static function getForms()
+    public static function getFormConfig()
     {
         return [
             self::FORM_COMMON => [
@@ -192,7 +192,9 @@ class ReportFieldsTable extends DataManager
                     ],
                     [
                         'type' => 'construction-stage',
-                        'stages' => [
+                        'multiple' => [
+                            'name' => 'stages',
+                            'id' => 'stageID',
                             'fields' => [
                                 'construction-stage',
                                 'construction-permission-num',
@@ -213,7 +215,9 @@ class ReportFieldsTable extends DataManager
                     ],
                     [
                         'type' => 'construction-stage',
-                        'stages' => [
+                        'multiple' => [
+                            'name' => 'stages',
+                            'id' => 'stageID',
                             'fields' => [
                                 'construction-stage',
                                 'construction-permission-num',
@@ -234,9 +238,13 @@ class ReportFieldsTable extends DataManager
                     ],
                     [
                         'type' => 'export-countries',
-                        'groups' => [
-                            'export-countries',
-                            'export-code'
+                        'multiple' => [
+                            'name' => 'groups',
+                            'id' => 'ID',
+                            'fields' => [
+                                'export-countries',
+                                'export-code'
+                            ]
                         ]
                     ],
                     [
@@ -257,7 +265,11 @@ class ReportFieldsTable extends DataManager
                     ],
                     [
                         'type' => 'innovations',
-                        'innovations' => ['innovation']
+                        'multiple' => [
+                            'name' => 'innovations',
+                            'id' => 'ID',
+                            'fields' => ['innovation']
+                        ]
                     ],
                     [
                         'fields' => ['high-productive-jobs']

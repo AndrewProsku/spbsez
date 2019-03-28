@@ -39,6 +39,7 @@ class ReportBlock {
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
         this.reportId = 0;
+        this.baseUrl = '/api/report/';
     }
 
     /* eslint-disable max-statements, max-lines-per-function */
@@ -46,6 +47,7 @@ class ReportBlock {
         this.target = options.target;
         this.formID = options.formID;
         this.reportId = options.reportId || 0;
+        this.baseUrl = options.baseUrl || this.baseUrl;
         this.isReadonly = options.isReadonly || false;
         this.isRejected = options.blockData.rejected || false;
         const blockData = options.blockData;
@@ -709,10 +711,9 @@ class ReportBlock {
     removeStage(input) {
         const that = this;
         const stageBlock = this.target.querySelector(`.${this.stageBlockClass}`);
-        const dataToSend = `action=delStage&id=${input.dataset.stageId}`;
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-stage-id="${input.dataset.stageId}"]`));
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.stageId}`, this.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
@@ -768,7 +769,7 @@ class ReportBlock {
         const that = this;
 
         stageAddButton.addEventListener('click', () => {
-            Utils.send('action=addConstructionStage', '/tests/reports/add-stage.json', {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=stages&form=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -820,7 +821,7 @@ class ReportBlock {
         const that = this;
 
         groupAddButton.addEventListener('click', () => {
-            Utils.send('action=addExportGroup', '/tests/reports/add-stage.json', {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=groups&form=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -857,10 +858,9 @@ class ReportBlock {
     removeExportGroup(input) {
         const that = this;
         const groupsBlock = this.target.querySelector(`.j-export-groups-block`);
-        const dataToSend = `action=delExportGroup&id=${input.dataset.id}`;
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.id}`, this.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
@@ -917,7 +917,7 @@ class ReportBlock {
         const that = this;
 
         innovationAddButton.addEventListener('click', () => {
-            Utils.send('action=addInnovation', '/tests/reports/add-stage.json', {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=innovations&form=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -954,10 +954,9 @@ class ReportBlock {
     removeInnovation(input) {
         const that = this;
         const innovationsBlock = this.target.querySelector(`.j-innovations-block`);
-        const dataToSend = `action=delInnovation&id=${input.dataset.id}`;
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.id}`, this.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;

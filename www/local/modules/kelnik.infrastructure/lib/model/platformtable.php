@@ -162,7 +162,7 @@ class PlatformTable extends DataManager
 
         Application::getInstance()->getTaggedCache()->clearByTag('kelnik:infrastructureList');
         Application::getInstance()->getTaggedCache()->clearByTag(
-            'kelnik:infrastructureRow_' . ArrayHelper::getValue($event->getParameter('id'), 'ID', 0)
+            'kelnik:infrastructureRow_' . ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0)
         );
 
         parent::clearComponentCache($event);
