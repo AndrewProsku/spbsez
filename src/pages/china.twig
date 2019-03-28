@@ -1,0 +1,694 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>China</title> {% endblock %}
+
+{% block header %}
+    <div class="l-home__header-left">
+        <a href="/" class="b-logo__link lang-ch" title="Вернуться на главную"></a>
+    </div>
+    <div class="l-home__header-right lang-ch">
+        <div class="b-language">
+            <span class="b-language__link">
+                中國
+            </span>
+            <ul class="b-language__list">
+                <li class="b-language__item is-active">
+                    <a href="#" class="b-language__item-link b-link-line">
+                        Рус
+                    </a>
+                </li>
+                <li class="b-language__item">
+                    <a href="#" class="b-language__item-link b-link-line">
+                        Eng
+                    </a>
+                </li>
+                <li class="b-language__item">
+                    <a href="#" class="b-language__item-link b-link-line">
+                        中國
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    <div class="l-china">
+        <div class="b-title b-about-title">
+            <h1>Особая экономическая зона</h1>
+        </div>
+
+        <div class="b-about-desc">
+            <div class="b-about-desc__img">
+                <img src="/images/about/about_UK-mission.png" alt="картинка">
+            </div>
+            <div class="b-about-desc__content">
+                <div class="b-about-desc__title">
+                    <h3>Высокотехнологичный бизнес в черте города</h3>
+                </div>
+                <div class="b-about-desc__text">
+                    <p>
+                        Особая экономическая зона «Санкт–Петербург» — это территория новых возможностей для развития высокотехнологичного бизнеса в черте города при поддержке органов власти. ОЭЗ создает благоприятные условия и инфраструктуру, при которых резиденты смогут успешно вести разработки и производство инновационной продукции в Санкт&nbsp;-&nbsp;Петербурге.
+                    </p>
+                </div>
+                <div class="b-about-desc__links">
+                    {% include "../components/anchor-scroll/anchor-scroll.twig" with {
+                        links: [
+                            {
+                                href: 'advantage',
+                                text: 'Преимущества локации'
+                            }, {
+                                href: 'area',
+                                text: 'Расположение'
+                            }, {
+                                href: 'priorities',
+                                text: 'Приоритетные направления'
+                            }, {
+                                href: 'privileges',
+                                text: 'Льготы и преференции'
+                            }, {
+                                href: 'benefits',
+                                text: 'Премущества'
+                            }, {
+                                href: 'government',
+                                text: 'Органы власти'
+                            }, {
+                                href: 'department',
+                                text: 'Контакты'
+                            }
+                        ]
+                    } %}
+                </div>
+
+            </div>
+        </div>
+
+        <div id="advantage">
+            {% include '../components/advantage-location/advantage-location.twig' %}
+        </div>
+
+        {# Блок с информацией об участках и картой #}
+        <div class="l-home-plots" id="area">
+            <div class="l-home-plots__title-mobile">
+                Расположение зон
+            </div>
+            <div class="l-home-plots__list">
+
+                <div class="l-home-plots__item">
+
+                    <div class="l-home-plots__map l-home-plots__map-neudorf">
+                        <div class="l-home-plots__all-map-images">
+                            <div class="l-home-plots__all-map-icon-wrap">
+                                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
+                            <span class="b-tooltip">
+                                Новоорловская
+                            </span>
+                                </a>
+                                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
+                            <span class="b-tooltip">
+                                Нойдорф
+                            </span>
+                                </a>
+                                <div class="l-home-plots__all-map-icon icon-port">
+                                    <div class="b-tooltip">
+                                        Порт
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-one">
+                                    <div class="b-tooltip">
+                                        Вокзал
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-center-city">
+                                    <div class="b-tooltip">
+                                        Центр&nbsp;города
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
+                                    <div class="b-tooltip">
+                                        Ладожский вокзал
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-airport">
+                                    <div class="b-tooltip">
+                                        Аэропорт
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="l-home-plots__content">
+                        <div class="l-home-plots__title">
+                            <a href="#" class="b-link-line">
+                                Участок «Нойдорф»
+                            </a>
+                        </div>
+                        <div class="l-home-plots__desc">
+                            <div class="l-home-plots__desc-item">
+                                <p>
+                                    <strong>18,99 га</strong> <span>площадь участка</span>
+                                </p>
+                            </div>
+                            <div class="l-home-plots__desc-item">
+                                <p>
+                                    <strong>30 км</strong> <span>от центра</span>
+                                </p>
+                            </div>
+                            <div class="l-home-plots__desc-item">
+                                <p>
+                                    <strong>Стрельна</strong> <span>юго-запад&nbsp;Петербурга</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="l-home-plots__text">
+                            <p>
+                                В&nbsp;окружении развитой городской инфраструктуры и&nbsp;культурного наследия. Менее
+                                10&nbsp;минут до&nbsp;выезда на&nbsp;КАД. 20&nbsp;минут на&nbsp;автотранспорте до&nbsp;аэропорта
+                            </p>
+                        </div>
+                        <div class="l-home-plots__link">
+                            <a href="#" class="b-link-line">
+                                Узнать больше
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="l-home-plots__item">
+
+                    <div class="l-home-plots__map l-home-plots__map-novoorlovskaya">
+                        <div class="l-home-plots__all-map-images">
+                            <div class="l-home-plots__all-map-icon-wrap">
+                                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
+                            <span class="b-tooltip">
+                                Новоорловская
+                            </span>
+                                </a>
+                                <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
+                            <span class="b-tooltip">
+                                Нойдорф
+                            </span>
+                                </a>
+                                <div class="l-home-plots__all-map-icon icon-port">
+                                    <div class="b-tooltip">
+                                        Порт
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-one">
+                                    <div class="b-tooltip">
+                                        Вокзал
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-center-city">
+                                    <div class="b-tooltip">
+                                        Центр&nbsp;города
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
+                                    <div class="b-tooltip">
+                                        Ладожский вокзал
+                                    </div>
+                                </div>
+
+                                <div class="l-home-plots__all-map-icon icon-airport">
+                                    <div class="b-tooltip">
+                                        Аэропорт
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="l-home-plots__content">
+                        <div class="l-home-plots__title">
+                            <a href="#" class="b-link-line">
+                                Участок «Новоорловская»
+                            </a>
+                        </div>
+                        <div class="l-home-plots__desc">
+                            <div class="l-home-plots__desc-item">
+                                <p>
+                                    <strong>163,33 га</strong> <span>площадь участка</span>
+                                </p>
+                            </div>
+                            <div class="l-home-plots__desc-item">
+                                <p>
+                                    <strong>20 км</strong> <span>от центра</span>
+                                </p>
+                            </div>
+                            <div class="l-home-plots__desc-item">
+                                <p>
+                                    <strong>Приморский район</strong> <span>В лесопарке «Новоорловский»</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="l-home-plots__text">
+                            <p>
+                                Развитая транспортная инфраструктура. Менее 10&nbsp;минут до&nbsp;выезда на&nbsp;КАД.
+                                30&nbsp;минут до&nbsp;центра города на&nbsp;автотранспорте.&nbsp;20&nbsp;минут
+                                до&nbsp;метро на&nbsp;автотранспорте
+                            </p>
+                        </div>
+                        <div class="l-home-plots__link">
+                            <a href="#" class="b-link-line">
+                                Узнать больше
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l-home-plots__all-map">
+                <div class="l-home-plots__all-map-images lang-ch">
+                    <div class="l-home-plots__all-map-icon-wrap">
+                        <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-novoorlovskaya">
+                            <span class="b-tooltip">
+                                Новоорловская
+                            </span>
+                        </a>
+                        <a href="#" class="l-home-plots__all-map-build l-home-plots__all-map-build-neudorf">
+                            <span class="b-tooltip">
+                                Нойдорф
+                            </span>
+                        </a>
+                        <div class="l-home-plots__all-map-icon icon-port">
+                            <div class="b-tooltip">
+                                Порт
+                            </div>
+                        </div>
+
+                        <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-one">
+                            <div class="b-tooltip">
+                                Вокзал
+                            </div>
+                        </div>
+
+                        <div class="l-home-plots__all-map-icon icon-center-city">
+                            <div class="b-tooltip">
+                                Центр&nbsp;города
+                            </div>
+                        </div>
+
+                        <div class="l-home-plots__all-map-icon icon-rialway-station icon-rialway-station-two">
+                            <div class="b-tooltip">
+                                Ладожский&nbsp;вокзал
+                            </div>
+                        </div>
+
+                        <div class="l-home-plots__all-map-icon icon-airport">
+                            <div class="b-tooltip">
+                                Аэропорт
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Блок Приоритетные направления #}
+        <div class="l-investors__priorities l-investors__priorities_margin_top" id="priorities">
+
+            {% include '../components/priorities-direction/priorities-direction.twig' with {
+                title: "Приоритетные направления",
+                data: [
+                    {
+                        img: "./media/priorities-1.svg",
+                        caption: "Фармацевтика <br>и биотехнологии",
+                        linkText: "18 резидентов"
+                    },{
+                        img: "./media/priorities-2.svg",
+                        caption: "Информационные технологии <br>и телекоммуникации",
+                        linkText: "12 резидентов"
+                    },{
+                        img: "./media/priorities-3.svg",
+                        caption: "Приборостроение",
+                        linkText: "10 резидентов"
+                    },{
+                        img: "./media/priorities-4.svg",
+                        caption: "Высокотехнологичные <br>производства",
+                        linkText: "6 резидентов"
+                    },{
+                        img: "./media/priorities-5.svg",
+                        caption: "Микроэлектроника",
+                        linkText: "4 резидентов"
+                    }
+                ]
+            } %}
+
+        </div>
+
+        {# Блок Льготы и преференции #}
+        <div class="b-about-privileges" id="privileges">
+            <div class="b-about-privileges__block">
+                <div class="b-about-privileges__main-block">
+                    <!-- Анимационные линии -->
+                    <div class="b-about-privileges__main-circle one"></div>
+                    <div class="b-about-privileges__main-circle two"></div>
+                    <div class="b-about-privileges__main-circle three"></div>
+                    <div class="b-about-privileges__main-circle four"></div>
+                    <div class="b-about-privileges__main-circle five"></div>
+                    <div class="b-about-privileges__main-circle six"></div>
+                    <!-- Закончились Анимационные линии -->
+
+                    <div class="b-about-privileges__main-block-text">
+                        <h2>
+                            Льготы <br/>
+                            и преференции
+                        </h2>
+                        <p>
+                            Для резидентов ОЭЗ действует <br/>
+                            особый режим осуществления <br/>
+                            предпринимательской  деятельности
+                        </p>
+                    </div>
+                    <div class="b-about-privileges__content">
+                        <div class="b-about-privileges__item">
+                            <p>
+                                Выкуп земельного <br/>
+                                участка&nbsp;<strong>за 25%</strong><br/>
+                                от&nbsp;кадастровой&nbsp;стоимости
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                                Снижение капитальных <br/>
+                                затрат проекта&nbsp;<strong>на&nbsp;30%</strong>
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                                Льготная ставка <br/>
+                                на&nbsp;аренду&nbsp;офисов
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                                Свободная <br/>
+                                таможенная&nbsp;зона
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                                Пониженные <br/>
+                                налоговые&nbsp;ставки
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                                Упрощенная&nbsp;система <br/>
+                                работы с&nbsp;государством
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                                Аренда&nbsp;земельного&nbsp;<br/>
+                                участка <strong>за 2%</strong> <br/>
+                                от кадастровой стоимости
+                            </p>
+                        </div>
+                        <div class="b-about-privileges__item">
+                            <p>
+                                Удобные&nbsp;локации
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Блок с информацие о налогах #}
+        <div class="l-investors__taxes" id="taxes">
+            {% include '../components/income-tax/income-tax.twig' %}
+        </div>
+
+        {# Блок Пониженные ставки страховых взносов #}
+        <div id="rates">
+            {% include '../components/reduced-rates/reduced-rates.twig' %}
+        </div>
+
+        {# Блок Таможенные преференции #}
+        <div class="b-area-descr b-area-descr_theme_grey" id="customs">
+            <div class="b-area-descr__title">
+                <h2>Таможенные преференции</h2>
+            </div>
+            <div class="b-area-descr__img">
+                <img src="/images/infrastructure/novoorl_customs.png" alt="Таможенный пост">
+            </div>
+            <div class="b-area-descr__block b-area-descr__block_theme_margin">
+                <div class="b-area-descr__text">
+                    <p>На территории ОЭЗ «Санкт-Петербург» применяется таможенная процедура «свободная таможенная зона», позволяющая на льготных условиях ввозить оборудование и компоненты для резидентов ОЭЗ.</p>
+                </div>
+                <h3 class="b-area-descr__subtitle">Преимущества импорта для резидентов ОЭЗ:</h3>
+                <ul class="b-area-descr__big-list">
+                    <li class="b-area-descr__big-item b-area-descr__big-item_without-border"><strong>Отсрочка выплаты</strong> таможенных пошлин</li>
+                    <li class="b-area-descr__big-item b-area-descr__big-item_without-border"><strong>Отсутствие затрат</strong> на&nbsp;склад временного хранения</li>
+                    <li class="b-area-descr__big-item b-area-descr__big-item_without-border"><strong>Выплата пошлины</strong> происходит либо целиком за&nbsp;окончательный продукт, либо только за&nbsp;его иностранные компоненты</li>
+                    <li class="b-area-descr__big-item b-area-descr__big-item_without-border"><strong>Собственный таможенный пост</strong></li>
+                </ul>
+                <h3 class="b-area-descr__subtitle b-area-descr__subtitle_theme_border">Преимущества экспорта для резидентов ОЭЗ:</h3>
+                <div>Возможность бесплатного использования рабочей силы, территории и ресурсов РФ</div>
+            </div>
+        </div>
+
+        {# Блок Условия выкупа #}
+        <div id="soft-terms">
+            {% include '../components/invest-conditions/invest-conditions.twig' %}
+        </div>
+
+        {# Блок Готовая инженерная инфраструктура #}
+
+        <div id="infrastructure">
+            {% include '../components/invest-infr/invest-infr.twig' %}
+        </div>
+
+        <div id="benefits">
+            {% include '../components/invest-benefits/invest-benefits.twig' %}
+        </div>
+
+        {# Блок курирующие органы власти #}
+
+        <div class="b-about-government" id="government">
+            <div class="b-government">
+                <div class="b-government__title">
+                    <h2>Курирующие органы государственной власти</h2>
+                </div>
+
+                <div class="b-government__list">
+                    <div class="b-government__item">
+                        <div class="b-government__item-header">
+                            <div class="b-government__item-img">
+                                <img src="/images/government/government-rf.svg" alt="Правительство РФ — Министерство экономического развития Российской Федерации">
+                            </div>
+                            <div class="b-government__item-link">
+                                <a href="#" class="b-link-line">
+                                    Правительство РФ — <br/> Министерство экономического развития Российской Федерации
+                                </a>
+                            </div>
+                        </div>
+                        <div class="b-government__item-text">
+                            <p>
+                                Разработка единой государственной политики в сфере создания, функционирования и управления ОЭЗ
+                            </p>
+                            <p>
+                                Разработка проектов федеральных законов, нормативных правовых актов по вопросам создания и функционирования ОЭЗ на территории Российской Федерации
+                            </p>
+                            <p>
+                                Координация работы по подготовке и реализации проектов, осуществляемых с участием международных финансовых организаций
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="b-government__item">
+                        <div class="b-government__item-header">
+                            <div class="b-government__item-img">
+                                <img src="/images/government/government-spb.svg" alt="Правительство Санкт-Петербурга">
+                            </div>
+                            <div class="b-government__item-link">
+                                <a href="#" class="b-link-line">
+                                    Правительство <br/> Санкт&nbsp;-&nbsp;Петербурга
+                                </a>
+                            </div>
+                        </div>
+                        <div class="b-government__item-text">
+                            <p>
+                                Разработка единой государственной политики в сфере создания, функционирования и управления ОЭЗ
+                            </p>
+                            <p>
+                                Выдача разрешений на строительство и ввод объектов в эксплуатацию индивидуальным предпринимателям и юридическим лицам, осуществляющим строительство или реконструкцию объектов на территории ОЭЗ
+                            </p>
+                            <p>
+                                Управление ОЭЗ в порядке и пределах, установленных законодательством РоссийскойФедерации
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="b-government__item">
+                        <div class="b-government__item-header">
+                            <div class="b-government__item-img">
+                                <img src="/images/government/committee-spb.svg" alt="Комитет по промышленной политике и инновациям Санкт-Петербурга и Наблюдательный совет ОЭЗ «Санкт-Петербург»">
+                            </div>
+                            <div class="b-government__item-link">
+                                <a href="#" class="b-link-line">
+                                    Комитет по промышленной политике и инновациям Санкт&nbsp;-&nbsp;Петербурга и Наблюдательный совет ОЭЗ «Санкт&nbsp;-&nbsp;Петербург»
+                                </a>
+                            </div>
+                        </div>
+                        <div class="b-government__item-text">
+                            <p>
+                                Контроль за выполнением соглашения о создании ОЭЗ и расходованием бюджетных средств, выделяемых на обустройство территории
+                            </p>
+                            <p>
+                                Участие в разработке перспективных планов развития ОЭЗ
+                            </p>
+                            <p>
+                                Рассмотрение вопросов участия новых резидентов в ОЭЗ и ознакомление с их бизнес-планами
+                            </p>
+                            <p>
+                                Заключение инвестиционных соглашений и мониторинг исполнения обязательств по ним
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Блок контактов #}
+
+        <div class="l-investors__department" id="department">
+            <div class="b-invest-depart">
+                <h2 class="b-invest-depart__title" id="investors-department">Отдел по работе с резидентами</h2>
+                <div class="b-invest-depart__text">Обратитесь за консультацией по процедуре получения статуса резидента ОЭЗ «Санкт-Петербург»</div>
+                <div class="b-invest-depart__contacts">
+
+                    {% include '../components/contact-list/contact-list.twig' with {
+                        contacts: [
+                            {
+                                name: "Станислав Гармаш",
+                                prof: "Заместитель Генерального директора по работе с инвесторами",
+                                phone: "+7 (812) 380-49-29, доб. 5500",
+                                mail: "sgarmash@spbsez.ru"
+                            },{
+                                name: "Андрей Иванов",
+                                prof: "Начальник управления по работе с инвесторами",
+                                phone: "+7 (812) 380-49-29, доб. 5004",
+                                mail: "aivanov@spbsez.ru"
+                            },{
+                                name: "Полина Ульзутуева",
+                                prof: "Начальник управления по работе с инвесторами",
+                                phone: "+7 (812) 380-49-29, доб. 5003",
+                                mail: "pulzutueva@spbsez.ru"
+                            },{
+                                name: "Алена Голубева ",
+                                prof: "Главный специалист отдела по работе с инвесторами",
+                                phone: "+7 (812) 380-49-29, доб. 5512",
+                                mail: "agolubeva@spbsez.ru"
+                            },{
+                                name: "Диана Уличева",
+                                prof: "Главный специалист отдела по работе с инвесторами",
+                                phone: "+7 (812) 380-49-29, доб. 5007",
+                                mail: "dulicheva@spbsez.ru"
+                            },
+                        ]
+                    } %}
+
+                </div>
+
+                <div class="b-invest-depart__button">
+                    <a href="#" class="button j-message-button" data-href="#message">Написать сообщение</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="b-footer__left">
+        <a href="/" class="b-footer__logo">
+            <img src="../images/home/ch-logo/Logo-white-footer.svg" alt="Особая Экономическая зона">
+        </a>
+    </div>
+    <div class="b-footer__center">
+        <div class="b-footer__copyright">
+            <span class="b-footer__copyright-text">&copy; 2018, ОЭЗ &laquo;Санкт&nbsp;-&nbsp;Петербург&raquo;</span>
+            <button class="b-footer__copyright-link j-message-button" data-href="#message">
+                Написать сообщение
+            </button>
+        </div>
+    </div>
+    <div class="b-footer__right">
+        <div class="b-footer__right-wrap">
+            <div class="b-footer__social">
+                <a href="#" class="b-footer__social-link">
+                    {% include "../sprites/svg/instagram.svg.twig" %}
+                </a>
+                <a href="#" class="b-footer__social-link">
+                    {% include "../sprites/svg/facebook.svg.twig" %}
+                </a>
+            </div>
+            <a href="#" class="b-footer__kelnik">
+                {% include "../sprites/svg/kelnik.svg.twig" %}
+            </a>
+        </div>
+    </div>
+
+    <div id="#message" class="b-message-popup">
+        <h3 class="b-message-popup__header">Написать сообщение</h3>
+        <form action="" method="post" enctype="multipart/form-data" class="b-vacancy-response-form j-message-form">
+            <div class="b-vacancy-response-form__inputs">
+                <div class="b-form-block j-message-text b-input-textarea">
+                    {% include "../components/forms/textarea/textarea.twig" with {
+                        id: "text",
+                        name: "text",
+                        rows: "3"
+                    } %}
+
+                    <label for="admin-fio" class="b-form-block__label">Комментарий</label>
+                    <span class="b-form-block__error-text">Комментарий</span>
+                </div>
+                <div class="b-form-block j-message-fio">
+                    {% include "../components/forms/input-text/input-text.twig" with {
+                        id: "message-fio",
+                        name: "message-fio"
+                    } %}
+
+                    <label for="message-fio" class="b-form-block__label">ФИО</label>
+                    <span class="b-form-block__error-text">Имя</span>
+                </div>
+                <div class="b-form-block j-message-email">
+                    {% include "../components/forms/email/email.twig" with {
+                        id: "message-email",
+                        name: "message-email"
+                    } %}
+                    <label for="message-email" class="b-form-block__label">
+                        Эл. почта
+                    </label>
+                    <span class="b-form-block__error-text">
+                            Текст подсказки
+                        </span>
+                </div>
+                <div class="b-form-block j-message-phone">
+                    {% include "../components/forms/telephone/telephone.twig" with {
+                        id: "message-phone",
+                        name: "message-phone"
+                    } %}
+
+                    <label for="message-phone" class="b-form-block__label">Телефон</label>
+                    <span class="b-form-block__error-text">Текст подсказки</span>
+                </div>
+            </div>
+
+            <button class="button b-vacancy__button j-message-submit">Написать сообщение</button>
+        </form>
+    </div>
+{% endblock %}
