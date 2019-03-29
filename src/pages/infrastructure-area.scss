@@ -208,9 +208,6 @@
 }
 
 .b-area-main-feature {
-    font-family: $font-bold;
-    font-weight: 700;
-
     @media #{$mobile-only} {
         padding-bottom: 32px;
     }
@@ -514,7 +511,8 @@
 }
 
 .b-area-descr__title h2 {
-    @include margin-level(both, blue);
+    @include margin-level(top, blue);
+    @include margin-level(bottom, green);
     @include font-size("h2");
 
     @media #{$tablet-portrait} {
@@ -523,7 +521,7 @@
 }
 
 .b-area-descr__subtitle {
-    @include padding-level(top, blue);
+    @include padding-level(top, yellow);
     @include padding-level(bottom, cyan);
     margin-bottom: 0;
 }
@@ -545,7 +543,7 @@
 }
 
 .b-area-descr__text {
-    @include margin-level(bottom, cyan);
+    @include margin-level(bottom, green);
 }
 
 .b-area-descr__text p {
@@ -607,8 +605,7 @@
 .b-area-descr__main-feature-title {
     @include margin-level(bottom, yellow);
     @include font-size('h2');
-    font-family: $font-bold;
-    font-weight: 700;
+    font-weight: 400;
     color: $blue;
 }
 
@@ -845,7 +842,6 @@
 .b-area-engine-item__title {
     @include margin-level(both, orange);
     @include font-size("h4");
-    font-family: $font-bold;
 }
 
 .b-area-engine-item__text p {
@@ -1129,10 +1125,24 @@
 .b-area-map__address {
     @include font-size("p1");
     @include prefix(4, 36);
-    background-image: url('/images/infrastructure/marker.svg');
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    background-size: 17px 23px;
+    position: relative;
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 3px;
+        width: 17px;
+        height: 23px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url('/images/infrastructure/marker.svg');
+
+        @media #{$laptop} {
+            top: 5px;
+        }
+    }
 
     @media #{$tablet-portrait} {
         @include prefix(2, 32);
