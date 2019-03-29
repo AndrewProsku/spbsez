@@ -19,6 +19,7 @@ $MESS['KELNIK_INFRASTRUCTURE_MAP_COORDS_LNG'] = 'Координаты карты
 $MESS['KELNIK_INFRASTRUCTURE_MAP_COORDS_CENTER_LAT'] = 'Координаты центра карты (lat)';
 $MESS['KELNIK_INFRASTRUCTURE_MAP_COORDS_CENTER_LNG'] = 'Координаты центра карты (lng)';
 $MESS['KELNIK_INFRASTRUCTURE_PLANOPLAN'] = 'Код PlanoPlan';
+$MESS['KELNIK_INFRASTRUCTURE_SHOW_TITLE'] = 'Показывать название резидента на плане';
 
 $tabMess = [
     'TEXT' => 'Описание',

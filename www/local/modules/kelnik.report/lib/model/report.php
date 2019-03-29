@@ -264,7 +264,9 @@ class Report extends EO_Reports
 
         // fields
         //
-        if (!empty($block['fields'])) {
+        if (!empty($block['fields'])
+            && (!isset($block['type']) || $block['type'] != 'results')
+        ) {
 
             foreach ($block['fields'] as $field) {
                 $isArray = is_array($field);
@@ -319,6 +321,28 @@ class Report extends EO_Reports
                 'type' => $block['type'],
                 $block['multiple']['name'] => array_values($rows)
             ];
+
+            $res[] = $newBlock;
+
+            return $res;
+        }
+
+        // Results
+        //
+        $ids = ArrayHelper::getValue($groups, ReportFieldsGroupTable::TYPE_RESULTS . '.' . $formNum, []);
+        foreach ($ids as $id) {
+            $newBlock = [
+                'type' => 'results',
+                'ID' => $id,
+                'fields' => []
+            ];
+
+            foreach ($block['fields'] as $field) {
+                $newBlock['fields'][] = [
+                    'id' => $field . '[' . $id . ']',
+                    'value' => self::getFieldValue($values, $field, $id)
+                ];
+            }
 
             $res[] = $newBlock;
         }

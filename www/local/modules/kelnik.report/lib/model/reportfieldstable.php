@@ -288,11 +288,16 @@ class ReportFieldsTable extends DataManager
             ],
             self::FORM_RESULT => [
                 'type' => 'results',
-                'fields' => [
-                    'result-type',
-                    'result-description',
-                    'result-date',
-                    'result-commercialization'
+                'blocks' => [
+                    [
+                        'type' => 'results',
+                        'fields' => [
+                            'result-type',
+                            'result-description',
+                            'result-date',
+                            'result-commercialization'
+                        ]
+                    ]
                 ]
             ]
         ];

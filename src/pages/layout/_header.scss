@@ -62,7 +62,7 @@
 
         .l-home__header-right {
             @media #{$laptop} {
-                align-items: streth;
+                align-items: stretch;
             }
         }
 
@@ -151,7 +151,7 @@
 
         .l-home__header-right {
             @media #{$laptop} {
-                align-items: streth;
+                align-items: stretch;
             }
         }
 
@@ -365,13 +365,46 @@
     @media #{$laptop} {
         @include column(6, 35);
         justify-content: space-between;
-        align-items: streth;
+        align-items: stretch;
         height: 100%;
     }
 
     @media #{$laptop-wide} {
         @include column(9, 35);
     }
+}
+
+.l-home__header-right.lang-ch {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    display: block;
+    height: 100%;
+}
+
+.l-home__header-right.lang-ch .b-language {
+    width: 40px;
+    display: flex;
+    max-width: none;
+    flex-basis: auto;
+    height: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+
+    @media #{$laptop} {
+        width: 70px;
+    }
+
+    @media #{$laptop-wide} {
+        width: 88px;
+    }
+
+    @media #{$laptop-wide} {
+        width: 105px;
+    }
+}
+
+.l-home__header-right.lang-ch .b-language__list {
+    width: 100%;
 }
 
 .b-account {

@@ -15,5 +15,6 @@
 
 return [
     'kelnik.admin_helper' => null,
-    'kelnik.helpers' => null
+    'kelnik.helpers' => null,
+    'kelnik.refbook' => null
 ];

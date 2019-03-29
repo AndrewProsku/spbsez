@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `kelnik_report_fields` (
   `REPORT_ID` int(11) unsigned NOT NULL DEFAULT '0',
   `GROUP_ID` int(11) unsigned NOT NULL DEFAULT '0',
   `NAME` varchar(100) DEFAULT NULL,
-  `VALUE` varchar(255) DEFAULT NULL,
+  `VALUE` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `REPORT_ID` (`REPORT_ID`),
   KEY `GROUP_ID` (`GROUP_ID`),

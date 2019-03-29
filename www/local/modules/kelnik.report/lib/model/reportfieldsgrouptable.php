@@ -17,6 +17,7 @@ class ReportFieldsGroupTable extends DataManager
     public const TYPE_STAGE = 'stages';
     public const TYPE_GROUP = 'groups';
     public const TYPE_INNOVATION = 'innovations';
+    public const TYPE_RESULTS = 'results';
 
     /**
      * @return string
@@ -61,15 +62,18 @@ class ReportFieldsGroupTable extends DataManager
     public static function getGroupFields()
     {
         return [
-            ReportFieldsGroupTable::TYPE_STAGE => [
+            self::TYPE_STAGE => [
                 ReportFieldsTable::FORM_BUILDING,
                 ReportFieldsTable::FORM_RENT
             ],
-            ReportFieldsGroupTable::TYPE_GROUP => [
+            self::TYPE_GROUP => [
                 ReportFieldsTable::FORM_INDICATORS
             ],
-            ReportFieldsGroupTable::TYPE_INNOVATION => [
+            self::TYPE_INNOVATION => [
                 ReportFieldsTable::FORM_INDICATORS
+            ],
+            self::TYPE_RESULTS => [
+                ReportFieldsTable::FORM_RESULT
             ]
         ];
     }

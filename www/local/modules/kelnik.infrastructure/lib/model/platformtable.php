@@ -2,9 +2,7 @@
 
 namespace Kelnik\Infrastructure\Model;
 
-use Bitrix\Main\Application;
-use Bitrix\Main\Context;
-use Bitrix\Main\Entity\Event;
+
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\ExpressionField;
@@ -13,8 +11,6 @@ use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Fields\TextField;
 use Bitrix\Main\ORM\Query\Join;
-use Kelnik\Helpers\ArrayHelper;
-use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
@@ -60,6 +56,10 @@ class PlatformTable extends DataManager
                 ->configureValues(self::NO, self::YES)
                 ->configureDefaultValue(self::YES)
                 ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_ACTIVE')),
+            (new BooleanField('SHOW_TITLE'))
+                ->configureValues(self::NO, self::YES)
+                ->configureDefaultValue(self::NO)
+                ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_SHOW_TITLE')),
 
             (new StringField('ALIAS'))
                 ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_ALIAS'))
@@ -122,10 +122,21 @@ class PlatformTable extends DataManager
             Join::on('this.ID', 'ref.PLATFORM_ID')
         ))->configureJoinType('LEFT');
 
+        $res[] = (new Reference(
+            'PLAN_ELEMENTS',
+            PlanTable::class,
+            Join::on('this.ID', 'ref.PLATFORM_ID')
+        ))->configureJoinType('LEFT');
+
         $res[] = new ExpressionField(
             'MAP_CNT',
             'COUNT(DISTINCT %s)',
             'MAP_ELEMENTS.ID'
+        );
+        $res[] = new ExpressionField(
+            'PLAN_CNT',
+            'COUNT(DISTINCT %s)',
+            'PLAN_ELEMENTS.ID'
         );
 
         return $res;
@@ -152,20 +163,6 @@ class PlatformTable extends DataManager
             'TEXT_ADVANTAGES2',
             'TEXT_ADVANTAGES3'
         ];
-    }
-
-    public static function clearComponentCache(Event $event)
-    {
-        if (!Context::getCurrent()->getRequest()->isAdminSection()) {
-            return;
-        }
-
-        Application::getInstance()->getTaggedCache()->clearByTag('kelnik:infrastructureList');
-        Application::getInstance()->getTaggedCache()->clearByTag(
-            'kelnik:infrastructureRow_' . ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0)
-        );
-
-        parent::clearComponentCache($event);
     }
 
     /**

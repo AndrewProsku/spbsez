@@ -269,9 +269,8 @@ class ReportBlock {
 
             deleteButton.addEventListener('click', (event) => {
                 const that = this;
-                const dataToSend = `action=delResult&id=${event.target.dataset.id}`;
 
-                Utils.send(dataToSend, '/tests/reports/input-update.json', {
+                Utils.send(`a=delGroup&id=${that.reportId}&typeId=${event.target.dataset.id}`, that.baseUrl, {
                     success(response) {
                         if (response.request.status === that.FAIL_STATUS) {
                             return;
