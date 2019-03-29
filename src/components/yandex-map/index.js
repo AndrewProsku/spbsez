@@ -62,6 +62,11 @@ class YandexMap {
         this.content = this.mapWrapper.querySelector(this.base);
         this.id = this.content.id;
         this.url = this.mapWrapper.dataset.ajax;
+        this.json = this.mapWrapper.dataset.json || {};
+
+        if (this.json) {
+            this.json = JSON.parse(atob(this.json));
+        }
 
         this.completeSettings(outerOptions, () => {
             this.initYandexMap(() => {
@@ -70,11 +75,11 @@ class YandexMap {
                 this.initMarkers();
                 this.initTabs();
                 this.initCircles();
+                this.initRoutes();
                 this.disableMobileDrag();
                 this.handleLocationLinks();
             });
         });
-
     }
 
     /**
@@ -106,11 +111,13 @@ class YandexMap {
             this.connectSettings(this.getScriptSettings(outerOptions));
             this.getServerSettings(this.url, initCallback);
 
-        } else {
-            this.connectSettings(this.setDefaultSettings());
-            this.connectSettings(this.getScriptSettings(outerOptions));
-            initCallback()
+            return;
         }
+
+        this.connectSettings(this.setDefaultSettings());
+        this.connectSettings(this.getScriptSettings(outerOptions));
+        this.connectSettings(this.json);
+        initCallback();
     }
 
     /**
@@ -298,6 +305,64 @@ class YandexMap {
         }
 
         //тут вызываем метод создающий кастомный контрол
+    }
+
+    /**
+     * Отрисовка путей
+     */
+    initRoutes() {
+        if (typeof this.settings.routes !== `object`) {
+            return;
+        }
+
+        this.settings.routes.forEach((rout) => {
+            let FinishLayout = null;
+            if (typeof rout.finishMarker === `object`) {
+                FinishLayout = ymaps.templateLayoutFactory.createClass(textHtmlMarker({
+                    title: rout.finishMarker.title,
+                    modify: `theme_${rout.finishMarker.theme}`
+                }));
+            }
+
+            const multiRoute = new ymaps.multiRouter.MultiRoute({
+                referencePoints: rout.points,
+                params: {
+                    results: 1
+                }
+            }, {
+                boundsAutoApply: false,
+                balloonLayout: null,
+                wayPointStartVisible: false,
+                cursor: 'default',
+                wayPointFinishIconLayout: FinishLayout,
+                routeActiveStrokeWidth: rout.activeStrokeWidth,
+                routeActiveStrokeColor: rout.activeStrokeColor
+            });
+
+            // Добавление маршрута на карту.
+            this.map.geoObjects.add(multiRoute);
+
+            if (typeof rout.viaPoint === `object`) {
+                this.customizeViaPoint(multiRoute, rout.viaPoint);
+            }
+        });
+    }
+
+    customizeViaPoint(route, pointData) {
+        const LayoutClass = ymaps.templateLayoutFactory.createClass(textHtmlMarker({
+            title: pointData.title,
+            modify: `theme_${pointData.theme}`
+        }));
+
+        route.model.events.once("requestsuccess", function () {
+            let yandexWayPoint = route.getWayPoints().get(1);
+
+            ymaps.geoObject.addon.balloon.get(yandexWayPoint);
+            yandexWayPoint.options.set({
+                iconLayout: LayoutClass,
+                balloonContentLayout: null
+            });
+        });
     }
 
     /**
@@ -651,7 +716,7 @@ class YandexMap {
 
     /**
      * Показываем/скрываем маркеры на карте
-     * @param {node} tab - нода таба по которому произошол клик
+     * @param {node} tab - нода таба по которому произошел клик
      */
     toggleMarkers(tab) {
         const classLink = `.b-yandex-map__tab-link`;

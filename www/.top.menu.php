@@ -9,14 +9,14 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Инфраструктура", 
-		"", 
+		"/infrastructure/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Услуги", 
-		"", 
+		"/services/",
 		Array(), 
 		Array(), 
 		"" 
@@ -30,14 +30,14 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Инвесторам", 
-		"", 
+		"/investors/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Медиа", 
-		"", 
+		"/media/",
 		Array(), 
 		Array(), 
 		"" 

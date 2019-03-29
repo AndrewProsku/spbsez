@@ -8,9 +8,12 @@
  * DEPENDENCIES
  */
 import $ from 'jquery';
+import Language from '../language';
 import Mediator from 'common/scripts/mediator';
 import template from 'components/popup/popup.twig';
 import Utils from 'common/scripts/utils';
+
+const Lang = new Language();
 
 const mediator = new Mediator();
 
@@ -20,7 +23,7 @@ class Popup {
         this.template = options.template || template;
         this.templateContent = options.templateContent || false;
         this.target = options.target;
-        this.closeButtonAriaLabel = options.closeButtonAriaLabel || 'Закрыть всплывающее окно';
+        this.closeButtonAriaLabel = options.closeButtonAriaLabel || Lang.get('popup.closeAriaLabel');
         this.stateClass = 'b-popup_state_open';
         this.bindEvents();
     }
@@ -29,7 +32,11 @@ class Popup {
      * Вешаем слушателей событий
      */
     bindEvents() {
-        this.target.addEventListener('click', this.makeOpen.bind(this));
+        this.target.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            this.makeOpen();
+        });
 
         document.addEventListener('keyup', (element) => {
             this.closeOnPressButton(element);
@@ -68,6 +75,12 @@ class Popup {
         const dataAttributeHref = this.target.dataset.href;
         const dataAttributeAjax = this.target.dataset.ajax;
         const dataAttributeAjaxData = $.param(this.target.dataset);
+        let dataAttributeJson = this.target.dataset.json;
+
+        if (dataAttributeJson) {
+            dataAttributeJson = atob(dataAttributeJson);
+            dataAttributeJson = JSON.parse(dataAttributeJson);
+        }
 
         if (dataAttributeHref) {
             const contentId = document.getElementById(dataAttributeHref);
@@ -85,6 +98,10 @@ class Popup {
         } else if (dataAttributeAjax) {
             this.outputOnDisplay();
             this.send(dataAttributeAjaxData, this.open.bind(this));
+        } else if (dataAttributeJson) {
+            this.outputOnDisplay();
+            Popup.insetContent(this.content, this.templateContent(dataAttributeJson));
+            this.open();
         }
     }
 
@@ -175,7 +192,7 @@ class Popup {
             }
         };
 
-        Utils.send(sentData, url, callback);
+        Utils.send(sentData, url, callback, 'get');
 
         return true;
     }
@@ -237,13 +254,13 @@ class Popup {
     errorHandler(typeError) {
         const errorList = [{
             type: 'internet',
-            html: '<h1>Вы не подключены к интернету. Повторите запрос позднее</h1>'
+            html: `<h1>${Lang.get('popup.errors.internet')}</h1>`
         }, {
             type: 'server',
-            html: '<h1>На сервере произошла ошибка. Повторите запрос позднее</h1>'
+            html: `<h1>${Lang.get('popup.errors.server')}</h1>`
         }, {
             type: 'data',
-            html: '<h1>На сервере произошла ошибка. Повторите запрос позднее</h1>'
+            html: `<h1>${Lang.get('popup.errors.data')}</h1>`
         }];
 
         errorList.forEach((item) => {

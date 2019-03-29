@@ -1,0 +1,203 @@
+$width: 300px;
+$widthColumn: 32px;
+$verPadding: 20px;
+$borderWidth: 1px;
+
+$widthContent: $width - ($verPadding * 2) - ($borderWidth * 2);
+$marginRight: ($widthContent - ($widthColumn * 7)) / 6; // Правый отступ для колонок
+
+.b-input-date {
+    width: $width;
+    background-color: $white;
+    border: $borderWidth solid $light-grey;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px $grey;
+    padding-top: 10px;
+    user-select: none;
+    position: absolute;
+    z-index: 111;
+    top: 100%;
+    left: 0;
+    display: none;
+}
+
+.b-input-date__title {
+    font-size: 18px;
+    padding: 0 $verPadding;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.b-input-date__head {
+    margin: 0 $verPadding 5px;
+    display: flex;
+    border-bottom: 2px solid $dark-white;
+    padding-bottom: 5px;
+}
+
+.b-input-date__head-item {
+    font-size: 16px;
+    width: $widthColumn;
+    min-width: $widthColumn;
+    text-align: center;
+    margin-right: $marginRight;
+
+    &:first-child {
+        text-align: left;
+    }
+
+    &:last-child {
+        text-align: right;
+        margin-right: 0;
+    }
+}
+
+.b-input-date__head-item_is_disabled {
+    color: rgba($black, 0.48);
+}
+
+.b-input-date__content {
+    height: 270px;
+    padding: 0 $verPadding;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 16px;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+.b-input-date__month {
+    margin-bottom: 30px;
+}
+
+.b-input-date__month-name {
+    color: rgba($black, 0.48);
+    margin-bottom: 15px;
+}
+
+.b-input-date__weeks {
+    width: $widthContent;
+}
+
+.b-input-date__week {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    &:first-child {
+        justify-content: flex-end;
+    }
+}
+
+.b-input-date__day {
+    width: $widthColumn;
+    min-width: $widthColumn;
+    height: 30px;
+    margin-right: $marginRight;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    color: $blue;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.b-input-date__day_is_active {
+    color: $white;
+    z-index: 1;
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 32px;
+        height: 32px;
+        background-color: $blue;
+        border-radius: 4px;
+        z-index: -1;
+    }
+
+    &.error-date {
+        &:after {
+            background-color: red;
+        }
+    }
+}
+
+.b-input-date__day_is_disabled {
+    color: rgba($black, 0.48);
+}
+
+.b-input-date__addition {
+    padding: 10px $verPadding;
+    background-color: $bg-select;
+    height: 83px;
+}
+
+.b-input-date__time {
+    .irs-slider {
+        top: 19px;
+        width: 20px;
+        height: 20px;
+        background: $blue !important; // stylelint-disable-line
+        border: none;
+        box-shadow: none;
+
+        &:hover {
+            background: $blue !important; // stylelint-disable-line
+        }
+    }
+
+    .irs-bar {
+        top: 28px;
+        height: 2px;
+        border: none;
+        background: $blue;
+    }
+
+    .irs-bar-edge {
+        top: 28px;
+        height: 2px;
+        border: none;
+        background: $blue;
+    }
+
+    .irs-line {
+        top: 28px;
+        height: 2px;
+        border: none;
+        background: $blue;
+    }
+
+    .irs-from,
+    .irs-to,
+    .irs-single {
+        @include font-size(p3);
+        top: -4px;
+        background: transparent;
+        color: $blue;
+        font-weight: 700;
+    }
+
+    .irs-min,
+    .irs-max {
+        @include font-size(p4);
+        background: transparent;
+        color: rgba($black, 0.48);
+        padding: 0;
+    }
+}

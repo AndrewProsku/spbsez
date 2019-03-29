@@ -12,43 +12,56 @@
 
             {% include '../components/investor-info/investor-info.twig' with {
                 title: "Особая экономическая зона технико-внедренческого типа",
-                img: "/images/investors-info/investors-info-1.png",
+                img: "/images/investors-info/investors-3.png",
                 text: "Резиденты ОЭЗ «Санкт-Петербург» должны осуществлять технико-внедренческую деятельность, под которой подразумевается: инновационная деятельность, создание, производство и реализация научно-технической продукции, создание и реализация программ для электронных вычислительных машин, баз данных, топологий интегральных микросхем, информационных систем, а также оказание услуг по их внедрению и обслуживанию.",
-                tags: [
-                    "Приоритетные направления",
-                    "Преимущества локации",
-                    "Льготы и преференции",
-                    "Как стать резидентом",
-                    "Документы и презентации",
-                    "Отдел по работе с резидентами"
+                anchors: [
+                    {
+                        text: "Приоритетные направления",
+                        link: "investors-priorities"
+                    },{
+                        text: "Преимущества локации",
+                        link: "investors-advantage"
+                    },{
+                        text: "Льготы и преференции",
+                        link: "investors-privileges"
+                    },{
+                        text: "Как стать резидентом",
+                        link: "investors-resident"
+                    },{
+                        text: "Документы и презентации",
+                        link: "investors-documents"
+                    },{
+                        text: "Отдел по работе с резидентами",
+                        link: "investors-department"
+                    }
                 ]
             } %}
 
         </div>
 
-        <div class="l-investors__priorities">
+        <div class="l-investors__priorities" id="investors-priorities">
 
             {% include '../components/priorities-direction/priorities-direction.twig' with {
                 title: "Приоритетные направления",
                 data: [
                     {
-                        img: "/images/priorities-direction/priorities-1.png",
+                        img: "./media/priorities-1.svg",
                         caption: "Фармацевтика <br>и биотехнологии",
                         linkText: "18 резидентов"
                     },{
-                        img: "/images/priorities-direction/priorities-2.png",
+                        img: "./media/priorities-2.svg",
                         caption: "Информационные технологии <br>и телекоммуникации",
                         linkText: "12 резидентов"
                     },{
-                        img: "/images/priorities-direction/priorities-3.png",
+                        img: "./media/priorities-3.svg",
                         caption: "Приборостроение",
                         linkText: "10 резидентов"
                     },{
-                        img: "/images/priorities-direction/priorities-4.png",
+                        img: "./media/priorities-4.svg",
                         caption: "Высокотехнологичные <br>производства",
                         linkText: "6 резидентов"
                     },{
-                        img: "/images/priorities-direction/priorities-5.png",
+                        img: "./media/priorities-5.svg",
                         caption: "Микроэлектроника",
                         linkText: "4 резидентов"
                     }
@@ -57,25 +70,38 @@
 
         </div>
 
-        <div class="l-investors__advantage">
+        <div class="l-investors__advantage" id="investors-advantage">
 
             {% include '../components/advantage-location/advantage-location.twig' %}
 
         </div>
 
-        <div class="l-investors__privileges">
+        <div class="l-investors__privileges" id="investors-privileges">
             {% include '../components/investor-info/investor-info.twig' with {
                 modify: "b-investors-info_big_title",
                 title: "Льготы и преференции ",
                 img: "/images/investors-info/investors-1.png",
                 text: "Для резидентов ОЭЗ действует особый режим осуществления предпринимательской деятельности. Резиденты получают доступ к готовой бизнес-инфраструктуре, льготные условия подключения к инженерным сетям, льготные условия аренды, налоговые льготы и таможенные преференции. Что позволяет инвестору существенным образом снижать издержки на запуск нового производства.",
-                tags: [
-                    "Налоговые льготы",
-                    "Пониженные ставки страховых взносов",
-                    "Таможенные преференции",
-                    "Льготные условия выкупа земельного участка",
-                    "Готовая инженерная инфраструктура",
-                    "Стабильность и безопасность"
+                anchors: [
+                    {
+                        text: "Налоговые льготы",
+                        link: "investors-taxes"
+                    },{
+                        text: "Пониженные ставки страховых взносов",
+                        link: "investors-rate"
+                    },{
+                        text: "Таможенные преференции",
+                        link: "investors-post"
+                    },{
+                        text: "Льготные условия выкупа земельного участка",
+                        link: "investors-conditions"
+                    },{
+                        text: "Готовая инженерная инфраструктура",
+                        link: "investors-infrastructure"
+                    },{
+                        text: "Стабильность и безопасность",
+                        link: "investors-benefits"
+                    }
                 ]
             } %}
         </div>
@@ -111,7 +137,7 @@
         <div class="l-investors__documents">
 
             <div class="b-invest-documents">
-                <h2 class="b-invest-documents__title">Документы и презентации</h2>
+                <h2 class="b-invest-documents__title" id="investors-documents">Документы и презентации</h2>
 
                 <div class="b-invest-documents__file">
 
@@ -141,7 +167,7 @@
         <div class="l-investors__department">
 
             <div class="b-invest-depart">
-                <h2 class="b-invest-depart__title">Отдел по работе с резидентами</h2>
+                <h2 class="b-invest-depart__title" id="investors-department">Отдел по работе с резидентами</h2>
 
                 <div class="b-invest-depart__text">Обратитесь за консультацией по процедуре получения статуса резидента ОЭЗ «Санкт-Петербург»</div>
 
@@ -181,7 +207,7 @@
                 </div>
 
                 <div class="b-invest-depart__button">
-                    <a href="#" class="button">Написать сообщение</a>
+                    <a href="#" class="button j-message-button" data-href="#message">Написать сообщение</a>
                 </div>
             </div>
 

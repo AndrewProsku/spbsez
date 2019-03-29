@@ -4,7 +4,6 @@
     @include padding-level(top, pink);
     @include padding-level(bottom, pink);
     background-color: $bg-grey;
-    background-image: url("/images/home/bg-sections.jpg");
 
     @media #{$laptop} {
         @include prefix(3, 36);
@@ -66,10 +65,12 @@
     }
 }
 
-.b-invest-infr__img {
+.b-invest-infr__item svg,
+.b-invest-infr__item img {
     margin-bottom: 15px;
     width: 80px;
-    
+    height: auto;
+
     @media #{$tablet-portrait} {
         width: 160px;
         margin-bottom: 21px;

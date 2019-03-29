@@ -367,14 +367,17 @@ $path: '/images/home/';
 .l-home__privileges-item {
     @include margin-level(bottom, green);
 
-    &:last-child,
-    &:nth-child(5) {
+    &:last-child {
         margin-bottom: 0;
     }
 
     @media #{$tablet-portrait} {
         @include column(half);
         @include suffix(2, 29);
+
+        &:nth-child(5) {
+            margin-bottom: 0;
+        }
     }
 
     @media #{$laptop} {
@@ -1015,6 +1018,14 @@ $path: '/images/home/';
         background-position: left top;
         background-size: 100% 100%;
         left: 0;
+
+        &.lang-en {
+            background-image: url($path + 'map-img-en/Map-ENG-8.png');
+        }
+
+        &.lang-ch {
+            background-image: url($path + 'map-img-ch/Map-CHINA-8.png');
+        }
     }
 
     .l-home-plots__all-map-icon {
@@ -1085,6 +1096,14 @@ $path: '/images/home/';
         background-image: url($path + 'map-mobile2.png');
         background-position: left top;
         background-size: cover;
+
+        &.lang-en {
+            background-image: url($path + 'map-img-en/Map-ENG-8.png');
+        }
+
+        &.lang-ch {
+            background-image: url($path + 'map-img-ch/Map-CHINA-8.png');
+        }
     }
 
     .l-home-plots__all-map-build-one {
@@ -1257,6 +1276,14 @@ $path: '/images/home/';
     background-position: center center;
     background-size: cover;
     left: -160px;
+
+    &.lang-en {
+        background-image: url($path + 'map-img-en/Map-ENG@2x-8.png');
+    }
+
+    &.lang-ch {
+        background-image: url($path + 'map-img-ch/Map-CHINA@2x-8.png');
+    }
 
     @media #{$tablet-landscape} {
         width: 1280px;

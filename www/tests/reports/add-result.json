@@ -1,0 +1,30 @@
+{
+  "request": {
+    "status": 1,
+    "errors": [
+      "Ошибка!"
+    ]
+  },
+  "data": {
+    "type": "results",
+    "ID": 3,
+    "fields": [
+      {
+        "id": "result-type[3]",
+        "value": null
+      },
+      {
+        "id": "result-description[3]",
+        "value": null
+      },
+      {
+        "id": "result-date[3]",
+        "value": null
+      },
+      {
+        "id": "result-commercialization[3]",
+        "value": null
+      }
+    ]
+  }
+}

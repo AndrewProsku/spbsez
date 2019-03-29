@@ -127,6 +127,101 @@
     }
 }
 
+.b-form-block_is_date {
+    height: auto;
+    border: none;
+    position: relative;
+    padding: 0;
+
+    &:hover {
+        background-color: transparent;
+
+        @media #{$tablet-landscape} {
+            background-color: $bg-select;
+        }
+    }
+
+    .b-form-block__label {
+        display: none;
+
+        @media #{$tablet-landscape} {
+            display: block;
+        }
+    }
+
+    .b-form-block__date {
+        position: relative;
+        display: flex;
+        align-items: center;
+        border: 1px solid $grey;
+        border-bottom: 0;
+        padding: 30px 0 12px 16px;
+
+        &:hover {
+            background-color: $bg-select;
+        }
+
+        @media #{$tablet-landscape} {
+            border: none;
+            color: rgba($black, 0.48);
+            padding-top: 0;
+            padding-bottom: 0;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        .b-form-block__label {
+            display: block;
+
+            @media #{$tablet-landscape} {
+                display: none;
+            }
+        }
+    }
+
+    .b-form-block__def {
+        display: none;
+
+        @media #{$tablet-landscape} {
+            display: inline-block;
+        }
+    }
+
+    input[type="text"] {
+        width: 240px;
+        padding-left: 0;
+        padding-right: 0;
+        
+        @media #{$tablet-landscape} {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    }
+
+    @media #{$tablet-landscape} {
+        display: flex;
+        align-items: center;
+        height: 64px;
+        padding: 30px 0 12px;
+        border: 1px solid $grey;
+    }
+
+    @media #{$laptop} {
+        height: 72px;
+    }
+
+    @media #{$laptop-wide} {
+        height: 80px;
+    }
+}
+
+.b-form-block.b-input-block.b-input-file {
+    height: auto;
+    padding-bottom: 0;
+}
+
 label.b-form-block {
     display: block;
 }
@@ -394,4 +489,63 @@ label.b-form-block {
 
 .b-add-request__form-button {
     @include margin-level(top, green);
+}
+
+.b-form-block-calendar {
+    position: absolute;
+    bottom: 5px;
+    left: -8px;
+
+    @media #{$tablet-portrait} {
+        left: -5px;
+    }
+
+    .b-input-date {
+        display: none;
+
+        &:first-child {
+            top: -70px;
+
+            @media #{$tablet-landscape} {
+                top: 100%;
+            }
+        }
+
+        &:last-child {
+            @media #{$tablet-landscape} {
+                left: 350px;
+            }
+        }
+    }
+}
+
+.b-form-block_is_long-label {
+    padding: 10px 16px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+
+    .b-pseudo-input,
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+        padding: 0;
+        order: 2;
+    }
+
+    .b-form-block__label {
+        position: static;
+        margin-bottom: 5px;
+        order: 1;
+    }
+
+    .b-form-block__error-text {
+        order: 3;
+        margin: 10px -18px -10px -16px;
+        width: auto;
+        max-width: none;
+    }
 }

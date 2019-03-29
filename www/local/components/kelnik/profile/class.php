@@ -4,10 +4,10 @@ namespace Kelnik\User\Components;
 
 use Bex\Bbc;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Userdata\Profile\ProfileModel;
-use Kelnik\Userdata\Model\DocsTable;
-use Kelnik\Userdata\Profile\ProfileSectionAdmins;
-use Kelnik\Userdata\Profile\ProfileSectionDocs;
+use Kelnik\UserData\Profile\Profile;
+use Kelnik\UserData\Model\DocsTable;
+use Kelnik\UserData\Profile\ProfileSectionAdmins;
+use Kelnik\UserData\Profile\ProfileSectionDocs;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -27,6 +27,9 @@ class ProfileForm extends Bbc\Basis
     ];
     protected $cacheTemplate = false;
 
+    /**
+     * @var \Kelnik\UserData\Profile\Profile
+     */
     protected $profile;
 
     protected function executeMain()
@@ -38,10 +41,16 @@ class ProfileForm extends Bbc\Basis
         }
 
         try {
-            $this->profile = ProfileModel::getInstance($USER->GetID());
+            $this->profile = Profile::getInstance((int)$USER->GetID());
         } catch (\Exception $e) {
             return false;
         }
+
+        if (!$this->profile->hasAccess()) {
+            LocalRedirect('/');
+        }
+
+        $this->arResult['IS_ADMIN'] = $this->profile->isResidentAdmin();
 
         $method = 'process' . ucfirst($this->arParams['SECTION']);
 
@@ -70,7 +79,7 @@ class ProfileForm extends Bbc\Basis
 
     protected function processAdmins()
     {
-        if (!$this->profile->canEditResidentAdmin()) {
+        if (!$this->profile->canEditResident()) {
             LocalRedirect('/cabinet/');
         }
 

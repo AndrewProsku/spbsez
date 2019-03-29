@@ -1,64 +1,185 @@
-// import $ from 'jquery';
 import Mediator from 'common/scripts/mediator';
 import ReportBlock from './report-block';
+import templateComments from './templates/comments.twig';
+import templateForm1 from './templates/form-1.twig';
+import templateForm2 from './templates/form-2.twig';
+import templateForm3 from './templates/form-3.twig';
+import templateForm4 from './templates/form-4.twig';
+import templateForm5 from './templates/form-5.twig';
+import templateForm6 from './templates/form-6.twig';
+import templateForm7 from './templates/form-7.twig';
+import templateResultBlock from './templates/result-block.twig';
 import Utils from '../../common/scripts/utils';
+
 
 const mediator = new Mediator();
 
 class ReportForm {
     constructor() {
         this.target = null;
+        this.formsBlockClass = 'j-report-block';
+        this.reportId = 0;
+
         // Табы
         this.filterClass = 'j-reports-filter';
-        this.selectsClass = 'j-reports-select';
-        // this.reportsContainerClass = 'j-reports-container';
-        this.selectsTitleClass = 'j-reports-select-title';
-        this.selectGroupClass = 'j-reports-select-group';
+        this.filterSelectsClass = 'j-reports-select';
+        this.filterSelectsTitleClass = 'j-reports-select-title';
+        this.filterGroupClass = 'j-reports-select-group';
         this.activeGroup = 'b-mini-filter__group_is_active';
-        // this.newsItemClass = 'b-news-item';
+        this.filterFakeInputClass = 'b-mini-filter__fake';
+        this.filterFakeInputSuccessClass = 'b-mini-filter__fake_is_success';
+        this.filterFakeInputErrorClass = 'b-mini-filter__fake_is_error';
 
-        this.formBlocks = [];
-        // возможно флаг не нужен
-        this.isFormApproved = false;
+        this.addResultClass = 'j-add-result';
+        this.resultsContainerClass = 'j-report-results';
+        this.submitReportClass = 'j-report-submit';
+        this.approveReportClass = 'j-report-approve';
+        this.commentsBlockClass = 'b-report-comments';
+
+        this.residentNameField = document.querySelector('.j-report-resident-name input');
+        this.oezNameField = document.querySelector('.j-report-oez-name input');
+
+
+        // this.isReportFulfilled = false;
+        this.forms = [{
+            isApproved: false,
+            template  : null
+        }, {
+            isApproved: false,
+            template  : null
+        }, {
+            isApproved: false,
+            template  : null
+        }, {
+            isApproved: false,
+            template  : null
+        }, {
+            isApproved: false,
+            template  : null
+        }, {
+            isApproved: false,
+            template  : null
+        }, {
+            isVisited : false,
+            isApproved: false,
+            template  : null
+        }];
+
+        this.initialForm = 0;
 
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
+
+        /**
+         * Обработчик для закрытия выпадающих списков с привязкой к this компонента
+         * Используется для корректоного удаления обработчика при закрытии списка
+         */
+        this.onClickOutsideBound = this.onClickOutside.bind(this);
     }
 
     init(options) {
         this.target = options.target;
-        this.formBlocks = Array.from(this.target.querySelectorAll('.j-report-block'));
-        const that = this;
+        this.submitReportButton = document.querySelector(`.${this.submitReportClass}`);
+        this.reportId = parseInt(this.target.dataset.reportId, 10);
 
         // Табы
-        this.filter = document.querySelector(`.${this.filterClass}`);
-        this.select = document.querySelectorAll(`.${this.selectsClass}`);
-        this.groups = Array.from(document.querySelectorAll(`.${this.selectGroupClass}`));
+        this.filters = Array.from(document.querySelectorAll(`.${this.filterClass}`));
+        this.groups = Array.from(document.querySelectorAll(`.${this.filterGroupClass}`));
+        this.filterFakeInputs = [];
 
+        if (Utils.keyExist(this.target.dataset, 'readOnly')) {
+            this.type = 'readonly';
+            this.residentNameField.disabled = true;
+            this.oezNameField.disabled = true;
+        }
 
-        mediator.subscribe('blockStatusChanged', () => {
-            for (let i = 0; i < this.formBlocks.length; i++) {
-                if (this.formBlocks[i].dataset.approved !== 'true') {
-                    this.isFormApproved = false;
-                    this.target.dataset.approved = false;
+        this.getInitialInputsValues();
 
-                    return;
-                }
-            }
-            this.target.dataset.approved = true;
-            this.isFormApproved = true;
+        this.filters.forEach((filter) => {
+            this.filterFakeInputs.push(Array.from(filter.querySelectorAll(`.${this.filterFakeInputClass}`)));
+            this.bindFilterEvents(filter);
         });
 
-        // по умолчанию поля считаются валидными
-        // иначе добавляеся поле isInvalid и массив errors
-        Utils.send('', '/tests/reports/first.json', {
+        mediator.subscribe('resultBlockDeleted', () => {
+            this.resultBlockDeletedHandler();
+        });
+
+        if (this.submitReportButton) {
+            this.submitReportButton.addEventListener('click', this.submitReports);
+        }
+    }
+
+    initCommentsBlock(formID) {
+        const formBlocks = Array.from(this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`));
+        const errorBlocks = [];
+
+        formBlocks.forEach((block) => {
+            if (Utils.keyExist(block.dataset, 'hasError')) {
+                errorBlocks.push(block.querySelector('.b-report-block__header').dataset.number);
+            }
+        });
+
+        if (document.querySelector(`.${this.commentsBlockClass}`)) {
+            Utils.removeElement(document.querySelector(`.${this.commentsBlockClass}`));
+        }
+
+        if (errorBlocks.length) {
+            document.querySelector(`.${this.filterClass}`).insertAdjacentHTML('afterend',
+                templateComments({
+                    blocks: errorBlocks
+                }));
+        }
+    }
+
+    getInitialInputsValues() {
+        const that = this;
+
+        this.residentNameField.addEventListener('change', (event) => {
+            this.sendNewValues(event.target);
+        });
+        this.oezNameField.addEventListener('change', (event) => {
+            this.sendNewValues(event.target);
+        });
+
+        Utils.send(`a=get&id=${that.reportId}`, '/api/report/', {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
                 }
-                const data = response.data;
+                const responseForms = response.data.forms;
 
-                that.initFormBlocks(data.blocks);
+                if (response.data.NAME) {
+                    that.residentNameField.value = response.data.NAME;
+                }
+                if (response.data.NAME_SEZ) {
+                    that.oezNameField.value = response.data.NAME_SEZ;
+                }
+
+                if (!responseForms.length) {
+                    return;
+                }
+
+                responseForms.forEach((formData, i) => {
+                    that.forms[i].template = that.createForm(i);
+
+                    if (formData.type && (formData.type === 'results')) {
+                        that.initResultsForm(formData, i);
+                    } else {
+                        that.initFormBlocks(formData.blocks, that.forms[i].template, i);
+                    }
+
+                    that.setFormStatus(i);
+                });
+
+                mediator.subscribe('blockStatusChanged', (formID) => {
+                    that.setFormStatus(formID);
+                    that.initCommentsBlock(formID);
+                });
+
+                that.insertForm(that.initialForm);
+                const formBlocks = that.forms[that.initialForm].template.querySelectorAll(`.${that.formsBlockClass}`);
+
+                that.toggleApproveFormButton(formBlocks, that.initialForm);
             },
             error(error) {
                 console.error(error);
@@ -66,27 +187,70 @@ class ReportForm {
         });
     }
 
-    bindEvents() {
-        this.filter.addEventListener('change', () => {
-            // this._sendFilter();
+    initResultsForm(data, formID) {
+        const resultsContainer = this.forms[formID].template.querySelector(`.${this.resultsContainerClass}`);
+        const isReadonly = this.type === 'readonly';
+
+        if (Array.isArray(data.blocks)) {
+            data.blocks.forEach((blockData, num) => {
+                const shiftForNumber = 1;
+                const blockNumber = num + shiftForNumber;
+
+                resultsContainer.insertAdjacentHTML('afterBegin', templateResultBlock({
+                    id    : blockData.ID,
+                    number: blockNumber,
+                    isReadonly
+                }));
+            });
+            const formBlocks = this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`);
+
+            data.blocks.reverse().forEach((blockData, blockNumber) => {
+                const reportBlock = new ReportBlock();
+
+                reportBlock.init({
+                    target: formBlocks[blockNumber],
+                    blockData,
+                    formID,
+                    isReadonly
+                });
+            });
+        }
+    }
+
+    sendNewValues(input) {
+        const dataToSend = `action=update&${input.id}=${input.value}`;
+        const that = this;
+
+        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+            success(response) {
+                if (response.request.status === that.SUCCESS_STATUS) {
+                    that.toggleSubmitButton();
+                }
+            },
+            error(error) {
+                console.error(error);
+            }
+        });
+    }
+
+    bindFilterEvents(filter) {
+        const filterSelect = filter.querySelector(`.${this.filterSelectsClass}`);
+
+        filter.addEventListener('change', (event) => {
+            this.filters.forEach((reportFilter) => {
+                reportFilter.querySelector(`input[value="${event.target.value}"]`).checked = true;
+            });
+            this.changeForm(event.target.value);
             this._setTitlesInSelects();
         });
 
-        this.select.addEventListener('click', (event) => {
+        filterSelect.addEventListener('click', (event) => {
             this._switchSelect(event.target);
         });
-
-        // window.addEventListener('click', (event) => {
-        //     const group = event.target.closest(`.${this.selectGroupClass}`);
-        //
-        //     if (!group) {
-        //         this._closeAllSelects();
-        //     }
-        // });
     }
 
     _switchSelect(select) {
-        const group = select.closest(`.${this.selectGroupClass}`);
+        const group = select.closest(`.${this.filterGroupClass}`);
 
         if (group.classList.contains(this.activeGroup)) {
             group.classList.remove(this.activeGroup);
@@ -94,18 +258,68 @@ class ReportForm {
             this._closeAllSelects();
             group.classList.add(this.activeGroup);
         }
+
+        window.addEventListener('click', this.onClickOutsideBound);
+    }
+
+    onClickOutside() {
+        const group = event.target.closest(`.${this.filterGroupClass}`);
+
+        if (!group) {
+            this._closeAllSelects();
+        }
     }
 
     _closeAllSelects() {
         this.groups.forEach((group) => {
             group.classList.remove(this.activeGroup);
         });
+        window.removeEventListener('click', this.onClickOutsideBound);
+    }
+
+    changeForm(formID) {
+        let formNumber = null;
+
+        /* eslint-disable no-magic-numbers */
+        switch (formID) {
+            case 'form1':
+                formNumber = 0;
+                break;
+            case 'form2':
+                formNumber = 1;
+                break;
+            case 'form3':
+                formNumber = 2;
+                break;
+            case 'form4':
+                formNumber = 3;
+                break;
+            case 'form5':
+                formNumber = 4;
+                break;
+            case 'form6':
+                formNumber = 5;
+                break;
+            case 'form7':
+                formNumber = 6;
+                this.forms[6].isVisited = true;
+                this.setFormStatus(6);
+                break;
+            default: break;
+        }
+        /* eslint-enable no-magic-numbers */
+
+        this.replaceForm(formNumber);
+
+        const formBlocks = Array.from(this.forms[formNumber].template.querySelectorAll(`.${this.formsBlockClass}`));
+
+        this.toggleApproveFormButton(formBlocks, formNumber);
     }
 
     _setTitlesInSelects() {
         this.groups.forEach((group) => {
-            const select = group.querySelector(`.${this.selectsClass}`);
-            const title = group.querySelector(`.${this.selectsTitleClass}`);
+            const select = group.querySelector(`.${this.filterSelectsClass}`);
+            const title = group.querySelector(`.${this.filterSelectsTitleClass}`);
             const inputsChecked = Array.from(group.querySelectorAll('input:checked'));
             let titleText = null;
 
@@ -132,13 +346,301 @@ class ReportForm {
         });
     }
 
-    initFormBlocks(blocksData) {
+    replaceForm(formNumber) {
+        Utils.clearHtml(this.target);
+        this.insertForm(formNumber);
+    }
+
+    insertForm(formNumber) {
+        this.initCommentsBlock(formNumber);
+
+        Utils.insetContent(this.target, this.forms[formNumber].template);
+        this.target.dataset.currentForm = formNumber;
+    }
+
+    createForm(formNumber) {
+        // Создание шаблона формы
+        const template = document.createElement('div');
+
+        /* eslint-disable no-magic-numbers */
+        switch (formNumber) {
+            case 0:
+                template.innerHTML = templateForm1();
+                break;
+            case 1:
+                template.innerHTML = templateForm2();
+                break;
+            case 2:
+                template.innerHTML = templateForm3({
+                    readonly: this.type === 'readonly'
+                });
+                break;
+            case 3:
+                template.innerHTML = templateForm4({
+                    readonly: this.type === 'readonly'
+                });
+                break;
+            case 4:
+                template.innerHTML = templateForm5({
+                    readonly: this.type === 'readonly'
+                });
+                break;
+            case 5:
+                template.innerHTML = templateForm6();
+                break;
+            case 6:
+                template.innerHTML = templateForm7({
+                    readonly: this.type === 'readonly'
+                });
+                if (this.type !== 'readonly') {
+                    this.createResultFormTemplate(template);
+                }
+                break;
+            default:
+                template.innerHTML = templateForm1();
+                break;
+        }
+
+        /* eslint-enable no-magic-numbers */
+        return template;
+    }
+
+    createResultFormTemplate(template) {
+        const that = this;
+        const addResultButton = template.querySelector(`.${this.addResultClass}`);
+
+        addResultButton.addEventListener('click', () => {
+            Utils.send('action=addResult', '/tests/reports/add-result.json', {
+                success(response) {
+                    if (response.request.status === that.FAIL_STATUS) {
+                        return;
+                    }
+                    const blocksAmount = template.querySelectorAll(`.${that.formsBlockClass}`).length;
+                    const shiftForNumber = 1;
+                    const blockNumber = blocksAmount + shiftForNumber;
+
+                    addResultButton.insertAdjacentHTML('afterend', templateResultBlock({
+                        id    : response.data.ID,
+                        number: blockNumber
+                    }));
+
+                    const reportBlock = new ReportBlock();
+
+                    reportBlock.init({
+                        target    : addResultButton.nextSibling,
+                        blockData : response.data,
+                        formID    : 6,
+                        isReadonly: that.type === 'readonly'
+                    });
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
+        });
+    }
+
+    resultBlockDeletedHandler() {
+        const resultsForm = 6;
+        const resultsBlocks = this.forms[resultsForm].template.querySelectorAll(`.${this.formsBlockClass}`);
+        let resultBlocksCounter = resultsBlocks.length;
+
+        Array.from(resultsBlocks).forEach((block) => {
+            block.querySelector('.b-report-block__header').dataset.number = resultBlocksCounter;
+            // eslint-disable-next-line no-magic-numbers
+            resultBlocksCounter -= 1;
+        });
+    }
+
+    toggleApproveFormButton(formBlocks, formNumber) {
+        const that = this;
+
+        for (let blockNum = 0; blockNum < formBlocks.length; blockNum++) {
+            if (Utils.keyExist(formBlocks[blockNum].dataset, 'prefilled')) {
+                if (document.querySelector(`.${that.approveReportClass}`)) {
+                    document.querySelector(`.${that.approveReportClass}`).setAttribute('data-form-id', formNumber);
+                } else {
+                    const approveFormButton = document.createElement('button');
+
+                    approveFormButton.classList.add('button', 'button_icon_check');
+                    approveFormButton.classList.add('b-report-approve', `.${that.approveReportClass}`);
+                    approveFormButton.setAttribute('type', 'button');
+                    approveFormButton.setAttribute('data-form-id', formNumber);
+                    approveFormButton.innerHTML = 'Подтвердить данные формы';
+
+                    approveFormButton.addEventListener('click', () => {
+                        const formID = approveFormButton.dataset.formId;
+                        const dataToSend = `action=confirmForm&formID=${formID}`;
+
+                        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+                            success(response) {
+                                if (response.request.status === that.SUCCESS_STATUS) {
+                                    mediator.publish('formApproved', Number(formID));
+                                }
+                            },
+                            error(error) {
+                                console.error(error);
+                            }
+                        });
+                    });
+
+                    this.target.parentNode.insertBefore(approveFormButton, this.target);
+                }
+                break;
+            }
+            // eslint-disable-next-line no-magic-numbers
+            if ((blockNum === formBlocks.length - 1) &&
+                document.querySelector(`.${that.approveReportClass}`)) {
+                Utils.removeElement(document.querySelector(`.${that.approveReportClass}`));
+            }
+        }
+    }
+
+    /* eslint-disable max-lines-per-function, max-statements */
+    setFormStatus(formID) {
+        const formBlocks = Array.from(this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`));
+        const resultsFormID = 6;
+        const arrayLengthShift = 1;
+        let hasEmpty = false;
+        let hasError = false;
+        let hasPrefilled = false;
+
+        for (let blockNum = 0; blockNum < formBlocks.length; blockNum++) {
+            let blockStatus = '';
+
+            if (Utils.keyExist(formBlocks[blockNum].dataset, 'prefilled')) {
+                blockStatus = 'prefilled';
+            } else if (Utils.keyExist(formBlocks[blockNum].dataset, 'hasError')) {
+                blockStatus = 'hasError';
+            } else if (Utils.keyExist(formBlocks[blockNum].dataset, 'approved')) {
+                blockStatus = 'approved';
+            }
+
+            switch (blockStatus) {
+                case 'hasError': {
+                    if (hasError) {
+                        break;
+                    }
+
+                    this.forms[formID].isApproved = false;
+                    this.filters.forEach((filter, i) => {
+                        this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                        this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputErrorClass);
+                    });
+                    hasError = true;
+                    break;
+                }
+                case 'prefilled': {
+                    if (hasPrefilled) {
+                        break;
+                    }
+
+                    this.forms[formID].isApproved = false;
+                    this.filters.forEach((filter, i) => {
+                        this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                    });
+
+                    hasPrefilled = true;
+                    break;
+                }
+                case 'approved': {
+                    break;
+                }
+                default: {
+                    if (hasEmpty) {
+                        break;
+                    }
+
+                    this.forms[formID].isApproved = false;
+                    this.filters.forEach((filter, i) => {
+                        this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                    });
+                    hasEmpty = true;
+                    break;
+                }
+            }
+
+            if (blockNum === (formBlocks.length - arrayLengthShift)) {
+                // Если форма с результатаими интеллектурьной деятельности еще не была посещена
+                // она не может считаться заполненной
+                if ((formID === resultsFormID) && !this.forms[resultsFormID].isVisited) {
+                    this.forms[formID].isApproved = false;
+                    this.filters.forEach((filter, i) => {
+                        this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
+                    });
+                } else if (!hasError) {
+                    this.filters.forEach((filter, i) => {
+                        this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputErrorClass);
+                    });
+                    if (document.querySelector(`.${this.commentsBlockClass}`)) {
+                        Utils.removeElement(document.querySelector(`.${this.commentsBlockClass}`));
+                    }
+
+                    if (!hasEmpty && !hasPrefilled) {
+                        this.forms[formID].isApproved = true;
+
+                        this.filters.forEach((filter, i) => {
+                            this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputSuccessClass);
+                        });
+                    }
+                }
+                this.toggleSubmitButton();
+            }
+        }
+    }
+    /* eslint-enable max-lines-per-function, max-statements */
+
+    /**
+     * Включает/отключает кнопку отправки отчета
+     */
+    toggleSubmitButton() {
+        if (this.submitReportButton) {
+            if (!this.residentNameField.value || !this.oezNameField.value) {
+                this.submitReportButton.disabled = true;
+
+                return;
+            }
+
+            for (let i = 0; i < this.forms.length; i++) {
+                if (!this.forms[i].isApproved) {
+                    this.submitReportButton.disabled = true;
+
+                    return;
+                }
+            }
+            this.submitReportButton.disabled = false;
+        }
+    }
+
+    submitReports() {
+        const that = this;
+
+        Utils.send('action=confirmReport', '/tests/reports/input-update.json', {
+            success(response) {
+                if (!response.request.status === that.SUCCESS_STATUS) {
+                    return true;
+                }
+
+                return true;
+            },
+            error(error) {
+                console.error(error);
+            }
+        });
+    }
+
+    initFormBlocks(blocksData, formTemplate, formID) {
+        const formBlocks = Array.from(formTemplate.querySelectorAll(`.${this.formsBlockClass}`));
+        const isReadonly = this.type === 'readonly';
+
         blocksData.forEach((blockData, i) => {
             const reportBlock = new ReportBlock();
 
             reportBlock.init({
-                target    : this.formBlocks[i],
-                inputsData: blockData
+                target: formBlocks[i],
+                blockData,
+                formID,
+                isReadonly
             });
         });
     }

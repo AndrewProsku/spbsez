@@ -1,13 +1,13 @@
 <?php
 
-namespace Kelnik\Userdata\Model\AdminInterface;
+namespace Kelnik\UserData\Model\AdminInterface;
 
 use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminInterface;
 use Kelnik\AdminHelper\Widget\DateTimeWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
-use Kelnik\AdminHelper\Widget\UserWidget;
+use Kelnik\AdminHelper\Widget\UserOrmWidget;
 
 Loc::loadMessages(__FILE__);
 
@@ -28,9 +28,20 @@ class ContactAdminInterface extends AdminInterface
                         'FILTER'           => true,
                         'HIDE_WHEN_CREATE' => true
                     ],
+                    'COMPANY_ID' => [
+                        'WIDGET' =>  new UserOrmWidget(),
+                        'TITLE_FIELD_NAME' => 'WORK_COMPANY',
+                        'READONLY' => true,
+                        'FILTER' => true,
+                        'VIRTUAL' => true,
+                        'FORCE_SELECT' => true,
+                        'HIDE_WHEN_CREATE' => true,
+                        'TITLE' => Loc::getMessage('KELNIK_USER_DATA_COMPANY')
+                    ],
                     'USER_ID' => [
-                        'WIDGET' => new UserWidget(),
+                        'WIDGET' => new UserOrmWidget(),
                         'REQUIRED' => true,
+                        'SIZE' => 2,
                         'FILTER' => true
                     ],
                     'DATE_CREATED' => [
@@ -58,6 +69,11 @@ class ContactAdminInterface extends AdminInterface
                         'WIDGET'   => new StringWidget(),
                         'SIZE'     => 40,
                         'FILTER'   => '%'
+                    ],
+                    'POSITION' => [
+                        'WIDGET' => new StringWidget(),
+                        'SIZE' => 40,
+                        'FILTER' => '%'
                     ]
                 ],
             ],
@@ -70,8 +86,9 @@ class ContactAdminInterface extends AdminInterface
     public function helpers()
     {
         return [
-            '\Kelnik\Userdata\Model\AdminInterface\ContactListHelper',
-            '\Kelnik\Userdata\Model\AdminInterface\ContactEditHelper',
+            ContactEditHelper::class,
+            ContactListHelper::class,
+            ContactTreeHelper::class
         ];
     }
 }

@@ -1,11 +1,11 @@
-import '../styles/app.scss';
-import '../../components/background-animation';
 import Accordion from 'components/accordion';
 import Anchor from '../../components/anchor-scroll';
 import AnimatedLines from 'components/animation-line/index';
 import Authorization from '../../components/authorization';
+import Disclosure from '../../components/disclosure/disclosure';
 import Glide from '@glidejs/glide';
 import GlideCarousel from '../../components/glide-carousel';
+import InputDate from 'components/input-date';
 import InputTel from '../../components/forms/telephone/telephone';
 import Logout from 'components/logout';
 import Mediator from 'common/scripts/mediator';
@@ -14,6 +14,7 @@ import messagePopupTemplate from '../../components/message-popup/message-popup.t
 import More from 'components/more';
 import NewPassword from '../../components/new-password';
 import News from '../../components/news';
+import Particles from '../../components/background-animation';
 import PasswordRecovery from '../../components/password-recovery';
 import Popup from 'components/popup';
 import ProfileAdministrators from '../../components/profile-administrators';
@@ -22,20 +23,27 @@ import ProfileInfo from '../../components/profile-info';
 import ProfileRequestPass from '../../components/request-pass';
 import ReportForm from '../../components/reports/reports-form';
 import Residents from '../../components/residents/';
+import reviewPopupContentTemplate from '../../components/popup/review-popup-content.twig';
+import reviewPopupTemplate from '../../components/popup/review-popup.twig';
 import Select from '../../components/forms/select/';
 import Service from '../../components/service-popup';
 import servicePopupTemplate from '../../components/service-popup/service-popup.twig';
 import TabsAjax from 'components/tabs/tabs-ajax';
 import templateMessages from 'components/messages/messages.twig';
-import templateTooltip from 'components/tooltip/custom-tooltip.twig';
-import Tooltip from 'components/tooltip/';
-import Utils from './utils';
+import Useful from '../../components/useful';
 import vacanciesPopupTemplate from '../../components/popup/popup-vacancies.twig';
 import Vacancy from '../../components/vacancy';
+import Visual from 'components/visual';
 import YandexMap from 'components/yandex-map';
 import yandexMapLoad from 'components/yandex-map/load';
 
 const mediator = new Mediator();
+
+const particlesNode = document.querySelector('.j-particles');
+
+if (particlesNode) {
+    new Particles(particlesNode).init();
+}
 
 /**
  * Полифилл метода closest()
@@ -151,7 +159,11 @@ const openMenu = function() {
     });
 };
 
-openMenu();
+const menuBurgerEl = document.querySelector('.j-burger-click');
+
+if (menuBurgerEl) {
+    openMenu();
+}
 
 /**
  *  Когда пользователь авторизовался - запрещаем переход по ссылке личного кабинета. (Для мобильной версии)
@@ -262,11 +274,21 @@ if (docWrap.length) {
 const mapWrapper = document.querySelector('.j-yandex-map');
 
 if (mapWrapper) {
-    yandexMapLoad()
+    yandexMapLoad(mapWrapper.dataset.lang || 'ru')
         .then((ymaps) => {
-            const yandexMap = new YandexMap(ymaps);
+            (new YandexMap(ymaps)).init({wrapper: mapWrapper});
+        })
+        .catch((error) => {
+            console.error(`При загрузке яндекс карт произошла ошибка: ${error}`);
+        });
+}
 
-            yandexMap.init({wrapper: mapWrapper});
+const noidorfMapWrapper = document.querySelector('.j-yandex-map-noidorf');
+
+if (noidorfMapWrapper) {
+    yandexMapLoad(noidorfMapWrapper.dataset.lang || 'ru')
+        .then((ymaps) => {
+            (new YandexMap(ymaps)).init({wrapper: noidorfMapWrapper, zoom: 11}); // 12
         })
         .catch((error) => {
             console.error(`При загрузке яндекс карт произошла ошибка: ${error}`);
@@ -356,9 +378,12 @@ if (reviewsCarouselEl) {
 }
 
 const newsCarouselEl = document.querySelector('.j-news-slider');
+const areaCarouselEl = document.querySelector('.j-area-slider');
 
-if (newsCarouselEl) {
-    const newsCarousel = new Glide('.j-news-slider', {
+if (newsCarouselEl || areaCarouselEl) {
+    const sliderClass = newsCarouselEl ? '.j-news-slider' : '.j-area-slider';
+
+    const glideInstance = new Glide(sliderClass, {
         type   : 'carousel',
         startAt: 0,
         perView: 1,
@@ -371,8 +396,8 @@ if (newsCarouselEl) {
 
     glideCarousel.init();
 
-    newsCarousel.mount();
-    newsCarousel.on('move.after', () => {
+    glideInstance.mount();
+    glideInstance.on('move.after', () => {
         glideCarousel.setControlsPosition();
     });
 }
@@ -381,16 +406,9 @@ if (newsCarouselEl) {
 /**
  * Добавляем класс для контена главного экрана,
  * чтобы увеличить значение отступа на величну панелей управления в мобильных браузерах
+ * @param {node} mainScreenContent - элемент с текстовым контентом главного экрана
  */
-const mainScreenContent = document.querySelector('.b-main-screen-content');
-
-if (mainScreenContent) {
-    if (Utils.isMobile()) {
-        mainScreenContent.classList.add('b-main-screen-content_is_mobile');
-    }
-
-    /* На главном экране рассчитываем padding-top */
-
+const fixMainScreenHeight = function(mainScreenContent) {
     const innerHeightWindow = window.innerHeight;
 
     mainScreenContent.style.paddingTop = `${innerHeightWindow}px`;
@@ -400,6 +418,18 @@ if (mainScreenContent) {
 
         mainScreenContent.style.paddingTop = `${resizeWindowHeight}px`;
     });
+};
+
+const homeMainScreenContent = document.querySelector('.b-main-screen-content');
+const residentPageTitle = document.querySelector('.b-area-main-screen__title');
+const areaMainScreen = document.querySelector('.j-area-main-screen');
+
+if (homeMainScreenContent) {
+    fixMainScreenHeight(homeMainScreenContent);
+}
+
+if (residentPageTitle) {
+    fixMainScreenHeight(residentPageTitle);
 }
 
 /**
@@ -410,6 +440,12 @@ const bgAnimationLines = document.querySelector('.j-animation-block');
 
 if (bgAnimationLines && homeMainScreen) {
     const animatedLines = new AnimatedLines(bgAnimationLines, homeMainScreen);
+
+    animatedLines.init();
+}
+
+if (bgAnimationLines && areaMainScreen) {
+    const animatedLines = new AnimatedLines(bgAnimationLines, areaMainScreen);
 
     animatedLines.init();
 }
@@ -443,12 +479,8 @@ if (animationBg) {
 const anchorSelector = Array.from(document.querySelectorAll('.j-anchor-link'));
 
 if (anchorSelector.length) {
-    anchorSelector.forEach((item) => {
-        const anchor = new Anchor();
-
-        anchor.init({
-            target: item
-        });
+    new Anchor().init({
+        targets: anchorSelector
     });
 }
 
@@ -610,21 +642,41 @@ mediator.subscribe('openPopup', (popup) => {
 });
 
 /**
- * Инициализация попапа "Написать сообщение" в футере
+ * Инициализация попапа "Отзыв полностью" в футере
  */
 
-const messageButton = document.querySelector('.j-message-button');
+const openPopupReview = Array.from(document.querySelectorAll('.j-popup-review'));
 
-if (messageButton) {
-    const messagePopup = new Popup();
+if (openPopupReview) {
+    openPopupReview.forEach((reviewButton) => {
+        const reviewPopup = new Popup();
 
-    messagePopup.init({
-        target              : messageButton,
-        template            : messagePopupTemplate,
-        closeButtonAriaLabel: 'Закрыть'
+        reviewPopup.init({
+            target              : reviewButton,
+            template            : reviewPopupTemplate,
+            templateContent     : reviewPopupContentTemplate,
+            closeButtonAriaLabel: 'Закрыть'
+        });
     });
 }
 
+/**
+ * Инициализация попапа "Написать сообщение" в футере
+ */
+
+const messageButtons = Array.from(document.querySelectorAll('.j-message-button'));
+
+if (messageButtons) {
+    messageButtons.forEach((messageButton) => {
+        const messagePopup = new Popup();
+
+        messagePopup.init({
+            target              : messageButton,
+            template            : messagePopupTemplate,
+            closeButtonAriaLabel: 'Закрыть'
+        });
+    });
+}
 
 mediator.subscribe('openPopup', (popup) => {
     if (popup.popup.classList.contains('b-popup_theme_message')) {
@@ -745,26 +797,14 @@ if (accordionLinks) {
  *  Инициализация фильтрации и подгрузки новостей
  */
 if (document.querySelector('.j-news-filter') || document.querySelector('.j-news-load-more')) {
-    const news = new News();
-
-    news.init();
+    (new News()).init();
 }
 
-
 /**
- *  Инициализация тултипа с подсказми
+ *  Инициализация фильтрации и подгрузки новостей
  */
-const helpTooltips = Array.from(document.querySelectorAll('.j-help'));
-
-if (helpTooltips) {
-    helpTooltips.forEach((helpTooltip) => {
-        const tooltip = new Tooltip();
-
-        tooltip.init({
-            target  : helpTooltip,
-            template: templateTooltip
-        });
-    });
+if (document.querySelector('.j-useful-content')) {
+    (new Useful()).init();
 }
 
 /**
@@ -774,48 +814,94 @@ if (helpTooltips) {
 const reportFormEl = document.querySelector('.j-report-form');
 
 if (reportFormEl) {
-    const reportForm = new ReportForm();
-
-    reportForm.init({
+    (new ReportForm()).init({
         target: reportFormEl
     });
 }
 
-// Скрытие/отображение инпута иностранных акционеров в зависимости от значения радио-кнопок перед ним
-const foreignInvestorsSwitch = document.querySelector('.j-foreign-investors-switch');
-const foreignInvestorsField = document.querySelector('.j-foreign-investors-field');
-const toggleBlock = (input) => {
-    switch (input.value) {
-        case 'no': {
-            if (input.checked === true) {
-                foreignInvestorsField.classList.add('b-input-block_is_disabled');
-            } else {
-                foreignInvestorsField.classList.remove('b-input-block_is_disabled');
-            }
-            break;
-        }
-        case 'yes': {
-            if (input.checked === true) {
-                foreignInvestorsField.classList.remove('b-input-block_is_disabled');
-            } else {
-                foreignInvestorsField.classList.add('b-input-block_is_disabled');
-            }
-            break;
-        }
-        default: break;
-    }
-};
 
-if (foreignInvestorsSwitch && foreignInvestorsField) {
-    const inputs = foreignInvestorsSwitch.querySelectorAll('input[type="radio"]');
+/**
+ * Инициализация страниц "Раскрытие информации"
+ */
 
-    inputs.forEach((radio) => {
-        radio.addEventListener('change', (event) => {
-            toggleBlock(event.target);
+const disclosureItems = Array.from(document.querySelectorAll('.j-disclosure-block'));
+
+if (disclosureItems.length) {
+    disclosureItems.forEach((target) => {
+        (new Disclosure()).init({
+            target
         });
     });
 }
 
-mediator.subscribe('radioChecked', (input) => {
-    toggleBlock(input);
-});
+
+/**
+ * Первый экран на страницах резидентов
+ */
+
+const residentMainScreen = document.querySelector('.j-area-main-screen');
+
+if (residentMainScreen) {
+    const getOverlayScrollTop = function() {
+        const yOffset = self.pageYOffset;
+        const maxYOffset = 100;
+        const offset = yOffset ||
+            (document.documentElement && document.documentElement.scrollTop) ||
+            (document.body && document.body.scrollTop);
+
+        if (offset > maxYOffset) {
+            residentMainScreen.classList.add('is-active-overlay');
+        } else {
+            residentMainScreen.classList.remove('is-active-overlay');
+        }
+    };
+
+    window.addEventListener('scroll', getOverlayScrollTop);
+}
+
+
+// Инициализация плана территории
+const areaPlaneEl = document.querySelector('.b-visual');
+
+if (areaPlaneEl) {
+    const areaPlane = new Visual();
+
+    areaPlane.init({
+        target: areaPlaneEl
+    });
+}
+
+const inputDateElement = Array.from(document.querySelectorAll('.j-input-date'));
+
+if (inputDateElement.length) {
+    const inputDates = {};
+
+    inputDateElement.forEach((element) => {
+        const inputDate = new InputDate({target: element});
+
+        inputDate.init();
+
+        inputDates[inputDate.getName()] = inputDate;
+    });
+
+    mediator.subscribe('calendar:afterDisplayDate', (calendar) => {
+        if (calendar.syncFrom) {
+            const syncCalendar = inputDates[calendar.syncFrom];
+
+            if (!calendar.dateIncreaseCheck(syncCalendar.date, syncCalendar.time)) {
+                syncCalendar.setDateTime(calendar.date, calendar.timeId, calendar.time);
+            }
+            syncCalendar.dateReductionCheck(calendar.date, calendar.time);
+        }
+
+        if (calendar.syncTo) {
+            const syncCalendar = inputDates[calendar.syncTo];
+
+            if (!calendar.dateReductionCheck(syncCalendar.date, syncCalendar.time)) {
+                calendar.writeValue(syncCalendar.date, syncCalendar.time);
+            }
+
+            syncCalendar.dateIncreaseCheck(calendar.date, calendar.time);
+        }
+    });
+}

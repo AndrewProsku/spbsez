@@ -29,13 +29,17 @@
 .l-investors__priorities {
     @include prefix(2, 36);
     @include suffix(2, 36);
-    @include margin-level(bottom, pink);
+    @include padding-level(bottom, pink);
     width: 100%;
 
     @media #{$fullhd} {
         @include prefix(3, 36);
         @include suffix(3, 36);
     }
+}
+
+.l-investors__priorities_margin_top {
+    @include margin-level(top, pink);
 }
 
 .l-investors__advantage {
@@ -92,7 +96,6 @@
     @include prefix(2, 36);
     @include suffix(2, 36);
     @include padding-level(top, pink);
-    @include padding-level(bottom, pink);
     width: 100%;
 
     @media #{$laptop} {
@@ -109,6 +112,7 @@
 .l-investors__department {
     @include prefix(2, 36);
     @include suffix(2, 36);
+    @include padding-level(top, pink);
     @include margin-level(bottom, pink);
     width: 100%;
 
@@ -125,7 +129,7 @@
 
 .b-invest-documents__file {
     @include column(32, 32);
-    
+
     @media #{$laptop} {
         @include column(20, 30);
     }

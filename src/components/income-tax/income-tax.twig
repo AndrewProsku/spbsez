@@ -31,56 +31,60 @@
 
     </div>
 
-    <div class="b-income-tax__bottom">
+    <div class="b-income-tax__bottom" id="investors-taxes">
 
         <div class="b-income-tax__title">Налоговые льготы ОЭЗ</div>
 
         <div class="b-income-tax__two-container">
-            <div class="b-income-tax__two-percent">
 
-                {% include '../percent-title/percent-title.twig' with {
-                    modify: "b-percent-title_small_items",
-                    percent: "0%",
-                    caption: "на имущество",
-                    items: [
-                        {
-                            percent: "2,2%",
-                            text: "Общее налогооблажение"
-                        }
-                    ]
-                } %}
+            <div class="b-income-tax__two-wrapper">
+                <div class="b-income-tax__two-percent">
 
+                    {% include '../percent-title/percent-title.twig' with {
+                        modify: "b-percent-title_small_items",
+                        percent: "0%",
+                        caption: "на имущество",
+                        items: [
+                            {
+                                percent: "2,2%",
+                                text: "Общее налогооблажение"
+                            }
+                        ]
+                    } %}
+
+                </div>
+                <div class="b-income-tax__two-percent">
+
+                    {% include '../percent-title/percent-title.twig' with {
+                        modify: "b-percent-title_small_items",
+                        percent: "0%",
+                        caption: "на землю",
+                        items: [
+                            {
+                                percent: "1,5%",
+                                text: "Общее налогооблажение"
+                            }
+                        ]
+                    } %}
+
+                </div>
+                <div class="b-income-tax__two-percent">
+
+                    {% include '../percent-title/percent-title.twig' with {
+                        modify: "b-percent-title_small_items",
+                        percent: "0%",
+                        caption: "на транспорт",
+                        items: [
+                            {
+                                percent: "до 150₽ за л.с",
+                                text: "Общее налогооблажение"
+                            }
+                        ]
+                    } %}
+
+                </div>
             </div>
-            <div class="b-income-tax__two-percent">
 
-                {% include '../percent-title/percent-title.twig' with {
-                    modify: "b-percent-title_small_items",
-                    percent: "0%",
-                    caption: "на землю",
-                    items: [
-                        {
-                            percent: "1,5%",
-                            text: "Общее налогооблажение"
-                        }
-                    ]
-                } %}
-
-            </div>
-            <div class="b-income-tax__two-percent">
-
-                {% include '../percent-title/percent-title.twig' with {
-                    modify: "b-percent-title_small_items",
-                    percent: "0%",
-                    caption: "на транспорт",
-                    items: [
-                        {
-                            percent: "до 150₽ за л.с",
-                            text: "Общее налогооблажение"
-                        }
-                    ]
-                } %}
-
-            </div>
             <div class="b-income-tax__invest">
                 <div class="b-income-tax__list">
                     <span>Инвесторы ОЭЗ не платят</span>

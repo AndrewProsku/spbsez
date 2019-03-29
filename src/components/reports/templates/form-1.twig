@@ -1,0 +1,233 @@
+{# 1 #}
+<section class="b-report-block j-report-block" id="block-1">
+    <div class="b-report-block__header" data-number="1">
+        <h3 class="b-report-block__title">Участие иностранных инвесторов, в составе акционеров (участников) или прямые иностранные инвестиции</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-radio-row j-foreign-investors-switch">
+            {% include "../../forms/custom-radio/custom-radio.twig" with {
+                id: "foreign-investors-yes",
+                name: "foreign-investors",
+                value: "yes",
+                text: "Да"
+            } %}
+
+            {% include "../../forms/custom-radio/custom-radio.twig" with {
+                id: "foreign-investors-no",
+                name: "foreign-investors",
+                value: "no",
+                text: "Нет"
+            } %}
+        </div>
+
+        <div class="b-input-block  b-input-block_is_disabled j-foreign-investors-field">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "investors-countries",
+                name: "investors-countries",
+                disabled: true
+            } %}
+            <label class="b-input-block__label" for="investors-countries">Страны</label>
+        </div>
+    </div>
+</section>
+{# 2 #}
+<section class="b-report-block j-report-block" id="block-2">
+    <div class="b-report-block__header" data-number="2">
+        <h3 class="b-report-block__title">Количество рабочих мест, созданных на территории ОЭЗ,&#160;(ед.)</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-report-block__subtitle">В соответствии с бизнес-планом</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "jobs-plan-all",
+                    name: "jobs-plan-all"
+                } %}
+                <label class="b-input-block__label" for="jobs-plan-all">Всего</label>
+            </div>
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "jobs-plan-year",
+                    name: "jobs-plan-year"
+                } %}
+                <label class="b-input-block__label" for="jobs-plan-year">За текущий год</label>
+            </div>
+        </div>
+
+        <div class="b-report-block__subtitle ">
+            Фактически созданных<div class="b-help j-help">С начала деятельности в качестве резидента</div>
+        </div>
+        <div class="b-inputs-row">
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "jobs-actual-all",
+                    name: "jobs-actual-all"
+                } %}
+                <label class="b-input-block__label" for="jobs-actual-all">С начала деятельности в качестве резидента</label>
+            </div>
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "jobs-actual-year",
+                    name: "jobs-actual-year"
+                } %}
+                <label class="b-input-block__label" for="jobs-actual-year">За текущий год</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 3 #}
+<section class="b-report-block j-report-block" id="block-3">
+    <div class="b-report-block__header" data-number="3">
+        <h3 class="b-report-block__title">Объем заявленных инвестиций на территории ОЭЗ (в соответствии с бизнес-планом),&#160;млн,&#160;₽</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-report-block__subtitle">Общий объем</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "invests-plan-all",
+                    name: "invests-plan-all"
+                } %}
+                <label class="b-input-block__label" for="invests-plan-all">Всего,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "invests-plan-year",
+                    name: "invests-plan-year"
+                } %}
+                <label class="b-input-block__label" for="invests-plan-year">За текущий год,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+
+        <div class="b-report-block__subtitle">в т.ч. капитальных вложений</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "capital-invests-plan-all",
+                    name: "capital-invests-plan-all"
+                } %}
+                <label class="b-input-block__label" for="capital-invests-plan-all">Всего,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "capital-invests-plan-year",
+                    name: "capital-invests-plan-year"
+                } %}
+                <label class="b-input-block__label" for="capital-invests-plan-year">За текущий год,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 4 #}
+<section class="b-report-block j-report-block" id="block-4">
+    <div class="b-report-block__header" data-number="4">
+        <h3 class="b-report-block__title">Общий объем осуществленных инвестиций на территории ОЭЗ
+            <span class="b-help j-help">Общий объем осуществленных инвестиций на территории ОЭЗ</span>
+        </h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-report-block__subtitle">Общий объем</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "invests-all",
+                    name: "invests-all"
+                } %}
+                <label class="b-input-block__label" for="invests-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "invests-year",
+                    name: "invests-year"
+                } %}
+                <label class="b-input-block__label" for="invests-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+
+        <div class="b-report-block__subtitle">в т.ч. капитальных вложений</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "capital-invests-all",
+                    name: "capital-invests-all"
+                } %}
+                <label class="b-input-block__label" for="capital-invests-all">Всего,&#160;млн&#160;₽</label>
+            </div>
+
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "capital-invests-year",
+                    name: "capital-invests-year"
+                } %}
+                <label class="b-input-block__label" for="capital-invests-year">За текущий год,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+
+    </div>
+</section>
+{# 5 #}
+<section class="b-report-block j-report-block" id="block-5">
+    <div class="b-report-block__header" data-number="5">
+        <h3 class="b-report-block__title">
+            Объем выручки от продажи товаров, продукции, работ, услуг (в денежном выражении,&#160;млн&#160;₽)
+            <span class="b-help j-help">Объем выручки от продажи товаров, продукции, работ, услуг (в денежном выражении,&#160;млн&#160;₽)</span>
+        </h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-inputs-row">
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "revenue-all",
+                    name: "revenue-all"
+                } %}
+                <label class="b-input-block__label" for="revenue-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "revenue-year",
+                    name: "revenue-year"
+                } %}
+                <label class="b-input-block__label" for="revenue-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 6 #}
+<section class="b-report-block j-report-block" id="block-6">
+    <div class="b-report-block__header" data-number="6">
+        <h3 class="b-report-block__title">Объем произведенной продукции (работ, услуг) на территории ОЭЗ, (в денежном выражении,&#160;млн&#160;₽)</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-inputs-row">
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "produce-all",
+                    name: "produce-all"
+                } %}
+                <label class="b-input-block__label" for="produce-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "produce-year",
+                    name: "produce-year"
+                } %}
+                <label class="b-input-block__label" for="produce-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 7 #}
+<section class="b-report-block j-report-block" id="block-7">
+    <div class="b-report-block__header" data-number="7">
+        <h3 class="b-report-block__title">Средняя з/п сотрудников предприятия (₽), (без учета руководящего состава)</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "salary",
+                name: "salary"
+            } %}
+            <label class="b-input-block__label" for="salary">З/п сотрудников,&#160;₽</label>
+        </div>
+    </div>
+</section>

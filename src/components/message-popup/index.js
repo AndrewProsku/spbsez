@@ -1,6 +1,9 @@
 import InputTel from '../forms/telephone/telephone';
-import successTemplate from './success.twig';
+import Language from '../language';
+import successTemplate from './message-success.twig';
 import Utils from '../../common/scripts/utils';
+
+const Lang = new Language();
 
 class Message {
     constructor() {
@@ -28,9 +31,9 @@ class Message {
             text : false
         };
 
-        this.emptyErrorMessage = 'Поле не может быть пустым';
-        this.incorrectEmailMessage = 'Некорректный email адрес';
-        this.incorrectPhoneMessage = 'Номер телефона введен не полностью';
+        this.emptyErrorMessage = Lang.get('validation.required');
+        this.incorrectEmailMessage = Lang.get('validation.email');
+        this.incorrectPhoneMessage = Lang.get('validation.phone');
     }
 
     init(options) {
@@ -64,36 +67,51 @@ class Message {
         }
     }
 
+    /* eslint-disable max-lines-per-function */
+
     _bindEvents() {
         this.$form.addEventListener('submit', (event) => {
             event.preventDefault();
             const that = this;
             const isFormFulfilled = this.checkForm();
 
-            if (isFormFulfilled) {
-                Utils.send(new FormData(that.$form), '/api/message/', {
-                    success(response) {
-                        const successStatus = 1;
-                        const failStatus = 0;
-
-                        if (response.request.status === successStatus) {
-                            that.showSuccessMessage();
-                        } else if (response.request.status === failStatus) {
-                            const errorMessage = response.request.errors.join('</br>');
-
-                            that.showErrorMessage(that.$inputResume, errorMessage);
-                            that.errorRepeatPassword(errorMessage);
-                        }
-                    },
-                    error(error) {
-                        console.error(error);
-                    }
-                });
+            /* eslint-disable consistent-return */
+            if (!isFormFulfilled) {
+                return;
             }
+
+            const formData = new FormData(that.$form);
+
+            formData.set('lang', document.documentElement.lang);
+
+            Utils.send(formData, '/api/message/', {
+                success(response) {
+                    const successStatus = 1;
+
+                    if (response.request.status === successStatus) {
+                        that.showSuccessMessage();
+
+                        return true;
+                    }
+
+                    const errorMessage = response.request.errors.join('</br>');
+
+                    that.showErrorMessage(that.$inputResume, errorMessage);
+                    that.errorRepeatPassword(errorMessage);
+
+                    return false;
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
+            /* eslint-enable consistent-return */
         });
+
         this.$inputFIO.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'fio');
         });
+
         this.$inputEmail.addEventListener('change', (event) => {
             const isValidEmail = event.target.checkValidity();
             const emailStr = '^[-._a-zA-Za-яA-я0-9]{2,}@(?:[a-zA-Za-яА-Я0-9][-a-z-A-Z-a-я-А-Я0-9]+\\.)+[a-za-я]{2,6}$';
@@ -105,6 +123,7 @@ class Message {
                 this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });
+
         this.$inputPhone.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'phone');
             const regPhone = new RegExp('\\+7\\s\\d{3}\\s\\d{3}-\\d{2}-\\d{2}', 'u');
@@ -113,10 +132,13 @@ class Message {
                 this.showErrorMessage(event.target, this.incorrectPhoneMessage);
             }
         });
+
         this.$textarea.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'text');
         });
     }
+
+    /* eslint-enable max-lines-per-function */
 
     inputChangeHandler(event, inputName) {
         if (event.target.value.length) {

@@ -3,7 +3,7 @@
 } ?>
 <?php if (empty($arResult['ELEMENTS'])): return; endif; ?>
 <div class="l-home-our-resident l-home__block">
-    <h2>Резиденты</h2>
+    <h2><?= $arResult['HEADER']; ?></h2>
     <div class="b-carousel">
         <div class="glide j-residents-carousel">
             <div class="glide__track b-carousel__track" data-glide-el="track">
@@ -30,13 +30,14 @@
                 <button class="b-carousel__arrow b-carousel__arrow-right" data-glide-dir="&#62;" type="button"></button>
             </div>
             <div class="b-carousel__dots" data-glide-el="controls[nav]">
-                <button class="b-carousel__dot" data-glide-dir="=0" type="button"></button>
-                <button class="b-carousel__dot" data-glide-dir="=1" type="button"></button>
-                <button class="b-carousel__dot" data-glide-dir="=2" type="button"></button>
+                <?php $i = 0; ?>
+                <?php foreach ($arResult['ELEMENTS'] as $element): ?>
+                    <button class="b-carousel__dot" data-glide-dir="=<?= $i++; ?>" type="button"></button>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
     <div class="l-home__more">
-        <a href="/residents/" class="button">Все резиденты</a>
+        <a href="<?= LANG_DIR; ?>residents/" class="button"><?= $arResult['MORE']; ?></a>
     </div>
 </div>

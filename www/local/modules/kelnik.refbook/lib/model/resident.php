@@ -5,7 +5,6 @@ namespace Kelnik\Refbook\Model;
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
-use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
@@ -54,6 +53,12 @@ class ResidentTable extends DataManager
                 ]
             ),
             new Main\Entity\IntegerField(
+                'IMAGE_ID_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_IMAGE_EN'),
+                ]
+            ),
+            new Main\Entity\IntegerField(
                 'SORT',
                 [
                     'default_value' => 500,
@@ -75,12 +80,19 @@ class ResidentTable extends DataManager
                 ]
             ),
             new Main\Entity\StringField(
+                'NAME_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_NAME_EN'),
+                ]
+            ),
+            new Main\Entity\StringField(
                 'SITE',
                 [
                     'title' => Loc::getMessage('KELNIK_RESIDENT_SITE'),
                 ]
             ),
             new Main\Entity\StringField('TEXT_TEXT_TYPE'),
+            new Main\Entity\StringField('TEXT_EN_TEXT_TYPE'),
 
             new Main\Entity\TextField(
                 'TEXT',
@@ -88,12 +100,18 @@ class ResidentTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_RESIDENT_TEXT'),
                 ]
             ),
+            new Main\Entity\TextField(
+                'TEXT_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_TEXT_EN'),
+                ]
+            ),
 
             new Main\Entity\ReferenceField(
                 'TYPE',
                 ResidentTypesTable::class,
                 [
-                    'this.TYPE_ID' => 'ref.ID'
+                    '=this.TYPE_ID' => 'ref.ID'
                 ]
             )
         ];

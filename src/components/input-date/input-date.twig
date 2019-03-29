@@ -1,0 +1,29 @@
+<div class="b-input-date j-input-date {{ modify }}"
+     data-from-year="{{ fromYear }}"
+     data-from-month="{{ fromMonth }}"
+     data-show-months="{{ shoMonths }}"
+     data-value-selector="{{ valueSelector }}"
+     data-name="{{ name }}"
+     data-sync-from="{{ syncFrom }}"
+     data-sync-to="{{ syncTo }}">
+
+    <div class="b-input-date__title">{{ title }}</div>
+
+    <ul class="b-input-date__head">
+        <li class="b-input-date__head-item">Пн</li>
+        <li class="b-input-date__head-item">Вт</li>
+        <li class="b-input-date__head-item">Ср</li>
+        <li class="b-input-date__head-item">Чт</li>
+        <li class="b-input-date__head-item">Пт</li>
+        <li class="b-input-date__head-item b-input-date__head-item_is_disabled">Сб</li>
+        <li class="b-input-date__head-item b-input-date__head-item_is_disabled">Вс</li>
+    </ul>
+
+    <div class="b-input-date__content j-input-date-content"></div>
+
+    <div class="b-input-date__addition">
+        <div class="b-input-date__time">
+            <input type="text" class="j-input-date-time">
+        </div>
+    </div>
+</div>

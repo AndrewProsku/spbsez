@@ -28,7 +28,7 @@
             display: block;
             position: absolute;
             height: 1px;
-            width: 100%;
+            width: 12px;
             background-color: $blue;
             top: 50%;
         }
@@ -55,6 +55,12 @@
     }
 }
 
+.b-input-file__input:disabled ~ .b-input-file__add,
+.b-input-file__input:disabled ~ .b-input-file__delete {
+    cursor: default;
+    opacity: 0.48;
+}
+
 .b-input-file:hover .b-input-file__delete:before {
     box-shadow: inset -15px 0 15px $bg-select;
 }
@@ -77,4 +83,9 @@
             transform: rotate(-45deg);
         }
     }
+}
+
+.b-input-file__text:empty:before {
+    content: 'A';
+    color: transparent;
 }

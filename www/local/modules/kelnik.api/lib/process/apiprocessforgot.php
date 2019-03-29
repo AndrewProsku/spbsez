@@ -5,7 +5,7 @@ use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
 
 /**
- * Class ApiProcessLogin
+ * Class ApiProcessForgot
  *
  * Обработка запроса восстановления пароля
  *

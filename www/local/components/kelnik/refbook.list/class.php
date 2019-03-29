@@ -3,9 +3,13 @@
 namespace Kelnik\Refbook\Component;
 
 use Bex\Bbc;
+use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
+use Kelnik\Refbook\Model\DocsTable;
 use Kelnik\Refbook\Model\PartnerTable;
+use Kelnik\Refbook\Model\PresTable;
 use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Refbook\Model\ResidentTypesTable;
 use Kelnik\Refbook\Model\ReviewTable;
@@ -22,7 +26,7 @@ if (!\Bitrix\Main\Loader::includeModule('bex.bbc')) {
 
 Loc::loadMessages(__FILE__);
 
-class RefbookList extends Bbc\Basis
+class RefBookList extends Bbc\Basis
 {
     protected $cacheTemplate = false;
     protected $needModules = ['kelnik.refbook'];
@@ -32,28 +36,41 @@ class RefbookList extends Bbc\Basis
 
     protected function executeMain()
     {
-        $classes = [
-            Types::TYPE_PARTNER => PartnerTable::class,
-            Types::TYPE_RESIDENT => ResidentTable::class,
-            Types::TYPE_REVIEW => ReviewTable::class,
-            Types::TYPE_TEAM => TeamTable::class
-        ];
+        $classes = Types::getClassesByTypeList();
 
         if (!$this->arParams['SECTION'] || !isset($classes[$this->arParams['SECTION']])) {
             return false;
         }
 
-        $className = $classes[$this->arParams['SECTION']];
+        self::registerCacheTag('kelnik:refBookList_' . $this->arParams['SECTION']);
 
-        $select = $this->arParams['SECTION'] == Types::TYPE_REVIEW
-                    ? ['ID', 'NAME', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'PREVIEW']
-                    : ['ID', 'NAME', 'IMAGE_ID', 'TEXT'];
+        $className = $classes[$this->arParams['SECTION']];
+        $selectFields = [
+            Types::TYPE_REVIEW => ['ID', 'NAME', 'NAME_EN', 'ALIAS', 'IMAGE_ID', 'IMAGE_BG_ID', 'COMMENT', 'COMMENT_EN', 'PREVIEW', 'PREVIEW_EN', 'BODY'],
+            Types::TYPE_DOCS => ['ID', 'NAME', 'FILE_ID'],
+            Types::TYPE_PRESENTATION => ['ID', 'NAME', 'FILE_ID'],
+            Types::TYPE_TEAM => ['ID', 'NAME', 'IMAGE_ID', 'TEXT', 'NAME_EN', 'TEXT_EN'],
+            Types::TYPE_PARTNER => ['ID', 'NAME', 'IMAGE_ID', 'IMAGE_ID_EN', 'NAME_EN']
+        ];
+
+        $select = ArrayHelper::getValue(
+            $selectFields,
+            $this->arParams['SECTION'] ,
+            ['ID', 'NAME', 'IMAGE_ID', 'TEXT']
+        );
 
         $filter = [
             '=ACTIVE' => $className::YES
         ];
+        
+        if (in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION])) {
+            $filter['=SITE_ID'] = SITE_ID;
+        }
 
-        if ((int)$this->arParams['SECTION'] !== Types::TYPE_RESIDENT) {
+        $this->arResult['HEADER'] = Loc::getMessage('KELNIK_REFBOOK_HEADER_' . $this->arParams['SECTION']);
+        $this->arResult['MORE'] = Loc::getMessage('KELNIK_REFBOOK_MORE_' . $this->arParams['SECTION']);
+
+        if ($this->arParams['SECTION'] !== Types::TYPE_RESIDENT) {
             try {
                 $this->arResult['ELEMENTS'] = $className::getList(
                     [
@@ -68,7 +85,35 @@ class RefbookList extends Bbc\Basis
                 return [];
             }
 
-            $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*']);
+            $this->arResult['ELEMENTS'] = $this->replaceFields(
+                $this->arResult['ELEMENTS'],
+                strtoupper(Context::getCurrent()->getLanguage())
+            );
+
+            $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*', 'FILE_*' => 'full']);
+
+            if (!$this->arResult['ELEMENTS']) {
+                return true;
+            }
+
+            foreach ($this->arResult['ELEMENTS'] as $k => &$v) {
+
+                $v['JSON'] = base64_encode(json_encode($v));
+
+                if (!in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION])) {
+                    continue;
+                }
+
+                if (empty($v['FILE_ID']['ID'])) {
+                    unset($this->arResult['ELEMENTS'][$k]);
+                    continue;
+                }
+
+                $v['FILE_ID']['EXT'] = strtolower(pathinfo($v['FILE_ID']['ORIGINAL_NAME'], PATHINFO_EXTENSION));
+                $v['FILE_ID']['DATE_FORMAT'] = $v['FILE_ID']['TIMESTAMP_X']->format('d.m.Y');
+                $v['FILE_ID']['FILE_SIZE_FORMAT'] = \CFile::FormatSize($v['FILE_ID']['FILE_SIZE']);
+            }
+            unset($v);
 
             return true;
         }
@@ -78,6 +123,7 @@ class RefbookList extends Bbc\Basis
                 'select' => [
                     '*',
                     'TYPE_NAME' => 'TYPE.NAME',
+                    'TYPE_NAME_EN' => 'TYPE.NAME_EN',
                     'TYPE_SORT' => 'TYPE.SORT'
                 ],
                 'filter' => [
@@ -104,6 +150,7 @@ class RefbookList extends Bbc\Basis
                 $this->arResult['TYPES'][$v['TYPE_ID']] = [
                     'ID' => $v['TYPE_ID'],
                     'NAME' => $v['TYPE_NAME'],
+                    'NAME_EN' => $v['TYPE_NAME_EN'],
                     'SORT' => $v['TYPE_SORT']
                 ];
             }
@@ -117,6 +164,15 @@ class RefbookList extends Bbc\Basis
         }
         unset($v);
 
+        $langId = strtoupper(Context::getCurrent()->getLanguage());
+
+        foreach (['ELEMENTS', 'TYPES'] as $type) {
+            $this->arResult[$type] = $this->replaceFields(
+                $this->arResult[$type],
+                $langId
+            );
+        }
+
         usort($this->arResult['TYPES'], function ($a, $b) {
             if ($a == $b) {
                 return 0;
@@ -126,5 +182,25 @@ class RefbookList extends Bbc\Basis
         });
 
         $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*']);
+    }
+
+    protected function replaceFields(array $data, $langId)
+    {
+        if (!$data || !$langId) {
+            return $data;
+        }
+
+        foreach ($data as &$v) {
+            foreach ($v as $key => $val) {
+                if (empty($v[$key . '_' . $langId])) {
+                    continue;
+                }
+                $v[$key] = $v[$key . '_' . $langId];
+                unset($v[$key . '_' . $langId]);
+            }
+        }
+        unset($v);
+
+        return $data;
     }
 }

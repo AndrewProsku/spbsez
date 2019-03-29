@@ -1,5 +1,5 @@
 {#variables#}
-{% set color = '#000000' %}
+{% set color = '#662D91' %}
 
 {#component#}
 <!doctype html>
@@ -13,9 +13,10 @@
         {% include "../../components/alert-old-browser/alert-old-browser.twig" %}
 
         <div class="l-layout">
-
             <header class="l-home__header inner-header j-home__header">
-                {% include '_header.twig' %}
+                {% block header %}
+                {% include '_header.twig'%}
+                {% endblock %}
             </header>
 
             <main class="l-layout__content l-layout__content-inner">
@@ -23,7 +24,9 @@
             </main>
 
             <footer class="l-home-footer b-footer">
-                {% include '_footer.twig' %}
+                {% block footer %}
+                {% include '_footer.twig'%}
+                {% endblock %}
             </footer>
 
             {# Мобильное меню #}

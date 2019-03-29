@@ -5,12 +5,13 @@ use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
-use Kelnik\Userdata\Data;
-use Kelnik\Userdata\Profile\ProfileModel;
-use Kelnik\Userdata\Profile\ProfileSectionContacts;
+use Kelnik\UserData\Profile\Profile;
+use Kelnik\UserData\Profile\ProfileSectionAdmins;
+use Kelnik\UserData\Profile\ProfileSectionContacts;
+use Kelnik\UserData\Profile\ProfileSectionDocs;
 
 /**
- * Class ApiProcessLogin
+ * Class ApiProcessProfile
  *
  * Профиль
  *
@@ -18,9 +19,24 @@ use Kelnik\Userdata\Profile\ProfileSectionContacts;
  */
 class ApiProcessProfile extends ApiProcessAbstract
 {
+    /**
+     * @var Profile
+     */
     protected $profile;
+
+    /**
+     * @var ProfileSectionContacts
+     */
     protected $contacts;
+
+    /**
+     * @var ProfileSectionDocs
+     */
     protected $docs;
+
+    /**
+     * @var ProfileSectionAdmins
+     */
     protected $admins;
 
     public function execute(array $request): bool
@@ -30,7 +46,7 @@ class ApiProcessProfile extends ApiProcessAbstract
         $action = trim(ArrayHelper::getValue($request, 'action'));
 
         try {
-            $this->profile = ProfileModel::getInstance($USER->GetID());
+            $this->profile = Profile::getInstance((int)$USER->GetID());
             $this->initSection($action);
         } catch (\Exception $e) {
             return false;
@@ -73,7 +89,7 @@ class ApiProcessProfile extends ApiProcessAbstract
                 continue;
             }
 
-            $nameSpace = '\Kelnik\Userdata\Profile\ProfileSection' . ucfirst($model);
+            $nameSpace = '\Kelnik\UserData\Profile\ProfileSection' . ucfirst($model);
 
             if (!class_exists($nameSpace)) {
                 return;
@@ -91,6 +107,7 @@ class ApiProcessProfile extends ApiProcessAbstract
     {
         if (!$res = $this->contacts->add([])) {
             $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+
             return false;
         }
 
@@ -105,6 +122,7 @@ class ApiProcessProfile extends ApiProcessAbstract
 
         if (false === $this->contacts->delete($id)) {
             $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+
             return false;
         }
 
@@ -118,12 +136,13 @@ class ApiProcessProfile extends ApiProcessAbstract
         $person  = ArrayHelper::getValue($request, 'person');
         $profile = ArrayHelper::getValue($request, 'profile');
 
-        if ($person) {
+        if ($person && $this->profile->isResidentAdmin()) {
 
             $res = $this->contacts->updateRows($person);
 
             if (false === $res) {
                 $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+
                 return false;
             }
 
@@ -150,6 +169,7 @@ class ApiProcessProfile extends ApiProcessAbstract
 
     protected function processAddDoc(array $request)
     {
+        /* @var array $doc */
         $doc = Context::getCurrent()->getRequest()->getFile('doc');
 
         if (!is_uploaded_file($doc['tmp_name'])) {
@@ -171,7 +191,7 @@ class ApiProcessProfile extends ApiProcessAbstract
 
         $res = [
             'id' => $res,
-            'userName' => $this->profile->getUserField('NAME')
+            'userName' => $this->profile->getField('NAME')
         ];
 
         $res['filePath'] = $fileData['SRC'];
@@ -214,7 +234,7 @@ class ApiProcessProfile extends ApiProcessAbstract
         }
 
         $this->data = $this->admins->getById($res);
-        unset($this->data[ProfileModel::OWNER_FIELD]);
+        unset($this->data[Profile::OWNER_FIELD]);
 
         return true;
     }
@@ -234,7 +254,7 @@ class ApiProcessProfile extends ApiProcessAbstract
 
         if (is_numeric($res)) {
             $this->data = $this->admins->getById($res);
-            unset($this->data[ProfileModel::OWNER_FIELD]);
+            unset($this->data[Profile::OWNER_FIELD]);
         }
 
         return true;

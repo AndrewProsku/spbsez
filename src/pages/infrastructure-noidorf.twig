@@ -1,0 +1,346 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Инфраструктура — Площадка «Нойдорф»</title> {% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    <div class="b-area-main-screen j-area-main-screen">
+        <div class="b-area-main-screen__video-wrapper b-area-main-screen__video-wrapper_theme_noidorf">
+            <video class="b-area-main-screen__video" width="100%" height="auto" preload="auto" autoplay="autoplay" loop="loop" muted>
+                <source src="/video/infra_noidorf.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+            </video>
+        </div>
+        {% include '../components/page-submenu/page-submenu.twig' with {
+            subitems: [{
+                href: '#',
+                name: 'Площадка «Новоорловская»'
+            }, {
+                href: '#',
+                name: 'Площадка «Нойдорф»',
+                active: true
+            }]
+        } %}
+        <div class="b-area-main-screen__title">
+            <h1>Площадка «Нойдорф»</h1>
+        </div>
+    </div>
+    <div class="b-area-background">
+        <div class="b-area-main-features">
+            <div class="b-area-main-feature">
+                <div class="b-area-main-feature__value">18,99га</div>
+                <div class="b-area-main-feature__description">площадь территории</div>
+            </div>
+            <div class="b-area-main-feature">
+                <div class="b-area-main-feature__value">11</div>
+                <div class="b-area-main-feature__description">резидентов</div>
+            </div>
+            <div class="b-area-main-feature">
+                <div class="b-area-main-feature__value">0</div>
+                <div class="b-area-main-feature__description">свободных </br>участков</div>
+            </div>
+        </div>
+        <div class="b-area-traits">
+            <div class="b-area-trait b-area-trait_icon_buy">Выкуп земельного участка за 25% от кадастровой стоимости</div>
+            <div class="b-area-trait b-area-trait_icon_engineering">Готовые инженерные сети и коммуникации</div>
+            <div class="b-area-trait b-area-trait_icon_location-noidorf">Удобная локация</div>
+            <div class="b-area-trait b-area-trait_icon_road">Дорожная инфраструктура</div>
+            <div class="b-area-trait b-area-trait_icon_posts">2 контрольно-пропускных пункта</div>
+            <div class="b-area-trait b-area-trait_icon_customs">Таможенный пост</div>
+            <div class="b-area-trait b-area-trait_icon_gas">Газовая котельная</div>
+            <div class="b-area-trait b-area-trait_icon_office">Административно-деловой центр</div>
+        </div>
+        <section class="b-area-rent">
+            {% include "../components/animation-line/animation-line.twig" %}
+            <div class="b-area-rent__title"><h2>Преференции по аренде земельного участка</h2></div>
+            <div class="b-area-rent__list">
+                <div class="b-area-rent__item">Понижающий коэффициент на аренду <strong>в течение 5 лет</strong> с момента получения статуса резидента</div>
+                <div class="b-area-rent__item">Максимальный размер арендной платы за земельные участки — <strong>2% от кадастровой стоимости</strong> в год</div>
+            </div>
+        </section>
+        <div class="b-area-map">
+            <div class="b-area-map__title">
+                <h2>Расположение</h2>
+            </div>
+            <div class="b-area-map__content">
+                <div class="b-infrastructure-map__yandex-map b-yandex-map b-yandex-map_theme_novoorlov j-yandex-map-noidorf" data-json="eyJjZW50ZXIiOls1OS44MzUxNTQsMzAuMDYzMzcyXSwic2Nyb2xsd2hlZWwiOmZhbHNlLCJmdWxsU2NyZWVuQ29udHJvbCI6ZmFsc2UsImN1c3RvbVpvb21Db250cm9sIjp0cnVlLCJodG1sTWFya2VycyI6W3sidGl0bGUiOiJcdTA0MWRcdTA0M2VcdTA0MzlcdTA0MzRcdTA0M2VcdTA0NDBcdTA0NDQiLCJsYXlvdXQiOiJzZWNvbmRhcnkiLCJjb29yZHMiOls1OS44NDA1NzMsMzAuMDA1OTQwXX0seyJ0aXRsZSI6Ilx1MDQxZlx1MDQzNVx1MDQ0Mlx1MDQ0MFx1MDQzZVx1MDQzNFx1MDQzMlx1MDQzZVx1MDQ0MFx1MDQzNVx1MDQ0NiIsImxheW91dCI6InRleHQiLCJjb29yZHMiOls1OS44NjY4NjcsMjkuOTI0NzE0XX1dLCJtYXJrZXJzIjpbXSwicm91dGVzIjpbeyJwb2ludHMiOltbNTkuODQwNTczLDMwLjAwNTk0MF0sWzU5LjgxNzU4MSwyOS45MjgxODldXSwiZmluaXNoTWFya2VyIjp7InRpdGxlIjoiXHUwMDMyXHUwMDMwIFx1MDQzY1x1MDQzOFx1MDQzZFx1MDQ0M1x1MDQ0MiBcdTA0MzRcdTA0M2UgXHUwNDFhXHUwNDEwXHUwNDE0IiwidGhlbWUiOiJ2aW9sZXQifSwiYWN0aXZlU3Ryb2tlV2lkdGgiOjYsImFjdGl2ZVN0cm9rZUNvbG9yIjoicmdiYSg0OCw2NCwxNTQsMC40OCkifSx7InBvaW50cyI6W1s1OS43OTk3NzQsMzAuMjczMDI5XSxbNTkuODM0NjQwLDMwLjI3NjcwOV0sWzU5Ljg0MDU3MywzMC4wMDU5NDBdXSwidmlhUG9pbnQiOnsidGl0bGUiOiJcdTAwMzJcdTAwMzAgXHUwNDNjXHUwNDM4XHUwNDNkXHUwNDQzXHUwNDQyIFx1MDQzZVx1MDQ0MiBcdTA0MzBcdTA0NGRcdTA0NDBcdTA0M2VcdTA0M2ZcdTA0M2VcdTA0NDBcdTA0NDJcdTA0MzAiLCJ0aGVtZSI6InBpbmsifSwiYWN0aXZlU3Ryb2tlV2lkdGgiOjYsImFjdGl2ZVN0cm9rZUNvbG9yIjoicmdiYSgxMDIsNDUsMTQ1LDAuNDgpIn1dfQo=">
+                    <div id="first" class="b-yandex-map__base"></div>
+                </div>
+            </div>
+            <div class="b-area-map__description">
+                <ul class="b-area-map__description-list">
+                    <li class="b-area-map__description-item">Площадка окружена развитой социальной инфраструктурой</li>
+                    <li class="b-area-map__description-item">Удобная транспортная инфраструктура</li>
+                    <li class="b-area-map__description-item">Непосредственная близость от объектов культурного наследия</li>
+                    <li class="b-area-map__description-item">Земельные участки в административных границах Санкт-Петербурга</li>
+                </ul>
+                <div class="b-area-map__address">198515, Россия, Санкт-Петербург, пос. Стрельна, ул. Связи, д. 34А</div>
+            </div>
+        </div>
+        <div class="b-area-plan">
+            <div class="b-area-plan__title"><h2>Планировка территории</h2></div>
+            <div class="b-visual"  data-area="noidorf">
+                <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 1920 820">
+                    <image
+                            class="b-visual__image"
+                            x="0"
+                            y="0"
+                            width="1920"
+                            height="820"
+                            preserveAspectRatio="none"
+                            xlink:href="/images/infrastructure/map-noidorf.svg"
+                            style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></image>
+                    <rect
+                            class="b-visual__overlay"
+                            width="100%"
+                            height="100%"
+                            fill-opacity="0"
+                            mask="url(#b-visual__hole)"></rect>
+                    <g class="b-visual__masks">
+                        <path
+                                data-title="АО «Техноком авиа»"
+                                data-id="1"
+                                data-json="eyJpbWFnZSI6eyJ1cmwiOiIvaW1hZ2VzL3Jlc2lkZW50cy9sb2dvdHlwZXMvdmVydGV4LnBuZyIsInRleHQiOiJcdTA0MWJcdTA0M2VcdTA0MzNcdTA0M2VcdTA0NDJcdTA0MzhcdTA0M2YgXHUwNDQwXHUwNDM1XHUwNDM3XHUwNDM4XHUwNDM0XHUwNDM1XHUwNDNkXHUwNDQyXHUwNDMwIn0sInRpdGxlIjoiXHUwNDEwXHUwNDFlIFx1MDBhYlx1MDQxMlx1MDQzNVx1MDQ0MFx1MDQ0Mlx1MDQzNVx1MDQzYVx1MDQ0MVx1MDBiYiIsImRlc2NyaXB0aW9uIjoiXHUwNDI0XHUwNDMwXHUwNDQwXHUwNDNjXHUwNDMwXHUwNDQ2XHUwNDM1XHUwNDMyXHUwNDQyXHUwNDM4XHUwNDNhXHUwNDMwIFx1MDQzOCBcdTA0MzFcdTA0MzhcdTA0M2VcdTA0NDJcdTA0MzVcdTA0NDVcdTA0M2RcdTA0M2VcdTA0M2JcdTA0M2VcdTA0MzNcdTA0MzhcdTA0MzgiLCJzcGFjZSI6Ilx1MDAzNFx1MDAyY1x1MDAzOFx1MDAzNCBcdTA0MzNcdTA0MzAiLCJzaXRlIjp7InVybCI6IiMiLCJ0aXRsZSI6InZlcnRleC5zcGIucnUifX0="
+                                d="M639.63,399l-27.39-62a2.15,2.15,0,0,1,3-2.75l16.92,9.24a81.12,81.12,0,0,0,44.45,10,55.2,55.2,0,0,0,9.89-1.47c31.69-8.34,96.92-25.48,98.11-25.48,1.57,0,48.85,64.61,48.85,64.61Z" fill="#cacee5" stroke="#30409a" stroke-miterlimit="10" stroke-width="2"/>
+                        <path
+                                data-title="ООО «ТР Инжиниринг»"
+                                data-id="2"
+                                data-json="eyJpbWFnZSI6eyJ1cmwiOiIvaW1hZ2VzL3Jlc2lkZW50cy9sb2dvdHlwZXMvdmVydGV4LnBuZyIsInRleHQiOiJcdTA0MWJcdTA0M2VcdTA0MzNcdTA0M2VcdTA0NDJcdTA0MzhcdTA0M2YgXHUwNDQwXHUwNDM1XHUwNDM3XHUwNDM4XHUwNDM0XHUwNDM1XHUwNDNkXHUwNDQyXHUwNDMwIn0sInRpdGxlIjoiXHUwNDEwXHUwNDFlIFx1MDBhYlx1MDQxMlx1MDQzNVx1MDQ0MFx1MDQ0Mlx1MDQzNVx1MDQzYVx1MDQ0MVx1MDBiYiIsImRlc2NyaXB0aW9uIjoiXHUwNDI0XHUwNDMwXHUwNDQwXHUwNDNjXHUwNDMwXHUwNDQ2XHUwNDM1XHUwNDMyXHUwNDQyXHUwNDM4XHUwNDNhXHUwNDMwIFx1MDQzOCBcdTA0MzFcdTA0MzhcdTA0M2VcdTA0NDJcdTA0MzVcdTA0NDVcdTA0M2RcdTA0M2VcdTA0M2JcdTA0M2VcdTA0MzNcdTA0MzhcdTA0MzgiLCJzcGFjZSI6Ilx1MDAzNFx1MDAyY1x1MDAzOFx1MDAzNCBcdTA0MzNcdTA0MzAiLCJzaXRlIjp7InVybCI6IiMiLCJ0aXRsZSI6InZlcnRleC5zcGIucnUifX0="
+                                d="M867.33,484.85l-9.46-67.75-208,9.45L657,444.67H620.72l-1.58-18.91-116.6,4.73,9.56,68.18Z" fill="#cacee5" stroke="#30409a" stroke-miterlimit="10" stroke-width="2"/>
+                        <path
+                                data-title="ООО НПП «Новотех-СПб»"
+                                data-id="3"
+                                data-json="eyJpbWFnZSI6eyJ1cmwiOiIvaW1hZ2VzL3Jlc2lkZW50cy9sb2dvdHlwZXMvdmVydGV4LnBuZyIsInRleHQiOiJcdTA0MWJcdTA0M2VcdTA0MzNcdTA0M2VcdTA0NDJcdTA0MzhcdTA0M2YgXHUwNDQwXHUwNDM1XHUwNDM3XHUwNDM4XHUwNDM0XHUwNDM1XHUwNDNkXHUwNDQyXHUwNDMwIn0sInRpdGxlIjoiXHUwNDEwXHUwNDFlIFx1MDBhYlx1MDQxMlx1MDQzNVx1MDQ0MFx1MDQ0Mlx1MDQzNVx1MDQzYVx1MDQ0MVx1MDBiYiIsImRlc2NyaXB0aW9uIjoiXHUwNDI0XHUwNDMwXHUwNDQwXHUwNDNjXHUwNDMwXHUwNDQ2XHUwNDM1XHUwNDMyXHUwNDQyXHUwNDM4XHUwNDNhXHUwNDMwIFx1MDQzOCBcdTA0MzFcdTA0MzhcdTA0M2VcdTA0NDJcdTA0MzVcdTA0NDVcdTA0M2RcdTA0M2VcdTA0M2JcdTA0M2VcdTA0MzNcdTA0MzhcdTA0MzgiLCJzcGFjZSI6Ilx1MDAzNFx1MDAyY1x1MDAzOFx1MDAzNCBcdTA0MzNcdTA0MzAiLCJzaXRlIjp7InVybCI6IiMiLCJ0aXRsZSI6InZlcnRleC5zcGIucnUifX0="
+                                d="M1604.84,119.14,1408.6,168.92l56.73,75.63,50.42-14.18,4.73,6.3,157.92-44.21-59.53-68.91A14,14,0,0,0,1604.84,119.14Z" fill="#cacee5" stroke="#30409a" stroke-miterlimit="10" stroke-width="2"/>
+                        <path
+                                data-title="АО «Лазерные системы»"
+                                data-id="4"
+                                data-json="eyJpbWFnZSI6eyJ1cmwiOiIvaW1hZ2VzL3Jlc2lkZW50cy9sb2dvdHlwZXMvdmVydGV4LnBuZyIsInRleHQiOiJcdTA0MWJcdTA0M2VcdTA0MzNcdTA0M2VcdTA0NDJcdTA0MzhcdTA0M2YgXHUwNDQwXHUwNDM1XHUwNDM3XHUwNDM4XHUwNDM0XHUwNDM1XHUwNDNkXHUwNDQyXHUwNDMwIn0sInRpdGxlIjoiXHUwNDEwXHUwNDFlIFx1MDBhYlx1MDQxMlx1MDQzNVx1MDQ0MFx1MDQ0Mlx1MDQzNVx1MDQzYVx1MDQ0MVx1MDBiYiIsImRlc2NyaXB0aW9uIjoiXHUwNDI0XHUwNDMwXHUwNDQwXHUwNDNjXHUwNDMwXHUwNDQ2XHUwNDM1XHUwNDMyXHUwNDQyXHUwNDM4XHUwNDNhXHUwNDMwIFx1MDQzOCBcdTA0MzFcdTA0MzhcdTA0M2VcdTA0NDJcdTA0MzVcdTA0NDVcdTA0M2RcdTA0M2VcdTA0M2JcdTA0M2VcdTA0MzNcdTA0MzhcdTA0MzgiLCJzcGFjZSI6Ilx1MDAzNFx1MDAyY1x1MDAzOFx1MDAzNCBcdTA0MzNcdTA0MzAiLCJzaXRlIjp7InVybCI6IiMiLCJ0aXRsZSI6InZlcnRleC5zcGIucnUifX0="
+                                d="M1529.79,351.3l-52.42-65.06,19.47-5.45-9.45-12.6,45.69-12.61-12.6-18.91,157.92-44.21,77,89.58a3,3,0,0,1-1.42,4.76Z" fill="#cacee5" stroke="#30409a" stroke-miterlimit="10" stroke-width="2"/>
+                        <path
+                                data-title="ООО «Инмед»"
+                                data-id="5"
+                                data-json="eyJpbWFnZSI6eyJ1cmwiOiIvaW1hZ2VzL3Jlc2lkZW50cy9sb2dvdHlwZXMvdmVydGV4LnBuZyIsInRleHQiOiJcdTA0MWJcdTA0M2VcdTA0MzNcdTA0M2VcdTA0NDJcdTA0MzhcdTA0M2YgXHUwNDQwXHUwNDM1XHUwNDM3XHUwNDM4XHUwNDM0XHUwNDM1XHUwNDNkXHUwNDQyXHUwNDMwIn0sInRpdGxlIjoiXHUwNDEwXHUwNDFlIFx1MDBhYlx1MDQxMlx1MDQzNVx1MDQ0MFx1MDQ0Mlx1MDQzNVx1MDQzYVx1MDQ0MVx1MDBiYiIsImRlc2NyaXB0aW9uIjoiXHUwNDI0XHUwNDMwXHUwNDQwXHUwNDNjXHUwNDMwXHUwNDQ2XHUwNDM1XHUwNDMyXHUwNDQyXHUwNDM4XHUwNDNhXHUwNDMwIFx1MDQzOCBcdTA0MzFcdTA0MzhcdTA0M2VcdTA0NDJcdTA0MzVcdTA0NDVcdTA0M2RcdTA0M2VcdTA0M2JcdTA0M2VcdTA0MzNcdTA0MzhcdTA0MzgiLCJzcGFjZSI6Ilx1MDAzNFx1MDAyY1x1MDAzOFx1MDAzNCBcdTA0MzNcdTA0MzAiLCJzaXRlIjp7InVybCI6IiMiLCJ0aXRsZSI6InZlcnRleC5zcGIucnUifX0="
+                                d="M502.54,430.49l-80.46,3.09a1.82,1.82,0,0,1-1.86-1.44h0l-4.58-18.34-126,2.51,9.79,84.91,0,.16a6.15,6.15,0,0,0,6.35,5.31l206.33-8Z" fill="#cacee5" stroke="#30409a" stroke-miterlimit="10" stroke-width="2"/>
+                        <path
+                                data-title="ООО «Ракурс-инжиниринг»"
+                                data-id="6"
+                                data-json="eyJpbWFnZSI6eyJ1cmwiOiIvaW1hZ2VzL3Jlc2lkZW50cy9sb2dvdHlwZXMvdmVydGV4LnBuZyIsInRleHQiOiJcdTA0MWJcdTA0M2VcdTA0MzNcdTA0M2VcdTA0NDJcdTA0MzhcdTA0M2YgXHUwNDQwXHUwNDM1XHUwNDM3XHUwNDM4XHUwNDM0XHUwNDM1XHUwNDNkXHUwNDQyXHUwNDMwIn0sInRpdGxlIjoiXHUwNDEwXHUwNDFlIFx1MDBhYlx1MDQxMlx1MDQzNVx1MDQ0MFx1MDQ0Mlx1MDQzNVx1MDQzYVx1MDQ0MVx1MDBiYiIsImRlc2NyaXB0aW9uIjoiXHUwNDI0XHUwNDMwXHUwNDQwXHUwNDNjXHUwNDMwXHUwNDQ2XHUwNDM1XHUwNDMyXHUwNDQyXHUwNDM4XHUwNDNhXHUwNDMwIFx1MDQzOCBcdTA0MzFcdTA0MzhcdTA0M2VcdTA0NDJcdTA0MzVcdTA0NDVcdTA0M2RcdTA0M2VcdTA0M2JcdTA0M2VcdTA0MzNcdTA0MzhcdTA0MzgiLCJzcGFjZSI6Ilx1MDAzNFx1MDAyY1x1MDAzOFx1MDAzNCBcdTA0MzNcdTA0MzAiLCJzaXRlIjp7InVybCI6IiMiLCJ0aXRsZSI6InZlcnRleC5zcGIucnUifX0="
+                                d="M1397.57,172.07l55.15,77.21L1265.2,298.13,1252.6,284l-17.82,5.72L1185.13,226Z" fill="#cacee5" stroke="#30409a" stroke-miterlimit="10" stroke-width="2"/>
+                        <path
+                                data-title="ООО «Медпрофит»"
+                                data-id="7"
+                                data-json="eyJpbWFnZSI6eyJ1cmwiOiIvaW1hZ2VzL3Jlc2lkZW50cy9sb2dvdHlwZXMvdmVydGV4LnBuZyIsInRleHQiOiJcdTA0MWJcdTA0M2VcdTA0MzNcdTA0M2VcdTA0NDJcdTA0MzhcdTA0M2YgXHUwNDQwXHUwNDM1XHUwNDM3XHUwNDM4XHUwNDM0XHUwNDM1XHUwNDNkXHUwNDQyXHUwNDMwIn0sInRpdGxlIjoiXHUwNDEwXHUwNDFlIFx1MDBhYlx1MDQxMlx1MDQzNVx1MDQ0MFx1MDQ0Mlx1MDQzNVx1MDQzYVx1MDQ0MVx1MDBiYiIsImRlc2NyaXB0aW9uIjoiXHUwNDI0XHUwNDMwXHUwNDQwXHUwNDNjXHUwNDMwXHUwNDQ2XHUwNDM1XHUwNDMyXHUwNDQyXHUwNDM4XHUwNDNhXHUwNDMwIFx1MDQzOCBcdTA0MzFcdTA0MzhcdTA0M2VcdTA0NDJcdTA0MzVcdTA0NDVcdTA0M2RcdTA0M2VcdTA0M2JcdTA0M2VcdTA0MzNcdTA0MzhcdTA0MzgiLCJzcGFjZSI6Ilx1MDAzNFx1MDAyY1x1MDAzOFx1MDAzNCBcdTA0MzNcdTA0MzAiLCJzaXRlIjp7InVybCI6IiMiLCJ0aXRsZSI6InZlcnRleC5zcGIucnUifX0="
+                                d="M1234.78,289.67l-26.3,8.46,11,14.18-149.7,39.39-75.64-77.21,191-48.48Z" fill="#cacee5" stroke="#30409a" stroke-miterlimit="10" stroke-width="2"/>
+                        <path
+                                data-title="ЗАО «Бизнес Компьютер Центр СПб»"
+                                data-id="8"
+                                data-json="eyJpbWFnZSI6eyJ1cmwiOiIvaW1hZ2VzL3Jlc2lkZW50cy9sb2dvdHlwZXMvdmVydGV4LnBuZyIsInRleHQiOiJcdTA0MWJcdTA0M2VcdTA0MzNcdTA0M2VcdTA0NDJcdTA0MzhcdTA0M2YgXHUwNDQwXHUwNDM1XHUwNDM3XHUwNDM4XHUwNDM0XHUwNDM1XHUwNDNkXHUwNDQyXHUwNDMwIn0sInRpdGxlIjoiXHUwNDEwXHUwNDFlIFx1MDBhYlx1MDQxMlx1MDQzNVx1MDQ0MFx1MDQ0Mlx1MDQzNVx1MDQzYVx1MDQ0MVx1MDBiYiIsImRlc2NyaXB0aW9uIjoiXHUwNDI0XHUwNDMwXHUwNDQwXHUwNDNjXHUwNDMwXHUwNDQ2XHUwNDM1XHUwNDMyXHUwNDQyXHUwNDM4XHUwNDNhXHUwNDMwIFx1MDQzOCBcdTA0MzFcdTA0MzhcdTA0M2VcdTA0NDJcdTA0MzVcdTA0NDVcdTA0M2RcdTA0M2VcdTA0M2JcdTA0M2VcdTA0MzNcdTA0MzhcdTA0MzgiLCJzcGFjZSI6Ilx1MDAzNFx1MDAyY1x1MDAzOFx1MDAzNCBcdTA0MzNcdTA0MzAiLCJzaXRlIjp7InVybCI6IiMiLCJ0aXRsZSI6InZlcnRleC5zcGIucnUifX0="
+                                d="M1529.79,351.3l-215.1,61.89a8.41,8.41,0,0,1-8.69-2.58l-.1-.12-60-74.22a2.91,2.91,0,0,1,1.51-4.64l200.55-54,9.46,14.18,19.92-5.58,48.89,60.68Z" fill="#cacee5" stroke="#30409a" stroke-miterlimit="10" stroke-width="2"/>
+                        <path
+                                data-title="ЗАО «Биокад»"
+                                data-id="9"
+                                data-json="eyJpbWFnZSI6eyJ1cmwiOiIvaW1hZ2VzL3Jlc2lkZW50cy9sb2dvdHlwZXMvdmVydGV4LnBuZyIsInRleHQiOiJcdTA0MWJcdTA0M2VcdTA0MzNcdTA0M2VcdTA0NDJcdTA0MzhcdTA0M2YgXHUwNDQwXHUwNDM1XHUwNDM3XHUwNDM4XHUwNDM0XHUwNDM1XHUwNDNkXHUwNDQyXHUwNDMwIn0sInRpdGxlIjoiXHUwNDEwXHUwNDFlIFx1MDBhYlx1MDQxMlx1MDQzNVx1MDQ0MFx1MDQ0Mlx1MDQzNVx1MDQzYVx1MDQ0MVx1MDBiYiIsImRlc2NyaXB0aW9uIjoiXHUwNDI0XHUwNDMwXHUwNDQwXHUwNDNjXHUwNDMwXHUwNDQ2XHUwNDM1XHUwNDMyXHUwNDQyXHUwNDM4XHUwNDNhXHUwNDMwIFx1MDQzOCBcdTA0MzFcdTA0MzhcdTA0M2VcdTA0NDJcdTA0MzVcdTA0NDVcdTA0M2RcdTA0M2VcdTA0M2JcdTA0M2VcdTA0MzNcdTA0MzhcdTA0MzgiLCJzcGFjZSI6Ilx1MDAzNFx1MDAyY1x1MDAzOFx1MDAzNCBcdTA0MzNcdTA0MzAiLCJzaXRlIjp7InVybCI6IiMiLCJ0aXRsZSI6InZlcnRleC5zcGIucnUifX0="
+                                d="M622.3,400.55c1.42,0-26.74-57.87-32.19-69.05,5.45,11.18,33.61,69.05,32.19,69.05h0l-2.49.07-203.17,7.72-1.78,2.37.78,3.09-126,2.51L277.09,307.7a96.94,96.94,0,0,0-8-28.88h0L217.19,150h0a5.18,5.18,0,0,1,3.62-6.94L443.05,90.25a41.13,41.13,0,0,1,45.09,19.37l.26.45,44.08,77.75-44.18,7.39a2.14,2.14,0,0,0-1.49,3.18h0l1.5,2.48a2.16,2.16,0,0,1-1.47,3.23h0l-22.21,3.7A2.2,2.2,0,0,0,463,211h0l5.7,10.26h0a2.53,2.53,0,0,0,2.41,1l53.46-7.64,50.14,92.69a2.82,2.82,0,0,1-1.88,4.11h0L543,316.85l-.5,1.1L552.7,335.5l.77.36L587.16,330h0a2.92,2.92,0,0,1,3,1.65" fill="#cacee5" stroke="#30409a" stroke-miterlimit="10" stroke-width="2"/>
+                    </g>
+                </svg>
+                {#<div class="b-visual__area-title" style="top: 198.295px; left: 699.334px;">ЗАО «Биокад»</div>#}
+            </div>
+        </div>
+        <div class="b-area-planoplan">
+            <iframe src="https://widget.planoplan.com/eb7000978bd630361458292a84f3b2fc" frameborder="0" scrolling="no" allowfullscreen></iframe>
+        </div>
+        <section class="b-area-descr">
+            <div class="b-area-descr__title">
+                <h2>Инженерная инфраструктура</h2>
+            </div>
+            <div class="b-area-descr__img">
+                <img src="/images/infrastructure/noidorf-engine.png" alt="Нойдорф">
+            </div>
+            <div class="b-area-descr__block">
+                <div class="b-area-descr__text b-area-descr__text_with_marker">
+                    <p>Подготовленная инженерная инфраструктура обеспечивает компаниям-резидентам возможность технологического присоединения к инженерным сетям. Точки для подключения к инженерным сетям находятся вблизи границ участка резидента.</p>
+                    <div class="b-area-descr__main-feature">
+                        <h3 class="b-area-descr__main-feature-title">30% экономия инвестиций</h3>
+                        <div class="b-area-descr__main-feature-text">в создание научно-производственной базы</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="b-area-descr__icons-list b-area-engine-list">
+                <li class="b-area-engine-item b-area-engine-item_icon_electricity">
+                    <h4 class="b-area-engine-item__title">Электроснабжение</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Восемь трансформаторных подстанций мощностью 2х1250 кВА и КЛ 10/0,4кВ.</p>
+                        <p>РП-740, присоединенная мощность 12,8 МВА.</p>
+                        <p>Категория надежности электроснабжения II.</p>
+                    </div>
+                </li>
+                <li class="b-area-engine-item b-area-engine-item_icon_heating">
+                    <h4 class="b-area-engine-item__title">Теплоснабжение</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Собственная газовая котельная мощностью 18 Гкал</p>
+                    </div>
+                </li>
+                <li class="b-area-engine-item b-area-engine-item_icon_water">
+                    <h4 class="b-area-engine-item__title">Водоснабжение</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Водоснабжение обеспечивает ГУП «Водоканал Санкт-Петербурга» 990 м³ в сутки</p>
+                    </div>
+                </li>
+                <li class="b-area-engine-item b-area-engine-item_icon_sanitation">
+                    <h4 class="b-area-engine-item__title">Канализация</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Предусмотрены хозяйственно-бытовая и ливневая канализации.</p>
+                    </div>
+                </li>
+                <li class="b-area-engine-item b-area-engine-item_icon_network">
+                    <h4 class="b-area-engine-item__title">Сети связи</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Система кабельной канализации между узлами связи операторов и объектами резидентов общей протяжённостью более 15 км.</p>
+                    </div>
+                </li>
+                <li class="b-area-engine-item b-area-engine-item_icon_security">
+                    <h4 class="b-area-engine-item__title">Комплексная безопасность</h4>
+                    <div class="b-area-engine-item__text">
+                        <p>Интегрированной системой безопасности на обеих площадках.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="b-area-descr b-area-descr_theme_grey">
+            {% include "../components/animation-line/animation-line.twig" %}
+            <div class="b-area-descr__title">
+                <h2>Таможенный пост</h2>
+            </div>
+            <div class="b-area-descr__img">
+                <img src="/images/infrastructure/noidorf-customs.png" alt="Таможенный пост">
+            </div>
+            <div class="b-area-descr__block">
+                <div class="b-area-descr__text">
+                    <p>На территории ОЭЗ «Санкт-Петербург» применяется таможенная процедура «свободная таможенная зона», позволяющая на льготных условиях ввозить оборудование и компоненты для резидентов ОЭЗ.</p>
+                </div>
+                <h3 class="b-area-descr__subtitle">На площадке «Нойдорф» действует Петродворцовый таможенный пост</h3>
+                <ul class="b-area-descr__list">
+                    <li class="b-area-descr__item">2 автомобильных контрольно-пропускных пункта</li>
+                    <li class="b-area-descr__item">1 зона таможенного контроля</li>
+                    <li class="b-area-descr__item">Стоянка на 6 большегрузных автомобилей</li>
+                    <li class="b-area-descr__item">Досмотровая площадка с навесом</li>
+                    <li class="b-area-descr__item">Автомобильные весы с установкой радиационного контроля «Янтарь»</li>
+                </ul>
+                <h3 class="b-area-descr__subtitle">Преимущества процедуры свободной таможенной зоны (СТЗ) для резидентов ОЭЗ:</h3>
+                <ul class="b-area-descr__big-list">
+                    <li class="b-area-descr__big-item"><strong>Отсрочка выплаты</strong> таможенных пошлин</li>
+                    <li class="b-area-descr__big-item"><strong>Отсутствие затрат</strong> на склад временного хранения</li>
+                    <li class="b-area-descr__big-item"><strong>Гибкая система уплаты таможенных платежей:</strong> выплата таможенной пошлины и НДС происходит либо целиком за окончательный продукт либо только за его иностранные компоненты</strong> на склад временного хранения</li>
+                    <li class="b-area-descr__big-item"><strong>Возможность беспошлинного размещения иностранных товаров</strong> на территории ОЭЗ практически неограниченное количество времени</li>
+                    <li class="b-area-descr__big-item"><strong>Собственный таможенный пост</strong></li>
+                </ul>
+            </div>
+        </section>
+        <section class="b-area-centre">
+            <div class="b-area-centre__title">
+                <h2>Административно-деловой центр</h2>
+            </div>
+            {% include '../components/glide-carousel/glide-carousel.twig' with {
+                    modify: "j-area-slider",
+                    slides: [
+                        {
+                            img: "/images/infrastructure/noidorf-slide-1.jpg",
+                            text: "Здание административно-делового центра. Главный вход."
+                        },
+                        {
+                            img: "/images/infrastructure/noidorf-slide-1.jpg",
+                            text: "Здание административно-делового центра. Главный вход."
+                        }
+                    ],
+                    arrow: true,
+                    dots: true
+                } %}
+            <ul class="b-area-centre__list">
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">B+</div>
+                    <div class="b-area-centre__item-text">Класс</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">7 этажей</div>
+                    <div class="b-area-centre__item-text">Этажность</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">14 975 м²</div>
+                    <div class="b-area-centre__item-text">Общая площадь</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">нет</div>
+                    <div class="b-area-centre__item-text">Свободная площадь</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">170 мест</div>
+                    <div class="b-area-centre__item-text">Открытая парковка</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">3 метра</div>
+                    <div class="b-area-centre__item-text">Высота потолков</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">100 Вт/1 м²</div>
+                    <div class="b-area-centre__item-text">Энергетическая мощность</div>
+                </li>
+                <li class="b-area-centre__item">
+                    <div class="b-area-centre__item-title">300 кг/1 м²</div>
+                    <div class="b-area-centre__item-text">Нагрузка на перекрытия</div>
+                </li>
+            </ul>
+        </section>
+        <section class="b-advantages b-advantages_theme_gradient">
+            <div class="b-advantages__img">
+                <img src="/images/infrastructure/noidorf-business.png " alt="Помещение бизнес центра">
+            </div>
+            <div class="b-advantages__block">
+                <div class="b-advantages__title">
+                    <h2>В бизнес-центре</h2>
+                </div>
+                <ul class="b-advantages__list">
+                    <li class="b-advantages__item">Офисные помещения с отделкой</li>
+                    <li class="b-advantages__item">Открытый наземный и подземный паркинг</li>
+                    <li class="b-advantages__item">Интернет и телефония</li>
+                    <li class="b-advantages__item">Центр обработки данных </li>
+                    <li class="b-advantages__item">Кафе и конференц-зал</li>
+                    <li class="b-advantages__item">Уборка офисов</li>
+                </ul>
+            </div>
+        </section>
+        <section class="b-advantages">
+            <div class="b-advantages__img">
+                <img src="/images/infrastructure/noidorf-comfort.png" alt="Помещение бизнес центра">
+            </div>
+            <div class="b-advantages__block">
+                <div class="b-advantages__title">
+                    <h2>Комфорт и безопасность</h2>
+                </div>
+                <ul class="b-advantages__list">
+                    <li class="b-advantages__item">Приточно-вытяжная система вентиляции</li>
+                    <li class="b-advantages__item">Централизованная система кондиционирования воздуха</li>
+                    <li class="b-advantages__item">Система оповещения пожарной безопасности</li>
+                </ul>
+            </div>
+        </section>
+        <section class="b-advantages b-advantages_theme_gradient">
+            <div class="b-advantages__img">
+                <img src="/images/infrastructure/noidorf-security.png " alt="Фото контрольно-пропускного пункта">
+            </div>
+            <div class="b-advantages__block">
+                <div class="b-advantages__title">
+                    <h2>Круглосуточная охрана</h2>
+                </div>
+                <div class="b-advantages__text">
+                    <p>В особой экономической зоне действует система контрольно-пропускных пунктов (КПП), предотвращающая свободное проникновение посторонних лиц на территорию. Проезд автотранспорта сторонних организаций и служб доставки осуществляется по предварительному согласованию с диспетчерской службой Управляющей компании. Кроме того, оба входа в бизнес-центр оборудованы системой контроля и управлением доступа в здание.</p>
+                </div>
+                <ul class="b-advantages__list">
+                    <li class="b-advantages__item">Видеонаблюдение</li>
+                    <li class="b-advantages__item">Система КПП и система контроля доступа</li>
+                    <li class="b-advantages__item">Охрана 24 часа</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+{% endblock %}

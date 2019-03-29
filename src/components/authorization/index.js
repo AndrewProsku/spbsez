@@ -1,5 +1,8 @@
 import $ from 'jquery';
+import Language from '../language';
 import Utils from '../../common/scripts/utils';
+
+const Lang = new Language();
 
 class Authorization {
     constructor() {
@@ -15,8 +18,8 @@ class Authorization {
         this.isPassword = false;
         this.isApprove = false;
 
-        this.emptyErrorMessage = 'Поле не может быть пустым';
-        this.incorrectEmailMessage = 'Некорректный email адрес';
+        this.emptyErrorMessage = Lang.get('validation.required');
+        this.incorrectEmailMessage = Lang.get('validation.email');
     }
 
     init() {
@@ -43,9 +46,7 @@ class Authorization {
             const isFormFulfilled = this.checkForm();
 
             if (isFormFulfilled) {
-                const dataToSend = $(event.target).serialize();
-
-                this.toLogin(dataToSend);
+                this.toLogin(`${$(event.target).serialize()}&lang=${document.documentElement.lang}`);
             }
         });
 

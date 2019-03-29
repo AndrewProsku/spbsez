@@ -9,7 +9,7 @@
         {% block title %}{% endblock %}
     </head>
     <body>
-
+        <div id="j-particles" class="background-particles j-particles"></div>
         {% include "../../components/alert-old-browser/alert-old-browser.twig" %}
 
         <div class="l-layout">
@@ -30,6 +30,5 @@
             {% include '../../components/mobile-menu/mobile-menu.twig' %}
         </div>
         <script async src="/scripts/app.js"></script>
-        {% include "../../components/background-animation/bg-animation.twig" %}
     </body>
 </html>

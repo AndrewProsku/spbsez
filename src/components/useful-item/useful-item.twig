@@ -1,0 +1,17 @@
+{#
+ modify
+    b-useful-item_gray_date
+ title
+ text
+ date
+#}
+
+<div class="b-useful-item {{ modify }}">
+    <div class="b-useful-item__caption-wrap">
+        <a href="{{ link?:'#' }}" class="b-useful-item__caption b-link-line">{{ title }}</a>
+    </div>
+    <div class="b-useful-item__text">{{ text }}</div>
+    <div class="b-useful-item__date">
+        <span>{% include '../news/media/time.svg.twig' %} {{ date }}</span>
+    </div>
+</div>

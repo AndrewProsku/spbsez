@@ -2,10 +2,13 @@
 const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const config = require('./tasks/config');
-const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
+const rev = require('./tasks/rev');
+
+rev([
+    './www/local/templates/kelnik/inc_footer.php'
+]);
 
 // CONFIG
 module.exports = {
@@ -13,8 +16,6 @@ module.exports = {
     context: path.resolve(__dirname, './src'),
     entry  : {
         app       : ['babel-polyfill', './common/scripts/app'],
-        visual    : './common/scripts/visual',
-        parametric: './common/scripts/parametric'
     },
     output: {
         filename: '[name].js',
@@ -23,81 +24,56 @@ module.exports = {
     module: {
         rules: [{
             test: /\.css/,
-            use : [
-                MiniCssExtractPlugin.loader,
-                "css-loader"
-            ]
+            use : ['style-loader', 'css-loader']
         }, {
             test   : /\.js$/,
             exclude: /(bower_components)/,
             use    : {
                 loader : 'babel-loader',
                 options: {
-                    presets       : ['env'],
+                    presets       : ['@babel/preset-env'],
+                    plugins       : ['@babel/plugin-proposal-object-rest-spread'],
                     cacheDirectory: true
                 }
             }
-        }, {
-            test   : /\.scss$/,
-            exclude: /(bower_components)/,
-            use    : [
-                MiniCssExtractPlugin.loader,
-                {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 2,
-                        sourceMap    : true
-                    }
-                }, {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins  : [autoprefixer()],
-                        sourceMap: true
-                    }
-                }, {
-                    loader: 'sass-loader',
-                    options: {
-                        sourceMap: true
-                    }
-                }
-            ]
         }, {
             test   : /\.twig$/,
             exclude: /(node_modules|bower_components)/,
             use    : {
                 loader: 'twig-loader'
             }
+        },{
+            test: /\.(png|jpg|gif)$/,
+            use: [
+                {
+                    loader: 'file-loader?name=/images/[name].[ext]',
+                    options: {
+                        name: '/images/[name].[ext]'
+                    }
+                }
+            ]
         }
         ]
     },
     plugins: [
-        new MiniCssExtractPlugin({
-          filename: './../styles/[name].css'
-        }),
         new CleanWebpackPlugin([
-            path.resolve(__dirname, config.scripts.output),
-            path.resolve(__dirname, config.styles.output)
-        ])
+            path.resolve(__dirname, config.scripts.output)
+        ]),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        })
       ],
     resolve: {
         alias: {
             components: path.resolve(__dirname, './src/components'),
-            common    : path.resolve(__dirname, './src/common')
+            common    : path.resolve(__dirname, './src/common'),
+            jquery    : 'jquery'
         }
     },
     devtool: 'source-map',
     optimization: {
         minimizer: [
-            new OptimizeCSSAssetsPlugin({
-                cssProcessorOptions: {
-                    map: {
-                        inline: false
-                    },
-                    discardComments: {
-                        removeAll: true
-                    }
-                },
-            }),
             new UglifyJSPlugin({
                 sourceMap: true,
                 uglifyOptions: {

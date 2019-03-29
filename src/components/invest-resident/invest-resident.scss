@@ -181,6 +181,14 @@
 .b-invest-resident__step-tag svg {
     fill: $white;
     margin-right: 15px;
+    position: relative;
+    top: -1px;
+}
+
+.b-invest-resident__step-tag img {
+    margin-right: 5px;
+    position: relative;
+    top: -2px;
 }
 
 .b-invest-resident__package {
@@ -219,9 +227,18 @@
 .b-invest-resident__list-num li {
     margin-bottom: 14px;
     counter-increment: conterList;
+    position: relative;
+    padding-left: 20px;
+
+    @media #{$tablet-portrait} {
+        padding-left: 40px;
+    }
 
     &:before {
         content: counter(conterList) ". ";
+        position: absolute;
+        top: 0;
+        left: 0;
         display: inline-block;
         width: 20px;
         opacity: 0.48;
@@ -237,6 +254,7 @@
     display: inline-block;
     @include font-size(p3);
     color: $white;
+    padding: 0;
     background-image: linear-gradient(to top, rgba($white, 0.12) 0%, rgba($white, 0.12) 40%, rgba($white, 0) 30%);
 
     &:hover {

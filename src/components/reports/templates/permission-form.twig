@@ -1,0 +1,23 @@
+<div class="b-input-group b-report-block__extra-fields j-permission-form" data-stage-id="{{ id }}">
+    <div class="b-input-block ">
+        {% include "../../forms/input-text/input-text.twig" with {
+            id: "construction-permission-num["~ id ~"]",
+            name: "construction-permission-num["~ id ~"]"
+        } %}
+        <label class="b-input-block__label" for="construction-permission-num[{{ id }}]">Номер разрешения</label>
+    </div>
+    {% include "../../forms/file/file.twig" with {
+        class: "b-input-block  j-file-input-block",
+        id: "construction-permission-file["~ id ~"]",
+        name: "construction-permission-file["~ id ~"]",
+        label: "Прикрепите файл разрешения",
+        withForm: true
+    } %}
+    <div class="b-input-block ">
+        {% include "../../forms/input-text/input-text.twig" with {
+            id: "construction-permission-date["~ id ~"]",
+            name: "construction-permission-date["~ id ~"]"
+        } %}
+        <label class="b-input-block__label" for="construction-permission-date[{{ id }}]">Дата документа</label>
+    </div>
+</div>

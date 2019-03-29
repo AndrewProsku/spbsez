@@ -1,5 +1,8 @@
 import $ from 'jquery';
+import Language from '../language';
 import Utils from '../../common/scripts/utils';
+
+const Lang = new Language();
 
 class PasswordRecovery {
     constructor() {
@@ -94,7 +97,7 @@ class PasswordRecovery {
     }
 
     showSuccessMessage(email) {
-        const successMessage = `Мы выслали ссылку на восстановление пароля на адрес ${email}`;
+        const successMessage = `${Lang.get('lk.passwordRecovery')} - ${email}`;
 
         Utils.clearHtml(this.$description);
         Utils.insetContent(this.$description, successMessage);

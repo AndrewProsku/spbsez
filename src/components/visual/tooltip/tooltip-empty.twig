@@ -1,0 +1,20 @@
+<div class="b-visual-tooltip b-visual-tooltip_theme_empty" style="top: 0; left: 0;">
+    <div class="b-visual-tooltip__title">{{ TITLE }}</div>
+    <div class="b-visual-tooltip__info">
+        <div class="b-visual-tooltip__info-text">{{ AREA_TITLE }}</div>
+        <div class="b-visual-tooltip__info-value">{{ AREA }}</div>
+    </div>
+    <div class="b-visual-tooltip__info">
+        <div class="b-visual-tooltip__info-text">{{ PRICE_TITLE }}</div>
+        <div class="b-visual-tooltip__info-value">{{ PRICE }}</div>
+    </div>
+    <div class="b-visual-tooltip__info">
+        <div class="b-visual-tooltip__info-text">{{ RENT_TITLE }}</div>
+        <div class="b-visual-tooltip__info-value">{{ RENT }}</div>
+    </div>
+    <ul class="b-visual-tooltip__features">
+        {% for feature in FEATURES %}
+            <li class="b-visual-tooltip__features-item b-visual-tooltip__features-item_icon_{{feature.ICON}}">{{feature.NAME}}</li>
+        {% endfor %}
+    </ul>
+</div>

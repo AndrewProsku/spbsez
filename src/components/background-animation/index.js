@@ -1,15 +1,49 @@
 import 'particles.js';
 
-const bgAnimation = document.querySelector('#j-particles');
+const isDesktop = window.matchMedia('(min-width: 1280px)');
 
-if (bgAnimation) {
-    const diameter = 240;
-    const radius = 120;
+class Particles {
+    constructor(node) {
+        this.node = node;
+        this.query = isDesktop.matches;
+    }
 
-    window.particlesJS.load('j-particles', '../assets/particles.json');
+    init() {
+        if (!this.node) {
+            return;
+        }
 
+        window.particlesJS.load('j-particles', '/assets/particles.json');
 
-    window.addEventListener('mousemove', (event) => {
-        bgAnimation.style['clip-path'] = `circle(${diameter}px at ${event.screenX}px ${event.screenY - radius}px)`;
-    });
+        this._bindEvents();
+    }
+
+    _bindEvents() {
+        this._clipPath = this._clipPath.bind(this);
+
+        if (this.query) {
+            window.addEventListener('mousemove', this._clipPath);
+        }
+
+        window.addEventListener('resize', () => {
+            if (this.query === isDesktop.matches) {
+                return;
+            }
+
+            this.query = isDesktop.matches;
+
+            const toggleEventListener = this.query ? window.addEventListener : window.removeEventListener;
+
+            toggleEventListener('mousemove', this._clipPath);
+        });
+    }
+
+    _clipPath(event) {
+        const radius = 120;
+        const diameter = 240;
+
+        this.node.style['clip-path'] = `circle(${diameter}px at ${event.screenX}px ${event.screenY - radius}px)`;
+    }
 }
+
+export default Particles;

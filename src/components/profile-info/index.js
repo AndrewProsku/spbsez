@@ -12,7 +12,9 @@ class ProfileInfo {
         this.$addContactButton = this.$profileInfo.querySelector('.j-add-contact');
 
         this.adminInputs = Array.from(this.$adminInfo.querySelectorAll('input'));
-        this.companyInputs = Array.from(this.$companyInfo.querySelectorAll('input'));
+        if (this.$companyInfo) {
+            this.companyInputs = Array.from(this.$companyInfo.querySelectorAll('input'));
+        }
 
         this.messageInputClass = 'b-form-block__error-text';
         this.errorInputClass = 'b-form-block-error';
@@ -72,11 +74,17 @@ class ProfileInfo {
                 this.onChange(event.target);
             });
         });
-        this.companyInputs.forEach((input) => {
-            input.addEventListener('change', (event) => {
-                this.onChange(event.target);
+        if (this.companyInputs) {
+            this.companyInputs.forEach((input) => {
+                input.addEventListener('change', (event) => {
+                    this.onChange(event.target);
+                });
             });
-        });
+        }
+
+        if (!this.$contactsInfo) {
+            return;
+        }
 
         this.bindEventsContacts();
 
@@ -107,6 +115,10 @@ class ProfileInfo {
     }
 
     bindEventsContacts() {
+        if (!this.$contactsInfo) {
+            return;
+        }
+
         const contactBlocks = Array.from(this.$contactsInfo.querySelectorAll('.b-profile-block'));
 
         contactBlocks.forEach((contact) => {
@@ -142,6 +154,10 @@ class ProfileInfo {
 
     initCompanyInfo(data) {
         const that = this;
+
+        if (!that.$companyInfo) {
+            return;
+        }
 
         if (data.WORK_COMPANY) {
             that.$companyInfo.querySelector('#company-resident').value = data.WORK_COMPANY;

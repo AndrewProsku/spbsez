@@ -4,7 +4,6 @@ namespace Kelnik\Refbook\Model;
 
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
@@ -66,6 +65,12 @@ class ReviewTable extends DataManager
                 ]
             ),
             new Main\Entity\StringField(
+                'NAME_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_REVIEW_NAME_EN'),
+                ]
+            ),
+            new Main\Entity\StringField(
                 'ALIAS',
                 [
                     'title' => Loc::getMessage('KELNIK_REVIEW_ALIAS'),
@@ -77,8 +82,16 @@ class ReviewTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_REVIEW_COMMENT'),
                 ]
             ),
+            new Main\Entity\StringField(
+                'COMMENT_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_REVIEW_COMMENT_EN'),
+                ]
+            ),
             new Main\Entity\StringField('BODY_TEXT_TYPE'),
             new Main\Entity\StringField('PREVIEW_TEXT_TYPE'),
+            new Main\Entity\StringField('BODY_EN_TEXT_TYPE'),
+            new Main\Entity\StringField('PREVIEW_EN_TEXT_TYPE'),
             new Main\Entity\TextField(
                 'BODY',
                 [
@@ -86,9 +99,21 @@ class ReviewTable extends DataManager
                 ]
             ),
             new Main\Entity\TextField(
+                'BODY_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_REVIEW_TEXT_EN'),
+                ]
+            ),
+            new Main\Entity\TextField(
                 'PREVIEW',
                 [
                     'title' => Loc::getMessage('KELNIK_REVIEW_PREVIEW'),
+                ]
+            ),
+            new Main\Entity\TextField(
+                'PREVIEW_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_REVIEW_PREVIEW_EN'),
                 ]
             )
         ];

@@ -3,6 +3,7 @@ class AnimationLine {
         this.animatedLines = animationLines;
         this.firstScreen = mainFirstScreen;
         this.firstScreenHeight = this.firstScreen.offsetHeight;
+        this.firstScreenBottom = this.firstScreen.getBoundingClientRect().top + this.firstScreen.offsetHeight;
     }
 
     init() {
@@ -18,6 +19,7 @@ class AnimationLine {
 
     _repositionOnScroll() {
         document.addEventListener('scroll', () => {
+            this._computeFirstScreenBottom();
             this._setAnimationPosition();
         });
     }
@@ -25,32 +27,32 @@ class AnimationLine {
     _repositionOnResize() {
         window.addEventListener('resize', () => {
             this.firstScreenHeight = this.firstScreen.offsetHeight;
+            this._computeFirstScreenBottom();
             this._setAnimationPosition();
         });
     }
 
     _raiseAnimationLayer() {
-        this.animatedLines.style.zIndex = 1;
+        this.animatedLines.style.zIndex = 0;
     }
 
-    _getPositionsDifference() {
-        return this.firstScreenHeight - window.pageYOffset;
+    _computeFirstScreenBottom() {
+        this.firstScreenBottom = this.firstScreen.getBoundingClientRect().top + this.firstScreen.offsetHeight;
     }
 
-    _comparePositions() {
+    _isFirstScreenVisible() {
         const zero = 0;
+        // this._computeFirstScreenBottom();
 
-        return this._getPositionsDifference() < zero;
+        return this.firstScreenBottom >= zero;
     }
 
     _setAnimationPosition() {
-        if (this._comparePositions()) {
+        if (!this._isFirstScreenVisible()) {
             return;
         }
 
-        const animationPosition = this._getPositionsDifference();
-
-        this.animatedLines.style.top = `${animationPosition}px`;
+        this.animatedLines.style.top = `${this.firstScreenBottom}px`;
     }
 }
 

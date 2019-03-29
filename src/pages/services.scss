@@ -1,4 +1,4 @@
-.b-services-title {
+.b-services__title {
     @include padding-level(top, blue);
     @include padding-level(bottom, blue);
     @include prefix(2, 36);
@@ -14,9 +14,13 @@
         @include prefix(4, 36);
         @include suffix(4, 36);
     }
+
+    h1 {
+        @include font-size('h1');
+    }
 }
 
-.b-services-text {
+.b-services__text p {
     @include font-size("p1");
     @include margin-level(bottom, blue);
     @include padding-level(top, dark-yellow);
@@ -28,12 +32,12 @@
         @include padding-level(bottom, dark-yellow);
         @include prefix(3, 36);
         @include suffix(3, 36);
+        max-width: 1600px;
     }
 
     @media #{$fullhd} {
         @include prefix(4, 36);
         @include suffix(4, 36);
-        max-width: 1450px;
     }
 }
 

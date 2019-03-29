@@ -44,8 +44,10 @@ class kelnik_refbook extends CModule
             `ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
             `SORT` INT(11) NOT NULL DEFAULT '500',
             `IMAGE_ID` INT(11) UNSIGNED NULL DEFAULT '0',
+            `IMAGE_ID_EN` INT(11) UNSIGNED NULL DEFAULT '0',
             `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
             `NAME` VARCHAR(255) NOT NULL,
+            `NAME_EN` VARCHAR(255) NOT NULL,
             `TEXT_TEXT_TYPE` VARCHAR(4) NULL DEFAULT 'html',
             `TEXT` TEXT NULL,
             PRIMARY KEY (`ID`),
@@ -59,11 +61,15 @@ class kelnik_refbook extends CModule
             `PLACE` INT(3) UNSIGNED NOT NULL DEFAULT '0',
             `SORT` INT(11) NOT NULL DEFAULT '500',
             `IMAGE_ID` INT(11) UNSIGNED NULL DEFAULT '0',
+            `IMAGE_ID_EN` INT(11) UNSIGNED NULL DEFAULT '0',
             `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
             `NAME` VARCHAR(255) NOT NULL,
+            `NAME_EN` VARCHAR(255) NOT NULL,
             `SITE` VARCHAR(255) NULL DEFAULT NULL,
             `TEXT_TEXT_TYPE` VARCHAR(4) NULL DEFAULT 'html',
+            `TEXT_EN_TEXT_TYPE` VARCHAR(4) NULL DEFAULT 'html',
             `TEXT` TEXT NULL,
+            `TEXT_EN` TEXT NULL,
             PRIMARY KEY (`ID`),
             INDEX `SORT` (`SORT`),
             INDEX `ACTIVE` (`ACTIVE`),
@@ -75,6 +81,7 @@ class kelnik_refbook extends CModule
             `SORT` INT(11) NOT NULL DEFAULT '500',
             `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
             `NAME` VARCHAR(255) NOT NULL,
+            `NAME_EN` VARCHAR(255) NOT NULL,
             PRIMARY KEY (`ID`),
             INDEX `SORT` (`SORT`),
             INDEX `ACTIVE` (`ACTIVE`)
@@ -88,27 +95,61 @@ class kelnik_refbook extends CModule
             `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
             `ALIAS` VARCHAR(255) NULL DEFAULT NULL,
             `NAME` VARCHAR(255) NOT NULL,
+            `NAME_EN` VARCHAR(255) NOT NULL,
             `BODY_TEXT_TYPE` VARCHAR(4) NULL DEFAULT 'html',
+            `BODY_EN_TEXT_TYPE` VARCHAR(4) NULL DEFAULT 'html',
             `PREVIEW_TEXT_TYPE` VARCHAR(4) NULL DEFAULT 'html',
+            `PREVIEW_EN_TEXT_TYPE` VARCHAR(4) NULL DEFAULT 'html',
             `COMMENT` VARCHAR(255) NULL DEFAULT NULL,
+            `COMMENT_EN` VARCHAR(255) NULL DEFAULT NULL,
             `BODY` TEXT NULL,
+            `BODY_EN` TEXT NULL,
             `PREVIEW` TEXT NULL,
+            `PREVIEW_EN` TEXT NULL,
             PRIMARY KEY (`ID`),
             INDEX `SORT` (`SORT`),
             INDEX `ACTIVE` (`ACTIVE`),
             INDEX `ALIAS` (`ALIAS`)
         ) COLLATE='utf8_general_ci' ENGINE=InnoDB;");
 
-        $this->getConnection()->query("CREATE TABLE `kelnik_refbook_team` (
+        $this->getConnection()->query("CREATE TABLE `" . \Kelnik\Refbook\Model\TeamTable::getTableName() . "` (
             `ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
             `SORT` INT(11) NOT NULL DEFAULT '500',
             `IMAGE_ID` INT(11) UNSIGNED NULL DEFAULT '0',
             `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
             `NAME` VARCHAR(255) NULL DEFAULT NULL,
+            `NAME_EN` VARCHAR(255) NULL DEFAULT NULL,
             `TEXT` VARCHAR(255) NULL DEFAULT NULL,
+            `TEXT_EN` VARCHAR(255) NULL DEFAULT NULL,
             PRIMARY KEY (`ID`),
             INDEX `SORT` (`SORT`),
             INDEX `ACTIVE` (`ACTIVE`)
+        ) COLLATE='utf8_general_ci' ENGINE=InnoDB");
+
+        $this->getConnection()->query("CREATE TABLE `" . \Kelnik\Refbook\Model\DocsTable::getTableName() . "` (
+            `ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `SORT` INT(11) NOT NULL DEFAULT '500',
+            `FILE_ID` INT(11) UNSIGNED NULL DEFAULT '0',
+            `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
+            `SITE_ID` VARCHAR(2) NULL DEFAULT 's1',
+            `NAME` VARCHAR(255) NULL DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            INDEX `SORT` (`SORT`),
+            INDEX `ACTIVE` (`ACTIVE`),
+	        INDEX `SITE_ID` (`SITE_ID`)
+        ) COLLATE='utf8_general_ci' ENGINE=InnoDB");
+
+        $this->getConnection()->query("CREATE TABLE `" . \Kelnik\Refbook\Model\PresTable::getTableName() . "` (
+            `ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `SORT` INT(11) NOT NULL DEFAULT '500',
+            `FILE_ID` INT(11) UNSIGNED NULL DEFAULT '0',
+            `ACTIVE` ENUM('Y','N') NOT NULL DEFAULT 'N',
+            `SITE_ID` VARCHAR(2) NULL DEFAULT 's1',
+            `NAME` VARCHAR(255) NULL DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            INDEX `SORT` (`SORT`),
+            INDEX `ACTIVE` (`ACTIVE`),
+	        INDEX `SITE_ID` (`SITE_ID`)
         ) COLLATE='utf8_general_ci' ENGINE=InnoDB");
 
         //$this->InstallFiles();
@@ -123,6 +164,9 @@ class kelnik_refbook extends CModule
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\ResidentTypesTable::getTableName());
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\ReviewTable::getTableName());
         $this->getConnection()->dropTable(\Kelnik\Refbook\Model\TeamTable::getTableName());
+        $this->getConnection()->dropTable(\Kelnik\Refbook\Model\DocsTable::getTableName());
+        $this->getConnection()->dropTable(\Kelnik\Refbook\Model\PresTable::getTableName());
+
         //$this->UnInstallFiles();
 
         ModuleManager::unRegisterModule($this->MODULE_ID);

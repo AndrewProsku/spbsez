@@ -13,9 +13,7 @@ function clean() {
     return del([
         config.pages.output,
         config.scripts.output,
-        config.styles.output,
-        config.fonts.output,
-        config.images.output
+        config.styles.output
     ]);
 }
 

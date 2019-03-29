@@ -37,7 +37,6 @@ $APPLICATION->SetTitle("Управляющая компания");
         </div>
 
         <div class="l-management-company__quote" id="mission">
-            <?php $APPLICATION->IncludeFile('inc_animation.php'); ?>
             <div class="b-quote">
                 <?$APPLICATION->IncludeComponent(
                     "kelnik:textblocks",
@@ -74,7 +73,7 @@ $APPLICATION->SetTitle("Управляющая компания");
                     "SECTION" => "4",
                     "CACHE_GROUPS" => "N",
                     "CACHE_TYPE" => "A",
-                    "CACHE_TIME" => "360000"
+                    "CACHE_TIME" => "3600"
                 ),
                 array()
             ); ?>
@@ -85,7 +84,7 @@ $APPLICATION->SetTitle("Управляющая компания");
                 <div class="b-ask-for-advice__text">
                     <p>Обратитесь за консультацией по процедуре получения статуса резидента ОЭЗ «Санкт-Петербург» к нашим специалистам</p>
                 </div>
-                <a href="#" class="b-ask-for-advice__link button">Контакты отдела</a>
+                <a href="/contacts/#managment" class="b-ask-for-advice__link button">Контакты отдела</a>
             </section>
         </div>
 

@@ -4,7 +4,6 @@ namespace Kelnik\Refbook\Model;
 
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
-use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
@@ -39,6 +38,12 @@ class PartnerTable extends DataManager
                 ]
             ),
             new Main\Entity\IntegerField(
+                'IMAGE_ID_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_PARTNER_IMAGE_EN'),
+                ]
+            ),
+            new Main\Entity\IntegerField(
                 'SORT',
                 [
                     'default_value' => 500,
@@ -57,6 +62,12 @@ class PartnerTable extends DataManager
                 'NAME',
                 [
                     'title' => Loc::getMessage('KELNIK_PARTNER_NAME'),
+                ]
+            ),
+            new Main\Entity\StringField(
+                'NAME_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_PARTNER_NAME_EN'),
                 ]
             ),
             new Main\Entity\StringField('TEXT_TEXT_TYPE'),

@@ -48,7 +48,8 @@
         min-height: 425px;
         flex-wrap: nowrap;
     }
-    @media #{$laptop} {
+
+    @media #{$fullhd} {
         min-height: 561px;
     }
 }
@@ -64,18 +65,19 @@
     justify-content: space-between;
     background-size: cover;
     background-position: center center;
+    box-sizing: border-box;
 
     @media #{$tablet-portrait} {
         @include prefix(2, 32);
         @include suffix(2, 32);
-        flex-basis: 50%;
+        width: 50%;
         height: 33.33%;
     }
 
     @media #{$laptop} {
         @include prefix(1, 32);
         @include suffix(1, 32);
-        flex-basis: 25%;
+        width: 25%;
         height: 66.66%;
     }
 
@@ -84,13 +86,14 @@
         align-self: flex-end;
         background-color: $bg-select;
         border: 1px solid $grey;
+        margin-left: auto;
     }
 
     &_theme_investors {
         background-image: url("/images/management-company/invest.jpg");
 
-        &:after {
-            @media #{$tablet-portrait} {
+        @media #{$tablet-portrait} {
+            &:after {
                 right: -50%;
                 top: 0;
                 border-right: 1px solid #d3d4e0;
@@ -102,31 +105,33 @@
     &_theme_development {
         background-image: url("/images/management-company/develop.jpg");
 
-        &:after {
-            @media #{$tablet-portrait} {
+        @media #{$tablet-portrait} {
+            &:after {
                 right: -50%;
                 top: 0;
                 border-right: 1px solid #d3d4e0;
             }
+        }
 
-            @media #{$laptop} {
+        @media #{$laptop} {
+            &:after {
                 border-top: 1px solid #d3d4e0;
             }
         }
     }
 
-    &_theme_work {
-        &:after {
-            @media #{$tablet-portrait} {
-                left: -50%;
-                bottom: -1px;
-                border-left: 1px solid #d3d4e0;
-            }
+    &_theme_work:after {
+        @media #{$tablet-portrait} {
+            left: -50%;
+            bottom: -1px;
+            border-left: 1px solid #d3d4e0;
+            margin-left: -1px;
+        }
 
-            @media #{$laptop} {
-                border-bottom: 1px solid #d3d4e0;
-                border-right: 1px solid #d3d4e0;
-            }
+        @media #{$laptop} {
+            margin-left: 0;
+            border-bottom: 1px solid #d3d4e0;
+            border-right: 1px solid #d3d4e0;
         }
     }
 
@@ -135,8 +140,8 @@
     &_theme_work {
         position: relative;
 
-        &:after {
-            @media #{$tablet-portrait} {
+        @media #{$tablet-portrait} {
+            &:after {
                 content: "";
                 position: absolute;
                 width: 50%;
@@ -147,8 +152,10 @@
     }
 }
 
+
 .b-functions__item-title {
     @include font-size("p3");
+    font-family: $font-bold;
     font-weight: 700;
 
     &_theme_investors,

@@ -12,7 +12,7 @@
 
 <meta name="format-detection" content="telephone=no">
 
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#662D91">
 <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
 <link rel="apple-touch-icon-precomposed" sizes="32x32" href="/favicons/apple-touch-icon-32x32.png">
 <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
@@ -118,9 +118,8 @@
 </div>
 
         <div class="l-layout">
-
             <header class="l-home__header inner-header j-home__header">
-                <div class="l-home__header-left">
+                                <div class="l-home__header-left">
     <a href="/" class="b-logo__link" title="Вернуться на главную"></a>
 </div>
 <div class="l-home__header-center">
@@ -209,7 +208,7 @@
     </div>
 </div>
 
-            </header>
+                            </header>
 
             <main class="l-layout__content l-layout__content-inner">
                     <div class="b-lk-nav">
@@ -308,17 +307,18 @@
                 </label>
             </div>
 
-            <div class="b-form-block">
+            <div class="b-form-block b-form-block_is_long-label">
                 <input
         id="organization"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
         name="organization"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                 required                                         >
+                 required                                                 
+>
 
                 <label for="theme-request" class="b-form-block__label">
                     Организация, подающая заявку
@@ -326,79 +326,166 @@
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
 
-            <div class="b-form-block">
-                <input
-        id="visitTime"
-        class="b-input-text"
+            <div class="b-form-block b-form-block_is_date">
+                <div class="b-form-block__date">
+                    <span class="b-form-block__def">С</span>
+                    <input
+        id="visitTimeFrom"
+        class="b-input-text j-input-value-from j-input-calendar"
         type="text"
-        name="visitTime"
+        name="visitTimeFrom"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                 required                                          data-date="true">
+                 required          readonly                                  data-date="true"        data-date-class='j-date-from'
+>
+                    <label for="theme-request" class="b-form-block__label">
+                        Дата и время визита «C»
+                    </label>
+                </div>
 
-                <label for="theme-request" class="b-form-block__label">
+                <div class="b-form-block__date">
+                    <span class="b-form-block__def">До</span>
+                    <input
+        id="visitTimeFrom"
+        class="b-input-text j-input-value-to j-input-calendar"
+        type="text"
+        name="visitTimeFrom"
+        maxlength=""
+        autocomplete=""
+        value=""
+        placeholder=""
+                 required          readonly                                  data-date="true"        data-date-class='j-date-to'
+>
+                    <label for="theme-request" class="b-form-block__label">
+                        Дата и время визита «До»
+                    </label>
+                </div>
+
+                <div class="b-form-block-calendar j-form-block-calendars">
+                    <div class="b-input-date j-input-date j-date-from"
+     data-from-year=""
+     data-from-month=""
+     data-show-months="4"
+     data-value-selector="j-input-value-from"
+     data-name="dateFrom"
+     data-sync-from="dateTo"
+     data-sync-to="">
+
+    <div class="b-input-date__title">С</div>
+
+    <ul class="b-input-date__head">
+        <li class="b-input-date__head-item">Пн</li>
+        <li class="b-input-date__head-item">Вт</li>
+        <li class="b-input-date__head-item">Ср</li>
+        <li class="b-input-date__head-item">Чт</li>
+        <li class="b-input-date__head-item">Пт</li>
+        <li class="b-input-date__head-item b-input-date__head-item_is_disabled">Сб</li>
+        <li class="b-input-date__head-item b-input-date__head-item_is_disabled">Вс</li>
+    </ul>
+
+    <div class="b-input-date__content j-input-date-content"></div>
+
+    <div class="b-input-date__addition">
+        <div class="b-input-date__time">
+            <input type="text" class="j-input-date-time">
+        </div>
+    </div>
+</div>
+
+                    <div class="b-input-date j-input-date j-date-to"
+     data-from-year=""
+     data-from-month=""
+     data-show-months="4"
+     data-value-selector="j-input-value-to"
+     data-name="dateTo"
+     data-sync-from=""
+     data-sync-to="dateFrom">
+
+    <div class="b-input-date__title">До</div>
+
+    <ul class="b-input-date__head">
+        <li class="b-input-date__head-item">Пн</li>
+        <li class="b-input-date__head-item">Вт</li>
+        <li class="b-input-date__head-item">Ср</li>
+        <li class="b-input-date__head-item">Чт</li>
+        <li class="b-input-date__head-item">Пт</li>
+        <li class="b-input-date__head-item b-input-date__head-item_is_disabled">Сб</li>
+        <li class="b-input-date__head-item b-input-date__head-item_is_disabled">Вс</li>
+    </ul>
+
+    <div class="b-input-date__content j-input-date-content"></div>
+
+    <div class="b-input-date__addition">
+        <div class="b-input-date__time">
+            <input type="text" class="j-input-date-time">
+        </div>
+    </div>
+</div>
+                </div>
+
+                <label class="b-form-block__label">
                     Дата и время визита
                 </label>
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
 
-            <div class="b-form-block">
+            <div class="b-form-block b-form-block_is_long-label">
                 <input
         id="visitTarget"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
         name="visitTarget"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                 required                                         >
-
+                 required                                                 
+>
                 <label for="theme-request" class="b-form-block__label">
                     Цель визита
                 </label>
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
 
-            <div class="b-form-block">
+            <div class="b-form-block b-form-block_is_long-label">
                 <input
         id="executiveCompany"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
         name="executiveCompany"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                 required                                         >
-
+                 required                                                 
+>
                 <label for="theme-request" class="b-form-block__label">
                     Должностное лицо компании, подающее заявку
                 </label>
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
 
-            <div class="b-form-block b-form-block_theme_grey">
+            <div class="b-form-block b-form-block_theme_grey b-form-block_is_long-label">
                 <input
         id="executiveVisit"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
         name="executiveVisit"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                 required                                         >
-
+                 required                                                 
+>
                 <label for="theme-request" class="b-form-block__label">
                     Должностное лицо компании, ответственное за визит
                 </label>
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
 
-            <div class="b-form-block">
+            <div class="b-form-block b-form-block_is_long-label">
                     <input
             id="phone"
             class="b-input-phone"
@@ -407,7 +494,6 @@
             autocomplete="tel"
             placeholder="+7 ___ ___-__-__"
                                         >
-
                 <label for="phone" class="b-form-block__label">Телефон</label>
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
@@ -415,114 +501,103 @@
 
         <div class="b-add-request__pass">
             <h4>Пропуск</h4>
-
             <div class="b-add-request__pass-container j-pass-container">
-
                 <div class="b-add-request__pass__item">
-
                     <div class="b-form-block__half-wrap b-form-block__half-wrap_is_top">
-                        <div class="b-form-block">
+                        <div class="b-form-block b-form-block_is_long-label">
                             <input
         id="fio"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
-        name="fio[]"
+        name="pass[fio][]"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                 required                                         >
-
+                 required                                                 
+>
                             <label for="theme-request" class="b-form-block__label">
                                 ФИО
                             </label>
                             <span class="b-form-block__error-text">Текст подсказки</span>
                         </div>
-
-                        <div class="b-form-block">
+                        <div class="b-form-block b-form-block_is_long-label">
                             <input
         id="organizationPass"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
-        name="organizationPass[]"
+        name="pass[organizationPass][]"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                 required                                         >
-
+                 required                                                 
+>
                             <label for="theme-request" class="b-form-block__label">
                                 Организация
                             </label>
                             <span class="b-form-block__error-text">Текст подсказки</span>
                         </div>
                     </div>
-
                     <div class="b-form-block__half-wrap b-form-block__half-wrap_is_center">
-                        <div class="b-form-block">
+                        <div class="b-form-block b-form-block_is_long-label">
                             <input
         id="carModel"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
-        name="carModel[]"
+        name="pass[carModel][]"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                 required                                         >
-
+                 required                                                 
+>
                             <label for="theme-request" class="b-form-block__label">
                                 Марка автомобиля
                             </label>
                             <span class="b-form-block__error-text">Текст подсказки</span>
                         </div>
-
-                        <div class="b-form-block">
+                        <div class="b-form-block b-form-block_is_long-label">
                             <input
         id="stateNumber"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
-        name="stateNumber[]"
+        name="pass[stateNumber][]"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                 required                                         >
-
+                 required                                                 
+>
                             <label for="theme-request" class="b-form-block__label">
                                 Гос. номер
                             </label>
                             <span class="b-form-block__error-text">Текст подсказки</span>
                         </div>
                     </div>
-
-                    <div class="b-form-block">
+                    <div class="b-form-block b-form-block_is_long-label">
                         <input
         id="accompanying"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
-        name="accompanying[]"
+        name="pass[accompanying][]"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                 required                                         >
-
+                 required                                                 
+>
                         <label for="theme-request" class="b-form-block__label">
                             Фамилия и инициалы сопровождающего лица
                         </label>
                         <span class="b-form-block__error-text">Текст подсказки</span>
                     </div>
-
                 </div>
-
             </div>
-
             <div class="b-profile-add">
                 <button class="button-add j-add-pass" type="button">Добавить еще пропуск</button>
             </div>
         </div>
-
         <button type="submit" class="button b-add-request__form-button">
             Подать заявку
         </button>
@@ -532,9 +607,9 @@
             </main>
 
             <footer class="l-home-footer b-footer">
-                <div class="b-footer__left">
+                                <div class="b-footer__left">
     <a href="/" class="b-footer__logo">
-        <img src="../images/home/logo-white.svg" alt="Особая Экономическая зона">
+        <img src="../images/home/logo-white-ru.svg" alt="Особая Экономическая зона">
     </a>
 </div>
 <div class="b-footer__center">
@@ -623,14 +698,15 @@
             <div class="b-form-block j-message-fio">
                 <input
         id="message-fio"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
         name="message-fio"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                                                        >
+                                                                
+>
 
                 <label for="message-fio" class="b-form-block__label">ФИО</label>
                 <span class="b-form-block__error-text">Имя</span>
@@ -669,7 +745,7 @@
         <button class="button b-vacancy__button j-message-submit">Написать сообщение</button>
     </form>
 </div>
-            </footer>
+                            </footer>
 
             <div class="b-mobile-menu j-mobile-menu">
     <div class="b-mobile-menu__header">

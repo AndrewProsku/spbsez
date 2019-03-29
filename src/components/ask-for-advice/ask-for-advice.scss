@@ -5,6 +5,11 @@
     background-image: linear-gradient(to right, $blue 0%, $violet 100%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 
+    @media #{$mobile-only} {
+        display: flex;
+        flex-direction: column;
+    }
+
     @media #{$tablet-portrait} {
         @include suffix(3, 36);
         @include prefix(2, 36);
@@ -34,9 +39,13 @@
 }
 
 a.b-ask-for-advice__link {
-    @include margin-level(top, yellow);
+    @include margin-level(top, green);
     color: $blue;
     background: $white;
+
+    @media #{$mobile-only} {
+        max-width: 284px;
+    }
 
     &:after {
         background-image: url("/images/management-company/arrow-right.svg");

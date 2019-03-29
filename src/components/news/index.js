@@ -12,8 +12,7 @@ class News {
         this.activeGroup = 'b-mini-filter__group_is_active';
         this.newsItemClass = 'b-news-item';
         this.contantLoadClass = 'b-news__content_is_load';
-
-        this.formData = new FormData();
+        this.tagNewsClass = 'j-news-tag';
     }
 
     init() {
@@ -54,45 +53,78 @@ class News {
                 this._closeAllSelects();
             }
         });
+
+        this._bindNewsTag();
+    }
+
+    _bindNewsTag() {
+        const tagNews = Array.from(document.querySelectorAll(`.${this.tagNewsClass}`));
+
+        tagNews.forEach((tag) => {
+            tag.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                this._activeInputById(tag.dataset.tag);
+                this._sendFilter();
+                this._setTitlesInSelects();
+            });
+        });
     }
 
     _sendFilter() {
         const that = this;
-        const dataSend = new FormData(this.filter);
+        const formData = new FormData(this.filter);
+        const action = this.filter.getAttribute('action');
+        const queryLink = this._setUrl();
 
-        this.formData = dataSend;
-        // this._runLoaderContant();
-
-        Utils.send(dataSend, '/tests/news.json', {
+        Utils.send(formData, action, {
             success(response) {
                 const {data} = response;
 
                 that._replaceHtmlNews(data);
+                that._bindNewsTag();
             },
             error(error) {
                 console.error(error);
             },
             complete() {
                 // that._stopLoaderContant();
+                window.history.pushState(null, null, `?${queryLink}`);
             }
-        }, 'GET');
+        }, this.filter.getAttribute('method') || 'post');
+    }
+
+    _setUrl() {
+        const url = new URLSearchParams();
+        const inputs = this.filter.querySelectorAll('input:checked');
+
+        inputs.forEach((input) => {
+            url.append(input.getAttribute('name'), input.value);
+        });
+
+        return url.toString();
     }
 
     _loadMore() {
         const that = this;
         const news = this.newsContainer.querySelectorAll(`.${this.newsItemClass}`);
+        const formData = new FormData(this.filter);
 
         this._disableButton();
 
         if (news.length) {
-            this.formData.append('countShowNews', `${news.length}`);
+            formData.append('showed', `${news.length}`);
         }
 
-        Utils.send(this.formData, '/tests/news.json', {
+        Utils.send(formData, '/api/news/', {
             success(response) {
                 const {data} = response;
 
                 that._insertHtmlNews(data);
+
+                if (!data.showMore) {
+                    that._hideLoadMore();
+                }
             },
             error(error) {
                 console.error(error);
@@ -100,7 +132,21 @@ class News {
             complete() {
                 that._enableButton();
             }
-        }, 'GET');
+        }, this.filter.getAttribute('method') || 'post');
+    }
+
+    _activeInputById(id) {
+        const inputs = Array.from(this.filter.querySelectorAll('input[type="checkbox"]'));
+        const first = 0;
+        const foundInput = inputs.filter((input) => {
+            return input.value === id;
+        })[first];
+
+        if (!foundInput) {
+            return;
+        }
+
+        foundInput.checked = true;
     }
 
     _switchSelect(select) {
@@ -173,6 +219,10 @@ class News {
 
     _stopLoaderContant() {
         this.newsContainer.classList.remove(this.contantLoadClass);
+    }
+
+    _hideLoadMore() {
+        Utils.hide(this.loadMore);
     }
 }
 

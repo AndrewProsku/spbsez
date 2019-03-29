@@ -1,0 +1,45 @@
+{% extends "./layout/_layout.twig" %}
+{% block title %} <title>Инфраструктура</title> {% endblock %}
+
+{% block content %}
+    {# Блок с анимацией #}
+
+    {% include "../components/animation-line/animation-line.twig" %}
+
+    {# Блок с подменю #}
+
+    {% include '../components/page-submenu/page-submenu.twig' with {
+        switch: true,
+        switchInfo: {
+            firstOptionText: 'Списком',
+            secondOptionText: 'На карте',
+            firstIsActive: false,
+            link: '#'
+        },
+        subitems: [{
+            href: '#',
+            name: 'Площадка «Новоорловская»'
+        }, {
+            href: '#',
+            name: 'Площадка «Нойдорф»'
+        }]
+    } %}
+
+    <div class="l-infrastructure-map">
+        <div class="b-infrastructure-map">
+            <div class="b-infrastructure-map__title">
+                <div class="b-page-switch b-infrastructure-switch">
+                    <a href="#">Списком</a>
+                    <a href="#" class="b-page-switch__switch b-page-switch__switch_is_switched"></a>
+                    <div>На карте</div>
+                </div>
+                <h1>Площадки особой экономической зоны «Санкт-Петербург»</h1>
+            </div>
+            <div class="b-infrastructure-map__content">
+                <div class="b-infrastructure-map__yandex-map j-yandex-map" data-json="eyJjZW50ZXIiOls1OS45NDIwOTksMzAuMTg2MTgyXSwic2Nyb2xsd2hlZWwiOmZhbHNlLCJmdWxsU2NyZWVuQ29udHJvbCI6ZmFsc2UsImN1c3RvbVpvb21Db250cm9sIjp0cnVlLCJodG1sTWFya2VycyI6W3sidGl0bGUiOiJcdTA0MWRcdTA0M2VcdTA0MzJcdTA0M2VcdTA0M2VcdTA0NDBcdTA0M2JcdTA0M2VcdTA0MzJcdTA0NDFcdTA0M2FcdTA0MzBcdTA0NGYiLCJsYXlvdXQiOiJzZWNvbmRhcnkiLCJjb29yZHMiOls2MC4wNTM0LDMwLjIzMTcxNF19LHsidGl0bGUiOiJcdTA0MWRcdTA0M2VcdTA0MzlcdTA0MzRcdTA0M2VcdTA0NDBcdTA0NDQiLCJsYXlvdXQiOiJzZWNvbmRhcnkiLCJjb29yZHMiOls1OS44NDA1NzMsMzAuMDA1OTRdfV0sIm1hcmtlcnMiOltdfQ==">
+                    <div id="first" class="b-yandex-map__base"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

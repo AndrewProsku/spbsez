@@ -16,7 +16,7 @@ class CurrentSite
      */
     protected static $instance = null;
 
-    private $_data = [];
+    private $data = [];
 
     /**
      * Creates new site instance.
@@ -45,22 +45,24 @@ class CurrentSite
 
     public function getData()
     {
-        if (!$this->_data) {
-            $this->_data = SitesTable::getCurrentSite();
+        if (!$this->data) {
+            $this->data = SitesTable::getCurrentSite();
             if ($this->getField('PHONE')) {
-                $this->_data['PHONE_F'] = preg_replace("/[^0-9]/", '', $this->getField('PHONE'));
-                $this->_data['PHONE_F'] = '+7' . substr($this->_data['PHONE_F'], -10);
+                $this->data['PHONE_F'] = preg_replace("/[^0-9]/", '', $this->getField('PHONE'));
+                $this->data['PHONE_F'] = '+7' . substr($this->data['PHONE_F'], -10);
             }
         }
-        return $this->_data;
+
+        return $this->data;
     }
 
     public function getField($name)
     {
         $upName = mb_strtoupper($name);
-        if (isset($this->_data[$upName])) {
-            return $this->_data[$upName];
+        if (isset($this->data[$upName])) {
+            return $this->data[$upName];
         }
+
         return false;
     }
 }

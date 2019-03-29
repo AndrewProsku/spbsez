@@ -1,4 +1,4 @@
-<div class="b-page-submenu">
+<div class="b-page-submenu{% if switch %} b-page-submenu_with_switch{% endif %}">
     <div class="b-page-submenu__block">
         <ul class="b-page-submenu__list">
             {% for subitem in subitems %}
@@ -10,4 +10,17 @@
             {% endfor %}
         </ul>
     </div>
+    {% if switch %}
+        <div class="b-page-switch">
+            {% if switchInfo.firstIsActive %}
+                <div>{{ switchInfo.firstOptionText }}</div>
+                <a href="{{ switchInfo.src }}" class="b-page-switch__switch"></a>
+                <a href="{{ switchInfo.src }}">{{ switchInfo.secondOptionText }}</a>
+            {% else %}
+                <a href="{{ switchInfo.src }}">{{ switchInfo.firstOptionText }}</a>
+                <a href="{{ switchInfo.src }}" class="b-page-switch__switch b-page-switch__switch_is_switched"></a>
+                <div>{{ switchInfo.secondOptionText }}</div>
+            {% endif %}
+        </div>
+    {% endif %}
 </div>

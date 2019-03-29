@@ -77,6 +77,7 @@
     @media #{$laptop} {
         @include column(12, 36);
         @include push(22, 36);
+        width: column(12, 36);
         // Отступ прописан без использования миксина, чтобы обойти баг в IE
         margin-top: 48px;
         position: absolute;
@@ -88,6 +89,7 @@
 
     @media #{$fullhd} {
         @include column(8, 36);
+        width: column(8, 36);
         margin-top: 64px;
     }
 }

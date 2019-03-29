@@ -1,0 +1,625 @@
+{
+  "request": {
+    "status": 1,
+    "errors": [
+      "Ошибка!"
+    ]
+  },
+  "data": {
+    "residentName": "ООО «Биокад»",
+    "oezName": "ОЭЗ ТВТ в г. Санкт-Петербурге",
+    "forms": [
+      {
+        "blocks": [
+          {
+            "type": "foreign-investors",
+            "fields": [
+              {
+                "id": "foreign-investors-yes",
+                "checked": true,
+                "isPrefilled": true
+              },
+              {
+                "id": "foreign-investors-no",
+                "checked": false,
+                "isPrefilled": true
+              },
+              {
+                "id": "investors-countries",
+                "value": "Казахстан, Франция, США",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "jobs-plan-all",
+                "value": 1232,
+                "isPrefilled": true
+              },
+              {
+                "id": "jobs-plan-year",
+                "value": 324,
+                "isPrefilled": true
+              },
+              {
+                "id": "jobs-actual-all",
+                "value": 223,
+                "isPrefilled": true
+              },
+              {
+                "id": "jobs-actual-year",
+                "value": 32,
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "invests-plan-all",
+                "value": 23123,
+                "isPrefilled": true
+              },
+              {
+                "id": "invests-plan-year",
+                "value": 213213,
+                "isPrefilled": true
+              },
+              {
+                "id": "capital-invests-plan-all",
+                "value": 12321,
+                "isPrefilled": true
+              },
+              {
+                "id": "capital-invests-plan-year",
+                "value": 213213,
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "invests-all",
+                "value": 1232,
+                "isPrefilled": true
+              },
+              {
+                "id": "invests-year",
+                "value": 324,
+                "isPrefilled": true
+              },
+              {
+                "id": "capital-invests-all",
+                "value": 23423,
+                "isPrefilled": true
+              },
+              {
+                "id": "capital-invests-year",
+                "value": 3233,
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "revenue-all",
+                "value": 1232,
+                "isPrefilled": true
+              },
+              {
+                "id": "revenue-year",
+                "value": 324,
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "produce-all",
+                "value": 1232,
+                "isPrefilled": true
+              },
+              {
+                "id": "produce-year",
+                "value": 324,
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "salary",
+                "value": 1232,
+                "isPrefilled": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "fields": [
+              {
+                "id": "taxes-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-year",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-federal-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-federal-year",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-regional-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-regional-year",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-local-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-local-year",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-offbudget-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-offbudget-year",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-nds-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-nds-year",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "taxes-breaks-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-breaks-year",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-breaks-federal-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-breaks-federal-year",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-breaks-local-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-breaks-local-year",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-breaks-offbudget-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "taxes-breaks-offbudget-year",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "custom-duties-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "custom-duties-year",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "custom-duties-breaks-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "custom-duties-breaks-year",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "fields": [
+              {
+                "id": "area-application",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "area-rent",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "area-property",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "object-name-plan",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "capital-object",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "construction-period",
+                "value": "5 лет",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "type": "construction-stage",
+            "stages": [
+              {
+                "stageID": 25,
+                "fields": [
+                  {
+                    "id": "construction-stage[25]",
+                    "value": "stage4",
+                    "isPrefilled": true
+                  },
+                  {
+                    "id": "construction-permission-num[25]",
+                    "value": "4 8 15 16 23 42",
+                    "isPrefilled": true
+                  },
+                  {
+                    "id": "construction-permission-file[25]",
+                    "value": null
+                  },
+                  {
+                    "id": "construction-permission-date[25]",
+                    "value": "25.01.2019",
+                    "isPrefilled": true
+                  }
+                ]
+              },
+              {
+                "stageID": 27,
+                "fields": [
+                  {
+                    "id": "construction-stage[27]",
+                    "value": "stage6",
+                    "isPrefilled": true
+                  },
+                  {
+                    "id": "construction-permission-num[27]",
+                    "value": "3333",
+                    "isPrefilled": true
+                  },
+                  {
+                    "id": "construction-permission-file[27]",
+                    "value": null
+                  },
+                  {
+                    "id": "construction-permission-date[27]",
+                    "value": null
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "fields": [
+              {
+                "id": "office-application",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "office-rent",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "type": "construction-stage",
+            "stages": [
+              {
+                "stageID": 25,
+                "fields": [
+                  {
+                    "id": "construction-stage[25]",
+                    "value": "stage4",
+                    "isPrefilled": true
+                  },
+                  {
+                    "id": "construction-permission-num[25]",
+                    "value": "4 8 15 16 23 42",
+                    "isPrefilled": true
+                  },
+                  {
+                    "id": "construction-permission-file[25]",
+                    "value": "permission.pdf",
+                    "isPrefilled": true
+                  },
+                  {
+                    "id": "construction-permission-date[25]",
+                    "value": "25.01.2019",
+                    "isPrefilled": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "fields": [
+              {
+                "id": "export-volume-all",
+                "value": "123",
+                "isPrefilled": true
+              },
+              {
+                "id": "export-volume-year",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "type": "export-countries",
+            "groups": [
+              {
+                "ID": 5,
+                "fields": [
+                  {
+                    "id": "export-countries[5]",
+                    "value": "Беларусь",
+                    "isPrefilled": true
+                  },
+                  {
+                    "id": "export-code[5]",
+                    "value": "9601 10 000 0",
+                    "isPrefilled": true
+                  }
+                ]
+              },
+              {
+                "ID": 6,
+                "fields": [
+                  {
+                    "id": "export-countries[6]",
+                    "value": "Финляндия",
+                    "isPrefilled": true
+                  },
+                  {
+                    "id": "export-code[6]",
+                    "value": "9601 10 000 0",
+                    "isPrefilled": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "high-tech-production-yes",
+                "checked": false,
+                "isPrefilled": true
+              },
+              {
+                "id": "high-tech-production-no",
+                "checked": true,
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "type": "innovations",
+            "innovations": [
+              {
+                "ID": 5,
+                "fields": [
+                  {
+                    "id": "innovation[5]",
+                    "value": "Инновация",
+                    "isPrefilled": true
+                  }
+                ]
+              },
+              {
+                "ID": 6,
+                "fields": [
+                  {
+                    "id": "innovation[6]",
+                    "value": "Инновационная инновация",
+                    "isPrefilled": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "high-productive-jobs",
+                "value": "40",
+                "isPrefilled": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "fields": [
+              {
+                "id": "intangible-assets",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "fields": [
+              {
+                "id": "degrees-employees",
+                "value": "123",
+                "isPrefilled": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "results",
+        "blocks": [
+          {
+            "type": "results",
+            "ID": 1,
+            "fields": [
+              {
+                "id": "result-type[1]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой",
+                "isPrefilled": true
+              },
+              {
+                "id": "result-description[1]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой",
+                "isPrefilled": true
+              },
+              {
+                "id": "result-date[1]",
+                "value": "6/11/2014",
+                "isPrefilled": true
+              },
+              {
+                "id": "result-commercialization[1]",
+                "value": "Не раскрывается",
+                "isPrefilled": true
+              }
+            ]
+          },
+          {
+            "type": "results",
+            "ID": 2,
+            "fields": [
+              {
+                "id": "result-type[2]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой",
+                "isPrefilled": true
+              },
+              {
+                "id": "result-description[2]",
+                "value": "Автономная система питания и термостабилизации матриц и линеек лазерных диодов импульсного твердотельного лазера с диодной накачкой",
+                "isPrefilled": true
+              },
+              {
+                "id": "result-date[2]",
+                "value": "6/11/2014",
+                "isPrefilled": true
+              },
+              {
+                "id": "result-commercialization[2]",
+                "value": "Не раскрывается",
+                "isPrefilled": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

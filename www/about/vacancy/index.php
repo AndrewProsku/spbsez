@@ -1,6 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Вакансии | АООЭЗ");
+$APPLICATION->SetTitle("Вакансии");
+$APPLICATION->SetPageProperty('title', "Вакансии | АООЭЗ");
 ?>
 
     <?$APPLICATION->IncludeComponent(

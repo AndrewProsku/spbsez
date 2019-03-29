@@ -5,7 +5,7 @@
     <?php if(!empty($arResult['REQUEST_ID'])): ?>
         <h4>Заявка отправлена</h4>
         <p>Ваша заявка отправлена менеджеру ОЭЗ. Номер заявки <strong><?= $arResult['REQUEST_ID']; ?></strong></p>
-        <p>Ответ по заявке прийдет на эл. почту <strong><?= $arResult['USER_EMAIL']; ?></strong></p>
+        <p>Ответ по заявке придет на эл. почту <strong><?= $arResult['USER_EMAIL']; ?></strong></p>
     <?php else: ?>
         <h4>Заявка</h4>
         <form method="post" enctype="multipart/form-data" class="b-add-request__form">

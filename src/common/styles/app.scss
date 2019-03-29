@@ -36,8 +36,15 @@
 @import "../../pages/news";
 @import "../../pages/news-single";
 @import "../../pages/investors";
+@import "../../pages/useful";
+@import "../../pages/disclosure";
+@import "../../pages/infrastructure";
+@import "../../pages/infrastructure-area";
 
 // Components
+@import "../../components/forms/telephone/telephone";
+// @import "../../components/forms/select/select";
+@import "../../components/tooltip/tooltip";
 
 @import "../../components/popup/popup-vacancies";
 @import "../../../node_modules/@glidejs/glide/src/assets/sass/glide.core";
@@ -47,6 +54,8 @@
 @import "../../components/carousel/carousel";
 @import "../../components/reviews/reviews";
 @import "../../components/news/news";
+@import "../../components/useful/useful";
+@import "../../components/useful-item/useful-item";
 
 @import "../../components/account-tooltip/account-tooltip";
 @import "../../components/tooltip/custom-tooltip";
@@ -55,7 +64,7 @@
 @import "../../components/page-submenu/page-submenu";
 @import "../../components/forms/input-text/input-text";
 @import "../../components/forms/email/email";
-@import "../../components/forms/telephone/telephone";
+// @import "../../components/forms/telephone/telephone";
 @import "../../components/forms/password/password";
 @import "../../components/forms/checkbox/checkbox";
 @import "../../components/forms/search/search";
@@ -93,3 +102,8 @@
 @import "../../components/invest-resident/invest-resident";
 @import "../../components/files-list/files-list";
 @import "../../components/contact-list/contact-list";
+@import "../../components/popup/review-popup";
+@import "../../components/input-date/input-date";
+@import "../../components/visual/visual.scss";
+@import "../../components/range-slider/source/ion.rangeSlider";
+@import "../../components/range-slider/source/ion.rangeSlider.skinHTML5";

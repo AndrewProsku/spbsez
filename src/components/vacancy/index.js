@@ -1,8 +1,11 @@
 import InputFile from 'components/forms/file';
 import InputTel from 'components/forms/telephone/telephone';
+import Language from '../language';
 import Select from 'components/forms/select';
 import successTemplate from './success.twig';
 import Utils from '../../common/scripts/utils';
+
+const Lang = new Language();
 
 class Vacancy {
     constructor() {
@@ -30,8 +33,9 @@ class Vacancy {
             resume: false
         };
 
-        this.emptyErrorMessage = 'Поле не может быть пустым';
-        this.incorrectEmailMessage = 'Некорректный email адрес';
+        this.lang = document.querySelector('html').getAttribute('lang') || 'ru';
+        this.emptyErrorMessage = Lang.get('validation.required');
+        this.incorrectEmailMessage = Lang.get('validation.email');
     }
 
     init(options) {
@@ -103,27 +107,33 @@ class Vacancy {
             const that = this;
             const isFormFulfilled = this.checkForm();
 
-            if (isFormFulfilled) {
-                Utils.send(new FormData(that.$form), '/api/vacancy/', {
-                    success(response) {
-                        const successStatus = 1;
-                        const failStatus = 0;
-
-                        if (response.request.status === successStatus) {
-                            that.showSuccessMessage();
-                        } else if (response.request.status === failStatus) {
-                            const errorMessage = response.request.errors.join('</br>');
-
-                            // Нужно подумать как разделть ошибки по типу полей к которым они относятся
-                            that.showErrorMessage(that.$inputResume, errorMessage);
-                            that.errorRepeatPassword(errorMessage);
-                        }
-                    },
-                    error(error) {
-                        console.error(error);
-                    }
-                });
+            if (!isFormFulfilled) {
+                return;
             }
+
+            const formData = new FormData(that.$form);
+
+            formData.set('lang', document.documentElement.lang);
+
+            Utils.send(formData, '/api/vacancy/', {
+                success(response) {
+                    const successStatus = 1;
+                    const failStatus = 0;
+
+                    if (response.request.status === successStatus) {
+                        that.showSuccessMessage();
+                    } else if (response.request.status === failStatus) {
+                        const errorMessage = response.request.errors.join('</br>');
+
+                        // Нужно подумать как разделть ошибки по типу полей к которым они относятся
+                        that.showErrorMessage(that.$inputResume, errorMessage);
+                        that.errorRepeatPassword(errorMessage);
+                    }
+                },
+                error(error) {
+                    console.error(error);
+                }
+            });
         });
 
         this.$inputFIO.addEventListener('change', (event) => {

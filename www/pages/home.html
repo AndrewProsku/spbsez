@@ -29,7 +29,7 @@
 
          <title>Главная страница</title> </head>
     <body>
-
+        <div id="j-particles" class="background-particles j-particles"></div>
         <div class="b-alert-old-browser is-hidden">
     <div class="b-alert-old-browser__content">
         <button class="b-alert-old-browser__close">
@@ -563,6 +563,7 @@
                 <div class="glide j-reviews-carousel">
                     <div class="glide__track b-carousel__track" data-glide-el="track">
                         <div class="glide__slides">
+
                             <div class="glide__slide">
                                 <div class="b-slider-reviews__item">
                                     <div class="b-slider-reviews__item-image" style="background-image:url('/images/home/review-img.jpg')"></div>
@@ -579,13 +580,14 @@
                                                 преференции и льготы, стоимость земельного участка ниже среднерыночной стоимости,
                                                 создание инженерной инфраструктуры на территории зоны за счет городских
                                                 ресурсов, продление срока действия особой экономической зоны до 2054 года.</div>
-                                            <a href="#" class="b-slider-reviews__person-link b-link-line-two">
+                                            <span class="b-slider-reviews__person-link b-link-line-two j-popup-review" data-ajax="/tests/review.json" data-id="3">
                                                 Отзыв полностью
-                                            </a>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="glide__slide">
                                 <div class="b-slider-reviews__item">
                                     <div class="b-slider-reviews__item-image" style="background-image:url('/images/home/review-img.jpg')"></div>
@@ -602,13 +604,14 @@
                                                 преференции и льготы, стоимость земельного участка ниже среднерыночной стоимости,
                                                 создание инженерной инфраструктуры на территории зоны за счет городских
                                                 ресурсов, продление срока действия особой экономической зоны до 2054 года.</div>
-                                            <a href="#" class="b-slider-reviews__person-link b-link-line-two">
+                                            <span class="b-slider-reviews__person-link b-link-line-two j-popup-review" data-ajax="/tests/review.json" data-id="10">
                                                 Отзыв полностью
-                                            </a>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -789,7 +792,7 @@
                             </div>
                             <div class="l-home-plots__desc-item">
                                 <p>
-                                    <strong>Стрельна</strong> <span>юго — запад Петербурга</span>
+                                    <strong>Стрельна</strong> <span>юго-запад Петербурга</span>
                                 </p>
                             </div>
                         </div>
@@ -905,7 +908,7 @@
             <footer class="l-home-footer b-footer">
                 <div class="b-footer__left">
     <a href="/" class="b-footer__logo">
-        <img src="../images/home/logo-white.svg" alt="Особая Экономическая зона">
+        <img src="../images/home/logo-white-ru.svg" alt="Особая Экономическая зона">
     </a>
 </div>
 <div class="b-footer__center">
@@ -994,14 +997,15 @@
             <div class="b-form-block j-message-fio">
                 <input
         id="message-fio"
-        class="b-input-text"
+        class="b-input-text "
         type="text"
         name="message-fio"
         maxlength=""
         autocomplete=""
         value=""
         placeholder=""
-                                                        >
+                                                                
+>
 
                 <label for="message-fio" class="b-form-block__label">ФИО</label>
                 <span class="b-form-block__error-text">Имя</span>
@@ -1311,5 +1315,5 @@
 </div>
         </div>
         <script async src="/scripts/app.js"></script>
-        <div id="j-particles"></div> </body>
+    </body>
 </html>

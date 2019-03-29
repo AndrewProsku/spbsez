@@ -25,6 +25,8 @@ class VacancyList extends Bbc\Basis
 
     protected function executeMain()
     {
+        self::registerCacheTag('kelnik:vacancyList');
+
         $this->arResult['ELEMENTS'] = [];
 
         try {
