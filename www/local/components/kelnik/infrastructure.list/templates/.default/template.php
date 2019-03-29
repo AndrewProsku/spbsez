@@ -17,7 +17,7 @@
     </div>
     <div class="b-page-switch">
         <div><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_LIST'); ?></div>
-        <div class="b-page-switch__switch"></div>
+        <a href="<?= $arParams['SEF_FOLDER']; ?>map/" class="b-page-switch__switch"></a>
         <a href="<?= $arParams['SEF_FOLDER']; ?>map/"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_ON_MAP'); ?></a>
     </div>
 </div>

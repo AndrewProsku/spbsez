@@ -17,7 +17,7 @@
     </div>
     <div class="b-page-switch">
         <a href="<?= $arParams['SEF_FOLDER']; ?>"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_LIST'); ?></a>
-        <div class="b-page-switch__switch b-page-switch__switch_is_switched"></div>
+        <a href="<?= $arParams['SEF_FOLDER']; ?>" class="b-page-switch__switch b-page-switch__switch_is_switched"></a>
         <div><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_ON_MAP'); ?></div>
     </div>
 </div>
@@ -27,7 +27,7 @@
         <div class="b-infrastructure-map__title">
             <div class="b-page-switch b-infrastructure-switch">
                 <a href="<?= $arParams['SEF_FOLDER']; ?>"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_LIST'); ?></a>
-                <div class="b-page-switch__switch b-page-switch__switch_is_switched"></div>
+                <a href="<?= $arParams['SEF_FOLDER']; ?>" class="b-page-switch__switch b-page-switch__switch_is_switched"></a>
                 <div><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_ON_MAP'); ?></div>
             </div>
             <h1><?= $APPLICATION->ShowTitle(false); ?></h1>

@@ -14,11 +14,11 @@
         <div class="b-page-switch">
             {% if switchInfo.firstIsActive %}
                 <div>{{ switchInfo.firstOptionText }}</div>
-                <div class="b-page-switch__switch"></div>
+                <a href="{{ switchInfo.src }}" class="b-page-switch__switch"></a>
                 <a href="{{ switchInfo.src }}">{{ switchInfo.secondOptionText }}</a>
             {% else %}
                 <a href="{{ switchInfo.src }}">{{ switchInfo.firstOptionText }}</a>
-                <div class="b-page-switch__switch b-page-switch__switch_is_switched"></div>
+                <a href="{{ switchInfo.src }}" class="b-page-switch__switch b-page-switch__switch_is_switched"></a>
                 <div>{{ switchInfo.secondOptionText }}</div>
             {% endif %}
         </div>
