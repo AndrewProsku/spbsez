@@ -159,7 +159,11 @@ const openMenu = function() {
     });
 };
 
-openMenu();
+const menuBurgerEl = document.querySelector('.j-burger-click');
+
+if (menuBurgerEl) {
+    openMenu();
+}
 
 /**
  *  Когда пользователь авторизовался - запрещаем переход по ссылке личного кабинета. (Для мобильной версии)
