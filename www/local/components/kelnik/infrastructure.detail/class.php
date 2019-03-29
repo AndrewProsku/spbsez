@@ -6,10 +6,13 @@ use Bex\Bbc;
 use Bitrix\Iblock\Component\Tools;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
 use Kelnik\Infrastructure\ElementTrait;
 use Kelnik\Infrastructure\Model\MapTable;
+use Kelnik\Infrastructure\Model\PlanTable;
 use Kelnik\Infrastructure\Model\PlatformTable;
+use Kelnik\Refbook\Model\ResidentTable;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -130,6 +133,8 @@ class InfrastructureDetail extends Bbc\Basis
                     $this->arResult['ELEMENT']['MAP_COORDS_LNG']
                 )
             );
+
+            $this->arResult['ELEMENT']['PLAN'] = self::getPlan((int) $this->arResult['ELEMENT']['ID']);
         } catch (\Exception $e) {
             $this->abortCache();
 
@@ -220,6 +225,89 @@ class InfrastructureDetail extends Bbc\Basis
                     $row['MAP_COORDS_LNG']
                 ]
             ];
+        }
+
+        return $res;
+    }
+
+    public static function getPlan(int $platformId)
+    {
+        $res = [];
+
+        if (!$platformId) {
+            return $res;
+        }
+
+        try {
+            $res = PlanTable::getAssoc([
+                'select' => [
+                    'ID', 'RESIDENT_ID', 'RESIDENT_IMAGE',
+                    'HEAT', 'ELECTRICITY', 'WATER', 'STORM_SEWER', 'AREA',
+                    'PRICE' => 'PRICE_RU', 'PRICE_EN',
+                    'RENT' => 'RENT_RU', 'RENT_EN', 'COORDS'
+                ],
+                'filter' => [
+                    '=ACTIVE' => PlanTable::YES,
+                    '=PLATFORM_ID' => $platformId,
+                    '!COORDS' => false
+                ]
+            ], 'ID');
+
+            $residents = ResidentTable::getAssoc([
+                'select' => [
+                    'ID', 'NAME' => 'NAME', 'NAME_EN',
+                    'SITE', 'RTYPE' => 'TYPE.NAME',
+                    'RTYPE_EN' => 'TYPE.NAME_EN'
+                ],
+                'filter' => [
+                    '=ACTIVE' => ResidentTable::YES,
+                    '=ID' => array_column($res, 'RESIDENT_ID')
+                ]
+            ], 'ID');
+        } catch (\Exception $e) {
+            $res = [];
+        }
+
+        $res = BitrixHelper::prepareFileFields($res, ['RESIDENT_IMAGE' => 'path']);
+        $residents = array_map(function ($el) {
+            return PlanTable::replaceFieldsByLang($el, LANGUAGE_ID);
+        }, $residents);
+
+        foreach ($res as &$v) {
+            $v = PlanTable::replaceFieldsByLang($v, LANGUAGE_ID);
+            $json = [
+                'PRICE' => $v['PRICE'],
+                'RENT' => $v['RENT'],
+                'AREA' => $v['AREA'] ? $v['AREA'] . ' ' . Loc::getMessage('KELNIK_INFRA_COMP_AREA_SUFFIX') : '',
+                'AREA_TITLE' => Loc::getMessage('KELNIK_INFRA_COMP_AREA_TITLE'),
+                'TITLE' => Loc::getMessage('KELNIK_INFRA_COMP_TITLE'),
+                'PRICE_TITLE' => Loc::getMessage('KELNIK_INFRA_COMP_PRICE_TITLE'),
+                'RENT_TITLE' => Loc::getMessage('KELNIK_INFRA_COMP_RENT_TITLE'),
+                'FEATURES' => []
+            ];
+
+            foreach (PlanTable::getFeatures() as $featureKey => $feature) {
+                if (!isset($v[$featureKey]) || $v[$featureKey] != PlanTable::YES) {
+                    continue;
+                }
+
+                $json['FEATURES'][] = $feature;
+            }
+
+            if ($v['RESIDENT'] = ArrayHelper::getValue($residents, $v['RESIDENT_ID'], [])) {
+                $json = [
+                    'NAME' => $v['RESIDENT']['NAME'],
+                    'AREA' => $v['AREA'] ? $v['AREA'] . ' ' . Loc::getMessage('KELNIK_INFRA_COMP_AREA_SUFFIX') : '',
+                    'AREA_TITLE' => Loc::getMessage('KELNIK_INFRA_COMP_AREA_TITLE'),
+                    'TYPE' => $v['RESIDENT']['RTYPE'],
+                    'IMAGE' => ArrayHelper::getValue($v, 'RESIDENT.RESIDENT_IMAGE_PATH'),
+                    'SITE' => $v['RESIDENT']['SITE']
+                                ? ['URL' => 'http://' . $v['RESIDENT']['SITE'], 'TITLE' => $v['RESIDENT']['SITE']]
+                                : false
+                ];
+            }
+
+            $v['JSON'] = base64_encode(json_encode($json));
         }
 
         return $res;

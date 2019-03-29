@@ -1,20 +1,20 @@
 <div class="b-visual-tooltip b-visual-tooltip_theme_empty" style="top: 0; left: 0;">
-    <div class="b-visual-tooltip__title">Свободный участок</div>
+    <div class="b-visual-tooltip__title">{{ TITLE }}</div>
     <div class="b-visual-tooltip__info">
-        <div class="b-visual-tooltip__info-text">Площадь участка</div>
-        <div class="b-visual-tooltip__info-value">{{ space }}</div>
+        <div class="b-visual-tooltip__info-text">{{ AREA_TITLE }}</div>
+        <div class="b-visual-tooltip__info-value">{{ AREA }}</div>
     </div>
     <div class="b-visual-tooltip__info">
-        <div class="b-visual-tooltip__info-text">Стоимость выкупа</div>
-        <div class="b-visual-tooltip__info-value">{{ buyPrice }}</div>
+        <div class="b-visual-tooltip__info-text">{{ PRICE_TITLE }}</div>
+        <div class="b-visual-tooltip__info-value">{{ PRICE }}</div>
     </div>
     <div class="b-visual-tooltip__info">
-        <div class="b-visual-tooltip__info-text">Стоимость аренды</div>
-        <div class="b-visual-tooltip__info-value">{{ rentPrice }}</div>
+        <div class="b-visual-tooltip__info-text">{{ RENT_TITLE }}</div>
+        <div class="b-visual-tooltip__info-value">{{ RENT }}</div>
     </div>
     <ul class="b-visual-tooltip__features">
-        {% for feature in features %}
-            <li class="b-visual-tooltip__features-item b-visual-tooltip__features-item_icon_{{feature.icon}}">{{feature.title}}</li>
+        {% for feature in FEATURES %}
+            <li class="b-visual-tooltip__features-item b-visual-tooltip__features-item_icon_{{feature.ICON}}">{{feature.NAME}}</li>
         {% endfor %}
     </ul>
 </div>
