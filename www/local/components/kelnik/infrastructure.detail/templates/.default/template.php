@@ -48,13 +48,13 @@
             <div class="b-area-plan">
                 <div class="b-area-plan__title"><h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_TERRITORY'); ?></h2></div>
                 <div class="b-visual<?php if($arResult['ELEMENT']['SHOW_TITLE'] != \Kelnik\Infrastructure\Model\PlatformTable::YES): ?> b-visual_theme_points<?php endif; ?>" data-area="<?= $arResult['ELEMENT']['ALIAS']; ?>">
-                    <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 <?= $arResult['ELEMENT']['AREA_BG_ID']['WIDTH']; ?> <?= $arResult['ELEMENT']['AREA_BG_ID']['HEIGHT']; ?>">
+                    <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 1920 1080">
                         <image
                             class="b-visual__image"
                             x="0"
                             y="0"
-                            width="<?= $arResult['ELEMENT']['AREA_BG_ID']['WIDTH']; ?>"
-                            height="<?= $arResult['ELEMENT']['AREA_BG_ID']['HEIGHT']; ?>"
+                            width="1920"
+                            height="1080"
                             preserveAspectRatio="none"
                             xlink:href="<?= $arResult['ELEMENT']['AREA_BG_ID']['SRC']; ?>"
                             style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></image>
