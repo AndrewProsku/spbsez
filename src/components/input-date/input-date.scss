@@ -1,4 +1,4 @@
-$width: 320px;
+$width: 300px;
 $widthColumn: 32px;
 $verPadding: 20px;
 $borderWidth: 1px;
@@ -187,7 +187,7 @@ $marginRight: ($widthContent - ($widthColumn * 7)) / 6; // Правый отст
     .irs-to,
     .irs-single {
         @include font-size(p3);
-        top: 40px;
+        top: -4px;
         background: transparent;
         color: $blue;
         font-weight: 700;
