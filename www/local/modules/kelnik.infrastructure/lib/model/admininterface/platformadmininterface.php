@@ -56,6 +56,11 @@ class PlatformAdminInterface extends AdminInterface
                         'FILTER' => false,
                         'REQUIRED' => true
                     ],
+                    'SHOW_TITLE' => [
+                        'WIDGET' => new CheckboxWidget(),
+                        'FILTER' => true,
+                        'FIELD_TYPE' => CheckboxWidget::TYPE_STRING
+                    ],
                     'MAP_COORDS_LAT' => [
                         'WIDGET' => new StringWidget(),
                         'HEADER' => false,
@@ -109,6 +114,15 @@ class PlatformAdminInterface extends AdminInterface
                         'WIDGET' => new ChildWidget(),
                         'TITLE' => Loc::getMessage('KELNIK_INFRASTRUCTURE_MAPS'),
                         'LIST_HELPER' => MapListHelper::class,
+                        'PARENT_FIELD' => 'PLATFORM_ID',
+                        'VIRTUAL' => true,
+                        'READONLY' => true,
+                        'FORCE_SELECT' => true
+                    ],
+                    'PLAN_CNT' => [
+                        'WIDGET' => new ChildWidget(),
+                        'TITLE' => Loc::getMessage('KELNIK_INFRASTRUCTURE_PLANS'),
+                        'LIST_HELPER' => PlanListHelper::class,
                         'PARENT_FIELD' => 'PLATFORM_ID',
                         'VIRTUAL' => true,
                         'READONLY' => true,

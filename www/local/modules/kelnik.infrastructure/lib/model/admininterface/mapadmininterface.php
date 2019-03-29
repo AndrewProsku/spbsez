@@ -6,10 +6,8 @@ use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminInterface;
 use Kelnik\AdminHelper\Widget\CheckboxWidget;
 use Kelnik\AdminHelper\Widget\ComboBoxWidget;
-use Kelnik\AdminHelper\Widget\FileWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
-use Kelnik\AdminHelper\Widget\VisualEditorWidget;
 use Kelnik\Infrastructure\Model\PlatformTable;
 
 Loc::loadMessages(__FILE__);

@@ -8,7 +8,6 @@ use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Query\Join;
-use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
