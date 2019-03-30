@@ -1,4 +1,12 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();?>
+<?php
+    $noidorfLink = LANG_DIR != SezLang::CHINESE_DIR
+                    ? LANG_DIR . 'infrastructure/noidorf/'
+                    : 'javascript:;';
+    $novLink = LANG_DIR != SezLang::CHINESE_DIR
+                    ? LANG_DIR . 'infrastructure/novoorlovskaya/'
+                    : 'javascript:;';
+?>
 <div<?php if(LANG_DIR == SezLang::CHINESE_DIR): ?> id="area" class="l-home-plots" <?php else: ?> class="l-home-plots j-home-plots"<?php endif; ?>>
     <div class="l-home-plots__title-mobile"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_LOCATION'); ?></div>
     <div class="l-home-plots__list">
@@ -6,10 +14,10 @@
             <div class="l-home-plots__map l-home-plots__map-novoorlovskaya">
                 <div class="l-home-plots__all-map-images lang-<?= LANGUAGE_ID; ?>">
                     <div class="l-home-plots__all-map-icon-wrap">
-                        <a href="<?= LANG_DIR; ?>infrastructure/novoorlovskaya/" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
+                        <a href="<?= $novLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
                             <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOVOORLOVSKAYA'); ?></span>
                         </a>
-                        <a href="<?= LANG_DIR; ?>infrastructure/noidorf/" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
+                        <a href="<?= $noidorfLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
                             <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOIDORF'); ?></span>
                         </a>
                         <div class="l-home-plots__all-map-icon icon-port">
@@ -36,9 +44,15 @@
             </div>
 
             <div class="l-home-plots__content">
-                <div class="l-home-plots__title">
-                    <a href="<?= LANG_DIR; ?>infrastructure/novoorlovskaya/" class="b-link-line"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SITE_NOVOORLOVSKAYA'); ?></a>
-                </div>
+                <?php if(LANG_DIR == \SezLang::CHINESE_DIR): ?>
+                    <div class="l-home-plots__title lang-<?= LANGUAGE_ID; ?>">
+                        <span class="b-link-line"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SITE_NOVOORLOVSKAYA'); ?></span>
+                    </div>
+                <?php else: ?>
+                    <div class="l-home-plots__title">
+                        <a href="<?= $novLink; ?>" class="b-link-line"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SITE_NOVOORLOVSKAYA'); ?></a>
+                    </div>
+                <?php endif; ?>
                 <div class="l-home-plots__desc">
                     <div class="l-home-plots__desc-item">
                         <p>
@@ -59,9 +73,11 @@
                 <div class="l-home-plots__text">
                     <p><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_DESCR_NOV'); ?></p>
                 </div>
+                <?php if(LANG_DIR !== \SezLang::CHINESE_DIR): ?>
                 <div class="l-home-plots__link">
-                    <a href="<?= LANG_DIR; ?>infrastructure/novoorlovskaya/" class="b-link-line"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_MORE'); ?></a>
+                    <a href="<?= $novLink; ?>" class="b-link-line"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_MORE'); ?></a>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -69,10 +85,10 @@
             <div class="l-home-plots__map l-home-plots__map-neudorf">
                 <div class="l-home-plots__all-map-images lang-<?= LANGUAGE_ID; ?>">
                     <div class="l-home-plots__all-map-icon-wrap">
-                        <a href="<?= LANG_DIR; ?>infrastructure/novoorlovskaya/" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
+                        <a href="<?= $novLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-one">
                             <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOVOORLOVSKAYA'); ?></span>
                         </a>
-                        <a href="<?= LANG_DIR; ?>infrastructure/noidorf/" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
+                        <a href="<?= $noidorfLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
                             <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOIDORF'); ?></span>
                         </a>
                         <div class="l-home-plots__all-map-icon icon-port">
@@ -99,9 +115,15 @@
             </div>
 
             <div class="l-home-plots__content">
-                <div class="l-home-plots__title">
-                    <a href="<?= LANG_DIR; ?>infrastructure/noidorf/" class="b-link-line"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SITE_NOIDORF'); ?></a>
-                </div>
+                <?php if(LANG_DIR == \SezLang::CHINESE_DIR): ?>
+                    <div class="l-home-plots__title lang-<?= LANGUAGE_ID; ?>">
+                        <span class="b-link-line"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SITE_NOIDORF'); ?></span>
+                    </div>
+                <?php else: ?>
+                    <div class="l-home-plots__title">
+                        <a href="<?= $noidorfLink; ?>" class="b-link-line"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SITE_NOIDORF'); ?></a>
+                    </div>
+                <?php endif; ?>
                 <div class="l-home-plots__desc">
                     <div class="l-home-plots__desc-item">
                         <p>
@@ -124,9 +146,11 @@
                         <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_DESCR_NOIDORF'); ?>
                     </p>
                 </div>
+                <?php if(LANG_DIR !== \SezLang::CHINESE_DIR): ?>
                 <div class="l-home-plots__link">
-                    <a href="<?= LANG_DIR; ?>infrastructure/noidorf/" class="b-link-line"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_MORE'); ?></a>
+                    <a href="<?= $noidorfLink; ?>" class="b-link-line"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_MORE'); ?></a>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -134,10 +158,10 @@
     <div class="l-home-plots__all-map">
         <div class="l-home-plots__all-map-images lang-<?= LANGUAGE_ID; ?>">
             <div class="l-home-plots__all-map-icon-wrap">
-                <a href="<?= LANG_DIR; ?>infrastructure/novoorlovskaya/" class="l-home-plots__all-map-build l-home-plots__all-map-build-novoorlovskaya">
+                <a href="<?= $novLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-novoorlovskaya">
                     <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOVOORLOVSKAYA'); ?></span>
                 </a>
-                <a href="<?= LANG_DIR; ?>infrastructure/noidorf/" class="l-home-plots__all-map-build l-home-plots__all-map-build-neudorf">
+                <a href="<?= $noidorfLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-neudorf">
                     <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOIDORF'); ?></span>
                 </a>
                 <div class="l-home-plots__all-map-icon icon-port">
