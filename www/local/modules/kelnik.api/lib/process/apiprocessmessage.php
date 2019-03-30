@@ -55,6 +55,9 @@ class ApiProcessMessage extends ApiProcessAbstract
             return false;
         }
 
+        $this->data['title'] = Loc::getMessage('KELNIK_API_MESSAGE_RESPONSE_TITLE');
+        $this->data['text'] = Loc::getMessage('KELNIK_API_MESSAGE_RESPONSE_TEXT');
+
         return true;
     }
 }
