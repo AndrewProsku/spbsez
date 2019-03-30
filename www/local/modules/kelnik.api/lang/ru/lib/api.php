@@ -19,6 +19,8 @@ $MESS['KELNIK_API_MESSAGE_ERROR_NAME'] = 'Не заполнено поле ФИ�
 $MESS['KELNIK_API_MESSAGE_ERROR_EMAIL'] = 'Не заполнено поле E-mail';
 $MESS['KELNIK_API_MESSAGE_ERROR_PHONE'] = 'Не заполнено поле Телефон';
 $MESS['KELNIK_API_MESSAGE_ERROR_BODY'] = 'Не заполнено поле Сообщение';
+$MESS['KELNIK_API_MESSAGE_RESPONSE_TITLE'] = 'Сообщение успешно отправлено';
+$MESS['KELNIK_API_MESSAGE_RESPONSE_TEXT'] = '';
 
 $MESS['KELNIK_API_SERVICE_ERROR_NAME'] = 'Не заполнено поле ФИО';
 $MESS['KELNIK_API_SERVICE_ERROR_EMAIL'] = 'Не заполнено поле E-mail';

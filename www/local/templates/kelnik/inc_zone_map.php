@@ -1,5 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();?>
-<div class="l-home-plots j-home-plots">
+<div<?php if(LANG_DIR == SezLang::CHINESE_DIR): ?> id="area" class="l-home-plots" <?php else: ?> class="l-home-plots j-home-plots"<?php endif; ?>>
     <div class="l-home-plots__title-mobile"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_LOCATION'); ?></div>
     <div class="l-home-plots__list">
         <div class="l-home-plots__item">

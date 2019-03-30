@@ -89,7 +89,7 @@ class Message {
                     const successStatus = 1;
 
                     if (response.request.status === successStatus) {
-                        that.showSuccessMessage();
+                        that.showSuccessMessage(response.data);
 
                         return true;
                     }
@@ -190,11 +190,11 @@ class Message {
         element.closest(`.${this.formBlockClass}`).classList.remove(this.errorInputClass);
     }
 
-    showSuccessMessage() {
+    showSuccessMessage(data) {
         const $popupContent = document.querySelector('.b-popup__content');
 
         Utils.clearHtml($popupContent);
-        Utils.insetContent($popupContent, successTemplate());
+        Utils.insetContent($popupContent, successTemplate(data));
 
         $popupContent.querySelector('.j-message-popup__close').addEventListener('click', () => {
             this.popup.close();
