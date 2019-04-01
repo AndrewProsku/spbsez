@@ -30,7 +30,6 @@
     @include margin-level(bottom, orange);
     border: 1px solid $grey;
     border-radius: 4px;
-    padding: 1px; // что бы не разрывался радиус у бордера
     overflow: hidden;
 
     @media #{$laptop} {
@@ -99,8 +98,8 @@
     }
 }
 
-.b-carousel__slide_is_active:not(.b-carousel__slide_is_swiping) .b-carousel__item {
-    border-left: none;
+.b-carousel__slide_is_active .b-carousel__item {
+    margin-left: -1px;
 }
 
 .b-carousel__item-logo {
