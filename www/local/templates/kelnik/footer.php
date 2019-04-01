@@ -23,7 +23,7 @@
             );?>
             <div class="b-footer__copyright">
                 <span class="b-footer__copyright-text">© <?= date('Y'); ?>, <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_FOOTER_SEZ'); ?></span>
-                <?php if(LANG_DIR == '/'): ?>
+                <?php if(LANG_DIR == \SezLang::RUSSIAN_DIR): ?>
                     <a href="<?= LANG_DIR . 'about/info/'; ?>" class="b-footer__copyright-link">Раскрытие информации</a>
                 <?php endif; ?>
                 <button class="b-footer__copyright-link j-message-button" data-href="#message">

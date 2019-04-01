@@ -47,23 +47,41 @@
         <?php if(!empty($arResult['ELEMENT']['AREA_BG_ID']['SRC'])): ?>
             <div class="b-area-plan">
                 <div class="b-area-plan__title"><h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_TERRITORY'); ?></h2></div>
-                <div class="b-visual" data-area="<?= $arResult['ELEMENT']['ALIAS']; ?>">
-                    <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 <?= $arResult['ELEMENT']['AREA_BG_ID']['WIDTH']; ?> <?= $arResult['ELEMENT']['AREA_BG_ID']['HEIGHT']; ?>">
+                <div class="b-visual<?php if($arResult['ELEMENT']['SHOW_TITLE'] != \Kelnik\Infrastructure\Model\PlatformTable::YES): ?> b-visual_theme_points<?php endif; ?>" data-area="<?= $arResult['ELEMENT']['ALIAS']; ?>">
+                    <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 1920 1080">
                         <image
                             class="b-visual__image"
                             x="0"
                             y="0"
-                            width="<?= $arResult['ELEMENT']['AREA_BG_ID']['WIDTH']; ?>"
-                            height="<?= $arResult['ELEMENT']['AREA_BG_ID']['HEIGHT']; ?>"
+                            width="1920"
+                            height="1080"
                             preserveAspectRatio="none"
                             xlink:href="<?= $arResult['ELEMENT']['AREA_BG_ID']['SRC']; ?>"
                             style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></image>
-                        <?php
-                            $maskFile = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'territory' . $arResult['ELEMENT']['ID'] . '.php';
-                            if (file_exists($maskFile)) {
-                                include $maskFile;
-                            }
-                        ?>
+                        <?php if($arResult['ELEMENT']['ID'] == \Kelnik\Infrastructure\Model\PlatformTable::ID_NOIDORF): ?>
+                            <rect
+                                class="b-visual__overlay"
+                                width="100%"
+                                height="100%"
+                                fill-opacity="0"
+                                mask="url(#b-visual__hole)"></rect>
+                        <?php endif; ?>
+                        <g class="b-visual__masks">
+                            <?php foreach ($arResult['ELEMENT']['PLAN'] as $plan): ?>
+                                <path data-id="<?= $plan['ID']; ?>"
+                                      data-json="<?= $plan['JSON']; ?>"
+                                      <?php if(empty($plan['RESIDENT']['ID'])): ?>
+                                          class="is-empty"
+                                      <?php elseif(!empty($plan['RESIDENT']['NAME'])): ?>
+                                          data-title="<?= $plan['RESIDENT']['NAME']; ?>"
+                                      <?php endif; ?>
+                                      d="<?= $plan['COORDS']; ?>"
+                                      fill="#cacee5"
+                                      stroke="#30409a"
+                                      stroke-miterlimit="10"
+                                      stroke-width="2"></path>
+                            <?php endforeach; ?>
+                        </g>
                     </svg>
                 </div>
             </div>

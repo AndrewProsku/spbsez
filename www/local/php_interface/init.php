@@ -23,3 +23,10 @@ if (!function_exists('getSiteBaseUrl')) {
                 '://' . $_SERVER['HTTP_HOST'];
     }
 }
+
+class SezLang
+{
+    public const CHINESE_DIR = '/ch/';
+    public const ENGLISH_DIR = '/en/';
+    public const RUSSIAN_DIR = '/';
+}

@@ -6,7 +6,6 @@
     z-index: 3;
 
     @media #{$tablet-portrait} {
-        @include suffix(1, 36);
         @include row();
         flex-direction: row;
         justify-content: space-between;
@@ -14,12 +13,11 @@
     }
 
     @media #{$laptop} {
-        @include prefix(3, 36);
+        @include prefix(1, 36);
         @include suffix(3, 36);
     }
 
     @media #{$fullhd} {
-        @include prefix(4, 36);
         @include suffix(4, 36);
     }
 }
@@ -31,6 +29,15 @@
         flex-direction: row-reverse;
     }
 
+    @media #{$laptop} {
+        @include prefix(3, 36);
+        @include suffix(1, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+    }
+
     .b-advantages__title h2,
     .b-advantages__text p {
         color: $white;
@@ -38,7 +45,7 @@
 
     .b-advantages__block {
         @media #{$tablet-portrait} {
-            @include post(2, 33);
+            @include post(2, 31);
         }
     }
 
@@ -66,25 +73,20 @@
     @include font-size("p1");
 }
 
-
 .b-advantages__img {
     width: 80%;
 
     @media #{$tablet-portrait} {
-        @include column(10, 33);
+        @include column(12, 31);
         align-self: center;
     }
 }
 
 .b-advantages__block {
     @media #{$tablet-portrait} {
-        @include column(21, 33);
-        @include push(2, 33);
+        @include column(17, 31);
+        @include push(2, 31);
         margin-left: 0;
-    }
-
-    @media #{$laptop} {
-        @include column(20, 33);
     }
 }
 

@@ -19,6 +19,8 @@ $MESS['KELNIK_API_MESSAGE_ERROR_NAME'] = 'Required field Name';
 $MESS['KELNIK_API_MESSAGE_ERROR_EMAIL'] = 'Required field E-mail';
 $MESS['KELNIK_API_MESSAGE_ERROR_PHONE'] = 'Required field Phone';
 $MESS['KELNIK_API_MESSAGE_ERROR_BODY'] = 'Required field Message';
+$MESS['KELNIK_API_MESSAGE_RESPONSE_TITLE'] = 'Message sent successfully';
+$MESS['KELNIK_API_MESSAGE_RESPONSE_TEXT'] = '';
 
 $MESS['KELNIK_API_SERVICE_ERROR_NAME'] = 'Required field Name';
 $MESS['KELNIK_API_SERVICE_ERROR_EMAIL'] = 'Required field E-mail';
@@ -27,3 +29,5 @@ $MESS['KELNIK_API_SERVICE_ERROR_BODY'] = 'Required field Comment';
 $MESS['KELNIK_API_SERVICE_ERROR_TYPE_ID'] = 'Required field Subject';
 $MESS['KELNIK_API_SERVICE_ERROR_COMPANY'] = 'Required field Company';
 $MESS['KELNIK_API_SERVICE_ERROR_POSITION'] = 'Required field Position';
+
+$MESS['KELNIK_API_REPORT_NOT_FOUND'] = 'Report not found';
