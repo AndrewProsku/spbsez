@@ -479,7 +479,10 @@ if (anchorSelector.length) {
     new Anchor().init({
         targets: anchorSelector
     });
+} else {
+    new Anchor().urlHashScroll(300);
 }
+
 
 /**
  * Инициализация формы авторизации
