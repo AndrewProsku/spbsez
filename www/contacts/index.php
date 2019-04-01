@@ -63,7 +63,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
             </div>
         </div>
 
-        <div class="l-contacts__content">
+        <div class="l-contacts__content" id="managment">
 
             <div class="l-contacts__block">
                 <?$APPLICATION->IncludeComponent(

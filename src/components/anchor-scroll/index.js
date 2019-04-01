@@ -20,7 +20,7 @@ class Anchor {
         }
 
         this._bindEvents();
-        this._urlHashScroll();
+        this.urlHashScroll();
     }
 
     _bindEvents() {
@@ -33,9 +33,8 @@ class Anchor {
         });
     }
 
-    _urlHashScroll() {
+    urlHashScroll(duration = 10) {
         const href = window.location.hash;
-        const duration = 10;
 
         if (!href) {
             return;

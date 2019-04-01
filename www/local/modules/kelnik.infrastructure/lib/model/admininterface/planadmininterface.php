@@ -41,13 +41,12 @@ class PlanAdminInterface extends AdminInterface
                         'EDIT_HELPER' => ResidentEditHelper::class,
                         'TITLE_FIELD_NAME' => 'NAME'
                     ],
-                    'RESIDENT_IMAGE' => [
-                        'WIDGET' => new FileWidget(),
-                        'HEADER' => false,
-                        'FILTER' => false,
-                        'IMAGE' => true
-                    ],
                     'ACTIVE' => [
+                        'WIDGET' => new CheckboxWidget(),
+                        'FILTER' => true,
+                        'FIELD_TYPE' => CheckboxWidget::TYPE_STRING
+                    ],
+                    'IS_BUSY' => [
                         'WIDGET' => new CheckboxWidget(),
                         'FILTER' => true,
                         'FIELD_TYPE' => CheckboxWidget::TYPE_STRING
