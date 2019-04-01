@@ -12,6 +12,7 @@ use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportFieldsGroupTable;
 use Kelnik\Report\Model\ReportFieldsTable;
 use Kelnik\Report\Model\ReportsTable;
+use Kelnik\Report\Model\StatusTable;
 use Kelnik\UserData\Profile\Profile;
 
 /**
@@ -284,6 +285,11 @@ class ApiProcessReport extends ApiProcessAbstract
 
             return false;
         }
+
+        $this->report->setStatusId(StatusTable::CHECKING);
+        $this->report->setDateModified(new DateTime());
+        $this->report->setIsLocked(false);
+        $this->report->save();
 
         $this->data['backUrl'] = \SezLang::getDirBySite(SITE_ID) . \Kelnik\Report\Model\ReportsTable::BASE_URL;
 

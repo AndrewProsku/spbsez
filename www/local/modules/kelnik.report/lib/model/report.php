@@ -150,8 +150,57 @@ class Report extends EO_Reports
      */
     public function isFilled()
     {
-        // TODO: check fields
-        // $forms = $this->getForms();
+        $forms = $this->getForms();
+
+        foreach ($forms as $form) {
+            foreach ($form['blocks'] as $block) {
+                if (isset($block['fields'])) {
+                    if (!self::checkFilledFields($block['fields'])) {
+                        return false;
+                    }
+                    continue;
+                }
+
+                // groups, innovations, stages
+                foreach (['groups', 'innovations', 'stages'] as $type) {
+                    if (!isset($block[$type])) {
+                        continue;
+                    }
+
+                    foreach ($block[$type] as $typeElement) {
+                        if ($type == 'stages') {
+                            $stageType = ArrayHelper::getValue(current($typeElement['fields']), 'value');
+                            if (ArrayHelper::getValue(ReportFieldsTable::$stages, $stageType . '.extra', false) === false) {
+                                continue;
+                            }
+                        }
+
+                        if (!self::checkFilledFields($typeElement['fields'])) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    protected static function checkFilledFields(array $fields)
+    {
+        if (!$fields) {
+            return false;
+        }
+
+        foreach ($fields as $field) {
+            if (isset($field['checked'])) {
+                continue;
+            }
+
+            if (empty($field['value'])) {
+                return false;
+            }
+        }
 
         return true;
     }

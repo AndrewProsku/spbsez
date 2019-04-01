@@ -24,6 +24,40 @@ class ReportFieldsTable extends DataManager
     public const FIELD_CONSTRUCTION_FILE = 'construction-permission-file';
     public const FIELD_CONSTRUCTION_DATE = 'construction-permission-date';
 
+    // Стадии строительства
+    // `extra` - требует дополнительных полей
+    //
+    public static $stages = [
+        'stage1' => [
+            'name'  => 'Заключение договора аренды',
+            'extra' => false
+        ],
+        'stage2' => [
+            'Землеустроительные работы',
+            'extra' => false
+        ],
+        'stage3' => [
+            'Проектирование',
+            'extra' => false
+        ],
+        'stage4' => [
+            'Строительство',
+            'extra' => true
+        ],
+        'stage5' => [
+            'Получение разрешения на ввод в эксплуатацию',
+            'extra' => false
+        ],
+        'stage6' => [
+            'Операционная деятельность',
+            'extra' => true
+        ],
+        'stage7' => [
+            'Строительство не предусмотрено',
+            'extra' => false
+        ]
+    ];
+
     /**
      * @return string
      */
