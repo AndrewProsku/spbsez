@@ -189,6 +189,12 @@
     }
 }
 
+.b-infrastructure-map__title_only_mobile {
+    @media #{$tablet-portrait} {
+        display: none;
+    }
+}
+
 .b-infrastructure-map__title .b-infrastructure-switch {
     @media #{$tablet-portrait}  {
         display: none;

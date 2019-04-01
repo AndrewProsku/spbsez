@@ -17137,6 +17137,10 @@ label .b-help {
       padding-right: 11.11111%; } }
 
 @media only screen and (min-width: 670px) {
+  .b-infrastructure-map__title_only_mobile {
+    display: none; } }
+
+@media only screen and (min-width: 670px) {
   .b-infrastructure-map__title .b-infrastructure-switch {
     display: none; } }
 
