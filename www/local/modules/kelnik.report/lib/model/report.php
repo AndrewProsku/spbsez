@@ -4,6 +4,8 @@ namespace Kelnik\Report\Model;
 
 
 use Bitrix\Main\Type\DateTime;
+use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Helpers\BitrixHelper;
 use Kelnik\UserData\Profile\Profile;
 
 /**
@@ -37,6 +39,7 @@ use Kelnik\UserData\Profile\Profile;
  * @method \Bitrix\Main\Type\DateTime getDateModified()
  * @method \Bitrix\Main\Type\DateTime getDateCreated()
  * @method Fields getFields()
+ * @method FieldsGroup getGroups()
  */
 class Report extends EO_Reports
 {
@@ -122,7 +125,7 @@ class Report extends EO_Reports
      *
      * @return bool
      */
-    public function isChecking()
+    public function isUnderReview()
     {
         return $this->getStatusId() === StatusTable::CHECKING;
     }
@@ -143,6 +146,66 @@ class Report extends EO_Reports
     }
 
     /**
+     * Отчет полностью заполнен и готов к отправке
+     */
+    public function isFilled()
+    {
+        $forms = $this->getForms();
+
+        foreach ($forms as $form) {
+            foreach ($form['blocks'] as $block) {
+                if (isset($block['fields'])) {
+                    if (!self::checkFilledFields($block['fields'])) {
+                        return false;
+                    }
+                    continue;
+                }
+
+                // groups, innovations, stages
+                foreach (['groups', 'innovations', 'stages'] as $type) {
+                    if (!isset($block[$type])) {
+                        continue;
+                    }
+
+                    foreach ($block[$type] as $typeElement) {
+                        if ($type == 'stages') {
+                            $stageType = ArrayHelper::getValue(current($typeElement['fields']), 'value');
+                            if (ArrayHelper::getValue(ReportFieldsTable::$stages, $stageType . '.extra', false) === false) {
+                                continue;
+                            }
+                        }
+
+                        if (!self::checkFilledFields($typeElement['fields'])) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    protected static function checkFilledFields(array $fields)
+    {
+        if (!$fields) {
+            return false;
+        }
+
+        foreach ($fields as $field) {
+            if (isset($field['checked'])) {
+                continue;
+            }
+
+            if (empty($field['value'])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Проверяем возможность редактирования отчета
      *
      * @param int $userId
@@ -150,7 +213,7 @@ class Report extends EO_Reports
      */
     public function canEdit(int $userId = 0)
     {
-        if ($this->isComplete() || $this->isChecking()) {
+        if ($this->isComplete() || $this->isUnderReview()) {
             return false;
         }
 
@@ -215,5 +278,181 @@ class Report extends EO_Reports
         $res['TYPE_NAME'] = $this->getTypeName();
 
         return $res;
+    }
+
+    public function getForms(): array
+    {
+        $res = [];
+        $fields = self::prepareFiles($this->getFields()->getArray());
+        $groups = $this->getGroups()->getArray();
+
+        $forms = ReportFieldsTable::getFormConfig();
+
+        foreach ($forms as $formKey => $formConfig) {
+            $formData = [
+                'blocks' => []
+            ];
+
+            if (isset($formConfig['type'])) {
+                $formData['type'] = $formConfig['type'];
+            }
+
+            if (empty($formConfig['blocks'])) {
+                continue;
+            }
+
+            foreach ($formConfig['blocks'] as $block) {
+                $formData['blocks'] = array_merge(
+                    $formData['blocks'],
+                    $this->processBlock($formKey, $fields, $groups, $block)
+                );
+            }
+
+            $res[$formKey] = $formData;
+        }
+
+        return $res;
+    }
+
+    protected function processBlock(int $formNum, array $values, array $groups, array $block)
+    {
+        $res = [];
+        $newBlock = [];
+
+        if (isset($block['type'])) {
+            $newBlock['type'] = $block['type'];
+        }
+
+        // fields
+        //
+        if (!empty($block['fields'])
+            && (!isset($block['type']) || $block['type'] != 'results')
+        ) {
+
+            foreach ($block['fields'] as $field) {
+                $isArray = is_array($field);
+
+                $id = $isArray ? $field['id'] : $field;
+                $val = self::getFieldValue($values, $id);
+                $valField = 'value';
+
+                if ($isArray && !empty($field['suffix'])) {
+                    $id = $id . '-' . $field['suffix'];
+                }
+
+                if ($isArray && $field['type'] == 'boolean') {
+                    $val = $val == ArrayHelper::getValue($field, 'trueValue', false);
+                    $valField = 'checked';
+                }
+
+                $newBlock['fields'][] = [
+                    'id' => $id,
+                    $valField => $val
+                ];
+            }
+
+            $res[] = $newBlock;
+
+            return $res;
+        }
+
+        // multiple
+        //
+        if (!empty($block['multiple'])) {
+
+            $ids = ArrayHelper::getValue($groups, $block['multiple']['name'] . '.' . $formNum, []);
+            $rows = [];
+
+            foreach ($ids as $id) {
+                $fields = [];
+                foreach ($block['multiple']['fields'] as $field) {
+                    $fields[] = [
+                        'id'    => $field . '[' . $id . ']',
+                        'value' => self::getFieldValue($values, $field, $id)
+                    ];
+                }
+
+                $rows[$id] = [
+                    $block['multiple']['id'] => $id,
+                    'fields' => $fields
+                ];
+            }
+
+            $newBlock = [
+                'type' => $block['type'],
+                $block['multiple']['name'] => array_values($rows)
+            ];
+
+            $res[] = $newBlock;
+
+            return $res;
+        }
+
+        // Results
+        //
+        $ids = ArrayHelper::getValue($groups, ReportFieldsGroupTable::TYPE_RESULTS . '.' . $formNum, []);
+        foreach ($ids as $id) {
+            $newBlock = [
+                'type' => 'results',
+                'ID' => $id,
+                'fields' => []
+            ];
+
+            foreach ($block['fields'] as $field) {
+                $newBlock['fields'][] = [
+                    'id' => $field . '[' . $id . ']',
+                    'value' => self::getFieldValue($values, $field, $id)
+                ];
+            }
+
+            $res[] = $newBlock;
+        }
+
+        return $res;
+    }
+
+    protected static function getFieldValue(array $fields, $fieldName, $groupId = 0)
+    {
+        if ($groupId) {
+            foreach ($fields as $field) {
+                if ($field['NAME'] != $fieldName || $field['GROUP_ID'] != $groupId) {
+                    continue;
+                }
+
+                return $field['VALUE'];
+            }
+
+            return '';
+        }
+
+        $key = array_search($fieldName, array_column($fields, 'NAME', 'ID'));
+
+        return $key
+                ? ArrayHelper::getValue($fields, $key . '.VALUE', '')
+                : '';
+    }
+
+    protected static function prepareFiles(array $fields)
+    {
+        $rows = array_filter($fields, function ($el) {
+            return $el['NAME'] == ReportFieldsTable::FIELD_CONSTRUCTION_FILE;
+        });
+
+        if (!$rows) {
+            return $fields;
+        }
+
+        $rows = BitrixHelper::prepareFileFields($rows, ['VALUE' => 'full']);
+
+        foreach ($rows as $v) {
+            if (!isset($fields[$v['ID']])) {
+                continue;
+            }
+
+            $fields[$v['ID']]['VALUE_ORIG'] = $fields[$v['ID']]['VALUE'];
+            $fields[$v['ID']]['VALUE'] = ArrayHelper::getValue($v, 'VALUE.ORIGINAL_NAME', '');
+        }
+
+        return $fields;
     }
 }

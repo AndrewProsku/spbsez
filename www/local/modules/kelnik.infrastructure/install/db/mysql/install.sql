@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `kelnik_infrastructure_platform_plan` (
   `PRICE_EN` varchar(100) DEFAULT NULL,
   `RENT_RU` varchar(100) DEFAULT NULL,
   `RENT_EN` varchar(100) DEFAULT NULL,
-  `COORDS` text,
+  `COORDS` TEXT NULL,
   PRIMARY KEY (`ID`),
   KEY `ACTIVE` (`ACTIVE`),
   KEY `PLATFORM_ID` (`PLATFORM_ID`),

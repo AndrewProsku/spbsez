@@ -22,9 +22,11 @@ Loc::loadMessages(__FILE__);
 
 class ReportsTable extends DataManager
 {
-    public const TYPE_1 = 1;
-    public const TYPE_2 = 2;
-    public const TYPE_3 = 3;
+    public const BASE_URL = 'cabinet/report/';
+
+    public const TYPE_QUARTER_1 = 1;
+    public const TYPE_QUARTER_2 = 2;
+    public const TYPE_QUARTER_3 = 3;
     public const TYPE_PRELIMINARY_ANNUAL = 4;
     public const TYPE_ANNUAL = 5;
 
@@ -98,7 +100,8 @@ class ReportsTable extends DataManager
                 Join::on('this.STATUS_ID', 'ref.ID')
             ))->configureJoinType('LEFT'),
 
-            (new OneToMany('FIELDS', ReportFieldsTable::class, 'REPORT'))
+            (new OneToMany('FIELDS', ReportFieldsTable::class, 'REPORT')),
+            (new OneToMany('GROUPS', ReportFieldsGroupTable::class, 'REPORT'))
         ];
     }
 
@@ -115,12 +118,42 @@ class ReportsTable extends DataManager
         return parent::update($id, $data);
     }
 
+    public static function onAfterAdd(Event $event)
+    {
+        ReportFieldsGroupTable::addReportGroups((int)  ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0));
+
+        static::clearComponentCache($event);
+        parent::onAfterAdd($event);
+    }
+
+    public static function onBeforeDelete(Event $event)
+    {
+        $id  = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
+
+        try {
+            if ($id) {
+                $sqlHelper = Application::getConnection()->getSqlHelper();
+                Application::getConnection()->query(
+                    "DELETE FROM `" . ReportFieldsTable::getTableName() . "` " .
+                    "WHERE `REPORT_ID` = " . $sqlHelper->convertToDbInteger($id)
+                );
+                Application::getConnection()->query(
+                    "DELETE FROM `" . ReportFieldsGroupTable::getTableName() . "` " .
+                    "WHERE `REPORT_ID` = " . $sqlHelper->convertToDbInteger($id)
+                );
+            }
+        } catch (\Exception $e) {
+        }
+
+        parent::onBeforeDelete($event);
+    }
+
     public static function clearComponentCache(Event $event)
     {
         global $USER;
 
         try {
-            $id = ArrayHelper::getValue($event->getParameter('id'), 'ID', 0);
+            $id = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
             $companyId = Context::getCurrent()->getRequest()->isAdminSection()
                         ? ReportsTable::getByPrimary($id)->fetchObject()->getCompanyId()
                         : Profile::getInstance((int)$USER->GetID())->getCompanyId();
@@ -140,9 +173,9 @@ class ReportsTable extends DataManager
     public static function getTypes()
     {
         return [
-            self::TYPE_1                  => Loc::getMessage('KELNIK_REPORT_TYPE_1'),
-            self::TYPE_2                  => Loc::getMessage('KELNIK_REPORT_TYPE_2'),
-            self::TYPE_3                  => Loc::getMessage('KELNIK_REPORT_TYPE_3'),
+            self::TYPE_QUARTER_1          => Loc::getMessage('KELNIK_REPORT_TYPE_1'),
+            self::TYPE_QUARTER_2          => Loc::getMessage('KELNIK_REPORT_TYPE_2'),
+            self::TYPE_QUARTER_3          => Loc::getMessage('KELNIK_REPORT_TYPE_3'),
             self::TYPE_PRELIMINARY_ANNUAL => Loc::getMessage('KELNIK_REPORT_TYPE_SEMI_ANNUAL'),
             self::TYPE_ANNUAL             => Loc::getMessage('KELNIK_REPORT_TYPE_ANNUAL')
         ];
@@ -160,15 +193,15 @@ class ReportsTable extends DataManager
         }
 
         return [
-            self::TYPE_1                  => [
+            self::TYPE_QUARTER_1          => [
                 'start' => mktime(0, 0, 0, 4, 1, $year),
                 'end' => mktime(23, 59, 59, 4, 31, $year)
             ],
-            self::TYPE_2                  => [
+            self::TYPE_QUARTER_2          => [
                 'start' => mktime(0, 0, 0, 7, 1, $year),
                 'end' => mktime(23, 59, 59, 7, 31, $year)
             ],
-            self::TYPE_3                  => [
+            self::TYPE_QUARTER_3          => [
                 'start' => mktime(0, 0, 0, 9, 1, $year),
                 'end' => mktime(23, 59, 59, 9, 30, $year)
             ],
