@@ -109,13 +109,18 @@
 }
 
 .b-page-submenu_with_switch {
-    @media #{$tablet-portrait} {
-        display: flex;
-        justify-content: space-between;
+    padding-bottom: 15px;
 
+    @media #{$tablet-portrait} {
         &:after {
             display: none;
         }
+    }
+
+    @media #{$tablet-landscape} {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 0;
     }
 }
 

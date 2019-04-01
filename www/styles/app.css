@@ -22853,16 +22853,20 @@ label .b-help {
       font-size: 18px;
       line-height: 27px; } }
 
-@media only screen and (min-width: 670px) {
-  .b-page-submenu_with_switch {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-            justify-content: space-between; }
+.b-page-submenu_with_switch {
+  padding-bottom: 15px; }
+  @media only screen and (min-width: 670px) {
     .b-page-submenu_with_switch:after {
       display: none; } }
+  @media only screen and (min-width: 960px) {
+    .b-page-submenu_with_switch {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: space-between;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      padding-bottom: 0; } }
 
 .b-page-submenu_with_switch .b-page-submenu__block:after {
   display: none; }
