@@ -472,10 +472,19 @@ class YandexMap {
 
             const placemark = new ymaps.Placemark(element.coords, {
             }, {
-                iconLayout: CustomLayoutClass
+                iconLayout: CustomLayoutClass,
+                iconShape: {
+                    type: 'Polygon',
+                    coordinates: [element.coordShape]
+                },
+                cursor: 'pointer'
             });
 
             this.map.geoObjects.add(placemark);
+
+            placemark.events.add('click', function () {
+                window.location = element.link;
+            });
         })
     }
 

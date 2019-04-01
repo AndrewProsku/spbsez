@@ -191,7 +191,6 @@ if (authBlock) {
  * Подключение маски телефона
  */
 const phoneInputs = Array.from(document.querySelectorAll('input[type="tel"]:not(.b-input-phone)'));
-let inputTel = {};
 
 if (phoneInputs.length) {
     (new InputTel()).init({input: phoneInputs});
