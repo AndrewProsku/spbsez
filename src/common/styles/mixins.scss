@@ -80,22 +80,22 @@
 // Стилизация скроллбара для вебкит браузеров
 @mixin custom-scroll() {
     &::-webkit-scrollbar {
-        width: 5px;
-        height: 5px;
-        @media #{$tablet-landscape} {
-            width: 10px;
-            height: 10px;
-        }
+        width: 2px;
+        height: 2px;
+        // @media #{$tablet-landscape} {
+        //     width: 5px;
+        //     height: 5px;
+        // }
     }
 
     &::-webkit-scrollbar-button {
-        width: 5px;
-        height: 5px;
+        width: 2px;
+        height: 2px;
 
-        @media #{$tablet-landscape} {
-            width: 16px;
-            height: 16px;
-        }
+        // @media #{$tablet-landscape} {
+        //     width: 10px;
+        //     height: 10px;
+        // }
     }
 
     &::-webkit-scrollbar-thumb {
