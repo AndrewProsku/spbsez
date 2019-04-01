@@ -612,6 +612,8 @@ class ReportForm {
                 }
 
                 window.location = response.data.backUrl;
+
+                return true;
             },
             error(error) {
                 console.error(error);

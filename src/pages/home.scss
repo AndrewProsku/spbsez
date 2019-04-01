@@ -381,7 +381,7 @@ $path: '/images/home/';
     }
 
     @media #{$laptop} {
-        @include row();
+        display: flex;
     }
 }
 
@@ -425,6 +425,7 @@ $path: '/images/home/';
 
 .l-home__privileges-text-title {
     @include font-size('p1');
+    font-family: $font-bold;
 }
 
 .l-home__privileges-text-block {
@@ -469,8 +470,8 @@ $path: '/images/home/';
     }
 
     @media #{$laptop} {
-        @include push(1, 32);
-        @include post(1, 32);
+        @include push(1, 30);
+        @include post(1, 30);
       }
 
     @media #{$laptop-wide} {
@@ -525,16 +526,9 @@ $path: '/images/home/';
 
 .l-home__news-main-title {
     @include font-size('p1');
-    @include margin-level(bottom, green);
-
-    @media #{$tablet-portrait} {
-        max-height: 170px;
-        overflow: hidden;
-    }
 
     @media #{$laptop-wide} {
-        max-height: 175px;
-        height: 175px;
+        min-height: 175px;
     }
 }
 
@@ -544,6 +538,7 @@ $path: '/images/home/';
     vertical-align: middle;
     padding-left: 28px;
     margin-right: 8px;
+    pointer-events: none;
 
     &:before {
         content: '';
@@ -567,6 +562,11 @@ $path: '/images/home/';
             left: 10px;
         }
     }
+}
+
+.l-home__news-date,
+.l-home__news-subsection {
+    @include margin-level(top, green);
 }
 
 .l-home__news-list {
@@ -636,7 +636,7 @@ $path: '/images/home/';
 
 .l-home__news-title {
     @include font-size('p3');
-    @include margin-level(bottom, green);
+    //@include margin-level(bottom, green);
 
     @media #{$tablet-portrait} {
         height: 126px;
@@ -1243,6 +1243,10 @@ $path: '/images/home/';
     background-color: $grey;
     overflow: auto;
 
+    .b-tooltip {
+        border: none;
+    }
+
     @media #{$tablet-portrait} {
         display: block;
     }
@@ -1329,16 +1333,13 @@ $path: '/images/home/';
         color: $white;
         background-color: $blue;
         border-radius: 30px;
-        padding: 3px 10px;
+        padding: 2px 10px 4px;
     }
 
     @media #{$laptop} {
         .b-tooltip {
             font-size: 20px;
-            padding-left: 20px;
-            padding-right: 20px;
-            padding-top: 8px;
-            padding-bottom: 7px;
+            padding: 7px 20px 8px;
         }
     }
 }
@@ -1627,7 +1628,7 @@ $path: '/images/home/';
         left: 100%;
         z-index: 2;
         background-color:$white;
-        border-radius: 20px;
+        border-radius: 8px;
         box-shadow: 0 2px 3px $grey, 0 4px 20px $dark-white;
         padding: 5px 25px;
         visibility: hidden;
