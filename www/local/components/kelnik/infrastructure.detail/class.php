@@ -238,11 +238,16 @@ class InfrastructureDetail extends Bbc\Basis
             return $res;
         }
 
+        $stubs = [
+            'ru' => '/images/residents/stub_ru.png',
+            'en' => '/images/residents/stub_en.png'
+        ];
+
         try {
             $res = PlanTable::getAssoc([
                 'select' => [
-                    'ID', 'RESIDENT_ID', 'RESIDENT_IMAGE',
-                    'HEAT', 'ELECTRICITY', 'WATER', 'STORM_SEWER', 'AREA',
+                    'ID', 'RESIDENT_ID', 'RESIDENT_IMAGE_RU', 'RESIDENT_IMAGE_EN',
+                    'HEAT', 'ELECTRICITY', 'WATER', 'STORM_SEWER', 'IS_BUSY', 'AREA',
                     'PRICE' => 'PRICE_RU', 'PRICE_EN',
                     'RENT' => 'RENT_RU', 'RENT_EN', 'COORDS'
                 ],
@@ -268,7 +273,7 @@ class InfrastructureDetail extends Bbc\Basis
             $res = [];
         }
 
-        $res = BitrixHelper::prepareFileFields($res, ['RESIDENT_IMAGE' => 'path']);
+        $res = BitrixHelper::prepareFileFields($res, ['RESIDENT_IMAGE*' => 'path']);
         $residents = array_map(function ($el) {
             return PlanTable::replaceFieldsByLang($el, LANGUAGE_ID);
         }, $residents);
@@ -296,15 +301,23 @@ class InfrastructureDetail extends Bbc\Basis
 
             if ($v['RESIDENT'] = ArrayHelper::getValue($residents, $v['RESIDENT_ID'], [])) {
                 $json = [
-                    'NAME' => $v['RESIDENT']['NAME'],
+                    'NAME' => strip_tags(html_entity_decode($v['RESIDENT']['NAME'], ENT_QUOTES, SITE_CHARSET)),
                     'AREA' => $v['AREA'] ? $v['AREA'] . ' ' . Loc::getMessage('KELNIK_INFRA_COMP_AREA_SUFFIX') : '',
                     'AREA_TITLE' => Loc::getMessage('KELNIK_INFRA_COMP_AREA_TITLE'),
                     'TYPE' => $v['RESIDENT']['RTYPE'],
-                    'IMAGE' => ArrayHelper::getValue($v, 'RESIDENT.RESIDENT_IMAGE_PATH'),
+                    'IMAGE' => ArrayHelper::getValue(
+                                    $v,
+                                    'RESIDENT_IMAGE_' . strtoupper(LANGUAGE_ID) . '_PATH',
+                                    ArrayHelper::getValue($v, 'RESIDENT_IMAGE_RU_PATH')
+                                ),
                     'SITE' => $v['RESIDENT']['SITE']
                                 ? ['URL' => 'http://' . $v['RESIDENT']['SITE'], 'TITLE' => $v['RESIDENT']['SITE']]
                                 : false
                 ];
+
+                if (!$json['IMAGE']) {
+                    $json['IMAGE'] = $stubs[LANGUAGE_ID];
+                }
             }
 
             $v['JSON'] = base64_encode(json_encode($json));

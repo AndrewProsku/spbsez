@@ -69,9 +69,9 @@
                         <g class="b-visual__masks">
                             <?php foreach ($arResult['ELEMENT']['PLAN'] as $plan): ?>
                                 <path data-id="<?= $plan['ID']; ?>"
-                                      data-json="<?= $plan['JSON']; ?>"
+                                      data-json="<?= $plan['IS_BUSY'] == 'Y' ? '' : $plan['JSON']; ?>"
                                       <?php if(empty($plan['RESIDENT']['ID'])): ?>
-                                          class="is-empty"
+                                          class="<?php if($plan['IS_BUSY'] == 'Y'): ?>is-busy<?php else: ?>is-empty<?php endif; ?>"
                                       <?php elseif(!empty($plan['RESIDENT']['NAME'])): ?>
                                           data-title="<?= $plan['RESIDENT']['NAME']; ?>"
                                       <?php endif; ?>
