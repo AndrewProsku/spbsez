@@ -246,7 +246,7 @@ class InfrastructureDetail extends Bbc\Basis
         try {
             $res = PlanTable::getAssoc([
                 'select' => [
-                    'ID', 'RESIDENT_ID', 'RESIDENT_IMAGE_RU', 'RESIDENT_IMAGE_EN',
+                    'ID', 'RESIDENT_ID',
                     'HEAT', 'ELECTRICITY', 'WATER', 'STORM_SEWER', 'IS_BUSY', 'AREA',
                     'PRICE' => 'PRICE_RU', 'PRICE_EN',
                     'RENT' => 'RENT_RU', 'RENT_EN', 'COORDS'
@@ -262,7 +262,8 @@ class InfrastructureDetail extends Bbc\Basis
                 'select' => [
                     'ID', 'NAME' => 'NAME', 'NAME_EN',
                     'SITE', 'RTYPE' => 'TYPE.NAME',
-                    'RTYPE_EN' => 'TYPE.NAME_EN'
+                    'RTYPE_EN' => 'TYPE.NAME_EN',
+                    'IMAGE_RU' => 'IMAGE_ID', 'IMAGE_EN' => 'IMAGE_ID_EN'
                 ],
                 'filter' => [
                     '=ACTIVE' => ResidentTable::YES,
@@ -273,7 +274,7 @@ class InfrastructureDetail extends Bbc\Basis
             $res = [];
         }
 
-        $res = BitrixHelper::prepareFileFields($res, ['RESIDENT_IMAGE*' => 'path']);
+        $residents = BitrixHelper::prepareFileFields($residents, ['IMAGE_*' => 'path']);
         $residents = array_map(function ($el) {
             return PlanTable::replaceFieldsByLang($el, LANGUAGE_ID);
         }, $residents);
@@ -307,8 +308,8 @@ class InfrastructureDetail extends Bbc\Basis
                     'TYPE' => $v['RESIDENT']['RTYPE'],
                     'IMAGE' => ArrayHelper::getValue(
                                     $v,
-                                    'RESIDENT_IMAGE_' . strtoupper(LANGUAGE_ID) . '_PATH',
-                                    ArrayHelper::getValue($v, 'RESIDENT_IMAGE_RU_PATH')
+                                    'RESIDENT.IMAGE_' . strtoupper(LANGUAGE_ID) . '_PATH',
+                                    ArrayHelper::getValue($v, 'RESIDENT.IMAGE_RU_PATH')
                                 ),
                     'SITE' => $v['RESIDENT']['SITE']
                                 ? ['URL' => 'http://' . $v['RESIDENT']['SITE'], 'TITLE' => $v['RESIDENT']['SITE']]
@@ -322,6 +323,17 @@ class InfrastructureDetail extends Bbc\Basis
 
             $v['JSON'] = base64_encode(json_encode($json));
         }
+
+        usort($res, function ($a, $b) {
+            $aIsBusy = !empty($a['RESIDENT_ID']) || $a['IS_BUSY'] == 'Y';
+            $bIsBusy = !empty($b['RESIDENT_ID']) || $b['IS_BUSY'] == 'Y';
+
+            if ($aIsBusy && $bIsBusy) {
+                return 0;
+            }
+
+            return $aIsBusy ? 1 : -1;
+        });
 
         return $res;
     }

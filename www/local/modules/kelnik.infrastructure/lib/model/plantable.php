@@ -34,12 +34,6 @@ class PlanTable extends DataManager
             (new IntegerField('RESIDENT_ID'))
                 ->configureDefaultValue(0)
                 ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_RESIDENT')),
-            (new IntegerField('RESIDENT_IMAGE_RU'))
-                ->configureDefaultValue(0)
-                ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_RESIDENT_IMAGE')),
-            (new IntegerField('RESIDENT_IMAGE_EN'))
-                ->configureDefaultValue(0)
-                ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_RESIDENT_IMAGE_EN')),
 
             (new BooleanField('ACTIVE'))
                 ->configureValues(self::NO, self::YES)

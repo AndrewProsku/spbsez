@@ -100,8 +100,6 @@ CREATE TABLE IF NOT EXISTS `kelnik_infrastructure_platform_plan` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `PLATFORM_ID` int(11) unsigned DEFAULT '0',
   `RESIDENT_ID` int(11) unsigned DEFAULT '0',
-  `RESIDENT_IMAGE_RU` int(11) unsigned DEFAULT '0',
-  `RESIDENT_IMAGE_EN` int(11) unsigned DEFAULT '0',
   `ACTIVE` enum('Y','N') DEFAULT 'N',
   `HEAT` enum('Y','N') DEFAULT 'N',
   `ELECTRICITY` enum('Y','N') DEFAULT 'N',
