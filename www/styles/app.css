@@ -9909,27 +9909,26 @@ p.b-checkbox-text {
       padding-left: 11.11111%;
       padding-right: 11.11111%; } }
 
-@media only screen and (min-width: 1920px) {
-  .b-residents-title {
-    margin-bottom: 24px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 670px) {
+.b-residents-title {
+  padding-top: 32px; }
+  @media only screen and (min-width: 670px) {
     .b-residents-title {
-      margin-bottom: 32px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 960px) {
+      padding-top: 40px; } }
+  @media only screen and (min-width: 960px) {
     .b-residents-title {
-      margin-bottom: 32px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 1280px) {
+      padding-top: 40px; } }
+  @media only screen and (min-width: 1280px) {
     .b-residents-title {
-      margin-bottom: 40px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 1600px) {
+      padding-top: 64px; } }
+  @media only screen and (min-width: 1600px) {
     .b-residents-title {
-      margin-bottom: 48px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 1920px) {
+      padding-top: 80px; } }
+  @media only screen and (min-width: 1920px) {
     .b-residents-title {
-      margin-bottom: 48px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 2560px) {
+      padding-top: 80px; } }
+  @media only screen and (min-width: 2560px) {
     .b-residents-title {
-      margin-bottom: 48px; } }
+      padding-top: 80px; } }
 
 @media only screen and (min-width: 670px) {
   .b-residents-content {
@@ -10327,7 +10326,8 @@ p.b-checkbox-text {
       font-size: 16px;
       line-height: 24px; } }
   .b-resident__page-link span {
-    color: #30409a; }
+    color: #30409a;
+    cursor: default; }
 
 .l-profile-messages {
   padding-left: 5.55556%;
@@ -25782,27 +25782,6 @@ input[type="password"].b-input-password {
       -webkit-flex-wrap: wrap;
           -ms-flex-wrap: wrap;
               flex-wrap: wrap; } }
-  @media only screen and (min-width: 1920px) {
-    .b-filters {
-      margin-bottom: 24px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 670px) {
-    .b-filters {
-      margin-bottom: 32px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 960px) {
-    .b-filters {
-      margin-bottom: 32px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 1280px) {
-    .b-filters {
-      margin-bottom: 40px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 1600px) {
-    .b-filters {
-      margin-bottom: 48px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 1920px) {
-    .b-filters {
-      margin-bottom: 48px; } }
-  @media only screen and (min-width: 1920px) and (min-width: 2560px) {
-    .b-filters {
-      margin-bottom: 48px; } }
 
 .b-filters__item {
   font-size: 14px;

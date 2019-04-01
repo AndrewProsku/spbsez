@@ -19,9 +19,7 @@
 }
 
 .b-residents-title {
-    @media #{$fullhd} {
-        @include margin-level(bottom, green);
-    }
+    @include padding-level(top, blue);
 }
 
 .b-residents-content {
@@ -233,5 +231,6 @@
 
     span {
         color: $blue;
+        cursor: default;
     }
 }
