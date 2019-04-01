@@ -8,7 +8,7 @@ $APPLICATION->SetTitle("Инвесторам");
     <div class="l-investors__top">
         <h1 class="b-title"><? $APPLICATION->ShowTitle(false); ?></h1>
 
-        <div class="b-investors-info ">
+        <div class="b-investors-info">
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",

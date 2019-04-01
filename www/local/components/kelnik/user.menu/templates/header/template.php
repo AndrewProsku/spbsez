@@ -1,8 +1,8 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
 } ?>
-<div class="l-home__header-right">
-    <?php if(LANGUAGE_ID !== 'ch'): ?>
+<div class="l-home__header-right lang-<?= LANGUAGE_ID; ?>">
+    <?php if(LANG_DIR !== SezLang::CHINESE_DIR): ?>
         <div class="b-account">
             <a href="<?= LANG_DIR; ?>cabinet/<?php if($arResult['MESSAGES']): ?>messages/<?php endif; ?>" class="b-account__link<?php if($arResult['IS_AUTHORIZED']): ?> is-auth<?php endif; ?>">
                 <span class="b-account__link-icon">
@@ -22,6 +22,7 @@
         ),
         array()
     ); ?>
+    <?php if(LANG_DIR !== SezLang::CHINESE_DIR): ?>
     <div class="b-burger-wrap j-burger-click">
         <div class="b-burger">
             <div class="b-burger__line"></div>
@@ -29,4 +30,5 @@
             <div class="b-burger__line"></div>
         </div>
     </div>
+    <?php endif; ?>
 </div>

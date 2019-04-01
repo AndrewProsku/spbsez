@@ -47,7 +47,7 @@ class ProfileForm extends Bbc\Basis
         }
 
         if (!$this->profile->hasAccess()) {
-            LocalRedirect('/');
+            LocalRedirect(LANG_DIR);
         }
 
         $this->arResult['IS_ADMIN'] = $this->profile->isResidentAdmin();

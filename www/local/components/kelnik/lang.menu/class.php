@@ -31,19 +31,19 @@ class LangMenu extends Bbc\Basis
             'ru' => [
                 'LABEL' => 'Ru',
                 'NAME' => 'Рус',
-                'URL' => '/',
+                'URL' => \SezLang::RUSSIAN_DIR,
                 'SELECTED' => false
             ],
             'en' => [
                 'LABEL' => 'En',
                 'NAME' => 'Eng',
-                'URL' => '/en/',
+                'URL' => \SezLang::ENGLISH_DIR,
                 'SELECTED' => false
             ],
             'ch' => [
                 'LABEL' => 'Ch',
                 'NAME' => '中國',
-                'URL' => '/ch/',
+                'URL' => \SezLang::CHINESE_DIR,
                 'SELECTED' => false
             ]
         ];
