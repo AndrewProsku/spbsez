@@ -39,9 +39,17 @@
     }
 }
 
+.b-page-submenu__block::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+
 .b-page-submenu__block {
-    @include custom-scroll();
+    // @include custom-scroll();
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
     overflow-x: auto;
+    scrollbar-width: none;
 }
 
 .b-page-submenu__list {

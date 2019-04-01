@@ -1059,6 +1059,11 @@ $circle-six: 22s;
         @include prefix(3, 36);
         @include suffix(3, 36);
     }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(4, 36);
+    }
 }
 
 .b-government__title {
@@ -1082,6 +1087,10 @@ $circle-six: 22s;
     @media #{$tablet-portrait} {
         @include row();
     }
+
+    @media #{$laptop} {
+        justify-content: space-between;
+    }
 }
 
 .b-government__item {
@@ -1092,17 +1101,17 @@ $circle-six: 22s;
     }
 
     @media #{$laptop} {
-        @include column(thrid, 30);
-        @include suffix(1, 30);
+        @include column(9, 30);
         display: block;
         margin-bottom: 0;
     }
 
     @media #{$fullhd} {
-        @include suffix(2, 30);
+        @include column(8, 28);
+        @include column(2, 28);
 
         &:nth-child(3) {
-            @include suffix(1, 30);
+            padding-right: 0;
         }
     }
 }

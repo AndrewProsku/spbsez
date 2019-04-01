@@ -1014,6 +1014,7 @@ $path: '/images/home/';
 
     .l-home-plots__all-map-images {
         width:  600px;
+        height: 380px;
         background-image: url($path + 'map-mobile.png');
         background-position: left top;
         background-size: 100% 100%;
@@ -1050,7 +1051,7 @@ $path: '/images/home/';
     }
 }
 
-.l-home-plots__map-neudorf {
+.l-home-plots__map {
     .l-home-plots__all-map-images {
         height: 380px;
     }
@@ -1087,64 +1088,64 @@ $path: '/images/home/';
     }
 }
 
-.l-home-plots__map-novoorlovskaya {
-    .l-home-plots__all-map-images {
-        //width: 460px;
-        //height: 250px;
-        width: 670px;
-        height: 370px;
-        background-image: url($path + 'map-mobile2.png');
-        background-position: left top;
-        background-size: cover;
-
-        &.lang-en {
-            background-image: url($path + 'map-img-en/Map-ENG-8.png');
-        }
-
-        &.lang-ch {
-            background-image: url($path + 'map-img-ch/Map-CHINA-8.png');
-        }
-    }
-
-    .l-home-plots__all-map-build-one {
-        left: 45%;
-        top: 16%;
-    }
-
-    .l-home-plots__all-map-build-two {
-        top: 83%;
-        left: 6%;
-    }
-
-    .l-home-plots__all-map-icon {
-        &.icon-port {
-            top: 45%;
-            left: 37%;
-        }
-
-        &.icon-rialway-station {
-            &.icon-rialway-station-one {
-                top: 56%;
-                left: 62%;
-            }
-
-            &.icon-rialway-station-two {
-                left: 80%;
-                top: 44%;
-            }
-        }
-
-        &.icon-center-city {
-            left: 67%;
-            top: 46%;
-        }
-
-        &.icon-airport {
-            left: 79%;
-            top: 86%;
-        }
-    }
-}
+// .l-home-plots__map-novoorlovskaya {
+//    .l-home-plots__all-map-images {
+//        width: 460px;
+//        height: 250px;
+//        width: 670px;
+//        height: 370px;
+//        background-image: url($path + 'map-mobile2.png');
+//        background-position: left top;
+//        background-size: cover;
+//
+//        &.lang-en {
+//            background-image: url($path + 'map-img-en/Map-ENG-8.png');
+//        }
+//
+//        &.lang-ch {
+//            background-image: url($path + 'map-img-ch/Map-CHINA-8.png');
+//        }
+//    }
+//
+//    .l-home-plots__all-map-build-one {
+//        left: 45%;
+//        top: 16%;
+//    }
+//
+//    .l-home-plots__all-map-build-two {
+//        top: 83%;
+//        left: 6%;
+//    }
+//
+//    .l-home-plots__all-map-icon {
+//        &.icon-port {
+//            top: 45%;
+//            left: 37%;
+//        }
+//
+//        &.icon-rialway-station {
+//            &.icon-rialway-station-one {
+//                top: 56%;
+//                left: 62%;
+//            }
+//
+//            &.icon-rialway-station-two {
+//                left: 80%;
+//                top: 44%;
+//            }
+//        }
+//
+//        &.icon-center-city {
+//            left: 67%;
+//            top: 46%;
+//        }
+//
+//        &.icon-airport {
+//            left: 79%;
+//            top: 86%;
+//        }
+//    }
+// }
 
 .l-home-plots__title {
     @include font-size('h3');
