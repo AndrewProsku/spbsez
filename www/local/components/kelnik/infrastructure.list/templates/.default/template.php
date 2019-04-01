@@ -22,6 +22,15 @@
     </div>
 </div>
 
+<div class="b-infrastructure-map__title b-infrastructure-map__title_only_mobile">
+    <div class="b-page-switch b-infrastructure-switch">
+        <div><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_LIST'); ?></div>
+        <a href="<?= $arParams['SEF_FOLDER']; ?>" class="b-page-switch__switch b-page-switch__switch_is_switched"></a>
+        <a href="<?= $arParams['SEF_FOLDER']; ?>"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_ON_MAP'); ?></a>
+    </div>
+    <h1><?= $APPLICATION->ShowTitle(false); ?></h1>
+</div>
+
 <div class="l-infrastructure">
     <div class="b-infrastructure-places">
         <?php foreach ($arResult['ELEMENTS'] as $arItem): ?>
