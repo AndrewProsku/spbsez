@@ -475,7 +475,7 @@ class YandexMap {
                 iconLayout: CustomLayoutClass,
                 iconShape: {
                     type: 'Polygon',
-                    coordinates: [element.coordShape]
+                    coordinates: [element.coordShape || [0,0]]
                 },
                 cursor: 'pointer'
             });
@@ -483,6 +483,10 @@ class YandexMap {
             this.map.geoObjects.add(placemark);
 
             placemark.events.add('click', function () {
+                if (!element.link) {
+                    return;
+                }
+
                 window.location = element.link;
             });
         })
