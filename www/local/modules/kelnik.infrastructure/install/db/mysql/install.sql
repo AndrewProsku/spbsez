@@ -96,13 +96,11 @@ CREATE TABLE IF NOT EXISTS `kelnik_infrastructure_platform_map` (
   KEY `PLATFORM_ID` (`PLATFORM_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
-
 CREATE TABLE IF NOT EXISTS `kelnik_infrastructure_platform_plan` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `PLATFORM_ID` int(11) unsigned DEFAULT '0',
   `RESIDENT_ID` int(11) unsigned DEFAULT '0',
   `ACTIVE` enum('Y','N') DEFAULT 'N',
-  `SHOW_TITLE` enum('Y','N') DEFAULT 'N',
   `HEAT` enum('Y','N') DEFAULT 'N',
   `ELECTRICITY` enum('Y','N') DEFAULT 'N',
   `WATER` enum('Y','N') DEFAULT 'N',
@@ -112,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `kelnik_infrastructure_platform_plan` (
   `PRICE_EN` varchar(100) DEFAULT NULL,
   `RENT_RU` varchar(100) DEFAULT NULL,
   `RENT_EN` varchar(100) DEFAULT NULL,
-  `COORDS` varchar(255) DEFAULT 'N',
+  `COORDS` text,
   PRIMARY KEY (`ID`),
   KEY `ACTIVE` (`ACTIVE`),
   KEY `PLATFORM_ID` (`PLATFORM_ID`),
