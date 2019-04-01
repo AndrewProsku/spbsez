@@ -391,7 +391,11 @@ class ReportBlock {
             event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
             const formData = new FormData(event.target.closest('form'));
 
-            Utils.send(formData, '/tests/reports/input-update.json', {
+            formData.append('a', 'update');
+            formData.append('id', that.reportId);
+            formData.append('field', input.id);
+
+            Utils.send(formData, that.baseUrl, {
                 success(response) {
                     if (!response.request.status === that.SUCCESS_STATUS) {
                         return true;
@@ -408,9 +412,10 @@ class ReportBlock {
         fileInputBlock.querySelector('.b-input-file__delete').addEventListener('click', (event) => {
             event.preventDefault();
             const permissionForm = event.target.closest(`.${that.permissionFormClass}`);
-            const dataToSend = `action=delPermissionDoc&id=${permissionForm.dataset.stageId}`;
+            const dataToSend = `a=delFile&id=${this.reportId}&form=${this.formID}` +
+                `&parent=${permissionForm.dataset.stageId}`;
 
-            Utils.send(dataToSend, '/tests/reports/input-update.json', {
+            Utils.send(dataToSend, this.baseUrl, {
                 success(response) {
                     if (!response.request.status === that.SUCCESS_STATUS) {
                         return true;

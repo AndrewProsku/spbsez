@@ -107,7 +107,11 @@ class ReportForm {
         });
 
         if (this.submitReportButton) {
-            this.submitReportButton.addEventListener('click', this.submitReports);
+            const that = this;
+
+            this.submitReportButton.addEventListener('click', () => {
+                this.submitReports(that);
+            });
         }
     }
 
@@ -577,34 +581,37 @@ class ReportForm {
      * Включает/отключает кнопку отправки отчета
      */
     toggleSubmitButton() {
-        if (this.submitReportButton) {
-            if (!this.residentNameField.value || !this.oezNameField.value) {
+        if (!this.submitReportButton) {
+            return;
+        }
+
+        if (!this.residentNameField.value || !this.oezNameField.value) {
+            this.submitReportButton.disabled = true;
+
+            return;
+        }
+
+        for (let i = 0; i < this.forms.length; i++) {
+            if (!this.forms[i].isApproved) {
                 this.submitReportButton.disabled = true;
 
                 return;
             }
-
-            for (let i = 0; i < this.forms.length; i++) {
-                if (!this.forms[i].isApproved) {
-                    this.submitReportButton.disabled = true;
-
-                    return;
-                }
-            }
-            this.submitReportButton.disabled = false;
         }
+
+        this.submitReportButton.disabled = false;
     }
 
     submitReports() {
         const that = this;
 
-        Utils.send('a=confirmReport', '/tests/reports/input-update.json', {
+        Utils.send(`a=confirm&id=${that.reportId}`, that.baseUrl, {
             success(response) {
                 if (!response.request.status === that.SUCCESS_STATUS) {
                     return true;
                 }
 
-                return true;
+                window.location = response.data.backUrl;
             },
             error(error) {
                 console.error(error);

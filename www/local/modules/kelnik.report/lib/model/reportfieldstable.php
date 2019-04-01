@@ -21,6 +21,9 @@ class ReportFieldsTable extends DataManager
     public const FORM_ADDITIONAL_INDICATORS = 5;
     public const FORM_RESULT = 6;
 
+    public const FIELD_CONSTRUCTION_FILE = 'construction-permission-file';
+    public const FIELD_CONSTRUCTION_DATE = 'construction-permission-date';
+
     /**
      * @return string
      */

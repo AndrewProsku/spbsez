@@ -4,6 +4,7 @@ namespace Kelnik\Api\Process;
 
 
 use Bitrix\Main\Application;
+use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
@@ -46,6 +47,10 @@ class ApiProcessReport extends ApiProcessAbstract
      * @var Report
      */
     protected $report;
+
+    protected static $notUpdateMethods = [
+        'get', 'confirm'
+    ];
 
     public function execute(array $request): bool
     {
@@ -92,7 +97,7 @@ class ApiProcessReport extends ApiProcessAbstract
         // обновляем время изменения самого отчета
         // и блокировку
         //
-        if ($this->action !== 'get') {
+        if (!in_array($this->action, self::$notUpdateMethods)) {
             $this->report->setIsLocked(true);
             $this->report->setDateModified(new DateTime());
             $this->report->save();
@@ -136,6 +141,16 @@ class ApiProcessReport extends ApiProcessAbstract
             preg_match('!(?P<field>[a-z0-9\-]+)\[(?P<parent>\d+)\]!si', $field, $matches);
             $groupId = (int) ArrayHelper::getValue($matches, 'parent', 0);
             $field = ArrayHelper::getValue($matches, 'field');
+        }
+
+        if ($field == ReportFieldsTable::FIELD_CONSTRUCTION_FILE) {
+            $val = $this->saveFile($field, $groupId, Context::getCurrent()->getRequest()->getFileList()->toArray());
+
+            if (!$val) {
+                $this->errors[] = Loc::getMessage('KELNIK_API_REPORT_FILE_UPLOAD_ERROR');
+
+                return false;
+            }
         }
 
         $data = [
@@ -220,5 +235,92 @@ class ApiProcessReport extends ApiProcessAbstract
         }
 
         return true;
+    }
+
+    protected function processDelFile(array $request)
+    {
+        $groupId = ArrayHelper::getValue($request, 'parent', 0);
+
+        if (!$groupId) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_REPORT_FILE_DELETE_ERROR');
+
+            return false;
+        }
+
+        try {
+            $row = ReportFieldsTable::getRow([
+                'select' => ['*'],
+                'filter' => [
+                    '=REPORT_ID' => $this->id,
+                    '=GROUP_ID'  => $groupId,
+                    '=NAME'      => ReportFieldsTable::FIELD_CONSTRUCTION_FILE
+                ]
+            ]);
+        } catch (\Exception $e) {
+            $row = [];
+        }
+
+        if (empty($row['ID'])) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_REPORT_FILE_DELETE_ERROR');
+
+            return false;
+        }
+
+        try {
+            \CFile::Delete((int) $row['VALUE']);
+            ReportFieldsTable::delete($row['ID']);
+        } catch (\Exception $e) {
+        }
+
+        return true;
+    }
+
+    // Отчет заполнен, проверяем так ли это и переводим в статус - проверка
+    // пользователя перекидываем обратно на список отчетов
+    protected function processConfirm(array $request)
+    {
+        if (!$this->report->isFilled()) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_REPORT_FILL_ERROR');
+
+            return false;
+        }
+
+        $this->data['backUrl'] = \SezLang::getDirBySite(SITE_ID) . \Kelnik\Report\Model\ReportsTable::BASE_URL;
+
+        return true;
+    }
+
+    /**
+     * Сохраняем файл из формы №3
+     *
+     * @param string $fieldName
+     * @param int $parentId
+     * @param array $files
+     * @return bool|int|string
+     */
+    protected function saveFile(string $fieldName, int $parentId, array $files)
+    {
+        if (!$fieldName || !$parentId || !isset($files[$fieldName]['name'][$parentId])) {
+            return 0;
+        }
+
+        $fileData = [
+            'name' => $files[$fieldName]['name'][$parentId],
+            'tmp_name' => $files[$fieldName]['tmp_name'][$parentId],
+            'type' => $files[$fieldName]['type'][$parentId],
+            'size' => $files[$fieldName]['size'[$parentId]],
+            'error' => $files[$fieldName]['error'][$parentId],
+            'MODULE_ID' => 'kelnik.report'
+        ];
+
+        if (!is_uploaded_file($fileData['tmp_name'])) {
+            return 0;
+        }
+
+        return \CFile::SaveFile(
+            $fileData,
+            $fileData['MODULE_ID'],
+            true
+        );
     }
 }

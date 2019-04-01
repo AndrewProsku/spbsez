@@ -5,6 +5,7 @@ namespace Kelnik\Report\Model;
 
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Helpers\BitrixHelper;
 use Kelnik\UserData\Profile\Profile;
 
 /**
@@ -145,6 +146,17 @@ class Report extends EO_Reports
     }
 
     /**
+     * Отчет полностью заполнен и готов к отправке
+     */
+    public function isFilled()
+    {
+        // TODO: check fields
+        // $forms = $this->getForms();
+
+        return true;
+    }
+
+    /**
      * Проверяем возможность редактирования отчета
      *
      * @param int $userId
@@ -222,7 +234,7 @@ class Report extends EO_Reports
     public function getForms(): array
     {
         $res = [];
-        $fields = $this->getFields()->getArray();
+        $fields = self::prepareFiles($this->getFields()->getArray());
         $groups = $this->getGroups()->getArray();
 
         $forms = ReportFieldsTable::getFormConfig();
@@ -369,5 +381,29 @@ class Report extends EO_Reports
         return $key
                 ? ArrayHelper::getValue($fields, $key . '.VALUE', '')
                 : '';
+    }
+
+    protected static function prepareFiles(array $fields)
+    {
+        $rows = array_filter($fields, function ($el) {
+            return $el['NAME'] == ReportFieldsTable::FIELD_CONSTRUCTION_FILE;
+        });
+
+        if (!$rows) {
+            return $fields;
+        }
+
+        $rows = BitrixHelper::prepareFileFields($rows, ['VALUE' => 'full']);
+
+        foreach ($rows as $v) {
+            if (!isset($fields[$v['ID']])) {
+                continue;
+            }
+
+            $fields[$v['ID']]['VALUE_ORIG'] = $fields[$v['ID']]['VALUE'];
+            $fields[$v['ID']]['VALUE'] = ArrayHelper::getValue($v, 'VALUE.ORIGINAL_NAME', '');
+        }
+
+        return $fields;
     }
 }

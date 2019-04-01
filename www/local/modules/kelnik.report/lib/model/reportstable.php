@@ -6,7 +6,6 @@ use Bitrix\Main\Application;
 use Bitrix\Main\Context;
 use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ORM\Entity;
 use Bitrix\Main\ORM\Fields\BooleanField;
 use Bitrix\Main\ORM\Fields\DatetimeField;
 use Bitrix\Main\ORM\Fields\IntegerField;
@@ -23,6 +22,8 @@ Loc::loadMessages(__FILE__);
 
 class ReportsTable extends DataManager
 {
+    public const BASE_URL = 'cabinet/report/';
+
     public const TYPE_QUARTER_1 = 1;
     public const TYPE_QUARTER_2 = 2;
     public const TYPE_QUARTER_3 = 3;
