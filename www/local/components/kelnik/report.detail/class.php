@@ -101,7 +101,7 @@ class ReportDetail extends Bbc\Basis
             $this->show404();
         }
 
-        if ($report->getType() === ReportsTable::TYPE_1) {
+        if ($report->getType() === ReportsTable::TYPE_QUARTER_1) {
             $prevYearRequired = !ReportsTable::yearIsComplete($this->profile->getCompanyId(), $report->getYear() - 1);
         }
 

@@ -59,9 +59,7 @@ class ReportsAdminInterface extends AdminInterface
                     'STATUS_ID' => [
                         'WIDGET' => new ComboBoxWidget(),
                         'VARIANTS' => StatusTable::getAdminAssocList(),
-                        'READONLY' => true,
-                        'FILTER' => true,
-                        'HIDE_WHEN_CREATE' => true
+                        'FILTER' => true
                     ],
                     'DATE_CREATED' => [
                         'WIDGET' => new DateTimeWidget(),
