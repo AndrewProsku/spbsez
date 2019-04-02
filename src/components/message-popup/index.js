@@ -114,12 +114,10 @@ class Message {
 
         this.$inputEmail.addEventListener('change', (event) => {
             const isValidEmail = event.target.checkValidity();
-            const emailStr = '^[-._a-zA-Za-яA-я0-9]{2,}@(?:[a-zA-Za-яА-Я0-9][-a-z-A-Z-a-я-А-Я0-9]+\\.)+[a-za-я]{2,6}$';
-            const regEmail = new RegExp(emailStr, 'u');
 
-            if (isValidEmail && regEmail.test(this.$inputEmail.value)) {
+            if (isValidEmail) {
                 this.inputChangeHandler(event, 'email');
-            } else if (isValidEmail === false || regEmail.test(this.$inputEmail.value) === false) {
+            } else {
                 this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });

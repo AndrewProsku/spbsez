@@ -17,6 +17,7 @@ $popup-mobile-close-icon-color: #000000;
 // вынести класс куда-нибудь отдельно, т.к повторяется еще в mobile-header.scss
 .body-fixed {
     overflow: hidden;
+    position: fixed;
 }
 
 // COMPONENT
@@ -72,8 +73,8 @@ $popup-mobile-close-icon-color: #000000;
         content: "";
         display: block;
         position: absolute;
-        height: 1px;
-        width: 100%;
+        height: 2px;
+        width: 27px;
         background-color: $blue;
     }
 
