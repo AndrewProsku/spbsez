@@ -8,6 +8,7 @@ use Kelnik\AdminHelper\Widget\ComboBoxWidget;
 use Kelnik\AdminHelper\Widget\DateTimeWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
+use Kelnik\Report\Model\ReportFieldsTable;
 use Kelnik\Report\Model\ReportsTable;
 use Kelnik\Report\Model\StatusTable;
 

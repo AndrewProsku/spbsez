@@ -24,40 +24,6 @@ class ReportFieldsTable extends DataManager
     public const FIELD_CONSTRUCTION_FILE = 'construction-permission-file';
     public const FIELD_CONSTRUCTION_DATE = 'construction-permission-date';
 
-    // Стадии строительства
-    // `extra` - требует дополнительных полей
-    //
-    public static $stages = [
-        'stage1' => [
-            'name'  => 'Заключение договора аренды',
-            'extra' => false
-        ],
-        'stage2' => [
-            'Землеустроительные работы',
-            'extra' => false
-        ],
-        'stage3' => [
-            'Проектирование',
-            'extra' => false
-        ],
-        'stage4' => [
-            'Строительство',
-            'extra' => true
-        ],
-        'stage5' => [
-            'Получение разрешения на ввод в эксплуатацию',
-            'extra' => false
-        ],
-        'stage6' => [
-            'Операционная деятельность',
-            'extra' => true
-        ],
-        'stage7' => [
-            'Строительство не предусмотрено',
-            'extra' => false
-        ]
-    ];
-
     /**
      * @return string
      */
@@ -104,81 +70,177 @@ class ReportFieldsTable extends DataManager
     {
         return [
             self::FORM_COMMON => [
+                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_FORM_1'),
                 'blocks' => [
                     [
+                        'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-1'),
                         'type' => 'foreign-investors',
                         'fields' => [
                             [
                                 'id' => 'foreign-investors',
                                 'suffix' => 'yes',
                                 'trueValue' => 'yes',
-                                'type' => 'boolean'
+                                'type' => 'boolean',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-1-1')
                             ],
                             [
                                 'id' => 'foreign-investors',
                                 'suffix' => 'no',
                                 'trueValue' => 'no',
-                                'type' => 'boolean'
+                                'type' => 'boolean',
+                                'exclude' => true
                             ],
-                            'investors-countries'
+                            [
+                                'id' => 'investors-countries',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-1-2')
+                            ]
                         ]
                     ],
                     [
+                        'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2'),
                         'fields' => [
-                            'jobs-plan-all',
-                            'jobs-plan-year',
-                            'jobs-actual-all',
-                            'jobs-actual-year'
+                            [
+                                'id' => 'jobs-plan-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-1')
+                            ],
+                            [
+                                'id' => 'jobs-plan-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-2')
+                            ],
+                            [
+                                'id' => 'jobs-actual-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-3')
+                            ],
+                            [
+                                'id' => 'jobs-actual-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-4')
+                            ]
                         ]
                     ],
                     [
+                        'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3'),
                         'fields' => [
-                            'invests-plan-all',
-                            'invests-plan-year',
-                            'capital-invests-plan-all',
-                            'capital-invests-plan-year'
+                            [
+                                'id' => 'invests-plan-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-1')
+                            ],
+                            [
+                                'id' => 'invests-plan-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-2')
+                            ],
+                            [
+                                'id' => 'capital-invests-plan-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-3')
+                            ],
+                            [
+                                'id' => 'capital-invests-plan-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-4')
+                            ]
                         ]
                     ],
                     [
+                        'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4'),
                         'fields' => [
-                            'invests-all',
-                            'invests-year',
-                            'capital-invests-all',
-                            'capital-invests-year'
+                            [
+                                'id' => 'invests-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-1')
+                            ],
+                            [
+                                'id' => 'invests-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-2')
+                            ],
+                            [
+                                'id' => 'capital-invests-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-3')
+                            ],
+                            [
+                                'id' => 'capital-invests-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-4')
+                            ]
                         ]
                     ],
                     [
+                        'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5'),
                         'fields' => [
-                            'revenue-all',
-                            'revenue-year'
+                            [
+                                'id' => 'revenue-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-1')
+                            ],
+                            [
+                                'id' => 'revenue-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-2')
+                            ]
                         ]
                     ],
                     [
+                        'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-6'),
+
                         'fields' => [
-                            'produce-all',
-                            'produce-year'
+                            [
+                                'id' => 'produce-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-6-1')
+                            ],
+                            [
+                                'id' => 'produce-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-6-2')
+                            ]
                         ]
                     ],
                     [
-                        'fields' => ['salary']
+                        'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-7'),
+                        'fields' => [
+                            ['id' => 'salary']
+                        ]
                     ]
                 ]
             ],
             self::FORM_TAXES => [
+                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_FORM_2'),
                 'blocks' => [
                     [
+                        'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1'),
                         'type' => 'taxes',
                         'fields' => [
-                            'taxes-federal-all',
-                            'taxes-federal-year',
-                            'taxes-regional-all',
-                            'taxes-regional-year',
-                            'taxes-local-all',
-                            'taxes-local-year',
-                            'taxes-offbudget-all',
-                            'taxes-offbudget-year',
-                            'taxes-nds-all',
-                            'taxes-nds-year'
+                            [
+                                'id' => 'taxes-federal-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-1')
+                            ],
+                            [
+                                'id' => 'taxes-federal-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-2')
+                            ],
+                            [
+                                'id' => 'taxes-regional-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-1')
+                            ],
+                            [
+                                'id' => 'taxes-regional-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-2')
+                            ],
+                            [
+                                'id' => 'taxes-local-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-3-1')
+                            ],
+                            [
+                                'id' => 'taxes-local-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-3-2')
+                            ],
+                            [
+                                'id' => 'taxes-offbudget-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-4-1')
+                            ],
+                            [
+                                'id' => 'taxes-offbudget-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-4-2')
+                            ],
+                            [
+                                'id' => 'taxes-nds-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-5-1')
+                            ],
+                            [
+                                'id' => 'taxes-nds-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-5-2')
+                            ]
                         ]
                     ],
                     [
@@ -208,6 +270,7 @@ class ReportFieldsTable extends DataManager
                 ]
             ],
             self::FORM_BUILDING => [
+                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_FORM_3'),
                 'blocks' => [
                     [
                         'fields' => ['area-application']
@@ -243,6 +306,7 @@ class ReportFieldsTable extends DataManager
                 ]
             ],
             self::FORM_RENT => [
+                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_FORM_4'),
                 'blocks' => [
                     [
                         'fields' => ['office-application']
@@ -266,6 +330,7 @@ class ReportFieldsTable extends DataManager
                 ]
             ],
             self::FORM_INDICATORS => [
+                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_FORM_5'),
                 'blocks' => [
                     [
                         'fields' => [
@@ -314,6 +379,7 @@ class ReportFieldsTable extends DataManager
                 ]
             ],
             self::FORM_ADDITIONAL_INDICATORS => [
+                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_FORM_6'),
                 'blocks' => [
                     [
                         'fields' => ['intangible-assets']
@@ -324,6 +390,7 @@ class ReportFieldsTable extends DataManager
                 ]
             ],
             self::FORM_RESULT => [
+                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_FORM_7'),
                 'type' => 'results',
                 'blocks' => [
                     [
@@ -336,6 +403,46 @@ class ReportFieldsTable extends DataManager
                         ]
                     ]
                 ]
+            ]
+        ];
+    }
+
+    /**
+     * Стадии строительства
+     * `extra` - требует дополнительных полей
+     *
+     * @return array
+     */
+    public static function getStages()
+    {
+        return [
+            'stage1' => [
+                'name'  => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE1'),
+                'extra' => false
+            ],
+            'stage2' => [
+                'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE2'),
+                'extra' => false
+            ],
+            'stage3' => [
+                'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE3'),
+                'extra' => false
+            ],
+            'stage4' => [
+                'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE4'),
+                'extra' => true
+            ],
+            'stage5' => [
+                'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE5'),
+                'extra' => false
+            ],
+            'stage6' => [
+                'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE6'),
+                'extra' => true
+            ],
+            'stage7' => [
+                'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE7'),
+                'extra' => false
             ]
         ];
     }

@@ -170,7 +170,7 @@ class Report extends EO_Reports
                     foreach ($block[$type] as $typeElement) {
                         if ($type == 'stages') {
                             $stageType = ArrayHelper::getValue(current($typeElement['fields']), 'value');
-                            if (ArrayHelper::getValue(ReportFieldsTable::$stages, $stageType . '.extra', false) === false) {
+                            if (ArrayHelper::getValue(ReportFieldsTable::getStages(), $stageType . '.extra', false) === false) {
                                 continue;
                             }
                         }
