@@ -32,10 +32,12 @@ class Vacancy {
             phone : false,
             resume: false
         };
+        this.isPhoneTooShort = false;
 
         this.lang = document.querySelector('html').getAttribute('lang') || 'ru';
         this.emptyErrorMessage = Lang.get('validation.required');
         this.incorrectEmailMessage = Lang.get('validation.email');
+        this.incorrectPhoneMessage = Lang.get('validation.phone');
     }
 
     init(options) {
@@ -140,21 +142,37 @@ class Vacancy {
             this.inputChangeHandler(event, 'fio');
         });
         this.$inputEmail.addEventListener('change', (event) => {
-            const isValidEmail = event.target.checkValidity();
+            const isValidEmail = (/^[^\s@]+@[^\s@]+\.[^\s@]+$/u).test(event.target.value);
 
             if (isValidEmail) {
                 this.inputChangeHandler(event, 'email');
             } else {
-                this.isFieldCorrect.email = false;
+                this.isFieldCorrect.phone = false;
                 this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });
         this.$inputPhone.addEventListener('change', (event) => {
-            this.inputChangeHandler(event, 'phone');
+            this._onPhoneChange(event);
         });
         this.$inputResume.addEventListener('change', (event) => {
             this.inputChangeHandler(event, 'resume');
         });
+    }
+
+    _onPhoneChange(event) {
+        if (this._isPhoneTooShort(event.target.value)) {
+            this.isFieldCorrect.phone = false;
+            this.showErrorMessage(event.target, this.incorrectPhoneMessage);
+        } else {
+            this.isFieldCorrect.phone = true;
+            this.inputChangeHandler(event, 'phone');
+        }
+    }
+
+    _isPhoneTooShort(value) {
+        const phoneDigits = value.replace(/[^0-9]/gu, '');
+
+        return (phoneDigits.length > 0) && (phoneDigits.length < 11);
     }
 
     inputChangeHandler(event, inputName) {
@@ -177,7 +195,11 @@ class Vacancy {
             this.showErrorMessage(this.$inputEmail, this.emptyErrorMessage);
         }
         if (!this.isFieldCorrect.phone) {
-            this.showErrorMessage(this.$inputPhone, this.emptyErrorMessage);
+            const errorMessage = this._isPhoneTooShort(this.$inputPhone.value) ?
+                this.incorrectPhoneMessage :
+                this.emptyErrorMessage;
+
+            this.showErrorMessage(this.$inputPhone, errorMessage);
         }
         if (!this.isFieldCorrect.resume) {
             this.showErrorMessage(this.$inputResume, this.emptyErrorMessage);
