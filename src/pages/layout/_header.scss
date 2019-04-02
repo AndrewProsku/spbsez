@@ -539,6 +539,7 @@
     margin: auto;
     visibility: hidden;
     opacity: 0;
+    cursor: default;
 }
 
 .b-language__item {
@@ -552,6 +553,8 @@
         .b-language__item-link {
             background-image: none;
             color: $black;
+            pointer-events: none;
+            cursor: default;
         }
     }
 }

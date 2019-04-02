@@ -186,7 +186,6 @@
 }
 
 .b-close-menu-warp {
-    margin-left: 15px;
     @include suffix(4, 36);
     text-align: right;
 
@@ -206,7 +205,10 @@
 
 .b-language + .b-close-menu-warp {
     margin-left: 10px;
-    @include push(1, 36);
+
+    @media #{$tablet-portrait} {
+        margin-left: 20px;
+    }
 }
 
 .b-close-menu {
