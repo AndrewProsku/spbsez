@@ -197,7 +197,7 @@
         "no-negated-condition": "error",
         "no-nested-ternary": "error",
         "no-new-object": "error",
-        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+        "no-plusplus": ["off", { "allowForLoopAfterthoughts": true }],
         "no-restricted-syntax": "off",
         "no-tabs": "error",
         "no-ternary": "off",

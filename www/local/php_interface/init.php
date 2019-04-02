@@ -29,4 +29,11 @@ class SezLang
     public const CHINESE_DIR = '/ch/';
     public const ENGLISH_DIR = '/en/';
     public const RUSSIAN_DIR = '/';
+
+    public static function getDirBySite($siteId)
+    {
+        $res = \Bitrix\Main\SiteTable::getById($siteId)->fetch();
+
+        return isset($res['DIR']) ? $res['DIR'] : '/';
+    }
 }

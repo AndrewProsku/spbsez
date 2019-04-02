@@ -21,6 +21,43 @@ class ReportFieldsTable extends DataManager
     public const FORM_ADDITIONAL_INDICATORS = 5;
     public const FORM_RESULT = 6;
 
+    public const FIELD_CONSTRUCTION_FILE = 'construction-permission-file';
+    public const FIELD_CONSTRUCTION_DATE = 'construction-permission-date';
+
+    // Стадии строительства
+    // `extra` - требует дополнительных полей
+    //
+    public static $stages = [
+        'stage1' => [
+            'name'  => 'Заключение договора аренды',
+            'extra' => false
+        ],
+        'stage2' => [
+            'Землеустроительные работы',
+            'extra' => false
+        ],
+        'stage3' => [
+            'Проектирование',
+            'extra' => false
+        ],
+        'stage4' => [
+            'Строительство',
+            'extra' => true
+        ],
+        'stage5' => [
+            'Получение разрешения на ввод в эксплуатацию',
+            'extra' => false
+        ],
+        'stage6' => [
+            'Операционная деятельность',
+            'extra' => true
+        ],
+        'stage7' => [
+            'Строительство не предусмотрено',
+            'extra' => false
+        ]
+    ];
+
     /**
      * @return string
      */
@@ -48,9 +85,12 @@ class ReportFieldsTable extends DataManager
             (new IntegerField('REPORT_ID'))
                 ->configureRequired(true),
 
-            (new StringField('PARENT_FIELD_NAME')),
-            (new StringField('FIELD_NAME')),
-            (new StringField('VALUE')),
+            (new IntegerField('GROUP_ID'))
+                ->configureDefaultValue(0),
+            (new StringField('NAME'))
+                ->configureSize(100),
+            (new StringField('VALUE'))
+                ->configureSize(255),
 
             (new Reference(
                 'REPORT',
@@ -60,17 +100,242 @@ class ReportFieldsTable extends DataManager
         ];
     }
 
-    public static function getForms()
+    public static function getFormConfig()
     {
         return [
-            self::FORM_COMMON => [],
-            self::FORM_TAXES => [],
-            self::FORM_BUILDING => [],
-            self::FORM_RENT => [],
-            self::FORM_INDICATORS => [],
-            self::FORM_ADDITIONAL_INDICATORS => [],
+            self::FORM_COMMON => [
+                'blocks' => [
+                    [
+                        'type' => 'foreign-investors',
+                        'fields' => [
+                            [
+                                'id' => 'foreign-investors',
+                                'suffix' => 'yes',
+                                'trueValue' => 'yes',
+                                'type' => 'boolean'
+                            ],
+                            [
+                                'id' => 'foreign-investors',
+                                'suffix' => 'no',
+                                'trueValue' => 'no',
+                                'type' => 'boolean'
+                            ],
+                            'investors-countries'
+                        ]
+                    ],
+                    [
+                        'fields' => [
+                            'jobs-plan-all',
+                            'jobs-plan-year',
+                            'jobs-actual-all',
+                            'jobs-actual-year'
+                        ]
+                    ],
+                    [
+                        'fields' => [
+                            'invests-plan-all',
+                            'invests-plan-year',
+                            'capital-invests-plan-all',
+                            'capital-invests-plan-year'
+                        ]
+                    ],
+                    [
+                        'fields' => [
+                            'invests-all',
+                            'invests-year',
+                            'capital-invests-all',
+                            'capital-invests-year'
+                        ]
+                    ],
+                    [
+                        'fields' => [
+                            'revenue-all',
+                            'revenue-year'
+                        ]
+                    ],
+                    [
+                        'fields' => [
+                            'produce-all',
+                            'produce-year'
+                        ]
+                    ],
+                    [
+                        'fields' => ['salary']
+                    ]
+                ]
+            ],
+            self::FORM_TAXES => [
+                'blocks' => [
+                    [
+                        'type' => 'taxes',
+                        'fields' => [
+                            'taxes-federal-all',
+                            'taxes-federal-year',
+                            'taxes-regional-all',
+                            'taxes-regional-year',
+                            'taxes-local-all',
+                            'taxes-local-year',
+                            'taxes-offbudget-all',
+                            'taxes-offbudget-year',
+                            'taxes-nds-all',
+                            'taxes-nds-year'
+                        ]
+                    ],
+                    [
+                        'fields' => [
+                            'taxes-breaks-all',
+                            'taxes-breaks-year',
+                            'taxes-breaks-federal-all',
+                            'taxes-breaks-federal-year',
+                            'taxes-breaks-local-all',
+                            'taxes-breaks-local-year',
+                            'taxes-breaks-offbudget-all',
+                            'taxes-breaks-offbudget-year'
+                        ]
+                    ],
+                    [
+                        'fields' => [
+                            'custom-duties-all',
+                            'custom-duties-year'
+                        ]
+                    ],
+                    [
+                        'fields' => [
+                            'custom-duties-breaks-all',
+                            'custom-duties-breaks-year'
+                        ]
+                    ]
+                ]
+            ],
+            self::FORM_BUILDING => [
+                'blocks' => [
+                    [
+                        'fields' => ['area-application']
+                    ],
+                    [
+                        'fields' => [
+                            'area-rent',
+                            'area-property'
+                        ]
+                    ],
+                    [
+                        'fields' => ['object-name-plan']
+                    ],
+                    [
+                        'fields' => ['capital-object']
+                    ],
+                    [
+                        'fields' => ['construction-period']
+                    ],
+                    [
+                        'type' => 'construction-stage',
+                        'multiple' => [
+                            'name' => 'stages',
+                            'id' => 'stageID',
+                            'fields' => [
+                                'construction-stage',
+                                'construction-permission-num',
+                                'construction-permission-file',
+                                'construction-permission-date'
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            self::FORM_RENT => [
+                'blocks' => [
+                    [
+                        'fields' => ['office-application']
+                    ],
+                    [
+                        'fields' => ['office-rent']
+                    ],
+                    [
+                        'type' => 'construction-stage',
+                        'multiple' => [
+                            'name' => 'stages',
+                            'id' => 'stageID',
+                            'fields' => [
+                                'construction-stage',
+                                'construction-permission-num',
+                                'construction-permission-file',
+                                'construction-permission-date'
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            self::FORM_INDICATORS => [
+                'blocks' => [
+                    [
+                        'fields' => [
+                            'export-volume-all',
+                            'export-volume-year'
+                        ]
+                    ],
+                    [
+                        'type' => 'export-countries',
+                        'multiple' => [
+                            'name' => 'groups',
+                            'id' => 'ID',
+                            'fields' => [
+                                'export-countries',
+                                'export-code'
+                            ]
+                        ]
+                    ],
+                    [
+                        'fields' => [
+                            [
+                                'id' => 'high-tech-production',
+                                'suffix' => 'yes',
+                                'trueValue' => 'yes',
+                                'type' => 'boolean'
+                            ],
+                            [
+                                'id' => 'high-tech-production',
+                                'suffix' => 'no',
+                                'trueValue' => 'no',
+                                'type' => 'boolean'
+                            ]
+                        ]
+                    ],
+                    [
+                        'type' => 'innovations',
+                        'multiple' => [
+                            'name' => 'innovations',
+                            'id' => 'ID',
+                            'fields' => ['innovation']
+                        ]
+                    ],
+                    [
+                        'fields' => ['high-productive-jobs']
+                    ]
+                ]
+            ],
+            self::FORM_ADDITIONAL_INDICATORS => [
+                'blocks' => [
+                    [
+                        'fields' => ['intangible-assets']
+                    ],
+                    [
+                        'fields' => ['degrees-employees']
+                    ]
+                ]
+            ],
             self::FORM_RESULT => [
-                'type' => 'results'
+                'type' => 'results',
+                'blocks' => [
+                    [
+                        'type' => 'results',
+                        'fields' => [
+                            'result-type',
+                            'result-description',
+                            'result-date',
+                            'result-commercialization'
+                        ]
+                    ]
+                ]
             ]
         ];
     }

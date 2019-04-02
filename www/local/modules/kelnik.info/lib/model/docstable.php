@@ -110,7 +110,7 @@ class DocsTable extends DataManager
 
         try {
             Main\Application::getInstance()->getTaggedCache()->clearByTag(
-                'kelnik:infoDocsList_' . ArrayHelper::getValue($event->getParameter('id'), 'ID', 0)
+                'kelnik:infoDocsList_' . ArrayHelper::getValue($event->getParameters(), 'fields.TYPE_ID', 0)
             );
         } catch (\Exception $e) {
         }

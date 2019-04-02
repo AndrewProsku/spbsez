@@ -4,14 +4,14 @@ namespace Kelnik\Report\Model;
 
 
 /**
- * Class Fields
+ * Class FieldsGroup
  * @package Kelnik\Report\Model
  *
  * @method \Bitrix\Main\ORM\Data\AddResult|\Bitrix\Main\ORM\Data\UpdateResult save()
  *
  * @method array getAll()
  */
-class Fields extends EO_ReportFields_Collection
+class FieldsGroup extends EO_ReportFieldsGroup_Collection
 {
     public function getArray()
     {
@@ -24,25 +24,9 @@ class Fields extends EO_ReportFields_Collection
 
         foreach ($rows as $row) {
             $row = $row->collectValues();
-            $res[$row['ID']] = $row;
+            $res[$row['TYPE']][$row['FORM_NUM']][$row['ID']] = $row['ID'];
         }
 
         return $res;
-    }
-
-    public function getAssocArray()
-    {
-        $res = $this->getArray();
-
-        if (!$res) {
-            return [];
-        }
-
-        $tmp = [];
-        foreach ($res as $v) {
-            $tmp[$v['NAME'] . '.' . $v['GROUP_ID']] = $v['ID'];
-        }
-
-        return $tmp;
     }
 }

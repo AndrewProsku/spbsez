@@ -27,7 +27,7 @@ class ProfileSectionDocs extends ProfileSectionAbstract
 
         try {
             $doc['MODULE_ID'] = self::MODULE_ID;
-            $fileId = \CFile::SaveFile($data, $data['MODULE_ID'], true);
+            $fileId = \CFile::SaveFile($data, $doc['MODULE_ID'], true);
         } catch (\Exception $e) {
         }
 

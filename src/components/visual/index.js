@@ -91,10 +91,16 @@ export default class Visual {
     bindMasksEvents() {
         if (this.mobileMode) {
             this.masks.forEach((path) => {
+                if (!path.dataset.json) {
+                    return;
+                }
                 path.addEventListener('click', this.tooltipShow.bind(this, path));
             });
         } else {
             this.masks.forEach((path) => {
+                if (!path.dataset.json) {
+                    return;
+                }
                 path.addEventListener('mouseenter', this.tooltipShow.bind(this, path));
                 path.addEventListener('mouseout', (event) => {
                     if (!event.relatedTarget.closest('.b-visual-tooltip')) {

@@ -33,12 +33,12 @@
 
     <div class="b-inputs-row b-report-oez">
         <div class="b-input-block j-report-resident-name">
-            <input id="resident-name" class="b-input-text" type="text" name="fields[<?= $arResult['REPORT']['ID']; ?>][NAME]" maxlength="" autocomplete="" value="" placeholder="">
+            <input id="resident-name" class="b-input-text" type="text" name="residentName" maxlength="" autocomplete="" value="" placeholder="">
 
             <label class="b-input-block__label" for="resident-name">Наименование резидента ОЭЗ</label>
         </div>
         <div class="b-input-block j-report-oez-name">
-            <input id="oez-name" class="b-input-text" type="text" name="fields[<?= $arResult['REPORT']['ID']; ?>][NAME_SEZ]" maxlength="" autocomplete="" value="" placeholder="">
+            <input id="oez-name" class="b-input-text" type="text" name="oezName" maxlength="" autocomplete="" value="" placeholder="">
 
             <label class="b-input-block__label" for="resident-name">Наименование ОЭЗ</label>
         </div>

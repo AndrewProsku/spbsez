@@ -72,7 +72,9 @@ class kelnik_report extends CModule
                         $folder,
                         $this->MODULE_ID
                     ]
-                )
+                ),
+                true,
+                true
             );
         }
     }

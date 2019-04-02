@@ -38,51 +38,38 @@ class ReportBlock {
 
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
+        this.reportId = 0;
+        this.baseUrl = '/api/report/';
     }
 
     /* eslint-disable max-statements, max-lines-per-function */
     init(options) {
         this.target = options.target;
         this.formID = options.formID;
+        this.reportId = options.reportId || 0;
+        this.baseUrl = options.baseUrl || this.baseUrl;
         this.isReadonly = options.isReadonly || false;
         this.isRejected = options.blockData.rejected || false;
         const blockData = options.blockData;
-
+        const blockTypes = {
+            'foreign-investors' : 'initForeignInvestorsBlock',
+            taxes               : 'initTaxesBlock',
+            'construction-stage': 'initConstructionStageBlock',
+            'export-countries'  : 'initExportCountriesBlock',
+            innovations         : 'initInnovationsBlock',
+            results             : 'initResultBlock'
+        };
 
         mediator.subscribe('formApproved', (formID) => {
             this.approveFormHandler(formID);
         });
 
-        if (blockData.type) {
-            switch (blockData.type) {
-                case 'foreign-investors': {
-                    this.initForeignInvestorsBlock(blockData);
-                    break;
-                }
-                case 'taxes': {
-                    this.initTaxesBlock(blockData);
-                    break;
-                }
-                case 'construction-stage': {
-                    this.initConstructionStageBlock(blockData);
-                    break;
-                }
-                case 'export-countries': {
-                    this.initExportCountriesBlock(blockData);
-                    break;
-                }
-                case 'innovations': {
-                    this.initInnovationsBlock(blockData);
-                    break;
-                }
-                case 'results': {
-                    this.initResultBlock(blockData);
-                    break;
-                }
-                default:
-                    this.inputsData = blockData;
-                    break;
-            }
+        const methodName = Object.prototype.hasOwnProperty.call(blockTypes, blockData.type) ?
+            blockTypes[blockData.type] :
+            false;
+
+        if (methodName && typeof this[methodName] === 'function') {
+            this[methodName](blockData);
         } else {
             this.inputsData = blockData;
         }
@@ -282,9 +269,8 @@ class ReportBlock {
 
             deleteButton.addEventListener('click', (event) => {
                 const that = this;
-                const dataToSend = `action=delResult&id=${event.target.dataset.id}`;
 
-                Utils.send(dataToSend, '/tests/reports/input-update.json', {
+                Utils.send(`a=delGroup&id=${that.reportId}&typeId=${event.target.dataset.id}`, that.baseUrl, {
                     success(response) {
                         if (response.request.status === that.FAIL_STATUS) {
                             return;
@@ -405,7 +391,11 @@ class ReportBlock {
             event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
             const formData = new FormData(event.target.closest('form'));
 
-            Utils.send(formData, '/tests/reports/input-update.json', {
+            formData.append('a', 'update');
+            formData.append('id', that.reportId);
+            formData.append('field', input.id);
+
+            Utils.send(formData, that.baseUrl, {
                 success(response) {
                     if (!response.request.status === that.SUCCESS_STATUS) {
                         return true;
@@ -422,9 +412,10 @@ class ReportBlock {
         fileInputBlock.querySelector('.b-input-file__delete').addEventListener('click', (event) => {
             event.preventDefault();
             const permissionForm = event.target.closest(`.${that.permissionFormClass}`);
-            const dataToSend = `action=delPermissionDoc&id=${permissionForm.dataset.stageId}`;
+            const dataToSend = `a=delFile&id=${this.reportId}&form=${this.formID}` +
+                `&parent=${permissionForm.dataset.stageId}`;
 
-            Utils.send(dataToSend, '/tests/reports/input-update.json', {
+            Utils.send(dataToSend, this.baseUrl, {
                 success(response) {
                     if (!response.request.status === that.SUCCESS_STATUS) {
                         return true;
@@ -655,24 +646,26 @@ class ReportBlock {
     /* eslint-enable max-lines-per-function, max-statements */
 
     sendNewValue(input) {
-        const dataToSend = `action=update&${$(input).serialize()}`;
+        const dataToSend = `a=update&id=${this.reportId}&field=${input.name}&val=${input.value}`;
         const that = this;
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(dataToSend, '/api/report/', {
             success(response) {
-                if (response.request.status === that.SUCCESS_STATUS) {
-                    if (input.type === 'radio') {
-                        const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
-
-                        Array.from(checkboxGroup).forEach((checkbox) => {
-                            that.inputsStatus[checkbox.id] = that.getInputStatus(checkbox);
-                        });
-                    } else {
-                        that.inputsStatus[input.id] = that.getInputStatus(input);
-                    }
-
-                    that.setBlockStatus();
+                if (response.request.status !== that.SUCCESS_STATUS) {
+                    return;
                 }
+
+                if (input.type === 'radio') {
+                    const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
+
+                    Array.from(checkboxGroup).forEach((checkbox) => {
+                        that.inputsStatus[checkbox.id] = that.getInputStatus(checkbox);
+                    });
+                } else {
+                    that.inputsStatus[input.id] = that.getInputStatus(input);
+                }
+
+                that.setBlockStatus();
             },
             error(error) {
                 console.error(error);
@@ -722,10 +715,9 @@ class ReportBlock {
     removeStage(input) {
         const that = this;
         const stageBlock = this.target.querySelector(`.${this.stageBlockClass}`);
-        const dataToSend = `action=delStage&id=${input.dataset.stageId}`;
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-stage-id="${input.dataset.stageId}"]`));
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.stageId}`, this.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
@@ -781,7 +773,7 @@ class ReportBlock {
         const that = this;
 
         stageAddButton.addEventListener('click', () => {
-            Utils.send('action=addConstructionStage', '/tests/reports/add-stage.json', {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=stages&form=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -833,7 +825,7 @@ class ReportBlock {
         const that = this;
 
         groupAddButton.addEventListener('click', () => {
-            Utils.send('action=addExportGroup', '/tests/reports/add-stage.json', {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=groups&form=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -870,10 +862,9 @@ class ReportBlock {
     removeExportGroup(input) {
         const that = this;
         const groupsBlock = this.target.querySelector(`.j-export-groups-block`);
-        const dataToSend = `action=delExportGroup&id=${input.dataset.id}`;
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.id}`, this.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
@@ -930,7 +921,7 @@ class ReportBlock {
         const that = this;
 
         innovationAddButton.addEventListener('click', () => {
-            Utils.send('action=addInnovation', '/tests/reports/add-stage.json', {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=innovations&form=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -967,10 +958,9 @@ class ReportBlock {
     removeInnovation(input) {
         const that = this;
         const innovationsBlock = this.target.querySelector(`.j-innovations-block`);
-        const dataToSend = `action=delInnovation&id=${input.dataset.id}`;
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.id}`, this.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;

@@ -38,9 +38,13 @@
     }
 
     @media #{$laptop} {
-        height: 100vh;
+        min-height: 640px;
         align-items: center;
         position: relative;
+    }
+
+    @media #{$fullhd} {
+        min-height: 1080px;
     }
 }
 

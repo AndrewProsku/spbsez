@@ -1108,9 +1108,10 @@ $circle-six: 22s;
 
     @media #{$fullhd} {
         @include column(8, 28);
+        @include post(2, 28);
 
         &:nth-child(3) {
-            padding-right: 0;
+            margin-right: 0;
         }
     }
 }
