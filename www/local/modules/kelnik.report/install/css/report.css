@@ -1,0 +1,91 @@
+.b-report-block {
+    display: block;
+    margin-bottom: 40px;
+}
+
+.b-report-block__body {
+    display: flex;
+    align-items: stretch;
+    flex-flow: row wrap;
+}
+
+.b-input-block {
+    margin: 10px;
+    text-align: left;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+}
+
+.b-input-group {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.b-report-block__body-grouped {
+    display: flex;
+    flex-direction: column;
+    flex-basis: content;
+}
+
+.b-report-block__body-grouped .b-input-group {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    display: flex;
+}
+
+.b-report-block__body-grouped .b-input-block {
+    border: none;
+}
+
+.b-input-block:nth-child(4n) {
+    page-break-after: always;
+}
+
+.b-input-block.taxes:nth-child(2n) {
+    page-break-after: always;
+}
+
+.b-input-block div.row-header {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.b-input-block div.row-value {
+    border: 1px solid #c8cfd3;
+    border-radius: 3px;
+    background: #f9fbfb;
+    margin-bottom: 10px;
+    color: #959494;
+    padding: 5px;
+    line-height: 16px;
+}
+
+.b-input-block div.row-value a {
+    text-decoration: none;
+}
+
+.b-input-block div input {
+    width: 90%;
+}
+
+.adm-workarea input.kelnik-btn-decline,
+.adm-workarea .kelnik-btn-decline,
+.adm-workarea input.kelnik-btn-decline:hover,
+.adm-workarea .kelnik-btn-decline:hover {
+    background-color: #ad3b00 !important;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), inset 0 1px 0 #dc5500;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), inset 0 1px 0 #dc5500;
+    border: solid 1px;
+    border-color: #db0702 #9e0702 #893300;
+    background-image: -webkit-linear-gradient(bottom, #9e0702, #db0702) !important;
+    background-image: -moz-linear-gradient(bottom, #9e0702, #db0702) !important;
+    background-image: -ms-linear-gradient(bottom, #9e0702, #db0702) !important;
+    background-image: -o-linear-gradient(bottom, #9e0702, #db0702) !important;
+    background-image: linear-gradient(bottom, #9e0702, #db0702) !important;
+    color: #fff;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    -webkit-font-smoothing: antialiased;
+    padding: 0 13px 2px;
+}
