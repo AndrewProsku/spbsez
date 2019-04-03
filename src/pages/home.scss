@@ -759,7 +759,7 @@ $path: '/images/home/';
         }
     }
 
-    @media #{$tablet-portrait} {
+    @media #{$tablet-landscape} {
         @include row();
         @include prefix(2, 32);
     }
@@ -775,7 +775,7 @@ $path: '/images/home/';
     font-family: $font-bold;
     padding-top: 15px;
 
-    @media #{$tablet-portrait} {
+    @media #{$tablet-landscape} {
         @include column(11, 32);
         padding-top: 20px;
     }
@@ -797,8 +797,9 @@ $path: '/images/home/';
 }
 
 .l-home-resident__item-desc {
-    @media #{$tablet-portrait} {
+    @media #{$tablet-landscape} {
         @include column(18, 32);
+        padding-left: 20px;
     }
 
     @media #{$laptop-wide} {
@@ -843,6 +844,7 @@ $path: '/images/home/';
 
     @media #{$laptop} {
         @include push(12.3, 32);
+        padding-left: 20px;
     }
 
     @media #{$fullhd} {

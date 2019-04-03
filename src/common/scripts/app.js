@@ -633,7 +633,7 @@ if (vacancyPopupButtons.length) {
 }
 
 
-mediator.subscribe('openPopup', (popup) => {
+mediator.subscribe('openPopupFirst', (popup) => {
     if (popup.popup.classList.contains('b-popup_theme_vacancy')) {
         const vacancy = new Vacancy();
 
