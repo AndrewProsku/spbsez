@@ -197,11 +197,11 @@ class Utils {
     /**
      * Клик по элементу или мимо
      *
-     * @param {array} selectors - Строка или масив селектор(а)ов отслеживаемых елемент(а)ов
+     * @param {string, array} selectors - Строка или масив селектор(а)ов отслеживаемых елемент(а)ов
      * @param {function} outside - Callback если клик вне елемент(а)ов
      * @param {function} inside - Callback если клик по елемент(у)ам
      */
-    static clickOutside(selectors, outside = function() {}, inside = function() {}) {
+    static clickOutside(selectors, outside = function(target) {}, inside = function(target) {}) {
         if (!selectors) {
             return;
         }
@@ -223,7 +223,7 @@ class Utils {
                 try {
                     elements.forEach((element) => {
                         if (element.indexOf(target) !== -1) {
-                            inside();
+                            inside(target);
 
                             throw false;
                         }
@@ -235,7 +235,7 @@ class Utils {
                 target = target.parentNode;
             } while (target);
 
-            outside();
+            outside(event.target);
         });
     }
 }

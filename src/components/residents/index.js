@@ -1,4 +1,5 @@
 import throttle from 'lodash/throttle';
+import Utils from '../../common/scripts/utils';
 
 class Residents {
     constructor() {
@@ -16,6 +17,9 @@ class Residents {
 
         this.THROTTLE_TIMEOUT = 50;
     }
+
+    /* eslint-disable */
+    // временно
 
     init() {
         this.$menuHeader.addEventListener('click', () => {
@@ -48,13 +52,75 @@ class Residents {
 
             if (this.isOverflowed(residentDescription)) {
                 resident.classList.add('b-resident_is_overflowed');
-                resident.addEventListener('mouseenter', this.onResidentMouseEnter);
-                resident.addEventListener('mouseleave', this.onResidentMouseLeave);
             }
+
+            resident.addEventListener('mouseenter', () => {
+                if (Utils.isMobile()) {
+                    return;
+                }
+
+
+                if (!resident.classList.contains('b-resident_is_overflowed')) {
+                    return;
+                }
+
+                this.onResidentMouseEnter(resident);
+            });
+
+            resident.addEventListener('mouseleave', () => {
+                if (Utils.isMobile()) {
+                    return;
+                }
+
+                if (!resident.classList.contains('b-resident_is_overflowed')) {
+                    return;
+                }
+
+                this.onResidentMouseLeave(resident);
+            });
+
+            resident.addEventListener('click', (event) => {
+                if (event.target.tagName === 'A') {
+                    return;
+                }
+
+                if (!Utils.isMobile()) {
+                    return;
+                }
+
+                if (!resident.classList.contains('b-resident_is_overflowed')) {
+                    return;
+                }
+
+                if (resident.classList.contains('b-resident_is_expanded')) {
+                    this.onResidentMouseLeave(resident);
+                } else {
+                    this.onResidentMouseLeaveAll();
+                    this.onResidentMouseEnter(resident);
+                }
+            });
         });
 
+        window.onresize = () => {
+            this.onResidentMouseLeaveAll();
+        };
+
         window.addEventListener('resize', throttle(this.onResize.bind(this), this.THROTTLE_TIMEOUT));
+
+        Utils.clickOutside('.b-resident', () => {
+            if (!Utils.isMobile()) {
+                return;
+            }
+
+            this.onResidentMouseLeaveAll();
+        }, (target) => {
+            if (!target.classList.contains('b-resident_is_overflowed')) {
+                this.onResidentMouseLeaveAll();
+            }
+        });
     }
+
+    /* eslint-enable */
 
     changeSelectedCategories(categoryId) {
         if (!this.selectedCategories.has(categoryId)) {
@@ -69,11 +135,15 @@ class Residents {
     }
 
     isOverflowed(element) {
-        return element.scrollHeight > element.getBoundingClientRect().height;
+        return element.scrollHeight > (element.getBoundingClientRect().height + 5);
     }
 
-    onResidentMouseEnter(event) {
-        const resident = event.target;
+    onResidentMouseEnter(resident) {
+        if (!resident) {
+            return;
+        }
+
+
         const residentWidth = resident.getBoundingClientRect().width;
         const residentHeight = resident.getBoundingClientRect().height;
 
@@ -82,10 +152,20 @@ class Residents {
         resident.classList.add(`b-resident_is_expanded`);
     }
 
-    onResidentMouseLeave(event) {
-        event.target.style.removeProperty('height');
-        event.target.style.removeProperty('width');
-        event.target.classList.remove(`b-resident_is_expanded`);
+    onResidentMouseLeave(resident) {
+        if (!resident) {
+            return;
+        }
+
+        resident.style.removeProperty('height');
+        resident.style.removeProperty('width');
+        resident.classList.remove(`b-resident_is_expanded`);
+    }
+
+    onResidentMouseLeaveAll() {
+        this.residents.forEach((resident) => {
+            this.onResidentMouseLeave(resident);
+        });
     }
 
     onResize() {
@@ -94,13 +174,8 @@ class Residents {
 
             if (this.isOverflowed(residentDescription)) {
                 resident.classList.add('b-resident_is_overflowed');
-
-                resident.addEventListener('mouseenter', this.onResidentMouseEnter);
-                resident.addEventListener('mouseleave', this.onResidentMouseLeave);
             } else {
                 resident.classList.remove('b-resident_is_overflowed');
-                resident.removeEventListener('mouseenter', this.onResidentMouseEnter);
-                resident.removeEventListener('mouseleave', this.onResidentMouseLeave);
             }
         });
     }
