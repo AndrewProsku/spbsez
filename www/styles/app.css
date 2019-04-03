@@ -10028,6 +10028,11 @@ p.b-checkbox-text {
   @media only screen and (min-width: 1920px) and (min-width: 2560px) {
     .b-resident__inner {
       padding-bottom: 48px; } }
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .b-resident__inner {
+      -webkit-align-items: flex-start;
+          -ms-flex-align: start;
+              align-items: flex-start; } }
 
 .b-resident_is_overflowed {
   cursor: pointer; }
@@ -10036,6 +10041,8 @@ p.b-checkbox-text {
   position: relative; }
   .b-resident_is_expanded .b-resident__inner {
     position: absolute;
+    top: 0;
+    left: 0;
     height: auto;
     width: 100%;
     min-height: 100%;
@@ -10116,6 +10123,12 @@ p.b-checkbox-text {
     .b-resident__title {
       padding-left: 11.11111%;
       padding-right: 11.11111%; } }
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .b-resident__title {
+      -webkit-flex: 1 0 auto;
+          -ms-flex: 1 0 auto;
+              flex: 1 0 auto;
+      width: 100%; } }
 
 .b-resident__category {
   font-size: 12px;
@@ -10173,6 +10186,9 @@ p.b-checkbox-text {
     .b-resident__category {
       padding-left: 11.11111%;
       padding-right: 11.11111%; } }
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .b-resident__category {
+      width: 100%; } }
 
 .b-resident__description {
   font-size: 14px;
@@ -10217,6 +10233,9 @@ p.b-checkbox-text {
     .b-resident__description {
       padding-left: 11.11111%;
       padding-right: 11.11111%; } }
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .b-resident__description {
+      width: 100%; } }
 
 .b-resident__links {
   padding-left: 6.25%;
