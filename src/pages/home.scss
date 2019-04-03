@@ -1243,10 +1243,6 @@ $path: '/images/home/';
     background-color: $grey;
     overflow: auto;
 
-    .b-tooltip {
-        border: none;
-    }
-
     @media #{$tablet-portrait} {
         display: block;
     }
@@ -1270,6 +1266,13 @@ $path: '/images/home/';
 
     @media only screen and (min-width: 2330px) {
         height: 1070px;
+    }
+}
+
+.l-home-plots__map,
+.l-home-plots__all-map {
+    .b-tooltip {
+        border: none;
     }
 }
 

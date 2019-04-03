@@ -35,7 +35,7 @@
                 <div class="b-resident__description"><?= $element['TEXT']; ?></div>
                 <div class="b-resident__links">
                     <?php if($element['SITE']): ?>
-                        <div class="b-resident__site-link"><a href="http://<?= $element['SITE']; ?>" target="_blank" class="b-link-line"><?= $element['SITE']; ?></a></div>
+                        <div class="b-resident__site-link"><a href="http://<?= $element['SITE']; ?>" target="_blank" class="b-link-line" rel="nofollow"><?= $element['SITE']; ?></a></div>
                     <?php endif; ?>
                     <?php if($element['PLACE']): ?>
                         <div class="b-resident__page-link"><span class="b-link-line"><?= $element['PLACE_NAME']; ?></span></div>
