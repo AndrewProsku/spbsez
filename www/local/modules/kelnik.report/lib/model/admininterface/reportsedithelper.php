@@ -1,9 +1,11 @@
 <?php
 namespace Kelnik\Report\Model\AdminInterface;
 
+use Bitrix\Main\DB\SqlQueryException;
 use Bitrix\Main\Localization\Loc;
 use CAdminTabControl;
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
+use Kelnik\AdminHelper\Widget\HelperWidget;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportFieldsTable;
@@ -40,7 +42,7 @@ class ReportsEditHelper extends AdminEditHelper
                 'ICON' => '',
                 'TITLE' => $v['title'],
                 'VISIBLE' => true,
-                'TMPL' => 'fields_' . $k
+                'KEY' => $k
             ];
         }
 
@@ -49,6 +51,28 @@ class ReportsEditHelper extends AdminEditHelper
         $this->tabControl = false;
         $this->report = ReportsTable::getReport($this->data['COMPANY_ID'], $this->data['ID']);
         $this->report->fill();
+
+        if (!empty($_REQUEST['done'])) {
+            // TODO: save report to status `DONE`
+        } elseif (!empty($_REQUEST['decline'])) {
+            // TODO: save report comments and set status to `DECLINED`
+        }
+    }
+
+    protected function editAction()
+    {
+        return false;
+    }
+
+    protected function saveElement($id = null)
+    {
+        /** @var EntityManager $entityManager */
+        $entityManager = new static::$entityManager(static::getModel(), empty($this->data) ? array() : $this->data, $id, $this);
+
+        //$saveResult = $entityManager->save();
+        $this->addNotes($entityManager->getNotes());
+
+        return $saveResult;
     }
 
     public function show()
@@ -71,10 +95,17 @@ class ReportsEditHelper extends AdminEditHelper
         echo bitrix_sessid_post();
 
         $formConfig = ReportFieldsTable::getFormConfig();
+        $stages = \Kelnik\Report\Model\ReportFieldsTable::getStages();
 
         foreach ($this->tabs as $tabKey => $tab) {
             $tabControl->BeginNextTab();
+            echo '<tr><td>';
+            $formNum = $tab['KEY'];
+            if (!in_array($formNum, [ReportFieldsTable::FORM_TAXES, ReportFieldsTable::FORM_RESULT, 'MAIN'], true)) {
+                $tab['DIV'] = 'form_default';
+            }
             include 'tabs/tab_' . strtolower($tab['DIV']) . '.php';
+            echo '</td></tr>';
         }
 
         $tabControl->Buttons();
@@ -84,14 +115,32 @@ class ReportsEditHelper extends AdminEditHelper
         echo '</form>';
     }
 
-    public function getValue($fieldName, $groupId = 0)
+    public function getValue($fieldName, $groupId = 0, $returnField = 'VALUE')
     {
         $keys = $this->report->getFields()->getAssocArray();
         $values = $this->report->getFields()->getArray();
 
         return ArrayHelper::getValue(
             $values,
-            ArrayHelper::getValue($keys, $fieldName. '.' . $groupId) . '.VALUE'
+            ArrayHelper::getValue($keys, $fieldName. '.' . $groupId) . '.' . $returnField
+        );
+    }
+
+    public function getValueComment($fieldName, $groupId = 0)
+    {
+        return htmlentities(
+            $this->getValue($fieldName, $groupId, 'COMMENT'),
+            ENT_QUOTES.
+            'UTF-8'
+        );
+    }
+
+    public function getGroup($formNum, $type)
+    {
+        return ArrayHelper::getValue(
+            $this->report->getGroups()->getArray(),
+            $type . '.' . $formNum,
+            []
         );
     }
 
