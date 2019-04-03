@@ -16,31 +16,32 @@
                      Для вывода ошибки и текста подсказки добавить класс b-form-block-error - на блок с классом b-form-block
                      Для правильно заполненного блока добавить класс b-form-block-success - на блок с классом b-form-block
                      -->
-                <div class="b-form-block j-auth-login">
+                <label class="b-form-block j-auth-login">
                     {% include "../components/forms/email/email.twig" with {
                         id: "email",
                         name: "email"
                     } %}
-                    <label for="email" class="b-form-block__label">
+                    <span class="b-form-block__label">
                         Эл. почта
-                    </label>
+                    </span>
                     <span class="b-form-block__error-text">
                         Это поле обязательно для заполнения
                     </span>
-                </div>
-                <div class="b-form-block j-auth-password">
+                </label>
+                <label class="b-form-block j-auth-password">
                     {% include "../components/forms/password/password.twig" with {
                         id: "password",
                         name: "password"
                     } %}
-                    <label for="password" class="b-form-block__label">
+                    <span class="b-form-block__label">
                         Пароль
-                    </label>
+                    </span>
                     <span class="b-form-block__error-text">
                         Это поле обязательно для заполнения
                     </span>
-                </div>
+                </label>
             </div>
+
             <div class="b-remember-password">
                 <a href="#" class="b-link-line">
                     Я не помню пароль
