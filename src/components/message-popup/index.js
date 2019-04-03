@@ -54,6 +54,7 @@ class Message {
         this.$inputPhone = this.$phone.querySelector('input');
         this.$textarea = this.$form.querySelector(`.${this.text}`);
         this.$inputTextarea = this.$form.querySelector(`textarea`);
+        this.$submit = this.$form.querySelector(`.${this.submit}`);
     }
 
     _initInputs() {
@@ -72,6 +73,7 @@ class Message {
     _bindEvents() {
         this.$form.addEventListener('submit', (event) => {
             event.preventDefault();
+
             const that = this;
             const isFormFulfilled = this.checkForm();
 
@@ -82,7 +84,9 @@ class Message {
 
             const formData = new FormData(that.$form);
 
-            formData.set('lang', document.documentElement.lang);
+            formData.append('lang', document.documentElement.lang);
+
+            this._disableSubmit();
 
             Utils.send(formData, '/api/message/', {
                 success(response) {
@@ -103,6 +107,9 @@ class Message {
                 },
                 error(error) {
                     console.error(error);
+                },
+                complete() {
+                    that._enableSubmit();
                 }
             });
             /* eslint-enable consistent-return */
@@ -197,6 +204,14 @@ class Message {
         $popupContent.querySelector('.j-message-popup__close').addEventListener('click', () => {
             this.popup.close();
         });
+    }
+
+    _disableSubmit() {
+        this.$submit.classList.add('is-disabled');
+    }
+
+    _enableSubmit() {
+        this.$submit.classList.remove('is-disabled');
     }
 }
 
