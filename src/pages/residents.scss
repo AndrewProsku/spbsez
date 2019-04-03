@@ -89,6 +89,10 @@
         @include padding-level(bottom, green);
         height: 729px;
     }
+
+    @media #{$ie} {
+        align-items: flex-start;
+    }
 }
 
 .b-resident_is_overflowed {
@@ -110,6 +114,8 @@
 
     .b-resident__inner {
         position: absolute;
+        top: 0;
+        left: 0;
         height: auto;
         width: 100%;
         min-height: 100%;
@@ -158,6 +164,11 @@
         @include prefix(1, 9);
         @include suffix(1, 9);
     }
+
+    @media #{$ie} {
+        flex: 1 0 auto;
+        width: 100%;
+    }
 }
 
 .b-resident__category {
@@ -174,6 +185,10 @@
     @media #{$fullhd} {
         @include prefix(1, 9);
         @include suffix(1, 9);
+    }
+
+    @media #{$ie} {
+        width: 100%;
     }
 }
 
@@ -194,6 +209,10 @@
     @media #{$fullhd} {
         @include prefix(1, 9);
         @include suffix(1, 9);
+    }
+
+    @media #{$ie} {
+        width: 100%;
     }
 }
 

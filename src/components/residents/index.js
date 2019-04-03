@@ -59,7 +59,6 @@ class Residents {
                     return;
                 }
 
-
                 if (!resident.classList.contains('b-resident_is_overflowed')) {
                     return;
                 }
@@ -142,7 +141,6 @@ class Residents {
         if (!resident) {
             return;
         }
-
 
         const residentWidth = resident.getBoundingClientRect().width;
         const residentHeight = resident.getBoundingClientRect().height;
