@@ -10,7 +10,7 @@
                     <?php foreach ($arResult['ELEMENTS'] as $element): ?>
                     <div class="glide__slide">
                         <div class="b-slider-reviews__item">
-                            <div class="b-slider-reviews__item-image"<?php if($element['IMAGE_BG_ID_PATH']): ?> style="background-image:url('<?= $element['IMAGE_BG_ID_PATH']; ?>')"<?php endif; ?>></div>
+                            <?php if($element['IMAGE_BG_ID_PATH']): ?><img src="<?= $element['IMAGE_BG_ID_PATH']; ?>" alt="" class="b-slider-reviews__item-image"><?php endif; ?>
                             <div class="b-slider-reviews__person">
                                 <div class="b-slider-reviews__person-img">
                                     <?php if($element['IMAGE_ID_PATH']): ?>

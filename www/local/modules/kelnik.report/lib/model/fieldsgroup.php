@@ -13,6 +13,11 @@ namespace Kelnik\Report\Model;
  */
 class FieldsGroup extends EO_ReportFieldsGroup_Collection
 {
+    /**
+     * Список групп
+     *
+     * @return array
+     */
     public function getArray()
     {
         $rows = $this->getAll();
