@@ -34,6 +34,8 @@ class Popup {
     bindEvents() {
         this.target.addEventListener('click', (event) => {
             event.preventDefault();
+            this.id = this.target.dataset.href;
+            this.slug = this.target.dataset.id || '';
 
             this.makeOpen();
         });
@@ -65,7 +67,14 @@ class Popup {
      * Запуск попапа при клике на кнопку.
      */
     makeOpen() {
-        this.contentTypeCheck();
+        this.openPopup = this.body.querySelector(`[data-popup="${this.id}${this.slug}"]`);
+
+        if (this.openPopup) {
+            this.popup = this.openPopup;
+            this.open();
+        } else {
+            this.contentTypeCheck();
+        }
     }
 
     /**
@@ -122,6 +131,8 @@ class Popup {
     setData(content) {
         this.data = {
             content,
+            id             : this.id,
+            slug           : this.slug,
             buttonAriaLabel: this.closeButtonAriaLabel
         };
     }
@@ -227,6 +238,10 @@ class Popup {
         this.fixedBody();
 
         mediator.publish('openPopup', this);
+
+        if (!this.openPopup) {
+            mediator.publish('openPopupFirst', this);
+        }
     }
 
     /**
@@ -234,7 +249,11 @@ class Popup {
      */
     close() {
         this.popup.classList.remove(this.stateClass);
-        this.remove();
+
+        if (!this.popup.dataset.popup) {
+            this.remove();
+        }
+
         this.fixedBody();
 
         mediator.publish('closePopup', this);
