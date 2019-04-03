@@ -3,32 +3,32 @@
 } ?>
 <form action="" enctype="multipart/form-data" class="b-login-form j-form-authorization" novalidate>
     <div class="b-form-block-wrap">
-        <div class="b-form-block j-auth-login">
+        <label class="b-form-block j-auth-login">
             <input id="email"
                     class="b-input-email"
                     type="email"
                     name="email">
 
-            <label for="email" class="b-form-block__label">
+            <span class="b-form-block__label">
                 Эл. почта
-            </label>
+            </span>
             <span class="b-form-block__error-text">
                     Это поле обязательно для заполнения
                 </span>
-        </div>
-        <div class="b-form-block j-auth-password">
+        </label>
+        <label class="b-form-block j-auth-password">
             <input id="password"
                     class="b-input-password"
                     type="password"
                     name="password">
 
-            <label for="password" class="b-form-block__label">
+            <span class="b-form-block__label">
                 Пароль
-            </label>
+            </span>
             <span class="b-form-block__error-text">
                     Это поле обязательно для заполнения
                 </span>
-        </div>
+        </label>
     </div>
     <div class="b-remember-password">
         <a href="/cabinet/forgot/" class="b-link-line">
