@@ -37,6 +37,10 @@
         @include column(10, 33);
         order: 3;
     }
+
+    @media #{$laptop} {
+        @include column(10, 32);
+    }
 }
 
 .b-offers__block {
@@ -49,7 +53,8 @@
     }
 
     @media #{$laptop} {
-        @include column(20, 33);
+        @include column(20, 32);
+        @include post(2, 32);
     }
 }
 
@@ -62,7 +67,7 @@
     }
 
     @media #{$laptop} {
-        @include post(13, 33);
+        @include post(13, 32);
         flex-basis: 100%;
     }
 }
@@ -148,7 +153,7 @@
     @include margin-level(bottom, cyan);
     @include prefix(2, 32);
     @include suffix(2, 32);
-    @include font-size("p2");
+    @include font-size("p3");
     padding-top: 11px;
     padding-bottom: 11px;
     background-color: $white;
@@ -161,6 +166,12 @@
 
 .b-offers__count-bold {
     font-weight: 700;
+}
+
+.b-offers__button {
+    width: 100%;
+    max-width: 264px;
+    min-width: auto;
 }
 
 .b-offers__description {
@@ -194,6 +205,7 @@
 
 .b-offers__logo-wrap {
     @include row();
+    align-items: flex-end;
 }
 
 
