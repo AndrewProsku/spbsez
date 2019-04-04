@@ -160,6 +160,10 @@ class ApiProcessReport extends ApiProcessAbstract
             'VALUE' => $val
         ];
 
+        if (isset($request['clearComment'])) {
+            $data['COMMENT'] = null;
+        }
+
         $field = $field . '.' . $groupId;
 
         try {
@@ -204,12 +208,53 @@ class ApiProcessReport extends ApiProcessAbstract
             if ($res->isSuccess()) {
                 $this->data['ID'] = $res->getId();
 
+                $this->addGroupFields($formNum, $type, $res->getId());
+
                 return true;
             }
         } catch (\Exception $e) {
         }
 
         return false;
+    }
+
+    protected function addGroupFields($formNum, $groupType, $groupId)
+    {
+        $blocks = ArrayHelper::getValue(ReportFieldsTable::getFormConfig(), $formNum . '.blocks', []);
+
+        if (!$blocks) {
+            return;
+        }
+
+        $values = [];
+
+        $sqlHelper = Application::getConnection()->getSqlHelper();
+
+        foreach ($blocks as $block) {
+            if (empty($block['multiple']['name']) || $block['multiple']['name'] !== $groupType) {
+                continue;
+            }
+
+            foreach ($block['multiple']['fields'] as $field) {
+                $values[] = '(' .
+                            $sqlHelper->convertToDbInteger($this->id). ', ' .
+                            $sqlHelper->convertToDbInteger($groupId) . ', ' .
+                            $sqlHelper->convertToDbString($field['id']) .
+                            ')';
+            }
+        }
+
+        if (!$values) {
+            return;
+        }
+
+        try {
+            Application::getConnection()->query(
+                'INSERT INTO `' . ReportFieldsTable::getTableName() . '` (`REPORT_ID`, `GROUP_ID`, `NAME`) '.
+                'VALUES ' . implode(', ', $values)
+            );
+        } catch (\Exception $e) {
+        }
     }
 
     protected function processDelGroup(array $request)

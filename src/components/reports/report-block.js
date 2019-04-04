@@ -523,10 +523,10 @@ class ReportBlock {
         }
 
         errorBlock.querySelector('.b-input-error__confirm').addEventListener('click', () => {
-            const dataToSend = `action=confirmField&${$(input).serialize()}`;
+            const dataToSend = `a=update&id=${this.reportId}&field=${input.name}&val=${input.value}&clearComment=1`;
             const that = this;
 
-            Utils.send(dataToSend, '/tests/reports/input-update.json', {
+            Utils.send(dataToSend, that.baseUrl, {
                 success(response) {
                     if (response.request.status === that.SUCCESS_STATUS) {
                         delete input.dataset.hasError;

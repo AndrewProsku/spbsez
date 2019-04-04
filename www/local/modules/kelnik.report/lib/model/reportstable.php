@@ -94,6 +94,12 @@ class ReportsTable extends DataManager
             (new StringField('NAME_SEZ'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME_SEZ')),
 
+            (new StringField('NAME_COMMENT'))
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME_COMMENT')),
+
+            (new StringField('NAME_SEZ_COMMENT'))
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME_SEZ_COMMENT')),
+
             (new Reference(
                 'STATUS',
                 StatusTable::class,
@@ -126,6 +132,33 @@ class ReportsTable extends DataManager
         parent::onAfterAdd($event);
     }
 
+    public static function onAfterUpdate(Event $event)
+    {
+        $id  = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
+
+        if (!$id || !Context::getCurrent()->getRequest()->isAdminSection()) {
+            parent::onAfterUpdate($event);
+
+            return;
+        }
+
+        try {
+            if (
+                (int) ArrayHelper::getValue(self::getRowById($id), 'STATUS_ID') == StatusTable::DONE
+            ) {
+                $sqlHelper = Application::getConnection()->getSqlHelper();
+                Application::getConnection()->query(
+                    'UPDATE `' . ReportFieldsTable::getTableName() . '` ' .
+                    'SET `COMMENT` = NULL ' .
+                    'WHERE `REPORT_ID` = ' . $sqlHelper->convertToDbInteger($id)
+                );
+            }
+        } catch (\Exception $e) {
+        }
+
+        parent::onAfterUpdate($event);
+    }
+
     public static function onBeforeDelete(Event $event)
     {
         $id  = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
@@ -134,12 +167,12 @@ class ReportsTable extends DataManager
             if ($id) {
                 $sqlHelper = Application::getConnection()->getSqlHelper();
                 Application::getConnection()->query(
-                    "DELETE FROM `" . ReportFieldsTable::getTableName() . "` " .
-                    "WHERE `REPORT_ID` = " . $sqlHelper->convertToDbInteger($id)
+                    'DELETE FROM `' . ReportFieldsTable::getTableName() . '` ' .
+                    'WHERE `REPORT_ID` = ' . $sqlHelper->convertToDbInteger($id)
                 );
                 Application::getConnection()->query(
-                    "DELETE FROM `" . ReportFieldsGroupTable::getTableName() . "` " .
-                    "WHERE `REPORT_ID` = " . $sqlHelper->convertToDbInteger($id)
+                    'DELETE FROM `' . ReportFieldsGroupTable::getTableName() . '` ' .
+                    'WHERE `REPORT_ID` = ' . $sqlHelper->convertToDbInteger($id)
                 );
             }
         } catch (\Exception $e) {
