@@ -372,6 +372,7 @@ class ReportBlock {
                 event.target.closest('.b-input-block').classList.add(this.untouchedIputClass);
             }
         });
+
         input.addEventListener('change', (event) => {
             delete input.dataset.prefilled;
             this.sendNewValue(event.target);

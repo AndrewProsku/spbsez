@@ -35,3 +35,4 @@ $MESS['KELNIK_API_REPORT_LOCKED'] = 'В данный момент отчет р�
 $MESS['KELNIK_API_REPORT_FILE_UPLOAD_ERROR'] = 'Не удалось загрузить файл';
 $MESS['KELNIK_API_REPORT_FILE_DELETE_ERROR'] = 'Информация о файле на найдена';
 $MESS['KELNIK_API_REPORT_FILL_ERROR'] = 'Отчет заполнен не полностью';
+$MESS['KELNIK_API_REPORT_LOAD_ERROR'] = 'Отчет закрыт для редактирования';
