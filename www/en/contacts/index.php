@@ -41,7 +41,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                         <p>Novoorlovskaya site</p>
                     </div>
                     <div class="l-contacts__map-text-desc">
-                        <p>Doroga v Kamenku, St.Petersburg</p>
+                        <p>Doroga v Kamenku, St.Petersburg </p>
                     </div>
                     <a href="#" class="l-contacts__map-text-link b-link-line j-contacts-location"
                        data-coordinates="[60.053400, 30.231714]">

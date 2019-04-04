@@ -11,7 +11,8 @@
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: none; }
+  -webkit-text-size-adjust: none;
+  -webkit-overflow-scrolling: touch; }
 
 /* stylelint-enable */
 a,
@@ -19815,8 +19816,7 @@ label .b-help {
 /* stylelint-disable  property-no-vendor-prefix */
 /* stylelint-enable */
 .body-fixed {
-  overflow: hidden;
-  position: fixed; }
+  overflow: hidden; }
 
 .b-popup {
   display: none;
@@ -19933,7 +19933,9 @@ label .b-help {
   padding-top: 20px;
   padding-bottom: 25px;
   background-color: #ffffff;
-  min-height: 100vh; }
+  min-height: 100vh;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch; }
   @media only screen and (min-width: 670px) {
     .b-popup__content {
       min-height: inherit;

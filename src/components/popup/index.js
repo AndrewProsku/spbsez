@@ -7,6 +7,7 @@
 /**
  * DEPENDENCIES
  */
+import {disableBodyScroll, enableBodyScroll} from 'body-scroll-lock';
 import $ from 'jquery';
 import Language from '../language';
 import Mediator from 'common/scripts/mediator';
@@ -237,6 +238,8 @@ class Popup {
         this.popup.classList.add(this.stateClass);
         this.fixedBody();
 
+        disableBodyScroll(this.popup);
+
         mediator.publish('openPopup', this);
 
         if (!this.openPopup) {
@@ -255,6 +258,8 @@ class Popup {
         }
 
         this.fixedBody();
+
+        enableBodyScroll(this.popup);
 
         mediator.publish('closePopup', this);
     }
