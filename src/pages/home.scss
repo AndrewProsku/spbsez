@@ -1275,6 +1275,19 @@ $path: '/images/home/';
 .l-home-plots__all-map {
     .b-tooltip {
         border: none;
+        white-space: nowrap;
+    }
+}
+
+.l-home-plots__all-map .lang-ch .b-tooltip {
+    @media #{$laptop} {
+        top: -40px;
+    }
+}
+
+.l-home-plots__all-map .lang-ch .l-home-plots__all-map-build-neudorf .b-tooltip {
+    @media #{$laptop} {
+        left: -35%;
     }
 }
 
