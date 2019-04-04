@@ -40,7 +40,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                         <p>Участок «Новоорловская»</p>
                     </div>
                     <div class="l-contacts__map-text-desc">
-                        <p>Санкт-Петербург, Дорога в Каменку, д. 74</p>
+                        <p>Санкт-Петербург, Дорога в Каменку, д. 74, литера А</p>
                     </div>
                     <a href="#" class="l-contacts__map-text-link b-link-line j-contacts-location"
                        data-coordinates="[60.053400, 30.231714]">
