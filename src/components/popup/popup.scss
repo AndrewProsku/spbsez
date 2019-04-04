@@ -17,7 +17,6 @@ $popup-mobile-close-icon-color: #000000;
 // вынести класс куда-нибудь отдельно, т.к повторяется еще в mobile-header.scss
 .body-fixed {
     overflow: hidden;
-    position: fixed;
 }
 
 // COMPONENT
@@ -120,6 +119,8 @@ $popup-mobile-close-icon-color: #000000;
     background-color: $popup-content-background-color;
     min-height: 100vh;
     border-radius: 4px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 
     @media #{$laptop} {
         min-height: inherit;
