@@ -126,6 +126,8 @@ class ReportsTable extends DataManager
 
     public static function onAfterAdd(Event $event)
     {
+        // Добавляем группы полей и некоторые поля по-умолчанию
+        //
         ReportFieldsGroupTable::addReportGroups((int)  ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0));
 
         static::clearComponentCache($event);

@@ -254,6 +254,12 @@ class Report extends EO_Reports
         return $this->hasAccess($userId);
     }
 
+    /**
+     * Проверка доступа к отчету
+     *
+     * @param int $userId
+     * @return bool
+     */
     public function hasAccess(int $userId = 0)
     {
         if (!$userId) {
@@ -314,6 +320,11 @@ class Report extends EO_Reports
         return $res;
     }
 
+    /**
+     * Получение массива данных отчета (для фронта)
+     *
+     * @return array
+     */
     public function getForms(): array
     {
         $res = [];
@@ -348,6 +359,15 @@ class Report extends EO_Reports
         return $res;
     }
 
+    /**
+     * Сборка данных для блока формы
+     *
+     * @param int $formNum
+     * @param array $values
+     * @param array $groups
+     * @param array $block
+     * @return array
+     */
     protected function processBlock(int $formNum, array $values, array $groups, array $block)
     {
         $res = [];
@@ -357,7 +377,7 @@ class Report extends EO_Reports
             $newBlock['type'] = $block['type'];
         }
 
-        // fields
+        // Простые поля (fields)
         //
         if (!empty($block['fields'])
             && (!isset($block['type']) || $block['type'] != 'results')
@@ -386,7 +406,8 @@ class Report extends EO_Reports
                 $newBlock['fields'][] = [
                     'id' => $id,
                     $valField => $val,
-                    'error' => $error
+                    'error' => $error,
+                    //'isPrefilled' => true
                 ];
             }
 
@@ -395,7 +416,7 @@ class Report extends EO_Reports
             return $res;
         }
 
-        // multiple
+        // Группы полей (multiple)
         //
         if (!empty($block['multiple'])) {
 
@@ -460,7 +481,7 @@ class Report extends EO_Reports
                     continue;
                 }
 
-                return $field[$fieldReturn];
+                return (string) $field[$fieldReturn];
             }
 
             return '';

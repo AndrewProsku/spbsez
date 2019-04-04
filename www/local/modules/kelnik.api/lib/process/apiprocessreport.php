@@ -92,6 +92,12 @@ class ApiProcessReport extends ApiProcessAbstract
             return false;
         }
 
+        if ($this->action !== 'get' && !$this->report->canEdit()) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_REPORT_LOAD_ERROR');
+
+            return false;
+        }
+
         $res = $this->{$methodName}($request);
 
         // После каждого изменения полей отчета
@@ -119,8 +125,8 @@ class ApiProcessReport extends ApiProcessAbstract
     protected function processUpdate(array $request)
     {
         $groupId = 0;
-        $field = trim(ArrayHelper::getValue($request, 'field'));
-        $val   = trim(ArrayHelper::getValue($request, 'val'));
+        $field   = trim(ArrayHelper::getValue($request, 'field'));
+        $val     = trim(ArrayHelper::getValue($request, 'val'));
 
         // Меняем поля самого отчета
         //
@@ -208,7 +214,7 @@ class ApiProcessReport extends ApiProcessAbstract
             if ($res->isSuccess()) {
                 $this->data['ID'] = $res->getId();
 
-                $this->addGroupFields($formNum, $type, $res->getId());
+                ReportFieldsTable::addFieldsByGroup($this->id, $formNum, $type, $res->getId());
 
                 return true;
             }
@@ -216,45 +222,6 @@ class ApiProcessReport extends ApiProcessAbstract
         }
 
         return false;
-    }
-
-    protected function addGroupFields($formNum, $groupType, $groupId)
-    {
-        $blocks = ArrayHelper::getValue(ReportFieldsTable::getFormConfig(), $formNum . '.blocks', []);
-
-        if (!$blocks) {
-            return;
-        }
-
-        $values = [];
-
-        $sqlHelper = Application::getConnection()->getSqlHelper();
-
-        foreach ($blocks as $block) {
-            if (empty($block['multiple']['name']) || $block['multiple']['name'] !== $groupType) {
-                continue;
-            }
-
-            foreach ($block['multiple']['fields'] as $field) {
-                $values[] = '(' .
-                            $sqlHelper->convertToDbInteger($this->id). ', ' .
-                            $sqlHelper->convertToDbInteger($groupId) . ', ' .
-                            $sqlHelper->convertToDbString($field['id']) .
-                            ')';
-            }
-        }
-
-        if (!$values) {
-            return;
-        }
-
-        try {
-            Application::getConnection()->query(
-                'INSERT INTO `' . ReportFieldsTable::getTableName() . '` (`REPORT_ID`, `GROUP_ID`, `NAME`) '.
-                'VALUES ' . implode(', ', $values)
-            );
-        } catch (\Exception $e) {
-        }
     }
 
     protected function processDelGroup(array $request)
@@ -277,7 +244,6 @@ class ApiProcessReport extends ApiProcessAbstract
                 " AND g.`REPORT_ID` = " . $sqlHelper->convertToDbInteger($this->id)
             );
         } catch (\Exception $e) {
-            die($e->getMessage());
         }
 
         return true;
@@ -321,8 +287,14 @@ class ApiProcessReport extends ApiProcessAbstract
         return true;
     }
 
-    // Отчет заполнен, проверяем так ли это и переводим в статус - проверка
-    // пользователя перекидываем обратно на список отчетов
+    /**
+     * Отчет заполнен, проверяем так ли это и переводим в статус - проверка.
+     * Пользователя перекидываем обратно на список отчетов
+     *
+     * @param array $request
+     * @return bool
+     * @throws \Bitrix\Main\ObjectException
+     */
     protected function processConfirm(array $request)
     {
         if (!$this->report->isFilled()) {
@@ -333,6 +305,8 @@ class ApiProcessReport extends ApiProcessAbstract
 
         $this->report->setStatusId(StatusTable::CHECKING);
         $this->report->setDateModified(new DateTime());
+        $this->report->setNameComment(null);
+        $this->report->setNameSezComment(null);
         $this->report->setIsLocked(false);
         $this->report->save();
 
