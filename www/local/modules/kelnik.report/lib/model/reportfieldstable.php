@@ -57,6 +57,8 @@ class ReportFieldsTable extends DataManager
                 ->configureSize(100),
             (new StringField('VALUE'))
                 ->configureSize(255),
+            (new StringField('COMMENT'))
+                ->configureSize(255),
 
             (new Reference(
                 'REPORT',
