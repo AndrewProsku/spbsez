@@ -43,10 +43,6 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                     <div class="l-contacts__map-text-desc">
                         <p>Doroga v Kamenku, 74, lit. A, St. Petersburg</p>
                     </div>
-                    <a href="#" class="l-contacts__map-text-link b-link-line j-contacts-location"
-                       data-coordinates="[60.053400, 30.231714]">
-                        Location
-                    </a>
                 </div>
 
                 <div class="l-contacts__map-text-item">
@@ -56,10 +52,6 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                     <div class="l-contacts__map-text-desc">
                         <p>Svyazi Street, 34 A, Strelna, St.Petersburg</p>
                     </div>
-                    <a href="#" class="l-contacts__map-text-link b-link-line j-contacts-location"
-                       data-coordinates="[59.840573, 30.005940]">
-                        Location
-                    </a>
                 </div>
             </div>
         </div>
