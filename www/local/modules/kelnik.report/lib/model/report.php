@@ -3,6 +3,7 @@
 namespace Kelnik\Report\Model;
 
 
+use Bitrix\Main\Application;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
@@ -23,6 +24,8 @@ use Kelnik\UserData\Profile\Profile;
  * @method Report setName(string $name)
  * @method Report setNameSez(string $name)
  * @method Report setIsLocked(bool $state)
+ * @method Report setNameComment(string $comment)
+ * @method Report setNameSezComment(string $comment)
  *
  * @method \Bitrix\Main\ORM\Data\DeleteResult delete()
  * @method \Bitrix\Main\ORM\Data\AddResult save()
@@ -186,6 +189,37 @@ class Report extends EO_Reports
         return true;
     }
 
+    public function updateFieldComments(array $list)
+    {
+        if (!$list) {
+            return false;
+        }
+
+        try {
+            $sqlHelper = Application::getConnection()->getSqlHelper();
+
+            $tmp = $list;
+            $list = [];
+
+            foreach ($tmp as $k => $v) {
+                $list[(int) $k] = $sqlHelper->convertToDbString(trim($v));
+            }
+            unset($tmp);
+            ksort($list);
+
+
+            Application::getConnection()->query($sql =
+                "UPDATE `" . ReportFieldsTable::getTableName() . "` " .
+                "SET `COMMENT` = ELT(FIELD(`ID`, " . implode(', ', array_keys($list)) . "), " . implode(', ', array_values($list)) . ") " .
+                "WHERE `ID` IN (" . implode(', ', array_keys($list)) . ") AND `REPORT_ID` = " . $this->getId()
+            );
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return true;
+    }
+
     protected static function checkFilledFields(array $fields)
     {
         if (!$fields) {
@@ -220,6 +254,12 @@ class Report extends EO_Reports
         return $this->hasAccess($userId);
     }
 
+    /**
+     * Проверка доступа к отчету
+     *
+     * @param int $userId
+     * @return bool
+     */
     public function hasAccess(int $userId = 0)
     {
         if (!$userId) {
@@ -280,6 +320,11 @@ class Report extends EO_Reports
         return $res;
     }
 
+    /**
+     * Получение массива данных отчета (для фронта)
+     *
+     * @return array
+     */
     public function getForms(): array
     {
         $res = [];
@@ -314,6 +359,15 @@ class Report extends EO_Reports
         return $res;
     }
 
+    /**
+     * Сборка данных для блока формы
+     *
+     * @param int $formNum
+     * @param array $values
+     * @param array $groups
+     * @param array $block
+     * @return array
+     */
     protected function processBlock(int $formNum, array $values, array $groups, array $block)
     {
         $res = [];
@@ -323,7 +377,7 @@ class Report extends EO_Reports
             $newBlock['type'] = $block['type'];
         }
 
-        // fields
+        // Простые поля (fields)
         //
         if (!empty($block['fields'])
             && (!isset($block['type']) || $block['type'] != 'results')
@@ -334,6 +388,7 @@ class Report extends EO_Reports
 
                 $id = $isArray ? $field['id'] : $field;
                 $val = self::getFieldValue($values, $id);
+                $error = self::getFieldValue($values, $id, 0, 'COMMENT');
                 $valField = 'value';
 
                 if ($isArray && !empty($field['suffix'])) {
@@ -343,11 +398,16 @@ class Report extends EO_Reports
                 if ($isArray && $field['type'] == 'boolean') {
                     $val = $val == ArrayHelper::getValue($field, 'trueValue', false);
                     $valField = 'checked';
+                    if (!$val) {
+                        $error = false;
+                    }
                 }
 
                 $newBlock['fields'][] = [
                     'id' => $id,
-                    $valField => $val
+                    $valField => $val,
+                    'error' => $error,
+                    //'isPrefilled' => true
                 ];
             }
 
@@ -356,7 +416,7 @@ class Report extends EO_Reports
             return $res;
         }
 
-        // multiple
+        // Группы полей (multiple)
         //
         if (!empty($block['multiple'])) {
 
@@ -367,8 +427,9 @@ class Report extends EO_Reports
                 $fields = [];
                 foreach ($block['multiple']['fields'] as $field) {
                     $fields[] = [
-                        'id'    => $field . '[' . $id . ']',
-                        'value' => self::getFieldValue($values, $field, $id)
+                        'id'    => $field['id'] . '[' . $id . ']',
+                        'value' => self::getFieldValue($values, $field['id'], $id),
+                        'error' => self::getFieldValue($values, $field['id'], 0, 'COMMENT')
                     ];
                 }
 
@@ -400,8 +461,9 @@ class Report extends EO_Reports
 
             foreach ($block['fields'] as $field) {
                 $newBlock['fields'][] = [
-                    'id' => $field . '[' . $id . ']',
-                    'value' => self::getFieldValue($values, $field, $id)
+                    'id' => $field['id'] . '[' . $id . ']',
+                    'value' => self::getFieldValue($values, $field['id'], $id),
+                    'error' => self::getFieldValue($values, $field['id'], 0, 'COMMENT')
                 ];
             }
 
@@ -411,7 +473,7 @@ class Report extends EO_Reports
         return $res;
     }
 
-    protected static function getFieldValue(array $fields, $fieldName, $groupId = 0)
+    protected static function getFieldValue(array $fields, $fieldName, $groupId = 0, $fieldReturn = 'VALUE')
     {
         if ($groupId) {
             foreach ($fields as $field) {
@@ -419,7 +481,7 @@ class Report extends EO_Reports
                     continue;
                 }
 
-                return $field['VALUE'];
+                return (string) $field[$fieldReturn];
             }
 
             return '';
@@ -428,7 +490,7 @@ class Report extends EO_Reports
         $key = array_search($fieldName, array_column($fields, 'NAME', 'ID'));
 
         return $key
-                ? ArrayHelper::getValue($fields, $key . '.VALUE', '')
+                ? ArrayHelper::getValue($fields, $key . '.' . $fieldReturn, '')
                 : '';
     }
 

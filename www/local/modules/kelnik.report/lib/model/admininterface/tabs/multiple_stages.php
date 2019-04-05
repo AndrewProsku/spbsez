@@ -37,7 +37,7 @@ if (!$groups) {
                     ?>
                     <div class="b-input-block">
                         <div class="row-header"><?= $field['title']; ?></div>
-                        <div class="row-value"><?= $val; ?></div>
+                        <div class="row-value"><?= $val ? $val : '&nbsp;'; ?></div>
                         <div><input type="text" name="comment[<?= $this->getValue($field['id'], $group, 'ID'); ?>]" value="<?= $this->getValueComment($field['id'], $group); ?>" placeholder="Комментарий"></div>
                     </div>
                 <?php endforeach; ?>

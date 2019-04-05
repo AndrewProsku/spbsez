@@ -585,7 +585,7 @@ class ReportForm {
             return;
         }
 
-        if (!this.residentNameField.value || !this.oezNameField.value) {
+        if (!this.residentNameField.value || !this.oezNameField.value || this.type === 'readonly') {
             this.submitReportButton.disabled = true;
 
             return;

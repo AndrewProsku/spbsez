@@ -2,11 +2,13 @@
 
 namespace Kelnik\Report\Model;
 
+use Bitrix\Main\Application;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Bitrix\Main\ORM\Fields\StringField;
 use Bitrix\Main\ORM\Query\Join;
+use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
@@ -23,6 +25,11 @@ class ReportFieldsTable extends DataManager
 
     public const FIELD_CONSTRUCTION_FILE = 'construction-permission-file';
     public const FIELD_CONSTRUCTION_DATE = 'construction-permission-date';
+
+    public static $defaultValues = [
+        'foreign-investors' => 'no',
+        'high-tech-production' => 'no'
+    ];
 
     /**
      * @return string
@@ -57,6 +64,8 @@ class ReportFieldsTable extends DataManager
                 ->configureSize(100),
             (new StringField('VALUE'))
                 ->configureSize(255),
+            (new StringField('COMMENT'))
+                ->configureSize(255),
 
             (new Reference(
                 'REPORT',
@@ -64,6 +73,84 @@ class ReportFieldsTable extends DataManager
                 Join::on('this.REPORT_ID', 'ref.ID')
             ))->configureJoinType('INNER')
         ];
+    }
+
+    /**
+     * Добавление полей с значениями по-умолчанию
+     *
+     * @param int $reportId
+     */
+    public static function addDefaultFields(int $reportId)
+    {
+        if (!$reportId) {
+            return;
+        }
+
+        $values = [];
+        $sqlHelper = Application::getConnection()->getSqlHelper();
+
+        foreach (self::$defaultValues as $field => $val) {
+            $values[] = '(' .
+                            $sqlHelper->convertToDbInteger($reportId) . ', ' .
+                            $sqlHelper->convertToDbString($field) . ', ' .
+                            $sqlHelper->convertToDbString($val) .
+                        ')';
+        }
+
+        try {
+            Application::getConnection()->query(
+                'INSERT INTO `' . self::getTableName() . '` (`REPORT_ID`, `NAME`, `VALUE`) '.
+                'VALUES ' . implode(', ', $values)
+            );
+        } catch (\Exception $e) {
+        }
+    }
+
+    /**
+     * Добавление полей для групп
+     *
+     * @param int $reportId
+     * @param int $formNum
+     * @param $groupType
+     * @param int $groupId
+     */
+    public static function addFieldsByGroup(int $reportId, int $formNum, $groupType, int $groupId)
+    {
+        $blocks = ArrayHelper::getValue(ReportFieldsTable::getFormConfig(), $formNum . '.blocks', []);
+
+        if (!$blocks || !$reportId) {
+            return;
+        }
+
+        $values = [];
+
+        $sqlHelper = Application::getConnection()->getSqlHelper();
+
+        foreach ($blocks as $block) {
+            if (empty($block['multiple']['name']) || $block['multiple']['name'] !== $groupType) {
+                continue;
+            }
+
+            foreach ($block['multiple']['fields'] as $field) {
+                $values[] = '(' .
+                    $sqlHelper->convertToDbInteger($reportId). ', ' .
+                    $sqlHelper->convertToDbInteger($groupId) . ', ' .
+                    $sqlHelper->convertToDbString($field['id']) .
+                    ')';
+            }
+        }
+
+        if (!$values) {
+            return;
+        }
+
+        try {
+            Application::getConnection()->query(
+                'INSERT INTO `' . self::getTableName() . '` (`REPORT_ID`, `GROUP_ID`, `NAME`) '.
+                'VALUES ' . implode(', ', $values)
+            );
+        } catch (\Exception $e) {
+        }
     }
 
     public static function getFormConfig()

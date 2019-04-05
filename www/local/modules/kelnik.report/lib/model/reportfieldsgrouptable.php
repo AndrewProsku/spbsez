@@ -90,7 +90,6 @@ class ReportFieldsGroupTable extends DataManager
         }
 
         $sqlHelper = Application::getConnection()->getSqlHelper();
-        $sql = "INSERT INTO `" . ReportFieldsGroupTable::getTableName() . "` (`REPORT_ID`, `FORM_NUM`, `TYPE`) VALUES ";
         $rows = [];
 
         foreach (self::getGroupFields() as $type => $formNums) {
@@ -107,10 +106,29 @@ class ReportFieldsGroupTable extends DataManager
             return;
         }
 
-        $sql .= implode(', ', $rows);
-
         try {
-            Application::getConnection()->query($sql);
+            Application::getConnection()->query(
+                'INSERT INTO `' . self::getTableName() . '` (`REPORT_ID`, `FORM_NUM`, `TYPE`) '.
+                'VALUES ' . implode(', ', $rows)
+            );
+            ReportFieldsTable::addDefaultFields($id);
+
+            $groups = self::getList([
+                'select' => ['*'],
+                'filter' => [
+                    '=REPORT_ID' => $id
+                ]
+            ])->fetchAll();
+
+            if (!$groups) {
+                return;
+            }
+
+            // Добавляем поля к новым группам
+            //
+            foreach ($groups as $group) {
+                ReportFieldsTable::addFieldsByGroup($id, $group['FORM_NUM'], $group['TYPE'], $group['ID']);
+            }
         } catch (\Exception $e) {
         }
     }

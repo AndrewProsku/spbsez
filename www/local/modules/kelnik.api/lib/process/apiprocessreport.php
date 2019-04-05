@@ -92,6 +92,12 @@ class ApiProcessReport extends ApiProcessAbstract
             return false;
         }
 
+        if ($this->action !== 'get' && !$this->report->canEdit()) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_REPORT_LOAD_ERROR');
+
+            return false;
+        }
+
         $res = $this->{$methodName}($request);
 
         // После каждого изменения полей отчета
@@ -119,8 +125,8 @@ class ApiProcessReport extends ApiProcessAbstract
     protected function processUpdate(array $request)
     {
         $groupId = 0;
-        $field = trim(ArrayHelper::getValue($request, 'field'));
-        $val   = trim(ArrayHelper::getValue($request, 'val'));
+        $field   = trim(ArrayHelper::getValue($request, 'field'));
+        $val     = trim(ArrayHelper::getValue($request, 'val'));
 
         // Меняем поля самого отчета
         //
@@ -159,6 +165,10 @@ class ApiProcessReport extends ApiProcessAbstract
             'GROUP_ID' => $groupId,
             'VALUE' => $val
         ];
+
+        if (isset($request['clearComment'])) {
+            $data['COMMENT'] = null;
+        }
 
         $field = $field . '.' . $groupId;
 
@@ -204,6 +214,8 @@ class ApiProcessReport extends ApiProcessAbstract
             if ($res->isSuccess()) {
                 $this->data['ID'] = $res->getId();
 
+                ReportFieldsTable::addFieldsByGroup($this->id, $formNum, $type, $res->getId());
+
                 return true;
             }
         } catch (\Exception $e) {
@@ -232,7 +244,6 @@ class ApiProcessReport extends ApiProcessAbstract
                 " AND g.`REPORT_ID` = " . $sqlHelper->convertToDbInteger($this->id)
             );
         } catch (\Exception $e) {
-            die($e->getMessage());
         }
 
         return true;
@@ -276,8 +287,14 @@ class ApiProcessReport extends ApiProcessAbstract
         return true;
     }
 
-    // Отчет заполнен, проверяем так ли это и переводим в статус - проверка
-    // пользователя перекидываем обратно на список отчетов
+    /**
+     * Отчет заполнен, проверяем так ли это и переводим в статус - проверка.
+     * Пользователя перекидываем обратно на список отчетов
+     *
+     * @param array $request
+     * @return bool
+     * @throws \Bitrix\Main\ObjectException
+     */
     protected function processConfirm(array $request)
     {
         if (!$this->report->isFilled()) {
@@ -288,6 +305,8 @@ class ApiProcessReport extends ApiProcessAbstract
 
         $this->report->setStatusId(StatusTable::CHECKING);
         $this->report->setDateModified(new DateTime());
+        $this->report->setNameComment(null);
+        $this->report->setNameSezComment(null);
         $this->report->setIsLocked(false);
         $this->report->save();
 

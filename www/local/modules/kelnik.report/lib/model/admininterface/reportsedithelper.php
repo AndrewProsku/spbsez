@@ -1,15 +1,16 @@
 <?php
 namespace Kelnik\Report\Model\AdminInterface;
 
-use Bitrix\Main\DB\SqlQueryException;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Data\UpdateResult;
+use Bitrix\Main\Type\DateTime;
 use CAdminTabControl;
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
-use Kelnik\AdminHelper\Widget\HelperWidget;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportFieldsTable;
 use Kelnik\Report\Model\ReportsTable;
+use Kelnik\Report\Model\StatusTable;
 
 Loc::loadMessages(__FILE__);
 
@@ -48,14 +49,18 @@ class ReportsEditHelper extends AdminEditHelper
 
         parent::__construct($fields, $tabs);
 
+        if (empty($this->data['ID'])) {
+            return;
+        }
+
         $this->tabControl = false;
         $this->report = ReportsTable::getReport($this->data['COMPANY_ID'], $this->data['ID']);
         $this->report->fill();
 
-        if (!empty($_REQUEST['done'])) {
-            // TODO: save report to status `DONE`
-        } elseif (!empty($_REQUEST['decline'])) {
-            // TODO: save report comments and set status to `DECLINED`
+        if (!empty($_REQUEST['done']) || !empty($_REQUEST['decline'])) {
+            $this->saveElement($this->data['ID']);
+
+            LocalRedirect(ReportsListHelper::getUrl());
         }
     }
 
@@ -66,20 +71,36 @@ class ReportsEditHelper extends AdminEditHelper
 
     protected function saveElement($id = null)
     {
-        /** @var EntityManager $entityManager */
-        $entityManager = new static::$entityManager(static::getModel(), empty($this->data) ? array() : $this->data, $id, $this);
+        global $USER;
 
-        //$saveResult = $entityManager->save();
-        $this->addNotes($entityManager->getNotes());
+        $this->report->setStatusId( StatusTable::DONE);
+        $this->report->setDateModified(new DateTime());
+        $this->report->setModifiedBy($USER->GetID());
 
-        return $saveResult;
+        if (!empty($_REQUEST['decline'])) {
+            $this->report->setStatusId(StatusTable::DECLINED);
+
+            $this->report->setNameComment(ArrayHelper::getValue($_REQUEST, 'commentMain.NAME'));
+            $this->report->setNameSezComment(ArrayHelper::getValue($_REQUEST, 'commentMain.NAME_SEZ'));
+            $this->report->updateFieldComments(ArrayHelper::getValue($_REQUEST, 'comment', []));
+
+            return $this->report->save();
+        }
+
+        $this->report->setNameComment(null);
+        $this->report->setNameSezComment(null);
+
+        return $this->report->save();
     }
 
     public function show()
     {
         global $APPLICATION;
 
-        if (!$this->hasReadRights()) {
+        $context = new \CAdminContextMenu([current($this->getMenu())]);
+        $context->Show();
+
+        if (!$this->hasReadRights() || empty($this->data['ID'])) {
             $this->addErrors(Loc::getMessage('KELNIK_ADMIN_HELPER_ACCESS_FORBIDDEN'));
             $this->showMessages();
 
