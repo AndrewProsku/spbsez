@@ -32,7 +32,7 @@ ErrorDocument 404 /404.php
     <FilesMatch "\.(js|css|txt)$">
         Header set Cache-Control "max-age=604800"
     </FilesMatch>
-    <FilesMatch "\.(flv|swf|ico|gif|jpg|jpeg|png|webp)$">
+    <FilesMatch "\.(flv|swf|ico|gif|jpg|jpeg|png|webp|svg)$">
         Header set Cache-Control "max-age=604800"
     </FilesMatch>
 </IfModule>
