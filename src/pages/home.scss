@@ -1279,6 +1279,11 @@ $path: '/images/home/';
     }
 }
 
+.l-home-plots__all-map .l-home-plots__all-map-icon .b-tooltip {
+    font-size: 14px;
+    line-height: 21px;
+}
+
 .l-home-plots__all-map .lang-ch .b-tooltip {
     @media #{$laptop} {
         top: -40px;
@@ -1451,14 +1456,37 @@ $path: '/images/home/';
     }
 }
 
+.plots-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+
+    &:hover {
+        .plots-icon-path {
+            fill: $white;
+        }
+    }
+}
+
+/*.plots-icon-circle {
+    display: none;
+}*/
+
+.plots-icon:not(:hover) {
+    .plots-icon-circle {
+        fill: $white;
+    }
+}
+
+
 .l-home-plots__all-map-icon {
     width: 40px;
     height: 40px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     position: absolute;
     z-index: 1;
+    background-color: $white;
+    border-radius: 100%;
+    border: 1px solid $light-grey;
 
     &:after {
         content: "";
@@ -1474,6 +1502,7 @@ $path: '/images/home/';
         background-color: rgba($blue, 0.1);
         visibility: hidden;
         opacity: 0;
+        pointer-events: none;
 
         @media #{$tablet-portrait} {
             width: 47px;
@@ -1488,13 +1517,12 @@ $path: '/images/home/';
     }
 
     &.icon-port {
-        background-image: url($path + 'port.svg');
         top: 36%;
         left: 44%;
-
-        &:hover {
-            background-image: url($path + 'port_hover.svg');
-        }
+        // background-image: url($path + 'port.svg');
+        // &:hover {
+        //    background-image: url($path + 'port_hover.svg');
+        // }
 
         @media #{$tablet-landscape} {
             top: 32%;
@@ -1512,11 +1540,11 @@ $path: '/images/home/';
     }
 
     &.icon-rialway-station {
-        background-image: url($path + 'train.svg');
-
-        &:hover {
-            background-image: url($path + 'train_hover.svg');
-        }
+        // background-image: url($path + 'train.svg');
+        //
+        // &:hover {
+        //    background-image: url($path + 'train_hover.svg');
+        // }
 
         &.icon-rialway-station-one {
             top: 44%;
@@ -1569,14 +1597,13 @@ $path: '/images/home/';
     }
 
     &.icon-center-city {
-        background-image: url($path + 'center-city.svg');
         top: 37%;
         left: 66%;
         z-index: 2;
-
-        &:hover {
-            background-image: url($path + 'center-city_hover.svg');
-        }
+        // background-image: url($path + 'center-city.svg');
+        // &:hover {
+        //    background-image: url($path + 'center-city_hover.svg');
+        // }
 
         @media #{$tablet-landscape} {
             top: 34%;
@@ -1599,13 +1626,13 @@ $path: '/images/home/';
     }
 
     &.icon-airport {
-        background-image: url($path + 'airport.svg');
         top: 67%;
         left: 72%;
-
-        &:hover {
-            background-image: url($path + 'airport_hover.svg');
-        }
+        // background-image: url($path + 'airport.svg');
+        //
+        // &:hover {
+        //    background-image: url($path + 'airport_hover.svg');
+        // }
 
         @media #{$tablet-landscape} {
             top: 68%;
@@ -1629,6 +1656,7 @@ $path: '/images/home/';
     }
 
     &:hover {
+
         &:after {
             visibility: visible;
             opacity: 1;
