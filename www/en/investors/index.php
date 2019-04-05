@@ -45,7 +45,7 @@ $APPLICATION->SetTitle("For Investors");
             ); ?>
         </div>
     </div>
-    <div class="l-investors__privileges" id="investors-privileges">
+    <div class="l-investors__privileges">
         <div class="b-investors-info b-investors-info_big_title">
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -58,7 +58,7 @@ $APPLICATION->SetTitle("For Investors");
             ); ?>
         </div>
     </div>
-    <div class="l-investors__taxes">
+    <div class="l-investors__taxes" id="investors-privileges">
         <div class="b-income-tax">
             <div class="b-income-tax__top">
                 <? $APPLICATION->IncludeComponent(
