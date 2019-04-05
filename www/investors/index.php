@@ -172,7 +172,7 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__resident">
+    <div class="l-investors__resident"  id="investors-resident">
         <div class="b-invest-resident">
             <div id="investors-resident"></div>
 
