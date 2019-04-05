@@ -42,5 +42,5 @@
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="b-disclosure-block__note">Закупки <br>ОЭЗ Санкт-Петербурга смотрите на сайте — <a class="b-link-line" href="http://zakupki.gov.ru" target="_blank">zakupki.gov.ru</a></div>
+    <div class="b-disclosure-block__note">Закупки <br>АО&nbsp;«ОЭЗ&nbsp;«Санкт&#8209;Петербург» смотрите на сайте — <a class="b-link-line" href="http://zakupki.gov.ru" target="_blank">zakupki.gov.ru</a></div>
 </div>
