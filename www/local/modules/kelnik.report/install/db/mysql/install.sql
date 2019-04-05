@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `kelnik_report` (
   `DATE_CREATED` datetime NOT NULL,
   `DATE_MODIFIED` datetime NOT NULL,
   `IS_LOCKED` enum('Y','N') NOT NULL DEFAULT 'N',
+  `IS_PRE_FILLED` enum('Y','N') NOT NULL DEFAULT 'N',
   `NAME` varchar(255) DEFAULT NULL,
   `NAME_SEZ` varchar(255) DEFAULT NULL,
   `NAME_COMMENT` varchar(255) DEFAULT NULL,
@@ -25,13 +26,15 @@ CREATE TABLE IF NOT EXISTS `kelnik_report_fields` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `REPORT_ID` int(11) unsigned NOT NULL DEFAULT '0',
   `GROUP_ID` int(11) unsigned NOT NULL DEFAULT '0',
+  `IS_PRE_FILLED` enum('Y','N') NOT NULL DEFAULT 'N',
   `NAME` varchar(100) DEFAULT NULL,
   `VALUE` varchar(1000) DEFAULT NULL,
   `COMMENT` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `REPORT_ID` (`REPORT_ID`),
   KEY `GROUP_ID` (`GROUP_ID`),
-  KEY `NAME` (`NAME`)
+  KEY `NAME` (`NAME`),
+  KEY `IS_PRE_FILLED` (`IS_PRE_FILLED`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 CREATE TABLE IF NOT EXISTS `kelnik_report_fields_group` (

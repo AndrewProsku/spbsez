@@ -36,3 +36,4 @@ $MESS['KELNIK_API_REPORT_FILE_UPLOAD_ERROR'] = 'Не удалось загруз
 $MESS['KELNIK_API_REPORT_FILE_DELETE_ERROR'] = 'Информация о файле на найдена';
 $MESS['KELNIK_API_REPORT_FILL_ERROR'] = 'Отчет заполнен не полностью';
 $MESS['KELNIK_API_REPORT_LOAD_ERROR'] = 'Отчет закрыт для редактирования';
+$MESS['KELNIK_API_REPORT_CONFIRM_FORM_ERROR'] = 'Не переданы поля';

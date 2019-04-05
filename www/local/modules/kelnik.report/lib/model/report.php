@@ -4,6 +4,7 @@ namespace Kelnik\Report\Model;
 
 
 use Bitrix\Main\Application;
+use Bitrix\Main\ORM\Query\Query;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
@@ -24,6 +25,7 @@ use Kelnik\UserData\Profile\Profile;
  * @method Report setName(string $name)
  * @method Report setNameSez(string $name)
  * @method Report setIsLocked(bool $state)
+ * @method Report setIsPreFilled(bool $state)
  * @method Report setNameComment(string $comment)
  * @method Report setNameSezComment(string $comment)
  *
@@ -39,6 +41,7 @@ use Kelnik\UserData\Profile\Profile;
  * @method string getNameSez()
  * @method bool getIsLocked()
  * @method int getCompanyId()
+ * @method bool getIsPreFilled()
  * @method \Bitrix\Main\Type\DateTime getDateModified()
  * @method \Bitrix\Main\Type\DateTime getDateCreated()
  * @method Fields getFields()
@@ -62,29 +65,35 @@ class Report extends EO_Reports
      * Заблокировать возможность изменения записи всем, кроме автора.
      * Время блокировки в @see ReportsTable::LOCK_TIME_LEFT
      *
-     * @return \Bitrix\Main\ORM\Data\AddResult
-     * @throws \Bitrix\Main\ObjectException
+     * @return \Bitrix\Main\ORM\Data\AddResult|bool
      */
     public function lock()
     {
-        return $this->setIsLocked(true)
-                    ->setModifiedBy(ReportsTable::getUserId())
-                    ->setDateModified(new DateTime())
-                    ->save();
+        try {
+            return $this->setIsLocked(true)
+                ->setModifiedBy(ReportsTable::getUserId())
+                ->setDateModified(new DateTime())
+                ->save();
+        } catch (\Exception $e){
+            return false;
+        }
     }
 
     /**
      * Снять блокировку с отчета
      *
-     * @return \Bitrix\Main\ORM\Data\AddResult
-     * @throws \Bitrix\Main\ObjectException
+     * @return \Bitrix\Main\ORM\Data\AddResult|bool
      */
     public function unLock()
     {
-        return $this->setIsLocked(false)
-                    ->setModifiedBy(ReportsTable::getUserId())
-                    ->setDateModified(new DateTime())
-                    ->save();
+        try {
+            return $this->setIsLocked(false)
+                        ->setModifiedBy(ReportsTable::getUserId())
+                        ->setDateModified(new DateTime())
+                        ->save();
+        } catch (\Exception $e){
+            return false;
+        }
     }
 
     /**
@@ -189,6 +198,23 @@ class Report extends EO_Reports
         return true;
     }
 
+    /**
+     * Помечаем отчет как предзаполненный
+     *
+     * @return \Bitrix\Main\ORM\Data\AddResult|bool
+     */
+    public function markAsPreFilled()
+    {
+        try {
+            return $this->setIsPreFilled(true)
+                ->setModifiedBy(ReportsTable::getUserId())
+                ->setDateModified(new DateTime())
+                ->save();
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
     public function updateFieldComments(array $list)
     {
         if (!$list) {
@@ -209,9 +235,9 @@ class Report extends EO_Reports
 
 
             Application::getConnection()->query($sql =
-                "UPDATE `" . ReportFieldsTable::getTableName() . "` " .
-                "SET `COMMENT` = ELT(FIELD(`ID`, " . implode(', ', array_keys($list)) . "), " . implode(', ', array_values($list)) . ") " .
-                "WHERE `ID` IN (" . implode(', ', array_keys($list)) . ") AND `REPORT_ID` = " . $this->getId()
+                'UPDATE `' . ReportFieldsTable::getTableName() . '` ' .
+                'SET `COMMENT` = ELT(FIELD(`ID`, ' . implode(', ', array_keys($list)) . '), ' . implode(', ', array_values($list)) . ') ' .
+                'WHERE `ID` IN (' . implode(', ', array_keys($list)) . ') AND `REPORT_ID` = ' . $this->getId()
             );
         } catch (\Exception $e) {
             return false;
@@ -278,8 +304,8 @@ class Report extends EO_Reports
     }
 
     /**
-     * Содание ссылки на отчет.
-     * Если отчет не существует, то создаем временную ссылку с указаним типа.
+     * Создание ссылки на отчет.
+     * Если отчет не существует, то создаем временную ссылку с указанием типа.
      *
      * @return string
      */
@@ -318,6 +344,189 @@ class Report extends EO_Reports
         $res['TYPE_NAME'] = $this->getTypeName();
 
         return $res;
+    }
+
+    public function copyDataFromPrevReport()
+    {
+        $lastReportId = $this->getLastReportId();
+
+        if (!$lastReportId) {
+            $this->markAsPreFilled();
+
+            return false;
+        }
+
+        $src = $this->getReportData($lastReportId);
+
+        if ($src['fields'] || $src['groups']) {
+            $dst = $this->getReportData($this->getId());
+            $sqlHelper = Application::getConnection()->getSqlHelper();
+
+            $values = [];
+
+            foreach ($src['fields'] as $fieldName => $group) {
+                foreach ($group as $groupId => $field) {
+
+                    $groupId = (int) $groupId;
+
+                    if ($groupId) {
+                        $groupId = $this->getDestinationGroupId($src['groups'], $dst['groups'], $groupId);
+                    }
+
+                    $rowId = ArrayHelper::getValue($dst, 'fields.' . $fieldName . '.' . $groupId . '.ID');
+                    $rowId = $rowId ? $sqlHelper->convertToDbInteger($rowId) : 'NULL';
+
+                    $val = ArrayHelper::getValue(
+                        $dst,
+                        'fields.' . $fieldName . '.' . $groupId . '.VALUE',
+                        $field['VALUE']
+                    );
+
+                    if (in_array(
+                            $field['NAME'],
+                            [
+                                ReportFieldsTable::FIELD_CONSTRUCTION_FILE,
+                                ReportFieldsTable::FIELD_CONSTRUCTION_DATE
+                            ]
+                        )
+                    ) {
+                        $val = 'NULL';
+                    }
+
+                    $values[] = '(' .
+                                $rowId . ', ' .
+                                $sqlHelper->convertToDbInteger($this->getId()) . ', ' .
+                                $sqlHelper->convertToDbInteger($groupId) . ', ' .
+                                $sqlHelper->convertToDbString(
+                                    (int) $rowId ? ReportFieldsTable::NO : ReportFieldsTable::YES
+                                ) . ', ' .
+                                $sqlHelper->convertToDbString($field['NAME']) . ', ' .
+                                $sqlHelper->convertToDbString($val) .
+                                ')';
+                }
+            }
+
+            if ($values) {
+                try {
+                    Application::getConnection()->query(
+                        'REPLACE INTO `' . ReportFieldsTable::getTableName() . '` (`ID`, `REPORT_ID`, `GROUP_ID`, `IS_PRE_FILLED`, `NAME`, `VALUE`)' .
+                        'VALUES ' . implode(', ', $values)
+                    );
+                } catch (\Exception $e) {
+                }
+            }
+        }
+
+        $this->markAsPreFilled();
+
+        return true;
+    }
+
+    protected function getDestinationGroupId(array $src, array &$dst, int $groupId)
+    {
+        $group = ArrayHelper::getValue($src, $groupId);
+
+        $filter = function($el) use ($group) {
+            return $el['TYPE'] == $group['TYPE'] && $el['FORM_NUM'] = $group['FORM_NUM'];
+        };
+
+        $srcArr = array_values(array_filter($src, $filter));
+        $dstArr = array_values(array_filter($dst, $filter));
+
+        $groupIdIndex = array_search($groupId, array_column($srcArr, 'ID'));
+
+        if (isset($dstArr[$groupIdIndex])) {
+            return (int) ArrayHelper::getValue($dstArr, $groupIdIndex . '.ID');
+        }
+
+        try {
+            $res = ReportFieldsGroupTable::add([
+                'REPORT_ID' => $this->getId(),
+                'FORM_NUM' => $group['FORM_NUM'],
+                'TYPE' => $group['TYPE']
+            ]);
+        } catch (\Exception $e) {
+            return 0;
+        }
+
+        $dst[$res->getId()] = [
+            'ID' => $res->getId(),
+            'TYPE' => $group['TYPE'],
+            'FORM_NUM' => $group['FORM_NUM']
+        ];
+
+        return $res->getId();
+    }
+
+    protected function getReportData($reportId)
+    {
+        if (!$reportId) {
+            return [];
+        }
+
+        $res = [
+            'fields' => [],
+            'groups' => []
+        ];
+
+        try {
+            $fields = ReportFieldsTable::getList([
+                'select' => ['*', 'GROUP_INFO_' => 'GROUP'],
+                'filter' => [
+                    '=REPORT_ID' => $reportId
+                ],
+                'order' => [
+                    'GROUP_ID' => 'ASC',
+                    'ID' => 'ASC'
+                ]
+            ])->fetchAll();
+        } catch (\Exception $e) {
+            return $res;
+        }
+
+        if (!$fields) {
+            return $res;
+        }
+
+        foreach ($fields as $field) {
+            if ($field['GROUP_ID']) {
+                $res['groups'][$field['GROUP_ID']] = [
+                    'ID' => $field['GROUP_ID'],
+                    'TYPE' => $field['GROUP_INFO_TYPE'],
+                    'FORM_NUM' => $field['GROUP_INFO_FORM_NUM']
+                ];
+            }
+
+            $res['fields'][$field['NAME']][$field['GROUP_ID']] = [
+                'ID' => $field['ID'],
+                'NAME' => $field['NAME'],
+                'VALUE' => $field['VALUE']
+            ];
+        }
+
+        return $res;
+    }
+
+    protected function getLastReportId()
+    {
+        try {
+            return (int) ArrayHelper::getValue(
+                ReportsTable::getRow([
+                    'select' => ['ID'],
+                    'filter' => [
+                        '=COMPANY_ID' => $this->getCompanyId(),
+                        '=STATUS_ID' => StatusTable::DONE,
+                        '=IS_PRE_FILLED' => ReportsTable::YES
+                    ],
+                    'order' => [
+                        'YEAR' => 'DESC'
+                    ]
+                ]),
+                'ID'
+            );
+        } catch (\Exception $e) {
+            return 0;
+        }
     }
 
     /**
@@ -407,7 +616,7 @@ class Report extends EO_Reports
                     'id' => $id,
                     $valField => $val,
                     'error' => $error,
-                    //'isPrefilled' => true
+                    'isPreFilled' => self::getFieldValue($values, $id, 0, 'IS_PRE_FILLED')
                 ];
             }
 

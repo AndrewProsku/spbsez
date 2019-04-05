@@ -55,10 +55,22 @@ class ReportFieldsGroupTable extends DataManager
                 'REPORT',
                 ReportsTable::class,
                 Join::on('this.REPORT_ID', 'ref.ID')
-            ))->configureJoinType('INNER')
+            ))->configureJoinType('INNER'),
+
+            (new Reference(
+                'FIELDS',
+                ReportFieldsTable::class,
+                Join::on('this.ID', 'ref.GROUP_ID')
+            ))->configureJoinType('LEFT')
         ];
     }
 
+    /**
+     * Соответвтсвие группы и формы.
+     * Группы могут быть заведенны в определенных формах
+     *
+     * @return array
+     */
     public static function getGroupFields()
     {
         return [

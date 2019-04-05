@@ -76,6 +76,7 @@ class ReportsEditHelper extends AdminEditHelper
         $this->report->setStatusId( StatusTable::DONE);
         $this->report->setDateModified(new DateTime());
         $this->report->setModifiedBy($USER->GetID());
+        $this->report->setIsLocked(false);
 
         if (!empty($_REQUEST['decline'])) {
             $this->report->setStatusId(StatusTable::DECLINED);
