@@ -25,6 +25,18 @@ ErrorDocument 404 /404.php
   DirectoryIndex index.php index.html
 </IfModule>
 
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age=43200"
+    </FilesMatch>
+    <FilesMatch "\.(js|css|txt)$">
+        Header set Cache-Control "max-age=604800"
+    </FilesMatch>
+    <FilesMatch "\.(flv|swf|ico|gif|jpg|jpeg|png|webp)$">
+        Header set Cache-Control "max-age=604800"
+    </FilesMatch>
+</IfModule>
+
 <IfModule mod_expires.c>
   ExpiresActive on
   ExpiresByType image/jpeg "access plus 3 day"
