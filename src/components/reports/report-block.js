@@ -373,6 +373,17 @@ class ReportBlock {
             }
         });
 
+        input.addEventListener('keyup', () => {
+            if (Utils.keyExist(input.dataset, 'prefilled')) {
+                delete input.dataset.prefilled;
+            }
+
+            input.removeEventListener('keyup', () => {
+            });
+
+            this.sendNewValue(event.target);
+        });
+
         input.addEventListener('change', (event) => {
             delete input.dataset.prefilled;
             this.sendNewValue(event.target);
@@ -443,7 +454,7 @@ class ReportBlock {
                         case 'radio': {
                             if (fieldData.error) {
                                 this.handleErrorField(input, fieldData.error, 'radio');
-                            } else if (fieldData.isPrefilled) {
+                            } else if (fieldData.isPreFilled) {
                                 input.dataset.prefilled = '';
                             }
                             input.checked = fieldData.checked;
@@ -452,7 +463,7 @@ class ReportBlock {
                         case 'select-one': {
                             if (fieldData.error) {
                                 this.handleErrorField(input, fieldData.error);
-                            } else if (fieldData.isPrefilled && !input.closest(`.${this.permissionFormClass}`)) {
+                            } else if (fieldData.isPreFilled && !input.closest(`.${this.permissionFormClass}`)) {
                                 input.dataset.prefilled = '';
                             }
                             input.value = fieldData.value;
@@ -476,7 +487,7 @@ class ReportBlock {
                         default: {
                             if (fieldData.error) {
                                 this.handleErrorField(input, fieldData.error);
-                            } else if (fieldData.isPrefilled) {
+                            } else if (fieldData.isPreFilled) {
                                 input.closest('.b-input-block').classList.add(this.untouchedIputClass);
                                 input.dataset.prefilled = '';
                             }

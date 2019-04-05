@@ -88,6 +88,11 @@ class ReportsTable extends DataManager
                 ->configureDefaultValue(self::NO)
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_IS_LOCKED')),
 
+            (new BooleanField('IS_PRE_FILLED'))
+                ->configureValues(self::NO, self::YES)
+                ->configureDefaultValue(self::NO)
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_IS_PRE_FILLED')),
+
             (new StringField('NAME'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME')),
 
@@ -261,7 +266,7 @@ class ReportsTable extends DataManager
     /**
      * @param int $companyId
      * @param int $id
-     * @param bool $getFields
+     *
      * @return Report|bool
      */
     public static function getReport(int $companyId, int $id)

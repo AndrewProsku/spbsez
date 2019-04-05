@@ -457,9 +457,19 @@ class ReportForm {
 
                     approveFormButton.addEventListener('click', () => {
                         const formID = approveFormButton.dataset.formId;
-                        const dataToSend = `a=confirmForm&formID=${formID}`;
+                        const inputs = [];
 
-                        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+                        formBlocks.forEach((el) => {
+                            if (!Utils.keyExist(el.dataset, 'prefilled')) {
+                                return;
+                            }
+
+                            el.querySelectorAll('input[data-prefilled]').forEach((inp) => {
+                                inputs.push(inp.name);
+                            });
+                        });
+
+                        Utils.send(`a=confirmForm&id=${that.reportId}&fields=${JSON.stringify(inputs)}`, that.baseUrl, {
                             success(response) {
                                 if (response.request.status === that.SUCCESS_STATUS) {
                                     mediator.publish('formApproved', Number(formID));

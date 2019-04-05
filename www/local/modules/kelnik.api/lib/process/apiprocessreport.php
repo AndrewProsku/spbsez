@@ -145,9 +145,7 @@ class ApiProcessReport extends ApiProcessAbstract
         $fields = $this->report->getFields()->getAssocArray();
 
         if (false !== strpos($field, '[')) {
-            preg_match('!(?P<field>[a-z0-9\-]+)\[(?P<parent>\d+)\]!si', $field, $matches);
-            $groupId = (int) ArrayHelper::getValue($matches, 'parent', 0);
-            $field = ArrayHelper::getValue($matches, 'field');
+            self::parseFieldName($field, $groupId);
         }
 
         if ($field == ReportFieldsTable::FIELD_CONSTRUCTION_FILE) {
@@ -163,6 +161,7 @@ class ApiProcessReport extends ApiProcessAbstract
         $data = [
             'NAME' => $field,
             'GROUP_ID' => $groupId,
+            'IS_PRE_FILLED' => ReportFieldsTable::NO,
             'VALUE' => $val
         ];
 
@@ -288,6 +287,57 @@ class ApiProcessReport extends ApiProcessAbstract
     }
 
     /**
+     * Подтверждение заполнения полей формы
+     *
+     * @param array $request
+     * @return bool
+     */
+    protected function processConfirmForm(array $request)
+    {
+        $fields = json_decode(ArrayHelper::getValue($request, 'fields', ''));
+
+        if (!$fields) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_REPORT_CONFIRM_FORM_ERROR');
+
+            return false;
+        }
+
+        $filter = [];
+        $sqlHelper = Application::getConnection()->getSqlHelper();
+
+        foreach ($fields as $field) {
+            $groupId = 0;
+            if (false !== strpos($field, '[')) {
+                self::parseFieldName($field, $groupId);
+            }
+
+            $filter[] = '(' .
+                            implode(
+                                ' AND ',
+                                [
+                                '`REPORT_ID` = ' . $sqlHelper->convertToDbInteger($this->id) ,
+                                '`GROUP_ID` = ' . $sqlHelper->convertToDbInteger($groupId),
+                                '`NAME` = ' . $sqlHelper->convertToDbString($field)
+                                ]
+                            ) .
+                        ')';
+        }
+
+        try {
+            Application::getConnection()->query(
+                'UPDATE `' . ReportFieldsTable::getTableName() . '` ' .
+                'SET `IS_PRE_FILLED` = ' . $sqlHelper->convertToDbString(ReportFieldsTable::NO) . ' ' .
+                'WHERE ' . implode(' OR ', $filter)
+            );
+        } catch (\Exception $e) {
+            $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Отчет заполнен, проверяем так ли это и переводим в статус - проверка.
      * Пользователя перекидываем обратно на список отчетов
      *
@@ -347,5 +397,13 @@ class ApiProcessReport extends ApiProcessAbstract
             $fileData['MODULE_ID'],
             true
         );
+    }
+
+    protected static function parseFieldName(&$field, &$groupId)
+    {
+        preg_match('!(?P<field>[a-z0-9\-]+)\[(?P<parent>\d+)\]!si', $field, $matches);
+
+        $groupId = (int) ArrayHelper::getValue($matches, 'parent', 0);
+        $field = ArrayHelper::getValue($matches, 'field');
     }
 }

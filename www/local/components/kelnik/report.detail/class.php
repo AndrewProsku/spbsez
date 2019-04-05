@@ -123,6 +123,9 @@ class ReportDetail extends Bbc\Basis
         $this->arResult['EDITABLE'] = $report->canEdit();
 
         if ($this->arResult['EDITABLE']) {
+            if (!$report->getIsPreFilled()) {
+                $report->copyDataFromPrevReport();
+            }
             $report->lock();
         }
 

@@ -38,10 +38,15 @@ $i = 1;
             </div>
         <?php endif; ?>
         <?php foreach ($block['fields'] as $field): ?>
-            <?php if (!isset($field['id']) || !empty($field['excludeAdmin'])): continue; endif; ?>
+            <?php
+                if (!isset($field['id']) || !empty($field['excludeAdmin'])):
+                    continue;
+                endif;
+                $val = $this->getValue($field['id']);
+            ?>
             <div class="b-input-block<?= $addCss; ?>">
                 <div class="row-header"><?= $field['title']; ?></div>
-                <div class="row-value"><?= $this->getValue($field['id']); ?></div>
+                <div class="row-value"><?= $val ? $val : '&nbsp;'; ?></div>
                 <div><input type="text" name="comment[<?= $this->getValue($field['id'], 0, 'ID'); ?>]" value="<?= $this->getValueComment($field['id']); ?>" placeholder="Комментарий"></div>
             </div>
         <?php endforeach; ?>

@@ -10,6 +10,7 @@ $MESS['KELNIK_REPORT_YEAR'] = 'Год';
 $MESS['KELNIK_REPORT_CREATED_BY'] = 'Создано';
 $MESS['KELNIK_REPORT_MODIFIED_BY'] = 'Изменено';
 $MESS['KELNIK_REPORT_IS_LOCKED'] = 'Редактируется';
+$MESS['KELNIK_REPORT_IS_PRE_FILLED'] = 'Заполнен данными из предыдущего отчета';
 $MESS['KELNIK_REPORT_COMPANY'] = 'Резидент';
 
 $MESS['KELNIK_REPORT_TYPE_1'] = '1 квартал';

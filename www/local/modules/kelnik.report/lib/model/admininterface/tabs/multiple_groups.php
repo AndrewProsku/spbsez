@@ -16,9 +16,10 @@ if (!$groups) {
         <?php foreach ($groups as $group): ?>
             <div class="b-input-group">
                 <?php foreach ($block['multiple']['fields'] as $field): ?>
+                    <?php $val = $this->getValue($field['id'], $group); ?>
                     <div class="b-input-block">
                         <div class="row-header"><?= $field['title']; ?></div>
-                        <div class="row-value"><?= $this->getValue($field['id'], $group); ?></div>
+                        <div class="row-value"><?= $val ? $val : '&nbsp;'; ?></div>
                         <div><input type="text" name="comment[<?= $this->getValue($field['id'], $group, 'ID'); ?>]" value="<?= $this->getValueComment($field['id'], $group); ?>" placeholder="Комментарий"></div>
                     </div>
                 <?php endforeach; ?>

@@ -3,6 +3,7 @@
 namespace Kelnik\Report\Model;
 
 use Bitrix\Main\Application;
+use Bitrix\Main\Entity\BooleanField;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Fields\IntegerField;
 use Bitrix\Main\ORM\Fields\Relations\Reference;
@@ -60,6 +61,9 @@ class ReportFieldsTable extends DataManager
 
             (new IntegerField('GROUP_ID'))
                 ->configureDefaultValue(0),
+            (new BooleanField('IS_PRE_FILLED'))
+                ->configureValues(self::NO, self::YES)
+                ->configureDefaultValue(self::NO),
             (new StringField('NAME'))
                 ->configureSize(100),
             (new StringField('VALUE'))
@@ -71,7 +75,13 @@ class ReportFieldsTable extends DataManager
                 'REPORT',
                 ReportsTable::class,
                 Join::on('this.REPORT_ID', 'ref.ID')
-            ))->configureJoinType('INNER')
+            ))->configureJoinType('INNER'),
+
+            (new Reference(
+                'GROUP',
+                ReportFieldsGroupTable::class,
+                Join::on('this.GROUP_ID', 'ref.ID')
+            ))->configureJoinType('LEFT')
         ];
     }
 
