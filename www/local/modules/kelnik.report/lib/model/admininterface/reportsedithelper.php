@@ -2,7 +2,6 @@
 namespace Kelnik\Report\Model\AdminInterface;
 
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ORM\Data\UpdateResult;
 use Bitrix\Main\Type\DateTime;
 use CAdminTabControl;
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
@@ -98,8 +97,7 @@ class ReportsEditHelper extends AdminEditHelper
     {
         global $APPLICATION;
 
-        $context = new \CAdminContextMenu([current($this->getMenu())]);
-        $context->Show();
+        (new \CAdminContextMenu([current($this->getMenu())]))->Show();
 
         if (!$this->hasReadRights() || empty($this->data['ID'])) {
             $this->addErrors(Loc::getMessage('KELNIK_ADMIN_HELPER_ACCESS_FORBIDDEN'));

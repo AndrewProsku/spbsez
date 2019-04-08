@@ -5,7 +5,6 @@ namespace Kelnik\Report\Model\AdminInterface;
 use Bitrix\Main\Context;
 use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Main\Localization\Loc;
-use function GuzzleHttp\Psr7\str;
 use Kelnik\AdminHelper\Helper\AdminBaseHelper;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
@@ -15,7 +14,7 @@ use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(
     __DIR__ . DIRECTORY_SEPARATOR
-    . '..' . DIRECTORY_SEPARATOR . 'reports.php'
+    . '..' . DIRECTORY_SEPARATOR . 'reportstable.php'
 );
 
 class ReportsTreeHelper extends AdminBaseHelper
@@ -50,8 +49,6 @@ class ReportsTreeHelper extends AdminBaseHelper
                 )
             );
         }
-
-        Loc::loadMessages(__FILE__);
 
         \CJSCore::RegisterExt(
             'treeGrid',
