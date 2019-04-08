@@ -378,6 +378,7 @@ class ReportBlock {
                 delete input.dataset.prefilled;
             }
 
+            // eslint-disable-next-line no-empty-function
             input.removeEventListener('keyup', () => {
             });
 

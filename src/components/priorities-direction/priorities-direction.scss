@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+
     @media #{$tablet-portrait} {
         @include column(10, 32);
         @include post(1, 32);
@@ -30,9 +30,7 @@
     }
 
     @media #{$tablet-landscape} {
-        @include column(10, 32);
-        @include post(1, 32);
-        margin-bottom: 37px;
+        @include column(7, 32);
     }
 
     @media #{$laptop} {
@@ -69,7 +67,7 @@
     width: 80px;
     height: 80px;
     margin-right: 20px;
-    
+
     @media #{$tablet-portrait} {
         @include margin-level(bottom, dark-yellow);
         min-width: 120px;
@@ -96,7 +94,7 @@
 .b-priorities-direction__residents {
     @include font-size(p3);
     display: none;
-    
+
     @media #{$tablet-portrait} {
         display: block;
     }
