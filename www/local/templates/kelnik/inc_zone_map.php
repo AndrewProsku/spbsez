@@ -7,7 +7,7 @@
                     ? LANG_DIR . 'infrastructure/novoorlovskaya/'
                     : 'javascript:;';
 ?>
-<div<?php if(LANG_DIR == SezLang::CHINESE_DIR): ?> id="area" class="l-home-plots" <?php else: ?> class="l-home-plots j-home-plots"<?php endif; ?>>
+<div id="area"<?php if(LANG_DIR == SezLang::CHINESE_DIR): ?> class="l-home-plots" <?php else: ?> class="l-home-plots j-home-plots"<?php endif; ?>>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" style="border: 0 !important; clip: rect(0 0 0 0) !important; height: 1px !important; margin: -1px !important; overflow: hidden !important; padding: 0 !important; position: absolute !important; width: 1px !important;">
         <defs>
             <linearGradient id="plots-gradient" x1="30.6" y1="50.66" x2="49.4" y2="31.86" gradientUnits="userSpaceOnUse">
