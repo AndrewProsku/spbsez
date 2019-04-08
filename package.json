@@ -31,11 +31,10 @@
     "add": "node ./cli/add.js"
   },
   "browserslist": [
-    "ie >= 10",
+    "ie >= 11",
     "ff >= 28",
     "Chrome >= 21",
-    "Safari >= 7",
-    "Opera >= 12"
+    "Safari >= 7"
   ],
   "config": {
     "ghooks": {
