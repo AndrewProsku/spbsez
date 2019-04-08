@@ -32,9 +32,14 @@
     @include padding-level(bottom, pink);
     width: 100%;
 
-    @media #{$fullhd} {
+    @media #{$laptop} {
         @include prefix(3, 36);
-        @include suffix(3, 36);
+        @include suffix(1, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
+        @include suffix(1, 36);
     }
 }
 
