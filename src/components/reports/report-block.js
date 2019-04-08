@@ -373,17 +373,17 @@ class ReportBlock {
             }
         });
 
-        input.addEventListener('keyup', () => {
-            if (Utils.keyExist(input.dataset, 'prefilled')) {
+        if (Utils.keyExist(input.dataset, 'prefilled')) {
+            input.addEventListener('keyup', (event) => {
                 delete input.dataset.prefilled;
-            }
 
-            // eslint-disable-next-line no-empty-function
-            input.removeEventListener('keyup', () => {
+                // eslint-disable-next-line no-empty-function
+                input.removeEventListener('keyup', () => {
+                });
+
+                this.sendNewValue(event.target);
             });
-
-            this.sendNewValue(event.target);
-        });
+        }
 
         input.addEventListener('change', (event) => {
             delete input.dataset.prefilled;
@@ -406,6 +406,7 @@ class ReportBlock {
 
             formData.append('a', 'update');
             formData.append('id', that.reportId);
+            formData.append('formNum', that.formID);
             formData.append('field', input.id);
 
             Utils.send(formData, that.baseUrl, {
@@ -425,7 +426,7 @@ class ReportBlock {
         fileInputBlock.querySelector('.b-input-file__delete').addEventListener('click', (event) => {
             event.preventDefault();
             const permissionForm = event.target.closest(`.${that.permissionFormClass}`);
-            const dataToSend = `a=delFile&id=${this.reportId}&form=${this.formID}` +
+            const dataToSend = `a=delFile&id=${this.reportId}&formNum=${this.formID}` +
                 `&parent=${permissionForm.dataset.stageId}`;
 
             Utils.send(dataToSend, this.baseUrl, {
@@ -536,7 +537,7 @@ class ReportBlock {
         }
 
         errorBlock.querySelector('.b-input-error__confirm').addEventListener('click', () => {
-            const dataToSend = `a=update&id=${this.reportId}&field=${input.name}&val=${input.value}&clearComment=1`;
+            const dataToSend = `a=update&id=${this.reportId}&formNum=${this.formID}&field=${input.name}&val=${input.value}&clearComment=1`;
             const that = this;
 
             Utils.send(dataToSend, that.baseUrl, {
@@ -659,31 +660,31 @@ class ReportBlock {
     /* eslint-enable max-lines-per-function, max-statements */
 
     sendNewValue(input) {
-        const dataToSend = `a=update&id=${this.reportId}&field=${input.name}&val=${input.value}`;
         const that = this;
 
-        Utils.send(dataToSend, '/api/report/', {
-            success(response) {
-                if (response.request.status !== that.SUCCESS_STATUS) {
-                    return;
+        Utils.send(`a=update&id=${this.reportId}&formNum=${this.formID}&field=${input.name}&val=${input.value}`,
+            '/api/report/', {
+                success(response) {
+                    if (response.request.status !== that.SUCCESS_STATUS) {
+                        return;
+                    }
+
+                    if (input.type === 'radio') {
+                        const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
+
+                        Array.from(checkboxGroup).forEach((checkbox) => {
+                            that.inputsStatus[checkbox.id] = that.getInputStatus(checkbox);
+                        });
+                    } else {
+                        that.inputsStatus[input.id] = that.getInputStatus(input);
+                    }
+
+                    that.setBlockStatus();
+                },
+                error(error) {
+                    console.error(error);
                 }
-
-                if (input.type === 'radio') {
-                    const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
-
-                    Array.from(checkboxGroup).forEach((checkbox) => {
-                        that.inputsStatus[checkbox.id] = that.getInputStatus(checkbox);
-                    });
-                } else {
-                    that.inputsStatus[input.id] = that.getInputStatus(input);
-                }
-
-                that.setBlockStatus();
-            },
-            error(error) {
-                console.error(error);
-            }
-        });
+            });
     }
 
     // ///
@@ -786,7 +787,7 @@ class ReportBlock {
         const that = this;
 
         stageAddButton.addEventListener('click', () => {
-            Utils.send(`a=addGroup&id=${this.reportId}&type=stages&form=${this.formID}`, this.baseUrl, {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=stages&formNum=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -838,7 +839,7 @@ class ReportBlock {
         const that = this;
 
         groupAddButton.addEventListener('click', () => {
-            Utils.send(`a=addGroup&id=${this.reportId}&type=groups&form=${this.formID}`, this.baseUrl, {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=groups&formNum=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -934,7 +935,7 @@ class ReportBlock {
         const that = this;
 
         innovationAddButton.addEventListener('click', () => {
-            Utils.send(`a=addGroup&id=${this.reportId}&type=innovations&form=${this.formID}`, this.baseUrl, {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=innovations&formNum=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;

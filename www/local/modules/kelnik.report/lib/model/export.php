@@ -110,6 +110,17 @@ class Export
         if (!$res) {
             return;
         }
+
+        echo '<pre>';
+
+        foreach ($res as $k => $v) {
+            unset($res[$k]);
+            print_r($v);
+
+//            $this->data['']
+//            $this->data['fields'] = [];
+        }
+        die;
     }
 
     protected function processForm($formNum)

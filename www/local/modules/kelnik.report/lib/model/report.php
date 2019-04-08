@@ -397,6 +397,7 @@ class Report extends EO_Reports
                                 $rowId . ', ' .
                                 $sqlHelper->convertToDbInteger($this->getId()) . ', ' .
                                 $sqlHelper->convertToDbInteger($groupId) . ', ' .
+                                $sqlHelper->convertToDbInteger($field['FORM_NUM']) . ', ' .
                                 $sqlHelper->convertToDbString(
                                     (int) $rowId ? ReportFieldsTable::NO : ReportFieldsTable::YES
                                 ) . ', ' .
@@ -409,7 +410,7 @@ class Report extends EO_Reports
             if ($values) {
                 try {
                     Application::getConnection()->query(
-                        'REPLACE INTO `' . ReportFieldsTable::getTableName() . '` (`ID`, `REPORT_ID`, `GROUP_ID`, `IS_PRE_FILLED`, `NAME`, `VALUE`)' .
+                        'REPLACE INTO `' . ReportFieldsTable::getTableName() . '` (`ID`, `REPORT_ID`, `GROUP_ID`, `FORM_NUM`, `IS_PRE_FILLED`, `NAME`, `VALUE`)' .
                         'VALUES ' . implode(', ', $values)
                     );
                 } catch (\Exception $e) {
@@ -500,6 +501,7 @@ class Report extends EO_Reports
             $res['fields'][$field['NAME']][$field['GROUP_ID']] = [
                 'ID' => $field['ID'],
                 'NAME' => $field['NAME'],
+                'FORM_NUM' => $field['FORM_NUM'],
                 'VALUE' => $field['VALUE']
             ];
         }
@@ -616,7 +618,7 @@ class Report extends EO_Reports
                     'id' => $id,
                     $valField => $val,
                     'error' => $error,
-                    'isPreFilled' => self::getFieldValue($values, $id, 0, 'IS_PRE_FILLED')
+                    'isPreFilled' => (bool) self::getFieldValue($values, $id, 0, 'IS_PRE_FILLED')
                 ];
             }
 

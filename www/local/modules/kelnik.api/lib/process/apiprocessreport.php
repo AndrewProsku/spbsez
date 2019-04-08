@@ -126,6 +126,7 @@ class ApiProcessReport extends ApiProcessAbstract
     {
         $groupId = 0;
         $field   = trim(ArrayHelper::getValue($request, 'field'));
+        $formNum = trim(ArrayHelper::getValue($request, 'formNum'));
         $val     = trim(ArrayHelper::getValue($request, 'val'));
 
         // Меняем поля самого отчета
@@ -161,6 +162,7 @@ class ApiProcessReport extends ApiProcessAbstract
         $data = [
             'NAME' => $field,
             'GROUP_ID' => $groupId,
+            'FORM_NUM' => $formNum,
             'IS_PRE_FILLED' => ReportFieldsTable::NO,
             'VALUE' => $val
         ];
@@ -169,7 +171,7 @@ class ApiProcessReport extends ApiProcessAbstract
             $data['COMMENT'] = null;
         }
 
-        $field = $field . '.' . $groupId;
+        $field = implode('.', [$field, $groupId, $formNum]);
 
         try {
             if (isset($fields[$field])) {
@@ -193,7 +195,7 @@ class ApiProcessReport extends ApiProcessAbstract
     protected function processAddGroup(array $request)
     {
         $type = ArrayHelper::getValue($request, 'type');
-        $formNum = ArrayHelper::getValue($request, 'form');
+        $formNum = ArrayHelper::getValue($request, 'formNum');
 
         $typeFormsAllowed = ArrayHelper::getValue(ReportFieldsGroupTable::getGroupFields(), $type, []);
 
