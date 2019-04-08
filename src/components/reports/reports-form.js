@@ -450,7 +450,7 @@ class ReportForm {
                     const approveFormButton = document.createElement('button');
 
                     approveFormButton.classList.add('button', 'button_icon_check');
-                    approveFormButton.classList.add('b-report-approve', `.${that.approveReportClass}`);
+                    approveFormButton.classList.add('b-report-approve', `${that.approveReportClass}`);
                     approveFormButton.setAttribute('type', 'button');
                     approveFormButton.setAttribute('data-form-id', formNumber);
                     approveFormButton.innerHTML = 'Подтвердить данные формы';
