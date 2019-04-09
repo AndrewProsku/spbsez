@@ -1,8 +1,8 @@
 import InputFile from 'components/forms/file';
 import InputTel from 'components/forms/telephone/telephone';
 import Language from '../language';
+import resultTemplate from './success.twig';
 import Select from 'components/forms/select';
-import successTemplate from './success.twig';
 import Utils from '../../common/scripts/utils';
 
 const Lang = new Language();
@@ -32,7 +32,6 @@ class Vacancy {
             phone : false,
             resume: false
         };
-        this.isPhoneTooShort = false;
 
         this.lang = document.querySelector('html').getAttribute('lang') || 'ru';
         this.emptyErrorMessage = Lang.get('validation.required');
@@ -51,8 +50,8 @@ class Vacancy {
     _initElements() {
         this.$form = document.querySelector(`.${this.form}`);
 
-        this.$title = this.$form.querySelector(`.${this.title}`);
-        this.$inputTitle = this.$title.querySelector('select');
+        // this.$title = this.$form.querySelector(`.${this.title}`);
+        // this.$inputTitle = this.$title.querySelector('select');
         this.$fio = this.$form.querySelector(`.${this.fio}`);
         this.$inputFIO = this.$fio.querySelector('input');
         this.$email = this.$form.querySelector(`.${this.email}`);
@@ -120,17 +119,14 @@ class Vacancy {
             Utils.send(formData, '/api/vacancy/', {
                 success(response) {
                     const successStatus = 1;
-                    const failStatus = 0;
 
                     if (response.request.status === successStatus) {
-                        that.showSuccessMessage();
-                    } else if (response.request.status === failStatus) {
-                        const errorMessage = response.request.errors.join('</br>');
+                        that.showResultMessage(response.data);
 
-                        // Нужно подумать как разделть ошибки по типу полей к которым они относятся
-                        that.showErrorMessage(that.$inputResume, errorMessage);
-                        that.errorRepeatPassword(errorMessage);
+                        return true;
                     }
+
+                    return false;
                 },
                 error(error) {
                     console.error(error);
@@ -229,11 +225,11 @@ class Vacancy {
         element.closest(`.${this.formBlockClass}`).classList.remove(this.errorInputClass);
     }
 
-    showSuccessMessage() {
+    showResultMessage(data) {
         const $popupContent = document.querySelector('.b-popup__content');
 
         Utils.clearHtml($popupContent);
-        Utils.insetContent($popupContent, successTemplate());
+        Utils.insetContent($popupContent, resultTemplate(data));
 
         $popupContent.querySelector('.j-vacancy-popup__close').addEventListener('click', () => {
             this.popup.close();

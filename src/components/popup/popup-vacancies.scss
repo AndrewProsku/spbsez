@@ -111,7 +111,7 @@ $popup-content-background-color: $white;
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     @media #{$ie} {
         margin: 0;
     }
@@ -124,8 +124,6 @@ $popup-content-background-color: $white;
     padding-bottom: 25px;
     background-color: $popup-content-background-color;
     min-height: 100vh;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
 
     @media #{$tablet-portrait} {
         min-height: inherit;
