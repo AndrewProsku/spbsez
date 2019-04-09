@@ -11,6 +11,7 @@ $MESS['KELNIK_TMPL_OLD_BROWSER_HEADER'] = 'Сайт может работать 
 $MESS['KELNIK_TMPL_OLD_BROWSER_BODY'] = 'Ваш браузер устарел и не поддерживает некоторые современные технологии сайта. Чтобы работали все функции, обновите браузер или скачайте другой из проверенных:';
 $MESS['KELNIK_TMPL_OLD_BROWSER_LINK'] = 'Все равно перейти на сайт';
 $MESS['KELNIK_TMPL_OLD_BROWSER_YANDEX'] = 'Яндекс.Браузер';
+$MESS['KELNIK_TMPL_BACK_TO_MEDIA'] = 'Назад в медиа';
 
 $MESS['KELNIK_TMPL_FORM_COMMENT'] = 'Комментарий';
 $MESS['KELNIK_TMPL_FORM_NAME'] = 'ФИО';
