@@ -11,6 +11,7 @@ $MESS['KELNIK_TMPL_OLD_BROWSER_HEADER'] = 'The site may not work correctly';
 $MESS['KELNIK_TMPL_OLD_BROWSER_BODY'] = 'Your browser is outdated and does not support some modern website technologies. To make all features work, update your browser or download another test:';
 $MESS['KELNIK_TMPL_OLD_BROWSER_LINK'] = 'Still go to the website';
 $MESS['KELNIK_TMPL_OLD_BROWSER_YANDEX'] = 'Yandex.Browser';
+$MESS['KELNIK_TMPL_BACK_TO_MEDIA'] = 'Back to media';
 
 $MESS['KELNIK_TMPL_FORM_COMMENT'] = 'Comment';
 $MESS['KELNIK_TMPL_FORM_NAME'] = 'Name';
