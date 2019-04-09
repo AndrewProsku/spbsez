@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Внутренние документы");
-$APPLICATION->SetPageProperty('title', "Раскрытие информации | Внутренние документы | АООЭЗ");
+$APPLICATION->SetPageProperty('title', "Раскрытие информации | Внутренние документы | ОЭЗ СПб");
 ?>
     <?$APPLICATION->IncludeComponent(
         "bitrix:menu",

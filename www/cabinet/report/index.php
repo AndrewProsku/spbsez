@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle('Подача отчета');
-$APPLICATION->SetPageProperty('title', 'Подача отчета | АООЭЗ');
+$APPLICATION->SetPageProperty('title', 'Подача отчета | ОЭЗ СПб');
 if (!$USER->IsAuthorized()) {
     LocalRedirect(LANG_DIR . 'cabinet/auth/');
 }
