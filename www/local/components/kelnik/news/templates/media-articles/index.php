@@ -1,9 +1,9 @@
 <?if(!defined('B_PROLOG_INCLUDED')||B_PROLOG_INCLUDED!==true)die();?>
 
 <div class="l-useful">
-    <div class="l-useful-single__back"><a href="/media/">
+    <div class="l-useful-single__back"><a href="<?= LANG_DIR; ?>media/">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="13" viewBox="0 0 8 13"><defs><path id="prgga" d="M214.44 194.5l-.94 1.074 4.977 4.927-4.977 4.925.94 1.074 6.06-5.999z"/></defs><g><g transform="rotate(180 110.5 103.5)"><use fill="#30409a" xlink:href="#prgga"/></g></g></svg>
-            Назад в медиа</a>
+            <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_BACK_TO_MEDIA'); ?></a>
     </div>
 
     <div class="l-useful-single__title b-title"><h1><?= $APPLICATION->ShowTitle(false); ?></h1></div>
