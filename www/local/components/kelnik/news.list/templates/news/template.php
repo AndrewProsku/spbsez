@@ -15,7 +15,7 @@
             <div class="b-mini-filter__group-wrap">
                 <?php foreach ($arResult['YEARS'] as $year): ?>
                     <div class="b-mini-filter__item">
-                        <input type="checkbox"
+                        <input type="radio"
                                name="year[]"
                                value="<?= $year['NAME']; ?>"
                                data-text="<?= $year['NAME']; ?>"
@@ -37,7 +37,7 @@
         <div class="b-mini-filter__group-wrap">
             <?php foreach ($arResult['TAGS'] as $tag): ?>
                 <div class="b-mini-filter__item">
-                    <input type="checkbox"
+                    <input type="radio"
                            name="tag[]"
                            value="<?= $tag['ID']; ?>"
                            data-text="<?= $tag['NAME']; ?>"
