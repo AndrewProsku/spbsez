@@ -1,7 +1,7 @@
 import InputTel from '../forms/telephone/telephone';
 import Language from '../language';
+import resultTemplate from './success.twig';
 import Select from 'components/forms/select';
-import successTemplate from './success.twig';
 import Utils from '../../common/scripts/utils';
 
 const Lang = new Language();
@@ -103,18 +103,14 @@ class Service {
             Utils.send(formData, '/api/service/', {
                 success(response) {
                     const successStatus = 1;
-                    const failStatus = 0;
 
                     if (response.request.status === successStatus) {
-                        that.showSuccessMessage();
-                    } else if (response.request.status === failStatus) {
-                        const errorMessage = response.request.errors.join('</br>');
+                        that.showResultMessage(response.data);
 
-                        const $popupContent = document.querySelector('.b-popup__content');
-
-                        Utils.clearHtml($popupContent);
-                        Utils.insetContent($popupContent, errorMessage);
+                        return true;
                     }
+
+                    return false;
                 },
                 error(error) {
                     console.error(error);
@@ -152,13 +148,20 @@ class Service {
 
     _checkPhone() {
         this.$inputPhone.addEventListener('change', (event) => {
-            this.inputChangeHandler(event, 'phone');
-            const regPhone = new RegExp('\\+7\\s\\d{3}\\s\\d{3}-\\d{2}-\\d{2}', 'u');
-
-            if (!regPhone.test(this.$inputPhone.value)) {
+            if (this._isPhoneTooShort(event.target.value)) {
+                this.isFieldCorrect.phone = false;
                 this.showErrorMessage(event.target, this.incorrectPhoneMessage);
+            } else {
+                this.isFieldCorrect.phone = true;
+                this.inputChangeHandler(event, 'phone');
             }
         });
+    }
+
+    _isPhoneTooShort(value) {
+        const phoneDigits = value.replace(/[^0-9]/gu, '');
+
+        return (phoneDigits.length > 0) && (phoneDigits.length < 11);
     }
 
     _checkTextarea() {
@@ -199,7 +202,11 @@ class Service {
             this.showErrorMessage(this.$inputEmail, this.emptyErrorMessage);
         }
         if (!this.isFieldCorrect.phone) {
-            this.showErrorMessage(this.$inputPhone, this.emptyErrorMessage);
+            const errorMessage = this._isPhoneTooShort(this.$inputPhone.value) ?
+                this.incorrectPhoneMessage :
+                this.emptyErrorMessage;
+
+            this.showErrorMessage(this.$inputPhone, errorMessage);
         }
         if (!this.isFieldCorrect.text) {
             this.showErrorMessage(this.$inputTextarea, this.emptyErrorMessage);
@@ -235,11 +242,11 @@ class Service {
         element.closest(`.${this.formBlockClass}`).classList.remove(this.errorInputClass);
     }
 
-    showSuccessMessage() {
+    showResultMessage(data) {
         const $popupContent = document.querySelector('.b-popup__content');
 
         Utils.clearHtml($popupContent);
-        Utils.insetContent($popupContent, successTemplate());
+        Utils.insetContent($popupContent, resultTemplate(data));
     }
 }
 

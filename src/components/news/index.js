@@ -13,11 +13,27 @@ class News {
         this.newsItemClass = 'b-news-item';
         this.contantLoadClass = 'b-news__content_is_load';
         this.tagNewsClass = 'j-news-tag';
+
+        this.year = null;
+        this.tag = null;
     }
 
     init() {
         this._initElements();
         this._bindEvents();
+
+        this.yearInputs = Array.from(this.filter.querySelectorAll(`[name="year[]"][type="radio"]`));
+        this.tagInputs = Array.from(this.filter.querySelectorAll(`[name="tag[]"][type="radio"]`));
+        this.yearInputs.forEach((input) => {
+            if (input.checked) {
+                this.year = input.value;
+            }
+        });
+        this.tagInputs.forEach((input) => {
+            if (input.checked) {
+                this.tag = input.value;
+            }
+        });
     }
 
     _initElements() {
@@ -29,9 +45,35 @@ class News {
     }
 
     _bindEvents() {
-        this.filter.addEventListener('change', () => {
+        this.filter.addEventListener('change', (event) => {
             this._sendFilter();
             this._setTitlesInSelects();
+            if (event.target.name === 'tag[]') {
+                this.tag = event.target.value;
+            } else if (event.target.name === 'year[]') {
+                this.year = event.target.value;
+            }
+        });
+
+        const inputs = Array.from(this.filter.querySelectorAll(`[type="radio"]`));
+
+        inputs.forEach((input) => {
+            input.addEventListener('click', (event) => {
+                const target = event.target;
+
+                if (target.name === 'tag[]' && target.value === this.tag) {
+                    target.checked = false;
+                    this.tag = null;
+                    this._sendFilter();
+                    this._setTitlesInSelects();
+                }
+                if (target.name === 'year[]' && target.value === this.year) {
+                    target.checked = false;
+                    this.year = null;
+                    this._sendFilter();
+                    this._setTitlesInSelects();
+                }
+            });
         });
 
         this.loadMore.addEventListener('click', (event) => {
@@ -136,7 +178,7 @@ class News {
     }
 
     _activeInputById(id) {
-        const inputs = Array.from(this.filter.querySelectorAll('input[type="checkbox"]'));
+        const inputs = Array.from(this.filter.querySelectorAll('input[type="radio"]'));
         const first = 0;
         const foundInput = inputs.filter((input) => {
             return input.value === id;

@@ -11,6 +11,7 @@ $MESS['KELNIK_TMPL_OLD_BROWSER_HEADER'] = '该网站可能无法正常工作';
 $MESS['KELNIK_TMPL_OLD_BROWSER_BODY'] = '您的浏览器已经过时，不支持一些现代的网站技术。 为了使所有的功能工作，更新您的浏览器或下载另一个测试的:';
 $MESS['KELNIK_TMPL_OLD_BROWSER_LINK'] = '仍然去的网站';
 $MESS['KELNIK_TMPL_OLD_BROWSER_YANDEX'] = 'Yandex.Browser';
+$MESS['KELNIK_TMPL_BACK_TO_MEDIA'] = '回到媒体';
 
 $MESS['KELNIK_TMPL_FORM_COMMENT'] = '评论';
 $MESS['KELNIK_TMPL_FORM_NAME'] = '名称';
