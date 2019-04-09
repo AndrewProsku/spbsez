@@ -18,3 +18,7 @@ $MESS['KELNIK_REPORT_TYPE_2'] = '2 квартал';
 $MESS['KELNIK_REPORT_TYPE_3'] = '3 квартал';
 $MESS['KELNIK_REPORT_TYPE_SEMI_ANNUAL'] = 'Предварительный годовой отчет';
 $MESS['KELNIK_REPORT_TYPE_ANNUAL'] = 'Годовой отчет';
+
+$MESS['KELNIK_REPORT_EXPORT_RESIDENT'] = 'Резидент';
+$MESS['KELNIK_REPORT_EXPORT_PERIOD'] = 'Период';
+$MESS['KELNIK_REPORT_EXPORT_BTN'] = 'Сформировать';

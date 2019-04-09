@@ -2,7 +2,6 @@
 namespace Kelnik\Report\Model\AdminInterface;
 
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\ORM\Data\UpdateResult;
 use Bitrix\Main\Type\DateTime;
 use CAdminTabControl;
 use Kelnik\AdminHelper\Helper\AdminEditHelper;
@@ -98,8 +97,7 @@ class ReportsEditHelper extends AdminEditHelper
     {
         global $APPLICATION;
 
-        $context = new \CAdminContextMenu([current($this->getMenu())]);
-        $context->Show();
+        (new \CAdminContextMenu([current($this->getMenu())]))->Show();
 
         if (!$this->hasReadRights() || empty($this->data['ID'])) {
             $this->addErrors(Loc::getMessage('KELNIK_ADMIN_HELPER_ACCESS_FORBIDDEN'));
@@ -137,21 +135,21 @@ class ReportsEditHelper extends AdminEditHelper
         echo '</form>';
     }
 
-    public function getValue($fieldName, $groupId = 0, $returnField = 'VALUE')
+    public function getValue($fieldName, $groupId = 0, $formNum = 0, $returnField = 'VALUE')
     {
         $keys = $this->report->getFields()->getAssocArray();
         $values = $this->report->getFields()->getArray();
 
         return ArrayHelper::getValue(
             $values,
-            ArrayHelper::getValue($keys, $fieldName. '.' . $groupId) . '.' . $returnField
+            ArrayHelper::getValue($keys, $fieldName. '.' . $groupId . '.' . $formNum) . '.' . $returnField
         );
     }
 
-    public function getValueComment($fieldName, $groupId = 0)
+    public function getValueComment($fieldName, $groupId = 0, $formNum = 0)
     {
         return htmlentities(
-            $this->getValue($fieldName, $groupId, 'COMMENT'),
+            $this->getValue($fieldName, $groupId, $formNum, 'COMMENT'),
             ENT_QUOTES.
             'UTF-8'
         );

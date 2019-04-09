@@ -397,7 +397,7 @@ class ReportForm {
         const addResultButton = template.querySelector(`.${this.addResultClass}`);
 
         addResultButton.addEventListener('click', () => {
-            Utils.send(`a=addGroup&id=${that.reportId}&type=results&form=6`, that.baseUrl, {
+            Utils.send(`a=addGroup&id=${that.reportId}&type=results&formNum=6`, that.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;

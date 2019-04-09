@@ -61,6 +61,8 @@ class ReportFieldsTable extends DataManager
 
             (new IntegerField('GROUP_ID'))
                 ->configureDefaultValue(0),
+            (new IntegerField('FORM_NUM'))
+                ->configureDefaultValue(0),
             (new BooleanField('IS_PRE_FILLED'))
                 ->configureValues(self::NO, self::YES)
                 ->configureDefaultValue(self::NO),
@@ -145,6 +147,7 @@ class ReportFieldsTable extends DataManager
                 $values[] = '(' .
                     $sqlHelper->convertToDbInteger($reportId). ', ' .
                     $sqlHelper->convertToDbInteger($groupId) . ', ' .
+                    $sqlHelper->convertToDbInteger($formNum) . ', ' .
                     $sqlHelper->convertToDbString($field['id']) .
                     ')';
             }
@@ -156,7 +159,7 @@ class ReportFieldsTable extends DataManager
 
         try {
             Application::getConnection()->query(
-                'INSERT INTO `' . self::getTableName() . '` (`REPORT_ID`, `GROUP_ID`, `NAME`) '.
+                'INSERT INTO `' . self::getTableName() . '` (`REPORT_ID`, `GROUP_ID`, `FORM_NUM`, `NAME`) '.
                 'VALUES ' . implode(', ', $values)
             );
         } catch (\Exception $e) {

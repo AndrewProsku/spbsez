@@ -32,7 +32,7 @@ $i = 1;
                     continue;
                 endif;
 
-                $val = $this->getValue($field['id']);
+                $val = $this->getValue($field['id'], 0, $formNum);
 
                 if (!empty($field['type']) && $field['type'] == 'boolean') {
                     $val = $val == 'yes' ? 'Да' : 'Нет';
@@ -41,7 +41,7 @@ $i = 1;
             <div class="b-input-block">
                 <div class="row-header"><?= $field['title']; ?></div>
                 <div class="row-value"><?= $val ? $val : '&nbsp;'; ?></div>
-                <div><input type="text" name="comment[<?= $this->getValue($field['id'], 0, 'ID'); ?>]" value="<?= $this->getValueComment($field['id']); ?>" placeholder="Комментарий"></div>
+                <div><input type="text" name="comment[<?= $this->getValue($field['id'], 0, $formNum, 'ID'); ?>]" value="<?= $this->getValueComment($field['id'], 0, $formNum); ?>" placeholder="Комментарий"></div>
             </div>
         <?php endforeach; ?>
         </div>

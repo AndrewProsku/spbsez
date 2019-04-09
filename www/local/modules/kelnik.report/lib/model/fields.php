@@ -40,7 +40,7 @@ class Fields extends EO_ReportFields_Collection
 
         $tmp = [];
         foreach ($res as $v) {
-            $tmp[$v['NAME'] . '.' . $v['GROUP_ID']] = $v['ID'];
+            $tmp[implode('.', [$v['NAME'], $v['GROUP_ID'], $v['FORM_NUM']])] = $v['ID'];
         }
 
         return $tmp;

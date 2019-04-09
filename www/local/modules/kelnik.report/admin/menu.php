@@ -53,6 +53,14 @@ return [
                 'sort' => 180,
                 'icon' => 'iblock_menu_icon',
                 'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_REPORT_REPORTS_EXPORT_MENU'),
+                'url' => \Kelnik\Report\Model\AdminInterface\ReportsExportHelper::getUrl(),
+            ],
+            [
+                'parent_menu' => 'kelnik_report',
+                'sort' => 180,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
                 'text' => Loc::getMessage('KELNIK_REPORT_STATUS_MENU'),
                 'url' => \Kelnik\Report\Model\AdminInterface\StatusListHelper::getUrl(),
                 'more_url' => [

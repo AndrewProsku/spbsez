@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `kelnik_report_fields` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `REPORT_ID` int(11) unsigned NOT NULL DEFAULT '0',
   `GROUP_ID` int(11) unsigned NOT NULL DEFAULT '0',
+  `FORM_NUM` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `IS_PRE_FILLED` enum('Y','N') NOT NULL DEFAULT 'N',
   `NAME` varchar(100) DEFAULT NULL,
   `VALUE` varchar(1000) DEFAULT NULL,
@@ -33,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `kelnik_report_fields` (
   PRIMARY KEY (`ID`),
   KEY `REPORT_ID` (`REPORT_ID`),
   KEY `GROUP_ID` (`GROUP_ID`),
+  KEY `FORM_NUM` (`FORM_NUM`),
   KEY `NAME` (`NAME`),
   KEY `IS_PRE_FILLED` (`IS_PRE_FILLED`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;

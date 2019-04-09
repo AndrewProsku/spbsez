@@ -94,7 +94,8 @@ class ReportsAdminInterface extends AdminInterface
         return [
             ReportsListHelper::class,
             ReportsEditHelper::class,
-            ReportsTreeHelper::class
+            ReportsTreeHelper::class,
+            ReportsExportHelper::class
         ];
     }
 }
