@@ -119,8 +119,6 @@ $popup-mobile-close-icon-color: #000000;
     background-color: $popup-content-background-color;
     min-height: 100vh;
     border-radius: 4px;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
 
     @media #{$laptop} {
         min-height: inherit;

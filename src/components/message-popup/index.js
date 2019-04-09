@@ -1,6 +1,6 @@
 import InputTel from '../forms/telephone/telephone';
 import Language from '../language';
-import successTemplate from './message-success.twig';
+import resultTemplate from './message-success.twig';
 import Utils from '../../common/scripts/utils';
 
 const Lang = new Language();
@@ -93,15 +93,14 @@ class Message {
                     const successStatus = 1;
 
                     if (response.request.status === successStatus) {
-                        that.showSuccessMessage(response.data);
+                        that.showResultMessage(response.data);
 
                         return true;
                     }
+                    // const errorMessage = response.request.errors.join('</br>');
 
-                    const errorMessage = response.request.errors.join('</br>');
-
-                    that.showErrorMessage(that.$inputResume, errorMessage);
-                    that.errorRepeatPassword(errorMessage);
+                    // that.showErrorMessage(that.$inputResume, errorMessage);
+                    // that.errorRepeatPassword(errorMessage);
 
                     return false;
                 },
@@ -130,11 +129,12 @@ class Message {
         });
 
         this.$inputPhone.addEventListener('change', (event) => {
-            this.inputChangeHandler(event, 'phone');
-            const regPhone = new RegExp('\\+7\\s\\d{3}\\s\\d{3}-\\d{2}-\\d{2}', 'u');
-
-            if (!regPhone.test(this.$inputPhone.value)) {
+            if (this._isPhoneTooShort(event.target.value)) {
+                this.isFieldCorrect.phone = false;
                 this.showErrorMessage(event.target, this.incorrectPhoneMessage);
+            } else {
+                this.isFieldCorrect.phone = true;
+                this.inputChangeHandler(event, 'phone');
             }
         });
 
@@ -144,6 +144,12 @@ class Message {
     }
 
     /* eslint-enable max-lines-per-function */
+
+    _isPhoneTooShort(value) {
+        const phoneDigits = value.replace(/[^0-9]/gu, '');
+
+        return (phoneDigits.length > 0) && (phoneDigits.length < 11);
+    }
 
     inputChangeHandler(event, inputName) {
         if (event.target.value.length) {
@@ -164,8 +170,12 @@ class Message {
         if (!this.$inputEmail.value.length) {
             this.showErrorMessage(this.$inputEmail, this.emptyErrorMessage);
         }
-        if (!this.$inputPhone.value.length) {
-            this.showErrorMessage(this.$inputPhone, this.emptyErrorMessage);
+        if (!this.isFieldCorrect.phone) {
+            const errorMessage = this._isPhoneTooShort(this.$inputPhone.value) ?
+                this.incorrectPhoneMessage :
+                this.emptyErrorMessage;
+
+            this.showErrorMessage(this.$inputPhone, errorMessage);
         }
         if (!this.isFieldCorrect.text) {
             this.showErrorMessage(this.$inputTextarea, this.emptyErrorMessage);
@@ -195,11 +205,11 @@ class Message {
         element.closest(`.${this.formBlockClass}`).classList.remove(this.errorInputClass);
     }
 
-    showSuccessMessage(data) {
+    showResultMessage(data) {
         const $popupContent = document.querySelector('.b-popup__content');
 
         Utils.clearHtml($popupContent);
-        Utils.insetContent($popupContent, successTemplate(data));
+        Utils.insetContent($popupContent, resultTemplate(data));
 
         $popupContent.querySelector('.j-message-popup__close').addEventListener('click', () => {
             this.popup.close();
