@@ -25,7 +25,7 @@ $i = 1;
                 $total = [0, 0];
                 foreach ($block['fields'] as $field) {
                     $key = false !== strpos($field['id'], 'all') ? 0 : 1;
-                    $total[$key] += (float) $this->getValue($field['id']);
+                    $total[$key] += (float) $this->getValue($field['id'], 0, $formNum);
                 }
             ?>
             <div class="b-input-block<?= $addCss; ?>">
@@ -42,12 +42,12 @@ $i = 1;
                 if (!isset($field['id']) || !empty($field['excludeAdmin'])):
                     continue;
                 endif;
-                $val = $this->getValue($field['id']);
+                $val = $this->getValue($field['id'], 0, $formNum);
             ?>
             <div class="b-input-block<?= $addCss; ?>">
                 <div class="row-header"><?= $field['title']; ?></div>
                 <div class="row-value"><?= $val ? $val : '&nbsp;'; ?></div>
-                <div><input type="text" name="comment[<?= $this->getValue($field['id'], 0, 'ID'); ?>]" value="<?= $this->getValueComment($field['id']); ?>" placeholder="Комментарий"></div>
+                <div><input type="text" name="comment[<?= $this->getValue($field['id'], 0, $formNum, 'ID'); ?>]" value="<?= $this->getValueComment($field['id'], 0, $formNum); ?>" placeholder="Комментарий"></div>
             </div>
         <?php endforeach; ?>
         </div>

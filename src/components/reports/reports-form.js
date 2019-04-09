@@ -469,8 +469,7 @@ class ReportForm {
                             });
                         });
 
-                        Utils.send(`a=confirmForm&id=${that.reportId}&
-                        formNum=${formNumber}fields=${JSON.stringify(inputs)}`, that.baseUrl, {
+                        Utils.send(`a=confirmForm&id=${that.reportId}&fields=${JSON.stringify(inputs)}`, that.baseUrl, {
                             success(response) {
                                 if (response.request.status === that.SUCCESS_STATUS) {
                                     mediator.publish('formApproved', Number(formID));

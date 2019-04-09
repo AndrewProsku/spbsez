@@ -135,21 +135,21 @@ class ReportsEditHelper extends AdminEditHelper
         echo '</form>';
     }
 
-    public function getValue($fieldName, $groupId = 0, $returnField = 'VALUE')
+    public function getValue($fieldName, $groupId = 0, $formNum = 0, $returnField = 'VALUE')
     {
         $keys = $this->report->getFields()->getAssocArray();
         $values = $this->report->getFields()->getArray();
 
         return ArrayHelper::getValue(
             $values,
-            ArrayHelper::getValue($keys, $fieldName. '.' . $groupId) . '.' . $returnField
+            ArrayHelper::getValue($keys, $fieldName. '.' . $groupId . '.' . $formNum) . '.' . $returnField
         );
     }
 
-    public function getValueComment($fieldName, $groupId = 0)
+    public function getValueComment($fieldName, $groupId = 0, $formNum = 0)
     {
         return htmlentities(
-            $this->getValue($fieldName, $groupId, 'COMMENT'),
+            $this->getValue($fieldName, $groupId, $formNum, 'COMMENT'),
             ENT_QUOTES.
             'UTF-8'
         );

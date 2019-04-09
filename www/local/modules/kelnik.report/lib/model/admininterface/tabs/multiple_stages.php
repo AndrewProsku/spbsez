@@ -21,7 +21,7 @@ if (!$groups) {
                         if (!$isExtra) {
                             continue;
                         }
-                        $val = $this->getValue($field['id'], $group);
+                        $val = $this->getValue($field['id'], $group, $formNum);
 
                         if ($field['id'] == 'construction-stage') {
                             $isExtra = \Kelnik\Helpers\ArrayHelper::getValue($stages, $val . '.extra', false);
@@ -38,7 +38,7 @@ if (!$groups) {
                     <div class="b-input-block">
                         <div class="row-header"><?= $field['title']; ?></div>
                         <div class="row-value"><?= $val ? $val : '&nbsp;'; ?></div>
-                        <div><input type="text" name="comment[<?= $this->getValue($field['id'], $group, 'ID'); ?>]" value="<?= $this->getValueComment($field['id'], $group); ?>" placeholder="Комментарий"></div>
+                        <div><input type="text" name="comment[<?= $this->getValue($field['id'], $group, $formNum, 'ID'); ?>]" value="<?= $this->getValueComment($field['id'], $group, $formNum); ?>" placeholder="Комментарий"></div>
                     </div>
                 <?php endforeach; ?>
             </div>
