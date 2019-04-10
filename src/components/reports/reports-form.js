@@ -445,7 +445,10 @@ class ReportForm {
         for (let blockNum = 0; blockNum < formBlocks.length; blockNum++) {
             if (Utils.keyExist(formBlocks[blockNum].dataset, 'prefilled')) {
                 if (document.querySelector(`.${that.approveReportClass}`)) {
-                    document.querySelector(`.${that.approveReportClass}`).setAttribute('data-form-id', formNumber);
+                    const approveButton = document.querySelector(`.${that.approveReportClass}`);
+
+                    approveButton.setAttribute('data-form-id', formNumber);
+                    approveButton.onclick = this.onApproveButtonClick.bind(this, formBlocks, formNumber);
                 } else {
                     const approveFormButton = document.createElement('button');
 
@@ -454,32 +457,7 @@ class ReportForm {
                     approveFormButton.setAttribute('type', 'button');
                     approveFormButton.setAttribute('data-form-id', formNumber);
                     approveFormButton.innerHTML = 'Подтвердить данные формы';
-
-                    approveFormButton.addEventListener('click', () => {
-                        const formID = approveFormButton.dataset.formId;
-                        const inputs = [];
-
-                        formBlocks.forEach((el) => {
-                            if (!Utils.keyExist(el.dataset, 'prefilled')) {
-                                return;
-                            }
-
-                            el.querySelectorAll('input[data-prefilled]').forEach((inp) => {
-                                inputs.push(inp.name);
-                            });
-                        });
-
-                        Utils.send(`a=confirmForm&id=${that.reportId}&fields=${JSON.stringify(inputs)}`, that.baseUrl, {
-                            success(response) {
-                                if (response.request.status === that.SUCCESS_STATUS) {
-                                    mediator.publish('formApproved', Number(formID));
-                                }
-                            },
-                            error(error) {
-                                console.error(error);
-                            }
-                        });
-                    });
+                    approveFormButton.onclick = this.onApproveButtonClick.bind(this, formBlocks, formNumber);
 
                     this.target.parentNode.insertBefore(approveFormButton, this.target);
                 }
@@ -491,6 +469,31 @@ class ReportForm {
                 Utils.removeElement(document.querySelector(`.${that.approveReportClass}`));
             }
         }
+    }
+
+    onApproveButtonClick(formBlocks, formNumber) {
+        const inputs = [];
+
+        formBlocks.forEach((el) => {
+            if (!Utils.keyExist(el.dataset, 'prefilled')) {
+                return;
+            }
+
+            el.querySelectorAll('input[data-prefilled]').forEach((inp) => {
+                inputs.push(inp.name);
+            });
+        });
+
+        Utils.send(`a=confirmForm&id=${this.reportId}&fields=${JSON.stringify(inputs)}`, this.baseUrl, {
+            success(response) {
+                if (response.request.status === this.SUCCESS_STATUS) {
+                    mediator.publish('formApproved', Number(formNumber));
+                }
+            },
+            error(error) {
+                console.error(error);
+            }
+        });
     }
 
     /* eslint-disable max-lines-per-function, max-statements */
