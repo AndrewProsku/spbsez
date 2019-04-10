@@ -202,7 +202,10 @@ class RefBookList extends Bbc\Basis
     {
         global $APPLICATION;
 
-        if (!$this->isAjax() && !empty($this->arParams['RESIDENT_TYPE'])) {
+        if (!$this->isAjax()
+            && !empty($this->arParams['RESIDENT_TYPE'])
+            && $this->arParams['COMPONENT_TEMPLATE'] == 'residents-full'
+        ) {
             Asset::getInstance()->addString(
                 '<link rel="canonical" href="' .
                 (\CMain::IsHTTPS() ? 'https' : 'http') .
