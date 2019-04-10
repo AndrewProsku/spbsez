@@ -537,6 +537,7 @@ class ReportBlock {
         }
 
         errorBlock.querySelector('.b-input-error__confirm').addEventListener('click', () => {
+            // eslint-disable-next-line max-len
             const dataToSend = `a=update&id=${this.reportId}&formNum=${this.formID}&field=${input.name}&val=${input.value}&clearComment=1`;
             const that = this;
 
