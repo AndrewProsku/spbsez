@@ -15,8 +15,6 @@ class Authorization {
         this.errorInputClass = 'b-form-block-error';
         this.messageInputs = 'b-form-block__error-text';
         this.isLogin = false;
-        this.isPassword = false;
-        this.isApprove = false;
 
         this.emptyErrorMessage = Lang.get('validation.required');
         this.incorrectEmailMessage = Lang.get('validation.email');
@@ -51,34 +49,27 @@ class Authorization {
         });
 
         this.$inputLogin.addEventListener('change', (event) => {
-            const isValidEmail = event.target.checkValidity();
+            const isValidEmail = (/^[^\s@]+@[^\s@]+\.[^\s@]+$/u).test(event.target.value);
 
             if (isValidEmail) {
                 this.loginChangeHandler(event.target);
             } else {
                 this.isLogin = false;
-                // this.showErrorMessage(event.target, this.incorrectEmailMessage);
-                // this.errorLogin(this.incorrectEmailMessage);
                 this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });
 
         this.$inputPassword.addEventListener('change', () => {
             if (this.$inputPassword.value.length) {
-                this.isPassword = true;
                 this.removeErrorPassword();
             } else {
-                this.isPassword = false;
                 this.errorPassword();
             }
         });
 
         this.$inputApprove.addEventListener('change', () => {
             if (this.$inputApprove.checked) {
-                this.isApprove = true;
                 this.$approve.classList.remove('is-error');
-            } else {
-                this.isApprove = false;
             }
         });
     }
@@ -102,15 +93,18 @@ class Authorization {
             }
 
             return false;
-        } else if (!this.isPassword) {
+        } else if (!this.$inputPassword.value.length) {
             this.errorPassword();
 
             return false;
-        } else if (!this.isApprove) {
+        } else if (!this.$inputApprove.checked) {
             this.errorApprove();
 
             return false;
         }
+
+        this.removeErrorPassword();
+        this.$approve.classList.remove('is-error');
 
         return true;
     }
