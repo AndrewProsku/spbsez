@@ -92,7 +92,13 @@ class ReportsAdminInterface extends AdminInterface
     public function helpers()
     {
         return [
-            ReportsListHelper::class,
+            ReportsListHelper::class => [
+                'BUTTONS' => [
+                    'LIST_CREATE_NEW' => [
+                        'VISIBLE' => 'N'
+                    ]
+                ]
+            ],
             ReportsEditHelper::class,
             ReportsTreeHelper::class,
             ReportsExportHelper::class

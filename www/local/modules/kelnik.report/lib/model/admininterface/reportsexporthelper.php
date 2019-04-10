@@ -49,6 +49,9 @@ class ReportsExportHelper extends AdminBaseHelper
                 'order' => [
                     'YEAR' => 'DESC',
                     'TYPE' => 'ASC'
+                ],
+                'group' => [
+                    'YEAR', 'TYPE'
                 ]
             ]);
         } catch (\Exception $e) {
@@ -109,9 +112,7 @@ class ReportsExportHelper extends AdminBaseHelper
             ]
         ]);
 
-
         $this->showMessages();
-
 
         $tabControl->begin();
         ?>
@@ -127,11 +128,14 @@ class ReportsExportHelper extends AdminBaseHelper
             }
             .export-block {
                 margin: 10px;
-                width: 200px;
+                width: 300px;
             }
             .export-block label,
             .export-block select {
                 width: 100%;
+            }
+            .export-block select[multiple] {
+                height: 200px;
             }
             .export-block label {
                 display: block;

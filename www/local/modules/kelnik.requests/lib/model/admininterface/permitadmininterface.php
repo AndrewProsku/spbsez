@@ -138,7 +138,13 @@ class PermitAdminInterface extends AdminInterface
     public function helpers()
     {
         return [
-            PermitListHelper::class,
+            PermitListHelper::class => [
+                'BUTTONS' => [
+                    'LIST_CREATE_NEW' => [
+                        'VISIBLE' => 'N'
+                    ]
+                ]
+            ],
             PermitEditHelper::class
         ];
     }
