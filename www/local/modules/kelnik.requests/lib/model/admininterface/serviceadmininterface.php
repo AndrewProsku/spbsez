@@ -95,7 +95,13 @@ class ServiceAdminInterface extends AdminInterface
     {
         return [
             ServiceEditHelper::class,
-            ServiceListHelper::class
+            ServiceListHelper::class => [
+                'BUTTONS' => [
+                    'LIST_CREATE_NEW' => [
+                        'VISIBLE' => 'N'
+                    ]
+                ]
+            ]
         ];
     }
 }

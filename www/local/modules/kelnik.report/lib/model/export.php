@@ -6,10 +6,9 @@ namespace Kelnik\Report\Model;
 
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
-use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Protection;
 
 Loc::loadMessages(__FILE__);
 
@@ -76,6 +75,9 @@ class Export
 
     protected function importData()
     {
+        $this->spreadsheet->getDefaultStyle()->getProtection()->setHidden(Protection::PROTECTION_UNPROTECTED);
+        $this->spreadsheet->getDefaultStyle()->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
+
         $config = ReportFieldsTable::getFormConfig();
         $forms  = array_keys($config);
 
@@ -90,6 +92,8 @@ class Export
             if ($this->data && method_exists($this, $methodName)) {
                 $this->{$methodName}();
             }
+
+            gc_collect_cycles();
         }
 
         $this->spreadsheet->setActiveSheetIndex(ReportFieldsTable::FORM_COMMON);
@@ -140,43 +144,48 @@ class Export
 
             $this->data[$v['COMPANY_ID']]['GROUPS'][$v['REPORT_FIELD_GROUP_ID']] = $v['REPORT_FIELD_GROUP_TYPE'];
         }
+        unset($res);
     }
 
     protected function processForm0()
     {
         $sheet = &$this->spreadsheet->getActiveSheet();
-        $sheet->setCellValue('O3', self::getCurrentDate());
+        $sheet->setCellValue('L3', self::getCurrentDate());
         
         $valueToCell = [
-            'F' => 'foreign-investors',
-            'H' => 'investors-countries',
-            'I' => 'jobs-plan-all',
-            'J' => 'jobs-plan-year',
-            'K' => 'jobs-actual-all',
-            'L' => 'jobs-actual-year',
-            'M' => 'invests-plan-all',
-            'N' => 'invests-plan-year',
-            'O' => 'capital-invests-plan-all',
-            'P' => 'capital-invests-plan-year',
-            'Q' => 'invests-all',
-            'R' => 'invests-year',
-            'S' => 'capital-invests-all',
-            'T' => 'capital-invests-year',
-            'U' => 'revenue-all',
-            'V' => 'revenue-year',
-            'W' => 'produce-all',
-            'X' => 'produce-year',
-            'Y' => 'salary'
+            'D' => 'foreign-investors',
+            'E' => 'investors-countries',
+            'F' => 'jobs-plan-all',
+            'G' => 'jobs-plan-year',
+            'H' => 'jobs-actual-all',
+            'I' => 'jobs-actual-year',
+            'J' => 'invests-plan-all',
+            'K' => 'invests-plan-year',
+            'L' => 'capital-invests-plan-all',
+            'M' => 'capital-invests-plan-year',
+            'N' => 'invests-all',
+            'O' => 'invests-year',
+            'P' => 'capital-invests-all',
+            'Q' => 'capital-invests-year',
+            'R' => 'revenue-all',
+            'S' => 'revenue-year',
+            'T' => 'produce-all',
+            'U' => 'produce-year',
+            'V' => 'salary'
         ];
 
-        $rowNum = 10;
+        $rowNum = $start = 10;
         foreach ($this->data as $company) {
+            if ($rowNum > $start) {
+                $this->copyRow($rowNum - 1, $rowNum);
+            }
 
-            $sheet->setCellValue('A' . $rowNum, $rowNum - 9);
+            $sheet->getRowDimension($rowNum)->setRowHeight(-1);
+            $sheet->setCellValue('A' . $rowNum, $rowNum - ($start - 1));
             $sheet->setCellValue('B' . $rowNum, $company['NAME']);
-            $sheet->setCellValue('E' . $rowNum, $company['NAME_SEZ']);
+            $sheet->setCellValue('C' . $rowNum, $company['NAME_SEZ']);
 
-            foreach ($valueToCell as $cellName => $valueName) {
+            foreach ($valueToCell as $colName => $valueName) {
                 $val = trim(ArrayHelper::getValue($company, 'FIELDS.0.' . $valueName));
                 if ($valueName === 'foreign-investors') {
                     $val = $val == 'yes' ? 'да' : 'нет';
@@ -186,11 +195,16 @@ class Export
                     $val = self::normalizeFloat($val);
                 }
 
-                $sheet->setCellValue($cellName . $rowNum, $val);
+                $sheet->setCellValue($colName . $rowNum, $val);
             }
 
             $rowNum++;
         }
+
+        $valueToCell = array_slice($valueToCell, 2, count($valueToCell));
+        $valueToCell = array_keys($valueToCell);
+
+        $this->setCellSum($valueToCell, $rowNum, $start, $rowNum - 1);
     }
 
     protected function processForm1()
@@ -226,10 +240,15 @@ class Export
         $sumFields = ArrayHelper::getValue(ReportFieldsTable::getFormConfig(), ReportFieldsTable::FORM_TAXES . '.blocks.0.fields', []);
         $sumFields = array_column($sumFields, 'id');
 
-        $rowNum = 10;
+        $rowNum = $start = 10;
         foreach ($this->data as $company) {
 
-            $sheet->setCellValue('A' . $rowNum, $rowNum - 9);
+            if ($rowNum > $start) {
+                $this->copyRow($rowNum - 1, $rowNum);
+            }
+
+            $sheet->getRowDimension($rowNum)->setRowHeight(-1);
+            $sheet->setCellValue('A' . $rowNum, $rowNum - ($start - 1));
             $sheet->setCellValue('B' . $rowNum, $company['NAME']);
             $sheet->setCellValue('C' . $rowNum, $company['NAME_SEZ']);
 
@@ -255,6 +274,12 @@ class Export
 
             $rowNum++;
         }
+
+        $valueToCell = array_slice($valueToCell, 2, count($valueToCell));
+        $valueToCell = array_keys($valueToCell);
+        $valueToCell = array_merge($valueToCell, ['D', 'E']);
+
+        $this->setCellSum($valueToCell, $rowNum, $start, $rowNum - 1);
     }
 
     protected function processForm2()
@@ -271,14 +296,23 @@ class Export
             'I' => 'construction-period'
         ];
 
-        $rowNum = 9;
+//        $sheet->getStyle('A7:J9')->applyFromArray([
+//            'protection' => [
+//                'locked' => Protection::PROTECTION_UNPROTECTED,
+//                'hidden' => Protection::PROTECTION_UNPROTECTED
+//            ]
+//        ]);
+
+        $rowNum = $start = 9;
 
         foreach ($this->data as $company) {
 
-            $rowNum++;
+            if ($rowNum > $start) {
+                $this->copyRow($rowNum - 1, $rowNum);
+            }
 
             $sheet->getRowDimension($rowNum)->setRowHeight(-1);
-            $sheet->setCellValue('A' . $rowNum, $rowNum - 9);
+            $sheet->setCellValue('A' . $rowNum, $rowNum - ($start - 1));
             $sheet->setCellValue('B' . $rowNum, $company['NAME']);
             $sheet->setCellValue('C' . $rowNum, $company['NAME_SEZ']);
 
@@ -290,14 +324,16 @@ class Export
             }
 
             if ($rowValue = self::getStages($company)) {
-                $richText = new RichText();
-                $richText->createText(implode(", \n", $rowValue));
+//                $richText = new RichText();
+//                $richText->createText(implode(", \n", $rowValue));
 
                 $cell = $sheet->getCell('J' . $rowNum);
 
-                $cell->setValue($richText);
+                $cell->setValue(implode(", \n", $rowValue));
                 $cell->getStyle()->getAlignment()->setWrapText(true);
             }
+
+            $rowNum++;
         }
     }
 
@@ -311,14 +347,15 @@ class Export
             'E' => 'office-rent'
         ];
 
-        $rowNum = 8;
+        $rowNum = $start = 9;
 
         foreach ($this->data as $company) {
-
-            $rowNum++;
+            if ($rowNum > $start) {
+                $this->copyRow($rowNum - 1, $rowNum);
+            }
 
             $sheet->getRowDimension($rowNum)->setRowHeight(-1);
-            $sheet->setCellValue('A' . $rowNum, $rowNum - 8);
+            $sheet->setCellValue('A' . $rowNum, $rowNum - ($start - 1));
             $sheet->setCellValue('B' . $rowNum, $company['NAME']);
             $sheet->setCellValue('C' . $rowNum, $company['NAME_SEZ']);
 
@@ -338,30 +375,33 @@ class Export
                 $cell->setValue($richText);
                 $cell->getStyle()->getAlignment()->setWrapText(true);
             }
+
+            $rowNum++;
         }
     }
 
     protected function processForm4()
     {
         $sheet = &$this->spreadsheet->getActiveSheet();
-        $sheet->setCellValue('H3', self::getCurrentDate());
+        $sheet->setCellValue('G3', self::getCurrentDate());
 
         $valueToCell = [
-            'E' => 'export-volume-all',
-            'F' => 'export-volume-year',
-            'I' => 'high-tech-production',
-            'L' => 'high-productive-jobs'
+            'D' => 'export-volume-all',
+            'E' => 'export-volume-year',
+            'H' => 'high-tech-production',
+            'J' => 'high-productive-jobs'
         ];
 
         $rowNum = 8;
+        $start = 9;
 
         $groupValueToCell = [
             'groups' => [
-                'G' => 'export-countries',
-                'H' => 'export-code'
+                'F' => 'export-countries',
+                'G' => 'export-code'
             ],
             'innovations' => [
-                'K' => 'innovation'
+                'I' => 'innovation'
             ]
         ];
 
@@ -369,10 +409,14 @@ class Export
 
             $rowNum++;
 
+            if ($rowNum > $start) {
+                $this->copyRow($rowNum - 1, $rowNum);
+            }
+
             $sheet->getRowDimension($rowNum)->setRowHeight(-1);
-            $sheet->setCellValue('A' . $rowNum, $rowNum - 8);
+            $sheet->setCellValue('A' . $rowNum, $rowNum - ($start - 1));
             $sheet->setCellValue('B' . $rowNum, $company['NAME']);
-            $sheet->setCellValue('D' . $rowNum, $company['NAME_SEZ']);
+            $sheet->setCellValue('C' . $rowNum, $company['NAME_SEZ']);
 
             foreach ($valueToCell as $cellName => $valueName) {
                 $val = trim(ArrayHelper::getValue($company, 'FIELDS.0.' . $valueName));
@@ -409,16 +453,21 @@ class Export
         $sheet->setCellValue('B4', 'по состоянию на ' . self::getCurrentDate());
 
         $valueToCell = [
-            'E' => 'intangible-assets',
-            'F' => 'degrees-employees',
+            'D' => 'intangible-assets',
+            'E' => 'degrees-employees',
         ];
 
-        $rowNum = 9;
+        $rowNum = $start = 9;
         foreach ($this->data as $company) {
 
-            $sheet->setCellValue('A' . $rowNum, $rowNum - 8);
+            if ($rowNum > $start) {
+                $this->copyRow($rowNum - 1, $rowNum);
+            }
+
+            $sheet->getRowDimension($rowNum)->setRowHeight(-1);
+            $sheet->setCellValue('A' . $rowNum, $rowNum - ($start - 1));
             $sheet->setCellValue('B' . $rowNum, $company['NAME']);
-            $sheet->setCellValue('D' . $rowNum, $company['NAME_SEZ']);
+            $sheet->setCellValue('C' . $rowNum, $company['NAME_SEZ']);
 
             foreach ($valueToCell as $cellName => $valueName) {
                 $val = trim(ArrayHelper::getValue($company, 'FIELDS.0.' . $valueName));
@@ -445,34 +494,72 @@ class Export
 
         $rowNum = 7;
         $companyNum = 1;
-        foreach ($this->data as $company) {
+        $mergeCells = [];
 
+        $r = [];
+
+        foreach ($this->data as $company) {
             $rowNum++;
             $rowValueNum = $rowNum;
+
+            if ($rowValueNum > 8) {
+                $this->copyRow($rowValueNum - 1, $rowValueNum);
+            }
+
+            $r[0][] = $rowNum;
 
             $sheet->getRowDimension($rowNum)->setRowHeight(-1);
             $sheet->setCellValue('A' . $rowNum, $companyNum++);
             $sheet->setCellValue('B' . $rowNum, $company['NAME']);
-            $sheet->setCellValue('D' . $rowNum, $company['NAME_SEZ']);
+            $sheet->setCellValue('C' . $rowNum, $company['NAME_SEZ']);
+
+            $mergeCells[$companyNum][0] = $rowNum;
 
             $values = self::getGroupValues($company, 'results');
 
             if (!$values) {
-                return;
+                continue;
             }
 
+            $needNewRow = false;
             foreach ($values as $rowValues) {
-                if ($rowValueNum > 7) {
-                    $this->copyRow($rowValueNum, $rowValueNum + 1);
+                if ($needNewRow) {
+                    $this->copyRow($rowValueNum - 1, $rowValueNum);
                 }
                 foreach ($valueToCell as $cellName => $valueName) {
                     $sheet->setCellValue($cellName . $rowValueNum, ArrayHelper::getValue($rowValues, $valueName));
                     $sheet->getCell($cellName . $rowValueNum)->getStyle()->getAlignment()->setWrapText(true);
                 }
+                $needNewRow = true;
                 $rowValueNum++;
+
+                $r[1][] = $rowValueNum;
             }
 
-            $rowNum = $rowValueNum;
+            $rowNum = $rowValueNum - 1;
+
+            $mergeCells[$companyNum][1] = $rowNum;
+        }
+
+        foreach ($mergeCells as $company) {
+            foreach (['A', 'B', 'C'] as $col) {
+                $sheet->mergeCells($col . $company[0] . ':' . $col . $company[1]);
+            }
+        }
+    }
+
+    /**
+     * Устанавливает формулу суммы в ячейку
+     *
+     * @param array $cols
+     * @param int $rowSet
+     * @param int $rowStart
+     * @param int $rowEnd
+     */
+    protected function setCellSum(array $cols, int $rowSet, int $rowStart, int $rowEnd)
+    {
+        foreach ($cols as $col) {
+            $this->spreadsheet->getActiveSheet()->setCellValue($col . $rowSet, '=SUM(' . $col . $rowStart . ':' . $col . $rowEnd . ')');
         }
     }
 
@@ -518,7 +605,7 @@ class Export
 //                )
 //            );
 
-            $val = '№' . $valNum;
+            $val = '№ ' . $valNum;
             if ($valDate) {
                 $val .= ' от ' . $valDate;
             }
@@ -529,6 +616,8 @@ class Export
 
             $res[] = $val;
         }
+
+        unset($company);
 
         return $res;
     }
@@ -548,6 +637,8 @@ class Export
 
             $res[] = ArrayHelper::getValue($company['FIELDS'], $groupId, []);
         }
+
+        unset($company);
 
         return $res;
     }
@@ -577,12 +668,15 @@ class Export
         return str_replace(',', '.', $val);
     }
 
-    protected function copyRow($rowSrc, $rowDst)
+    protected function copyRow($rowNumSrc, $rowNumDst)
     {
         $sheet = &$this->spreadsheet->getActiveSheet();
-
-        $sheet->insertNewRowBefore($rowDst);
-//        $sheet->getColumnDimension();
-//        $sheet->duplicateStyle($sheet->getStyle($rowSrc), $rowDst);
+        $sheet->insertNewRowBefore($rowNumDst);
+        $cols = $sheet->getColumnDimensions();
+        foreach ($cols as $colNum => $coll) {
+            $cell = $sheet->getCell($colNum . $rowNumSrc);
+            $sheet->duplicateStyle($cell->getStyle(), $colNum . $rowNumDst);
+        }
+        unset($sheet, $cell);
     }
 }

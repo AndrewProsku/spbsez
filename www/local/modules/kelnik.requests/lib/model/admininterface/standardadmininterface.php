@@ -88,7 +88,13 @@ class StandardAdminInterface extends AdminInterface
     public function helpers()
     {
         return [
-            '\Kelnik\Requests\Model\AdminInterface\StandardListHelper',
+            '\Kelnik\Requests\Model\AdminInterface\StandardListHelper' => [
+                'BUTTONS' => [
+                    'LIST_CREATE_NEW' => [
+                        'VISIBLE' => 'N'
+                    ]
+                ]
+            ],
             '\Kelnik\Requests\Model\AdminInterface\StandardEditHelper'
         ];
     }
