@@ -16,7 +16,7 @@ $MESS['KELNIK_API_VACANCY_ERROR_EMAIL'] = 'Не заполнено поле E-ma
 $MESS['KELNIK_API_VACANCY_ERROR_VACANCY_ID'] = 'Не указана вакансия';
 $MESS['KELNIK_API_VACANCY_ERROR_FILE'] = 'Не загружен файл резюме';
 $MESS['KELNIK_API_VACANCY_RESPONSE_TITLE'] = 'Сообщение успешно отправлено';
-$MESS['KELNIK_API_VACANCY_RESPONSE_TEXT'] = 'Отдел кадров обработает ваше сообщение и свяжется с Вами.';
+$MESS['KELNIK_API_VACANCY_RESPONSE_TEXT'] = 'Отдел кадров АО «ОЭЗ «Санкт-Петербург» обработает ваше сообщение и свяжется с Вами.';
 
 $MESS['KELNIK_API_DOC_FILE_UPLOAD_ERROR'] = 'Не удалось загрузить файл';
 $MESS['KELNIK_API_MESSAGE_ERROR_NAME'] = 'Не заполнено поле ФИО';
