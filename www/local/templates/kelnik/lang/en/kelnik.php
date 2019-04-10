@@ -42,9 +42,9 @@ $MESS['KELNIK_TMPL_SITES_SITE_NOIDORF'] = 'Noidorf site';
 $MESS['KELNIK_TMPL_SITES_DESCR_NOV'] = 'Developed transport infrastructure. Less than 10
                         minutes to the St. Petersburg Ring Road. 30
                         minutes by motor vehicle to the city center. 20
-                        minutes by motor vehicle to the metro station';
+                        minutes by motor vehicle to the metro station.';
 $MESS['KELNIK_TMPL_SITES_DESCR_NOIDORF'] = 'Surrounded by the developed urban infrastructure
                         and cultural heritage. Less than 10 minutes to the
                         St. Petersburg Ring Road. 20 minutes by motor
-                        vehicle to the airport';
+                        vehicle to the airport.';
 $MESS['KELNIK_TMPL_SITES_PRIM'] = '<strong>Primorsky District</strong> <span>In Novoorlovsky urban forest</span>';
