@@ -9,11 +9,15 @@ $MESS['KELNIK_API_AUTH_REQUIRED'] = 'Требуется авторизация';
 $MESS['KELNIK_API_LOGIN_INCORRECT'] = 'Неверный логин или пароль';
 $MESS['KELNIK_API_USER_NOT_FOUND'] = 'Пользователь не найден';
 $MESS['KELNIK_API_PASSWORD_LENGTH_ERROR'] = 'Длина пароля должна быть не меньше #NUM# символов';
+
 $MESS['KELNIK_API_VACANCY_ERROR_NAME'] = 'Не заполнено поле ФИО';
 $MESS['KELNIK_API_VACANCY_ERROR_PHONE'] = 'Не заполнено поле Телефон';
 $MESS['KELNIK_API_VACANCY_ERROR_EMAIL'] = 'Не заполнено поле E-mail';
 $MESS['KELNIK_API_VACANCY_ERROR_VACANCY_ID'] = 'Не указана вакансия';
 $MESS['KELNIK_API_VACANCY_ERROR_FILE'] = 'Не загружен файл резюме';
+$MESS['KELNIK_API_VACANCY_RESPONSE_TITLE'] = 'Сообщение успешно отправлено';
+$MESS['KELNIK_API_VACANCY_RESPONSE_TEXT'] = 'Отдел кадров АО «ОЭЗ «Санкт-Петербург» обработает ваше сообщение и свяжется с Вами.';
+
 $MESS['KELNIK_API_DOC_FILE_UPLOAD_ERROR'] = 'Не удалось загрузить файл';
 $MESS['KELNIK_API_MESSAGE_ERROR_NAME'] = 'Не заполнено поле ФИО';
 $MESS['KELNIK_API_MESSAGE_ERROR_EMAIL'] = 'Не заполнено поле E-mail';

@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Residents");
 $APPLICATION->SetPageProperty('title', 'Residents | SEZ');
 ?>
-<div class="l-residents all-categories j-residents-page">
+<div class="l-residents j-residents-page <? $APPLICATION->ShowProperty('residentCategory'); ?>">
     <div class="b-title b-residents-title"><h1><?= $APPLICATION->ShowTitle(false); ?></h1></div>
 
     <? $APPLICATION->IncludeComponent(

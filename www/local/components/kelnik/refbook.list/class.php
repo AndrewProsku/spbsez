@@ -5,15 +5,11 @@ namespace Kelnik\Refbook\Component;
 use Bex\Bbc;
 use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Page\Asset;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
-use Kelnik\Refbook\Model\DocsTable;
-use Kelnik\Refbook\Model\PartnerTable;
-use Kelnik\Refbook\Model\PresTable;
 use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Refbook\Model\ResidentTypesTable;
-use Kelnik\Refbook\Model\ReviewTable;
-use Kelnik\Refbook\Model\TeamTable;
 use Kelnik\Refbook\Types;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
@@ -33,6 +29,21 @@ class RefBookList extends Bbc\Basis
     protected $checkParams = [
         'SECTION' => ['type' => 'int', 'error' => false]
     ];
+
+    protected function executeProlog()
+    {
+        global $APPLICATION;
+
+        if ($this->arParams['SECTION'] === Types::TYPE_RESIDENT) {
+            $this->arParams['RESIDENT_TYPE'] = (int) ArrayHelper::getValue($_GET, 'type');
+            $APPLICATION->SetPageProperty(
+                'residentCategory',
+                $this->arParams['RESIDENT_TYPE']
+                    ? 'category-' . $this->arParams['RESIDENT_TYPE']
+                    : 'all-categories'
+            );
+        }
+    }
 
     protected function executeMain()
     {
@@ -185,6 +196,23 @@ class RefBookList extends Bbc\Basis
         });
 
         $this->arResult['ELEMENTS'] = BitrixHelper::prepareFileFields($this->arResult['ELEMENTS'], ['IMAGE_*']);
+    }
+
+    protected function executeEpilog()
+    {
+        global $APPLICATION;
+
+        if (!$this->isAjax()
+            && !empty($this->arParams['RESIDENT_TYPE'])
+            && $this->arParams['COMPONENT_TEMPLATE'] == 'residents-full'
+        ) {
+            Asset::getInstance()->addString(
+                '<link rel="canonical" href="' .
+                (\CMain::IsHTTPS() ? 'https' : 'http') .
+                '://' .  $_SERVER['HTTP_HOST'] .
+                $APPLICATION->GetCurDir() . '">'
+            );
+        }
     }
 
     protected function replaceFields(array $data, $langId)
