@@ -29,5 +29,7 @@ $MESS['KELNIK_API_SERVICE_ERROR_BODY'] = 'Required field Comment';
 $MESS['KELNIK_API_SERVICE_ERROR_TYPE_ID'] = 'Required field Subject';
 $MESS['KELNIK_API_SERVICE_ERROR_COMPANY'] = 'Required field Company';
 $MESS['KELNIK_API_SERVICE_ERROR_POSITION'] = 'Required field Position';
+$MESS['KELNIK_API_SERVICE_RESPONSE_TITLE'] = '短信成功发送';
+$MESS['KELNIK_API_SERVICE_RESPONSE_TEXT'] = '在不久的将来，JSC SEZ“St.Petersburg”的同事将与您联系。';
 
 $MESS['KELNIK_API_REPORT_NOT_FOUND'] = 'Report not found';

@@ -41,6 +41,10 @@ class RequestForm extends Bbc\Basis
     {
         global $USER;
 
+        if (!$USER->IsAuthorized()) {
+            return false;
+        }
+
         try {
             $this->profile = Profile::getInstance((int)$USER->GetID());
             $this->sectionRequests = new ProfileSectionRequests($this->profile);
