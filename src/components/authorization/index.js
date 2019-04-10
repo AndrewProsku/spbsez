@@ -14,7 +14,6 @@ class Authorization {
         this.formBlockClass = 'b-form-block';
         this.errorInputClass = 'b-form-block-error';
         this.messageInputs = 'b-form-block__error-text';
-        this.isLogin = false;
 
         this.emptyErrorMessage = Lang.get('validation.required');
         this.incorrectEmailMessage = Lang.get('validation.email');
@@ -53,12 +52,9 @@ class Authorization {
         });
 
         this.$inputLogin.addEventListener('change', (event) => {
-            const isValidEmail = (/^[^\s@]+@[^\s@]+\.[^\s@]+$/u).test(event.target.value);
-
-            if (isValidEmail) {
+            if (this.isEmailValid(event.target.value)) {
                 this.loginChangeHandler(event.target);
             } else {
-                this.isLogin = false;
                 this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });
@@ -78,23 +74,25 @@ class Authorization {
         });
     }
 
+    isEmailValid(email) {
+        return (/^[^\s@]+@[^\s@]+\.[^\s@]+$/u).test(email);
+    }
+
     loginChangeHandler(target) {
         if (target.value.length) {
-            this.isLogin = true;
             this.removeErrorLogin();
         } else {
-            this.isLogin = false;
             this.showErrorMessage(target, this.emptyErrorMessage);
         }
     }
 
     checkForm() {
-        if (!this.isLogin) {
-            if (!this.$inputLogin.value.length) {
-                this.showErrorMessage(this.$inputLogin, this.emptyErrorMessage);
-            } else if (!this.$inputLogin.checkValidity()) {
-                this.showErrorMessage(this.$inputLogin, this.incorrectEmailMessage);
-            }
+        if (!this.$inputLogin.value.length) {
+            this.showErrorMessage(this.$inputLogin, this.emptyErrorMessage);
+
+            return false;
+        } else if (!this.isEmailValid(this.$inputLogin.value)) {
+            this.showErrorMessage(this.$inputLogin, this.incorrectEmailMessage);
 
             return false;
         } else if (!this.$inputPassword.value.length) {
