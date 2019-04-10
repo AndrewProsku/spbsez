@@ -38,6 +38,10 @@ class Authorization {
         this.defaultErrorMessage = this.$messagePassword.innerText;
     }
 
+    /**
+     * Биндит события
+     * @private
+     */
     _bindEvents() {
         this.$form.addEventListener('submit', (event) => {
             event.preventDefault();
