@@ -71,6 +71,9 @@ class RefBookList extends Bbc\Basis
         $this->arResult['MORE'] = Loc::getMessage('KELNIK_REFBOOK_MORE_' . $this->arParams['SECTION']);
 
         if ($this->arParams['SECTION'] !== Types::TYPE_RESIDENT) {
+            if ($this->arParams['SECTION'] === Types::TYPE_REVIEW && LANGUAGE_ID == 'en') {
+                $filter['!NAME_EN'] = false;
+            }
             try {
                 $this->arResult['ELEMENTS'] = $className::getList(
                     [

@@ -89,8 +89,7 @@ class ReviewAdminInterface extends AdminInterface
                     'NAME_EN'        => [
                         'WIDGET'   => new StringWidget(),
                         'SIZE'     => 40,
-                        'FILTER'   => '%',
-                        'REQUIRED' => true
+                        'FILTER'   => '%'
                     ],
                     'COMMENT_EN'     => [
                         'WIDGET' => new StringWidget(),
@@ -103,11 +102,11 @@ class ReviewAdminInterface extends AdminInterface
                         'HEADER' => false,
                         'FILTER' => false
                     ],
-                    'BODY_EN'        => [
-                        'WIDGET' => new VisualEditorWidget(),
-                        'HEADER' => false,
-                        'FILTER' => false
-                    ]
+//                    'BODY_EN'        => [
+//                        'WIDGET' => new VisualEditorWidget(),
+//                        'HEADER' => false,
+//                        'FILTER' => false
+//                    ]
                 ],
             ],
         ];

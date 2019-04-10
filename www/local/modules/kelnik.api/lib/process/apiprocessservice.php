@@ -7,7 +7,6 @@ use Bitrix\Main\Localization\Loc;
 use Kelnik\Api\Api;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Requests\Model\ServiceTable;
-use Kelnik\Requests\Model\SiteMsgTable;
 
 /**
  * Class ApiProcessService
@@ -65,6 +64,9 @@ class ApiProcessService extends ApiProcessAbstract
 
             return false;
         }
+
+        $this->data['title'] = Loc::getMessage('KELNIK_API_SERVICE_RESPONSE_TITLE');
+        $this->data['text'] = Loc::getMessage('KELNIK_API_SERVICE_RESPONSE_TEXT');
 
         return true;
     }
