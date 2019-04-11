@@ -61,7 +61,7 @@ class ReportList extends Bbc\Basis
         self::registerCacheTag('kelnik:reportList_' . $this->profile->getCompanyId());
 
         $this->arResult['REPORTS'] = $this->getReports();
-        $this->arResult['DISABLED'] = !count($this->arResult['REPORTS']);
+        //$this->arResult['DISABLED'] = !count($this->arResult['REPORTS']);
     }
 
     protected function getReports()
@@ -80,11 +80,7 @@ class ReportList extends Bbc\Basis
                 ]
             ])->fetchCollection();
         } catch (\Exception $e) {
-            return [];
-        }
-
-        if (!$reports->count()) {
-            return [];
+            $reports = new \Kelnik\Report\Model\EO_Reports_Collection();
         }
 
         return $this->prepareReports(
@@ -140,10 +136,6 @@ class ReportList extends Bbc\Basis
      */
     protected function checkList(Collection $reports)
     {
-        if (!$reports->count()) {
-            return $reports;
-        }
-
         $types     = array_keys(ReportsTable::getTypes());
         $curYear   = (int) date('Y');
         $curTime   = ReportsTable::getCurrentTime();
@@ -151,14 +143,15 @@ class ReportList extends Bbc\Basis
 
         $reportsByYear = [];
 
-        foreach ($reports as $report) {
-            $reportsByYear[$report->getYear()][$report->getType()] = $report->getType();
+        if ($reports->count()) {
+            foreach ($reports as $report) {
+                $reportsByYear[$report->getYear()][$report->getType()] = $report->getType();
+            }
         }
 
         if (!isset($reportsByYear[$curYear])) {
             $reportsByYear[$curYear] = $curYear;
         }
-
 
         foreach ($reportsByYear as $year => $yearTypes) {
             $typePeriod = ReportsTable::getTypePeriod($year);
