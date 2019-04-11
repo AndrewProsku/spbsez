@@ -473,6 +473,7 @@ class ReportForm {
 
     onApproveButtonClick(formBlocks, formNumber) {
         const inputs = [];
+        const that = this;
 
         formBlocks.forEach((el) => {
             if (!Utils.keyExist(el.dataset, 'prefilled')) {
@@ -486,7 +487,7 @@ class ReportForm {
 
         Utils.send(`a=confirmForm&id=${this.reportId}&fields=${JSON.stringify(inputs)}`, this.baseUrl, {
             success(response) {
-                if (response.request.status === this.SUCCESS_STATUS) {
+                if (response.request.status === that.SUCCESS_STATUS) {
                     mediator.publish('formApproved', Number(formNumber));
                 }
             },

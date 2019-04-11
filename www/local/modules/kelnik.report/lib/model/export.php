@@ -73,6 +73,11 @@ class Export
         $this->sendFile();
     }
 
+    /**
+     * Выгрузка данных из БД в Excel
+     *
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
     protected function importData()
     {
         $this->spreadsheet->getDefaultStyle()->getProtection()->setHidden(Protection::PROTECTION_UNPROTECTED);
@@ -99,6 +104,12 @@ class Export
         $this->spreadsheet->setActiveSheetIndex(ReportFieldsTable::FORM_COMMON);
     }
 
+    /**
+     * Выборка данных из БД
+     *
+     * @param $formNum - номер формы (от 0 до 6)
+     * @see ReportFieldsTable::getFormConfig
+     */
     protected function loadData($formNum)
     {
         $this->data = [];
@@ -564,6 +575,8 @@ class Export
     }
 
     /**
+     * Получения групп полей по типу stages
+     *
      * @param array $company
      * @return array
      */
@@ -668,7 +681,14 @@ class Export
         return str_replace(',', '.', $val);
     }
 
-    protected function copyRow($rowNumSrc, $rowNumDst)
+    /**
+     * Добавление новой строки через копирование
+     *
+     * @param int $rowNumSrc
+     * @param int $rowNumDst
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    protected function copyRow(int $rowNumSrc, int $rowNumDst)
     {
         $sheet = &$this->spreadsheet->getActiveSheet();
         $sheet->insertNewRowBefore($rowNumDst);
