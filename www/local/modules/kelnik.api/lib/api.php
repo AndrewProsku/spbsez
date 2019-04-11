@@ -189,6 +189,6 @@ class Api
 
         $json['data'] = $this->data;
 
-        return json_encode($json);
+        return json_encode($json, JSON_PARTIAL_OUTPUT_ON_ERROR);
     }
 }

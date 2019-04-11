@@ -127,7 +127,7 @@ class ApiProcessReport extends ApiProcessAbstract
         $groupId = 0;
         $field   = trim(ArrayHelper::getValue($request, 'field'));
         $formNum = trim(ArrayHelper::getValue($request, 'formNum'));
-        $val     = trim(ArrayHelper::getValue($request, 'val'));
+        $val     = htmlentities(trim(ArrayHelper::getValue($request, 'val')));
 
         // Меняем поля самого отчета
         //
@@ -135,6 +135,8 @@ class ApiProcessReport extends ApiProcessAbstract
             $methodName = $field == 'resident-name'
                             ? 'setName'
                             : 'setNameSez';
+
+            $val = mb_substr($val, 0, 255, 'UTF-8');
 
             $this->report->{$methodName}($val);
 
