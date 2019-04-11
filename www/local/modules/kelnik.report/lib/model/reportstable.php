@@ -141,22 +141,29 @@ class ReportsTable extends DataManager
 
     public static function onAfterUpdate(Event $event)
     {
-        $id  = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
+        $id = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
 
-        if (!$id || !Context::getCurrent()->getRequest()->isAdminSection()) {
+        if (!$id) {
             parent::onAfterUpdate($event);
 
             return;
         }
 
         try {
-            if (
-                (int) ArrayHelper::getValue(self::getRowById($id), 'STATUS_ID') == StatusTable::DONE
-            ) {
+            $status = (int) ArrayHelper::getValue(self::getRowById($id), 'STATUS_ID');
+
+            if ($status === StatusTable::DONE) {
                 $sqlHelper = Application::getConnection()->getSqlHelper();
                 Application::getConnection()->query(
                     'UPDATE `' . ReportFieldsTable::getTableName() . '` ' .
                     'SET `COMMENT` = NULL ' .
+                    'WHERE `REPORT_ID` = ' . $sqlHelper->convertToDbInteger($id)
+                );
+            } elseif ($status === StatusTable::CHECKING ) {
+                $sqlHelper = Application::getConnection()->getSqlHelper();
+                Application::getConnection()->query(
+                    'UPDATE `' . ReportFieldsTable::getTableName() . '` ' .
+                    'SET `IS_PRE_FILLED` = ' . $sqlHelper->convertToDbString(ReportFieldsTable::NO) . ' ' .
                     'WHERE `REPORT_ID` = ' . $sqlHelper->convertToDbInteger($id)
                 );
             }

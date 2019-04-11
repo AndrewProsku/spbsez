@@ -90,17 +90,19 @@ class ReportBlock {
     /* eslint-enable max-statements, max-lines-per-function */
 
     approveFormHandler(formID) {
-        if (formID === this.formID) {
-            this.inputs.forEach((input) => {
-                delete input.dataset.prefilled;
-
-                if (!input.closest(`.${this.permissionFormClass}`) &&
-                    !input.closest(`.${this.disabledInputClass}`)) {
-                    this.inputsStatus[input.id] = this.getInputStatus(input);
-                }
-            });
-            this.setBlockStatus();
+        if (formID !== this.formID) {
+            return;
         }
+
+        this.inputs.forEach((input) => {
+            delete input.dataset.prefilled;
+
+            if (!input.closest(`.${this.permissionFormClass}`) &&
+                !input.closest(`.${this.disabledInputClass}`)) {
+                this.inputsStatus[input.id] = this.getInputStatus(input);
+            }
+        });
+        this.setBlockStatus();
     }
 
     initForeignInvestorsBlock(data) {
@@ -131,6 +133,7 @@ class ReportBlock {
                 }
             });
         });
+
         data.fields.forEach((field) => {
             if (field.id === 'foreign-investors-yes' && field.checked) {
                 investorCountries.classList.remove('b-input-block_is_disabled');
@@ -145,6 +148,7 @@ class ReportBlock {
                 }
             }
         });
+
         investorCountriesField.addEventListener('change', () => {
             radios.forEach((radio) => {
                 delete radio.dataset.prefilled;
@@ -198,9 +202,11 @@ class ReportBlock {
                     newValue += Number(input.value);
                 });
                 resultInput.value = newValue;
-            } else {
-                event.target.value = previousValue;
+
+                return;
             }
+
+            event.target.value = previousValue;
         });
     }
 
