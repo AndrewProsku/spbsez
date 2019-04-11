@@ -39,7 +39,7 @@ class ReportList extends Bbc\Basis
         global $USER;
 
         $this->addCacheAdditionalId($USER->GetID());
-        $this->addCacheAdditionalId(date('Y'));
+        $this->addCacheAdditionalId(date('Y-m-d'));
 
         $this->profile = Profile::getInstance((int)$USER->GetID());
 

@@ -21,7 +21,7 @@
 ?>
 <?php foreach ($arResult['REPORTS'] as $year): ?>
     <?php
-        if($year['IS_COMPLETE']) {
+        if($year['IS_COMPLETE'] && $year['NAME'] < date('Y')) {
             $hasArchive = true;
             continue;
         }
@@ -44,7 +44,7 @@
 <h2 class="b-reports-subtitle">Архив очетов</h2>
 
 <?php foreach ($arResult['REPORTS'] as $year): ?>
-    <?php if(!$year['IS_COMPLETE']): continue; endif; ?>
+    <?php if(!$year['IS_COMPLETE'] || $year['NAME'] == date('Y')): continue; endif; ?>
     <h3 class="b-reports-year"><?= $year['NAME']; ?></h3>
     <div class="b-quarters">
         <?php foreach ($year['ELEMENTS'] as $report): ?>
