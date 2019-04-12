@@ -112,7 +112,7 @@ $APPLICATION->SetTitle("For Investors");
             ); ?>
         </div>
     </div>
-    <div class="l-investors__conditions">
+    <div class="l-investors__conditions"  id="investors-conditions">
         <div class="b-invest-conditions">
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
