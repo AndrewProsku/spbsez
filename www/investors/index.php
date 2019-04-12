@@ -123,7 +123,7 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__conditions">
+    <div class="l-investors__conditions" id="investors-conditions">
         <div class="b-invest-conditions">
             <div id="investors-conditions"></div>
 
