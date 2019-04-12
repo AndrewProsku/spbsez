@@ -2,10 +2,10 @@
 <?php if(!empty($arResult['PREV_YEAR_REQUIRED'])): ?>
     <div class="l-reports">
         <div class="b-title b-reports-title">
-            <h1>Не закрыт предыдущий отчетный пероид</h1>
+            <h1>Не закрыт предыдущий отчетный период</h1>
         </div>
         <div class="b-reports-empty">
-            В данный момент вы не можете заполнить текущий отчет, т.к. имеется незавершенный отчет предшествующего пероида.<br><br>
+            В данный момент вы не можете заполнить текущий отчет, т.к. имеется незавершенный отчет предшествующего периода.<br><br>
             Вернуться к <a class="b-link-line" href="<?= $this->__component->getParent()->arParams['SEF_FOLDER']; ?>">списку отчетов</a> резидента.
         </div>
     </div>

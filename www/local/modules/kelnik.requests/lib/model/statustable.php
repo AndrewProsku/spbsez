@@ -65,7 +65,7 @@ class StatusTable extends DataManager
     public static function getNameById($id)
     {
         return $id
-                ? ArrayHelper::getValue(self::getRowById($id), 'NAME')
+                ? ArrayHelper::getValue(self::getRowByIdCached($id), 'NAME')
                 : 0;
     }
 }

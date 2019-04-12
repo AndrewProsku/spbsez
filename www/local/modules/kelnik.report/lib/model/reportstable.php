@@ -16,6 +16,7 @@ use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Report\Events;
 use Kelnik\UserData\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
@@ -56,6 +57,8 @@ class ReportsTable extends DataManager
 
             (new IntegerField('COMPANY_ID'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_COMPANY')),
+            (new IntegerField('USER_ID'))
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_USER')),
 
             (new IntegerField('CREATED_BY'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_CREATED_BY'))
@@ -139,6 +142,12 @@ class ReportsTable extends DataManager
         parent::onAfterAdd($event);
     }
 
+    public static function onBeforeAdd(\Bitrix\Main\ORM\Event $event)
+    {
+        Events::setStatus($event);
+        parent::onBeforeAdd($event);
+    }
+
     public static function onAfterUpdate(Event $event)
     {
         $id = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
@@ -150,7 +159,7 @@ class ReportsTable extends DataManager
         }
 
         try {
-            $status = (int) ArrayHelper::getValue(self::getRowById($id), 'STATUS_ID');
+            $status = (int) ArrayHelper::getValue(self::getRowByIdCached($id), 'STATUS_ID');
 
             if ($status === StatusTable::DONE) {
                 $sqlHelper = Application::getConnection()->getSqlHelper();
@@ -159,7 +168,7 @@ class ReportsTable extends DataManager
                     'SET `COMMENT` = NULL ' .
                     'WHERE `REPORT_ID` = ' . $sqlHelper->convertToDbInteger($id)
                 );
-            } elseif ($status === StatusTable::CHECKING ) {
+            } elseif ($status === StatusTable::CHECKING) {
                 $sqlHelper = Application::getConnection()->getSqlHelper();
                 Application::getConnection()->query(
                     'UPDATE `' . ReportFieldsTable::getTableName() . '` ' .
@@ -170,6 +179,7 @@ class ReportsTable extends DataManager
         } catch (\Exception $e) {
         }
 
+        Events::sendNotify($event);
         parent::onAfterUpdate($event);
     }
 

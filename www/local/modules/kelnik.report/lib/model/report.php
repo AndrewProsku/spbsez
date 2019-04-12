@@ -19,6 +19,7 @@ use Kelnik\UserData\Profile\Profile;
  * @method Report setStatusId(int $id)
  * @method Report setType(int $id)
  * @method Report setCompanyId(int $id)
+ * @method Report setUserId(int $id)
  * @method Report setModifiedBy(int $id)
  * @method Report setDateModified(\Bitrix\Main\Type\DateTime $dtime)
  * @method Report setDateCreated(\Bitrix\Main\Type\DateTime $dtime)
@@ -41,6 +42,7 @@ use Kelnik\UserData\Profile\Profile;
  * @method string getNameSez()
  * @method bool getIsLocked()
  * @method int getCompanyId()
+ * @method int getUserId()
  * @method bool getIsPreFilled()
  * @method \Bitrix\Main\Type\DateTime getDateModified()
  * @method \Bitrix\Main\Type\DateTime getDateCreated()
@@ -72,6 +74,7 @@ class Report extends EO_Reports
         try {
             return $this->setIsLocked(true)
                 ->setModifiedBy(ReportsTable::getUserId())
+                ->setUserId(ReportsTable::getUserId())
                 ->setDateModified(new DateTime())
                 ->save();
         } catch (\Exception $e){
@@ -89,6 +92,7 @@ class Report extends EO_Reports
         try {
             return $this->setIsLocked(false)
                         ->setModifiedBy(ReportsTable::getUserId())
+                        ->setUserId(ReportsTable::getUserId())
                         ->setDateModified(new DateTime())
                         ->save();
         } catch (\Exception $e){
@@ -148,13 +152,13 @@ class Report extends EO_Reports
      * @param int $userId
      * @return bool
      */
-    public function isLastModifier(int $userId = 0)
+    public function isOwner(int $userId = 0)
     {
         if (!$userId) {
             $userId = ReportsTable::getUserId();
         }
 
-        return $this->getModifiedBy() === Profile::getInstance($userId)->getId();
+        return $this->getUserId() === Profile::getInstance($userId)->getId();
     }
 
     /**

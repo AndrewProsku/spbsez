@@ -81,7 +81,7 @@ class ApiProcessReport extends ApiProcessAbstract
 
         // при попытке изменения проверяем блокировку
         //
-        if ($this->action !== 'get' && $this->report->isLocked() && !$this->report->isLastModifier()) {
+        if ($this->action !== 'get' && $this->report->isLocked() && !$this->report->isOwner()) {
             $this->errors[] = Loc::getMessage(
                 'KELNIK_API_REPORT_LOCKED',
                 [
@@ -107,6 +107,7 @@ class ApiProcessReport extends ApiProcessAbstract
         if (!in_array($this->action, self::$notUpdateMethods)) {
             $this->report->setIsLocked(true);
             $this->report->setDateModified(new DateTime());
+            $this->report->setUserId($this->profile->getId());
             $this->report->save();
         }
 
