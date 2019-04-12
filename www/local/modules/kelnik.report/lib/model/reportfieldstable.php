@@ -192,7 +192,8 @@ class ReportFieldsTable extends DataManager
                             ],
                             [
                                 'id' => 'investors-countries',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-1-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-1-2'),
+                                'type' => 'text'
                             ]
                         ]
                     ],
@@ -201,19 +202,23 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'jobs-plan-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'jobs-plan-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-2'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'jobs-actual-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-3')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-3'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'jobs-actual-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-4')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-4'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -222,19 +227,23 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'invests-plan-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'invests-plan-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-2'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'capital-invests-plan-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-3')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-3'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'capital-invests-plan-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-4')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-3-4'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -243,19 +252,23 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'invests-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'invests-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-2'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'capital-invests-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-3')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-3'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'capital-invests-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-4')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-4-4'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -264,11 +277,13 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'revenue-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'revenue-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-2'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -278,18 +293,24 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'produce-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-6-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-6-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'produce-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-6-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-6-2'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
                     [
                         'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-7'),
                         'fields' => [
-                            ['id' => 'salary']
+                            [
+                                'id' => 'salary',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-7'),
+                                'type' => 'int'
+                            ]
                         ]
                     ]
                 ]
@@ -303,43 +324,53 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'taxes-federal-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-federal-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-2'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-regional-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-3')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-3'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-regional-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-4')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-4'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-local-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-5')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-5'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-local-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-6')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-6'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-offbudget-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-7')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-7'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-offbudget-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-8')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-8'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-nds-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-9')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-9'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-nds-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-10')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-1-10'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -348,35 +379,43 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'taxes-breaks-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-breaks-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-2'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-breaks-federal-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-3')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-3'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-breaks-federal-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-4')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-4'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-breaks-local-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-5')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-5'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-breaks-local-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-6')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-6'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-breaks-offbudget-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-7')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-7'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'taxes-breaks-offbudget-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-8')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-8'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -385,11 +424,13 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'custom-duties-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-3-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-3-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'custom-duties-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-3-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-3-2'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -398,11 +439,13 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'custom-duties-breaks-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-4-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-4-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'custom-duties-breaks-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-4-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-4-2'),
+                                'type' => 'float'
                             ]
                         ]
                     ]
@@ -416,7 +459,8 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'area-application',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-1-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-1-1'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -425,11 +469,13 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'area-rent',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-2-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-2-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'area-property',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-2-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-2-1'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -439,7 +485,8 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'object-name-plan',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-3-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-3-1'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -449,7 +496,8 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'capital-object',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-4-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-4-1'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -459,7 +507,8 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'construction-period',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-5-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-5-1'),
+                                'type' => 'text'
                             ]
                         ]
                     ],
@@ -472,19 +521,23 @@ class ReportFieldsTable extends DataManager
                             'fields' => [
                                 [
                                     'id' => 'construction-stage',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-1')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-1'),
+                                    'type' => 'text'
                                 ],
                                 [
                                     'id' => 'construction-permission-num',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-2')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-2'),
+                                    'type' => 'text'
                                 ],
                                 [
                                     'id' => 'construction-permission-file',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-3')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-3'),
+                                    'type' => 'file'
                                 ],
                                 [
                                     'id' => 'construction-permission-date',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-4')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-4'),
+                                    'type' => 'date'
                                 ]
                             ]
                         ]
@@ -499,7 +552,8 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'office-application',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-4')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-4'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -508,7 +562,8 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'office-rent',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-4')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-4'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -521,19 +576,23 @@ class ReportFieldsTable extends DataManager
                             'fields' => [
                                 [
                                     'id' => 'construction-stage',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-3-1')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-3-1'),
+                                    'type' => 'text'
                                 ],
                                 [
                                     'id' => 'construction-permission-num',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-3-2')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-3-2'),
+                                    'type' => 'text'
                                 ],
                                 [
                                     'id' => 'construction-permission-file',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-3-3')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-3-3'),
+                                    'type' => 'file'
                                 ],
                                 [
                                     'id' => 'construction-permission-date',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-3-4')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-3-4'),
+                                    'type' => 'date'
                                 ]
                             ]
                         ]
@@ -548,11 +607,13 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'export-volume-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-1-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-1-1'),
+                                'type' => 'float'
                             ],
                             [
                                 'id' => 'export-volume-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-1-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-1-2'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -565,11 +626,13 @@ class ReportFieldsTable extends DataManager
                             'fields' => [
                                 [
                                     'id' => 'export-countries',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-2-1')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-2-1'),
+                                    'type' => 'text'
                                 ],
                                 [
                                     'id' => 'export-code',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-2-2')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-2-2'),
+                                    'type' => 'text'
                                 ]
                             ]
                         ]
@@ -602,7 +665,8 @@ class ReportFieldsTable extends DataManager
                             'fields' => [
                                 [
                                     'id' => 'innovation',
-                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-4-1')
+                                    'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-4-1'),
+                                    'type' => 'text'
                                 ]
                             ]
                         ]
@@ -612,7 +676,8 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'high-productive-jobs',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-5-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_5-5-1'),
+                                'type' => 'int'
                             ]
                         ]
                     ]
@@ -626,7 +691,8 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'intangible-assets',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_6-1-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_6-1-1'),
+                                'type' => 'float'
                             ]
                         ]
                     ],
@@ -635,7 +701,8 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'degrees-employees',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_6-2-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_6-2-1'),
+                                'type' => 'int'
                             ]
                         ]
                     ]
@@ -651,24 +718,84 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'result-type',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_7-1-1')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_7-1-1'),
+                                'type' => 'longText'
                             ],
                             [
                                 'id' => 'result-description',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_7-1-2')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_7-1-2'),
+                                'type' => 'longText'
                             ],
                             [
                                 'id' => 'result-date',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_7-1-3')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_7-1-3'),
+                                'type' => 'longText'
                             ],
                             [
                                 'id' => 'result-commercialization',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_7-1-4')
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_7-1-4'),
+                                'type' => 'longText'
                             ]
                         ]
                     ]
                 ]
             ]
+        ];
+    }
+
+    public static function getFormFieldType($fieldName, $formNum)
+    {
+        $blocks = ArrayHelper::getValue(self::getFormConfig(), $formNum . '.blocks', []);
+
+        foreach ($blocks as $block) {
+
+            $fields = !empty($block['multiple']['fields'])
+                        ? $block['multiple']['fields']
+                        : ArrayHelper::getValue($block, 'fields', []);
+
+            if (!$fields) {
+                continue;
+            }
+
+            foreach ($fields as $field) {
+                if ($field['id'] === $fieldName) {
+                    return ArrayHelper::getValue($field, 'type', 'text');
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static function getFieldTypes()
+    {
+        return [
+            'float' => function($val) {
+                return (float) round($val, 2);
+            },
+            'int' => function ($val) {
+                return (int) $val;
+            },
+            'text' => function ($val) {
+                return substr(
+                    htmlspecialchars(strip_tags((string)$val), ENT_QUOTES, 'UTF-8'),
+                    0,
+                    255
+                );
+            },
+            'longText' => function ($val) {
+                return substr(
+                    htmlspecialchars(strip_tags((string)$val), ENT_QUOTES, 'UTF-8'),
+                    0,
+                    1000
+                );
+            },
+            'boolean' => function ($val) {
+                return ((string)$val) === 'yes' ? 'yes' : 'no';
+            },
+            'date' => function ($val) {
+                return date('Y-m-d', strtotime((string)$val));
+            }
         ];
     }
 

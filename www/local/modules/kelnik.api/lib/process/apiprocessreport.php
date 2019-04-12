@@ -127,7 +127,7 @@ class ApiProcessReport extends ApiProcessAbstract
         $groupId = 0;
         $field   = trim(ArrayHelper::getValue($request, 'field'));
         $formNum = trim(ArrayHelper::getValue($request, 'formNum'));
-        $val     = htmlentities(trim(ArrayHelper::getValue($request, 'val')));
+        $val     = trim(ArrayHelper::getValue($request, 'val'));
 
         // Меняем поля самого отчета
         //
@@ -136,7 +136,7 @@ class ApiProcessReport extends ApiProcessAbstract
                             ? 'setName'
                             : 'setNameSez';
 
-            $val = mb_substr($val, 0, 255, 'UTF-8');
+            $val = call_user_func(ReportFieldsTable::getFieldTypes()['text'], $val);
 
             $this->report->{$methodName}($val);
 
@@ -160,6 +160,8 @@ class ApiProcessReport extends ApiProcessAbstract
                 return false;
             }
         }
+
+        $val = self::prepareFieldValue($val, $field, $formNum);
 
         $data = [
             'NAME' => $field,
@@ -409,5 +411,15 @@ class ApiProcessReport extends ApiProcessAbstract
 
         $groupId = (int) ArrayHelper::getValue($matches, 'parent', 0);
         $field = ArrayHelper::getValue($matches, 'field');
+    }
+
+    protected static function prepareFieldValue($val, $fieldName, $formNum)
+    {
+        $fieldType = ReportFieldsTable::getFormFieldType($fieldName, $formNum);
+        $types     = ReportFieldsTable::getFieldTypes();
+
+        return $fieldType && isset($types[$fieldType])
+                ? call_user_func($types[$fieldType], $val)
+                : '';
     }
 }
