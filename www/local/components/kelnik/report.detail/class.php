@@ -113,7 +113,7 @@ class ReportDetail extends Bbc\Basis
             return true;
         }
 
-        if ($report->isLocked() && !$report->isLastModifier()) {
+        if ($report->isLocked() && !$report->isOwner()) {
             $this->arResult['IS_LOCKED'] = true;
             $this->arResult['TIME_LEFT'] = FormatDate('idiff', time(), $report->getLockExpiredTime());
 
@@ -195,6 +195,7 @@ class ReportDetail extends Bbc\Basis
                     ->setType($elementType)
                     ->setStatusId(StatusTable::NEW)
                     ->setCompanyId($this->profile->getCompanyId())
+                    ->setUserId($this->profile->getId())
                     ->setName($this->profile->getCompanyName())
                     ->setModifiedBy($this->profile->getId())
                     ->setDateModified(new DateTime());

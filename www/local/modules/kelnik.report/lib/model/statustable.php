@@ -81,4 +81,11 @@ class StatusTable extends DataManager
             Loc::getMessage('KELNIK_REPORT_STATUS_BUTTON_NAME_VIEW')
         );
     }
+
+    public static function getNameById($id)
+    {
+        return $id
+            ? ArrayHelper::getValue(self::getRowByIdCached($id), 'NAME')
+            : 0;
+    }
 }
