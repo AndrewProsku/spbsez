@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS `kelnik_report` (
   `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `COMPANY_ID` int(11) unsigned NOT NULL DEFAULT '0',
+  `USER_ID` int(11) unsigned NOT NULL DEFAULT '0',
   `CREATED_BY` int(11) unsigned NOT NULL DEFAULT '0',
   `MODIFIED_BY` int(11) unsigned NOT NULL DEFAULT '0',
   `STATUS_ID` int(11) unsigned NOT NULL DEFAULT '0',
