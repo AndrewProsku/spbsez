@@ -293,6 +293,20 @@
 
 .b-vacancy-response-form__inputs {
     @include padding-level(bottom, green);
+    display: flex;
+    flex-direction: column;
+}
+
+.b-vacancy-response-form__note {
+    order: 100;
+    opacity: .72;
+    padding-left: 16px;
+    padding-top: 5px;
+    font-size: 14px;
+
+    @media #{$laptop} {
+        font-size: 16px;
+    }
 }
 
 .b-vacancies-popup__success {
