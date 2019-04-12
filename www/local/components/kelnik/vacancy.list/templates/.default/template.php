@@ -121,7 +121,7 @@
                 <span class="b-form-block__error-text">Текст подсказки</span>
             </div>
             <div class="b-form-block b-input-file j-vacancy-resume">
-                <input type="file" class="b-input-file__input"
+                <input type="file" class="b-input-file__input" accept=".doc,.docx,.pdf,.xls,.xlsx"
                        id="vacancy-resume"
                        name="resume">
                 <div class="b-input-file__text b-pseudo-input"> </div>
