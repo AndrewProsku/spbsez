@@ -60,12 +60,13 @@ class ApiProcessLogin extends ApiProcessAbstract
         try {
             $this->data['auth'] = $USER->Login($userData['LOGIN'], $data['password'], 'N');
         } catch (\Exception $e) {
+            die($e->getMessage());
         }
 
         if (true === $this->data['auth']) {
             $this->data['backUrl'] = '/cabinet/';
         } else {
-            $this->data['error'] = ArrayHelper::getValue($this->data['auth'], 'MESSAGE', '');
+            $this->data['error'] = $this->errors[] = strip_tags(ArrayHelper::getValue($this->data['auth'], 'MESSAGE'));
             $this->data['auth'] = false;
         }
 
