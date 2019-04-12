@@ -1,5 +1,6 @@
 <?php
 
 $MESS['KELNIK_INFRA_COMP_PLATFORM'] = 'Site';
+$MESS['KELNIK_INFRA_GENERAL_INFO'] = 'General information';
 $MESS['KELNIK_INFRA_COMP_LIST'] = 'List';
 $MESS['KELNIK_INFRA_COMP_ON_MAP'] = 'Map';
