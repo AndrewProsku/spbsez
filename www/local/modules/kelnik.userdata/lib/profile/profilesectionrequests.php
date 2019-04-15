@@ -155,6 +155,10 @@ class ProfileSectionRequests extends ProfileSectionAbstract
                     'name' => 'timeFrom',
                     'type' => 'date'
                 ],
+                'DATE_FINISH' => [
+                    'name' => 'timeTo',
+                    'type' => 'date'
+                ],
                 'TARGET' => [
                     'name' => 'visitTarget'
                 ],
