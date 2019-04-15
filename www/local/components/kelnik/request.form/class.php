@@ -71,7 +71,7 @@ class RequestForm extends Bbc\Basis
                 'order' => [
                     'SORT' => 'ASC'
                 ]
-            ]);
+            ])->fetchAll();
 
             $lang = strtoupper(Context::getCurrent()->getLanguage());
 
