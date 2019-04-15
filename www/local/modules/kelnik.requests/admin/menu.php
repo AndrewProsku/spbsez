@@ -8,6 +8,8 @@ use Kelnik\Requests\Model\AdminInterface\PermitListHelper;
 use Kelnik\Requests\Model\AdminInterface\PermitEditHelper;
 use Kelnik\Requests\Model\AdminInterface\ServiceEditHelper;
 use Kelnik\Requests\Model\AdminInterface\ServiceListHelper;
+use Kelnik\Requests\Model\AdminInterface\ServiceTypeEditHelper;
+use Kelnik\Requests\Model\AdminInterface\ServiceTypeListHelper;
 use Kelnik\Requests\Model\AdminInterface\SiteMsgListHelper;
 use Kelnik\Requests\Model\AdminInterface\SiteMsgEditHelper;
 use Kelnik\Requests\Model\AdminInterface\StandardListHelper;
@@ -57,10 +59,32 @@ return [
                 'sort' => 100,
                 'icon' => 'iblock_menu_icon',
                 'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_REQ_TYPES'),
+                'url' => TypeListHelper::getUrl(),
+                'more_url' => [
+                    TypeEditHelper::getUrl(),
+                ]
+            ],
+            [
+                'parent_menu' => 'global_menu_content',
+                'sort' => 100,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
                 'text' => Loc::getMessage('KELNIK_REQ_PERMIT'),
                 'url' => PermitListHelper::getUrl(),
                 'more_url' => [
                     PermitEditHelper::getUrl(),
+                ]
+            ],
+            [
+                'parent_menu' => 'global_menu_content',
+                'sort' => 100,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_REQ_AREAS'),
+                'url' => AreaListHelper::getUrl(),
+                'more_url' => [
+                    AreaEditHelper::getUrl(),
                 ]
             ],
             [
@@ -90,21 +114,10 @@ return [
                 'sort' => 100,
                 'icon' => 'iblock_menu_icon',
                 'page_icon' => 'iblock_menu_icon',
-                'text' => Loc::getMessage('KELNIK_REQ_TYPES'),
-                'url' => TypeListHelper::getUrl(),
+                'text' => Loc::getMessage('KELNIK_REQ_SERVICE_TYPES'),
+                'url' => ServiceTypeListHelper::getUrl(),
                 'more_url' => [
-                    TypeEditHelper::getUrl(),
-                ]
-            ],
-            [
-                'parent_menu' => 'global_menu_content',
-                'sort' => 100,
-                'icon' => 'iblock_menu_icon',
-                'page_icon' => 'iblock_menu_icon',
-                'text' => Loc::getMessage('KELNIK_REQ_AREAS'),
-                'url' => AreaListHelper::getUrl(),
-                'more_url' => [
-                    AreaEditHelper::getUrl(),
+                    ServiceTypeEditHelper::getUrl(),
                 ]
             ],
             [

@@ -7,5 +7,5 @@ use Kelnik\AdminHelper\Helper\AdminListHelper;
 
 class TypeListHelper extends AdminListHelper
 {
-	protected static $model = '\Kelnik\Requests\Model\TypeTable';
+    protected static $model = '\Kelnik\Requests\Model\TypeTable';
 }
