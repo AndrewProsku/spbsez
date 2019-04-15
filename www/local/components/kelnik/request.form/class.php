@@ -6,7 +6,6 @@ use Bex\Bbc;
 use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Requests\Model\AreaTable;
-use Kelnik\Requests\Model\ServiceTable;
 use Kelnik\Requests\Model\ServiceTypeTable;
 use Kelnik\Requests\Model\TypeTable;
 use Kelnik\UserData\Profile\Profile;

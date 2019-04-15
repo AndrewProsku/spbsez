@@ -31,7 +31,7 @@
                     <?php endif; ?>
                 </div>
 
-                <div class="b-form-block<?php if(!empty($arResult['ERRORS']['FIELDS']['NAME'])): ?> b-form-block-error<?php endif; ?>">
+                <div class="b-form-block b-form-block_is_long-label<?php if(!empty($arResult['ERRORS']['FIELDS']['NAME'])): ?> b-form-block-error<?php endif; ?>">
                     <input id="organization"
                         class="b-input-text"
                         type="text"
@@ -49,25 +49,114 @@
                     <?php endif; ?>
                 </div>
 
-                <div class="b-form-block<?php if(!empty($arResult['ERRORS']['FIELDS']['DATE_START'])): ?> b-form-block-error<?php endif; ?>">
-                    <input id="visitTime"
-                        class="b-input-text"
-                        type="text"
-                        name="timeFrom"
-                        maxlength=""
-                        autocomplete=""
-                        value="<?= $arResult['FORM']['DATE_START']; ?>"
-                        placeholder=""
-                        required data-date="true">
-                    <label for="theme-request" class="b-form-block__label">
+                <div class="b-form-block b-form-block_is_date<?php if(!empty($arResult['ERRORS']['FIELDS']['DATE_START']) || !empty($arResult['ERRORS']['FIELDS']['DATE_FINISH'])): ?> b-form-block-error<?php endif; ?>">
+                    <div class="b-form-block__date">
+                        <span class="b-form-block__def">С</span>
+                        <input
+                            id="visitTimeFrom"
+                            class="b-input-text j-input-value-from j-input-calendar"
+                            type="text"
+                            name="timeFrom"
+                            maxlength=""
+                            autocomplete=""
+                            value=""
+                            placeholder=""
+                            required readonly data-date="true" data-date-class='j-date-from'
+                        >
+                        <label for="theme-request" class="b-form-block__label">
+                            Дата и время визита «C»
+                        </label>
+                    </div>
+
+                    <div class="b-form-block__date">
+                        <span class="b-form-block__def">До</span>
+                        <input
+                            id="visitTimeTo"
+                            class="b-input-text j-input-value-to j-input-calendar"
+                            type="text"
+                            name="timeTo"
+                            maxlength=""
+                            autocomplete=""
+                            value=""
+                            placeholder=""
+                            required readonly data-date="true" data-date-class='j-date-to'
+                        >
+                        <label for="theme-request" class="b-form-block__label">
+                            Дата и время визита «До»
+                        </label>
+                    </div>
+
+                    <div class="b-form-block-calendar j-form-block-calendars">
+                        <div class="b-input-date j-input-date j-date-from"
+                             data-from-year=""
+                             data-from-month=""
+                             data-show-months="4"
+                             data-value-selector="j-input-value-from"
+                             data-name="dateFrom"
+                             data-sync-from="dateTo"
+                             data-sync-to="">
+
+                            <div class="b-input-date__title">С</div>
+
+                            <ul class="b-input-date__head">
+                                <li class="b-input-date__head-item">Пн</li>
+                                <li class="b-input-date__head-item">Вт</li>
+                                <li class="b-input-date__head-item">Ср</li>
+                                <li class="b-input-date__head-item">Чт</li>
+                                <li class="b-input-date__head-item">Пт</li>
+                                <li class="b-input-date__head-item b-input-date__head-item_is_disabled">Сб</li>
+                                <li class="b-input-date__head-item b-input-date__head-item_is_disabled">Вс</li>
+                            </ul>
+
+                            <div class="b-input-date__content j-input-date-content"></div>
+
+                            <div class="b-input-date__addition">
+                                <div class="b-input-date__time">
+                                    <input type="text" class="j-input-date-time">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="b-input-date j-input-date j-date-to"
+                             data-from-year=""
+                             data-from-month=""
+                             data-show-months="4"
+                             data-value-selector="j-input-value-to"
+                             data-name="dateTo"
+                             data-sync-from=""
+                             data-sync-to="dateFrom">
+
+                            <div class="b-input-date__title">До</div>
+
+                            <ul class="b-input-date__head">
+                                <li class="b-input-date__head-item">Пн</li>
+                                <li class="b-input-date__head-item">Вт</li>
+                                <li class="b-input-date__head-item">Ср</li>
+                                <li class="b-input-date__head-item">Чт</li>
+                                <li class="b-input-date__head-item">Пт</li>
+                                <li class="b-input-date__head-item b-input-date__head-item_is_disabled">Сб</li>
+                                <li class="b-input-date__head-item b-input-date__head-item_is_disabled">Вс</li>
+                            </ul>
+
+                            <div class="b-input-date__content j-input-date-content"></div>
+
+                            <div class="b-input-date__addition">
+                                <div class="b-input-date__time">
+                                    <input type="text" class="j-input-date-time">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label class="b-form-block__label">
                         Дата и время визита
                     </label>
-                    <?php if(!empty($arResult['ERRORS']['FIELDS']['DATE_START'])): ?>
-                        <span class="b-form-block__error-text"><?= $arResult['ERRORS']['FIELDS']['DATE_START']; ?></span>
+                    <?php if(!empty($arResult['ERRORS']['FIELDS']['DATE_START']) || !empty($arResult['ERRORS']['FIELDS']['DATE_FINISH'])): ?>
+                        <span class="b-form-block__error-text"><?= implode(', ', [$arResult['ERRORS']['FIELDS']['DATE_START'], $arResult['ERRORS']['FIELDS']['DATE_FINISH']]); ?></span>
                     <?php endif; ?>
                 </div>
 
-                <div class="b-form-block<?php if(!empty($arResult['ERRORS']['FIELDS']['TARGET'])): ?> b-form-block-error<?php endif; ?>">
+                <div class="b-form-block b-form-block_is_long-label<?php if(!empty($arResult['ERRORS']['FIELDS']['TARGET'])): ?> b-form-block-error<?php endif; ?>">
                     <input id="visitTarget"
                         class="b-input-text"
                         type="text"
@@ -85,7 +174,7 @@
                     <?php endif; ?>
                 </div>
 
-                <div class="b-form-block<?php if(!empty($arResult['ERRORS']['FIELDS']['EXECUTIVE_COMPANY'])): ?> b-form-block-error<?php endif; ?>">
+                <div class="b-form-block b-form-block_is_long-label<?php if(!empty($arResult['ERRORS']['FIELDS']['EXECUTIVE_COMPANY'])): ?> b-form-block-error<?php endif; ?>">
                     <input id="executiveCompany"
                         class="b-input-text"
                         type="text"
@@ -103,7 +192,7 @@
                     <?php endif; ?>
                 </div>
 
-                <div class="b-form-block b-form-block_theme_grey<?php if(!empty($arResult['ERRORS']['FIELDS']['EXECUTIVE_VISIT'])): ?> b-form-block-error<?php endif; ?>">
+                <div class="b-form-block b-form-block_theme_grey b-form-block_is_long-label<?php if(!empty($arResult['ERRORS']['FIELDS']['EXECUTIVE_VISIT'])): ?> b-form-block-error<?php endif; ?>">
                     <input id="executiveVisit"
                         class="b-input-text"
                         type="text"
@@ -121,7 +210,7 @@
                     <?php endif; ?>
                 </div>
 
-                <div class="b-form-block<?php if(!empty($arResult['ERRORS']['FIELDS']['PHONE'])): ?> b-form-block-error<?php endif; ?>">
+                <div class="b-form-block b-form-block_is_long-label<?php if(!empty($arResult['ERRORS']['FIELDS']['PHONE'])): ?> b-form-block-error<?php endif; ?>">
                     <input id="phone"
                         class="b-input-phone"
                         type="tel"
