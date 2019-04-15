@@ -63,9 +63,7 @@ define("PATH_TO_404", '/404.php'); ?>
     <?php include 'inc_notify_old_browser.php'; ?>
     <div class="l-layout">
         <header class="l-home__header<?php if($isRegularPage): ?> inner-header<?php endif; ?> j-home__header">
-            <div class="l-home__header-left">
-                <a href="<?= LANG_DIR; ?>" class="b-logo__link lang-<?=LANGUAGE_ID; ?>" title="<?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_BACK_TO_MAIN'); ?>"></a>
-            </div>
+            <div class="l-home__header-left"><a href="<?= LANG_DIR; ?>" class="b-logo__link lang-<?=LANGUAGE_ID; ?>" title="<?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_BACK_TO_MAIN'); ?>"></a></div>
             <?php if(LANG_DIR !== \SezLang::CHINESE_DIR): ?>
                 <div class="l-home__header-center">
                     <?$APPLICATION->IncludeComponent(

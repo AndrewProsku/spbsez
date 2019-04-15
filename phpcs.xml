@@ -7,6 +7,7 @@
     <exclude-pattern>www/local/php_interface/lib/*</exclude-pattern>
     <exclude-pattern>www/local/components/*/templates/*</exclude-pattern>
     <exclude-pattern>www/local/modules/*/install/components/*/templates/*</exclude-pattern>
+    <exclude-pattern>www/local/templates/*</exclude-pattern>
     <exclude-pattern>www/bitrix/*</exclude-pattern>
     <exclude-pattern>vendor/*</exclude-pattern>
 
