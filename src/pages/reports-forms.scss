@@ -131,6 +131,7 @@
     input[type="password"],
     input[type="email"],
     input[type="tel"],
+    input[type="number"],
     textarea {
         @include font-size("p2");
         font-family: inherit;

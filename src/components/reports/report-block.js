@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import InputFile from 'components/forms/file';
+import inputmask from 'inputmask';
 import Mediator from 'common/scripts/mediator';
 import Select from 'components/forms/select';
 import templateError from './templates/input-error.twig';
@@ -29,6 +30,7 @@ class ReportBlock {
         this.fileInputClass = 'j-file-input-block';
         this.resultDeleteButtonClass = 'j-delete-result';
         this.disabledInputClass = 'b-input-block_is_disabled';
+        this.numericInputClass = 'b-input-text_type_numeric';
 
         /**
          * Данные о состоянии инпутов блока, полученные от сервера
@@ -59,6 +61,15 @@ class ReportBlock {
             innovations         : 'initInnovationsBlock',
             results             : 'initResultBlock'
         };
+
+        const numericInputs = this.target.querySelectorAll(`.${this.numericInputClass}`);
+
+        if (numericInputs.length) {
+            inputmask({
+                alias     : 'numeric',
+                rightAlign: false
+            }).mask(numericInputs);
+        }
 
         mediator.subscribe('formApproved', (formID) => {
             this.approveFormHandler(formID);

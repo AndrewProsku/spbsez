@@ -10,14 +10,16 @@
             <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "export-volume-all",
-                    name: "export-volume-all"
+                    name: "export-volume-all",
+                    modify: "b-input-text_type_numeric"
                 } %}
                 <label class="b-input-block__label" for="export-volume-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
             </div>
             <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "export-volume-year",
-                    name: "export-volume-year"
+                    name: "export-volume-year",
+                    modify: "b-input-text_type_numeric"
                 } %}
                 <label class="b-input-block__label" for="export-volume-year">С начала текущего года,&#160;млн&#160;₽</label>
             </div>
@@ -88,7 +90,8 @@
         <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "high-productive-jobs",
-                name: "high-productive-jobs"
+                name: "high-productive-jobs",
+                modify: "b-input-text_type_numeric"
             } %}
             <label class="b-input-block__label" for="high-productive-jobs">Количество рабочих мест</label>
         </div>

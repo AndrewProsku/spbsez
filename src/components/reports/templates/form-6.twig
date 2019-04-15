@@ -11,7 +11,8 @@
         <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "intangible-assets",
-                name: "intangible-assets"
+                name: "intangible-assets",
+                modify: "b-input-text_type_numeric"
             } %}
             <label class="b-input-block__label" for="intangible-assets">Сумма нематериальных активов,&#160;млн&#160;₽</label>
         </div>
@@ -26,7 +27,8 @@
         <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "degrees-employees",
-                name: "degrees-employees"
+                name: "degrees-employees",
+                modify: "b-input-text_type_numeric"
             } %}
             <label class="b-input-block__label" for="degrees-employees">Сотрудники компании-резидента находящиеся в штате</label>
         </div>
