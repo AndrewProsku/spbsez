@@ -7,6 +7,7 @@ use Bitrix\Main\Localization\Loc;
 use Kelnik\Api\Api;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Requests\Model\ServiceTable;
+use Kelnik\Requests\Model\ServiceTypeTable;
 
 /**
  * Class ApiProcessService
@@ -40,7 +41,7 @@ class ApiProcessService extends ApiProcessAbstract
 
         $data = [];
 
-        $types = ServiceTable::getTypes();
+        $types = ServiceTypeTable::getAssoc(['cache' => ['ttl' => 60]], 'ID');
 
         foreach ($fields as $k => $v) {
             $data[$k] = $k == 'TYPE_ID'

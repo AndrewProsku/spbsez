@@ -8,5 +8,5 @@ use Kelnik\Requests\Model\AreaTable;
 
 class AreaListHelper extends AdminListHelper
 {
-	protected static $model = AreaTable::class;
+    protected static $model = AreaTable::class;
 }

@@ -9,18 +9,14 @@ use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
-class TypeTable extends DataManager
+class ServiceTypeTable extends DataManager
 {
-    public const SUB_TYPE_SERVICE = 'service';
-    public const SUB_TYPE_STANDARD = 'standard';
-    public const SUB_TYPE_PERMIT = 'permit';
-
     /**
      * {@inheritdoc}
      */
     public static function getTableName()
     {
-        return 'kelnik_request_types';
+        return 'kelnik_request_service_types';
     }
 
     /**
@@ -56,16 +52,25 @@ class TypeTable extends DataManager
                 [
                     'title' => Loc::getMessage('KELNIK_REQ_NAME')
                 ]
+            ),
+            new StringField(
+                'NAME_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_NAME_EN')
+                ]
+            ),
+            new StringField(
+                'NAME_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_NAME_EN')
+                ]
+            ),
+            new StringField(
+                'EMAIL',
+                [
+                    'title' => Loc::getMessage('KELNIK_REQ_EMAIL')
+                ]
             )
-        ];
-    }
-
-    public static function getFormTypes()
-    {
-        return [
-            self::SUB_TYPE_PERMIT => Loc::getMessage('KELNIK_REQ_SUB_TYPE_PERMIT'),
-            self::SUB_TYPE_SERVICE => Loc::getMessage('KELNIK_REQ_SUB_TYPE_SERVICE'),
-            self::SUB_TYPE_STANDARD => Loc::getMessage('KELNIK_REQ_SUB_TYPE_STANDARD')
         ];
     }
 }

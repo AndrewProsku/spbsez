@@ -7,5 +7,5 @@ use Kelnik\AdminHelper\Helper\AdminListHelper;
 
 class StatusListHelper extends AdminListHelper
 {
-	protected static $model = '\Kelnik\Requests\Model\StatusTable';
+    protected static $model = '\Kelnik\Requests\Model\StatusTable';
 }

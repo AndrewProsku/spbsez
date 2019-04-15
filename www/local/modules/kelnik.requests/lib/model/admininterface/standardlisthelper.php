@@ -6,5 +6,5 @@ use Kelnik\AdminHelper\Helper\AdminListHelper;
 
 class StandardListHelper extends AdminListHelper
 {
-	protected static $model = '\Kelnik\Requests\Model\StandardTable';
+    protected static $model = '\Kelnik\Requests\Model\StandardTable';
 }

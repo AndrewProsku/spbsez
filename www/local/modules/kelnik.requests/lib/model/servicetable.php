@@ -2,6 +2,7 @@
 
 namespace Kelnik\Requests\Model;
 
+use Bitrix\Main\Context;
 use Bitrix\Main\Entity\DatetimeField;
 use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Entity\IntegerField;
@@ -20,12 +21,8 @@ Loc::loadMessages(__FILE__);
  */
 class ServiceTable extends DataManager
 {
-
-    public const TYPE_OFFICE = 1;
-    public const TYPE_CONFERENCE = 2;
-    public const TYPE_DPC = 3;
-
     public const REQUEST_TIME_LEFT = 60; // 1 min
+
     /**
      * {@inheritdoc}
      */
@@ -114,14 +111,34 @@ class ServiceTable extends DataManager
 
     public static function onAfterAdd(Event $event)
     {
+        if (Context::getCurrent()->getRequest()->isAdminSection()) {
+            parent::onAfterAdd($event);
+
+            return;
+        }
+
         try {
-            \Bitrix\Main\Mail\Event::sendImmediate([
-                'EVENT_NAME' => 'MESSAGE_SERVICE_FORM',
-                'LID' => SITE_ID,
-                'FIELDS' => [
-                    'LINK' => self::getUrl(ArrayHelper::getValue($event->getParameters(), 'id', 0))
-                ]
-            ]);
+            $types  = ServiceTypeTable::getAssoc(['cache' => ['ttl' => 60]], 'ID');
+            $typeId = ArrayHelper::getValue($event->getParameters(), 'fields.TYPE_ID', 0);
+
+            $emails = explode(',', ArrayHelper::getValue($types, $typeId . '.EMAIL'));
+
+            if ($emails) {
+                foreach ($emails as $email) {
+                    $email = trim($email);
+                    if (!$email) {
+                        continue;
+                    }
+                    \Bitrix\Main\Mail\Event::sendImmediate([
+                        'EVENT_NAME' => 'MESSAGE_SERVICE_FORM',
+                        'LID' => SITE_ID,
+                        'FIELDS' => [
+                            'LINK' => self::getUrl(ArrayHelper::getValue($event->getParameters(), 'id', 0)),
+                            'EMAIL_TO' => $email
+                        ]
+                    ]);
+                }
+            }
         } catch (\Exception $e) {
         }
 
@@ -148,15 +165,6 @@ class ServiceTable extends DataManager
                 '>=DATE_CREATED' => DateTime::createFromTimestamp(time() - self::REQUEST_TIME_LEFT)
             ]
         ]);
-    }
-
-    public static function getTypes()
-    {
-        return [
-            self::TYPE_OFFICE => Loc::getMessage('KELNIK_REQ_TYPE_1'),
-            self::TYPE_CONFERENCE => Loc::getMessage('KELNIK_REQ_TYPE_2'),
-            self::TYPE_DPC => Loc::getMessage('KELNIK_REQ_TYPE_3')
-        ];
     }
 
     public static function getUrl($id)
