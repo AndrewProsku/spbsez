@@ -54,7 +54,9 @@ define("PATH_TO_404", '/404.php');
     </script>
 </head>
 <body>
+    <?php if($USER->IsAuthorized()): ?>
     <div id="panel"><?$APPLICATION->ShowPanel();?></div>
+    <?php endif; ?>
     <?php if($showAnimation): ?>
     <div id="j-particles" class="background-particles j-particles"></div>
     <?php endif; ?>
