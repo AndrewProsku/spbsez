@@ -1,6 +1,6 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetPageProperty('title', "Инфраструктура | ОЭЗ СПб");
+$APPLICATION->SetPageProperty('title', "Инфраструктура");
 $APPLICATION->SetTitle("Площадки особой экономической зоны «Санкт-Петербург»");
 ?>
 

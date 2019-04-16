@@ -10,6 +10,7 @@ use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\AdminHelper\Widget\TextAreaWidget;
 use Kelnik\Requests\Model\ServiceTable;
+use Kelnik\Requests\Model\ServiceTypeTable;
 
 Loc::loadMessages(__FILE__);
 
@@ -43,7 +44,7 @@ class ServiceAdminInterface extends AdminInterface
                     ],
                     'TYPE_ID' => [
                         'WIDGET' => new ComboBoxWidget(),
-                        'VARIANTS' => ServiceTable::getTypes(),
+                        'VARIANTS' => ServiceTypeTable::getAdminAssocList(),
                         'READONLY' => true,
                         'HIDE_WHEN_CREATE' => true
                     ],

@@ -1,6 +1,6 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetPageProperty('title', "Новости | ОЭЗ СПб");
+$APPLICATION->SetPageProperty('title', "Новости");
 $APPLICATION->SetTitle("Новости");
 ?>
 

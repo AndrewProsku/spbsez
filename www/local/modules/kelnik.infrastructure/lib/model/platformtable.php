@@ -238,4 +238,33 @@ class PlatformTable extends DataManager
 
         return self::getAssoc($filter, 'ID', 'NAME_');
     }
+
+    public static function getActiveList($short = false)
+    {
+        $select = [
+            'ID', 'ALIAS', 'NAME_RU', 'NAME_EN'
+        ];
+
+        if (!$short) {
+            $select = array_merge(
+                $select,
+                [
+                    'IMAGE_ID',
+                    'MAP_COORDS_LAT',
+                    'MAP_COORDS_LNG',
+                    'TEXT_RU', 'TEXT_EN'
+                ]
+            );
+        }
+
+        return self::getAssoc([
+            'select' => $select,
+            'filter' => [
+                '=ACTIVE' => self::YES
+            ],
+            'order' => [
+                'SORT' => 'ASC'
+            ]
+        ]);
+    }
 }

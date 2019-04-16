@@ -15,8 +15,8 @@
                                 class="b-select__list j-select"
                                 name="type"
                                 data-placeholder="">
-                            <?php foreach ($arResult['TYPES'] as $typeId => $typeName): ?>
-                                <option value="<?= $typeId; ?>"><?= $typeName; ?></option>
+                            <?php foreach ($arResult['TYPES'] as $type): ?>
+                                <option value="<?= $type['ID']; ?>"><?= $type['NAME']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

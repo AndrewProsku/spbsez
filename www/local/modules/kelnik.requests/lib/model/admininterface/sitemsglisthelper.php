@@ -7,5 +7,5 @@ use Kelnik\Requests\Model\SiteMsgTable;
 
 class SiteMsgListHelper extends AdminListHelper
 {
-	protected static $model = SiteMsgTable::class;
+    protected static $model = SiteMsgTable::class;
 }
