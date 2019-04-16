@@ -8,7 +8,7 @@ try {
         getLocalPath('components/kelnik/infrastructure.list/class.php')
     );
 
-    $elements = \Kelnik\Infrastructure\Model\PlatformTable::getActiveList();
+    $elements = \Kelnik\Infrastructure\Model\PlatformTable::getActiveList(true);
 
     if (!$elements) {
         return;
