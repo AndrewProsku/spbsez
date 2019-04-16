@@ -6,20 +6,6 @@ $aMenuLinks = Array(
         Array(),
         Array(),
         ""
-    ),
-    Array(
-        "Site «Novoorlovskaya»",
-        "/en/infrastructure/novoorlovskaya/",
-        Array(),
-        Array(),
-        ""
-    ),
-    Array(
-        "Site «Noidorf»",
-        "/en/infrastructure/noidorf/",
-        Array(),
-        Array(),
-        ""
-    ),
+    )
 );
 ?>
