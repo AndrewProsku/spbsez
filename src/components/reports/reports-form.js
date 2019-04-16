@@ -1,3 +1,4 @@
+import inputmask from 'inputmask';
 import Mediator from 'common/scripts/mediator';
 import ReportBlock from './report-block';
 import templateComments from './templates/comments.twig';
@@ -209,6 +210,14 @@ class ReportForm {
                     isReadonly
                 }));
             });
+
+            const dateInputs = Array.from(resultsContainer.querySelectorAll(`.b-input-text_type_date`));
+
+            inputmask({
+                mask: '99.99.99'
+            }).mask(dateInputs);
+
+
             const formBlocks = this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`);
 
             data.blocks.reverse().forEach((blockData, blockNumber) => {
@@ -405,15 +414,35 @@ class ReportForm {
                     const blocksAmount = template.querySelectorAll(`.${that.formsBlockClass}`).length;
                     const shiftForNumber = 1;
                     const blockNumber = blocksAmount + shiftForNumber;
+                    const defaultFields = [{
+                        id   : `result-type[${response.data.ID}]`,
+                        value: ''
+                    }, {
+                        id   : `result-description[${response.data.ID}]`,
+                        value: ''
+                    }, {
+                        id   : `result-date[${response.data.ID}]`,
+                        value: ''
+                    }, {
+                        id   : `result-commercialization[${response.data.ID}]`,
+                        value: ''
+                    }];
+                    const blockFields = response.data.fields || defaultFields;
 
                     addResultButton.insertAdjacentHTML('afterend', templateResultBlock({
                         id    : response.data.ID,
                         number: blockNumber
                     }));
 
+                    const blockData = {
+                        ID    : response.data.ID,
+                        type  : 'results',
+                        fields: blockFields
+                    };
+
                     (new ReportBlock()).init({
                         target    : addResultButton.nextSibling,
-                        blockData : response.data,
+                        blockData,
                         formID    : 6,
                         isReadonly: that.type === 'readonly',
                         reportId  : that.reportId,

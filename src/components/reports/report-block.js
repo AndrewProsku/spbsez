@@ -31,6 +31,7 @@ class ReportBlock {
         this.resultDeleteButtonClass = 'j-delete-result';
         this.disabledInputClass = 'b-input-block_is_disabled';
         this.numericInputClass = 'b-input-text_type_numeric';
+        this.dateInputClass = 'b-input-text_type_date';
 
         /**
          * Данные о состоянии инпутов блока, полученные от сервера
@@ -66,8 +67,10 @@ class ReportBlock {
 
         if (numericInputs.length) {
             inputmask({
-                alias     : 'numeric',
-                rightAlign: false
+                alias         : 'numeric',
+                rightAlign    : false,
+                autoGroup     : true,
+                groupSeparator: ' '
             }).mask(numericInputs);
         }
 
@@ -159,6 +162,8 @@ class ReportBlock {
                 }
             }
         });
+
+        this.setBlockStatus();
 
         investorCountriesField.addEventListener('change', () => {
             radios.forEach((radio) => {
@@ -304,6 +309,10 @@ class ReportBlock {
                 });
             });
         }
+
+        inputmask({
+            mask: '99.99.99'
+        }).mask(this.target.querySelector(`.b-input-text_type_date`));
 
         this.inputsData = data;
     }
@@ -578,20 +587,23 @@ class ReportBlock {
     getInputStatus(input) {
         switch (input.type) {
             case 'radio': {
-                const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
-
+                // const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
                 if (Utils.keyExist(input.dataset, 'hasError')) {
                     return 'hasError';
                 } else if (Utils.keyExist(input.dataset, 'prefilled')) {
                     return 'prefilled';
                 }
-                for (let i = 0; i < checkboxGroup.length; i++) {
-                    if (checkboxGroup[i].checked) {
-                        return 'filled';
-                    }
-                }
 
-                break;
+                // Статус радио-кнопки высталяется как filled предполагая что
+                // в любой момент времени какая-то из кнокпок в группе все равно будет выбрана
+                return 'filled';
+                // for (let i = 0; i < checkboxGroup.length; i++) {
+                //     if (checkboxGroup[i].checked) {
+                //         return 'filled';
+                //     }
+                // }
+                //
+                // break;
             }
             default: {
                 if (Utils.keyExist(input.dataset, 'hasError')) {
@@ -726,12 +738,22 @@ class ReportBlock {
             const stageSelect = this.target.querySelector(`.${this.stageSelectClass}[data-stage-id="${stageID}"]`);
 
             stageSelect.insertAdjacentHTML('afterend', templatePermissionForm({id: stageID}));
+            this.bindDateInputs();
         }
 
         // Биндим событя на кнопку удаления
         if (deletable) {
             this.bindRemoveStage(stageID);
         }
+    }
+
+    bindDateInputs() {
+        const stageBlock = this.target.querySelector(`.${this.stageBlockClass}`);
+        const dateInputs = Array.from(stageBlock.querySelectorAll(`.b-input-text_type_date`));
+
+        inputmask({
+            mask: '99.99.99'
+        }).mask(dateInputs);
     }
 
     bindRemoveStage(stageID) {
@@ -766,7 +788,7 @@ class ReportBlock {
                 // Если осталась только одна стадия - её нельзя удалять
                 const onlyOne = 1;
 
-                if (stageBlock.querySelectorAll(`.${that.stageDeleteButtonClass}`).length === onlyOne) {
+                if (stageBlock.querySelectorAll(`.${that.stageSelectClass}`).length === onlyOne) {
                     Utils.removeElement(stageBlock.querySelector(`.${that.stageDeleteButtonClass}`));
                 }
             },
@@ -789,6 +811,11 @@ class ReportBlock {
         if (needExtraForm && !permissionForm) {
             selectWrapper.insertAdjacentHTML('afterend', templatePermissionForm({id: stageID}));
             const extraFormInputs = Array.from(selectWrapper.nextSibling.querySelectorAll('input, select'));
+            const dateInput = selectWrapper.nextSibling.querySelector('.b-input-text_type_date');
+
+            inputmask({
+                mask: '99.99.99'
+            }).mask(dateInput);
 
             this._bindInputsEvents(extraFormInputs);
         } else if (!needExtraForm && permissionForm) {
@@ -914,7 +941,7 @@ class ReportBlock {
                 // Если осталась только одна группа - её нельзя удалять
                 const onlyOne = 1;
 
-                if (groupsBlock.querySelectorAll(`.j-delete-group`).length === onlyOne) {
+                if (groupsBlock.querySelectorAll(`.b-inputs-row`).length === onlyOne) {
                     Utils.removeElement(groupsBlock.querySelector(`.j-delete-group`));
                 }
             },

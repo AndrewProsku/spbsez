@@ -16,7 +16,9 @@
     <div class="b-input-block ">
         {% include "../../forms/input-text/input-text.twig" with {
             id: "construction-permission-date["~ id ~"]",
-            name: "construction-permission-date["~ id ~"]"
+            name: "construction-permission-date["~ id ~"]",
+            modify: "b-input-text_type_date",
+            placeholder: "__.__.__"
         } %}
         <label class="b-input-block__label" for="construction-permission-date[{{ id }}]">Дата документа</label>
     </div>
