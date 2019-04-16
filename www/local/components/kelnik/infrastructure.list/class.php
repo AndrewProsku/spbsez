@@ -49,21 +49,7 @@ class InfrastructureList extends Bbc\Basis
         $this->setResultCacheKeys(['ELEMENTS', 'MAP_DATA']);
 
         try {
-            $this->arResult['ELEMENTS'] = PlatformTable::getAssoc([
-                'select' => [
-                    'ID', 'ALIAS', 'IMAGE_ID',
-                    'NAME_RU', 'NAME_EN',
-                    'MAP_COORDS_LAT',
-                    'MAP_COORDS_LNG',
-                    'TEXT_RU', 'TEXT_EN'
-                ],
-                'filter' => [
-                    '=ACTIVE' => PlatformTable::YES
-                ],
-                'order' => [
-                    'SORT' => 'ASC'
-                ]
-            ]);
+            $this->arResult['ELEMENTS'] = PlatformTable::getActiveList();
         } catch (\Exception $e) {
             $this->abortCache();
             return;
