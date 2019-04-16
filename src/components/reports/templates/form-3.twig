@@ -8,7 +8,8 @@
         <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "area-application",
-                name: "area-application"
+                name: "area-application",
+                modify: "b-input-text_type_numeric"
             } %}
             <label class="b-input-block__label" for="area-application">С начала деятельности в качестве резидента, млн ₽</label>
         </div>
@@ -24,14 +25,16 @@
             <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "area-rent",
-                    name: "area-rent"
+                    name: "area-rent",
+                    modify: "b-input-text_type_numeric"
                 } %}
                 <label class="b-input-block__label" for="area-rent">В аренду,&#160;га</label>
             </div>
             <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "area-property",
-                    name: "area-property"
+                    name: "area-property",
+                    modify: "b-input-text_type_numeric"
                 } %}
                 <label class="b-input-block__label" for="area-property">В собственность,&#160;га</label>
             </div>
@@ -47,7 +50,8 @@
         <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "object-name-plan",
-                name: "object-name-plan"
+                name: "object-name-plan",
+                modify: "b-input-text_type_numeric"
             } %}
             <label class="b-input-block__label" for="object-name-plan">Наименование объекта</label>
         </div>
@@ -62,7 +66,8 @@
         <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "capital-object",
-                name: "capital-object"
+                name: "capital-object",
+                modify: "b-input-text_type_numeric"
             } %}
             <label class="b-input-block__label" for="capital-object">Мощность объекта,&#160;м²</label>
         </div>
@@ -77,7 +82,8 @@
         <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "construction-period",
-                name: "construction-period"
+                name: "construction-period",
+                modify: "b-input-text_type_numeric"
             } %}
             <label class="b-input-block__label" for="construction-period">Сроки строительства</label>
         </div>

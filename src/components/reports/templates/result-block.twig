@@ -27,7 +27,8 @@
             <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "result-date["~ id ~"]",
-                    name: "result-date["~ id ~"]"
+                    name: "result-date["~ id ~"]",
+                    modify: "b-input-text_type_date"
                 } %}
                 <label class="b-input-block__label" for="result-date{{ id }}">Дата регистрации результата ИД</label>
             </div>

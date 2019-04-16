@@ -44,10 +44,13 @@
         </div>
     </div>
 
-    <?php include 'tabs.php'; ?>
+    <div class="b-reports-filter-wrap" id="reports-filter-top">
+        <?php include 'tabs.php'; ?>
+    </div>
 
     <div class="b-report-comments"></div>
     <div class="b-report-form j-report-form"
+         id="report-form"
          data-current-form="0"
          data-report-id="<?= $arResult['REPORT']['ID']; ?>"
         <?php if(empty($arResult['EDITABLE'])): ?> data-read-only="true"<?php endif; ?>>
