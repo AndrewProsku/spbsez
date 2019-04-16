@@ -771,10 +771,10 @@ class ReportFieldsTable extends DataManager
     {
         return [
             'float' => function($val) {
-                return (float) round($val, 2);
+                return (float) round(self::normalizeDigital($val), 2);
             },
             'int' => function ($val) {
-                return (int) $val;
+                return (int) self::normalizeDigital($val);
             },
             'text' => function ($val) {
                 return substr(
@@ -837,5 +837,10 @@ class ReportFieldsTable extends DataManager
                 'extra' => false
             ]
         ];
+    }
+
+    public static function normalizeDigital($val)
+    {
+        return str_replace([' ', ','], ['', '.'], $val);
     }
 }
