@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle('Вход в личный кабинет');
-$APPLICATION->SetPageProperty('title', 'Вход в личный кабинет | ОЭЗ СПб');
+$APPLICATION->SetPageProperty('title', 'Вход в личный кабинет');
 if ($USER->IsAuthorized()) {
     LocalRedirect(LANG_DIR . 'cabinet/');
 }

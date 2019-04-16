@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Раскрытие информации | ОЭЗ СПб");
+$APPLICATION->SetTitle("Раскрытие информации");
 LocalRedirect('/about/info/docs/');
 ?>
 

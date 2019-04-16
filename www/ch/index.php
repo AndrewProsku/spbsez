@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty("title", "經濟特區 | SEZ");
+$APPLICATION->SetPageProperty("title", "經濟特區");
 $APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
 $APPLICATION->SetTitle("經濟特區");
 ?>

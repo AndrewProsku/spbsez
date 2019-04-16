@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty('title', "Managing Company | SEZ");
+$APPLICATION->SetPageProperty('title', "Managing Company");
 $APPLICATION->SetTitle("Managing Company");
 ?>
 

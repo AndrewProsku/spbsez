@@ -206,11 +206,9 @@ class RefBookList extends Bbc\Basis
             && !empty($this->arParams['RESIDENT_TYPE'])
             && $this->arParams['COMPONENT_TEMPLATE'] == 'residents-full'
         ) {
-            Asset::getInstance()->addString(
-                '<link rel="canonical" href="' .
-                (\CMain::IsHTTPS() ? 'https' : 'http') .
-                '://' .  $_SERVER['HTTP_HOST'] .
-                $APPLICATION->GetCurDir() . '">'
+            $APPLICATION->SetPageProperty(
+                'canonical',
+                (\CMain::IsHTTPS() ? 'https' : 'http') . '://' .  $_SERVER['HTTP_HOST'] . $APPLICATION->GetCurDir()
             );
         }
     }
