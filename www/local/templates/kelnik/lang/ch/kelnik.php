@@ -1,5 +1,6 @@
 <?php
 
+$MESS['KELNIK_TMPL_TITLE_SUFFIX'] = 'SEZ';
 $MESS['KELNIK_TMPL_BACK_TO_MAIN'] = '回到主要';
 $MESS['KELNIK_TMPL_404'] = '頁面未找到';
 $MESS['KELNIK_TMPL_404_TEXT'] = '嘗試從 <a href="#MAIN_PAGE#" class="b-link-line">主頁</a> 或 <a href="#SITE_PAGE#" class="b-link-line">查看我們的網站</a>開始';
