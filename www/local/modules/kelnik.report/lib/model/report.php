@@ -260,7 +260,7 @@ class Report extends EO_Reports
                 continue;
             }
 
-            if (!strlen($field['value'])) {
+            if (!isset($field['value']) || !strlen($field['value'])) {
                 return false;
             }
         }
