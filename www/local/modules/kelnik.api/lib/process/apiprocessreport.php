@@ -146,8 +146,6 @@ class ApiProcessReport extends ApiProcessAbstract
 
         // Изменяем поля формы отчета
         //
-        $fields = $this->report->getFields()->getAssocArray();
-
         if (false !== strpos($field, '[')) {
             self::parseFieldName($field, $groupId);
         }
@@ -176,7 +174,8 @@ class ApiProcessReport extends ApiProcessAbstract
             $data['COMMENT'] = null;
         }
 
-        $field = implode('.', [$field, $groupId, $formNum]);
+        $field  = implode('.', [$field, $groupId, $formNum]);
+        $fields = $this->report->getFields()->getAssocArray();
 
         try {
             if (isset($fields[$field])) {
