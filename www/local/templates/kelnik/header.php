@@ -1,5 +1,6 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
-define("PATH_TO_404", '/404.php'); ?>
+define("PATH_TO_404", '/404.php');
+\Bitrix\Main\Localization\Loc::loadMessages(__DIR__ . DIRECTORY_SEPARATOR . 'kelnik.php'); ?>
 <!doctype html>
 <html lang="<?= LANGUAGE_ID; ?>">
 <head>
@@ -8,7 +9,7 @@ define("PATH_TO_404", '/404.php'); ?>
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title><?php $APPLICATION->ShowTitle() ?></title>
+    <title><?php $APPLICATION->ShowTitle(); ?> | <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_TITLE_SUFFIX'); ?></title>
     <?php
         $APPLICATION->SetAdditionalCSS("/styles/app.css");
         $isRegularPage = !in_array($APPLICATION->GetCurDir(), [LANG_DIR]) || defined('ERROR_404');
@@ -28,10 +29,7 @@ define("PATH_TO_404", '/404.php'); ?>
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
     <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
     <link rel="icon" sizes="192x192" href="/favicons/touch-icon-192x192.png">
-    <?php
-        $APPLICATION->ShowHead();
-        \Bitrix\Main\Localization\Loc::loadMessages(__DIR__ . DIRECTORY_SEPARATOR . 'kelnik.php');
-    ?>
+    <?php $APPLICATION->ShowHead(); ?>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

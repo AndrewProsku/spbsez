@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Contacts");
-$APPLICATION->SetPageProperty('title', 'Contacts | SEZ');
+$APPLICATION->SetPageProperty('title', 'Contacts');
 
 $yMapJson = [
     "center" => [59.942099, 30.186182],
