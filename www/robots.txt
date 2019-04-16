@@ -1,3 +1,4 @@
 User-agent: *
+Disallow: /cabinet/
 Disallow: /bitrix/
 Disallow: /upload/
