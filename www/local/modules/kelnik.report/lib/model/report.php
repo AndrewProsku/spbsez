@@ -4,7 +4,6 @@ namespace Kelnik\Report\Model;
 
 
 use Bitrix\Main\Application;
-use Bitrix\Main\ORM\Query\Query;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
@@ -261,7 +260,7 @@ class Report extends EO_Reports
                 continue;
             }
 
-            if (empty($field['value'])) {
+            if (!strlen($field['value'])) {
                 return false;
             }
         }
