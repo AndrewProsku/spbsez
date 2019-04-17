@@ -9,6 +9,7 @@ import templateForm4 from './templates/form-4.twig';
 import templateForm5 from './templates/form-5.twig';
 import templateForm6 from './templates/form-6.twig';
 import templateForm7 from './templates/form-7.twig';
+import templateFormError from './templates/submit-error.twig';
 import templateResultBlock from './templates/result-block.twig';
 import Utils from '../../common/scripts/utils';
 
@@ -650,7 +651,13 @@ class ReportForm {
 
         Utils.send(`a=confirm&id=${that.reportId}`, that.baseUrl, {
             success(response) {
-                if (!response.request.status === that.SUCCESS_STATUS) {
+                if (response.request.status === that.FAIL_STATUS) {
+                    const errorMessage = response.request.errors.join('</br>');
+
+                    that.submitReportButton.insertAdjacentHTML('afterend', templateFormError({
+                        errorMessage
+                    }));
+
                     return true;
                 }
 
