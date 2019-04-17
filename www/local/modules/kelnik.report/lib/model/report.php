@@ -180,10 +180,8 @@ class Report extends EO_Reports
                         // то проверяем какой вариант выбран, если вариант - нет,
                         // то незаполненное поле 'Страна' игнорируем
                         //
-                        $cols = array_column($block['fields'], 'id');
-                        $noIndex = array_search('foreign-investors-no', $cols);
-                        $countryIndex = array_search('investors-countries', $cols);
-                        if ($block['fields'][$noIndex]['checked'] && mb_strlen($block['fields'][$countryIndex]['value'])) {
+                        $noIndex = array_search('foreign-investors-no', array_column($block['fields'], 'id'));
+                        if ($block['fields'][$noIndex]['checked']) {
                             continue;
                         }
                         return false;
