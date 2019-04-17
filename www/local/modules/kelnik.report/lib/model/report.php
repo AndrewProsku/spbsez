@@ -171,6 +171,21 @@ class Report extends EO_Reports
             foreach ($form['blocks'] as $block) {
                 if (isset($block['fields'])) {
                     if (!self::checkFilledFields($block['fields'])) {
+                        if (!isset($block['type']) || $block['type'] !== 'foreign-investors') {
+                            return false;
+                        }
+
+                        // Если форма 1 и блок 1 (Участие иностранных инвесторов,
+                        // в составе акционеров (участников) или прямые иностранные инвестиции),
+                        // то проверяем какой вариант выбран, если вариант - нет,
+                        // то незаполненное поле 'Страна' игнорируем
+                        //
+                        $cols = array_column($block['fields'], 'id');
+                        $noIndex = array_search('foreign-investors-no', $cols);
+                        $countryIndex = array_search('investors-countries', $cols);
+                        if ($block['fields'][$noIndex]['checked'] && mb_strlen($block['fields'][$countryIndex]['value'])) {
+                            continue;
+                        }
                         return false;
                     }
                     continue;
@@ -260,7 +275,7 @@ class Report extends EO_Reports
                 continue;
             }
 
-            if (!isset($field['value']) || !strlen($field['value'])) {
+            if (!isset($field['value']) || !mb_strlen($field['value'])) {
                 return false;
             }
         }
