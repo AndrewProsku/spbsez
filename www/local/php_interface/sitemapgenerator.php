@@ -54,7 +54,7 @@ class SiteMapGenerator
 
     public function save($filePath = false)
     {
-        return file_put_contents($filePath ? $filePath : $_SERVER['DOCUMENT_ROOT'] . $this->settings['FILENAME_INDEX'], $this->map);
+        return file_put_contents($filePath ? $filePath : $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $this->settings['FILENAME_INDEX'], $this->map);
     }
 
     protected function loadData(): bool
@@ -105,23 +105,51 @@ class SiteMapGenerator
 
     protected function loadModuleData()
     {
+        $sections = array_keys(self::getSections());
+
         foreach ($this->paths as $path) {
-            if (empty($path['DATA']['ABS_NAME'])) {
+            if (empty($path['DATA']['ABS_PATH'])) {
                 continue;
             }
 
-            if (false !== strpos($path['DATA']['ABS_NAME'], 'infrastructure')) {
+            foreach ($sections as $section) {
+                if (false === strpos($path['DATA']['ABS_PATH'], $section)) {
+                    continue;
+                }
 
-                $path = explode('/', trim($path['DATA']['ABS_NAME'], '/'));
-                $lang = array_shift($path);
+                $data = $this->getModuleData(
+                    $section,
+                    self::getLangByPath($path['DATA']['ABS_PATH'])
+                );
 
-                $this->getModuleData('intrastructure', $lang);
+                if ($data) {
+                    foreach ($data as $v) {
+                        $modTime = time();
+                        if (!empty($v['DATE_MODIFIED']) && $v['DATE_MODIFIED'] instanceof \Bitrix\Main\Type\DateTime) {
+                            $modTime = $v['DATE_MODIFIED']->getTimestamp();
+                        }
 
-                continue;
+                        $this->paths[] = [
+                            'TYPE' => 'F',
+                            'DATA' => [
+                                'ABS_PATH' => $path['DATA']['ABS_PATH'] . '/' . $v['ALIAS'] . '/',
+                                'TYPE' => 'F',
+                                'TIMESTAMP' => $modTime
+                            ]
+                        ];
+                    }
+                }
+
+                continue 2;
             }
         }
     }
 
+    /**
+     * @param $moduleName
+     * @param string $lang
+     * @return array
+     */
     protected function getModuleData($moduleName, $lang = 'ru')
     {
         $lang = strtolower($lang);
@@ -132,40 +160,22 @@ class SiteMapGenerator
             return $this->dataCache[$cacheKey];
         }
 
-        $tableClasses = [
-            'infrastructure' => [
-                'class' => \Kelnik\Infrastructure\Model\PlatformTable::class
-            ],
-            'news' => [
-                'class' => \Kelnik\News\News\NewsTable::class,
-                'cat' => [
-                    'ru' => \Kelnik\News\Categories\CategoriesTable::NEWS_RU,
-                    'en' => \Kelnik\News\Categories\CategoriesTable::NEWS_EN
-                ]
-            ],
-            'articles' => [
-                'class' => \Kelnik\News\News\NewsTable::class,
-                'cat' => [
-                    'ru' => \Kelnik\News\Categories\CategoriesTable::ARTICLES_RU,
-                    'en' => \Kelnik\News\Categories\CategoriesTable::ARTICLES_EN
-                ]
-            ]
-        ];
+        $sections = self::getSections();
 
-        $table = \Kelnik\Helpers\ArrayHelper::getValue($tableClasses, $moduleName, []);
+        $section = \Kelnik\Helpers\ArrayHelper::getValue($sections, $moduleName, []);
 
-        if (!$table) {
+        if (!$section) {
             return [];
         }
 
-        $className = $table['class'];
-        $select = ['ID', 'ALIAS'];
+        $className = $section['class'];
+        $select = $section['select'];
         $filter = [
             '=ACTIVE' => $className::YES
         ];
 
-        if (isset($table['cat'])) {
-            $filter['=CAT_ID'] = $table['cat'][$lang];
+        if (isset($section['cat'])) {
+            $filter['=CAT_ID'] = $section['cat'][$lang];
         }
 
         $this->dataCache[$cacheKey] = $className::getList([
@@ -176,7 +186,12 @@ class SiteMapGenerator
         return $this->dataCache[$cacheKey];
     }
 
-    protected function scanDirs($siteId, $logical, $paths)
+    /**
+     * @param $siteId
+     * @param $logical
+     * @param array $paths
+     */
+    protected function scanDirs($siteId, $logical, array $paths)
     {
         foreach ($paths as $path) {
             $dirs = \CSeoUtils::getDirStructure(
@@ -207,7 +222,7 @@ class SiteMapGenerator
                 if (empty($dir['DATA']['TYPE']) || $dir['DATA']['TYPE'] !== self::TYPE_DIR) {
                     continue;
                 }
-                $this->scanDirs($siteId, $logical, $dir);
+                $this->scanDirs($siteId, $logical, [$dir['DATA']['ABS_PATH']]);
             }
         }
     }
@@ -229,9 +244,18 @@ class SiteMapGenerator
         $this->map .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
         foreach ($this->paths as $path) {
+            $url = $this->getBaseUrl();
+
+            if (!empty($path['DATA']['ABS_PATH'])) {
+                $url .= ltrim($path['DATA']['ABS_PATH'], '/') .
+                        ($path['DATA']['TYPE'] === self::TYPE_DIR ? '/' : '');
+            }
+
             $this->map .= '<url>';
-            $this->map .= '<loc>' . $this->getBaseUrl() . ltrim($path['DATA']['ABS_PATH'], '/') . '</loc>';
-            $this->map .= '<lastmod>' . date('Y-m-d', strtotime($path['DATA']['DATE'])). '</lastmod>';
+            $this->map .= '<loc>' . $url . '</loc>';
+            if (!empty($path['DATA']['TIMESTAMP'])) {
+                $this->map .= '<lastmod>' . date('Y-m-d', $path['DATA']['TIMESTAMP']) . '</lastmod>';
+            }
             $this->map .= '<changefreq>monthly</changefreq>';
             $this->map .= '<priority>0.8</priority>';
             $this->map .= '</url>';
@@ -243,5 +267,47 @@ class SiteMapGenerator
     protected function getBaseUrl()
     {
         return ($this->settings['PROTO'] ? 'https' : 'http') . '://' . $this->settings['DOMAIN'] . '/';
+    }
+
+    protected static function getSections(): array
+    {
+        return [
+            'infrastructure' => [
+                'class' => \Kelnik\Infrastructure\Model\PlatformTable::class,
+                'select' => ['ALIAS']
+            ],
+            'news' => [
+                'class' => \Kelnik\News\News\NewsTable::class,
+                'select' => ['ALIAS' => 'CODE', 'DATE_MODIFY'],
+                'cat' => [
+                    'ru' => \Kelnik\News\Categories\CategoriesTable::NEWS_RU,
+                    'en' => \Kelnik\News\Categories\CategoriesTable::NEWS_EN
+                ]
+            ],
+            'articles' => [
+                'class' => \Kelnik\News\News\NewsTable::class,
+                'select' => ['ALIAS' => 'CODE', 'DATE_MODIFY'],
+                'cat' => [
+                    'ru' => \Kelnik\News\Categories\CategoriesTable::ARTICLES_RU,
+                    'en' => \Kelnik\News\Categories\CategoriesTable::ARTICLES_EN
+                ]
+            ]
+        ];
+    }
+
+    protected static function getLangByPath($path)
+    {
+        $langs = [
+            SezLang::ENGLISH_DIR => 'en',
+            SezLang::CHINESE_DIR => 'ch'
+        ];
+
+        foreach ($langs as $k => $v) {
+            if (0 === strpos($k, $path)) {
+                return $v;
+            }
+        }
+
+        return 'ru';
     }
 }

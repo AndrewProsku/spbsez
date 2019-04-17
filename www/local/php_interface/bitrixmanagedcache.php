@@ -47,7 +47,7 @@ trait BitrixManagedCache
     protected static function setCache(string $cacheId, $val)
     {
         $cache = static::initManagedCache($cacheId);
-        $cache->set($cacheId, $val);
+        $cache->setImmediate($cacheId, $val);
     }
 
     /**
