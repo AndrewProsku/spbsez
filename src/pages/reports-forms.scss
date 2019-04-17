@@ -37,7 +37,7 @@
     max-width: 1280px;
 }
 
-.b-reports-filter + .b-report-form {
+.b-reports-filter-wrap + .b-report-form {
     padding-top: 0;
 }
 
@@ -131,6 +131,7 @@
     input[type="password"],
     input[type="email"],
     input[type="tel"],
+    input[type="number"],
     textarea {
         @include font-size("p2");
         font-family: inherit;

@@ -483,6 +483,15 @@ if (anchorSelector.length) {
     new Anchor().urlHashScroll(300);
 }
 
+const reportsFiltersSelector = '.j-report-form + .j-reports-filter .b-mini-filter__fake';
+const reportsBottomFilters = Array.from(document.querySelectorAll(reportsFiltersSelector));
+
+if (reportsBottomFilters.length) {
+    new Anchor().init({
+        targets       : reportsBottomFilters,
+        preventDefault: false
+    });
+}
 
 /**
  * Инициализация формы авторизации

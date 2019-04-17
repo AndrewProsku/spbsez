@@ -8,37 +8,24 @@
                     class="b-input-email"
                     type="email"
                     name="email">
-
-            <span class="b-form-block__label">
-                Эл. почта
-            </span>
-            <span class="b-form-block__error-text">
-                    Это поле обязательно для заполнения
-                </span>
+            <span class="b-form-block__label">Эл. почта</span>
+            <span class="b-form-block__error-text">Это поле обязательно для заполнения</span>
         </label>
         <label class="b-form-block j-auth-password">
             <input id="password"
                     class="b-input-password"
                     type="password"
                     name="password">
-
-            <span class="b-form-block__label">
-                Пароль
-            </span>
-            <span class="b-form-block__error-text">
-                    Это поле обязательно для заполнения
-                </span>
+            <span class="b-form-block__label">Пароль</span>
+            <span class="b-form-block__error-text">Это поле обязательно для заполнения</span>
         </label>
     </div>
     <div class="b-remember-password">
-        <a href="/cabinet/forgot/" class="b-link-line">
-            Я не помню пароль
-        </a>
+        <a href="/cabinet/forgot/" class="b-link-line">Я не помню пароль</a>
     </div>
     <div class="b-personal-information j-person-data">
                     <div class="b-form__checkbox">
-                        <input
-                                id="personal-information"
+                        <input id="personal-information"
                                 class="b-checkbox-input"
                                 type="checkbox"
                                 value=""
@@ -46,8 +33,7 @@
                                 required>
                         <label for="personal-information" class="b-checkbox-label">
                             <span class="b-checkbox-box">
-                                <svg width="16" height="11" xmlns="http://www.w3.org/2000/svg"
-                                                              viewBox="0 0 16 11">
+                                <svg width="16" height="11" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11">
                                     <defs>
                                         <path d="M281,4467.5l5,5l8.5,-8.5" id="Path-0"/>
                                     </defs>
@@ -60,18 +46,10 @@
                                     </g>
                                 </svg>
                             </span>
-                            <span class="b-checkbox-text">Даю согласие на обработку <a href='#' class='b-link-line'>персональных
-                                данных</a></span>
+                            <span class="b-checkbox-text">Даю согласие на обработку <a href='/pdp/' class='b-link-line'>персональных данных</a></span>
                         </label>
                     </div>
-                    <div class="b-checkbox-error j-person-data__error">
-                        Необходимо отметить этот пункт
-                    </div>
+                    <div class="b-checkbox-error j-person-data__error">Необходимо отметить этот пункт</div>
                 </div>
-
-    <div class="b-login-form__button-block">
-        <button type="submit" class="button b-login-form__button j-auth-submit">
-            Войдите в личный кабинет
-        </button>
-    </div>
+    <div class="b-login-form__button-block"><button type="submit" class="button b-login-form__button j-auth-submit">Войдите в личный кабинет</button></div>
 </form>

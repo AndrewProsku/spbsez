@@ -5,6 +5,7 @@
  */
 
 import $ from 'jquery';
+import Utils from '../../common/scripts/utils';
 
 class Anchor {
     constructor() {
@@ -14,6 +15,7 @@ class Anchor {
 
     init(options) {
         this.targets = Array.from(options.targets);
+        this.preventDefault = Utils.keyExist(options, 'preventDefault') ? options.preventDefault : true;
 
         if (!this.targets) {
             return;
@@ -26,9 +28,15 @@ class Anchor {
     _bindEvents() {
         this.targets.forEach((target) => {
             target.addEventListener('click', (event) => {
-                event.preventDefault();
+                if (this.preventDefault) {
+                    event.preventDefault();
+                }
 
-                this._goScroll(target.getAttribute('href'));
+                const targetID = target.getAttribute('href') ?
+                    target.getAttribute('href') :
+                    target.dataset.scrollTarget;
+
+                this._goScroll(targetID);
             });
         });
     }
