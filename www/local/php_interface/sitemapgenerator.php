@@ -16,6 +16,10 @@ class SiteMapGenerator
     ];
 
     /**
+     * Настройки сайта для генерации карты.
+     * Раздел в админке /bitrix/admin/seo_sitemap.php?lang=ru
+     * Берется первый сайт из списка
+     *
      * @var array
      */
     private $settings = [];
