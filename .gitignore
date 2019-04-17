@@ -7,3 +7,4 @@ www/upload
 *.sublime-project
 *.sublime-workspace
 env.lock
+sitemap*.xml
