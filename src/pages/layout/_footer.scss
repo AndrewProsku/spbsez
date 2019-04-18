@@ -50,6 +50,9 @@
 }
 
 .b-footer__center {
+    position: relative;
+    z-index: 1;
+
     @media #{$laptop} {
         @include column(21, 34);
         @include padding-level(bottom, cyan);
@@ -126,6 +129,7 @@
     @include transition(opacity);
     display: block;
     color: inherit;
+    font-family: $font;
     font-size: inherit;
     opacity: 0.48;
     margin-bottom: 10px;
