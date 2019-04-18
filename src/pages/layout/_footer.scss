@@ -6,10 +6,10 @@
     @include padding-level(bottom, cyan);
     position: relative;
     z-index: 0;
-    height: 197px;
+    height: 228px;
     background-image: linear-gradient(to right, $blue 0%, $violet 100%);
     overflow: hidden;
-    margin-top: -197px;
+    margin-top: -228px;
 
     @media #{$laptop} {
         @include row();
@@ -103,17 +103,22 @@
     @media #{$tablet-portrait} {
         margin-bottom: 0;
     }
+
+    @media #{$laptop} {
+        display: flex;
+    }
 }
 
 .b-footer__copyright-text {
     display: block;
+    white-space: nowrap;
     margin-bottom: 10px;
 
     @media #{$laptop} {
         display: inline-block;
         vertical-align: middle;
         margin-bottom: 0;
-        margin-right: 30px;
+        margin-right: 15px;
     }
 }
 
@@ -129,16 +134,21 @@
     line-height: 21px;
     padding: 0;
     cursor: pointer;
+    white-space: nowrap;
 
     &:hover {
         opacity: 0.76;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
     }
 
     @media #{$laptop} {
         display: inline-block;
         vertical-align: middle;
         margin-bottom: 0;
-        margin-right: 30px;
+        margin-right: 15px;
     }
 }
 
