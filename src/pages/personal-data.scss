@@ -46,3 +46,27 @@
         }
     }
 }
+
+.b-privacy-list {
+    counter-reset: section;
+
+    ol {
+        @include font-size(p2);
+        @include margin-level(bottom, cyan);
+        counter-reset: section;
+    }
+}
+
+.b-privacy-list__subtitle {
+    @include font-size(h3);
+    @include margin-level(bottom, green);
+    display: inline-block;
+}
+
+.b-privacy-list__subtitle::before,
+.b-privacy-list ol li::before {
+    counter-increment: section;
+    content: counters(section,".") ".";
+    font-size: inherit;
+    padding-right: .5em;
+}
