@@ -52,12 +52,12 @@
                     name: "jobs-plan-year",
                     modify: "b-input-text_type_numeric"
                 } %}
-                <label class="b-input-block__label" for="jobs-plan-year">За текущий год</label>
+                <label class="b-input-block__label" for="jobs-plan-year">С начала текущего года</label>
             </div>
         </div>
 
         <div class="b-report-block__subtitle ">
-            Фактически созданных<div class="b-help j-help">С начала деятельности в качестве резидента</div>
+            Фактически созданных<div class="b-help j-help">Фактическое кол-во рабочих мест на конец периода.</div>
         </div>
         <div class="b-inputs-row">
             <div class="b-input-block ">
@@ -74,7 +74,7 @@
                     name: "jobs-actual-year",
                     modify: "b-input-text_type_numeric"
                 } %}
-                <label class="b-input-block__label" for="jobs-actual-year">За текущий год</label>
+                <label class="b-input-block__label" for="jobs-actual-year">С начала текущего года</label>
             </div>
         </div>
     </div>
@@ -82,7 +82,7 @@
 {# 3 #}
 <section class="b-report-block j-report-block" id="block-3">
     <div class="b-report-block__header" data-number="3">
-        <h3 class="b-report-block__title">Объем заявленных инвестиций на территории ОЭЗ (в соответствии с бизнес-планом),&#160;млн,&#160;₽</h3>
+        <h3 class="b-report-block__title">Объем заявленных инвестиций на территории ОЭЗ (в соответствии с бизнес-планом),&#160;млн&#160;₽</h3>
     </div>
     <div class="b-report-block__body">
         <div class="b-report-block__subtitle">Общий объем</div>
@@ -130,7 +130,7 @@
 <section class="b-report-block j-report-block" id="block-4">
     <div class="b-report-block__header" data-number="4">
         <h3 class="b-report-block__title">Общий объем осуществленных инвестиций на территории ОЭЗ
-            <span class="b-help j-help">Общий объем осуществленных инвестиций на территории ОЭЗ</span>
+            <span class="b-help j-help">Значение показателя приводится в соответствии с документально подтвержденными расходами согласно правилам ведения бухгалтерского учета, при расхождении указываемых данных с данными, предоставленными в предыдущем отчете пояснить причины расхождения (затраты компании в соответствии с финансовой отчетностью (МСФО) не включенные в отчетность (РСБУ) указываются справочно).</span>
         </h3>
     </div>
     <div class="b-report-block__body">
@@ -162,7 +162,7 @@
                     name: "capital-invests-all",
                     modify: "b-input-text_type_numeric"
                 } %}
-                <label class="b-input-block__label" for="capital-invests-all">Всего,&#160;млн&#160;₽</label>
+                <label class="b-input-block__label" for="capital-invests-all">С начала деятельности в качестве резидента</label>
             </div>
 
             <div class="b-input-block ">
@@ -171,7 +171,7 @@
                     name: "capital-invests-year",
                     modify: "b-input-text_type_numeric"
                 } %}
-                <label class="b-input-block__label" for="capital-invests-year">За текущий год,&#160;млн&#160;₽</label>
+                <label class="b-input-block__label" for="capital-invests-year">С начала текущего года</label>
             </div>
         </div>
 
@@ -182,7 +182,7 @@
     <div class="b-report-block__header" data-number="5">
         <h3 class="b-report-block__title">
             Объем выручки от продажи товаров, продукции, работ, услуг (в денежном выражении,&#160;млн&#160;₽)
-            <span class="b-help j-help">Объем выручки от продажи товаров, продукции, работ, услуг (в денежном выражении,&#160;млн&#160;₽)</span>
+            <span class="b-help j-help">Объем выручки от продажи товаров, продукции, работ, услуг за вычетом налога на добавленную стоимость, акцизов (в соответствии с отчетом о финансовых результатах бухгалтерской отчетности резидентов, применяющих общую систему налогообложения) и (или) сумма доходов (в соответствии с налоговой декларацией по налогу, уплачиваемому в связи с применением упрощенной системы налогообложения, резидентов, применяющих упрощенную систему налогообложения), полученных резидентами в результате реализации соглашений об осуществлении деятельности в особой экономической зоне.</span>
         </h3>
     </div>
     <div class="b-report-block__body">
@@ -241,7 +241,8 @@
         <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "salary",
-                name: "salary"
+                name: "salary",
+                modify: "b-input-text_type_numeric"
             } %}
             <label class="b-input-block__label" for="salary">З/п сотрудников,&#160;₽</label>
         </div>
