@@ -532,7 +532,7 @@ class ReportFieldsTable extends DataManager
                                 [
                                     'id' => 'construction-permission-file',
                                     'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-3'),
-                                    'type' => 'file'
+                                    'type' => 'int'
                                 ],
                                 [
                                     'id' => 'construction-permission-date',
@@ -587,7 +587,7 @@ class ReportFieldsTable extends DataManager
                                 [
                                     'id' => 'construction-permission-file',
                                     'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-3-3'),
-                                    'type' => 'file'
+                                    'type' => 'int'
                                 ],
                                 [
                                     'id' => 'construction-permission-date',
