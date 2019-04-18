@@ -70,24 +70,32 @@ try {
 /**
  * Полифилл метода closest()
  */
-if (!Element.prototype.matches) {
-    Element.prototype.matches = Element.prototype.msMatchesSelector ||
-        Element.prototype.webkitMatchesSelector;
+const ElementPrototype = window.Element.prototype;
+
+if (typeof ElementPrototype.matches !== 'function') {
+    ElementPrototype.matches = ElementPrototype.msMatchesSelector || ElementPrototype.mozMatchesSelector || ElementPrototype.webkitMatchesSelector || function matches(selector) {
+        let element = this;
+        const elements = (element.document || element.ownerDocument).querySelectorAll(selector);
+        let index = 0;
+
+        while (elements[index] && elements[index] !== element) {
+            ++index;
+        }
+
+        return Boolean(elements[index]);
+    };
 }
 
-if (!Element.prototype.closest) {
-    Element.prototype.closest = function(s) {
-        let el = this;
+if (typeof ElementPrototype.closest !== 'function') {
+    ElementPrototype.closest = function closest(selector) {
+        let element = this;
 
-        if (!document.documentElement.contains(el)) {
-            return null;
-        }
-        do {
-            if (el.matches(s)) {
-                return el;
+        while (element && element.nodeType === 1) {
+            if (element.matches(selector)) {
+                return element;
             }
-            el = el.parentElement || el.parentNode;
-        } while (el !== null && el.nodeType === 1);
+            element = element.parentNode;
+        }
 
         return null;
     };
