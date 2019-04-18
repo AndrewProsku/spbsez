@@ -170,7 +170,7 @@ class DocsTreeHelper extends AdminBaseHelper
             if (!$isChild) {
                 $data[$k] = [
                     'ID' => '',
-                    'NAME' => '<a href="javascript:;">' . $val . '</a>',
+                    'NAME' => '<a href="javascript:;" class="kelnik-fake-sub">' . $val . '</a>',
                     'id' => 'c' . $k,
                     'parent_id' => 0,
                     'quantity' => ArrayHelper::getValue($stat, $k, 0)

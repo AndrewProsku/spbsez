@@ -21,7 +21,8 @@
             var out = [];
             for (var i = 0, n = arr.length; i < n; ++i) {
                 if (!tmp[arr[i]]) {
-                    tmp[arr[i]] = true;out.push(arr[i]);
+                    tmp[arr[i]] = true;
+                    out.push(arr[i]);
                 }
             }
             return out;
@@ -29,7 +30,6 @@
 
         function openChildren(obj, pid) {
             $(obj).find('tr[data-parent-id=' + pid + ']').each(function () {
-                //$(this).closest('tr').fadeIn();
                 slideDownTr(this);
                 openChildren(obj, $(this).data('row-id'));
             });
@@ -41,7 +41,6 @@
         function closeChildren(obj, pid) {
             $(obj).find('tr[data-parent-id=' + pid + ']').each(function () {
                 closeChildren(obj, $(this).data('row-id'));
-                //$(this).closest('tr').fadeOut();
                 slideUpTr(this);
             });
 
@@ -165,18 +164,17 @@
             open = open.split(',');
 
             for (var i in open) {
-                if (!parseInt(open[i])) {
+                if (!parseInt(open[i], 10)) {
                     continue;
                 }
-                if (parseInt(open[i]) != parseInt(id)) {
+                if (parseInt(open[i], 10) != parseInt(id)) {
                     newOpen.push(open[i]);
                 }
             }
 
             if (newOpen.length != open.length) {
                 newOpen = newOpen.join(',');
-                Cookies.set(
-                    'kelnik_tree_grid', newOpen, { expires: 7, path: options.path });
+                Cookies.set('kelnik_tree_grid', newOpen, { expires: 7, path: options.path });
             }
         }
 
@@ -186,11 +184,11 @@
             if (typeof open !== 'undefined') {
                 open = open.split(',');
                 for (var i in open) {
-                    if (parseInt(open[i]) > 0) {
+                    if (parseInt(open[i], 10) > 0) {
                         var block = $(obj).find('tr[data-row-id=' + open[i] + ']').find('td > div.kelnik-tree-block');
 
                         if (!$(block).hasClass('open') && !$(block).hasClass('loaded')) {
-                            $(block).find('a.kelnik-tree-sub').click();
+                            $(block).find('a.kelnik-tree-sub').trigger('click');
                         }
                     }
                 }
@@ -200,7 +198,7 @@
         return this.each(function () {
             var obj = this;
 
-            $(this).on('click', 'div.kelnik-tree-block > div > a.kelnik-tree-sub', function (event) {
+            $(this).on('click', 'div.kelnik-tree-block > div > a.kelnik-tree-sub, div.kelnik-tree-block > div > a.kelnik-fake-sub', function (event) {
                 event.preventDefault();
                 var tr = $(this).closest('tr');
                 var dv = $(this).closest('.kelnik-tree-block');
@@ -208,18 +206,20 @@
                 if ($(dv).hasClass('open')) {
                     $(dv).removeClass('open');
                     closeChildren(obj, $(tr).data('row-id'));
-                } else {
-                    if (!$(dv).hasClass('loaded')) {
-                        getData(obj, $(tr).data('row-id'), parseInt($(tr).data('level')) + 1);
-                    } else {
-                        openChildren(obj, $(tr).data('row-id'));
-                    }
 
-                    // save opened in cookie
-                    //
-                    if (options.useCookie && typeof Cookies !== 'undefined') {
-                        addCookie($(tr).data('row-id'));
-                    }
+                    return;
+                }
+
+                if (!$(dv).hasClass('loaded')) {
+                    getData(obj, $(tr).data('row-id'), parseInt($(tr).data('level'), 10) + 1);
+                } else {
+                    openChildren(obj, $(tr).data('row-id'));
+                }
+
+                // save opened in cookie
+                //
+                if (options.useCookie && typeof Cookies !== 'undefined') {
+                    addCookie($(tr).data('row-id'));
                 }
             });
 

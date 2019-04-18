@@ -474,7 +474,7 @@ class ReportFieldsTable extends DataManager
                             ],
                             [
                                 'id' => 'area-property',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-2-1'),
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-2-2'),
                                 'type' => 'float'
                             ]
                         ]

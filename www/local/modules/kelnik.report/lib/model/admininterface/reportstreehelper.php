@@ -182,7 +182,7 @@ class ReportsTreeHelper extends AdminBaseHelper
             if (!$residentId) {
                 $v = [
                     'ID' => '',
-                    'NAME' => '<a href="javascript:;">' . $v . '</a>',
+                    'NAME' => '<a href="javascript:;" class="kelnik-fake-sub">' . $v . '</a>',
                     'id' => 'c' . $k,
                     'parent_id' => 0,
                     'quantity' => ArrayHelper::getValue($stat, $k, 0)
@@ -194,7 +194,7 @@ class ReportsTreeHelper extends AdminBaseHelper
             if ($residentId && !$year) {
                 $v = [
                     'ID' => '',
-                    'NAME' => '<a href="javascript:;">' . $v['YEAR'] . '</a>',
+                    'NAME' => '<a href="javascript:;" class="kelnik-fake-sub">' . $v['YEAR'] . '</a>',
                     'id' => 'c' . $v['COMPANY_ID'] . '-' . $v['YEAR'],
                     'parent_id' => 'c' . $v['COMPANY_ID'],
                     'quantity' => 1
