@@ -45,10 +45,31 @@ if (particlesNode) {
     new Particles(particlesNode).init();
 }
 
+/* eslint-disable */
+/**
+ * Полифилл конструктора CustomEvent
+ */
+try {
+    new CustomEvent('IE has CustomEvent, but doesn\'t support constructor');
+} catch (e) {
+    window.CustomEvent = (event, params) => {
+        let evt;
+        params = params || {
+            bubbles   : false,
+            cancelable: false,
+            detail    : undefined
+        };
+        evt = document.createEvent("CustomEvent");
+        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+        return evt;
+    };
+
+    CustomEvent.prototype = Object.create(window.Event.prototype);
+}
+
 /**
  * Полифилл метода closest()
  */
-/* eslint-disable */
 if (!Element.prototype.matches) {
     Element.prototype.matches = Element.prototype.msMatchesSelector ||
         Element.prototype.webkitMatchesSelector;

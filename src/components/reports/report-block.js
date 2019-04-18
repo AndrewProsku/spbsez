@@ -111,8 +111,7 @@ class ReportBlock {
         this.inputs.forEach((input) => {
             delete input.dataset.prefilled;
 
-            if (!input.closest(`.${this.permissionFormClass}`) &&
-                !input.closest(`.${this.disabledInputClass}`)) {
+            if (!input.closest(`.${this.disabledInputClass}`)) {
                 this.inputsStatus[input.id] = this.getInputStatus(input);
             }
         });
@@ -364,7 +363,6 @@ class ReportBlock {
                 }
                 case 'file': {
                     this.initFileInputsEvents(input);
-
                     break;
                 }
                 case 'select-one': {
@@ -440,6 +438,8 @@ class ReportBlock {
                     if (!response.request.status === that.SUCCESS_STATUS) {
                         return true;
                     }
+                    that.inputsStatus[input.id] = that.getInputStatus(input);
+                    that.setBlockStatus();
 
                     return true;
                 },
@@ -595,7 +595,7 @@ class ReportBlock {
                 }
 
                 // Статус радио-кнопки высталяется как filled предполагая что
-                // в любой момент времени какая-то из кнокпок в группе все равно будет выбрана
+                // в любой момент времени какая-то из кнопок в группе все равно будет выбрана
                 return 'filled';
                 // for (let i = 0; i < checkboxGroup.length; i++) {
                 //     if (checkboxGroup[i].checked) {
@@ -619,7 +619,9 @@ class ReportBlock {
 
         // Дополнительные поля в блоках "Стадия строительства" не обяательны для заполнения
         // поэтому если в них нет ошибок они считаются заполненными
-        return input.closest(`.${this.permissionFormClass}`) ? 'filled' : 'empty';
+        // return input.closest(`.${this.permissionFormClass}`) ? 'filled' : 'empty';
+        // Теперь эти поля обзятельны для заполнения
+        return 'empty';
     }
 
     /* eslint-disable max-lines-per-function, max-statements */
@@ -820,10 +822,17 @@ class ReportBlock {
             this._bindInputsEvents(extraFormInputs);
         } else if (!needExtraForm && permissionForm) {
             Utils.removeElement(permissionForm);
+
+            delete this.inputsStatus[`construction-permission-date[${stageID}]`];
+            delete this.inputsStatus[`construction-permission-file[${stageID}]`];
+            delete this.inputsStatus[`construction-permission-num[${stageID}]`];
         }
 
         event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
         this.sendNewValue(event.target);
+
+        this.inputs = Array.from(this.target.querySelectorAll('input:not(.chosen-search-input), select, textarea'));
+        this._getInputsValues();
     }
 
     addStage() {
