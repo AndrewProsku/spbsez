@@ -150,6 +150,8 @@ class SiteMapGenerator
     }
 
     /**
+     * Выборка данных по модулям
+     *
      * @param $moduleName
      * @param string $lang
      * @return array
@@ -158,7 +160,10 @@ class SiteMapGenerator
     {
         $lang = strtolower($lang);
         $moduleName = strtolower($moduleName);
-        $cacheKey = $moduleName . '_' . $lang;
+
+        $cacheKey = $moduleName === 'infrastructure'
+                    ? $moduleName
+                    : $moduleName . '_' . $lang;
 
         if (isset($this->dataCache[$cacheKey])) {
             return $this->dataCache[$cacheKey];
@@ -173,7 +178,6 @@ class SiteMapGenerator
         }
 
         $className = $section['class'];
-        $select = $section['select'];
         $filter = [
             '=ACTIVE' => $className::YES
         ];
@@ -183,7 +187,7 @@ class SiteMapGenerator
         }
 
         $this->dataCache[$cacheKey] = $className::getList([
-            'select' => $select,
+            'select' => $section['select'],
             'filter' => $filter
         ])->fetchAll();
 
@@ -191,6 +195,8 @@ class SiteMapGenerator
     }
 
     /**
+     * Сканирование директорий
+     *
      * @param $siteId
      * @param $logical
      * @param array $paths
@@ -205,11 +211,9 @@ class SiteMapGenerator
             );
 
             foreach ($dirs as $k => $v) {
-                if ($v['DATA']['TYPE'] === self::TYPE_FILE && $v['DATA']['NAME'] !== 'index.php') {
-                    continue;
-                }
-
-                if ($v['DATA']['TYPE'] === self::TYPE_DIR && $this->canScan($v['DATA']['ABS_PATH'])) {
+                if (($v['DATA']['TYPE'] === self::TYPE_FILE && $v['DATA']['NAME'] !== 'index.php')
+                    || ($v['DATA']['TYPE'] === self::TYPE_DIR && $this->canScan($v['DATA']['ABS_PATH']))
+                ) {
                     continue;
                 }
 
@@ -226,11 +230,19 @@ class SiteMapGenerator
                 if (empty($dir['DATA']['TYPE']) || $dir['DATA']['TYPE'] !== self::TYPE_DIR) {
                     continue;
                 }
+
                 $this->scanDirs($siteId, $logical, [$dir['DATA']['ABS_PATH']]);
             }
         }
     }
 
+    /**
+     * Проверяем запрет сканирования директории.
+     * Данные берем из настроек
+     *
+     * @param $absPath
+     * @return bool
+     */
     protected function canScan($absPath)
     {
         $absPath = str_replace('//', '/', $absPath);
@@ -242,6 +254,9 @@ class SiteMapGenerator
         return \Kelnik\Helpers\ArrayHelper::getValue($this->settings, 'DIR.' . $absPath, 'Y') === self::YES;
     }
 
+    /**
+     * Создание xml, сохраняем в $this->map
+     */
     protected function generateMap()
     {
         $this->map = '<?xml version="1.0" encoding="UTF-8"?>';
@@ -259,8 +274,8 @@ class SiteMapGenerator
             $this->map .= '<loc>' . $url . '</loc>';
             if (!empty($path['DATA']['TIMESTAMP'])) {
                 $this->map .= '<lastmod>' . date('Y-m-d', $path['DATA']['TIMESTAMP']) . '</lastmod>';
+                $this->map .= '<changefreq>monthly</changefreq>';
             }
-            $this->map .= '<changefreq>monthly</changefreq>';
             $this->map .= '<priority>0.8</priority>';
             $this->map .= '</url>';
         }
