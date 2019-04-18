@@ -130,6 +130,11 @@ class Profile
         return $this->companyName;
     }
 
+    public function getSezDefaultName()
+    {
+        return 'ОЭЗ ТВТ в г. Санкт-Петербурге';
+    }
+
     public function update(array $data)
     {
         $allowFields = self::getUserFields();

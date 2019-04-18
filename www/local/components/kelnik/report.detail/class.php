@@ -197,6 +197,7 @@ class ReportDetail extends Bbc\Basis
                     ->setCompanyId($this->profile->getCompanyId())
                     ->setUserId($this->profile->getId())
                     ->setName($this->profile->getCompanyName())
+                    ->setNameSez($this->profile->getSezDefaultName())
                     ->setModifiedBy($this->profile->getId())
                     ->setDateModified(new DateTime());
 
