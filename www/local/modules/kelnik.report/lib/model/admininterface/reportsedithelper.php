@@ -116,12 +116,17 @@ class ReportsEditHelper extends AdminEditHelper
 
         $formConfig = ReportFieldsTable::getFormConfig();
         $stages = \Kelnik\Report\Model\ReportFieldsTable::getStages();
+        $formDefaults = [
+            ReportFieldsTable::FORM_TAXES,
+            ReportFieldsTable::FORM_RESULT,
+            'MAIN'
+        ];
 
         foreach ($this->tabs as $tabKey => $tab) {
             $tabControl->BeginNextTab();
             echo '<tr><td>';
             $formNum = $tab['KEY'];
-            if (!in_array($formNum, [ReportFieldsTable::FORM_TAXES, ReportFieldsTable::FORM_RESULT, 'MAIN'], true)) {
+            if (!in_array($formNum, $formDefaults, true)) {
                 $tab['DIV'] = 'form_default';
             }
             include 'tabs/tab_' . strtolower($tab['DIV']) . '.php';
