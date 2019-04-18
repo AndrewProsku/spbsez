@@ -1,4 +1,4 @@
-import 'particles.js';
+import './particles.js';
 
 const isDesktop = window.matchMedia('(min-width: 1280px)');
 
@@ -13,9 +13,7 @@ class Particles {
             return;
         }
 
-        window.particlesJS.load('j-particles', '/assets/particles.json');
-
-        this._bindEvents();
+        window.particlesJS.load('j-particles', this._bindEvents.bind(this));
     }
 
     _bindEvents() {
