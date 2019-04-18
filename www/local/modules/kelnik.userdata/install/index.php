@@ -12,6 +12,13 @@ class kelnik_userdata extends CModule
     public $MODULE_ID = 'kelnik.userdata';
     public $MODULE_GROUP_RIGHTS = 'Y';
 
+    protected $events = [
+        'main' => [
+            'OnUserDelete' => 'onUserDelete',
+            'OnBeforeUserDelete' => 'onBeforeUserDelete'
+        ]
+    ];
+
     public function __construct()
     {
         $arModuleVersion = array();
@@ -40,6 +47,7 @@ class kelnik_userdata extends CModule
         ModuleManager::registerModule($this->MODULE_ID);
         Loader::includeModule($this->MODULE_ID);
 
+        $this->InstallEvents();
         //$this->InstallFiles();
     }
 
@@ -47,6 +55,7 @@ class kelnik_userdata extends CModule
     {
         Loader::includeModule($this->MODULE_ID);
 
+        $this->UnInstallEvents();
         //$this->UnInstallFiles();
 
         ModuleManager::unRegisterModule($this->MODULE_ID);
@@ -73,6 +82,36 @@ class kelnik_userdata extends CModule
     public function UnInstallDB()
     {
         $this->runSql('uninstall.sql');
+    }
+
+    public function InstallEvents()
+    {
+        foreach ($this->events as $module => $events) {
+            foreach ($events as $eventSrc => $eventDst) {
+                \Bitrix\Main\EventManager::getInstance()->registerEventHandler(
+                    $module,
+                    $eventSrc,
+                    $this->MODULE_ID,
+                    \Kelnik\UserData\EventHandler::class,
+                    $eventDst
+                );
+            }
+        }
+    }
+
+    public function UnInstallEvents()
+    {
+        foreach ($this->events as $module => $events) {
+            foreach ($events as $eventSrc => $eventDst) {
+                \Bitrix\Main\EventManager::getInstance()->unRegisterEventHandler(
+                    $module,
+                    $eventSrc,
+                    $this->MODULE_ID,
+                    \Kelnik\UserData\EventHandler::class,
+                    $eventDst
+                );
+            }
+        }
     }
 
     protected function checkDependencies()
