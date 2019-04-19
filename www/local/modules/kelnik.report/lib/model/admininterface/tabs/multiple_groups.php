@@ -19,7 +19,7 @@ if (!$groups) {
                     <?php $val = $this->getValue($field['id'], $group, $formNum); ?>
                     <div class="b-input-block">
                         <div class="row-header"><?= $field['title']; ?></div>
-                        <div class="row-value"><?= $val ? $val : '&nbsp;'; ?></div>
+                        <div class="row-value"><?= mb_strlen($val) ? $val : '&nbsp;'; ?></div>
                         <div><input type="text" name="comment[<?= $this->getValue($field['id'], $group, $formNum, 'ID'); ?>]" value="<?= $this->getValueComment($field['id'], $group, $formNum); ?>" placeholder="Комментарий"></div>
                     </div>
                 <?php endforeach; ?>

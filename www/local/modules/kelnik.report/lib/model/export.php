@@ -9,6 +9,7 @@ use Kelnik\Helpers\ArrayHelper;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Style\Protection;
+use PhpOffice\PhpSpreadsheet\Style\Style;
 
 Loc::loadMessages(__FILE__);
 
@@ -160,7 +161,7 @@ class Export
 
     protected function processForm0()
     {
-        $sheet = &$this->spreadsheet->getActiveSheet();
+        $sheet = $this->spreadsheet->getActiveSheet();
         $sheet->setCellValue('L3', self::getCurrentDate());
         
         $valueToCell = [
@@ -220,7 +221,7 @@ class Export
 
     protected function processForm1()
     {
-        $sheet = &$this->spreadsheet->getActiveSheet();
+        $sheet = $this->spreadsheet->getActiveSheet();
         $sheet->setCellValue('K3', self::getCurrentDate());
 
         $valueToCell = [
@@ -295,7 +296,7 @@ class Export
 
     protected function processForm2()
     {
-        $sheet = &$this->spreadsheet->getActiveSheet();
+        $sheet = $this->spreadsheet->getActiveSheet();
         $sheet->setCellValue('G4', self::getCurrentDate());
 
         $valueToCell = [
@@ -350,7 +351,7 @@ class Export
 
     protected function processForm3()
     {
-        $sheet = &$this->spreadsheet->getActiveSheet();
+        $sheet = $this->spreadsheet->getActiveSheet();
         $sheet->setCellValue('E4', self::getCurrentDate());
 
         $valueToCell = [
@@ -393,7 +394,7 @@ class Export
 
     protected function processForm4()
     {
-        $sheet = &$this->spreadsheet->getActiveSheet();
+        $sheet = $this->spreadsheet->getActiveSheet();
         $sheet->setCellValue('G3', self::getCurrentDate());
 
         $valueToCell = [
@@ -460,7 +461,7 @@ class Export
 
     protected function processForm5()
     {
-        $sheet = &$this->spreadsheet->getActiveSheet();
+        $sheet = $this->spreadsheet->getActiveSheet();
         $sheet->setCellValue('B4', 'по состоянию на ' . self::getCurrentDate());
 
         $valueToCell = [
@@ -493,7 +494,7 @@ class Export
 
     protected function processForm6()
     {
-        $sheet = &$this->spreadsheet->getActiveSheet();
+        $sheet = $this->spreadsheet->getActiveSheet();
         $sheet->setCellValue('E4', self::getCurrentDate());
 
         $valueToCell = [
@@ -690,12 +691,14 @@ class Export
      */
     protected function copyRow(int $rowNumSrc, int $rowNumDst)
     {
-        $sheet = &$this->spreadsheet->getActiveSheet();
+        $sheet = $this->spreadsheet->getActiveSheet();
         $sheet->insertNewRowBefore($rowNumDst);
         $cols = $sheet->getColumnDimensions();
         foreach ($cols as $colNum => $coll) {
-            $cell = $sheet->getCell($colNum . $rowNumSrc);
-            $sheet->duplicateStyle($cell->getStyle(), $colNum . $rowNumDst);
+            $sheet->duplicateStyle(
+                $sheet->getCell($colNum . $rowNumSrc)->getStyle()->getSharedComponent(),
+                $colNum . $rowNumDst
+            );
         }
         unset($sheet, $cell);
     }
