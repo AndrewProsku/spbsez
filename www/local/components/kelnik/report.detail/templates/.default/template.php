@@ -63,3 +63,4 @@
 
     <button class="button button_without_icon b-report-submit j-report-submit" type="button" disabled="">Отправить отчет</button>
 </div>
+<?php $APPLICATION->IncludeFile('inc_account_logout.php'); ?>

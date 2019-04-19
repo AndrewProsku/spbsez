@@ -19,3 +19,4 @@
         $component
     );?>
 </div>
+<?php $APPLICATION->IncludeFile('inc_account_logout.php'); ?>
