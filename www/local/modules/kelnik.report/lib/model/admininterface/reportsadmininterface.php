@@ -11,6 +11,7 @@ use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\AdminHelper\Widget\UserOrmWidget;
 use Kelnik\Report\Model\ReportsTable;
 use Kelnik\Report\Model\StatusTable;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
@@ -33,7 +34,7 @@ class ReportsAdminInterface extends AdminInterface
                     ],
                     'COMPANY_ID' => [
                         'WIDGET' =>  new UserOrmWidget(),
-                        'TITLE_FIELD_NAME' => 'WORK_COMPANY',
+                        'TITLE_FIELD_NAME' => Profile::COMPANY_NAME_FIELD,
                         'READONLY' => true,
                         'FILTER' => true,
                         'VIRTUAL' => true,
