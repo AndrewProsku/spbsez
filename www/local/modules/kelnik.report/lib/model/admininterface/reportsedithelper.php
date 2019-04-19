@@ -10,6 +10,7 @@ use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportFieldsTable;
 use Kelnik\Report\Model\ReportsTable;
 use Kelnik\Report\Model\StatusTable;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
@@ -55,6 +56,17 @@ class ReportsEditHelper extends AdminEditHelper
         $this->tabControl = false;
         $this->report = ReportsTable::getReport($this->data['COMPANY_ID'], $this->data['ID']);
         $this->report->fill();
+
+        $companyName = \CUser::GetByID($this->report->getCompanyId())->Fetch();
+
+        $this->setTitle(
+            Loc::getMessage('KELNIK_REPORT_TITLE') . ': ' .
+            htmlentities(
+                $companyName[Profile::COMPANY_NAME_FIELD] . ', ' . $this->report->getTypeName() . ' ' . $this->report->getYear(),
+                ENT_QUOTES,
+                'UTF-8'
+            )
+        );
 
         if (!empty($_REQUEST['done']) || !empty($_REQUEST['decline'])) {
             $this->saveElement($this->data['ID']);

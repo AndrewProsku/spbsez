@@ -8,6 +8,7 @@ use Kelnik\AdminHelper\Widget\DateTimeWidget;
 use Kelnik\AdminHelper\Widget\FileWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\UserOrmWidget;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
@@ -30,7 +31,7 @@ class DocsAdminInterface extends AdminInterface
                     ],
                     'COMPANY_ID' => [
                         'WIDGET' =>  new UserOrmWidget(),
-                        'TITLE_FIELD_NAME' => 'WORK_COMPANY',
+                        'TITLE_FIELD_NAME' => Profile::COMPANY_NAME_FIELD,
                         'READONLY' => true,
                         'FILTER' => true,
                         'VIRTUAL' => true,
