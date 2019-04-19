@@ -40,7 +40,7 @@ $i = 1;
             ?>
             <div class="b-input-block">
                 <div class="row-header"><?= $field['title']; ?></div>
-                <div class="row-value"><?= $val ? $val : '&nbsp;'; ?></div>
+                <div class="row-value"><?= mb_strlen($val) ? $val : '&nbsp;'; ?></div>
                 <div><input type="text" name="comment[<?= $this->getValue($field['id'], 0, $formNum, 'ID'); ?>]" value="<?= $this->getValueComment($field['id'], 0, $formNum); ?>" placeholder="Комментарий"></div>
             </div>
         <?php endforeach; ?>
