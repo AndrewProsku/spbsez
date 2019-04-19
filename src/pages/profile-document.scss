@@ -102,7 +102,7 @@
 
     &.is-active-item {
         background-color: $bg-select;
-        z-index: 1;
+        //z-index: 2;
 
         .b-profile-document__item-delete {
             display: block;
@@ -154,6 +154,16 @@
         }
     }
 }
+
+/*
+.b-profile-document__item.is-active-item + .b-profile-document__item.is-active-item {
+    z-index: 1;
+}
+.b-profile-document__item.is-active-item + .b-profile-document__item {
+    z-index: 0;
+}
+*/
+
 
 .b-profile-document__item-title {
     @include font-size('p3');
