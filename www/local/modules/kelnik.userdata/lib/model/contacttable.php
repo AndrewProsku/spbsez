@@ -95,7 +95,7 @@ class ContactTable extends DataManager
             ),
             new Main\Entity\ExpressionField(
                 'COMPANY_NAME',
-                'IF(%s, (SELECT `WORK_COMPANY` FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s), (SELECT `WORK_COMPANY` FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s))',
+                'IF(%s, (SELECT `' . Profile::COMPANY_NAME_FIELD .'` FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s), (SELECT `' . Profile::COMPANY_NAME_FIELD .'` FROM `' . Main\UserTable::getTableName() . '` WHERE `ID`= %s))',
                 [
                     'USER.' . Profile::OWNER_FIELD,
                     'USER.' . Profile::OWNER_FIELD,

@@ -22,4 +22,14 @@ $fieldTitle = \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REPORT_FIELD_' .
             </div>
         <?php endforeach; ?>
     </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block">
+            <div class="row-header"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REPORT_FIELD_TYPE'); ?></div>
+            <div class="row-value"><?= \Kelnik\Helpers\ArrayHelper::getValue($this->fields, 'TYPE.VARIANTS.' . $this->data['TYPE']) .' ' . $this->data['YEAR']; ?></div>
+        </div>
+        <div class="b-input-block">
+            <div class="row-header"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REPORT_FIELD_STATUS'); ?></div>
+            <div class="row-value"><?= \Kelnik\Helpers\ArrayHelper::getValue($this->fields, 'STATUS_ID.VARIANTS.' . $this->data['STATUS_ID']); ?></div>
+        </div>
+    </div>
 </section>
