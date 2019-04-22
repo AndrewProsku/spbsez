@@ -43,6 +43,7 @@ class ReportBlock {
         this.FAIL_STATUS = 0;
         this.reportId = 0;
         this.baseUrl = '/api/report/';
+        this.textInputTimeout = 0;
     }
 
     /* eslint-disable max-statements, max-lines-per-function */
@@ -399,22 +400,21 @@ class ReportBlock {
             }
         });
 
+        input.addEventListener('keyup', (event) => {
+            if (this.textInputTimeout) {
+                clearTimeout(this.textInputTimeout);
+            }
+            this.textInputTimeout = setTimeout(this.onInputKeyup.bind(this), 500, event.target);
+        });
+    }
+
+    onInputKeyup(input) {
+        this.textInputTimeout = 0;
         if (Utils.keyExist(input.dataset, 'prefilled')) {
-            input.addEventListener('keyup', (event) => {
-                delete input.dataset.prefilled;
-
-                // eslint-disable-next-line no-empty-function
-                input.removeEventListener('keyup', () => {
-                });
-
-                this.sendNewValue(event.target);
-            });
+            delete input.dataset.prefilled;
         }
 
-        input.addEventListener('change', (event) => {
-            delete input.dataset.prefilled;
-            this.sendNewValue(event.target);
-        });
+        this.sendNewValue(input);
     }
 
     initFileInputsEvents(input) {

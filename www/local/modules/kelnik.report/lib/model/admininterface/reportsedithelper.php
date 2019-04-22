@@ -61,11 +61,7 @@ class ReportsEditHelper extends AdminEditHelper
 
         $this->setTitle(
             Loc::getMessage('KELNIK_REPORT_TITLE') . ': ' .
-            htmlentities(
-                $companyName[Profile::COMPANY_NAME_FIELD] . ', ' . $this->report->getTypeName() . ' ' . $this->report->getYear(),
-                ENT_QUOTES,
-                'UTF-8'
-            )
+            strip_tags($companyName[Profile::COMPANY_NAME_FIELD] . ', ' . $this->report->getTypeName() . ' ' . $this->report->getYear())
         );
 
         if (!empty($_REQUEST['done']) || !empty($_REQUEST['decline'])) {
