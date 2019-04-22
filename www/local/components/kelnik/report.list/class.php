@@ -120,6 +120,12 @@ class ReportList extends Bbc\Basis
             $res[$year]['ELEMENTS'][$v['TYPE']] = $v;
         }
 
+        $res = array_map(function ($year) {
+            ksort($year['ELEMENTS']);
+
+            return $year;
+        }, $res);
+
         ksort($res);
 
         return array_reverse($res);
