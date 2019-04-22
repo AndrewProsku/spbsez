@@ -376,17 +376,18 @@ class ReportFieldsTable extends DataManager
                     ],
                     [
                         'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2'),
+                        'type' => 'taxes',
                         'fields' => [
-                            [
-                                'id' => 'taxes-breaks-all',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-1'),
-                                'type' => 'float'
-                            ],
-                            [
-                                'id' => 'taxes-breaks-year',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-2'),
-                                'type' => 'float'
-                            ],
+//                            [
+//                                'id' => 'taxes-breaks-all',
+//                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-1'),
+//                                'type' => 'float'
+//                            ],
+//                            [
+//                                'id' => 'taxes-breaks-year',
+//                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-2'),
+//                                'type' => 'float'
+//                            ],
                             [
                                 'id' => 'taxes-breaks-federal-all',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_2-2-3'),
