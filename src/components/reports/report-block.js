@@ -607,6 +607,16 @@ class ReportBlock {
                 //
                 // break;
             }
+            case 'file': {
+                if (Utils.keyExist(input.dataset, 'hasError')) {
+                    return 'hasError';
+                } else if (Utils.keyExist(input.dataset, 'prefilled')) {
+                    return 'prefilled';
+                } else if (input.parentElement.querySelector('.b-input-file__text').textContent.length) {
+                    return 'filled';
+                }
+                break;
+            }
             default: {
                 if (Utils.keyExist(input.dataset, 'hasError')) {
                     return 'hasError';
