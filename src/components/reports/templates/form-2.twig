@@ -133,7 +133,7 @@
     <div class="b-report-block__body">
         <div class="b-report-block__subtitle">Всего, из них</div>
         <div class="b-inputs-row">
-            <div class="b-input-block ">
+            <div class="b-input-block">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-breaks-all",
                     name: "taxes-breaks-all",
@@ -152,7 +152,7 @@
         </div>
         <div class="b-report-block__subtitle">В части, зачисляемой в федеральный бюджет</div>
         <div class="b-inputs-row">
-            <div class="b-input-block ">
+            <div class="b-input-block j-taxes-all">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-breaks-federal-all",
                     name: "taxes-breaks-federal-all",
@@ -160,7 +160,7 @@
                 } %}
                 <label class="b-input-block__label" for="taxes-breaks-federal-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
             </div>
-            <div class="b-input-block ">
+            <div class="b-input-block j-taxes-year">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-breaks-federal-year",
                     name: "taxes-breaks-federal-year",
@@ -171,7 +171,7 @@
         </div>
         <div class="b-report-block__subtitle">В части, зачисляемой в бюджет субъекта и местный бюджет</div>
         <div class="b-inputs-row">
-            <div class="b-input-block ">
+            <div class="b-input-block j-taxes-all">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-breaks-local-all",
                     name: "taxes-breaks-local-all",
@@ -179,7 +179,7 @@
                 } %}
                 <label class="b-input-block__label" for="taxes-breaks-local-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
             </div>
-            <div class="b-input-block ">
+            <div class="b-input-block j-taxes-year">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-breaks-local-year",
                     name: "taxes-breaks-local-year",
@@ -190,7 +190,7 @@
         </div>
         <div class="b-report-block__subtitle">В части, зачисляемой во внебюджетные фонды</div>
         <div class="b-inputs-row">
-            <div class="b-input-block ">
+            <div class="b-input-block j-taxes-all">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-breaks-offbudget-all",
                     name: "taxes-breaks-offbudget-all",
@@ -198,7 +198,7 @@
                 } %}
                 <label class="b-input-block__label" for="taxes-breaks-offbudget-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
             </div>
-            <div class="b-input-block ">
+            <div class="b-input-block j-taxes-year">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-breaks-offbudget-year",
                     name: "taxes-breaks-offbudget-year",

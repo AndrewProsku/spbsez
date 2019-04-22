@@ -559,6 +559,7 @@ class ReportForm {
                         this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputErrorClass);
                     });
                     hasError = true;
+                    this.forms[resultsFormID].isVisited = true;
                     break;
                 }
                 case 'prefilled': {
@@ -592,9 +593,11 @@ class ReportForm {
             }
 
             if (blockNum === (formBlocks.length - arrayLengthShift)) {
+                const isReadonly = this.type === 'readonly';
+
                 // Если форма с результатаими интеллектурьной деятельности еще не была посещена
                 // она не может считаться заполненной
-                if ((formID === resultsFormID) && !this.forms[resultsFormID].isVisited) {
+                if ((formID === resultsFormID) && !isReadonly && !this.forms[resultsFormID].isVisited) {
                     this.forms[formID].isApproved = false;
                     this.filters.forEach((filter, i) => {
                         this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
