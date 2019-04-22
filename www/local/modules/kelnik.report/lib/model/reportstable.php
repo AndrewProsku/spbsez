@@ -355,6 +355,14 @@ class ReportsTable extends DataManager
         return self::$completeYear[$companyId . '_' . $year] = true;
     }
 
+    /**
+     * Проверка предыдущих отчетов в течение года
+     *
+     * @param int $companyId ID компании
+     * @param int $type период отчета
+     * @param int $year год
+     * @return bool
+     */
     public static function prevRequired(int $companyId, int $type, int $year)
     {
         if ($type === ReportsTable::TYPE_QUARTER_1) {
