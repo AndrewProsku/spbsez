@@ -559,6 +559,7 @@ class ReportForm {
                         this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputErrorClass);
                     });
                     hasError = true;
+                    this.forms[resultsFormID].isVisited = true;
                     break;
                 }
                 case 'prefilled': {
