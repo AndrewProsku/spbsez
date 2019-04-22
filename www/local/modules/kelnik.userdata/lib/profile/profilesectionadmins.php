@@ -49,7 +49,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
             $data = [
                 'ID' => self::getFakeId(),
                 Profile::OWNER_FIELD => $this->profile->getId(),
-                'STATUS_NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_ADMIN'),
+                'STATUS_NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_RESIDENT'),
                 'NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_DEFAULT_NAME'),
                 'FULL_NAME' => Loc::getMessage('KELNIK_PROFILE_STATUS_DEFAULT_NAME')
             ];
@@ -190,7 +190,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
                 unset($res[$k]);
             }
             $res['FULL_NAME'] = Profile::getFullName($res);
-            $res['STATUS_NAME'] = Loc::getMessage('KELNIK_PROFILE_STATUS_ADMIN');
+            $res['STATUS_NAME'] = Loc::getMessage('KELNIK_PROFILE_STATUS_RESIDENT');
         }
 
         return $res;
@@ -332,7 +332,7 @@ class ProfileSectionAdmins extends ProfileSectionAbstract
         );
 
         foreach ($res as &$v) {
-            $v['STATUS_NAME'] = Loc::getMessage('KELNIK_PROFILE_STATUS_ADMIN');
+            $v['STATUS_NAME'] = Loc::getMessage('KELNIK_PROFILE_STATUS_RESIDENT');
         }
         unset($v);
 
