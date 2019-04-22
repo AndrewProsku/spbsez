@@ -132,7 +132,14 @@ class Report extends EO_Reports
      */
     public function isComplete()
     {
-        return $this->getStatusId() == StatusTable::DONE;
+        return in_array(
+            $this->getStatusId(),
+            [
+                StatusTable::DONE,
+                StatusTable::CHECKING
+            ],
+            true
+        );
     }
 
     /**
