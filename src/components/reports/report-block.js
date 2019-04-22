@@ -176,8 +176,8 @@ class ReportBlock {
 
     initTaxesBlock(data) {
         this.inputsData = data;
-        const taxesAllInput = this.target.querySelector('#taxes-all');
-        const taxesYearInput = this.target.querySelector('#taxes-year');
+        const taxesAllInput = this.target.querySelector('.j-taxes-total-all');
+        const taxesYearInput = this.target.querySelector('.j-taxes-total-year');
         let allTaxes = 0;
         let yearTaxes = 0;
         const NOT_FOUND = -1;
@@ -209,14 +209,16 @@ class ReportBlock {
         currentInput.addEventListener('focus', (event) => {
             previousValue = event.target.value;
         });
-        currentInput.addEventListener('change', (event) => {
-            if ($.isNumeric(event.target.value)) {
+        currentInput.addEventListener('keyup', (event) => {
+            const newNumericValue = Number(event.target.value.replace(/ /gu, ''));
+
+            if ($.isNumeric(newNumericValue)) {
                 let newValue = 0;
 
                 allInputs.forEach((input) => {
-                    newValue += Number(input.value);
+                    newValue += Number(input.value.replace(/ /gu, ''));
                 });
-                resultInput.value = newValue;
+                resultInput.value = Math.round(newValue * 1000000) / 1000000;
 
                 return;
             }
