@@ -32,8 +32,12 @@
         <?php foreach ($year['ELEMENTS'] as $report): ?>
             <section class="b-quarter <?= $report['STATUS_CSS_CLASS']; ?>">
                 <h3 class="b-quarter__title"><?= $report['TYPE_NAME']; ?></h3>
-                <div class="b-quarter__label"><?= $report['STATUS_NAME']; ?></div>
-                <a class="button b-quarter__button button_icon_pen" href="<?= $report['LINK']; ?>"><?= $report['STATUS_BUTTON_NAME']; ?></a>
+                <?php if($report['STATUS_ID'] < 0): ?>
+                    <div class="b-quarter__description">Отчетный период не&nbsp;наступил</div>
+                <?php else: ?>
+                    <div class="b-quarter__label"><?= $report['STATUS_NAME']; ?></div>
+                    <a class="button b-quarter__button button_icon_pen" href="<?= $report['LINK']; ?>"><?= $report['STATUS_BUTTON_NAME']; ?></a>
+                <?php endif; ?>
             </section>
         <?php endforeach; ?>
     </div>

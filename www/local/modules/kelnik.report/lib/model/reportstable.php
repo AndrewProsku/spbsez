@@ -250,15 +250,15 @@ class ReportsTable extends DataManager
         }
 
         return [
-            self::TYPE_QUARTER_1          => [
+            self::TYPE_QUARTER_1 => [
                 'start' => mktime(0, 0, 0, 4, 1, $year),
                 'end' => mktime(23, 59, 59, 4, 31, $year)
             ],
-            self::TYPE_QUARTER_2          => [
+            self::TYPE_QUARTER_2 => [
                 'start' => mktime(0, 0, 0, 7, 1, $year),
                 'end' => mktime(23, 59, 59, 7, 31, $year)
             ],
-            self::TYPE_QUARTER_3          => [
+            self::TYPE_QUARTER_3 => [
                 'start' => mktime(0, 0, 0, 9, 1, $year),
                 'end' => mktime(23, 59, 59, 9, 30, $year)
             ],
@@ -266,7 +266,7 @@ class ReportsTable extends DataManager
                 'start' => mktime(0, 0, 0, 1, 8, $year + 1),
                 'end' => mktime(23, 59, 59, 1, 31, $year + 1)
             ],
-            self::TYPE_ANNUAL             => [
+            self::TYPE_ANNUAL => [
                 'start' => mktime(0, 0, 0, 4, 1, $year + 1),
                 'end' => mktime(23, 59, 59, 4, 31, $year + 1)
             ]
@@ -335,7 +335,7 @@ class ReportsTable extends DataManager
                 ]
             ])->fetchCollection();
         } catch (\Exception $e) {
-            $reports = [];
+            $reports = new \Kelnik\Report\Model\EO_Reports_Collection();
         }
 
         if (!$reports->count()) {
@@ -353,6 +353,48 @@ class ReportsTable extends DataManager
         }
 
         return self::$completeYear[$companyId . '_' . $year] = true;
+    }
+
+    /**
+     * Проверка предыдущих отчетов в течение года
+     *
+     * @param int $companyId ID компании
+     * @param int $type период отчета
+     * @param int $year год
+     * @return bool
+     */
+    public static function prevRequired(int $companyId, int $type, int $year)
+    {
+        if ($type === ReportsTable::TYPE_QUARTER_1) {
+            return !ReportsTable::yearIsComplete($companyId, $year - 1);
+        }
+
+        try {
+            $reports = self::getList([
+                'filter' => [
+                    '=YEAR' => $year,
+                    '=COMPANY_ID' => $companyId,
+                    '<TYPE' => $type
+                ],
+                'order' => [
+                    'TYPE' => 'ASC'
+                ]
+            ])->fetchCollection();
+        } catch (\Exception $e) {
+            $reports = new \Kelnik\Report\Model\EO_Reports_Collection();
+        }
+
+        if (!$reports->count()) {
+            return false;
+        }
+
+        foreach ($reports as $report) {
+            if (!$report->isComplete()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static function getCurrentTime()
