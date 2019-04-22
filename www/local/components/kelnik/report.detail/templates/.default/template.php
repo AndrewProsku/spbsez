@@ -1,5 +1,5 @@
 <?if(!defined('B_PROLOG_INCLUDED')||B_PROLOG_INCLUDED!==true)die();?>
-<?php if(!empty($arResult['PREV_YEAR_REQUIRED'])): ?>
+<?php if(!empty($arResult['PREV_REQUIRED'])): ?>
     <div class="l-reports">
         <div class="b-title b-reports-title">
             <h1>Не закрыт предыдущий отчетный период</h1>
