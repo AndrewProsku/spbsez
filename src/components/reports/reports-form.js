@@ -104,6 +104,12 @@ class ReportForm {
             this.bindFilterEvents(filter);
         });
 
+        this.filterFakeInputs.forEach((fakeInputsGroup) => {
+            fakeInputsGroup.forEach((fakeInput) => {
+                fakeInput.addEventListener('click', this.preventDefaultHandler);
+            });
+        });
+
         mediator.subscribe('resultBlockDeleted', () => {
             this.resultBlockDeletedHandler();
         });
@@ -188,11 +194,20 @@ class ReportForm {
                 const formBlocks = that.forms[that.initialForm].template.querySelectorAll(`.${that.formsBlockClass}`);
 
                 that.toggleApproveFormButton(formBlocks, that.initialForm);
+                that.filterFakeInputs.forEach((fakeInputsGroup) => {
+                    fakeInputsGroup.forEach((fakeInput) => {
+                        fakeInput.removeEventListener('click', that.preventDefaultHandler);
+                    });
+                });
             },
             error(error) {
                 console.error(error);
             }
         });
+    }
+
+    preventDefaultHandler(event) {
+        event.preventDefault();
     }
 
     initResultsForm(data, formID) {
@@ -256,6 +271,7 @@ class ReportForm {
                 reportFilter.querySelector(`input[value="${event.target.value}"]`).checked = true;
             });
             this.changeForm(event.target.value);
+
             this._setTitlesInSelects();
         });
 
