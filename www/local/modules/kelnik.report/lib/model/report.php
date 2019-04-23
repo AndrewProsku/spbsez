@@ -422,15 +422,20 @@ class Report extends EO_Reports
                 }
 
                 $values[] = '(' .
-                            $rowId . ', ' .
-                            $sqlHelper->convertToDbInteger($this->getId()) . ', ' .
-                            $sqlHelper->convertToDbInteger($groupId) . ', ' .
-                            $sqlHelper->convertToDbInteger($field['FORM_NUM']) . ', ' .
-                            $sqlHelper->convertToDbString(
-                                (int) $rowId ? ReportFieldsTable::NO : ReportFieldsTable::YES
-                            ) . ', ' .
-                            $sqlHelper->convertToDbString($field['NAME']) . ', ' .
-                            $sqlHelper->convertToDbString($val) .
+                            implode(
+                                ', ',
+                                [
+                                    $rowId,
+                                    $sqlHelper->convertToDbInteger($this->getId()),
+                                    $sqlHelper->convertToDbInteger($groupId),
+                                    $sqlHelper->convertToDbInteger($field['FORM_NUM']),
+                                    $sqlHelper->convertToDbString(
+                                        (int) $rowId ? ReportFieldsTable::NO : ReportFieldsTable::YES
+                                    ),
+                                    $sqlHelper->convertToDbString($field['NAME']),
+                                    $sqlHelper->convertToDbString($val)
+                                ]
+                            ) .
                             ')';
             }
         }
