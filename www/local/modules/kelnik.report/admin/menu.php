@@ -15,6 +15,22 @@ if ($GLOBALS['APPLICATION']->GetUserRight('kelnik.report') < 'R') {
     return [];
 }
 
+$cnt = \Kelnik\Report\Model\ReportsTable::getRow([
+    'select' => [
+        new \Bitrix\Main\ORM\Fields\ExpressionField(
+            'CNT',
+            'COUNT(%s)',
+            'ID'
+        )
+    ],
+    'filter' => [
+        '=STATUS_ID' => \Kelnik\Report\Model\StatusTable::CHECKING
+    ]
+]);
+
+$cnt = \Kelnik\Helpers\ArrayHelper::getValue($cnt, 'CNT', 0);
+$cnt = $cnt ? ' (' . $cnt . ')' : null;
+
 return [
     [
         "parent_menu" => "global_menu_content",
@@ -31,7 +47,7 @@ return [
                 'sort' => 180,
                 'icon' => 'iblock_menu_icon',
                 'page_icon' => 'iblock_menu_icon',
-                'text' => Loc::getMessage('KELNIK_REPORT_REPORTS_MENU'),
+                'text' => Loc::getMessage('KELNIK_REPORT_REPORTS_MENU') . $cnt,
                 'url' => \Kelnik\Report\Model\AdminInterface\ReportsListHelper::getUrl(),
                 'more_url' => [
                     \Kelnik\Report\Model\AdminInterface\ReportsEditHelper::getUrl()
@@ -47,6 +63,14 @@ return [
                 'more_url' => [
                     \Kelnik\Report\Model\AdminInterface\ReportsEditHelper::getUrl()
                 ]
+            ],
+            [
+                'parent_menu' => 'kelnik_report',
+                'sort' => 180,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_REPORT_REPORTS_EXPORT_MENU'),
+                'url' => \Kelnik\Report\Model\AdminInterface\ReportsExportHelper::getUrl(),
             ],
             [
                 'parent_menu' => 'kelnik_report',

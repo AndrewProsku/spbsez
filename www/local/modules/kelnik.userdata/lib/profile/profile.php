@@ -14,6 +14,7 @@ class Profile
     public const GROUP_RESIDENT = 10;
 
     public const OWNER_FIELD = 'UF_ADMIN_ID';
+    public const COMPANY_NAME_FIELD = 'WORK_COMPANY';
 
     public const CAN_REPORT = 'UF_CAN_REPORT';
     public const CAN_REQUEST = 'UF_CAN_REQUEST';
@@ -119,15 +120,20 @@ class Profile
             return $this->companyName;
         }
 
-        $this->companyName = $this->getField('WORK_COMPANY');
+        $this->companyName = $this->getField(self::COMPANY_NAME_FIELD);
 
         if ($this->isResident()) {
             $adminInfo = \CUser::GetByID($this->getCompanyId())->Fetch();
 
-            $this->companyName = ArrayHelper::getValue($adminInfo, 'WORK_COMPANY', '');
+            $this->companyName = ArrayHelper::getValue($adminInfo, self::COMPANY_NAME_FIELD, '');
         }
 
         return $this->companyName;
+    }
+
+    public function getSezDefaultName()
+    {
+        return 'ОЭЗ ТВТ в г. Санкт-Петербурге';
     }
 
     public function update(array $data)
@@ -376,7 +382,7 @@ class Profile
             [
                 'SELECT' => [],
                 'FIELDS' => [
-                    'ID', 'WORK_COMPANY'
+                    'ID', self::COMPANY_NAME_FIELD
                 ]
             ]
         );
@@ -386,7 +392,7 @@ class Profile
         }
 
         while ($row = $tmp->Fetch()) {
-            $res[$row['ID']] = '[' . $row['ID'] . '] ' . $row['WORK_COMPANY'];
+            $res[$row['ID']] = '[' . $row['ID'] . '] ' . $row[self::COMPANY_NAME_FIELD];
         }
 
         return $res;

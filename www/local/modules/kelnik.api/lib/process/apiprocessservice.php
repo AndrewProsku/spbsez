@@ -7,7 +7,7 @@ use Bitrix\Main\Localization\Loc;
 use Kelnik\Api\Api;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Requests\Model\ServiceTable;
-use Kelnik\Requests\Model\SiteMsgTable;
+use Kelnik\Requests\Model\ServiceTypeTable;
 
 /**
  * Class ApiProcessService
@@ -41,7 +41,7 @@ class ApiProcessService extends ApiProcessAbstract
 
         $data = [];
 
-        $types = ServiceTable::getTypes();
+        $types = ServiceTypeTable::getAssoc(['cache' => ['ttl' => 60]], 'ID');
 
         foreach ($fields as $k => $v) {
             $data[$k] = $k == 'TYPE_ID'
@@ -65,6 +65,9 @@ class ApiProcessService extends ApiProcessAbstract
 
             return false;
         }
+
+        $this->data['title'] = Loc::getMessage('KELNIK_API_SERVICE_RESPONSE_TITLE');
+        $this->data['text'] = Loc::getMessage('KELNIK_API_SERVICE_RESPONSE_TEXT');
 
         return true;
     }

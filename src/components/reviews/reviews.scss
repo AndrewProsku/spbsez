@@ -38,37 +38,41 @@
     }
 
     @media #{$laptop} {
-        height: 100vh;
+        min-height: 640px;
         align-items: center;
         position: relative;
+    }
+
+    @media #{$fullhd} {
+        min-height: 1080px;
     }
 }
 
 .b-slider-reviews__item-image {
     @include column(18, 36);
     display: none;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+
 
     @media #{$tablet-portrait} {
         display: block;
-    }
-
-    @media #{$laptop} {
-        @include column(36, 36);
         position: absolute;
         top: 0;
         left: 0;
         z-index: -1;
-        width: 100%;
         height: 100%;
+        object-fit: cover;
+    }
+
+    @media #{$laptop} {
+        @include column(36, 36);
+        width: 100%;
     }
 }
 
 .b-slider-reviews__person {
     @media #{$tablet-portrait} {
         @include column(18, 36);
+        margin-left: auto;
     }
 
     @media #{$laptop} {

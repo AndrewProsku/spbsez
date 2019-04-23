@@ -82,38 +82,48 @@
     @include column(32, 32);
     margin-bottom: 24px;
     display: flex;
+    width: 100%;
 
     &:last-child {
         margin-bottom: 0;
     }
-
-    @media #{$tablet-portrait} {
-        flex-basis: 50%;
-    }
 }
 
 .b-icons-list__item:first-child {
-    flex-basis: 40%;
+    @media #{$laptop} {
+        flex-basis: 40%;
+        width: 40%;
+    }
 }
 
 .b-icons-list__item:nth-child(2) {
-    flex-basis: 40%;
-    order: 3;
+    @media #{$laptop} {
+        flex-basis: 40%;
+        width: 40%;
+        order: 3;
+    }
 }
 
 .b-icons-list__item:nth-child(3) {
-    flex-basis: 55%;
-    order: 2;
+    @media #{$laptop} {
+        flex-basis: 55%;
+        width: 55%;
+        order: 2;
+    }
 }
 
 .b-icons-list__item:nth-child(4) {
-    flex-basis: 55%;
-    order: 4;
+    @media #{$laptop} {
+        flex-basis: 55%;
+        width: 55%;
+        order: 4;
+    }
 }
 
 
 .b-icons-list__img {
     width: 64px;
+    min-width: 64px;
     height: 64px;
     margin-right: 21px;
 }
@@ -176,6 +186,12 @@
     @media #{$fullhd} {
         @include prefix(4, 36);
         @include suffix(4, 36);
+    }
+}
+
+.b-infrastructure-map__title_only_mobile {
+    @media #{$tablet-portrait} {
+        display: none;
     }
 }
 

@@ -67,6 +67,9 @@ class ApiProcessVacancy extends ApiProcessAbstract
             return false;
         }
 
+        $this->data['title'] = Loc::getMessage('KELNIK_API_VACANCY_RESPONSE_TITLE');
+        $this->data['text'] = Loc::getMessage('KELNIK_API_VACANCY_RESPONSE_TEXT');
+
         return true;
     }
 }

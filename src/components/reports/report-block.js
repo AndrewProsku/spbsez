@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import InputFile from 'components/forms/file';
+import inputmask from 'inputmask';
 import Mediator from 'common/scripts/mediator';
 import Select from 'components/forms/select';
 import templateError from './templates/input-error.twig';
@@ -29,6 +30,8 @@ class ReportBlock {
         this.fileInputClass = 'j-file-input-block';
         this.resultDeleteButtonClass = 'j-delete-result';
         this.disabledInputClass = 'b-input-block_is_disabled';
+        this.numericInputClass = 'b-input-text_type_numeric';
+        this.dateInputClass = 'b-input-text_type_date';
 
         /**
          * Данные о состоянии инпутов блока, полученные от сервера
@@ -38,51 +41,50 @@ class ReportBlock {
 
         this.SUCCESS_STATUS = 1;
         this.FAIL_STATUS = 0;
+        this.reportId = 0;
+        this.baseUrl = '/api/report/';
+        this.textInputTimeout = 0;
     }
 
     /* eslint-disable max-statements, max-lines-per-function */
     init(options) {
         this.target = options.target;
         this.formID = options.formID;
+        this.reportId = options.reportId || 0;
+        this.baseUrl = options.baseUrl || this.baseUrl;
         this.isReadonly = options.isReadonly || false;
         this.isRejected = options.blockData.rejected || false;
         const blockData = options.blockData;
+        const blockTypes = {
+            'foreign-investors' : 'initForeignInvestorsBlock',
+            taxes               : 'initTaxesBlock',
+            'construction-stage': 'initConstructionStageBlock',
+            'export-countries'  : 'initExportCountriesBlock',
+            innovations         : 'initInnovationsBlock',
+            results             : 'initResultBlock'
+        };
 
+        const numericInputs = this.target.querySelectorAll(`.${this.numericInputClass}`);
+
+        if (numericInputs.length) {
+            inputmask({
+                alias         : 'numeric',
+                rightAlign    : false,
+                autoGroup     : true,
+                groupSeparator: ' '
+            }).mask(numericInputs);
+        }
 
         mediator.subscribe('formApproved', (formID) => {
             this.approveFormHandler(formID);
         });
 
-        if (blockData.type) {
-            switch (blockData.type) {
-                case 'foreign-investors': {
-                    this.initForeignInvestorsBlock(blockData);
-                    break;
-                }
-                case 'taxes': {
-                    this.initTaxesBlock(blockData);
-                    break;
-                }
-                case 'construction-stage': {
-                    this.initConstructionStageBlock(blockData);
-                    break;
-                }
-                case 'export-countries': {
-                    this.initExportCountriesBlock(blockData);
-                    break;
-                }
-                case 'innovations': {
-                    this.initInnovationsBlock(blockData);
-                    break;
-                }
-                case 'results': {
-                    this.initResultBlock(blockData);
-                    break;
-                }
-                default:
-                    this.inputsData = blockData;
-                    break;
-            }
+        const methodName = Object.prototype.hasOwnProperty.call(blockTypes, blockData.type) ?
+            blockTypes[blockData.type] :
+            false;
+
+        if (methodName && typeof this[methodName] === 'function') {
+            this[methodName](blockData);
         } else {
             this.inputsData = blockData;
         }
@@ -103,17 +105,18 @@ class ReportBlock {
     /* eslint-enable max-statements, max-lines-per-function */
 
     approveFormHandler(formID) {
-        if (formID === this.formID) {
-            this.inputs.forEach((input) => {
-                delete input.dataset.prefilled;
-
-                if (!input.closest(`.${this.permissionFormClass}`) &&
-                    !input.closest(`.${this.disabledInputClass}`)) {
-                    this.inputsStatus[input.id] = this.getInputStatus(input);
-                }
-            });
-            this.setBlockStatus();
+        if (formID !== this.formID) {
+            return;
         }
+
+        this.inputs.forEach((input) => {
+            delete input.dataset.prefilled;
+
+            if (!input.closest(`.${this.disabledInputClass}`)) {
+                this.inputsStatus[input.id] = this.getInputStatus(input);
+            }
+        });
+        this.setBlockStatus();
     }
 
     initForeignInvestorsBlock(data) {
@@ -144,6 +147,7 @@ class ReportBlock {
                 }
             });
         });
+
         data.fields.forEach((field) => {
             if (field.id === 'foreign-investors-yes' && field.checked) {
                 investorCountries.classList.remove('b-input-block_is_disabled');
@@ -158,6 +162,9 @@ class ReportBlock {
                 }
             }
         });
+
+        this.setBlockStatus();
+
         investorCountriesField.addEventListener('change', () => {
             radios.forEach((radio) => {
                 delete radio.dataset.prefilled;
@@ -170,8 +177,8 @@ class ReportBlock {
 
     initTaxesBlock(data) {
         this.inputsData = data;
-        const taxesAllInput = this.target.querySelector('#taxes-all');
-        const taxesYearInput = this.target.querySelector('#taxes-year');
+        const taxesAllInput = this.target.querySelector('.j-taxes-total-all');
+        const taxesYearInput = this.target.querySelector('.j-taxes-total-year');
         let allTaxes = 0;
         let yearTaxes = 0;
         const NOT_FOUND = -1;
@@ -203,17 +210,21 @@ class ReportBlock {
         currentInput.addEventListener('focus', (event) => {
             previousValue = event.target.value;
         });
-        currentInput.addEventListener('change', (event) => {
-            if ($.isNumeric(event.target.value)) {
+        currentInput.addEventListener('keyup', (event) => {
+            const newNumericValue = Number(event.target.value.replace(/ /gu, ''));
+
+            if ($.isNumeric(newNumericValue)) {
                 let newValue = 0;
 
                 allInputs.forEach((input) => {
-                    newValue += Number(input.value);
+                    newValue += Number(input.value.replace(/ /gu, ''));
                 });
-                resultInput.value = newValue;
-            } else {
-                event.target.value = previousValue;
+                resultInput.value = Math.round(newValue * 1000000) / 1000000;
+
+                return;
             }
+
+            event.target.value = previousValue;
         });
     }
 
@@ -282,9 +293,8 @@ class ReportBlock {
 
             deleteButton.addEventListener('click', (event) => {
                 const that = this;
-                const dataToSend = `action=delResult&id=${event.target.dataset.id}`;
 
-                Utils.send(dataToSend, '/tests/reports/input-update.json', {
+                Utils.send(`a=delGroup&id=${that.reportId}&typeId=${event.target.dataset.id}`, that.baseUrl, {
                     success(response) {
                         if (response.request.status === that.FAIL_STATUS) {
                             return;
@@ -301,6 +311,10 @@ class ReportBlock {
                 });
             });
         }
+
+        inputmask({
+            mask: '99.99.99'
+        }).mask(this.target.querySelector(`.b-input-text_type_date`));
 
         this.inputsData = data;
     }
@@ -352,7 +366,6 @@ class ReportBlock {
                 }
                 case 'file': {
                     this.initFileInputsEvents(input);
-
                     break;
                 }
                 case 'select-one': {
@@ -386,10 +399,22 @@ class ReportBlock {
                 event.target.closest('.b-input-block').classList.add(this.untouchedIputClass);
             }
         });
-        input.addEventListener('change', (event) => {
-            delete input.dataset.prefilled;
-            this.sendNewValue(event.target);
+
+        input.addEventListener('keyup', (event) => {
+            if (this.textInputTimeout) {
+                clearTimeout(this.textInputTimeout);
+            }
+            this.textInputTimeout = setTimeout(this.onInputKeyup.bind(this), 500, event.target);
         });
+    }
+
+    onInputKeyup(input) {
+        this.textInputTimeout = 0;
+        if (Utils.keyExist(input.dataset, 'prefilled')) {
+            delete input.dataset.prefilled;
+        }
+
+        this.sendNewValue(input);
     }
 
     initFileInputsEvents(input) {
@@ -405,11 +430,18 @@ class ReportBlock {
             event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
             const formData = new FormData(event.target.closest('form'));
 
-            Utils.send(formData, '/tests/reports/input-update.json', {
+            formData.append('a', 'update');
+            formData.append('id', that.reportId);
+            formData.append('formNum', that.formID);
+            formData.append('field', input.id);
+
+            Utils.send(formData, that.baseUrl, {
                 success(response) {
                     if (!response.request.status === that.SUCCESS_STATUS) {
                         return true;
                     }
+                    that.inputsStatus[input.id] = that.getInputStatus(input);
+                    that.setBlockStatus();
 
                     return true;
                 },
@@ -422,9 +454,10 @@ class ReportBlock {
         fileInputBlock.querySelector('.b-input-file__delete').addEventListener('click', (event) => {
             event.preventDefault();
             const permissionForm = event.target.closest(`.${that.permissionFormClass}`);
-            const dataToSend = `action=delPermissionDoc&id=${permissionForm.dataset.stageId}`;
+            const dataToSend = `a=delFile&id=${this.reportId}&formNum=${this.formID}` +
+                `&parent=${permissionForm.dataset.stageId}`;
 
-            Utils.send(dataToSend, '/tests/reports/input-update.json', {
+            Utils.send(dataToSend, this.baseUrl, {
                 success(response) {
                     if (!response.request.status === that.SUCCESS_STATUS) {
                         return true;
@@ -451,7 +484,7 @@ class ReportBlock {
                         case 'radio': {
                             if (fieldData.error) {
                                 this.handleErrorField(input, fieldData.error, 'radio');
-                            } else if (fieldData.isPrefilled) {
+                            } else if (fieldData.isPreFilled) {
                                 input.dataset.prefilled = '';
                             }
                             input.checked = fieldData.checked;
@@ -460,7 +493,7 @@ class ReportBlock {
                         case 'select-one': {
                             if (fieldData.error) {
                                 this.handleErrorField(input, fieldData.error);
-                            } else if (fieldData.isPrefilled && !input.closest(`.${this.permissionFormClass}`)) {
+                            } else if (fieldData.isPreFilled && !input.closest(`.${this.permissionFormClass}`)) {
                                 input.dataset.prefilled = '';
                             }
                             input.value = fieldData.value;
@@ -484,7 +517,7 @@ class ReportBlock {
                         default: {
                             if (fieldData.error) {
                                 this.handleErrorField(input, fieldData.error);
-                            } else if (fieldData.isPrefilled) {
+                            } else if (fieldData.isPreFilled) {
                                 input.closest('.b-input-block').classList.add(this.untouchedIputClass);
                                 input.dataset.prefilled = '';
                             }
@@ -532,10 +565,11 @@ class ReportBlock {
         }
 
         errorBlock.querySelector('.b-input-error__confirm').addEventListener('click', () => {
-            const dataToSend = `action=confirmField&${$(input).serialize()}`;
+            // eslint-disable-next-line max-len
+            const dataToSend = `a=update&id=${this.reportId}&formNum=${this.formID}&field=${input.name}&val=${input.value}&clearComment=1`;
             const that = this;
 
-            Utils.send(dataToSend, '/tests/reports/input-update.json', {
+            Utils.send(dataToSend, that.baseUrl, {
                 success(response) {
                     if (response.request.status === that.SUCCESS_STATUS) {
                         delete input.dataset.hasError;
@@ -555,19 +589,32 @@ class ReportBlock {
     getInputStatus(input) {
         switch (input.type) {
             case 'radio': {
-                const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
-
+                // const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
                 if (Utils.keyExist(input.dataset, 'hasError')) {
                     return 'hasError';
                 } else if (Utils.keyExist(input.dataset, 'prefilled')) {
                     return 'prefilled';
                 }
-                for (let i = 0; i < checkboxGroup.length; i++) {
-                    if (checkboxGroup[i].checked) {
-                        return 'filled';
-                    }
-                }
 
+                // Статус радио-кнопки высталяется как filled предполагая что
+                // в любой момент времени какая-то из кнопок в группе все равно будет выбрана
+                return 'filled';
+                // for (let i = 0; i < checkboxGroup.length; i++) {
+                //     if (checkboxGroup[i].checked) {
+                //         return 'filled';
+                //     }
+                // }
+                //
+                // break;
+            }
+            case 'file': {
+                if (Utils.keyExist(input.dataset, 'hasError')) {
+                    return 'hasError';
+                } else if (Utils.keyExist(input.dataset, 'prefilled')) {
+                    return 'prefilled';
+                } else if (input.parentElement.querySelector('.b-input-file__text').textContent.length) {
+                    return 'filled';
+                }
                 break;
             }
             default: {
@@ -584,7 +631,9 @@ class ReportBlock {
 
         // Дополнительные поля в блоках "Стадия строительства" не обяательны для заполнения
         // поэтому если в них нет ошибок они считаются заполненными
-        return input.closest(`.${this.permissionFormClass}`) ? 'filled' : 'empty';
+        // return input.closest(`.${this.permissionFormClass}`) ? 'filled' : 'empty';
+        // Теперь эти поля обзятельны для заполнения
+        return 'empty';
     }
 
     /* eslint-disable max-lines-per-function, max-statements */
@@ -655,12 +704,15 @@ class ReportBlock {
     /* eslint-enable max-lines-per-function, max-statements */
 
     sendNewValue(input) {
-        const dataToSend = `action=update&${$(input).serialize()}`;
         const that = this;
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
-            success(response) {
-                if (response.request.status === that.SUCCESS_STATUS) {
+        Utils.send(`a=update&id=${this.reportId}&formNum=${this.formID}&field=${input.name}&val=${input.value}`,
+            '/api/report/', {
+                success(response) {
+                    if (response.request.status !== that.SUCCESS_STATUS) {
+                        return;
+                    }
+
                     if (input.type === 'radio') {
                         const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
 
@@ -672,12 +724,11 @@ class ReportBlock {
                     }
 
                     that.setBlockStatus();
+                },
+                error(error) {
+                    console.error(error);
                 }
-            },
-            error(error) {
-                console.error(error);
-            }
-        });
+            });
     }
 
     // ///
@@ -701,12 +752,22 @@ class ReportBlock {
             const stageSelect = this.target.querySelector(`.${this.stageSelectClass}[data-stage-id="${stageID}"]`);
 
             stageSelect.insertAdjacentHTML('afterend', templatePermissionForm({id: stageID}));
+            this.bindDateInputs();
         }
 
         // Биндим событя на кнопку удаления
         if (deletable) {
             this.bindRemoveStage(stageID);
         }
+    }
+
+    bindDateInputs() {
+        const stageBlock = this.target.querySelector(`.${this.stageBlockClass}`);
+        const dateInputs = Array.from(stageBlock.querySelectorAll(`.b-input-text_type_date`));
+
+        inputmask({
+            mask: '99.99.99'
+        }).mask(dateInputs);
     }
 
     bindRemoveStage(stageID) {
@@ -722,10 +783,9 @@ class ReportBlock {
     removeStage(input) {
         const that = this;
         const stageBlock = this.target.querySelector(`.${this.stageBlockClass}`);
-        const dataToSend = `action=delStage&id=${input.dataset.stageId}`;
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-stage-id="${input.dataset.stageId}"]`));
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.stageId}`, this.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
@@ -742,7 +802,7 @@ class ReportBlock {
                 // Если осталась только одна стадия - её нельзя удалять
                 const onlyOne = 1;
 
-                if (stageBlock.querySelectorAll(`.${that.stageDeleteButtonClass}`).length === onlyOne) {
+                if (stageBlock.querySelectorAll(`.${that.stageSelectClass}`).length === onlyOne) {
                     Utils.removeElement(stageBlock.querySelector(`.${that.stageDeleteButtonClass}`));
                 }
             },
@@ -765,14 +825,26 @@ class ReportBlock {
         if (needExtraForm && !permissionForm) {
             selectWrapper.insertAdjacentHTML('afterend', templatePermissionForm({id: stageID}));
             const extraFormInputs = Array.from(selectWrapper.nextSibling.querySelectorAll('input, select'));
+            const dateInput = selectWrapper.nextSibling.querySelector('.b-input-text_type_date');
+
+            inputmask({
+                mask: '99.99.99'
+            }).mask(dateInput);
 
             this._bindInputsEvents(extraFormInputs);
         } else if (!needExtraForm && permissionForm) {
             Utils.removeElement(permissionForm);
+
+            delete this.inputsStatus[`construction-permission-date[${stageID}]`];
+            delete this.inputsStatus[`construction-permission-file[${stageID}]`];
+            delete this.inputsStatus[`construction-permission-num[${stageID}]`];
         }
 
         event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
         this.sendNewValue(event.target);
+
+        this.inputs = Array.from(this.target.querySelectorAll('input:not(.chosen-search-input), select, textarea'));
+        this._getInputsValues();
     }
 
     addStage() {
@@ -781,7 +853,7 @@ class ReportBlock {
         const that = this;
 
         stageAddButton.addEventListener('click', () => {
-            Utils.send('action=addConstructionStage', '/tests/reports/add-stage.json', {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=stages&formNum=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -833,7 +905,7 @@ class ReportBlock {
         const that = this;
 
         groupAddButton.addEventListener('click', () => {
-            Utils.send('action=addExportGroup', '/tests/reports/add-stage.json', {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=groups&formNum=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -870,10 +942,9 @@ class ReportBlock {
     removeExportGroup(input) {
         const that = this;
         const groupsBlock = this.target.querySelector(`.j-export-groups-block`);
-        const dataToSend = `action=delExportGroup&id=${input.dataset.id}`;
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.id}`, this.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
@@ -891,7 +962,7 @@ class ReportBlock {
                 // Если осталась только одна группа - её нельзя удалять
                 const onlyOne = 1;
 
-                if (groupsBlock.querySelectorAll(`.j-delete-group`).length === onlyOne) {
+                if (groupsBlock.querySelectorAll(`.b-inputs-row`).length === onlyOne) {
                     Utils.removeElement(groupsBlock.querySelector(`.j-delete-group`));
                 }
             },
@@ -930,7 +1001,7 @@ class ReportBlock {
         const that = this;
 
         innovationAddButton.addEventListener('click', () => {
-            Utils.send('action=addInnovation', '/tests/reports/add-stage.json', {
+            Utils.send(`a=addGroup&id=${this.reportId}&type=innovations&formNum=${this.formID}`, this.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -967,10 +1038,9 @@ class ReportBlock {
     removeInnovation(input) {
         const that = this;
         const innovationsBlock = this.target.querySelector(`.j-innovations-block`);
-        const dataToSend = `action=delInnovation&id=${input.dataset.id}`;
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.id}`, this.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;

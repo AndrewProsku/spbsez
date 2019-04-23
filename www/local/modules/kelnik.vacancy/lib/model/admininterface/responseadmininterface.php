@@ -75,7 +75,13 @@ class ResponseAdminInterface extends AdminInterface
     public function helpers()
     {
         return [
-            ResponseListHelper::class,
+            ResponseListHelper::class => [
+                'BUTTONS' => [
+                    'LIST_CREATE_NEW' => [
+                        'VISIBLE' => 'N'
+                    ]
+                ]
+            ],
             ResponseEditHelper::class
         ];
     }

@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Особая экономическая зона");
-$APPLICATION->SetPageProperty('title', 'Особая экономическая зона | АООЭЗ');
+$APPLICATION->SetPageProperty('title', 'Особая экономическая зона');
 ?>
     <?$APPLICATION->IncludeComponent(
         "bitrix:menu",

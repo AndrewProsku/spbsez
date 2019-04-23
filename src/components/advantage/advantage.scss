@@ -6,20 +6,19 @@
     z-index: 3;
 
     @media #{$tablet-portrait} {
-        @include suffix(1, 36);
         @include row();
+        @include prefix(1, 36);
+        @include suffix(2, 36);
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
 
     @media #{$laptop} {
-        @include prefix(3, 36);
         @include suffix(3, 36);
     }
 
     @media #{$fullhd} {
-        @include prefix(4, 36);
         @include suffix(4, 36);
     }
 }
@@ -28,7 +27,17 @@
     background-image: linear-gradient(to right, $blue 0%, $violet 100%);
 
     @media #{$tablet-portrait} {
+        @include prefix(2, 36);
+        @include suffix(1, 36);
         flex-direction: row-reverse;
+    }
+
+    @media #{$laptop} {
+        @include prefix(3, 36);
+    }
+
+    @media #{$fullhd} {
+        @include prefix(4, 36);
     }
 
     .b-advantages__title h2,
@@ -39,6 +48,7 @@
     .b-advantages__block {
         @media #{$tablet-portrait} {
             @include post(2, 33);
+            margin-left: 0;
         }
     }
 
@@ -49,6 +59,20 @@
             background-image: none;
             background-color: $white;
         }
+    }
+}
+
+.b-advantages_theme_parking .b-advantages__block {
+    @media #{$laptop-only}, #{$laptop-wide-only} {
+        @include column(17, 32);
+        @include push(4, 32);
+    }
+}
+
+.b-advantages_theme_gradient.b-advantages_theme_security .b-advantages__block {
+    @media #{$laptop-only},  #{$laptop-wide-only} {
+        @include column(17, 32);
+        @include post(4, 32);
     }
 }
 
@@ -66,7 +90,6 @@
     @include font-size("p1");
 }
 
-
 .b-advantages__img {
     width: 80%;
 
@@ -74,17 +97,26 @@
         @include column(10, 33);
         align-self: center;
     }
+    @media #{$laptop} {
+        @include column(11, 32);
+    }
+    @media #{$fullhd} {
+        @include column(11, 31);
+    }
 }
 
 .b-advantages__block {
     @media #{$tablet-portrait} {
         @include column(21, 33);
         @include push(2, 33);
-        margin-left: 0;
     }
-
     @media #{$laptop} {
-        @include column(20, 33);
+        @include column(19, 32);
+        @include push(2, 32);
+    }
+    @media #{$fullhd} {
+        @include column(18, 31);
+        @include push(2, 31);
     }
 }
 

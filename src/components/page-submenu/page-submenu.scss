@@ -39,9 +39,17 @@
     }
 }
 
+.b-page-submenu__block::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+
 .b-page-submenu__block {
-    @include custom-scroll();
+    // @include custom-scroll();
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
     overflow-x: auto;
+    scrollbar-width: none;
 }
 
 .b-page-submenu__list {
@@ -101,13 +109,18 @@
 }
 
 .b-page-submenu_with_switch {
-    @media #{$tablet-portrait} {
-        display: flex;
-        justify-content: space-between;
+    padding-bottom: 15px;
 
+    @media #{$tablet-portrait} {
         &:after {
             display: none;
         }
+    }
+
+    @media #{$tablet-landscape} {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 0;
     }
 }
 

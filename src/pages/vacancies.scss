@@ -6,7 +6,7 @@
 
     @media #{$laptop} {
         @include prefix(3, 36);
-        @include suffix(10.5, 36);
+        @include suffix(11, 36);
     }
 
     @media #{$fullhd} {
@@ -19,7 +19,7 @@
     @include padding-level(bottom, cyan);
 
     h1 {
-        @include font-size("h1-inner");
+        @include font-size("h1");
         margin-bottom: 0;
     }
 }
@@ -31,7 +31,7 @@
     }
 
     p:not(:last-child) {
-        @include padding-level(bottom, cyan);
+        @include padding-level(bottom, green);
     }
 }
 
@@ -44,8 +44,12 @@
 .b-vacancy__header {
     @include transition(color);
     @include font-size('p2');
+    @include prefix(2, 32);
+    @include suffix(2, 32);
     position: relative;
-    padding: 21px 30px 18px 19px;
+    //padding: 21px 30px 18px 19px;
+    padding-top: 21px;
+    padding-bottom: 18px;
     margin-bottom: 0;
     font-family: $font-bold;
     font-weight: 700;
@@ -68,15 +72,25 @@
         background-size: contain;
     }
 
-    @media #{$tablet-portrait} {
-        padding-right: 50px;
-    }
+    /*@media #{$tablet-portrait} {
+        //padding-right: 50px;
+    }*/
 
     @media #{$tablet-portrait} {
-        padding: 24px 75px 21px 32px;
+        @include prefix(1, 32);
+        @include suffix(1, 32);
+        padding-top: 24px;
+        padding-bottom: 21px;
+    }
+
+    @media #{$laptop} {
+        @include prefix(1, 22);
+        @include suffix(1, 22);
     }
 
     @media #{$fullhd} {
+        @include prefix(1, 20);
+        @include suffix(1, 20);
         padding-top: 23px;
         padding-bottom: 27px;
     }
@@ -104,20 +118,20 @@
         font-family: $font;
         font-weight: 500;
         color: $black;
-        padding-right: 50px;
+        //padding-right: 50px;
 
         &:after {
             transform: rotate(180deg);
             top: 38px;
         }
 
-        @media #{$laptop} {
+        /*@media #{$laptop} {
             padding-left: 35px;
         }
 
         @media #{$fullhd} {
             padding-left: 54px;
-        }
+        }*/
     }
 }
 
@@ -136,21 +150,27 @@
 .b-vacancy__content {
     @include padding-level(bottom, blue);
     @include font-size('p2');
+    @include prefix(2, 32);
+    @include suffix(2, 32);
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: auto;
-    padding-left: 19px;
-    padding-right: 19px;
+
+    @media #{$tablet-portrait} {
+        @include prefix(1, 32);
+        @include suffix(1, 32);
+    }
 
     @media #{$laptop} {
-        padding-left: 35px;
-        padding-right: 35px;
+        @include prefix(1, 22);
+        @include suffix(1, 22);
     }
 
     @media #{$fullhd} {
-        padding-left: 54px;
+        @include prefix(1, 20);
+        @include suffix(1, 20);
     }
 }
 
@@ -273,6 +293,20 @@
 
 .b-vacancy-response-form__inputs {
     @include padding-level(bottom, green);
+    display: flex;
+    flex-direction: column;
+}
+
+.b-vacancy-response-form__note {
+    order: 100;
+    opacity: .72;
+    padding-left: 16px;
+    padding-top: 5px;
+    font-size: 14px;
+
+    @media #{$laptop} {
+        font-size: 16px;
+    }
 }
 
 .b-vacancies-popup__success {

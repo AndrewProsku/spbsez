@@ -8,8 +8,10 @@ use Kelnik\AdminHelper\Widget\ComboBoxWidget;
 use Kelnik\AdminHelper\Widget\DateTimeWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
+use Kelnik\AdminHelper\Widget\UserOrmWidget;
 use Kelnik\Report\Model\ReportsTable;
 use Kelnik\Report\Model\StatusTable;
+use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
@@ -30,18 +32,27 @@ class ReportsAdminInterface extends AdminInterface
                         'FILTER'           => true,
                         'HIDE_WHEN_CREATE' => true
                     ],
+                    'COMPANY_ID' => [
+                        'WIDGET' =>  new UserOrmWidget(),
+                        'TITLE_FIELD_NAME' => Profile::COMPANY_NAME_FIELD,
+                        'READONLY' => true,
+                        'FILTER' => true,
+                        'VIRTUAL' => true,
+                        'FORCE_SELECT' => true,
+                        'HIDE_WHEN_CREATE' => true
+                    ],
                     'NAME' => [
                         'WIDGET' => new StringWidget(),
                         'SIZE' => 40,
                         'FILTER' => '%',
-                        'REQUIRED' => true,
+                        'READONLY' => true,
                         'EDIT_LINK' => true
                     ],
                     'NAME_SEZ' => [
                         'WIDGET' => new StringWidget(),
                         'SIZE' => 40,
                         'FILTER' => '%',
-                        'REQUIRED' => true
+                        'READONLY' => true,
                     ],
                     'YEAR' => [
                         'WIDGET' => new NumberWidget(),
@@ -59,9 +70,7 @@ class ReportsAdminInterface extends AdminInterface
                     'STATUS_ID' => [
                         'WIDGET' => new ComboBoxWidget(),
                         'VARIANTS' => StatusTable::getAdminAssocList(),
-                        'READONLY' => true,
-                        'FILTER' => true,
-                        'HIDE_WHEN_CREATE' => true
+                        'FILTER' => true
                     ],
                     'DATE_CREATED' => [
                         'WIDGET' => new DateTimeWidget(),
@@ -84,9 +93,16 @@ class ReportsAdminInterface extends AdminInterface
     public function helpers()
     {
         return [
-            ReportsListHelper::class,
+            ReportsListHelper::class => [
+                'BUTTONS' => [
+                    'LIST_CREATE_NEW' => [
+                        'VISIBLE' => 'N'
+                    ]
+                ]
+            ],
             ReportsEditHelper::class,
-            ReportsTreeHelper::class
+            ReportsTreeHelper::class,
+            ReportsExportHelper::class
         ];
     }
 }

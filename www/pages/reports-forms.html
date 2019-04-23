@@ -248,7 +248,8 @@
                 <label class="b-input-block__label" for="resident-name">Наименование ОЭЗ</label>
             </div>
         </div>
-        <form action="#" class="b-reports-filter b-mini-filter j-reports-filter">
+        <div class="b-reports-filter-wrap" id="reports-filter-top">
+            <form action="#" class="b-reports-filter b-mini-filter j-reports-filter" id="reports-filter-top">
 
             <div class="b-mini-filter__group j-reports-select-group">
 
@@ -292,6 +293,7 @@
                 </div>
             </div>
         </form>
+        </div>
 
         <!--
             data-read-only Просмотр уже принятых отчетов за предыдущие кварталы
@@ -307,37 +309,37 @@
                 <div class="b-mini-filter__group-wrap">
                     <div class="b-mini-filter__item">
                         <input type="radio" name="reports-forms" value="form1" data-text="Ф-1 Общая" id="form1-2" class="b-mini-filter__input" checked>
-                        <label for="form1-2" class="b-mini-filter__fake b-mini-filter__fake_is_success">Ф-1 Общая</label>
+                        <label for="form1-2" class="b-mini-filter__fake b-mini-filter__fake_is_success" data-scroll-target="#reports-filter-top">Ф-1 Общая</label>
                     </div>
 
                     <div class="b-mini-filter__item">
                         <input type="radio" name="reports-forms" value="form2" data-text="Ф-2 Налоги" id="form2-2" class="b-mini-filter__input">
-                        <label for="form2-2" class="b-mini-filter__fake">Ф-2 Налоги</label>
+                        <label for="form2-2" class="b-mini-filter__fake" data-scroll-target="#reports-filter-top">Ф-2 Налоги</label>
                     </div>
 
                     <div class="b-mini-filter__item">
                         <input type="radio" name="reports-forms" value="form3" data-text="Ф-3 Стройка" id="form3-2" class="b-mini-filter__input">
-                        <label for="form3-2" class="b-mini-filter__fake">Ф-3 Стройка</label>
+                        <label for="form3-2" class="b-mini-filter__fake" data-scroll-target="#reports-filter-top">Ф-3 Стройка</label>
                     </div>
 
                     <div class="b-mini-filter__item">
                         <input type="radio" name="reports-forms" value="form4" data-text="Ф-4 Аренда" id="form4-2" class="b-mini-filter__input">
-                        <label for="form4-2" class="b-mini-filter__fake">Ф-4 Аренда</label>
+                        <label for="form4-2" class="b-mini-filter__fake" data-scroll-target="#reports-filter-top">Ф-4 Аренда</label>
                     </div>
 
                     <div class="b-mini-filter__item">
                         <input type="radio" name="reports-forms" value="form5" data-text="Ф-5 ППТ, ТВ и ПТ" id="form5-2" class="b-mini-filter__input">
-                        <label for="form5-2" class="b-mini-filter__fake">Ф-5 ППТ, ТВ и ПТ</label>
+                        <label for="form5-2" class="b-mini-filter__fake" data-scroll-target="#reports-filter-top">Ф-5 ППТ, ТВ и ПТ</label>
                     </div>
 
                     <div class="b-mini-filter__item">
                         <input type="radio" name="reports-forms" value="form6" data-text="Ф-6 ТВ-3" id="form6-2" class="b-mini-filter__input">
-                        <label for="form6-2" class="b-mini-filter__fake">Ф-6 ТВ-3</label>
+                        <label for="form6-2" class="b-mini-filter__fake" data-scroll-target="#reports-filter-top">Ф-6 ТВ-3</label>
                     </div>
 
                     <div class="b-mini-filter__item">
                         <input type="radio" name="reports-forms" value="form7" data-text="Ф-7 ТВД и ИД" id="form7-2" class="b-mini-filter__input">
-                        <label for="form7-2" class="b-mini-filter__fake">Ф-7 ТВД и ИД</label>
+                        <label for="form7-2" class="b-mini-filter__fake" data-scroll-target="#reports-filter-top">Ф-7 ТВД и ИД</label>
                     </div>
                 </div>
             </div>
@@ -345,6 +347,8 @@
 
         <button class="button button_without_icon b-report-submit j-report-submit" type="button" disabled>Отправить отчет</button>
     </div>
+    <div class="l-profile-logout">
+        <button class="button-logout j-logout" type="button">Выйти из личного кабинета</button> </div>
             </main>
 
             <footer class="l-home-footer b-footer">
@@ -398,6 +402,9 @@
         <span class="b-footer__copyright-text">© 2018, ОЭЗ «Санкт — Петербург»</span>
         <a href="#" class="b-footer__copyright-link">
             Раскрытие информации
+        </a>
+        <a href="#" class="b-footer__copyright-link">
+            Политика конфиденциальности
         </a>
         <button class="b-footer__copyright-link j-message-button" data-href="#message">
             Написать сообщение

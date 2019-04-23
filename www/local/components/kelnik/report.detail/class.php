@@ -52,6 +52,8 @@ class ReportDetail extends Bbc\Basis
             $arParams['CREATE_ELEMENT_TYPE'] = 0;
         }
 
+        $this->arParams['PREV_REQUIRED'] = false;
+
         return parent::onPrepareComponentParams($arParams);
     }
 
@@ -83,6 +85,10 @@ class ReportDetail extends Bbc\Basis
 
         if (is_string($res)) {
             LocalRedirect($res);
+        } elseif ($res === true) {
+            $this->arParams['PREV_REQUIRED'] = true;
+
+            return true;
         }
 
         $this->show404();
@@ -90,30 +96,31 @@ class ReportDetail extends Bbc\Basis
 
     protected function executeMain()
     {
-        $this->setResultCacheKeys(['PREV_YEAR_REQUIRED', 'IS_LOCKED', 'TIME_LEFT', 'ORDER']);
+        $this->setResultCacheKeys(['PREV_REQUIRED', 'IS_LOCKED', 'TIME_LEFT', 'ORDER']);
         $this->abortCache();
 //        self::registerCacheTag('kelnik:report_' . $this->profile->getCompanyId() . '_' . $this->arParams['ELEMENT_ID']);
 
+        if (!$this->arParams['ELEMENT_ID'] && $this->arParams['PREV_REQUIRED']) {
+            $this->arResult['PREV_REQUIRED'] = true;
+
+            return true;
+        }
+
         $report = ReportsTable::getReport($this->profile->getCompanyId(), $this->arParams['ELEMENT_ID']);
-        $prevYearRequired = false;
 
         if ((!$report || !$report->hasAccess()) && $this->arParams['SET_404'] === 'Y') {
             $this->show404();
         }
 
-        if ($report->getType() === ReportsTable::TYPE_1) {
-            $prevYearRequired = !ReportsTable::yearIsComplete($this->profile->getCompanyId(), $report->getYear() - 1);
-        }
-
-        // Не заполнен предыдущий год
+        // Не заполнен предыдущий отчетный период
         //
-        if ($prevYearRequired) {
-            $this->arResult['PREV_YEAR_REQUIRED'] = true;
+        if (ReportsTable::prevRequired($this->profile->getCompanyId(), $report->getType(), $report->getYear())) {
+            $this->arResult['PREV_REQUIRED'] = true;
 
             return true;
         }
 
-        if ($report->isLocked() && !$report->isLastModifier()) {
+        if ($report->isLocked() && !$report->isOwner()) {
             $this->arResult['IS_LOCKED'] = true;
             $this->arResult['TIME_LEFT'] = FormatDate('idiff', time(), $report->getLockExpiredTime());
 
@@ -123,6 +130,9 @@ class ReportDetail extends Bbc\Basis
         $this->arResult['EDITABLE'] = $report->canEdit();
 
         if ($this->arResult['EDITABLE']) {
+            if (!$report->getIsPreFilled()) {
+                $report->copyDataFromPrevReport();
+            }
             $report->lock();
         }
 
@@ -184,6 +194,10 @@ class ReportDetail extends Bbc\Basis
             return false;
         }
 
+        if (ReportsTable::prevRequired($this->profile->getCompanyId(), $elementType, $year)) {
+            return true;
+        }
+
         // Создаем отчет
         //
         try {
@@ -192,7 +206,9 @@ class ReportDetail extends Bbc\Basis
                     ->setType($elementType)
                     ->setStatusId(StatusTable::NEW)
                     ->setCompanyId($this->profile->getCompanyId())
+                    ->setUserId($this->profile->getId())
                     ->setName($this->profile->getCompanyName())
+                    ->setNameSez($this->profile->getSezDefaultName())
                     ->setModifiedBy($this->profile->getId())
                     ->setDateModified(new DateTime());
 

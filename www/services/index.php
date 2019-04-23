@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetPageProperty('title', "Услуги | АООЭЗ");
+$APPLICATION->SetPageProperty('title', "Услуги");
 $APPLICATION->SetTitle("Услуги");
 ?>
 
@@ -64,7 +64,7 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__advantage">
-        <section class="b-advantages b-advantages_theme_gradient">
+        <section class="b-advantages b-advantages_theme_gradient b-advantages_theme_security">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -78,7 +78,7 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__advantage">
-        <section class="b-advantages ">
+        <section class="b-advantages b-advantages_theme_parking">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",

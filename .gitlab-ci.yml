@@ -5,6 +5,7 @@ deploy-master:
     url: http://oez.ksdev.ru
   variables:
     DEPLOY_PATH : "~/oez.ksdev.ru/master/"
+    GIT_STRATEGY: none
   script:
   - echo "Deploy master"
   - echo $DEPLOY_PATH
@@ -19,6 +20,7 @@ deploy-dev:
     url: http://oez-d.ksdev.ru
   variables:
     DEPLOY_PATH : "~/oez.ksdev.ru/dev/"
+    GIT_STRATEGY: none
   script:
   - echo "Deploy dev"
   - echo $DEPLOY_PATH
@@ -33,6 +35,7 @@ deploy-test:
     url: http://oez-t.ksdev.ru
   variables:
     DEPLOY_PATH : "~/oez.ksdev.ru/test/"
+    GIT_STRATEGY: none
   script:
   - echo "Deploy test"
   - echo $DEPLOY_PATH

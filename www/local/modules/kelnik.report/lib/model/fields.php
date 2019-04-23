@@ -23,9 +23,26 @@ class Fields extends EO_ReportFields_Collection
         }
 
         foreach ($rows as $row) {
-            $res[] = $row->collectValues();
+            $row = $row->collectValues();
+            $res[$row['ID']] = $row;
         }
 
         return $res;
+    }
+
+    public function getAssocArray()
+    {
+        $res = $this->getArray();
+
+        if (!$res) {
+            return [];
+        }
+
+        $tmp = [];
+        foreach ($res as $v) {
+            $tmp[implode('.', [$v['NAME'], $v['GROUP_ID'], $v['FORM_NUM']])] = $v['ID'];
+        }
+
+        return $tmp;
     }
 }

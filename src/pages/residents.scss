@@ -19,9 +19,7 @@
 }
 
 .b-residents-title {
-    @media #{$fullhd} {
-        @include margin-level(bottom, green);
-    }
+    @include padding-level(top, blue);
 }
 
 .b-residents-content {
@@ -91,19 +89,23 @@
         @include padding-level(bottom, green);
         height: 729px;
     }
+
+    @media #{$ie} {
+        align-items: flex-start;
+    }
 }
 
 .b-resident_is_overflowed {
     cursor: pointer;
 
     .b-resident__description:after {
-        content: "";
-        display: block;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 45px;
-        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .99) 90%, #ffffff 100%);
+        //content: "";
+        //display: block;
+        //position: absolute;
+        //bottom: 0;
+        //width: 100%;
+        //height: 45px;
+        //background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .99) 90%, #ffffff 100%);
     }
 }
 
@@ -112,11 +114,13 @@
 
     .b-resident__inner {
         position: absolute;
+        top: 0;
+        left: 0;
         height: auto;
         width: 100%;
         min-height: 100%;
         z-index: 10;
-        box-shadow: 0 10px 20px $grey;
+        box-shadow: 0 10px 20px rgba($blue, 0.2);
     }
 
     .b-resident__description {
@@ -132,9 +136,14 @@
     max-height: 220px;
     margin-left: auto;
     margin-right: auto;
+    flex: 0 0 auto;
 
     @media #{$fullhd} {
         max-height: 280px;
+    }
+
+    @media #{$ie} {
+        height: auto;
     }
 }
 
@@ -156,6 +165,11 @@
         @include prefix(1, 9);
         @include suffix(1, 9);
     }
+
+    @media #{$ie} {
+        flex: 1 0 auto;
+        width: 100%;
+    }
 }
 
 .b-resident__category {
@@ -172,6 +186,10 @@
     @media #{$fullhd} {
         @include prefix(1, 9);
         @include suffix(1, 9);
+    }
+
+    @media #{$ie} {
+        width: 100%;
     }
 }
 
@@ -192,6 +210,10 @@
     @media #{$fullhd} {
         @include prefix(1, 9);
         @include suffix(1, 9);
+    }
+
+    @media #{$ie} {
+        width: 100%;
     }
 }
 
@@ -230,6 +252,9 @@
     background-repeat: no-repeat;
     background-position: 3px 50%;
     background-size: 13px 18px;
+
+    span {
+        color: $blue;
+        cursor: default;
+    }
 }
-
-

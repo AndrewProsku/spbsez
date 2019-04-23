@@ -11,7 +11,8 @@
     "composer/installers": "*",
     "kelnik/module.admin_helper": "~3.0",
     "kelnik/module-text": "~3.0",
-    "kelnik/module-image-resizer": "~3.0"
+    "kelnik/module-image-resizer": "~3.0",
+    "phpoffice/phpspreadsheet": "^1.6"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "*",

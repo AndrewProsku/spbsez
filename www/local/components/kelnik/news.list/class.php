@@ -259,15 +259,15 @@ class NewsList extends Bbc\Basis
 
     protected function executeEpilog()
     {
+        global $APPLICATION;
+
         if ($this->isAjax() || !Context::getCurrent()->getRequest()->getQueryList()->toArray()) {
             return;
         }
 
-        Asset::getInstance()->addString(
-            '<link rel="canonical" href="' .
-            (\CMain::IsHTTPS() ? 'https' : 'http') .
-            '://' .  $_SERVER['HTTP_HOST'] .
-            $this->arParams['SEF_FOLDER'] . '">'
+        $APPLICATION->SetPageProperty(
+            'canonical',
+            (\CMain::IsHTTPS() ? 'https' : 'http') . '://' .  $_SERVER['HTTP_HOST'] . $this->arParams['SEF_FOLDER']
         );
     }
 

@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Special Economic Zone");
-$APPLICATION->SetPageProperty('title', 'Special Economic Zone | SEZ');
+$APPLICATION->SetPageProperty('title', 'Special Economic Zone');
 ?>
     <?$APPLICATION->IncludeComponent(
         "bitrix:menu",

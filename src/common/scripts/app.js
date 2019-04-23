@@ -45,28 +45,57 @@ if (particlesNode) {
     new Particles(particlesNode).init();
 }
 
+/* eslint-disable */
+/**
+ * Полифилл конструктора CustomEvent
+ */
+try {
+    new CustomEvent('IE has CustomEvent, but doesn\'t support constructor');
+} catch (e) {
+    window.CustomEvent = (event, params) => {
+        let evt;
+        params = params || {
+            bubbles   : false,
+            cancelable: false,
+            detail    : undefined
+        };
+        evt = document.createEvent("CustomEvent");
+        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+        return evt;
+    };
+
+    CustomEvent.prototype = Object.create(window.Event.prototype);
+}
+
 /**
  * Полифилл метода closest()
  */
-/* eslint-disable */
-if (!Element.prototype.matches) {
-    Element.prototype.matches = Element.prototype.msMatchesSelector ||
-        Element.prototype.webkitMatchesSelector;
+const ElementPrototype = window.Element.prototype;
+
+if (typeof ElementPrototype.matches !== 'function') {
+    ElementPrototype.matches = ElementPrototype.msMatchesSelector || ElementPrototype.mozMatchesSelector || ElementPrototype.webkitMatchesSelector || function matches(selector) {
+        let element = this;
+        const elements = (element.document || element.ownerDocument).querySelectorAll(selector);
+        let index = 0;
+
+        while (elements[index] && elements[index] !== element) {
+            ++index;
+        }
+
+        return Boolean(elements[index]);
+    };
 }
 
-if (!Element.prototype.closest) {
-    Element.prototype.closest = function(s) {
-        let el = this;
+if (typeof ElementPrototype.closest !== 'function') {
+    ElementPrototype.closest = function closest(selector) {
+        let element = this;
 
-        if (!document.documentElement.contains(el)) {
-            return null;
-        }
-        do {
-            if (el.matches(s)) {
-                return el;
+        while (element && element.nodeType === 1) {
+            if (element.matches(selector)) {
+                return element;
             }
-            el = el.parentElement || el.parentNode;
-        } while (el !== null && el.nodeType === 1);
+            element = element.parentNode;
+        }
 
         return null;
     };
@@ -191,12 +220,9 @@ if (authBlock) {
  * Подключение маски телефона
  */
 const phoneInputs = Array.from(document.querySelectorAll('input[type="tel"]:not(.b-input-phone)'));
-let inputTel = {};
 
 if (phoneInputs.length) {
-    inputTel = new InputTel();
-
-    inputTel.init({input: phoneInputs});
+    (new InputTel()).init({input: phoneInputs});
 }
 
 
@@ -482,6 +508,18 @@ if (anchorSelector.length) {
     new Anchor().init({
         targets: anchorSelector
     });
+} else {
+    new Anchor().urlHashScroll(300);
+}
+
+const reportsFiltersSelector = '.j-report-form + .j-reports-filter .b-mini-filter__fake';
+const reportsBottomFilters = Array.from(document.querySelectorAll(reportsFiltersSelector));
+
+if (reportsBottomFilters.length) {
+    new Anchor().init({
+        targets       : reportsBottomFilters,
+        preventDefault: false
+    });
 }
 
 /**
@@ -633,7 +671,7 @@ if (vacancyPopupButtons.length) {
 }
 
 
-mediator.subscribe('openPopup', (popup) => {
+mediator.subscribe('openPopupFirst', (popup) => {
     if (popup.popup.classList.contains('b-popup_theme_vacancy')) {
         const vacancy = new Vacancy();
 

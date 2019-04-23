@@ -1,6 +1,6 @@
 import InputTel from '../forms/telephone/telephone';
 import Language from '../language';
-import successTemplate from './message-success.twig';
+import resultTemplate from './message-success.twig';
 import Utils from '../../common/scripts/utils';
 
 const Lang = new Language();
@@ -54,6 +54,7 @@ class Message {
         this.$inputPhone = this.$phone.querySelector('input');
         this.$textarea = this.$form.querySelector(`.${this.text}`);
         this.$inputTextarea = this.$form.querySelector(`textarea`);
+        this.$submit = this.$form.querySelector(`.${this.submit}`);
     }
 
     _initInputs() {
@@ -72,6 +73,7 @@ class Message {
     _bindEvents() {
         this.$form.addEventListener('submit', (event) => {
             event.preventDefault();
+
             const that = this;
             const isFormFulfilled = this.checkForm();
 
@@ -82,27 +84,31 @@ class Message {
 
             const formData = new FormData(that.$form);
 
-            formData.set('lang', document.documentElement.lang);
+            formData.append('lang', document.documentElement.lang);
+
+            this._disableSubmit();
 
             Utils.send(formData, '/api/message/', {
                 success(response) {
                     const successStatus = 1;
 
                     if (response.request.status === successStatus) {
-                        that.showSuccessMessage();
+                        that.showResultMessage(response.data);
 
                         return true;
                     }
+                    // const errorMessage = response.request.errors.join('</br>');
 
-                    const errorMessage = response.request.errors.join('</br>');
-
-                    that.showErrorMessage(that.$inputResume, errorMessage);
-                    that.errorRepeatPassword(errorMessage);
+                    // that.showErrorMessage(that.$inputResume, errorMessage);
+                    // that.errorRepeatPassword(errorMessage);
 
                     return false;
                 },
                 error(error) {
                     console.error(error);
+                },
+                complete() {
+                    that._enableSubmit();
                 }
             });
             /* eslint-enable consistent-return */
@@ -114,22 +120,21 @@ class Message {
 
         this.$inputEmail.addEventListener('change', (event) => {
             const isValidEmail = event.target.checkValidity();
-            const emailStr = '^[-._a-zA-Za-яA-я0-9]{2,}@(?:[a-zA-Za-яА-Я0-9][-a-z-A-Z-a-я-А-Я0-9]+\\.)+[a-za-я]{2,6}$';
-            const regEmail = new RegExp(emailStr, 'u');
 
-            if (isValidEmail && regEmail.test(this.$inputEmail.value)) {
+            if (isValidEmail) {
                 this.inputChangeHandler(event, 'email');
-            } else if (isValidEmail === false || regEmail.test(this.$inputEmail.value) === false) {
+            } else {
                 this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });
 
         this.$inputPhone.addEventListener('change', (event) => {
-            this.inputChangeHandler(event, 'phone');
-            const regPhone = new RegExp('\\+7\\s\\d{3}\\s\\d{3}-\\d{2}-\\d{2}', 'u');
-
-            if (!regPhone.test(this.$inputPhone.value)) {
+            if (this._isPhoneTooShort(event.target.value)) {
+                this.isFieldCorrect.phone = false;
                 this.showErrorMessage(event.target, this.incorrectPhoneMessage);
+            } else {
+                this.isFieldCorrect.phone = true;
+                this.inputChangeHandler(event, 'phone');
             }
         });
 
@@ -139,6 +144,12 @@ class Message {
     }
 
     /* eslint-enable max-lines-per-function */
+
+    _isPhoneTooShort(value) {
+        const phoneDigits = value.replace(/[^0-9]/gu, '');
+
+        return (phoneDigits.length > 0) && (phoneDigits.length < 11);
+    }
 
     inputChangeHandler(event, inputName) {
         if (event.target.value.length) {
@@ -159,8 +170,12 @@ class Message {
         if (!this.$inputEmail.value.length) {
             this.showErrorMessage(this.$inputEmail, this.emptyErrorMessage);
         }
-        if (!this.$inputPhone.value.length) {
-            this.showErrorMessage(this.$inputPhone, this.emptyErrorMessage);
+        if (!this.isFieldCorrect.phone) {
+            const errorMessage = this._isPhoneTooShort(this.$inputPhone.value) ?
+                this.incorrectPhoneMessage :
+                this.emptyErrorMessage;
+
+            this.showErrorMessage(this.$inputPhone, errorMessage);
         }
         if (!this.isFieldCorrect.text) {
             this.showErrorMessage(this.$inputTextarea, this.emptyErrorMessage);
@@ -190,15 +205,23 @@ class Message {
         element.closest(`.${this.formBlockClass}`).classList.remove(this.errorInputClass);
     }
 
-    showSuccessMessage() {
+    showResultMessage(data) {
         const $popupContent = document.querySelector('.b-popup__content');
 
         Utils.clearHtml($popupContent);
-        Utils.insetContent($popupContent, successTemplate());
+        Utils.insetContent($popupContent, resultTemplate(data));
 
         $popupContent.querySelector('.j-message-popup__close').addEventListener('click', () => {
             this.popup.close();
         });
+    }
+
+    _disableSubmit() {
+        this.$submit.classList.add('is-disabled');
+    }
+
+    _enableSubmit() {
+        this.$submit.classList.remove('is-disabled');
     }
 }
 

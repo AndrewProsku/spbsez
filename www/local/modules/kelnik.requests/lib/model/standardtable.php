@@ -125,17 +125,7 @@ class StandardTable extends DataManager
 
     public static function onAfterAdd(Event $event)
     {
-        try {
-            \Bitrix\Main\Mail\Event::sendImmediate([
-                'EVENT_NAME' => 'STANDARD_REQUEST',
-                'LID' => SITE_ID,
-                'FIELDS' => [
-                    'LINK' => self::getUrl(ArrayHelper::getValue($event->getParameters(), 'id', 0))
-                ]
-            ]);
-        } catch (\Exception $e) {
-        }
-
+        Events::sendNotify($event);
         parent::onAfterAdd($event);
     }
 
@@ -155,7 +145,7 @@ class StandardTable extends DataManager
     public static function onAfterUpdate(Event $event)
     {
         Events::sendNotify($event);
-        parent::onAfterAdd($event);
+        parent::onAfterUpdate($event);
     }
 
     public static function getNewCode($typeId, $userId)

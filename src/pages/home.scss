@@ -381,7 +381,7 @@ $path: '/images/home/';
     }
 
     @media #{$laptop} {
-        @include row();
+        display: flex;
     }
 }
 
@@ -425,6 +425,7 @@ $path: '/images/home/';
 
 .l-home__privileges-text-title {
     @include font-size('p1');
+    font-family: $font-bold;
 }
 
 .l-home__privileges-text-block {
@@ -469,8 +470,8 @@ $path: '/images/home/';
     }
 
     @media #{$laptop} {
-        @include push(1, 32);
-        @include post(1, 32);
+        @include push(1, 30);
+        @include post(1, 30);
       }
 
     @media #{$laptop-wide} {
@@ -525,16 +526,9 @@ $path: '/images/home/';
 
 .l-home__news-main-title {
     @include font-size('p1');
-    @include margin-level(bottom, green);
-
-    @media #{$tablet-portrait} {
-        max-height: 170px;
-        overflow: hidden;
-    }
 
     @media #{$laptop-wide} {
-        max-height: 175px;
-        height: 175px;
+        min-height: 175px;
     }
 }
 
@@ -544,6 +538,7 @@ $path: '/images/home/';
     vertical-align: middle;
     padding-left: 28px;
     margin-right: 8px;
+    pointer-events: none;
 
     &:before {
         content: '';
@@ -567,6 +562,11 @@ $path: '/images/home/';
             left: 10px;
         }
     }
+}
+
+.l-home__news-date,
+.l-home__news-subsection {
+    @include margin-level(top, green);
 }
 
 .l-home__news-list {
@@ -636,7 +636,7 @@ $path: '/images/home/';
 
 .l-home__news-title {
     @include font-size('p3');
-    @include margin-level(bottom, green);
+    //@include margin-level(bottom, green);
 
     @media #{$tablet-portrait} {
         height: 126px;
@@ -759,7 +759,7 @@ $path: '/images/home/';
         }
     }
 
-    @media #{$tablet-portrait} {
+    @media #{$tablet-landscape} {
         @include row();
         @include prefix(2, 32);
     }
@@ -775,7 +775,7 @@ $path: '/images/home/';
     font-family: $font-bold;
     padding-top: 15px;
 
-    @media #{$tablet-portrait} {
+    @media #{$tablet-landscape} {
         @include column(11, 32);
         padding-top: 20px;
     }
@@ -797,8 +797,9 @@ $path: '/images/home/';
 }
 
 .l-home-resident__item-desc {
-    @media #{$tablet-portrait} {
+    @media #{$tablet-landscape} {
         @include column(18, 32);
+        padding-left: 20px;
     }
 
     @media #{$laptop-wide} {
@@ -843,6 +844,7 @@ $path: '/images/home/';
 
     @media #{$laptop} {
         @include push(12.3, 32);
+        padding-left: 20px;
     }
 
     @media #{$fullhd} {
@@ -1014,6 +1016,7 @@ $path: '/images/home/';
 
     .l-home-plots__all-map-images {
         width:  600px;
+        height: 380px;
         background-image: url($path + 'map-mobile.png');
         background-position: left top;
         background-size: 100% 100%;
@@ -1050,7 +1053,7 @@ $path: '/images/home/';
     }
 }
 
-.l-home-plots__map-neudorf {
+.l-home-plots__map {
     .l-home-plots__all-map-images {
         height: 380px;
     }
@@ -1087,64 +1090,64 @@ $path: '/images/home/';
     }
 }
 
-.l-home-plots__map-novoorlovskaya {
-    .l-home-plots__all-map-images {
-        //width: 460px;
-        //height: 250px;
-        width: 670px;
-        height: 370px;
-        background-image: url($path + 'map-mobile2.png');
-        background-position: left top;
-        background-size: cover;
-
-        &.lang-en {
-            background-image: url($path + 'map-img-en/Map-ENG-8.png');
-        }
-
-        &.lang-ch {
-            background-image: url($path + 'map-img-ch/Map-CHINA-8.png');
-        }
-    }
-
-    .l-home-plots__all-map-build-one {
-        left: 45%;
-        top: 16%;
-    }
-
-    .l-home-plots__all-map-build-two {
-        top: 83%;
-        left: 6%;
-    }
-
-    .l-home-plots__all-map-icon {
-        &.icon-port {
-            top: 45%;
-            left: 37%;
-        }
-
-        &.icon-rialway-station {
-            &.icon-rialway-station-one {
-                top: 56%;
-                left: 62%;
-            }
-
-            &.icon-rialway-station-two {
-                left: 80%;
-                top: 44%;
-            }
-        }
-
-        &.icon-center-city {
-            left: 67%;
-            top: 46%;
-        }
-
-        &.icon-airport {
-            left: 79%;
-            top: 86%;
-        }
-    }
-}
+// .l-home-plots__map-novoorlovskaya {
+//    .l-home-plots__all-map-images {
+//        width: 460px;
+//        height: 250px;
+//        width: 670px;
+//        height: 370px;
+//        background-image: url($path + 'map-mobile2.png');
+//        background-position: left top;
+//        background-size: cover;
+//
+//        &.lang-en {
+//            background-image: url($path + 'map-img-en/Map-ENG-8.png');
+//        }
+//
+//        &.lang-ch {
+//            background-image: url($path + 'map-img-ch/Map-CHINA-8.png');
+//        }
+//    }
+//
+//    .l-home-plots__all-map-build-one {
+//        left: 45%;
+//        top: 16%;
+//    }
+//
+//    .l-home-plots__all-map-build-two {
+//        top: 83%;
+//        left: 6%;
+//    }
+//
+//    .l-home-plots__all-map-icon {
+//        &.icon-port {
+//            top: 45%;
+//            left: 37%;
+//        }
+//
+//        &.icon-rialway-station {
+//            &.icon-rialway-station-one {
+//                top: 56%;
+//                left: 62%;
+//            }
+//
+//            &.icon-rialway-station-two {
+//                left: 80%;
+//                top: 44%;
+//            }
+//        }
+//
+//        &.icon-center-city {
+//            left: 67%;
+//            top: 46%;
+//        }
+//
+//        &.icon-airport {
+//            left: 79%;
+//            top: 86%;
+//        }
+//    }
+// }
 
 .l-home-plots__title {
     @include font-size('h3');
@@ -1177,7 +1180,7 @@ $path: '/images/home/';
 
         @media #{$laptop-wide} {
             display: block;
-            max-width: 130px;
+            //max-width: 130px;
         }
     }
 
@@ -1235,6 +1238,7 @@ $path: '/images/home/';
 
 
 .l-home-plots__all-map {
+    @include custom-scroll();
     display: none;
     width: 100%;
     height: 460px;
@@ -1264,6 +1268,31 @@ $path: '/images/home/';
 
     @media only screen and (min-width: 2330px) {
         height: 1070px;
+    }
+}
+
+.l-home-plots__map,
+.l-home-plots__all-map {
+    .b-tooltip {
+        border: none;
+        white-space: nowrap;
+    }
+}
+
+.l-home-plots__all-map .l-home-plots__all-map-icon .b-tooltip {
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.l-home-plots__all-map .lang-ch .b-tooltip {
+    @media #{$laptop} {
+        top: -40px;
+    }
+}
+
+.l-home-plots__all-map .lang-ch .l-home-plots__all-map-build-neudorf .b-tooltip {
+    @media #{$laptop} {
+        left: -35%;
     }
 }
 
@@ -1327,16 +1356,13 @@ $path: '/images/home/';
         color: $white;
         background-color: $blue;
         border-radius: 30px;
-        padding: 3px 10px;
+        padding: 2px 10px 4px;
     }
 
     @media #{$laptop} {
         .b-tooltip {
             font-size: 20px;
-            padding-left: 20px;
-            padding-right: 20px;
-            padding-top: 8px;
-            padding-bottom: 7px;
+            padding: 7px 20px 8px;
         }
     }
 }
@@ -1430,14 +1456,37 @@ $path: '/images/home/';
     }
 }
 
+.plots-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+
+    &:hover {
+        .plots-icon-path {
+            fill: $white;
+        }
+    }
+}
+
+/*.plots-icon-circle {
+    display: none;
+}*/
+
+.plots-icon:not(:hover) {
+    .plots-icon-circle {
+        fill: $white;
+    }
+}
+
+
 .l-home-plots__all-map-icon {
     width: 40px;
     height: 40px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
     position: absolute;
     z-index: 1;
+    background-color: $white;
+    border-radius: 100%;
+    border: 1px solid $light-grey;
 
     &:after {
         content: "";
@@ -1453,6 +1502,7 @@ $path: '/images/home/';
         background-color: rgba($blue, 0.1);
         visibility: hidden;
         opacity: 0;
+        pointer-events: none;
 
         @media #{$tablet-portrait} {
             width: 47px;
@@ -1467,13 +1517,12 @@ $path: '/images/home/';
     }
 
     &.icon-port {
-        background-image: url($path + 'port.svg');
         top: 36%;
         left: 44%;
-
-        &:hover {
-            background-image: url($path + 'port_hover.svg');
-        }
+        // background-image: url($path + 'port.svg');
+        // &:hover {
+        //    background-image: url($path + 'port_hover.svg');
+        // }
 
         @media #{$tablet-landscape} {
             top: 32%;
@@ -1491,11 +1540,11 @@ $path: '/images/home/';
     }
 
     &.icon-rialway-station {
-        background-image: url($path + 'train.svg');
-
-        &:hover {
-            background-image: url($path + 'train_hover.svg');
-        }
+        // background-image: url($path + 'train.svg');
+        //
+        // &:hover {
+        //    background-image: url($path + 'train_hover.svg');
+        // }
 
         &.icon-rialway-station-one {
             top: 44%;
@@ -1548,14 +1597,13 @@ $path: '/images/home/';
     }
 
     &.icon-center-city {
-        background-image: url($path + 'center-city.svg');
         top: 37%;
         left: 66%;
         z-index: 2;
-
-        &:hover {
-            background-image: url($path + 'center-city_hover.svg');
-        }
+        // background-image: url($path + 'center-city.svg');
+        // &:hover {
+        //    background-image: url($path + 'center-city_hover.svg');
+        // }
 
         @media #{$tablet-landscape} {
             top: 34%;
@@ -1578,13 +1626,13 @@ $path: '/images/home/';
     }
 
     &.icon-airport {
-        background-image: url($path + 'airport.svg');
         top: 67%;
         left: 72%;
-
-        &:hover {
-            background-image: url($path + 'airport_hover.svg');
-        }
+        // background-image: url($path + 'airport.svg');
+        //
+        // &:hover {
+        //    background-image: url($path + 'airport_hover.svg');
+        // }
 
         @media #{$tablet-landscape} {
             top: 68%;
@@ -1608,6 +1656,7 @@ $path: '/images/home/';
     }
 
     &:hover {
+
         &:after {
             visibility: visible;
             opacity: 1;
@@ -1625,7 +1674,7 @@ $path: '/images/home/';
         left: 100%;
         z-index: 2;
         background-color:$white;
-        border-radius: 20px;
+        border-radius: 8px;
         box-shadow: 0 2px 3px $grey, 0 4px 20px $dark-white;
         padding: 5px 25px;
         visibility: hidden;

@@ -7,8 +7,6 @@ use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
 
-Loc::loadLanguageFile(__FILE__);
-
 class Api
 {
     protected static $instance;
@@ -90,6 +88,9 @@ class Api
         if ($this->lang !== LANGUAGE_ID) {
             Context::getCurrent()->setLanguage($this->lang);
         }
+
+        Loc::setCurrentLang($this->lang);
+        Loc::loadMessages(__FILE__);
 
         if (!$this->event) {
             $this->errors[] = Loc::getMessage('KELNIK_API_EVENT_REQUIRED');
@@ -188,6 +189,6 @@ class Api
 
         $json['data'] = $this->data;
 
-        return json_encode($json);
+        return json_encode($json, JSON_PARTIAL_OUTPUT_ON_ERROR);
     }
 }

@@ -10,14 +10,16 @@
             <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "export-volume-all",
-                    name: "export-volume-all"
+                    name: "export-volume-all",
+                    modify: "b-input-text_type_numeric"
                 } %}
                 <label class="b-input-block__label" for="export-volume-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
             </div>
             <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "export-volume-year",
-                    name: "export-volume-year"
+                    name: "export-volume-year",
+                    modify: "b-input-text_type_numeric"
                 } %}
                 <label class="b-input-block__label" for="export-volume-year">С начала текущего года,&#160;млн&#160;₽</label>
             </div>
@@ -42,7 +44,7 @@
 <section class="b-report-block j-report-block" id="block-3">
     <div class="b-report-block__header" data-number="3">
         <h3 class="b-report-block__title">Относится ли производство к высокотехнологичным секторам экономики
-            <div class="b-help j-help">С начала деятельности в качестве резидента</div>
+            <div class="b-help j-help">К сектору высокотехнологичных отраслей относят виды экономической деятельности, характеризующиеся высоким уровнем технологического развития. В эту группировку традиционно включаются производственные виды экономической деятельности. К числу наукоемких видов экономической деятельности обычно относят виды экономической деятельности, производящие услуги. В качестве критерия отнесения к числу высокотехнологичных и наукоемких отраслей применяют степень прямого и косвенного использования результатов НИОКР в том или ином виде экономической деятельности (Приказ Росстата от 28.02.2013 г. № 81).</div>
         </h3>
     </div>
     <div class="b-report-block__body">
@@ -66,7 +68,9 @@
 {# 4 #}
 <section class="b-report-block j-report-block" id="block-4">
     <div class="b-report-block__header" data-number="4">
-        <h3 class="b-report-block__title">Наименование технологических инноваций</h3>
+        <h3 class="b-report-block__title">Наименование технологических инноваций
+            <div class="b-help j-help">Технологические инновации представляют собой конечный результат инновационной деятельности, получивший воплощение в виде нового либо усовершенствованного продукта или услуги, внедренных на рынке, нового либо усовершенствованного процесса или способа производства (передачи) услуг, используемых в практической деятельности. Технологическими инновациями могут быть как те продукты, процессы, услуги и методы, которые организация разрабатывает впервые, так и те, которые перенимаются ею у других организаций (Приказ Росстата от 6.09.2012 г. № 481).</div>
+        </h3>
     </div>
     <div class="b-report-block__body">
         <div class="b-innovations-block j-innovations-block"></div>
@@ -81,14 +85,15 @@
 <section class="b-report-block j-report-block" id="block-5">
     <div class="b-report-block__header" data-number="5">
         <h3 class="b-report-block__title">Количество созданных высокопроизводительных рабочих мест (ед., при наличии)
-            <div class="b-help j-help">Количество созданных высокопроизводительных рабочих мест (ед., при наличии)</div>
+            <div class="b-help j-help">К высокопроизводительным рабочим местам относятся все занятые рабочие места предприятий (организаций), в которых добавленная стоимость в расчете на одно рабочее место превышает установленный критерий (Приказ Росстата от 21.02.2013 N 70).</div>
         </h3>
     </div>
     <div class="b-report-block__body">
         <div class="b-input-block ">
             {% include "../../forms/input-text/input-text.twig" with {
                 id: "high-productive-jobs",
-                name: "high-productive-jobs"
+                name: "high-productive-jobs",
+                modify: "b-input-text_type_numeric"
             } %}
             <label class="b-input-block__label" for="high-productive-jobs">Количество рабочих мест</label>
         </div>

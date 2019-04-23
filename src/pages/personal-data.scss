@@ -1,0 +1,72 @@
+.l-personal-data {
+    @include innerPadding();
+    @include padding-level(top, blue);
+    @include margin-level(bottom, pink);
+}
+
+.l-personal-data__title {
+    @include margin-level(bottom, green);
+    margin-top: 0;
+    padding-top: 10px;
+    padding-bottom: 0;
+
+    h1 {
+        @include font-size(h2);
+    }
+}
+
+.l-personal-data__content {
+    ul,
+    p {
+        margin-bottom: 30px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    ul li {
+        @include font-size("p2");
+        padding-left: 30px;
+        position: relative;
+        margin-bottom: 16px;
+
+        &:after {
+            content: "";
+            width: 15px;
+            height: 2px;
+            background-color: $blue;
+            position: absolute;
+            top: .7em;
+            left: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.b-privacy-list {
+    counter-reset: section;
+
+    ol {
+        @include font-size(p2);
+        @include margin-level(bottom, cyan);
+        counter-reset: section;
+    }
+}
+
+.b-privacy-list__subtitle {
+    @include font-size(h3);
+    @include margin-level(bottom, green);
+    display: inline-block;
+}
+
+.b-privacy-list__subtitle::before,
+.b-privacy-list ol li::before {
+    counter-increment: section;
+    content: counters(section,".") ".";
+    font-size: inherit;
+    padding-right: .5em;
+}

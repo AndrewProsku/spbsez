@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle('Подача отчета');
-$APPLICATION->SetPageProperty('title', 'Подача отчета | АООЭЗ');
+$APPLICATION->SetPageProperty('title', 'Подача отчета');
 if (!$USER->IsAuthorized()) {
     LocalRedirect(LANG_DIR . 'cabinet/auth/');
 }
@@ -18,6 +18,7 @@ if (!$USER->IsAuthorized()) {
             "MENU_CACHE_TIME" => "3600",
             "MENU_CACHE_TYPE" => "A",
             "MENU_CACHE_USE_GROUPS" => "Y",
+            "MENU_CACHE_USE_USERS" => "Y",
             "ROOT_MENU_TYPE" => "left",
             "USE_EXT" => "Y"
         )

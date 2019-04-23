@@ -14,9 +14,6 @@ class Authorization {
         this.formBlockClass = 'b-form-block';
         this.errorInputClass = 'b-form-block-error';
         this.messageInputs = 'b-form-block__error-text';
-        this.isLogin = false;
-        this.isPassword = false;
-        this.isApprove = false;
 
         this.emptyErrorMessage = Lang.get('validation.required');
         this.incorrectEmailMessage = Lang.get('validation.email');
@@ -40,6 +37,10 @@ class Authorization {
         this.defaultErrorMessage = this.$messagePassword.innerText;
     }
 
+    /**
+     * Биндит события
+     * @private
+     */
     _bindEvents() {
         this.$form.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -51,66 +52,61 @@ class Authorization {
         });
 
         this.$inputLogin.addEventListener('change', (event) => {
-            const isValidEmail = event.target.checkValidity();
-
-            if (isValidEmail) {
+            if (this.isEmailValid(event.target.value)) {
                 this.loginChangeHandler(event.target);
             } else {
-                this.isLogin = false;
-                // this.showErrorMessage(event.target, this.incorrectEmailMessage);
-                // this.errorLogin(this.incorrectEmailMessage);
                 this.showErrorMessage(event.target, this.incorrectEmailMessage);
             }
         });
 
         this.$inputPassword.addEventListener('change', () => {
             if (this.$inputPassword.value.length) {
-                this.isPassword = true;
                 this.removeErrorPassword();
             } else {
-                this.isPassword = false;
                 this.errorPassword();
             }
         });
 
         this.$inputApprove.addEventListener('change', () => {
             if (this.$inputApprove.checked) {
-                this.isApprove = true;
                 this.$approve.classList.remove('is-error');
-            } else {
-                this.isApprove = false;
             }
         });
     }
 
+    isEmailValid(email) {
+        return (/^[^\s@]+@[^\s@]+\.[^\s@]+$/u).test(email);
+    }
+
     loginChangeHandler(target) {
         if (target.value.length) {
-            this.isLogin = true;
             this.removeErrorLogin();
         } else {
-            this.isLogin = false;
             this.showErrorMessage(target, this.emptyErrorMessage);
         }
     }
 
     checkForm() {
-        if (!this.isLogin) {
-            if (!this.$inputLogin.value.length) {
-                this.showErrorMessage(this.$inputLogin, this.emptyErrorMessage);
-            } else if (!this.$inputLogin.checkValidity()) {
-                this.showErrorMessage(this.$inputLogin, this.incorrectEmailMessage);
-            }
+        if (!this.$inputLogin.value.length) {
+            this.showErrorMessage(this.$inputLogin, this.emptyErrorMessage);
 
             return false;
-        } else if (!this.isPassword) {
+        } else if (!this.isEmailValid(this.$inputLogin.value)) {
+            this.showErrorMessage(this.$inputLogin, this.incorrectEmailMessage);
+
+            return false;
+        } else if (!this.$inputPassword.value.length) {
             this.errorPassword();
 
             return false;
-        } else if (!this.isApprove) {
+        } else if (!this.$inputApprove.checked) {
             this.errorApprove();
 
             return false;
         }
+
+        this.removeErrorPassword();
+        this.$approve.classList.remove('is-error');
 
         return true;
     }

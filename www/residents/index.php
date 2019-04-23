@@ -1,9 +1,9 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Резиденты");
-$APPLICATION->SetPageProperty('title', 'Резиденты | АООЭЗ');
+$APPLICATION->SetPageProperty('title', 'Резиденты');
 ?>
-<div class="l-residents all-categories j-residents-page">
+<div class="l-residents j-residents-page <? $APPLICATION->ShowProperty('residentCategory'); ?>">
     <div class="b-title b-residents-title"><h1><?= $APPLICATION->ShowTitle(false); ?></h1></div>
 
     <? $APPLICATION->IncludeComponent(

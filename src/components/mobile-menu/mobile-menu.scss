@@ -77,7 +77,8 @@
 }
 
 .b-mobile-menu__header-right {
-    @include row();
+    display: flex;
+    flex-wrap: nowrap;
     @include column(12, 36);
     @include prefix(4, 36);
     height: 100%;
@@ -185,23 +186,28 @@
 }
 
 .b-close-menu-warp {
-    @include column(4, 8);
     @include suffix(4, 36);
     text-align: right;
 
     @media #{$tablet-portrait} {
-        @include column(3, 24);
         @include suffix(1.5, 36);
     }
 
     @media #{$laptop} {
-        @include column(2, 21);
         @include suffix(1, 36);
     }
 
     @media #{$fullhd} {
         @include suffix(0, 36);
         text-align: center;
+    }
+}
+
+.b-language + .b-close-menu-warp {
+    margin-left: 10px;
+
+    @media #{$tablet-portrait} {
+        margin-left: 20px;
     }
 }
 
@@ -366,7 +372,7 @@
     &:last-child {
         margin-bottom: 0;
     }
-    
+
     @media #{$tablet-portrait} {
         display: inline-block;
         vertical-align: middle;

@@ -1,6 +1,6 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetPageProperty('title', "For Investors | SEZ");
+$APPLICATION->SetPageProperty('title', "For Investors");
 $APPLICATION->SetTitle("For Investors");
 ?>
 
@@ -45,7 +45,7 @@ $APPLICATION->SetTitle("For Investors");
             ); ?>
         </div>
     </div>
-    <div class="l-investors__privileges" id="investors-privileges">
+    <div class="l-investors__privileges">
         <div class="b-investors-info b-investors-info_big_title">
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -58,7 +58,7 @@ $APPLICATION->SetTitle("For Investors");
             ); ?>
         </div>
     </div>
-    <div class="l-investors__taxes">
+    <div class="l-investors__taxes" id="investors-privileges">
         <div class="b-income-tax">
             <div class="b-income-tax__top">
                 <? $APPLICATION->IncludeComponent(
@@ -112,7 +112,7 @@ $APPLICATION->SetTitle("For Investors");
             ); ?>
         </div>
     </div>
-    <div class="l-investors__conditions">
+    <div class="l-investors__conditions"  id="investors-conditions">
         <div class="b-invest-conditions">
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -153,7 +153,7 @@ $APPLICATION->SetTitle("For Investors");
             </div>
         </div>
     </div>
-    <div class="l-investors__resident" >
+    <div class="l-investors__resident"  id="investors-resident">
         <div class="b-invest-resident">
             <div id="investors-resident"></div>
             <? $APPLICATION->IncludeComponent(

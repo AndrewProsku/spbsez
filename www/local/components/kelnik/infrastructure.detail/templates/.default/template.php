@@ -12,6 +12,11 @@
     <div class="b-page-submenu">
         <div class="b-page-submenu__block">
             <ul class="b-page-submenu__list">
+                <li class="b-page-submenu__item">
+                    <a href="<?= $arParams['SEF_FOLDER']; ?>" class="b-page-submenu__link b-link-line">
+                        <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_GENERAL_INFO'); ?>
+                    </a>
+                </li>
                 <?php foreach ($arResult['ELEMENTS'] as $arItem): ?>
                     <li class="b-page-submenu__item<?php if($arItem['ID'] == $arResult['ELEMENT']['ID']): ?> is-active<?php endif; ?>">
                         <a href="<?= $arItem['DETAIL_PAGE_URL']; ?>" class="b-page-submenu__link b-link-line">
@@ -48,13 +53,13 @@
             <div class="b-area-plan">
                 <div class="b-area-plan__title"><h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_TERRITORY'); ?></h2></div>
                 <div class="b-visual<?php if($arResult['ELEMENT']['SHOW_TITLE'] != \Kelnik\Infrastructure\Model\PlatformTable::YES): ?> b-visual_theme_points<?php endif; ?>" data-area="<?= $arResult['ELEMENT']['ALIAS']; ?>">
-                    <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 <?= $arResult['ELEMENT']['AREA_BG_ID']['WIDTH']; ?> <?= $arResult['ELEMENT']['AREA_BG_ID']['HEIGHT']; ?>">
+                    <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 1920 1080">
                         <image
                             class="b-visual__image"
                             x="0"
                             y="0"
-                            width="<?= $arResult['ELEMENT']['AREA_BG_ID']['WIDTH']; ?>"
-                            height="<?= $arResult['ELEMENT']['AREA_BG_ID']['HEIGHT']; ?>"
+                            width="1920"
+                            height="1080"
                             preserveAspectRatio="none"
                             xlink:href="<?= $arResult['ELEMENT']['AREA_BG_ID']['SRC']; ?>"
                             style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></image>
@@ -69,9 +74,9 @@
                         <g class="b-visual__masks">
                             <?php foreach ($arResult['ELEMENT']['PLAN'] as $plan): ?>
                                 <path data-id="<?= $plan['ID']; ?>"
-                                      data-json="<?= $plan['JSON']; ?>"
+                                      data-json="<?= $plan['IS_BUSY'] == 'Y' ? '' : $plan['JSON']; ?>"
                                       <?php if(empty($plan['RESIDENT']['ID'])): ?>
-                                          class="is-empty"
+                                          class="<?php if($plan['IS_BUSY'] == 'Y'): ?>is-busy<?php else: ?>is-empty<?php endif; ?>"
                                       <?php elseif(!empty($plan['RESIDENT']['NAME'])): ?>
                                           data-title="<?= $plan['RESIDENT']['NAME']; ?>"
                                       <?php endif; ?>

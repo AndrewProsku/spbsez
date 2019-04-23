@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Профиль");
-$APPLICATION->SetPageProperty('title', 'Личный кабинет | АООЭЗ');
+$APPLICATION->SetPageProperty('title', 'Личный кабинет');
 if (!$USER->IsAuthorized()) {
     LocalRedirect(LANG_DIR . 'cabinet/auth/');
 }
@@ -43,6 +43,7 @@ if (!$USER->IsAuthorized()) {
                     "MENU_CACHE_TIME" => "3600",
                     "MENU_CACHE_TYPE" => "A",
                     "MENU_CACHE_USE_GROUPS" => "Y",
+                    "MENU_CACHE_USE_USERS" => "Y",
                     "ROOT_MENU_TYPE" => "sub",
                     "USE_EXT" => "Y"
                 )

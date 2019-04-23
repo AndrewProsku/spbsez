@@ -8,6 +8,7 @@ use Bitrix\Main\ORM\Objectify\Collection;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportsTable;
+use Kelnik\Report\Model\Status;
 use Kelnik\Report\Model\StatusTable;
 use Kelnik\UserData\Profile\Profile;
 
@@ -39,7 +40,7 @@ class ReportList extends Bbc\Basis
         global $USER;
 
         $this->addCacheAdditionalId($USER->GetID());
-        $this->addCacheAdditionalId(date('Y'));
+        $this->addCacheAdditionalId(date('Y-m-d'));
 
         $this->profile = Profile::getInstance((int)$USER->GetID());
 
@@ -61,7 +62,7 @@ class ReportList extends Bbc\Basis
         self::registerCacheTag('kelnik:reportList_' . $this->profile->getCompanyId());
 
         $this->arResult['REPORTS'] = $this->getReports();
-        $this->arResult['DISABLED'] = !count($this->arResult['REPORTS']);
+        //$this->arResult['DISABLED'] = !count($this->arResult['REPORTS']);
     }
 
     protected function getReports()
@@ -80,11 +81,7 @@ class ReportList extends Bbc\Basis
                 ]
             ])->fetchCollection();
         } catch (\Exception $e) {
-            return [];
-        }
-
-        if (!$reports->count()) {
-            return [];
+            $reports = new \Kelnik\Report\Model\EO_Reports_Collection();
         }
 
         return $this->prepareReports(
@@ -95,15 +92,15 @@ class ReportList extends Bbc\Basis
     /**
      * Подготовка списка отчетов по годам
      *
-     * @param \Kelnik\Report\Model\EO_Reports_Collection $reports
+     * @param array $reports
      * @return array
      */
-    protected function prepareReports(\Kelnik\Report\Model\EO_Reports_Collection $reports)
+    protected function prepareReports(array $reports)
     {
         $res = [];
 
         foreach ($reports as $v) {
-            $year = $v->getYear();
+            $year = $v['YEAR'];
 
             if (!isset($res[$year])) {
                 $res[$year] = [
@@ -113,15 +110,21 @@ class ReportList extends Bbc\Basis
                 ];
             }
 
-            if (!$v->isComplete()) {
+            if ($v['STATUS_ID'] !== StatusTable::DONE) {
                 $res[$year]['IS_COMPLETE'] = false;
             }
 
             // У битрикса плохо с кешированием объектов,
             // переводим в массив
             //
-            $res[$year]['ELEMENTS'][$v->getType()] = $v->getArray();
+            $res[$year]['ELEMENTS'][$v['TYPE']] = $v;
         }
+
+        $res = array_map(function ($year) {
+            ksort($year['ELEMENTS']);
+
+            return $year;
+        }, $res);
 
         ksort($res);
 
@@ -134,50 +137,60 @@ class ReportList extends Bbc\Basis
      * с ссылкой на создание реального отчета
      *
      * @param Collection $reports
-     * @return array|Collection
+     * @return array
      * @throws \Bitrix\Main\ArgumentException
      * @throws \Bitrix\Main\SystemException
      */
     protected function checkList(Collection $reports)
     {
-        if (!$reports->count()) {
-            return $reports;
-        }
-
-        $types     = array_keys(ReportsTable::getTypes());
-        $curYear   = (int) date('Y');
-        $curTime   = ReportsTable::getCurrentTime();
+        $types = array_keys(ReportsTable::getTypes());
+        $curYear = (int)date('Y');
+        $curTime = ReportsTable::getCurrentTime();
         $defStatus = StatusTable::getByPrimary(StatusTable::NEW)->fetchObject();
+        $unActiveStatus = new Status();
 
         $reportsByYear = [];
 
-        foreach ($reports as $report) {
-            $reportsByYear[$report->getYear()][$report->getType()] = $report->getType();
+        $reports = $reports->getAll();
+
+        if (count($reports)) {
+            foreach ($reports as $k => $report) {
+                $reportsByYear[$report->getYear()][$report->getType()] = $report->getType();
+                $reports[$k] = $report->getArray();
+            }
         }
 
         if (!isset($reportsByYear[$curYear])) {
             $reportsByYear[$curYear] = $curYear;
         }
 
-
         foreach ($reportsByYear as $year => $yearTypes) {
             $typePeriod = ReportsTable::getTypePeriod($year);
 
             foreach ($types as $type) {
-                if (isset($yearTypes[$type])
-                    || $curTime > $typePeriod[$type]['end']
+                if (isset($yearTypes[$type])) {
+                    continue;
+                }
+                if ($curTime > $typePeriod[$type]['end']
                     || $curTime < $typePeriod[$type]['start']
                 ) {
+                    $reports[] = (new Report())
+                                    ->setId(0)
+                                    ->setYear($year)
+                                    ->setType($type)
+                                    ->setStatus($unActiveStatus)
+                                    ->setStatusId(-1)
+                                    ->getArray();
+
                     continue;
                 }
 
-                $reports->add(
-                    (new Report())
-                    ->setId(0)
-                    ->setYear($year)
-                    ->setType($type)
-                    ->setStatus($defStatus)
-                );
+                $reports[] = (new Report())
+                                ->setId(0)
+                                ->setYear($year)
+                                ->setType($type)
+                                ->setStatus($defStatus)
+                                ->getArray();
             }
         }
 

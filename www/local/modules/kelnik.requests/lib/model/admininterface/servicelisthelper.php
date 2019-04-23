@@ -7,5 +7,5 @@ use Kelnik\Requests\Model\ServiceTable;
 
 class ServiceListHelper extends AdminListHelper
 {
-	protected static $model = ServiceTable::class;
+    protected static $model = ServiceTable::class;
 }

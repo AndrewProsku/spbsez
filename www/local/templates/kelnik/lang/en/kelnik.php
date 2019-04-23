@@ -1,5 +1,6 @@
 <?php
 
+$MESS['KELNIK_TMPL_TITLE_SUFFIX'] = 'SEZ';
 $MESS['KELNIK_TMPL_BACK_TO_MAIN'] = 'Back to main';
 $MESS['KELNIK_TMPL_404'] = 'Page not found';
 $MESS['KELNIK_TMPL_404_TEXT'] = 'Try to start from <a href="#MAIN_PAGE#" class="b-link-line">the main page</a> or <a href="#SITE_PAGE#" class="b-link-line">view our sites</a>';
@@ -11,6 +12,7 @@ $MESS['KELNIK_TMPL_OLD_BROWSER_HEADER'] = 'The site may not work correctly';
 $MESS['KELNIK_TMPL_OLD_BROWSER_BODY'] = 'Your browser is outdated and does not support some modern website technologies. To make all features work, update your browser or download another test:';
 $MESS['KELNIK_TMPL_OLD_BROWSER_LINK'] = 'Still go to the website';
 $MESS['KELNIK_TMPL_OLD_BROWSER_YANDEX'] = 'Yandex.Browser';
+$MESS['KELNIK_TMPL_BACK_TO_MEDIA'] = 'Back to media';
 
 $MESS['KELNIK_TMPL_FORM_COMMENT'] = 'Comment';
 $MESS['KELNIK_TMPL_FORM_NAME'] = 'Name';
@@ -24,9 +26,9 @@ $MESS['KELNIK_TMPL_SITES_LOCATION'] = 'Location of zones';
 $MESS['KELNIK_TMPL_SITES_NOVOORLOVSKAYA'] = 'Novoorlovskaya';
 $MESS['KELNIK_TMPL_SITES_NOIDORF'] = 'Noidorf';
 $MESS['KELNIK_TMPL_SITES_SEA_PORT'] = 'Sea port';
-$MESS['KELNIK_TMPL_SITES_RAILWAY'] = 'Railway station';
+$MESS['KELNIK_TMPL_SITES_RAILWAY_BALT'] = 'Baltic Railway Station';
 $MESS['KELNIK_TMPL_SITES_CENTER'] = 'City center';
-$MESS['KELNIK_TMPL_SITES_RAILWAY_LAD'] = 'Ladozhsky Railway Station';
+$MESS['KELNIK_TMPL_SITES_RAILWAY_LAD'] = 'Ladoga Railway Station';
 $MESS['KELNIK_TMPL_SITES_AIRPORT'] = 'Airport';
 $MESS['KELNIK_TMPL_SITES_MORE'] = 'Learn more';
 $MESS['KELNIK_TMPL_SITES_SITE'] = 'Site';
@@ -41,9 +43,9 @@ $MESS['KELNIK_TMPL_SITES_SITE_NOIDORF'] = 'Noidorf site';
 $MESS['KELNIK_TMPL_SITES_DESCR_NOV'] = 'Developed transport infrastructure. Less than 10
                         minutes to the St. Petersburg Ring Road. 30
                         minutes by motor vehicle to the city center. 20
-                        minutes by motor vehicle to the metro station';
+                        minutes by motor vehicle to the metro station.';
 $MESS['KELNIK_TMPL_SITES_DESCR_NOIDORF'] = 'Surrounded by the developed urban infrastructure
                         and cultural heritage. Less than 10 minutes to the
                         St. Petersburg Ring Road. 20 minutes by motor
-                        vehicle to the airport';
+                        vehicle to the airport.';
 $MESS['KELNIK_TMPL_SITES_PRIM'] = '<strong>Primorsky District</strong> <span>In Novoorlovsky urban forest</span>';

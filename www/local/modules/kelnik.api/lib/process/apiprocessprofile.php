@@ -180,17 +180,17 @@ class ApiProcessProfile extends ApiProcessAbstract
 
         $res = $this->docs->add($doc);
 
-        if (!$res) {
+        if (!$res || !is_array($res)) {
             $this->errors[] = $this->docs->getLastError();
 
             return false;
         }
 
         $dateTime = new DateTime();
-        $fileData = \CFile::GetFileArray($res);
+        $fileData = \CFile::GetFileArray($res['fileId']);
 
         $res = [
-            'id' => $res,
+            'id' => $res['rowId'],
             'userName' => $this->profile->getField('NAME')
         ];
 

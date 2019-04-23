@@ -74,7 +74,13 @@ class SiteMsgAdminInterface extends AdminInterface
     public function helpers()
     {
         return [
-            SiteMsgListHelper::class,
+            SiteMsgListHelper::class => [
+                'BUTTONS' => [
+                    'LIST_CREATE_NEW' => [
+                        'VISIBLE' => 'N'
+                    ]
+                ]
+            ],
             SiteMsgEditHelper::class
         ];
     }

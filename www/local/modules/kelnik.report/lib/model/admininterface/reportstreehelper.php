@@ -8,12 +8,13 @@ use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminBaseHelper;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
+use Kelnik\Helpers\Database\Query;
 use Kelnik\Report\Model\ReportsTable;
 use Kelnik\Userdata\Profile\Profile;
 
 Loc::loadMessages(
     __DIR__ . DIRECTORY_SEPARATOR
-    . '..' . DIRECTORY_SEPARATOR . 'reports.php'
+    . '..' . DIRECTORY_SEPARATOR . 'reportstable.php'
 );
 
 class ReportsTreeHelper extends AdminBaseHelper
@@ -36,17 +37,18 @@ class ReportsTreeHelper extends AdminBaseHelper
         if ($request->isAjaxRequest() && isset($_POST['id'])) {
             $APPLICATION->RestartBuffer();
 
+            preg_match('!c(?P<resident>\d+)(\-(?P<year>\d+)|)!si', $request->getPost('id'), $matches);
+            $residentId = (int) ArrayHelper::getValue($matches, 'resident', 0);
+            $year       = (int) ArrayHelper::getValue($matches, 'year', 0);
+
             BitrixHelper::jsonResponse(
                 $this->prepareChild(
-                    self::getChild(
-                        str_replace('c', '', $request->getPost('id'))
-                    ),
-                    !empty($request->getPost('id'))
+                    self::getChild($residentId, $year),
+                    $residentId,
+                    $year
                 )
             );
         }
-
-        Loc::loadMessages(__FILE__);
 
         \CJSCore::RegisterExt(
             'treeGrid',
@@ -74,7 +76,7 @@ class ReportsTreeHelper extends AdminBaseHelper
 
         echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_REPORT_ID') . '</div></td>';
         echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_REPORT_NAME') . '</div></td>';
-        echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_REPORT_QUARTER') . '</div></td>';
+        echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_REPORT_TYPE') . '</div></td>';
         echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">' . Loc::getMessage('KELNIK_REPORT_STATUS') . '</div></td>';
 
         echo '<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">&nbsp;</div></td>';
@@ -92,7 +94,7 @@ class ReportsTreeHelper extends AdminBaseHelper
                 'field' => 'NAME'
             ],
             [
-                'field' => 'QUARTER'
+                'field' => 'TYPE'
             ],
             [
                 'field' => 'STATUS'
@@ -110,34 +112,53 @@ class ReportsTreeHelper extends AdminBaseHelper
         echo "\n<script>$('#{$tableId}').treeGrid({$params});</script>\n";
     }
 
-    protected static function getChild($parentId): array
+    protected static function getChild(int $residentId, int $year = 0): array
     {
-        $parentId = (int) $parentId;
-
         try {
-            if (!$parentId) {
+            if (!$residentId) {
                 return Profile::getAdminCompanyList();
             }
 
-            return ReportsTable::getAssoc([
+            $keyField = 'ID';
+            $params = [
                 'select' => [
                     'ID', 'COMPANY_ID', 'NAME',
-                    'QUARTER', 'YEAR',
+                    'TYPE', 'YEAR',
                     'STATUS_NAME' => 'STATUS.NAME'
                 ],
                 'filter' => [
-                    '=COMPANY_ID' => $parentId
+                    '=COMPANY_ID' => $residentId,
+                    '=YEAR' => $year
                 ],
                 'order' => [
+                    'TYPE' => 'DESC',
                     'DATE_CREATED' => 'DESC'
-                ]
-            ], 'ID');
+                ],
+                'group' => []
+            ];
+
+            if (!$year) {
+                Query::setGlobalChainsToGroup(false);
+                $params['select'] = ['YEAR', 'COMPANY_ID'];
+                $params['group']  = ['YEAR'];
+                $params['order'] = [
+                    'YEAR' => 'DESC'
+                ];
+                $keyField = 'YEAR';
+                unset($params['filter']['=YEAR']);
+            }
+
+            $res = ReportsTable::getAssoc($params, $keyField);
+            Query::setGlobalChainsToGroup(true);
+
         } catch (\Exception $e) {
-            return [];
+            $res = [];
         }
+
+        return $res;
     }
 
-    protected function prepareChild(array $data, $isReports = false): array
+    protected function prepareChild(array $data, int $residentId = 0, int $year = 0): array
     {
         if (!$data) {
             return $data;
@@ -145,7 +166,7 @@ class ReportsTreeHelper extends AdminBaseHelper
 
         $stat = [];
 
-        if (!$isReports) {
+        if (!$residentId) {
             $stat = ReportsTable::getAssoc([
                 'select' => [
                     'COMPANY_ID',
@@ -157,26 +178,39 @@ class ReportsTreeHelper extends AdminBaseHelper
             ], 'COMPANY_ID', 'CNT');
         }
 
-        foreach ($data as $k => $val) {
-            if (!$isReports) {
-                $data[$k] = [
+        foreach ($data as $k => &$v) {
+            if (!$residentId) {
+                $v = [
                     'ID' => '',
-                    'NAME' => '<a href="#">' . $val . '</a>',
+                    'NAME' => '<a href="javascript:;" class="kelnik-fake-sub">' . $v . '</a>',
                     'id' => 'c' . $k,
                     'parent_id' => 0,
                     'quantity' => ArrayHelper::getValue($stat, $k, 0)
                 ];
+
                 continue;
             }
 
-            $data[$k] = [
-                'id' => $k,
-                'parent_id' => 'c'. $data['COMPANY_ID'],
+            if ($residentId && !$year) {
+                $v = [
+                    'ID' => '',
+                    'NAME' => '<a href="javascript:;" class="kelnik-fake-sub">' . $v['YEAR'] . '</a>',
+                    'id' => 'c' . $v['COMPANY_ID'] . '-' . $v['YEAR'],
+                    'parent_id' => 'c' . $v['COMPANY_ID'],
+                    'quantity' => 1
+                ];
+
+                continue;
+            }
+
+            $v = [
+                'id' => $v['ID'],
+                'parent_id' => 'c' . $v['COMPANY_ID'] . '-' . $v['YEAR'],
                 'quantity' => -1,
-                'ID' => $k,
-                'NAME' => '<a target="_blank" href="' . ReportsEditHelper::getUrl(['ID' => $k]) . '">' . $val['NAME'] . '</a>',
-                'QUARTER' => ReportsTable::getTypeName($val['QUARTER']) . ' ' . $val['YEAR'],
-                'STATUS' => $val['STATUS_NAME']
+                'ID' => $v['ID'],
+                'NAME' => '<a target="_blank" href="' . ReportsEditHelper::getUrl(['ID' => $v['ID']]) . '">' . $v['NAME'] . '</a>',
+                'TYPE' => ReportsTable::getTypeName($v['TYPE']),
+                'STATUS' => $v['STATUS_NAME']
             ];
         }
 

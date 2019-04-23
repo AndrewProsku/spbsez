@@ -261,7 +261,7 @@ class InputDate {
     }
 
     _reverseDate(date) {
-        return date.split('.').reverse().join('.');
+        return date.split('.').reverse().join('/');
     }
 
     errorDate() {

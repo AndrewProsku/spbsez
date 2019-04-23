@@ -1,5 +1,6 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
-define("PATH_TO_404", '/404.php'); ?>
+define("PATH_TO_404", '/404.php');
+\Bitrix\Main\Localization\Loc::loadMessages(__DIR__ . DIRECTORY_SEPARATOR . 'kelnik.php'); ?>
 <!doctype html>
 <html lang="<?= LANGUAGE_ID; ?>">
 <head>
@@ -8,11 +9,15 @@ define("PATH_TO_404", '/404.php'); ?>
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title><?php $APPLICATION->ShowTitle() ?></title>
+    <title><?php $APPLICATION->ShowTitle(); ?> | <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_TITLE_SUFFIX'); ?></title>
     <?php
         $APPLICATION->SetAdditionalCSS("/styles/app.css");
         $isRegularPage = !in_array($APPLICATION->GetCurDir(), [LANG_DIR]) || defined('ERROR_404');
         $showAnimation = $APPLICATION->GetProperty('showAnimation') === true || defined('ERROR_404');
+
+        if (LANG_DIR == \SezLang::CHINESE_DIR) {
+            $isRegularPage = true;
+        }
     ?>
 
     <meta name="theme-color" content="#662D91">
@@ -24,10 +29,7 @@ define("PATH_TO_404", '/404.php'); ?>
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
     <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
     <link rel="icon" sizes="192x192" href="/favicons/touch-icon-192x192.png">
-    <?php
-        $APPLICATION->ShowHead();
-        \Bitrix\Main\Localization\Loc::loadMessages(__DIR__ . DIRECTORY_SEPARATOR . 'kelnik.php');
-    ?>
+    <?php $APPLICATION->ShowHead(); ?>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -52,33 +54,35 @@ define("PATH_TO_404", '/404.php'); ?>
     </script>
 </head>
 <body>
+    <?php if($USER->IsAuthorized()): ?>
     <div id="panel"><?$APPLICATION->ShowPanel();?></div>
+    <?php endif; ?>
     <?php if($showAnimation): ?>
     <div id="j-particles" class="background-particles j-particles"></div>
     <?php endif; ?>
     <?php include 'inc_notify_old_browser.php'; ?>
     <div class="l-layout">
         <header class="l-home__header<?php if($isRegularPage): ?> inner-header<?php endif; ?> j-home__header">
-            <div class="l-home__header-left">
-                <a href="<?= LANG_DIR; ?>" class="b-logo__link lang-<?=LANGUAGE_ID; ?>" title="<?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_BACK_TO_MAIN'); ?>"></a>
-            </div>
-            <div class="l-home__header-center">
-                <?$APPLICATION->IncludeComponent(
-                    "bitrix:menu",
-                    "top",
-                    Array(
-                        "ALLOW_MULTI_SELECT" => "N",
-                        "DELAY" => "N",
-                        "MAX_LEVEL" => "1",
-                        "MENU_CACHE_GET_VARS" => array(""),
-                        "MENU_CACHE_TIME" => "3600",
-                        "MENU_CACHE_TYPE" => "A",
-                        "MENU_CACHE_USE_GROUPS" => "Y",
-                        "ROOT_MENU_TYPE" => "top",
-                        "USE_EXT" => "N"
-                    )
-                );?>
-            </div>
+            <div class="l-home__header-left"><a href="<?= LANG_DIR; ?>" class="b-logo__link lang-<?=LANGUAGE_ID; ?>" title="<?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_BACK_TO_MAIN'); ?>"></a></div>
+            <?php if(LANG_DIR !== \SezLang::CHINESE_DIR): ?>
+                <div class="l-home__header-center">
+                    <?$APPLICATION->IncludeComponent(
+                        "bitrix:menu",
+                        "top",
+                        Array(
+                            "ALLOW_MULTI_SELECT" => "N",
+                            "DELAY" => "N",
+                            "MAX_LEVEL" => "1",
+                            "MENU_CACHE_GET_VARS" => array(""),
+                            "MENU_CACHE_TIME" => "3600",
+                            "MENU_CACHE_TYPE" => "A",
+                            "MENU_CACHE_USE_GROUPS" => "Y",
+                            "ROOT_MENU_TYPE" => "top",
+                            "USE_EXT" => "N"
+                        )
+                    );?>
+                </div>
+            <?php endif; ?>
             <? $APPLICATION->IncludeComponent(
                 "kelnik:user.menu",
                 "header",

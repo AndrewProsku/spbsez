@@ -37,7 +37,7 @@
     max-width: 1280px;
 }
 
-.b-reports-filter + .b-report-form {
+.b-reports-filter-wrap + .b-report-form {
     padding-top: 0;
 }
 
@@ -131,6 +131,7 @@
     input[type="password"],
     input[type="email"],
     input[type="tel"],
+    input[type="number"],
     textarea {
         @include font-size("p2");
         font-family: inherit;
@@ -684,8 +685,6 @@ label .b-help {
 
 .b-input-error {
     @include font-size("p4");
-    /*font-size: 12px;
-    line-height: 16px;*/
     display: block;
     margin-left: -1px;
     margin-right: -1px;
@@ -713,12 +712,23 @@ label .b-help {
     }
 
     @media #{$laptop} {
-        /*position: absolute;
-        top: 100%;*/
-        /*font-size: 16px;
-        line-height: 24px;*/
         border-radius: 0 0 4px 4px;
         order: 2;
+    }
+}
+
+.b-report-submit + .b-input-error {
+    font-size: 14px;
+    margin-top: 16px;
+    max-width: 1280px;
+    border-radius: 4px;
+
+    .b-input-error__message {
+        margin-bottom: 0;
+    }
+
+    @media #{$tablet-portrait} {
+        font-size: 18px;
     }
 }
 

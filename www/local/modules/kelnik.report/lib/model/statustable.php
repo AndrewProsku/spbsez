@@ -66,7 +66,7 @@ class StatusTable extends DataManager
                 self::DECLINED => 'b-quarter_status_rejected'
             ],
             $id,
-            'b-quarter_status_approved'
+            'b-quarter_status_preliminary'
         );
     }
 
@@ -80,5 +80,12 @@ class StatusTable extends DataManager
             $id,
             Loc::getMessage('KELNIK_REPORT_STATUS_BUTTON_NAME_VIEW')
         );
+    }
+
+    public static function getNameById($id)
+    {
+        return $id
+            ? ArrayHelper::getValue(self::getRowByIdCached($id), 'NAME')
+            : 0;
     }
 }

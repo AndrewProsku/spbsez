@@ -9,9 +9,6 @@ use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
 
-/**
- * Модель заявок на обратный звонок.
- */
 class TypeTable extends DataManager
 {
     public const SUB_TYPE_SERVICE = 'service';

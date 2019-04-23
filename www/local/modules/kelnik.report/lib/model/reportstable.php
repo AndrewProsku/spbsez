@@ -16,15 +16,18 @@ use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Report\Events;
 use Kelnik\UserData\Profile\Profile;
 
 Loc::loadMessages(__FILE__);
 
 class ReportsTable extends DataManager
 {
-    public const TYPE_1 = 1;
-    public const TYPE_2 = 2;
-    public const TYPE_3 = 3;
+    public const BASE_URL = 'cabinet/report/';
+
+    public const TYPE_QUARTER_1 = 1;
+    public const TYPE_QUARTER_2 = 2;
+    public const TYPE_QUARTER_3 = 3;
     public const TYPE_PRELIMINARY_ANNUAL = 4;
     public const TYPE_ANNUAL = 5;
 
@@ -54,6 +57,8 @@ class ReportsTable extends DataManager
 
             (new IntegerField('COMPANY_ID'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_COMPANY')),
+            (new IntegerField('USER_ID'))
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_USER')),
 
             (new IntegerField('CREATED_BY'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_CREATED_BY'))
@@ -86,11 +91,22 @@ class ReportsTable extends DataManager
                 ->configureDefaultValue(self::NO)
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_IS_LOCKED')),
 
+            (new BooleanField('IS_PRE_FILLED'))
+                ->configureValues(self::NO, self::YES)
+                ->configureDefaultValue(self::NO)
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_IS_PRE_FILLED')),
+
             (new StringField('NAME'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME')),
 
             (new StringField('NAME_SEZ'))
                 ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME_SEZ')),
+
+            (new StringField('NAME_COMMENT'))
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME_COMMENT')),
+
+            (new StringField('NAME_SEZ_COMMENT'))
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_NAME_SEZ_COMMENT')),
 
             (new Reference(
                 'STATUS',
@@ -98,7 +114,8 @@ class ReportsTable extends DataManager
                 Join::on('this.STATUS_ID', 'ref.ID')
             ))->configureJoinType('LEFT'),
 
-            (new OneToMany('FIELDS', ReportFieldsTable::class, 'REPORT'))
+            (new OneToMany('FIELDS', ReportFieldsTable::class, 'REPORT')),
+            (new OneToMany('GROUPS', ReportFieldsGroupTable::class, 'REPORT'))
         ];
     }
 
@@ -115,12 +132,85 @@ class ReportsTable extends DataManager
         return parent::update($id, $data);
     }
 
+    public static function onAfterAdd(Event $event)
+    {
+        // Добавляем группы полей и некоторые поля по-умолчанию
+        //
+        ReportFieldsGroupTable::addReportGroups((int)  ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0));
+
+        static::clearComponentCache($event);
+        parent::onAfterAdd($event);
+    }
+
+    public static function onBeforeAdd(\Bitrix\Main\ORM\Event $event)
+    {
+        Events::setStatus($event);
+        parent::onBeforeAdd($event);
+    }
+
+    public static function onAfterUpdate(Event $event)
+    {
+        $id = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
+
+        if (!$id) {
+            parent::onAfterUpdate($event);
+
+            return;
+        }
+
+        try {
+            $status = (int) ArrayHelper::getValue(self::getRowByIdCached($id), 'STATUS_ID');
+
+            if ($status === StatusTable::DONE) {
+                $sqlHelper = Application::getConnection()->getSqlHelper();
+                Application::getConnection()->query(
+                    'UPDATE `' . ReportFieldsTable::getTableName() . '` ' .
+                    'SET `COMMENT` = NULL ' .
+                    'WHERE `REPORT_ID` = ' . $sqlHelper->convertToDbInteger($id)
+                );
+            } elseif ($status === StatusTable::CHECKING) {
+                $sqlHelper = Application::getConnection()->getSqlHelper();
+                Application::getConnection()->query(
+                    'UPDATE `' . ReportFieldsTable::getTableName() . '` ' .
+                    'SET `IS_PRE_FILLED` = ' . $sqlHelper->convertToDbString(ReportFieldsTable::NO) . ' ' .
+                    'WHERE `REPORT_ID` = ' . $sqlHelper->convertToDbInteger($id)
+                );
+            }
+        } catch (\Exception $e) {
+        }
+
+        Events::sendNotify($event);
+        parent::onAfterUpdate($event);
+    }
+
+    public static function onBeforeDelete(Event $event)
+    {
+        $id  = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
+
+        try {
+            if ($id) {
+                $sqlHelper = Application::getConnection()->getSqlHelper();
+                Application::getConnection()->query(
+                    'DELETE FROM `' . ReportFieldsTable::getTableName() . '` ' .
+                    'WHERE `REPORT_ID` = ' . $sqlHelper->convertToDbInteger($id)
+                );
+                Application::getConnection()->query(
+                    'DELETE FROM `' . ReportFieldsGroupTable::getTableName() . '` ' .
+                    'WHERE `REPORT_ID` = ' . $sqlHelper->convertToDbInteger($id)
+                );
+            }
+        } catch (\Exception $e) {
+        }
+
+        parent::onBeforeDelete($event);
+    }
+
     public static function clearComponentCache(Event $event)
     {
         global $USER;
 
         try {
-            $id = ArrayHelper::getValue($event->getParameter('id'), 'ID', 0);
+            $id = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
             $companyId = Context::getCurrent()->getRequest()->isAdminSection()
                         ? ReportsTable::getByPrimary($id)->fetchObject()->getCompanyId()
                         : Profile::getInstance((int)$USER->GetID())->getCompanyId();
@@ -140,9 +230,9 @@ class ReportsTable extends DataManager
     public static function getTypes()
     {
         return [
-            self::TYPE_1                  => Loc::getMessage('KELNIK_REPORT_TYPE_1'),
-            self::TYPE_2                  => Loc::getMessage('KELNIK_REPORT_TYPE_2'),
-            self::TYPE_3                  => Loc::getMessage('KELNIK_REPORT_TYPE_3'),
+            self::TYPE_QUARTER_1          => Loc::getMessage('KELNIK_REPORT_TYPE_1'),
+            self::TYPE_QUARTER_2          => Loc::getMessage('KELNIK_REPORT_TYPE_2'),
+            self::TYPE_QUARTER_3          => Loc::getMessage('KELNIK_REPORT_TYPE_3'),
             self::TYPE_PRELIMINARY_ANNUAL => Loc::getMessage('KELNIK_REPORT_TYPE_SEMI_ANNUAL'),
             self::TYPE_ANNUAL             => Loc::getMessage('KELNIK_REPORT_TYPE_ANNUAL')
         ];
@@ -160,15 +250,15 @@ class ReportsTable extends DataManager
         }
 
         return [
-            self::TYPE_1                  => [
+            self::TYPE_QUARTER_1 => [
                 'start' => mktime(0, 0, 0, 4, 1, $year),
                 'end' => mktime(23, 59, 59, 4, 31, $year)
             ],
-            self::TYPE_2                  => [
+            self::TYPE_QUARTER_2 => [
                 'start' => mktime(0, 0, 0, 7, 1, $year),
                 'end' => mktime(23, 59, 59, 7, 31, $year)
             ],
-            self::TYPE_3                  => [
+            self::TYPE_QUARTER_3 => [
                 'start' => mktime(0, 0, 0, 9, 1, $year),
                 'end' => mktime(23, 59, 59, 9, 30, $year)
             ],
@@ -176,7 +266,7 @@ class ReportsTable extends DataManager
                 'start' => mktime(0, 0, 0, 1, 8, $year + 1),
                 'end' => mktime(23, 59, 59, 1, 31, $year + 1)
             ],
-            self::TYPE_ANNUAL             => [
+            self::TYPE_ANNUAL => [
                 'start' => mktime(0, 0, 0, 4, 1, $year + 1),
                 'end' => mktime(23, 59, 59, 4, 31, $year + 1)
             ]
@@ -193,7 +283,7 @@ class ReportsTable extends DataManager
     /**
      * @param int $companyId
      * @param int $id
-     * @param bool $getFields
+     *
      * @return Report|bool
      */
     public static function getReport(int $companyId, int $id)
@@ -245,7 +335,7 @@ class ReportsTable extends DataManager
                 ]
             ])->fetchCollection();
         } catch (\Exception $e) {
-            $reports = [];
+            $reports = new \Kelnik\Report\Model\EO_Reports_Collection();
         }
 
         if (!$reports->count()) {
@@ -265,9 +355,51 @@ class ReportsTable extends DataManager
         return self::$completeYear[$companyId . '_' . $year] = true;
     }
 
+    /**
+     * Проверка предыдущих отчетов в течение года
+     *
+     * @param int $companyId ID компании
+     * @param int $type период отчета
+     * @param int $year год
+     * @return bool
+     */
+    public static function prevRequired(int $companyId, int $type, int $year)
+    {
+        if ($type === ReportsTable::TYPE_QUARTER_1) {
+            return !ReportsTable::yearIsComplete($companyId, $year - 1);
+        }
+
+        try {
+            $reports = self::getList([
+                'filter' => [
+                    '=YEAR' => $year,
+                    '=COMPANY_ID' => $companyId,
+                    '<TYPE' => $type
+                ],
+                'order' => [
+                    'TYPE' => 'ASC'
+                ]
+            ])->fetchCollection();
+        } catch (\Exception $e) {
+            $reports = new \Kelnik\Report\Model\EO_Reports_Collection();
+        }
+
+        if (!$reports->count()) {
+            return false;
+        }
+
+        foreach ($reports as $report) {
+            if (!$report->isComplete()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function getCurrentTime()
     {
         // TODO: restore real date
-        return mktime(0, 0, 0, 4, 2, 2019); // time();
+        return mktime(0, 0, 0, 7, 2, 2019); // time();
     }
 }

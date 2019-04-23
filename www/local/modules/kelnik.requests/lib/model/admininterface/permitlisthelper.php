@@ -7,5 +7,5 @@ use Kelnik\Requests\Model\PermitTable;
 
 class PermitListHelper extends AdminListHelper
 {
-	protected static $model = PermitTable::class;
+    protected static $model = PermitTable::class;
 }

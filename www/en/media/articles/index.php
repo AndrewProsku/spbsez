@@ -1,6 +1,6 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetPageProperty('title', "Articles | SEZ");
+$APPLICATION->SetPageProperty('title', "Articles");
 $APPLICATION->SetTitle("Articles");
 ?>
 

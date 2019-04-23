@@ -11,7 +11,7 @@
                     rows: "3"
                 } %}
                 <label class="b-input-block__label" for="result-type{{ id }}">
-                    Вид результата<span class="b-help j-help">Вид результата</span>
+                    Вид результата<span class="b-help j-help">Вид результата ИД (патент, лицензия, разработка и т.д.) полученный за период работы в качестве Резидента ОЭЗ.</span>
                 </label>
             </div>
             <div class="b-input-block ">
@@ -27,7 +27,8 @@
             <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "result-date["~ id ~"]",
-                    name: "result-date["~ id ~"]"
+                    name: "result-date["~ id ~"]",
+                    modify: "b-input-text_type_date"
                 } %}
                 <label class="b-input-block__label" for="result-date{{ id }}">Дата регистрации результата ИД</label>
             </div>
@@ -38,7 +39,7 @@
                     rows: "3"
                 } %}
                 <label class="b-input-block__label" for="result-commercialization{{ id }}">
-                    Информация о коммерциализации результатов ИД<span class="b-help j-help">Информация о коммерциализации результатов ИД</span>
+                    Информация о коммерциализации результатов ИД<span class="b-help j-help">Факт практического использования результатов научных исследований и разработок (вывод на рынок новых или улучшенных продуктов, услуг или процессов с целью получения коммерческого эффекта).</span>
                 </label>
             </div>
         </div>

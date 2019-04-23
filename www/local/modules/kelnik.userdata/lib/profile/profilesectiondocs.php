@@ -4,6 +4,7 @@
 namespace Kelnik\Userdata\Profile;
 
 
+use Bitrix\Main\Entity\AddResult;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Userdata\Model\DocsTable;
 
@@ -13,11 +14,12 @@ class ProfileSectionDocs extends ProfileSectionAbstract
 {
     /**
      * @param array $data
-     * @return int|string
+     * @return array|bool
      */
     public function add(array $data)
     {
         $allowExt = DocsTable::getAllowExt();
+        $fileId = $res = false;
 
         if (!in_array($data['type'], array_keys($allowExt))) {
             $this->lastError = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_EXT_ERROR');
@@ -27,7 +29,7 @@ class ProfileSectionDocs extends ProfileSectionAbstract
 
         try {
             $doc['MODULE_ID'] = self::MODULE_ID;
-            $fileId = \CFile::SaveFile($data, $data['MODULE_ID'], true);
+            $fileId = \CFile::SaveFile($data, $doc['MODULE_ID'], true);
         } catch (\Exception $e) {
         }
 
@@ -43,18 +45,18 @@ class ProfileSectionDocs extends ProfileSectionAbstract
                 'FILE_ID' => $fileId
             ]);
         } catch (\Exception $e) {
+        }
+
+        if (!($res instanceof AddResult) || !$res->isSuccess()) {
             $this->lastError = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_UPLOAD_ERROR');
 
             return false;
         }
 
-        if (!$res->isSuccess()) {
-            $this->lastError = Loc::getMessage('KELNIK_PROFILE_DOC_FILE_UPLOAD_ERROR');
-
-            return false;
-        }
-
-        return $fileId;
+        return [
+            'rowId' => $res->getId(),
+            'fileId' => $fileId
+        ];
     }
 
     public function delete($id)

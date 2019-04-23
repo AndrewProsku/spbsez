@@ -21,7 +21,7 @@
 ?>
 <?php foreach ($arResult['REPORTS'] as $year): ?>
     <?php
-        if($year['IS_COMPLETE']) {
+        if($year['IS_COMPLETE'] && $year['NAME'] < date('Y')) {
             $hasArchive = true;
             continue;
         }
@@ -32,8 +32,12 @@
         <?php foreach ($year['ELEMENTS'] as $report): ?>
             <section class="b-quarter <?= $report['STATUS_CSS_CLASS']; ?>">
                 <h3 class="b-quarter__title"><?= $report['TYPE_NAME']; ?></h3>
-                <div class="b-quarter__label"><?= $report['STATUS_NAME']; ?></div>
-                <a class="button b-quarter__button button_icon_pen" href="<?= $report['LINK']; ?>"><?= $report['STATUS_BUTTON_NAME']; ?></a>
+                <?php if($report['STATUS_ID'] < 0): ?>
+                    <div class="b-quarter__description">Отчетный период не&nbsp;наступил</div>
+                <?php else: ?>
+                    <div class="b-quarter__label"><?= $report['STATUS_NAME']; ?></div>
+                    <a class="button b-quarter__button button_icon_pen" href="<?= $report['LINK']; ?>"><?= $report['STATUS_BUTTON_NAME']; ?></a>
+                <?php endif; ?>
             </section>
         <?php endforeach; ?>
     </div>
@@ -44,7 +48,7 @@
 <h2 class="b-reports-subtitle">Архив очетов</h2>
 
 <?php foreach ($arResult['REPORTS'] as $year): ?>
-    <?php if(!$year['IS_COMPLETE']): continue; endif; ?>
+    <?php if(!$year['IS_COMPLETE'] || $year['NAME'] == date('Y')): continue; endif; ?>
     <h3 class="b-reports-year"><?= $year['NAME']; ?></h3>
     <div class="b-quarters">
         <?php foreach ($year['ELEMENTS'] as $report): ?>

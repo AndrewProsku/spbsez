@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Контакты");
-$APPLICATION->SetPageProperty('title', 'Контакты | АООЭЗ');
+$APPLICATION->SetPageProperty('title', 'Контакты');
 $yMapJson = [
     "center" => [59.942099, 30.186182],
     "scrollwheel" => false,
@@ -40,12 +40,8 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                         <p>Участок «Новоорловская»</p>
                     </div>
                     <div class="l-contacts__map-text-desc">
-                        <p>Санкт-Петербург, Дорога в Каменку, д. 74</p>
+                        <p>Санкт-Петербург, Дорога в Каменку, д. 74, литера А</p>
                     </div>
-                    <a href="#" class="l-contacts__map-text-link b-link-line j-contacts-location"
-                       data-coordinates="[60.053400, 30.231714]">
-                        Расположение
-                    </a>
                 </div>
 
                 <div class="l-contacts__map-text-item">
@@ -55,15 +51,11 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                     <div class="l-contacts__map-text-desc">
                         <p>Санкт-Петербург, пос. Стрельна, ул. Связи, д. 34А</p>
                     </div>
-                    <a href="#" class="l-contacts__map-text-link b-link-line j-contacts-location"
-                       data-coordinates="[59.840573, 30.005940]">
-                        Расположение
-                    </a>
                 </div>
             </div>
         </div>
 
-        <div class="l-contacts__content">
+        <div class="l-contacts__content" id="managment">
 
             <div class="l-contacts__block">
                 <?$APPLICATION->IncludeComponent(

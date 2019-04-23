@@ -6,7 +6,7 @@ use Bex\Bbc;
 use Bitrix\Main\Context;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Requests\Model\AreaTable;
-use Kelnik\Requests\Model\ServiceTable;
+use Kelnik\Requests\Model\ServiceTypeTable;
 use Kelnik\Requests\Model\TypeTable;
 use Kelnik\UserData\Profile\Profile;
 use Kelnik\UserData\Profile\ProfileSectionRequests;
@@ -41,6 +41,10 @@ class RequestForm extends Bbc\Basis
     {
         global $USER;
 
+        if (!$USER->IsAuthorized()) {
+            return false;
+        }
+
         try {
             $this->profile = Profile::getInstance((int)$USER->GetID());
             $this->sectionRequests = new ProfileSectionRequests($this->profile);
@@ -59,7 +63,22 @@ class RequestForm extends Bbc\Basis
         global $USER;
 
         if ($this->arParams['SUB_TYPE'] === TypeTable::SUB_TYPE_SERVICE) {
-            $this->arResult['TYPES'] = ServiceTable::getTypes();
+            $this->arResult['TYPES'] = ServiceTypeTable::getList([
+                'filter' => [
+                    '=ACTIVE' => ServiceTypeTable::YES
+                ],
+                'order' => [
+                    'SORT' => 'ASC'
+                ]
+            ])->fetchAll();
+
+            $lang = strtoupper(Context::getCurrent()->getLanguage());
+
+            if ($lang !== 'RU') {
+                foreach ($this->arResult['TYPES'] as &$v) {
+                    $v['NAME'] = !empty($v['NAME_' . $lang]) ? $v['NAME_' . $lang] : $v['NAME'];
+                }
+            }
 
             return true;
         }

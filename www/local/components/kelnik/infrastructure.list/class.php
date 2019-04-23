@@ -29,6 +29,7 @@ class InfrastructureList extends Bbc\Basis
     protected $cacheTemplate = false;
     protected $needModules = ['kelnik.infrastructure', 'iblock'];
     protected $checkParams = [];
+    protected $shapeWidth = [1 => 90, 2 => 60];
 
     protected function executeMain()
     {
@@ -48,21 +49,7 @@ class InfrastructureList extends Bbc\Basis
         $this->setResultCacheKeys(['ELEMENTS', 'MAP_DATA']);
 
         try {
-            $this->arResult['ELEMENTS'] = PlatformTable::getAssoc([
-                'select' => [
-                    'ID', 'ALIAS', 'IMAGE_ID',
-                    'NAME_RU', 'NAME_EN',
-                    'MAP_COORDS_LAT',
-                    'MAP_COORDS_LNG',
-                    'TEXT_RU', 'TEXT_EN'
-                ],
-                'filter' => [
-                    '=ACTIVE' => PlatformTable::YES
-                ],
-                'order' => [
-                    'SORT' => 'ASC'
-                ]
-            ]);
+            $this->arResult['ELEMENTS'] = PlatformTable::getActiveList();
         } catch (\Exception $e) {
             $this->abortCache();
             return;
@@ -77,6 +64,7 @@ class InfrastructureList extends Bbc\Basis
         foreach ($this->arResult['ELEMENTS'] as &$element) {
             $element = PlatformTable::replaceFieldsByLang($element, LANGUAGE_ID);
             $element['DETAIL_PAGE_URL'] = $this->getElementUrl($element);
+            $element['WIDTH'] = $this->shapeWidth[$element['ID']];
             if (!$element['MAP_COORDS_LAT'] || !$element['MAP_COORDS_LNG']) {
                 continue;
             }
@@ -86,6 +74,13 @@ class InfrastructureList extends Bbc\Basis
                 'coords' => [
                     $element['MAP_COORDS_LAT'],
                     $element['MAP_COORDS_LNG']
+                ],
+                'link' => $element['DETAIL_PAGE_URL'],
+                'coordShape' => [
+                    [-$element['WIDTH'], -30],
+                    [$element['WIDTH'], -30],
+                    [$element['WIDTH'], 10],
+                    [-$element['WIDTH'], 10],
                 ]
             ];
         }

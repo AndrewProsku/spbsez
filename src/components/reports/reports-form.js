@@ -1,3 +1,4 @@
+import inputmask from 'inputmask';
 import Mediator from 'common/scripts/mediator';
 import ReportBlock from './report-block';
 import templateComments from './templates/comments.twig';
@@ -8,6 +9,7 @@ import templateForm4 from './templates/form-4.twig';
 import templateForm5 from './templates/form-5.twig';
 import templateForm6 from './templates/form-6.twig';
 import templateForm7 from './templates/form-7.twig';
+import templateFormError from './templates/submit-error.twig';
 import templateResultBlock from './templates/result-block.twig';
 import Utils from '../../common/scripts/utils';
 
@@ -19,6 +21,7 @@ class ReportForm {
         this.target = null;
         this.formsBlockClass = 'j-report-block';
         this.reportId = 0;
+        this.baseUrl = '/api/report/';
 
         // Табы
         this.filterClass = 'j-reports-filter';
@@ -81,6 +84,7 @@ class ReportForm {
         this.target = options.target;
         this.submitReportButton = document.querySelector(`.${this.submitReportClass}`);
         this.reportId = parseInt(this.target.dataset.reportId, 10);
+        this.baseUrl = options.baseUrl || this.baseUrl;
 
         // Табы
         this.filters = Array.from(document.querySelectorAll(`.${this.filterClass}`));
@@ -105,7 +109,11 @@ class ReportForm {
         });
 
         if (this.submitReportButton) {
-            this.submitReportButton.addEventListener('click', this.submitReports);
+            const that = this;
+
+            this.submitReportButton.addEventListener('click', () => {
+                this.submitReports(that);
+            });
         }
     }
 
@@ -141,7 +149,7 @@ class ReportForm {
             this.sendNewValues(event.target);
         });
 
-        Utils.send(`a=get&id=${that.reportId}`, '/api/report/', {
+        Utils.send(`a=get&id=${that.reportId}`, that.baseUrl, {
             success(response) {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
@@ -162,7 +170,7 @@ class ReportForm {
                 responseForms.forEach((formData, i) => {
                     that.forms[i].template = that.createForm(i);
 
-                    if (formData.type && (formData.type === 'results')) {
+                    if (formData.type && formData.type === 'results') {
                         that.initResultsForm(formData, i);
                     } else {
                         that.initFormBlocks(formData.blocks, that.forms[i].template, i);
@@ -190,6 +198,7 @@ class ReportForm {
     initResultsForm(data, formID) {
         const resultsContainer = this.forms[formID].template.querySelector(`.${this.resultsContainerClass}`);
         const isReadonly = this.type === 'readonly';
+        const that = this;
 
         if (Array.isArray(data.blocks)) {
             data.blocks.forEach((blockData, num) => {
@@ -202,13 +211,20 @@ class ReportForm {
                     isReadonly
                 }));
             });
+
+            const dateInputs = Array.from(resultsContainer.querySelectorAll(`.b-input-text_type_date`));
+
+            inputmask({
+                mask: '99.99.99'
+            }).mask(dateInputs);
+
+
             const formBlocks = this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`);
 
             data.blocks.reverse().forEach((blockData, blockNumber) => {
-                const reportBlock = new ReportBlock();
-
-                reportBlock.init({
-                    target: formBlocks[blockNumber],
+                (new ReportBlock()).init({
+                    reportId: that.reportId,
+                    target  : formBlocks[blockNumber],
                     blockData,
                     formID,
                     isReadonly
@@ -218,10 +234,9 @@ class ReportForm {
     }
 
     sendNewValues(input) {
-        const dataToSend = `action=update&${input.id}=${input.value}`;
         const that = this;
 
-        Utils.send(dataToSend, '/tests/reports/input-update.json', {
+        Utils.send(`a=update&id=${this.reportId}&field=${input.id}&val=${input.value}`, that.baseUrl, {
             success(response) {
                 if (response.request.status === that.SUCCESS_STATUS) {
                     that.toggleSubmitButton();
@@ -278,36 +293,18 @@ class ReportForm {
     }
 
     changeForm(formID) {
-        let formNumber = null;
+        let formNumber = parseInt(formID.replace('form', ''), 10);
 
-        /* eslint-disable no-magic-numbers */
-        switch (formID) {
-            case 'form1':
-                formNumber = 0;
-                break;
-            case 'form2':
-                formNumber = 1;
-                break;
-            case 'form3':
-                formNumber = 2;
-                break;
-            case 'form4':
-                formNumber = 3;
-                break;
-            case 'form5':
-                formNumber = 4;
-                break;
-            case 'form6':
-                formNumber = 5;
-                break;
-            case 'form7':
-                formNumber = 6;
-                this.forms[6].isVisited = true;
-                this.setFormStatus(6);
-                break;
-            default: break;
+        formNumber--;
+
+        if (formNumber < 0) {
+            return;
         }
-        /* eslint-enable no-magic-numbers */
+
+        if (formNumber === 6) {
+            this.forms[formNumber].isVisited = true;
+            this.setFormStatus(formNumber);
+        }
 
         this.replaceForm(formNumber);
 
@@ -410,7 +407,7 @@ class ReportForm {
         const addResultButton = template.querySelector(`.${this.addResultClass}`);
 
         addResultButton.addEventListener('click', () => {
-            Utils.send('action=addResult', '/tests/reports/add-result.json', {
+            Utils.send(`a=addGroup&id=${that.reportId}&type=results&formNum=6`, that.baseUrl, {
                 success(response) {
                     if (response.request.status === that.FAIL_STATUS) {
                         return;
@@ -418,19 +415,39 @@ class ReportForm {
                     const blocksAmount = template.querySelectorAll(`.${that.formsBlockClass}`).length;
                     const shiftForNumber = 1;
                     const blockNumber = blocksAmount + shiftForNumber;
+                    const defaultFields = [{
+                        id   : `result-type[${response.data.ID}]`,
+                        value: ''
+                    }, {
+                        id   : `result-description[${response.data.ID}]`,
+                        value: ''
+                    }, {
+                        id   : `result-date[${response.data.ID}]`,
+                        value: ''
+                    }, {
+                        id   : `result-commercialization[${response.data.ID}]`,
+                        value: ''
+                    }];
+                    const blockFields = response.data.fields || defaultFields;
 
                     addResultButton.insertAdjacentHTML('afterend', templateResultBlock({
                         id    : response.data.ID,
                         number: blockNumber
                     }));
 
-                    const reportBlock = new ReportBlock();
+                    const blockData = {
+                        ID    : response.data.ID,
+                        type  : 'results',
+                        fields: blockFields
+                    };
 
-                    reportBlock.init({
+                    (new ReportBlock()).init({
                         target    : addResultButton.nextSibling,
-                        blockData : response.data,
+                        blockData,
                         formID    : 6,
-                        isReadonly: that.type === 'readonly'
+                        isReadonly: that.type === 'readonly',
+                        reportId  : that.reportId,
+                        baseUrl   : that.baseUrl
                     });
                 },
                 error(error) {
@@ -458,31 +475,21 @@ class ReportForm {
         for (let blockNum = 0; blockNum < formBlocks.length; blockNum++) {
             if (Utils.keyExist(formBlocks[blockNum].dataset, 'prefilled')) {
                 if (document.querySelector(`.${that.approveReportClass}`)) {
-                    document.querySelector(`.${that.approveReportClass}`).setAttribute('data-form-id', formNumber);
+                    const approveButton = document.querySelector(`.${that.approveReportClass}`);
+
+                    approveButton.setAttribute('data-form-id', formNumber);
+                    approveButton.onclick = this.onApproveButtonClick.bind(this, formBlocks, formNumber);
                 } else {
                     const approveFormButton = document.createElement('button');
 
-                    approveFormButton.classList.add('button', 'button_icon_check');
-                    approveFormButton.classList.add('b-report-approve', `.${that.approveReportClass}`);
+                    approveFormButton.classList.add('button');
+                    approveFormButton.classList.add('button_icon_check');
+                    approveFormButton.classList.add('b-report-approve');
+                    approveFormButton.classList.add(`${that.approveReportClass}`);
                     approveFormButton.setAttribute('type', 'button');
                     approveFormButton.setAttribute('data-form-id', formNumber);
                     approveFormButton.innerHTML = 'Подтвердить данные формы';
-
-                    approveFormButton.addEventListener('click', () => {
-                        const formID = approveFormButton.dataset.formId;
-                        const dataToSend = `action=confirmForm&formID=${formID}`;
-
-                        Utils.send(dataToSend, '/tests/reports/input-update.json', {
-                            success(response) {
-                                if (response.request.status === that.SUCCESS_STATUS) {
-                                    mediator.publish('formApproved', Number(formID));
-                                }
-                            },
-                            error(error) {
-                                console.error(error);
-                            }
-                        });
-                    });
+                    approveFormButton.onclick = this.onApproveButtonClick.bind(this, formBlocks, formNumber);
 
                     this.target.parentNode.insertBefore(approveFormButton, this.target);
                 }
@@ -494,6 +501,32 @@ class ReportForm {
                 Utils.removeElement(document.querySelector(`.${that.approveReportClass}`));
             }
         }
+    }
+
+    onApproveButtonClick(formBlocks, formNumber) {
+        const inputs = [];
+        const that = this;
+
+        formBlocks.forEach((el) => {
+            if (!Utils.keyExist(el.dataset, 'prefilled')) {
+                return;
+            }
+
+            el.querySelectorAll('input[data-prefilled]').forEach((inp) => {
+                inputs.push(inp.name);
+            });
+        });
+
+        Utils.send(`a=confirmForm&id=${this.reportId}&fields=${JSON.stringify(inputs)}`, this.baseUrl, {
+            success(response) {
+                if (response.request.status === that.SUCCESS_STATUS) {
+                    mediator.publish('formApproved', Number(formNumber));
+                }
+            },
+            error(error) {
+                console.error(error);
+            }
+        });
     }
 
     /* eslint-disable max-lines-per-function, max-statements */
@@ -528,6 +561,7 @@ class ReportForm {
                         this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputErrorClass);
                     });
                     hasError = true;
+                    this.forms[resultsFormID].isVisited = true;
                     break;
                 }
                 case 'prefilled': {
@@ -561,9 +595,11 @@ class ReportForm {
             }
 
             if (blockNum === (formBlocks.length - arrayLengthShift)) {
+                const isReadonly = this.type === 'readonly';
+
                 // Если форма с результатаими интеллектурьной деятельности еще не была посещена
                 // она не может считаться заполненной
-                if ((formID === resultsFormID) && !this.forms[resultsFormID].isVisited) {
+                if ((formID === resultsFormID) && !isReadonly && !this.forms[resultsFormID].isVisited) {
                     this.forms[formID].isApproved = false;
                     this.filters.forEach((filter, i) => {
                         this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputSuccessClass);
@@ -594,32 +630,43 @@ class ReportForm {
      * Включает/отключает кнопку отправки отчета
      */
     toggleSubmitButton() {
-        if (this.submitReportButton) {
-            if (!this.residentNameField.value || !this.oezNameField.value) {
+        if (!this.submitReportButton) {
+            return;
+        }
+
+        if (!this.residentNameField.value || !this.oezNameField.value || this.type === 'readonly') {
+            this.submitReportButton.disabled = true;
+
+            return;
+        }
+
+        for (let i = 0; i < this.forms.length; i++) {
+            if (!this.forms[i].isApproved) {
                 this.submitReportButton.disabled = true;
 
                 return;
             }
-
-            for (let i = 0; i < this.forms.length; i++) {
-                if (!this.forms[i].isApproved) {
-                    this.submitReportButton.disabled = true;
-
-                    return;
-                }
-            }
-            this.submitReportButton.disabled = false;
         }
+
+        this.submitReportButton.disabled = false;
     }
 
     submitReports() {
         const that = this;
 
-        Utils.send('action=confirmReport', '/tests/reports/input-update.json', {
+        Utils.send(`a=confirm&id=${that.reportId}`, that.baseUrl, {
             success(response) {
-                if (!response.request.status === that.SUCCESS_STATUS) {
+                if (response.request.status === that.FAIL_STATUS) {
+                    const errorMessage = response.request.errors.join('</br>');
+
+                    that.submitReportButton.insertAdjacentHTML('afterend', templateFormError({
+                        errorMessage
+                    }));
+
                     return true;
                 }
+
+                window.location = response.data.backUrl;
 
                 return true;
             },
@@ -632,12 +679,13 @@ class ReportForm {
     initFormBlocks(blocksData, formTemplate, formID) {
         const formBlocks = Array.from(formTemplate.querySelectorAll(`.${this.formsBlockClass}`));
         const isReadonly = this.type === 'readonly';
+        const that = this;
 
         blocksData.forEach((blockData, i) => {
-            const reportBlock = new ReportBlock();
-
-            reportBlock.init({
-                target: formBlocks[i],
+            (new ReportBlock()).init({
+                reportId: that.reportId,
+                baseUrl : that.baseUrl,
+                target  : formBlocks[i],
                 blockData,
                 formID,
                 isReadonly

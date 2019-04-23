@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle('Восстановление пароля');
-$APPLICATION->SetPageProperty('title', 'Восстановление пароля | АООЭЗ');
+$APPLICATION->SetPageProperty('title', 'Восстановление пароля');
 if ($USER->IsAuthorized()) {
     LocalRedirect(LANG_DIR . 'cabinet/');
 }

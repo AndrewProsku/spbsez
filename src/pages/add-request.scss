@@ -390,8 +390,8 @@ label.b-form-block {
     @include font-size("p4");
     display: none;
     position: relative;
-    left: -1px;
-    width: calc(100% + 2px);
+    width: auto;
+    margin: 0 -1px;
     background-color: $dark-white;
     border: 1px solid $grey;
     border-bottom: 0;

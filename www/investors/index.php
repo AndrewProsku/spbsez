@@ -1,6 +1,6 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetPageProperty('title', "Инвесторам | АООЭЗ");
+$APPLICATION->SetPageProperty('title', "Инвесторам");
 $APPLICATION->SetTitle("Инвесторам");
 ?>
 
@@ -8,7 +8,7 @@ $APPLICATION->SetTitle("Инвесторам");
     <div class="l-investors__top">
         <h1 class="b-title"><? $APPLICATION->ShowTitle(false); ?></h1>
 
-        <div class="b-investors-info ">
+        <div class="b-investors-info">
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -49,7 +49,7 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__privileges" id="investors-privileges">
+    <div class="l-investors__privileges">
         <div class="b-investors-info b-investors-info_big_title">
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -63,7 +63,7 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__taxes">
+    <div class="l-investors__taxes" id="investors-privileges">
         <div class="b-income-tax">
             <div class="b-income-tax__top">
                 <? $APPLICATION->IncludeComponent(
@@ -123,7 +123,7 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__conditions">
+    <div class="l-investors__conditions" id="investors-conditions">
         <div class="b-invest-conditions">
             <div id="investors-conditions"></div>
 
@@ -172,7 +172,7 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__resident">
+    <div class="l-investors__resident"  id="investors-resident">
         <div class="b-invest-resident">
             <div id="investors-resident"></div>
 
