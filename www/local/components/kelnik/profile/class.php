@@ -32,23 +32,29 @@ class ProfileForm extends Bbc\Basis
      */
     protected $profile;
 
-    protected function executeMain()
+    protected function executeProlog()
     {
         global $USER;
-
-        if (!$USER->IsAuthorized()) {
-            return false;
-        }
 
         try {
             $this->profile = Profile::getInstance((int)$USER->GetID());
         } catch (\Exception $e) {
-            return false;
         }
 
-        if (!$this->profile->hasAccess()) {
+        if (!$USER->IsAuthorized()
+            || !$this->profile
+            || !$this->profile->hasAccess()
+        ) {
             LocalRedirect(LANG_DIR);
         }
+
+        $this->addCacheAdditionalId($USER->GetID());
+    }
+
+    protected function executeMain()
+    {
+        self::registerCacheTag('kelnik:profile_' . $this->profile->getId());
+        self::registerCacheTag('kelnik:profileCompany_' . $this->profile->getCompanyId());
 
         $this->arResult['IS_ADMIN'] = $this->profile->isResidentAdmin();
 
@@ -80,7 +86,7 @@ class ProfileForm extends Bbc\Basis
     protected function processAdmins()
     {
         if (!$this->profile->canEditResident()) {
-            LocalRedirect('/cabinet/');
+            LocalRedirect(LANG_DIR . 'cabinet/');
         }
 
         $this->arResult['USERS'] = (new ProfileSectionAdmins($this->profile))->getList();

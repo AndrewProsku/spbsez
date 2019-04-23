@@ -54,7 +54,7 @@ if (!$USER->IsAuthorized()) {
                 array(
                     "COMPONENT_TEMPLATE" => "docs",
                     "SECTION" => "docs",
-                    "CACHE_TYPE" => "N",
+                    "CACHE_TYPE" => "Y",
                     "CACHE_TIME" => "3600"
                 ),
                 array()

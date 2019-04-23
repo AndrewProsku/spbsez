@@ -15,7 +15,7 @@
         <div class="b-profile-document__item j-profile-document__item b-profile-document__item_ext_<?= $doc['FILE_DATA']['EXT']; ?>"
             data-id="<?= $doc['ID']; ?>"
             data-ext="<?= $doc['FILE_DATA']['EXT']; ?>"
-            data-can-delete="true">
+            data-can-delete="<?= $doc['CAN_DELETE'] ? 'true' : 'false'; ?>">
             <div class="b-profile-document__item-title">
                 <a href="<?= $doc['FILE_DATA']['SRC']; ?>" class="b-profile-document__item-title-link b-link-line"><?= $doc['FILE_DATA']['ORIGINAL_NAME']; ?></a>
                 <span class="b-profile-document__item-title-weight"><?= $doc['FILE_DATA']['FILE_SIZE_FORMAT']; ?></span>

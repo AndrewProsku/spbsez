@@ -191,7 +191,14 @@ class ApiProcessProfile extends ApiProcessAbstract
 
         $res = [
             'id' => $res['rowId'],
-            'userName' => $this->profile->getField('NAME')
+            'userName' => implode(
+                ' ',
+                [
+                    $this->profile->getField('LAST_NAME'),
+                    $this->profile->getField('NAME'),
+                    $this->profile->getField('SECOND_NAME')
+                ]
+            )
         ];
 
         $res['filePath'] = $fileData['SRC'];
@@ -200,6 +207,7 @@ class ApiProcessProfile extends ApiProcessAbstract
         $res['fileExt'] = strtolower(pathinfo($fileData['ORIGINAL_NAME'], PATHINFO_EXTENSION));
         $res['dateModified'] = $dateTime->format('Y-m-d');
         $res['dateModifiedHuman'] = $dateTime->format('d.m.Y');
+        $res['canDelete'] = true;
 
         $this->data['docs'][] = $res;
 
@@ -213,7 +221,7 @@ class ApiProcessProfile extends ApiProcessAbstract
         $res = $this->docs->delete($id);
 
         if (!$res) {
-            $this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+            $this->errors[] = $this->docs->getLastError();
 
             return false;
         }
