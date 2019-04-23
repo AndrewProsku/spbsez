@@ -19,6 +19,7 @@ $MESS['KELNIK_API_VACANCY_RESPONSE_TITLE'] = 'The message has been successfully 
 $MESS['KELNIK_API_VACANCY_RESPONSE_TEXT'] = 'The human resources Department will process your message.';
 
 $MESS['KELNIK_API_DOC_FILE_UPLOAD_ERROR'] = 'File upload error';
+$MESS['KELNIK_API_DOC_FILE_DELETE_PERMISSION_ERROR'] = 'You do not have permission to delete the file.';
 
 $MESS['KELNIK_API_MESSAGE_ERROR_NAME'] = 'Required field Name';
 $MESS['KELNIK_API_MESSAGE_ERROR_EMAIL'] = 'Required field E-mail';
@@ -38,3 +39,9 @@ $MESS['KELNIK_API_SERVICE_RESPONSE_TITLE'] = 'Message sent successfully';
 $MESS['KELNIK_API_SERVICE_RESPONSE_TEXT'] = 'In the near future, our colleagues from JSC SEZ “St.Petersburg” will contact you.';
 
 $MESS['KELNIK_API_REPORT_NOT_FOUND'] = 'Report not found';
+$MESS['KELNIK_API_REPORT_LOCKED'] = 'В данный момент отчет редактируется другим резидентом.<br>Отчет, возможно, будет доступен для редактирования через #TIME#';
+$MESS['KELNIK_API_REPORT_FILE_UPLOAD_ERROR'] = 'Не удалось загрузить файл';
+$MESS['KELNIK_API_REPORT_FILE_DELETE_ERROR'] = 'Информация о файле на найдена';
+$MESS['KELNIK_API_REPORT_FILL_ERROR'] = 'Отчет заполнен не полностью';
+$MESS['KELNIK_API_REPORT_LOAD_ERROR'] = 'Отчет закрыт для редактирования';
+$MESS['KELNIK_API_REPORT_CONFIRM_FORM_ERROR'] = 'Не переданы поля';
