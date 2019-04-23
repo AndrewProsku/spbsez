@@ -381,63 +381,67 @@ class Report extends EO_Reports
 
         $src = $this->getReportData($lastReportId);
 
-        if ($src['fields'] || $src['groups']) {
-            $dst = $this->getReportData($this->getId());
-            $sqlHelper = Application::getConnection()->getSqlHelper();
+        if (!$src['fields'] && !$src['groups']) {
+            $this->markAsPreFilled();
 
-            $values = [];
+            return false;
+        }
 
-            foreach ($src['fields'] as $fieldName => $group) {
-                foreach ($group as $groupId => $field) {
+        $dst = $this->getReportData($this->getId());
+        $sqlHelper = Application::getConnection()->getSqlHelper();
 
-                    $groupId = (int) $groupId;
+        $values = [];
 
-                    if ($groupId) {
-                        $groupId = $this->getDestinationGroupId($src['groups'], $dst['groups'], $groupId);
-                    }
+        foreach ($src['fields'] as $fieldName => $group) {
+            foreach ($group as $groupId => $field) {
 
-                    $rowId = ArrayHelper::getValue($dst, 'fields.' . $fieldName . '.' . $groupId . '.ID');
-                    $rowId = $rowId ? $sqlHelper->convertToDbInteger($rowId) : 'NULL';
+                $groupId = (int) $groupId;
 
-                    $val = ArrayHelper::getValue(
-                        $dst,
-                        'fields.' . $fieldName . '.' . $groupId . '.VALUE',
-                        $field['VALUE']
-                    );
-
-                    if (in_array(
-                            $field['NAME'],
-                            [
-                                ReportFieldsTable::FIELD_CONSTRUCTION_FILE,
-                                ReportFieldsTable::FIELD_CONSTRUCTION_DATE
-                            ]
-                        )
-                    ) {
-                        $val = 'NULL';
-                    }
-
-                    $values[] = '(' .
-                                $rowId . ', ' .
-                                $sqlHelper->convertToDbInteger($this->getId()) . ', ' .
-                                $sqlHelper->convertToDbInteger($groupId) . ', ' .
-                                $sqlHelper->convertToDbInteger($field['FORM_NUM']) . ', ' .
-                                $sqlHelper->convertToDbString(
-                                    (int) $rowId ? ReportFieldsTable::NO : ReportFieldsTable::YES
-                                ) . ', ' .
-                                $sqlHelper->convertToDbString($field['NAME']) . ', ' .
-                                $sqlHelper->convertToDbString($val) .
-                                ')';
+                if ($groupId) {
+                    $groupId = $this->getDestinationGroupId($src['groups'], $dst['groups'], $groupId);
                 }
+
+                $rowId = ArrayHelper::getValue($dst, 'fields.' . $fieldName . '.' . $groupId . '.ID');
+                $rowId = $rowId ? $sqlHelper->convertToDbInteger($rowId) : 'NULL';
+
+                $val = ArrayHelper::getValue($dst, 'fields.' . $fieldName . '.' . $groupId . '.VALUE');
+
+                if (!$val && $field['VALUE']) {
+                    $val = $field['VALUE'];
+                }
+
+                if (in_array(
+                        $field['NAME'],
+                        [
+                            ReportFieldsTable::FIELD_CONSTRUCTION_FILE,
+                            ReportFieldsTable::FIELD_CONSTRUCTION_DATE
+                        ]
+                    )
+                ) {
+                    $val = 'NULL';
+                }
+
+                $values[] = '(' .
+                            $rowId . ', ' .
+                            $sqlHelper->convertToDbInteger($this->getId()) . ', ' .
+                            $sqlHelper->convertToDbInteger($groupId) . ', ' .
+                            $sqlHelper->convertToDbInteger($field['FORM_NUM']) . ', ' .
+                            $sqlHelper->convertToDbString(
+                                (int) $rowId ? ReportFieldsTable::NO : ReportFieldsTable::YES
+                            ) . ', ' .
+                            $sqlHelper->convertToDbString($field['NAME']) . ', ' .
+                            $sqlHelper->convertToDbString($val) .
+                            ')';
             }
+        }
 
-            if ($values) {
-                try {
-                    Application::getConnection()->query(
-                        'REPLACE INTO `' . ReportFieldsTable::getTableName() . '` (`ID`, `REPORT_ID`, `GROUP_ID`, `FORM_NUM`, `IS_PRE_FILLED`, `NAME`, `VALUE`)' .
-                        'VALUES ' . implode(', ', $values)
-                    );
-                } catch (\Exception $e) {
-                }
+        if ($values) {
+            try {
+                Application::getConnection()->query(
+                    'REPLACE INTO `' . ReportFieldsTable::getTableName() . '` (`ID`, `REPORT_ID`, `GROUP_ID`, `FORM_NUM`, `IS_PRE_FILLED`, `NAME`, `VALUE`)' .
+                    'VALUES ' . implode(', ', $values)
+                );
+            } catch (\Exception $e) {
             }
         }
 
@@ -451,7 +455,7 @@ class Report extends EO_Reports
         $group = ArrayHelper::getValue($src, $groupId);
 
         $filter = function($el) use ($group) {
-            return $el['TYPE'] == $group['TYPE'] && $el['FORM_NUM'] = $group['FORM_NUM'];
+            return $el['TYPE'] == $group['TYPE'] && $el['FORM_NUM'] == $group['FORM_NUM'];
         };
 
         $srcArr = array_values(array_filter($src, $filter));
@@ -494,16 +498,29 @@ class Report extends EO_Reports
         ];
 
         try {
+            // Т.к. поля могу существовать отдельно от групп,
+            // а группы могут быть без значений полей, делаем выборки раздельно
+            //
             $fields = ReportFieldsTable::getList([
-                'select' => ['*', 'GROUP_INFO_' => 'GROUP'],
+                'select' => [
+                    'ID', 'REPORT_ID', 'GROUP_ID', 'FORM_NUM', 'NAME', 'VALUE'
+                ],
                 'filter' => [
                     '=REPORT_ID' => $reportId
                 ],
                 'order' => [
-                    'GROUP_ID' => 'ASC',
                     'ID' => 'ASC'
                 ]
             ])->fetchAll();
+
+            $res['groups'] = ReportFieldsGroupTable::getAssoc([
+                'filter' => [
+                    '=REPORT_ID' => $reportId
+                ],
+                'order' => [
+                    'ID' => 'ASC'
+                ]
+            ], 'ID');
         } catch (\Exception $e) {
             return $res;
         }
@@ -512,21 +529,15 @@ class Report extends EO_Reports
             return $res;
         }
 
-        foreach ($fields as $field) {
-            if ($field['GROUP_ID']) {
-                $res['groups'][$field['GROUP_ID']] = [
-                    'ID' => $field['GROUP_ID'],
-                    'TYPE' => $field['GROUP_INFO_TYPE'],
-                    'FORM_NUM' => $field['GROUP_INFO_FORM_NUM']
+        if ($fields) {
+            foreach ($fields as $field) {
+                $res['fields'][$field['NAME']][$field['GROUP_ID']] = [
+                    'ID' => $field['ID'],
+                    'NAME' => $field['NAME'],
+                    'FORM_NUM' => $field['FORM_NUM'],
+                    'VALUE' => $field['VALUE']
                 ];
             }
-
-            $res['fields'][$field['NAME']][$field['GROUP_ID']] = [
-                'ID' => $field['ID'],
-                'NAME' => $field['NAME'],
-                'FORM_NUM' => $field['FORM_NUM'],
-                'VALUE' => $field['VALUE']
-            ];
         }
 
         return $res;
