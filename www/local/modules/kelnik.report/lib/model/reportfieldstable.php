@@ -203,22 +203,22 @@ class ReportFieldsTable extends DataManager
                             [
                                 'id' => 'jobs-plan-all',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-1'),
-                                'type' => 'float'
+                                'type' => 'int'
                             ],
                             [
                                 'id' => 'jobs-plan-year',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-2'),
-                                'type' => 'float'
+                                'type' => 'int'
                             ],
                             [
                                 'id' => 'jobs-actual-all',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-3'),
-                                'type' => 'float'
+                                'type' => 'int'
                             ],
                             [
                                 'id' => 'jobs-actual-year',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-2-4'),
-                                'type' => 'float'
+                                'type' => 'int'
                             ]
                         ]
                     ],

@@ -400,6 +400,6 @@ class ReportsTable extends DataManager
     public static function getCurrentTime()
     {
         // TODO: restore real date
-        return mktime(0, 0, 0, 4, 2, 2019); // time();
+        return mktime(0, 0, 0, 7, 2, 2019); // time();
     }
 }
