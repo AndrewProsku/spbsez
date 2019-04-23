@@ -66,18 +66,31 @@ class ProfileSectionDocs extends ProfileSectionAbstract
         }
 
         try {
-            $res = DocsTable::getRow([
-                'select' => ['ID'],
-                'filter' => [
-                    '=ID' => $id,
-                    '=USER_ID' => $this->profile->getId()
-                ]
+            $doc = DocsTable::getRow([
+                'select' => ['ID', 'USER_ID'],
+                'filter' => ['=ID' => $id]
             ]);
-            if (empty($res['ID'])) {
+
+            if (empty($doc['USER_ID'])) {
                 $this->lastError = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+
                 return false;
             }
+
+            $doc['USER_ID'] = (int)$doc['USER_ID'];
+
+            $isCompanyOwner = $this->profile->isResidentAdmin() && in_array($doc['USER_ID'], $this->profile->getCompanyUserIds());
+            $isFileOwner = $this->profile->getId() === $doc['USER_ID'];
+
+            if (!$isCompanyOwner && !$isFileOwner) {
+                $this->lastError = Loc::getMessage('KELNIK_API_DOC_FILE_DELETE_PERMISSION_ERROR');
+
+                return false;
+            }
+
             DocsTable::delete($id);
+            $this->lastError = false;
+
         }catch (\Exception $e) {
             return false;
         }
@@ -87,6 +100,17 @@ class ProfileSectionDocs extends ProfileSectionAbstract
 
     public function getList()
     {
-        return DocsTable::getListByUser($this->profile->getId());
+        $res = DocsTable::getListByUser($this->profile->getCompanyUserIds());
+
+        if (!$res) {
+            return $res;
+        }
+
+        foreach ($res as &$v) {
+            $v['CAN_DELETE'] = $this->profile->isResidentAdmin() || (int)$v['USER_ID'] === $this->profile->getId();
+        }
+        unset($v);
+
+        return $res;
     }
 }

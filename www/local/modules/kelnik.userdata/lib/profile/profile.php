@@ -2,6 +2,7 @@
 
 namespace Kelnik\Userdata\Profile;
 
+use Bitrix\Main\UserTable;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Messages\MessageService;
 
@@ -22,6 +23,7 @@ class Profile
 
     private $userId;
     private $user;
+    private $userIds = [];
     private $userGroups = [];
     private $lastError = '';
     private $companyName = false;
@@ -112,6 +114,33 @@ class Profile
         }
 
         return (int) $this->getField('UF_ADMIN_ID');
+    }
+
+    /**
+     * Список ID всех пользователей компании, включая администратора
+     *
+     * @return array
+     */
+    public function getCompanyUserIds(): array
+    {
+        if ($this->userIds) {
+            return $this->userIds;
+        }
+
+        try {
+            $users = UserTable::getList([
+                'select' => ['ID'],
+                'filter' => [
+                    'LOGIC' => 'OR',
+                    ['=ID' => [$this->isResidentAdmin() ? $this->getId() : $this->getCompanyId()]],
+                    ['=' . self::OWNER_FIELD => $this->getCompanyId()]
+                ]
+            ])->fetchAll();
+        } catch (\Exception $e) {
+            $users = [];
+        }
+
+        return $this->userIds = array_column($users, 'ID');
     }
 
     public function getCompanyName()
