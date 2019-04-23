@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /cabinet/
 Disallow: /bitrix/
 Disallow: /upload/
-Sitemap: https://oez-d.ksdev.ru/sitemap.xml
+Sitemap: https://spbsez.ru/sitemap.xml
