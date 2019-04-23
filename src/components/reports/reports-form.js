@@ -482,8 +482,10 @@ class ReportForm {
                 } else {
                     const approveFormButton = document.createElement('button');
 
-                    approveFormButton.classList.add('button', 'button_icon_check');
-                    approveFormButton.classList.add('b-report-approve', `${that.approveReportClass}`);
+                    approveFormButton.classList.add('button');
+                    approveFormButton.classList.add('button_icon_check');
+                    approveFormButton.classList.add('b-report-approve');
+                    approveFormButton.classList.add(`${that.approveReportClass}`);
                     approveFormButton.setAttribute('type', 'button');
                     approveFormButton.setAttribute('data-form-id', formNumber);
                     approveFormButton.innerHTML = 'Подтвердить данные формы';
