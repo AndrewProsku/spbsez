@@ -11,7 +11,7 @@ class ProfileDocs {
         this.selector = ProfileDocs.selector;
         this.rowClass = 'j-profile-document__item';
         this.errorMessageClass = 'b-profile-document-error';
-        this.deleteDocumentWrapClass = '.j-profile-document__item-delete';
+        this.deleteDocumentWrapClass = 'j-profile-document__item-delete';
         this.documentsPage = document.querySelector(this.selector);
         this.documentsList = this.documentsPage.querySelector('.b-profile-document__list');
         this.fileButton = this.documentsPage.querySelector('.b-profile-add');
