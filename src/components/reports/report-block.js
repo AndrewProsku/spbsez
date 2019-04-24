@@ -404,6 +404,7 @@ class ReportBlock {
             if (this.textInputTimeout) {
                 clearTimeout(this.textInputTimeout);
             }
+            input.closest('.b-input-block').classList.remove(this.untouchedIputClass);
             this.textInputTimeout = setTimeout(this.onInputKeyup.bind(this), 500, event.target);
         });
     }
@@ -615,7 +616,7 @@ class ReportBlock {
                 } else if (Utils.keyExist(input.dataset, 'prefilled')) {
                     return 'prefilled';
                 } else if (selectText) {
-                    if (selectText.textContent.length) {
+                    if (selectText.textContent.trim().length) {
                         return 'filled';
                     }
                 } else if (input.value) {
