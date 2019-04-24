@@ -11,11 +11,12 @@ class ProfileDocs {
         this.selector = ProfileDocs.selector;
         this.rowClass = 'j-profile-document__item';
         this.errorMessageClass = 'b-profile-document-error';
+        this.deleteDocumentWrapClass = '.j-profile-document__item-delete';
         this.documentsPage = document.querySelector(this.selector);
         this.documentsList = this.documentsPage.querySelector('.b-profile-document__list');
         this.fileButton = this.documentsPage.querySelector('.b-profile-add');
         this.fileInput = this.documentsPage.querySelector('.j-profile__file-picker');
-        this.delButtons = this.documentsPage.querySelectorAll('.j-delete-doc-row');
+        this.docItems = Array.from(this.documentsList.querySelectorAll(`.${this.rowClass}`));
         this.successStatus = 1;
         this.failStatus = 0;
     }
@@ -28,6 +29,8 @@ class ProfileDocs {
     }
 
     bindEvents() {
+        this.bindDeleteTooltip();
+
         this.fileButton.querySelector('form').addEventListener('submit', (event) => {
             event.preventDefault();
         });
@@ -68,6 +71,30 @@ class ProfileDocs {
         this.bindRemoveDocs();
     }
 
+    bindDeleteTooltip() {
+        if (this.docItems.length) {
+            this.docItems.forEach((element) => {
+                const isDeletable = element.dataset.canDelete === 'true';
+
+                if (isDeletable) {
+                    const delDocWrap = element.querySelector('.j-profile-document__item-delete');
+                    const delDoc = element.querySelector('.j-delete-doc-button');
+
+                    delDoc.addEventListener('click', (event) => {
+                        event.preventDefault();
+
+                        element.classList.toggle('is-active-item');
+                        delDocWrap.classList.toggle('is-active-delete');
+
+                        delDoc.classList.toggle('is-delete');
+                    });
+                } else if (element.querySelector(`.${this.deleteDocumentWrapClass}`)) {
+                    Utils.removeElement(element.querySelector(`.${this.deleteDocumentWrapClass}`));
+                }
+            });
+        }
+    }
+
     setZIndexes() {
         const documentRows = Array.from(document.querySelectorAll(`.${this.rowClass}`));
 
@@ -91,28 +118,33 @@ class ProfileDocs {
 
     createDocumentItem(documentInfo) {
         const that = this;
-        const template = documentTemplate(documentInfo);
+        const templateData = documentInfo;
+
+        templateData.canDelete = String(documentInfo.canDelete);
+        const template = documentTemplate(templateData);
         const documentItem = new DOMParser().parseFromString(template, 'text/html').body.firstChild;
-        const delDocWrap = documentItem.querySelector('.j-profile-document__item-delete');
-        const delDoc = documentItem.querySelector('.j-delete-doc-button');
-        const delDocButton = documentItem.querySelector('.j-delete-doc-row');
 
         documentItem.style.zIndex = ++this.documentsAmount;
 
-        delDoc.addEventListener('click', (event) => {
-            event.preventDefault();
+        if (documentInfo.canDelete) {
+            const delDocWrap = documentItem.querySelector('.j-profile-document__item-delete');
+            const delDoc = documentItem.querySelector('.j-delete-doc-button');
+            const delDocButton = documentItem.querySelector('.j-delete-doc-row');
 
-            documentItem.classList.toggle('is-active-item');
-            delDocWrap.classList.toggle('is-active-delete');
+            delDoc.addEventListener('click', (event) => {
+                event.preventDefault();
 
-            delDoc.classList.toggle('is-delete');
-        });
+                documentItem.classList.toggle('is-active-item');
+                delDocWrap.classList.toggle('is-active-delete');
 
-        delDocButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            that.removeDoc(event.target.closest(`.${that.rowClass}`));
-        });
+                delDoc.classList.toggle('is-delete');
+            });
 
+            delDocButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                that.removeDoc(event.target.closest(`.${that.rowClass}`));
+            });
+        }
 
         return documentItem;
     }
@@ -133,7 +165,7 @@ class ProfileDocs {
     bindRemoveDocs() {
         const that = this;
 
-        this.delButtons = Array.from(this.delButtons);
+        this.delButtons = Array.from(this.documentsPage.querySelectorAll('.j-delete-doc-row'));
         this.delButtons.forEach((el) => {
             el.addEventListener('click', (event) => {
                 event.preventDefault();
