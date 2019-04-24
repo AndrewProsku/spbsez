@@ -1,4 +1,4 @@
-<div class="b-profile-document__item j-profile-document__item b-profile-document__ext_{{ fileExt }}" data-id="{{ id }}" data-ext="{{ fileExt }}" data-can-delete="true">
+<div class="b-profile-document__item j-profile-document__item b-profile-document__ext_{{ fileExt }}" data-id="{{ id }}" data-ext="{{ fileExt }}" data-can-delete="{{ canDelete }}">
     <div class="b-profile-document__item-title">
         <a href="{{ filePath }}" class="b-profile-document__item-title-link b-link-line">{{ fileName }}</a>
         <span class="b-profile-document__item-title-weight">{{ fileSizeFormat }}</span>
@@ -6,13 +6,15 @@
     <div class="b-profile-document__item-desc">
         <span class="b-profile-document__item-name">{{ userName }}</span>
         <time datetime="{{ dateModified }}" class="b-profile-document__item-date">{{ dateModifiedHuman }}</time>
-        <div class="b-profile-document__item-delete j-profile-document__item-delete">
-            <button type="button" class="b-profile-document__item-delete-button j-delete-doc-button">
-                {% include "../../sprites/svg/delete-icon.svg.twig" %}
-            </button>
-            <div class="b-profile-document__item-delete-tooltip">
-                <a href="#" class="b-link-line j-delete-doc-row">Удалить</a>
+        {% if canDelete == "true" %}
+            <div class="b-profile-document__item-delete j-profile-document__item-delete">
+                <button type="button" class="b-profile-document__item-delete-button j-delete-doc-button">
+                    {% include "../../sprites/svg/delete-icon.svg.twig" %}
+                </button>
+                <div class="b-profile-document__item-delete-tooltip">
+                    <a href="#" class="b-link-line j-delete-doc-row">Удалить</a>
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 </div>

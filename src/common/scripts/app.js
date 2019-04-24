@@ -274,28 +274,6 @@ const openSubmenu = function() {
 
 openSubmenu();
 
-/**
- * Открытие и закрытие в документах кнопки удалить.
- */
-
-const docWrap = Array.from(document.querySelectorAll('.j-profile-document__item'));
-
-if (docWrap.length) {
-    docWrap.forEach((element) => {
-        const delDocWrap = element.querySelector('.j-profile-document__item-delete');
-        const delDoc = element.querySelector('.j-delete-doc-button');
-
-        delDoc.addEventListener('click', (event) => {
-            event.preventDefault();
-
-            element.classList.toggle('is-active-item');
-            delDocWrap.classList.toggle('is-active-delete');
-
-            delDoc.classList.toggle('is-delete');
-        });
-    });
-}
-
 /* eslint-disable */
 const mapWrapper = document.querySelector('.j-yandex-map');
 
