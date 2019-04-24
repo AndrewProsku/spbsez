@@ -395,7 +395,7 @@ class ReportBlock {
             event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
         });
         input.addEventListener('blur', (event) => {
-            if (Utils.keyExist(input.dataset, 'prefilled')) {
+            if (Utils.keyExist(input.dataset, 'prefilled') && !this.textInputTimeout) {
                 event.target.closest('.b-input-block').classList.add(this.untouchedIputClass);
             }
         });
@@ -404,6 +404,7 @@ class ReportBlock {
             if (this.textInputTimeout) {
                 clearTimeout(this.textInputTimeout);
             }
+
             this.textInputTimeout = setTimeout(this.onInputKeyup.bind(this), 500, event.target);
         });
     }
@@ -615,7 +616,7 @@ class ReportBlock {
                 } else if (Utils.keyExist(input.dataset, 'prefilled')) {
                     return 'prefilled';
                 } else if (selectText) {
-                    if (selectText.textContent.length) {
+                    if (selectText.textContent.trim().length) {
                         return 'filled';
                     }
                 } else if (input.value) {
