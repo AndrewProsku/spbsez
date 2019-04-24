@@ -607,6 +607,22 @@ class ReportBlock {
                 //
                 // break;
             }
+            case 'select-one': {
+                const selectText = input.parentElement.querySelector('.chosen-single span');
+
+                if (Utils.keyExist(input.dataset, 'hasError')) {
+                    return 'hasError';
+                } else if (Utils.keyExist(input.dataset, 'prefilled')) {
+                    return 'prefilled';
+                } else if (selectText) {
+                    if (selectText.textContent.length) {
+                        return 'filled';
+                    }
+                } else if (input.value) {
+                    return 'filled';
+                }
+                break;
+            }
             case 'file': {
                 if (Utils.keyExist(input.dataset, 'hasError')) {
                     return 'hasError';
