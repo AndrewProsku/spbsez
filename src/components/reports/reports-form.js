@@ -216,6 +216,7 @@ class ReportForm {
         const that = this;
 
         if (Array.isArray(data.blocks)) {
+            this.forms[formID].isVisited = true;
             data.blocks.forEach((blockData, num) => {
                 const shiftForNumber = 1;
                 const blockNumber = num + shiftForNumber;
@@ -545,7 +546,7 @@ class ReportForm {
         });
     }
 
-    /* eslint-disable max-lines-per-function, max-statements */
+    /* eslint-disable max-lines-per-function, max-statements, complexity */
     setFormStatus(formID) {
         const formBlocks = Array.from(this.forms[formID].template.querySelectorAll(`.${this.formsBlockClass}`));
         const resultsFormID = 6;
@@ -639,8 +640,15 @@ class ReportForm {
                 this.toggleSubmitButton();
             }
         }
+
+        if ((formID === resultsFormID) && (formBlocks.length === 0)) {
+            this.filters.forEach((filter, i) => {
+                this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputErrorClass);
+                this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputSuccessClass);
+            });
+        }
     }
-    /* eslint-enable max-lines-per-function, max-statements */
+    /* eslint-enable max-lines-per-function, max-statements, complexity */
 
     /**
      * Включает/отключает кнопку отправки отчета
