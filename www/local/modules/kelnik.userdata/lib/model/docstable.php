@@ -3,6 +3,7 @@
 namespace Kelnik\UserData\Model;
 
 use Bitrix\Main;
+use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
@@ -138,11 +139,11 @@ class DocsTable extends DataManager
         return parent::update($primary, $data);
     }
 
-    public static function getListByUser($userId)
+    public static function getListByUser(array $userIds)
     {
-        $userId = (int) $userId;
+        $userIds = array_map('intval', $userIds);
 
-        if (!$userId) {
+        if (!$userIds) {
             return [];
         }
 
@@ -161,7 +162,7 @@ class DocsTable extends DataManager
                     )
                 ],
                 'filter' => [
-                    '=USER_ID' => $userId
+                    '=USER_ID' => $userIds
                 ],
                 'order'  => [
                     'ID' => 'DESC'
@@ -193,5 +194,28 @@ class DocsTable extends DataManager
     public static function getAllowExt()
     {
         return self::$allowExt;
+    }
+
+    public static function clearComponentCache(Event $event)
+    {
+        global $USER;
+
+        try {
+            $rowId = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
+
+            $userId = Main\Context::getCurrent()->getRequest()->isAdminSection()
+                            ? (int)ArrayHelper::getValue(DocsTable::getById($rowId)->fetch(), 'USER_ID')
+                            : (int)$USER->GetID();
+
+            if (!$userId) {
+                return;
+            }
+
+            $profile = Profile::getInstance($userId);
+
+            Main\Application::getInstance()->getTaggedCache()->clearByTag('kelnik:profile_' . $profile->getId());
+            Main\Application::getInstance()->getTaggedCache()->clearByTag('kelnik:profileCompany_' . $profile->getCompanyId());
+        } catch (\Exception $e) {
+        }
     }
 }

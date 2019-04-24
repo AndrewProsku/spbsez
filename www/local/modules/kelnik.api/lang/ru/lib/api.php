@@ -19,6 +19,8 @@ $MESS['KELNIK_API_VACANCY_RESPONSE_TITLE'] = 'Сообщение успешно 
 $MESS['KELNIK_API_VACANCY_RESPONSE_TEXT'] = 'Отдел кадров АО «ОЭЗ «Санкт-Петербург» обработает ваше сообщение и свяжется с Вами.';
 
 $MESS['KELNIK_API_DOC_FILE_UPLOAD_ERROR'] = 'Не удалось загрузить файл';
+$MESS['KELNIK_API_DOC_FILE_DELETE_PERMISSION_ERROR'] = 'У вас нет прав для удаления файла';
+
 $MESS['KELNIK_API_MESSAGE_ERROR_NAME'] = 'Не заполнено поле ФИО';
 $MESS['KELNIK_API_MESSAGE_ERROR_EMAIL'] = 'Не заполнено поле E-mail';
 $MESS['KELNIK_API_MESSAGE_ERROR_PHONE'] = 'Не заполнено поле Телефон';
