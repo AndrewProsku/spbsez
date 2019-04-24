@@ -48,7 +48,7 @@
     }
 }
 
-.b-slider-reviews__item-image {
+.b-slider-reviews .b-slider-reviews__item-image {
     @include column(18, 36);
     display: none;
 
