@@ -395,7 +395,7 @@ class ReportBlock {
             event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
         });
         input.addEventListener('blur', (event) => {
-            if (Utils.keyExist(input.dataset, 'prefilled')) {
+            if (Utils.keyExist(input.dataset, 'prefilled') && !this.textInputTimeout) {
                 event.target.closest('.b-input-block').classList.add(this.untouchedIputClass);
             }
         });
@@ -404,7 +404,7 @@ class ReportBlock {
             if (this.textInputTimeout) {
                 clearTimeout(this.textInputTimeout);
             }
-            input.closest('.b-input-block').classList.remove(this.untouchedIputClass);
+
             this.textInputTimeout = setTimeout(this.onInputKeyup.bind(this), 500, event.target);
         });
     }
