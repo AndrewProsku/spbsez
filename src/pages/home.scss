@@ -1017,13 +1017,14 @@ $path: '/images/home/';
     .l-home-plots__all-map-images {
         width:  600px;
         height: 380px;
-        background-image: url($path + 'map-mobile.png');
-        background-position: left top;
-        background-size: 100% 100%;
         left: 0;
+        background-image: url($path + 'Map@2x-8.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
 
         &.lang-en {
-            background-image: url($path + 'map-img-en/Map-ENG-8.png');
+            background-image: url($path + 'map-img-en/Map-ENG@2x-8.png');
         }
 
         &.lang-ch {
