@@ -2,13 +2,17 @@
 
 namespace Kelnik\Userdata\Profile;
 
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\UserTable;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Messages\MessageService;
 
+Loc::loadMessages(__DIR__ . DIRECTORY_SEPARATOR . 'profilesectionadmins.php');
+
 class Profile
 {
     public const GROUP_SUPER_ADMIN = 1;
+    public const GROUP_DEFAULT = 2;
     public const GROUP_ADMIN = 7;
     public const GROUP_MODERATOR = 8;
     public const GROUP_RESIDENT_ADMIN = 9;
@@ -53,7 +57,7 @@ class Profile
         $timeFormat = 'd.m.Y H:i:s';
 
         while($row = $tmp->Fetch()) {
-            if ($row['GROUP_ID'] == 2) {
+            if ($row['GROUP_ID'] == self::GROUP_DEFAULT) {
                 continue;
             }
 
@@ -93,6 +97,9 @@ class Profile
         }
 
         $res['FULL_NAME'] = self::getFullName($this->user);
+        $res['STATUS'] = $this->isResidentAdmin()
+                            ? Loc::getMessage('KELNIK_PROFILE_STATUS_ADMIN')
+                            : Loc::getMessage('KELNIK_PROFILE_STATUS_RESIDENT');
 
         return $res;
     }
