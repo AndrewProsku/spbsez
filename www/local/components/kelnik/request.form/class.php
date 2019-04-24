@@ -41,23 +41,27 @@ class RequestForm extends Bbc\Basis
     {
         global $USER;
 
+        if (!$USER->IsAuthorized()) {
+            return false;
+        }
+
         try {
             $this->profile = Profile::getInstance((int)$USER->GetID());
             $this->sectionRequests = new ProfileSectionRequests($this->profile);
             $this->sectionRequests->setFormType($this->arParams['SUB_TYPE']);
         } catch (\Exception $exception) {
+            return false;
         }
 
-        if (!$USER->IsAuthorized()
-            || !$this->profile
-            || !$this->profile->canRequest()
-        ) {
+        if (!$this->profile->canRequest()) {
             LocalRedirect(LANG_DIR . 'cabinet/');
         }
     }
 
     protected function executeMain()
     {
+        global $USER;
+
         if ($this->arParams['SUB_TYPE'] === TypeTable::SUB_TYPE_SERVICE) {
             $this->arResult['TYPES'] = ServiceTypeTable::getList([
                 'filter' => [
@@ -85,6 +89,10 @@ class RequestForm extends Bbc\Basis
             'FIELDS' => [],
             'TEXT' => []
         ];
+
+        if (!$USER->IsAuthorized()) {
+            return false;
+        }
 
         if ($request->isPost()) {
             $this->abortCache();
