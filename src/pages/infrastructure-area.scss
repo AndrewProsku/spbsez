@@ -1180,7 +1180,8 @@
         }
     }
 
-    .pp-hint-container {
+    .pp-hint-container,
+    .pp-scene__img + div {
         background-image: linear-gradient(to right, rgba($blue, .72) 0%, rgba($violet, .72) 100%);
         background-color: transparent;
     }
