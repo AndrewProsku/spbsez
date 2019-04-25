@@ -93,7 +93,17 @@
         <?php endif; ?>
         <?php if(!empty($arResult['ELEMENT']['PLANOPLAN'])): ?>
         <div class="b-area-planoplan">
-            <iframe src="https://widget.planoplan.com/<?= $arResult['ELEMENT']['PLANOPLAN']; ?>" frameborder="0" allowfullscreen="" scrolling="no"></iframe>
+            <script src="https://widget.planoplan.com/etc/multiwidget/release/static/js/main.js"></script>
+            <div id="planoplan-widget"></div>
+            <script>
+                Planoplan.init({
+                    uid: '<?= $arResult['ELEMENT']['PLANOPLAN']; ?>',
+                    el: 'planoplan-widget',
+                    fontFamily: 'Brutal, sans-serif',
+                    textColor: '#30409a'
+                });
+                window._babelPolyfill = null;
+            </script>
         </div>
         <?php endif; ?>
         <?= $arResult['ELEMENT']['TEXT_INFRA']; ?>
