@@ -44,7 +44,7 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '', $addition
             $phpMailer->isSMTP();
             $phpMailer->Host = $curSite->getField('SMTP_HOST');
             $phpMailer->SMTPAuth = true;
-            $phpMailer->Username = $curSite->getField('SMTP_LOGIN');
+            $phpMailer->Username = $curSite->getField('SMTP_USER');
             $phpMailer->Password = $curSite->getField('SMTP_PWD');
         }
     }
