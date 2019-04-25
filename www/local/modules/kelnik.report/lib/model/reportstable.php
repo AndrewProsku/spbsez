@@ -36,6 +36,7 @@ class ReportsTable extends DataManager
     public const ENV_PRODUCTION = 'prod';
 
     protected static $completeYear = [];
+    protected static $env = false;
 
     /**
      * @return string
@@ -401,13 +402,16 @@ class ReportsTable extends DataManager
     public static function getCurrentTime()
     {
         $envPath = Application::getDocumentRoot() . '/../env.lock';
-        $env = self::ENV_PRODUCTION;
 
-        if (!file_exists($envPath)) {
-            $env = trim(file_get_contents($envPath));
+        if (!self::$env && file_exists($envPath)) {
+            self::$env = trim(file_get_contents($envPath));
         }
 
-        return $env === self::ENV_PRODUCTION
+        if (!self::$env) {
+            self::$env = self::ENV_PRODUCTION;
+        }
+
+        return self::$env === self::ENV_PRODUCTION
                 ? time()
                 : mktime(0, 0, 0, 4, 2, 2019);
     }
