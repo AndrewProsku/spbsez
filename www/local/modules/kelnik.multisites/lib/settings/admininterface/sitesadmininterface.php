@@ -29,72 +29,72 @@ class SitesAdminInterface extends AdminInterface
      */
     public function fields()
     {
-        return array(
-            'MAIN' => array(
-                'NAME' => Loc::getMessage('KELNIK_SITES_TAB_MAIN'),
-                'FIELDS' => array(
-                    'ID' => array(
-                        'WIDGET' => new NumberWidget(),
-                        'READONLY' => true,
-                        'FILTER' => true,
+        return [
+            'MAIN' => [
+                'NAME'   => Loc::getMessage('KELNIK_SITES_TAB_MAIN'),
+                'FIELDS' => [
+                    'ID'          => [
+                        'WIDGET'           => new NumberWidget(),
+                        'READONLY'         => true,
+                        'FILTER'           => true,
                         'HIDE_WHEN_CREATE' => true
-                    ),
-                    'ACTIVE' => array(
+                    ],
+                    'ACTIVE'      => [
                         'WIDGET' => new CheckboxWidget(),
                         'FILTER' => true,
-                    ),
-                    'NAME' => array(
-                        'WIDGET' => new StringWidget(),
-                        'SIZE' => '60',
-                        'FILTER' => '%',
+                    ],
+                    'NAME'        => [
+                        'WIDGET'    => new StringWidget(),
+                        'SIZE'      => '60',
+                        'FILTER'    => '%',
                         'EDIT_LINK' => true,
-                        'REQUIRED' => true,
-                    ),
-                    'DOMAIN' => array(
-                        'WIDGET' => new StringWidget(),
-                        'FILTER' => false,
+                        'REQUIRED'  => true,
+                    ],
+                    'DOMAIN'      => [
+                        'WIDGET'   => new StringWidget(),
+                        'FILTER'   => false,
                         'REQUIRED' => true,
                         'MULTIPLE' => true,
-                        'HEADER' => false,
-                        'TITLE' => Loc::getMessage('KELNIK_MULTISITE_DOMAIN')
-                    ),
+                        'HEADER'   => false,
+                        'TITLE'    => Loc::getMessage('KELNIK_MULTISITE_DOMAIN')
+                    ],
                     'DOMAIN_LIST' => [
-                        'WIDGET' => new MultiWidget(),
-                        'TITLE' => Loc::getMessage('KELNIK_MULTISITE_DOMAIN'),
-                        'FILTER' => false,
-                        'VIRTUAL '=> true,
-                        'READONLY' => true,
+                        'WIDGET'       => new MultiWidget(),
+                        'TITLE'        => Loc::getMessage('KELNIK_MULTISITE_DOMAIN'),
+                        'FILTER'       => false,
+                        'VIRTUAL '     => true,
+                        'READONLY'     => true,
                         'FORCE_SELECT' => true,
-                        'SEPARATOR' => ', '
+                        'SEPARATOR'    => ', '
                     ],
 
-                    'PHONE' => array(
+                    'PHONE'           => [
                         'WIDGET' => new StringWidget(),
-                        'SIZE' => '60',
-                    ),
-                    'ADDRESS' => array(
+                        'SIZE'   => '60',
+                    ],
+                    'ADDRESS'         => [
                         'WIDGET' => new StringWidget(),
-                        'SIZE' => '60',
-                    ),
-                    'SOCIAL_INST' => array(
+                        'SIZE'   => '60',
+                    ],
+                    'SOCIAL_INST'     => [
                         'WIDGET' => new StringWidget(),
-                        'SIZE' => '60',
+                        'SIZE'   => '60',
                         'HEADER' => false,
                         'FILTER' => false
-                    ),
-                    'SOCIAL_FACEBOOK' => array(
+                    ],
+                    'SOCIAL_FACEBOOK' => [
                         'WIDGET' => new StringWidget(),
-                        'SIZE' => '60',
+                        'SIZE'   => '60',
                         'HEADER' => false,
                         'FILTER' => false
-                    ),
+                    ],
 
-                    'MAIN_VIDEO_MP4' => [
+                    'MAIN_VIDEO_MP4'  => [
                         'WIDGET' => new FileWidget(),
                         'HEADER' => false,
                         'FILTER' => false
                     ],
-                    'MAIN_VIDEO_OGV' => [
+                    'MAIN_VIDEO_OGV'  => [
                         'WIDGET' => new FileWidget(),
                         'HEADER' => false,
                         'FILTER' => false
@@ -105,7 +105,7 @@ class SitesAdminInterface extends AdminInterface
                         'FILTER' => false
                     ],
 
-                    'PRESS_CONTACT' => [
+                    'PRESS_CONTACT'    => [
                         'WIDGET' => new VisualEditorWidget(),
                         'HEADER' => false,
                         'FILTER' => false
@@ -116,12 +116,12 @@ class SitesAdminInterface extends AdminInterface
                         'FILTER' => false
                     ],
 
-                    'TEMPLATE_ID' => array(
-                        'WIDGET' => new ComboBoxWidget(),
-                        'HEADER' => true,
-                        'VARIANTS' => SitesTable::getTemplatesList(),
+                    'TEMPLATE_ID' => [
+                        'WIDGET'          => new ComboBoxWidget(),
+                        'HEADER'          => true,
+                        'VARIANTS'        => SitesTable::getTemplatesList(),
                         'DEFAULT_VARIANT' => null,
-                    ),
+                    ],
 
 //                    'SEO_TITLE' => array(
 //                        'WIDGET' => new StringWidget(),
@@ -135,9 +135,35 @@ class SitesAdminInterface extends AdminInterface
 //                        'WIDGET' => new StringWidget(),
 //                        'SIZE' => '80',
 //                    ),
-                )
-            )
-        );
+                ]
+            ],
+            'SMTP' => [
+                'NAME'   => Loc::getMessage('KELNIK_MULTISITE_SMTP_TAB'),
+                'FIELDS' => [
+                    'USE_SMTP' => [
+                        'WIDGET' => new CheckboxWidget(),
+                        'FIELD_TYPE' => CheckboxWidget::TYPE_STRING,
+                        'FILTER' => false,
+                        'HEADER' => false
+                    ],
+                    'SMTP_HOST' => [
+                        'WIDGET' => new StringWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ],
+                    'SMTP_USER' => [
+                        'WIDGET' => new StringWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ],
+                    'SMTP_PWD' => [
+                        'WIDGET' => new StringWidget(),
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ],
+                ]
+            ]
+        ];
     }
 
     /**
@@ -145,9 +171,9 @@ class SitesAdminInterface extends AdminInterface
      */
     public function helpers()
     {
-        return array(
+        return [
             'Kelnik\Multisites\Settings\AdminInterface\SitesListHelper',
             'Kelnik\Multisites\Settings\AdminInterface\SitesEditHelper'
-        );
+        ];
     }
 }

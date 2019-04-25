@@ -12,7 +12,7 @@ class CurrentSite
     /**
      * CurrentSite instance
      *
-     * @var null
+     * @var CurrentSite
      */
     protected static $instance = null;
 
@@ -26,13 +26,14 @@ class CurrentSite
         if (!isset(static::$instance)) {
             static::$instance = $this;
         }
+
         return static::$instance;
     }
 
     /**
      * Returns current instance of the CurrentSite.
      *
-     * @return null
+     * @return
      */
     public static function getInstance()
     {
