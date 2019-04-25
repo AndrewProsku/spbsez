@@ -4,7 +4,7 @@
 
 <?php if (empty($arResult['ELEMENTS'])): ?>
     <div class="b-vacancies-empty" style="display: block">
-        К сожалению, в настоящий момент открытых вакансий нет
+        В настоящий момент открытых вакансий нет
     </div>
     <?php return; ?>
 <?php endif; ?>
