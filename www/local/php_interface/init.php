@@ -22,10 +22,11 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '', $addition
     $phpMailer->addAddress($to);
     $phpMailer->Subject = $subject;
     $phpMailer->Body = $message;
+    $phpMailer->CharSet = 'utf-8';
 
     preg_match_all('!(From: (?P<from>[^\n]+))|(BCC: (?P<bcc>[^\n]+))|(CC: (?P<cc>[^\n]+))!i', $additionalHeaders, $matches);
 
-    $matchesCnt = count($matches['from']);
+    $matchesCnt = count($matches['from']) - 1;
 
     $phpMailer->setFrom(array_shift($matches['from']));
 
@@ -33,8 +34,8 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '', $addition
         $phpMailer->addCC($matches['cc'][$matchesCnt]);
     }
 
-    if ($matchesCnt-1 && !empty($matches['bcc'][$matchesCnt-1])) {
-        $phpMailer->addBCC($matches['bcc'][$matchesCnt-1]);
+    if (!empty($matches['bcc'][$matchesCnt])) {
+        $phpMailer->addBCC($matches['bcc'][$matchesCnt]);
     }
 
     if (\Bitrix\Main\Loader::includeModule('kelnik.multisites')) {
@@ -42,6 +43,7 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '', $addition
 
         if ($curSite->getField('USE_SMTP') == \Kelnik\Multisites\Settings\SitesTable::YES) {
             $phpMailer->isSMTP();
+            $phpMailer->SMTPSecure = 'tls';
             $phpMailer->Host = $curSite->getField('SMTP_HOST');
             $phpMailer->SMTPAuth = true;
             $phpMailer->Username = $curSite->getField('SMTP_USER');
