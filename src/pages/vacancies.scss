@@ -265,9 +265,7 @@
 }
 
 .b-vacancies-empty {
-    @include font-size('h4');
-    font-family: $font-bold;
-    font-weight: 700;
+    @include font-size('p1');
     display: none;
 }
 
