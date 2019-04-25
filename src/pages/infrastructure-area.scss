@@ -1163,20 +1163,189 @@
     position: relative;
     z-index: 2;
 
-    iframe {
-        min-height: 800px;
+    #planoplan-widget {
+        height: 480px;
         width: 100%;
 
         @media #{$tablet-portrait} {
-            min-height: 800px;
+            height: 800px;
         }
 
         @media #{$laptop} {
-            min-height: 720px;
+            height: 720px;
         }
 
         @media #{$fullhd} {
-            min-height: 1080px;
+            height: 1080px;
+        }
+    }
+
+    .pp-hint-container {
+        background-image: linear-gradient(to right, rgba($blue, .72) 0%, rgba($violet, .72) 100%);
+        background-color: transparent;
+    }
+}
+
+.b-area-planoplan #planoplan-widget {
+    .pp-logo {
+        top: 57px;
+
+        @media #{$mobile-only} {
+            display: none;
+        }
+    }
+
+
+    .pp-logo__icon,
+    .pp-logo__icon svg {
+        width: 54px;
+        height: 51px;
+    }
+
+    .pp-hint__title {
+        color: #30409a;
+        border-bottom: none;
+        opacity: 1;
+        font-family: $font-bold;
+        font-weight: 700;
+        font-size: 20px;
+        padding-top: 22px;
+
+        @media #{$tablet-portrait} {
+            padding-top: 33px;
+            font-size: 24px;
+        }
+    }
+
+    .pp-hint__list {
+        padding-bottom: 28px;
+        padding-left: 18px;
+        padding-right: 18px;
+
+        @media #{$tablet-portrait} {
+            padding-left: 44px;
+            padding-right: 44px;
+            padding-bottom: 32px;
+        }
+
+        @media #{$tablet-portrait} {
+            padding-left: 48px;
+            padding-right: 48px;
+        }
+    }
+
+    .pp-hint__item__text {
+        font-family: $font;
+        font-size: 14px;
+        margin-left: 10px;
+        padding-bottom: .25em;
+        background-image: linear-gradient(to top, rgba(48, 64, 154, 0.12) 0%, rgba(102, 45, 145, 0.12) 37%, rgba(102, 45, 145, 0) 30%);
+        white-space: nowrap;
+
+        @media #{$tablet-portrait} {
+            font-size: 16px;
+            margin-left: 24px;
+        }
+    }
+
+    .pp-hint__item__icon circle,
+    .pp-hint__item__icon path {
+        stroke: $blue;
+    }
+
+    .pp-hint__item__icon path {
+        fill: $blue;
+    }
+
+    .pp-hint__button {
+        margin: 0 18px 29px;
+
+        @media #{$tablet-portrait} {
+            margin: 0 44px 52px;
+        }
+
+        @media #{$tablet-portrait} {
+            margin: 0 48px 48px;
+        }
+
+
+        button {
+            @include transition(background);
+            position: relative;
+            background-image: linear-gradient($gradient-linear);
+            background-size: 200% auto;
+            border-radius: 4px;
+            padding-right: 50px;
+            padding-left: 26px;
+            text-align: left;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &:after {
+                @include transition(right);
+                content: "";
+                width: 18px;
+                height: 9px;
+                background-image: url("/images/home/arrow-right.svg");
+                background-repeat: no-repeat;
+                position: absolute;
+                top: calc(50% - 5px);
+                right: 9%;
+            }
+
+            @media #{$tablet-portrait} {
+                height: 56px;
+                font-size: 18px;
+                //line-height: 56px;
+                padding-right: 90px;
+
+                &:hover {
+                    background-position: right center;
+
+                    &:after {
+                        width: 9px;
+                        height: 9px;
+                        background-image: url("/images/home/arrow-white-small.svg");
+                        right: 5%;
+                    }
+                }
+            }
+        }
+    }
+
+    .pp-scene-picker {
+        margin-bottom: 10px;
+    }
+
+    .pp-scene-picker__vr {
+        background-image: linear-gradient(to right, $blue 0%, $violet 100%);
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    .pp-scene-picker__item {
+        background-color: transparent;
+
+
+        @media #{$mobile-only} {
+            width: 64px;
+            height: 64px;
+        }
+    }
+    .pp-scene-picker__item--active:before,
+    .pp-scene-picker__item--active:hover:before {
+        border-color: $violet;
+    }
+
+    .pp-scene-picker__item--VR:hover:before {
+        border-color: transparent;
+    }
+
+    .pp-vr-mobile-container {
+        @media #{$tablet-portrait} {
+            margin-bottom: 170px;
         }
     }
 }
