@@ -18,6 +18,7 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '', $addition
 {
     $phpMailer = new \PHPMailer\PHPMailer\PHPMailer(true);
 
+    $phpMailer->isHTML(true);
     $phpMailer->addAddress($to);
     $phpMailer->Subject = $subject;
     $phpMailer->Body = $message;
