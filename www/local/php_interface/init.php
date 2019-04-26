@@ -23,6 +23,7 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '', $addition
     $phpMailer->Subject = $subject;
     $phpMailer->Body = $message;
     $phpMailer->CharSet = 'utf-8';
+    $phpMailer->XMailer = 'SEZ mailer';
 
     preg_match_all('!(From: (?P<from>[^\n]+))|(BCC: (?P<bcc>[^\n]+))|(CC: (?P<cc>[^\n]+))!i', $additionalHeaders, $matches);
 
@@ -44,6 +45,13 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '', $addition
         if ($curSite->getField('USE_SMTP') == \Kelnik\Multisites\Settings\SitesTable::YES) {
             $phpMailer->isSMTP();
             $phpMailer->Port = 465;
+            $phpMailer->SMTPOptions = [
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                ]
+            ];
             $phpMailer->Host = $curSite->getField('SMTP_HOST');
             $phpMailer->SMTPAuth = true;
             $phpMailer->Username = $curSite->getField('SMTP_USER');
