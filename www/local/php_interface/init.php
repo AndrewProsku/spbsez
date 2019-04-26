@@ -43,7 +43,7 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '', $addition
 
         if ($curSite->getField('USE_SMTP') == \Kelnik\Multisites\Settings\SitesTable::YES) {
             $phpMailer->isSMTP();
-            $phpMailer->SMTPSecure = 'tls';
+            $phpMailer->Port = 465;
             $phpMailer->Host = $curSite->getField('SMTP_HOST');
             $phpMailer->SMTPAuth = true;
             $phpMailer->Username = $curSite->getField('SMTP_USER');
