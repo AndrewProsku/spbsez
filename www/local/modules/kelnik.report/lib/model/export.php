@@ -4,7 +4,9 @@
 namespace Kelnik\Report\Model;
 
 
+use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\UserTable;
 use Kelnik\Helpers\ArrayHelper;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
@@ -122,14 +124,25 @@ class Export
                     'REPORT_FIELD_' => 'FIELDS',
                     'REPORT_FIELD_GROUP_' => 'FIELDS.GROUP'
                 ],
+                'runtime' => [
+                    (new ExpressionField(
+                        'COMPANY_ORIG_NAME',
+                        '(SELECT `WORK_COMPANY` FROM `' . UserTable::getTableName() . '` WHERE `ID` = %s)',
+                        'COMPANY_ID'
+                    ))
+                ],
                 'filter' => [
                     '=COMPANY_ID' => $this->companies,
                     '=TYPE' => $this->type,
                     '=YEAR' => $this->year,
                     '=FIELDS.FORM_NUM' => $formNum
+                ],
+                'order' => [
+                    'COMPANY_ORIG_NAME' => 'ASC'
                 ]
             ]);
         } catch (\Exception $e) {
+            die($e->getMessage());
             $res = [];
         }
 
