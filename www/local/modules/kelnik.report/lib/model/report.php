@@ -679,7 +679,7 @@ class Report extends EO_Reports
                     $fields[] = [
                         'id'    => $field['id'] . '[' . $id . ']',
                         'value' => self::getFieldValue($values, $field['id'], $id),
-                        'error' => self::getFieldValue($values, $field['id'], 0, 'COMMENT')
+                        'error' => self::getFieldValue($values, $field['id'], $id,'COMMENT')
                     ];
                 }
 
@@ -713,7 +713,7 @@ class Report extends EO_Reports
                 $newBlock['fields'][] = [
                     'id' => $field['id'] . '[' . $id . ']',
                     'value' => self::getFieldValue($values, $field['id'], $id),
-                    'error' => self::getFieldValue($values, $field['id'], 0, 'COMMENT')
+                    'error' => self::getFieldValue($values, $field['id'], $id, 'COMMENT')
                 ];
             }
 
