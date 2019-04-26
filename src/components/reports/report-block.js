@@ -398,6 +398,11 @@ class ReportBlock {
             if (Utils.keyExist(input.dataset, 'prefilled') && !this.textInputTimeout) {
                 event.target.closest('.b-input-block').classList.add(this.untouchedIputClass);
             }
+
+            if (this.textInputTimeout) {
+                clearTimeout(this.textInputTimeout);
+                this.onInputKeyup(event.target);
+            }
         });
 
         input.addEventListener('keyup', (event) => {

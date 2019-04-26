@@ -43,7 +43,6 @@ class ReportForm {
         this.oezNameField = document.querySelector('.j-report-oez-name input');
 
 
-        // this.isReportFulfilled = false;
         this.forms = [{
             isApproved: false,
             template  : null
@@ -216,7 +215,8 @@ class ReportForm {
         const that = this;
 
         if (Array.isArray(data.blocks)) {
-            this.forms[formID].isVisited = true;
+            this.forms[6].isVisited = Utils.getCookie(`rep${this.reportId}-form7`) === 'true';
+
             data.blocks.forEach((blockData, num) => {
                 const shiftForNumber = 1;
                 const blockNumber = num + shiftForNumber;
@@ -320,6 +320,7 @@ class ReportForm {
 
         if (formNumber === 6) {
             this.forms[formNumber].isVisited = true;
+            Utils.setCookie(`rep${this.reportId}-form7`, true);
             this.setFormStatus(formNumber);
         }
 
@@ -641,7 +642,7 @@ class ReportForm {
             }
         }
 
-        if ((formID === resultsFormID) && (formBlocks.length === 0)) {
+        if ((formID === resultsFormID) && (formBlocks.length === 0) && this.forms[formID].isVisited) {
             this.filters.forEach((filter, i) => {
                 this.filterFakeInputs[i][formID].classList.remove(this.filterFakeInputErrorClass);
                 this.filterFakeInputs[i][formID].classList.add(this.filterFakeInputSuccessClass);
