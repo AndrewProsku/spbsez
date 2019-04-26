@@ -1,18 +1,8 @@
 <?php
 
+use Kelnik\Multisites\Settings\CurrentSite;
+
 include realpath(__DIR__ . '/../../../vendor/autoload.php');
-
-\Bitrix\Main\EventManager::getInstance()->addEventHandler("main", "OnBeforeEventAdd", "OnBeforeEventAddHandler");
-
-function OnBeforeEventAddHandler(&$event, &$lid, $arFields)
-{
-    if ($event == "FAVORITES") {
-        require_once realpath(__DIR__ . '/lib/mail_attach/mail_attach.php');
-        SendAttache($event, $lid, $arFields, "/upload/pdf/{$arFields['FILE_NAME']}");
-        $event = 'null';
-        $lid = 'null';
-    }
-}
 
 if (!function_exists('getSiteBaseUrl')) {
     function getSiteBaseUrl()
@@ -22,6 +12,60 @@ if (!function_exists('getSiteBaseUrl')) {
             : (($_SERVER['SERVER_PORT'] == 443 || strtolower($_SERVER['HTTPS']) == 'on') ? 'https' : 'http') .
                 '://' . $_SERVER['HTTP_HOST'];
     }
+}
+
+function custom_mail($to, $subject, $message, $additionalHeaders = '', $additionalParameters = '', $context = null)
+{
+    $phpMailer = new \PHPMailer\PHPMailer\PHPMailer(true);
+
+    $phpMailer->isHTML(true);
+    $phpMailer->addAddress($to);
+    $phpMailer->Subject = $subject;
+    $phpMailer->Body = $message;
+    $phpMailer->CharSet = 'utf-8';
+    $phpMailer->XMailer = 'SEZ mailer';
+
+    preg_match_all('!(From: (?P<from>[^\n]+))|(BCC: (?P<bcc>[^\n]+))|(CC: (?P<cc>[^\n]+))!i', $additionalHeaders, $matches);
+
+    $matchesCnt = count($matches['from']) - 1;
+
+    $phpMailer->setFrom(array_shift($matches['from']));
+
+    if (!empty($matches['cc'][$matchesCnt])) {
+        $phpMailer->addCC($matches['cc'][$matchesCnt]);
+    }
+
+    if (!empty($matches['bcc'][$matchesCnt])) {
+        $phpMailer->addBCC($matches['bcc'][$matchesCnt]);
+    }
+
+    if (\Bitrix\Main\Loader::includeModule('kelnik.multisites')) {
+        $curSite = CurrentSite::getInstance();
+
+        if ($curSite->getField('USE_SMTP') == \Kelnik\Multisites\Settings\SitesTable::YES) {
+            $phpMailer->isSMTP();
+            $phpMailer->Port = 465;
+            $phpMailer->SMTPOptions = [
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                ]
+            ];
+            $phpMailer->Host = $curSite->getField('SMTP_HOST');
+            $phpMailer->SMTPAuth = true;
+            $phpMailer->Username = $curSite->getField('SMTP_USER');
+            $phpMailer->Password = $curSite->getField('SMTP_PWD');
+        }
+    }
+
+    try {
+        $phpMailer->send();
+    } catch (Exception $e) {
+        return false;
+    }
+
+    return true;
 }
 
 class SezLang

@@ -19,3 +19,9 @@ $MESS['KELNIK_MULTISITE_VIDEO_OGV'] = 'Видео на главной OGV';
 $MESS['KELNIK_MULTISITE_VIDEO_WEBM'] = 'Видео на главной WEBM';
 $MESS['KELNIK_MULTISITE_PRESS_CONTACT'] = 'Контакты пресс-службы';
 $MESS['KELNIK_MULTISITE_PRESS_CONTACT_EN'] = 'Контакты пресс-службы (англ.)';
+
+$MESS['KELNIK_MULTISITE_SMTP_TAB'] = 'Настройки почты';
+$MESS['KELNIK_MULTISITE_SMTP_USE'] = 'Использовать SMTP';
+$MESS['KELNIK_MULTISITE_SMTP_HOST'] = 'Адрес сервера';
+$MESS['KELNIK_MULTISITE_SMTP_USER'] = 'Пользователь';
+$MESS['KELNIK_MULTISITE_SMTP_PWD'] = 'Пароль';

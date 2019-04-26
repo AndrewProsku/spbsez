@@ -147,8 +147,7 @@ class InfrastructureDetail extends Bbc\Basis
             ' | ',
             [
                 Loc::getMessage('KELNIK_INFRA_COMP_FOLDER'),
-                Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM') . ' ' . $this->arResult['ELEMENT']['NAME'],
-                Loc::getMessage('KELNIK_INFRA_COMP_SEZ')
+                Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM') . ' ' . $this->arResult['ELEMENT']['NAME']
             ]
         );
 

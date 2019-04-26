@@ -33,8 +33,10 @@ class ReportsTable extends DataManager
 
     public const NEW_ROW_PREFIX = 'new-';
     public const LOCK_TIME_LEFT = 900; // 15 min
+    public const ENV_PRODUCTION = 'prod';
 
     protected static $completeYear = [];
+    protected static $env = false;
 
     /**
      * @return string
@@ -399,7 +401,18 @@ class ReportsTable extends DataManager
 
     public static function getCurrentTime()
     {
-        // TODO: restore real date
-        return mktime(0, 0, 0, 7, 2, 2019); // time();
+        $envPath = Application::getDocumentRoot() . '/../env.lock';
+
+        if (!self::$env && file_exists($envPath)) {
+            self::$env = trim(file_get_contents($envPath));
+        }
+
+        if (!self::$env) {
+            self::$env = self::ENV_PRODUCTION;
+        }
+
+        return self::$env === self::ENV_PRODUCTION
+                ? time()
+                : mktime(0, 0, 0, 4, 2, 2019);
     }
 }

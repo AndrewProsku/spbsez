@@ -56,8 +56,14 @@ class SitesTable extends DataManager
             ),
             new StringField(
                 'ACTIVE', [
-                    'values' => ['Y', 'N'],
+                    'values' => [self::YES, self::NO],
                     'title'  => Loc::getMessage('KELNIK_MULTISITE_ACTIVE')
+                ]
+            ),
+            new StringField(
+                'USE_SMTP', [
+                    'values' => [self::YES, self::NO],
+                    'title'  => Loc::getMessage('KELNIK_MULTISITE_SMTP_USE')
                 ]
             ),
             new StringField('NAME', [
@@ -78,6 +84,15 @@ class SitesTable extends DataManager
             ]),
             new StringField('TEMPLATE_ID', [
                 'title' => Loc::getMessage('KELNIK_MULTISITE_TEMPLATE_ID'),
+            ]),
+            new StringField('SMTP_HOST', [
+                'title' => Loc::getMessage('KELNIK_MULTISITE_SMTP_HOST'),
+            ]),
+            new StringField('SMTP_USER', [
+                'title' => Loc::getMessage('KELNIK_MULTISITE_SMTP_USER'),
+            ]),
+            new StringField('SMTP_PWD', [
+                'title' => Loc::getMessage('KELNIK_MULTISITE_SMTP_PWD'),
             ]),
             new TextField(
                 'PRESS_CONTACT',
