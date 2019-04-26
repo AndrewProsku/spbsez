@@ -202,6 +202,9 @@ class ReportBlock {
         });
         taxesAllInput.value = allTaxes;
         taxesYearInput.value = yearTaxes;
+
+        this.checkTaxesIsZero(taxesAllInput);
+        this.checkTaxesIsZero(taxesYearInput);
     }
 
     calculateTaxes(currentInput, allInputs, resultInput) {
@@ -220,12 +223,21 @@ class ReportBlock {
                     newValue += Number(input.value.replace(/ /gu, ''));
                 });
                 resultInput.value = Math.round(newValue * 1000000) / 1000000;
+                this.checkTaxesIsZero(resultInput);
 
                 return;
             }
 
             event.target.value = previousValue;
         });
+    }
+
+    checkTaxesIsZero(taxInput) {
+        if (taxInput.value === '0') {
+            taxInput.classList.add('b-input-text_theme_grey');
+        } else if (taxInput.classList.contains('b-input-text_theme_grey')) {
+            taxInput.classList.remove('b-input-text_theme_grey');
+        }
     }
 
     initConstructionStageBlock(data) {

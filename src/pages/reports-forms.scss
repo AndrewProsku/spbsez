@@ -156,6 +156,10 @@
         }
     }
 
+    input[type="text"].b-input-text_theme_grey {
+        color: rgba($black, 0.48);
+    }
+
     textarea {
         resize: vertical;
     }
