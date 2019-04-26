@@ -205,9 +205,9 @@ class Utils {
         if (!selectors) {
             return;
         }
-        
+
         let elements = [];
-        
+
         if (typeof selectors == 'string') {
             elements.push(Array.from(document.querySelectorAll(selectors)));
         } else {
@@ -237,6 +237,66 @@ class Utils {
 
             outside(event.target);
         });
+    }
+
+    /**
+     * возвращает cookie с именем name, если есть, если нет, то undefined
+     *
+     * @param {string} name - имя куки
+     */
+    static getCookie(name) {
+        const matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/gu, '\\$1') + "=([^;]*)"
+        ));
+
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    /**
+     * Устанавливает cookie с именем name и значением value
+     *
+     * @param {string} name - имя куки
+     * @param {string} value - значение куки
+     * @param {object} options - объект с свойствами cookie (expires, path, domain, secure)
+     */
+    static setCookie(name, value, options) {
+        options = options || {};
+        let expires = options.expires;
+
+        if (typeof expires == "number" && expires) {
+            let d = new Date();
+            d.setTime(d.getTime() + expires * 1000);
+            expires = options.expires = d;
+        }
+        if (expires && expires.toUTCString) {
+            options.expires = expires.toUTCString();
+        }
+
+        value = encodeURIComponent(value);
+
+        let updatedCookie = name + "=" + value;
+
+        for (let propName in options) {
+            updatedCookie += "; " + propName;
+            let propValue = options[propName];
+
+            if (propValue !== true) {
+                updatedCookie += "=" + propValue;
+            }
+        }
+
+        document.cookie = updatedCookie;
+    }
+
+    /**
+     * удаляет cookie с именем name
+     *
+     * @param {string} name - имя куки
+     */
+    static deleteCookie(name) {
+        setCookie(name, "", {
+            expires: -1
+        })
     }
 }
 
