@@ -563,6 +563,12 @@ class ReportBlock {
             errorBlock = inputBlock.nextElementSibling;
         } else {
             inputBlock = input.closest('.b-input-block');
+
+            // Если блок уже содержитсообщение об ошибке, то больше ничго делать не нужно
+            if (inputBlock.querySelector('.b-input-error')) {
+                return;
+            }
+
             Utils.insetContent(inputBlock, templateError({
                 errorMessage
             }));
@@ -824,7 +830,8 @@ class ReportBlock {
                 // Если осталась только одна стадия - её нельзя удалять
                 const onlyOne = 1;
 
-                if (stageBlock.querySelectorAll(`.${that.stageSelectClass}`).length === onlyOne) {
+                if ((stageBlock.querySelectorAll(`.${that.stageSelectClass}`).length === onlyOne) &&
+                    stageBlock.querySelector(`.${that.stageDeleteButtonClass}`)) {
                     Utils.removeElement(stageBlock.querySelector(`.${that.stageDeleteButtonClass}`));
                 }
             },
