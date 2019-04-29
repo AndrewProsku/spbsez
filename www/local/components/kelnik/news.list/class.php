@@ -7,6 +7,7 @@ use Bitrix\Main\Context;
 use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Page\Asset;
+use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\ImageResizer\Resizer;
 use Kelnik\News\Categories\CategoriesTable;
@@ -91,6 +92,10 @@ class NewsList extends Bbc\Basis
         if ($this->arParams['SECTION_ID']) {
             $filter['=CAT_ID'] = $this->arParams['SECTION_ID'];
             $filter['=CAT.ACTIVE'] = CategoriesTable::YES;
+        }
+
+        if (in_array($this->arParams['SECTION_ID'], [CategoriesTable::NEWS_RU, CategoriesTable::NEWS_EN])) {
+            $filter['<=DATE_SHOW'] = new DateTime();
         }
 
         $this->arResult['YEARS'] = $this->getYears($filter);
