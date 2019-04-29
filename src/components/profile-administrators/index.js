@@ -133,7 +133,7 @@ class ProfileAdministrators {
         const accessFields = {};
         const textValue = [];
 
-        selectAccordion.querySelectorAll('.b-checkbox-input').forEach((checkbox) => {
+        Array.from(selectAccordion.querySelectorAll('.b-checkbox-input')).forEach((checkbox) => {
             let label = Array.from(checkbox.nextElementSibling.getElementsByClassName('b-checkbox-text'));
 
             accessFields[checkbox.name] = checkbox.checked ? checkbox.value : 0;
