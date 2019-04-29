@@ -12,6 +12,7 @@ ErrorDocument 404 /404.php
   RewriteEngine On
 
   RewriteRule ^api/([^/]+)(/|.?)$ /ajax/api.php?event=$1 [QSA,L]
+  RewriteRule ^favicon.ico$ /favicons/favicon.ico [R=301,L]
 
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-l
