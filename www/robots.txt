@@ -1,5 +1,11 @@
 User-agent: *
+Disallow: /*index.php$
 Disallow: /cabinet/
+Disallow: /en/cabinet/
 Disallow: /bitrix/
 Disallow: /upload/
-Sitemap: https://spbsez.ru/sitemap.xml
+Disallow: /tests/
+Disallow: /pages/
+Disallow: /local/
+Host: www.spbsez.ru
+Sitemap: https://www.spbsez.ru/sitemap.xml
