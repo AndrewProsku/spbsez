@@ -1357,6 +1357,26 @@
     }
 }
 
+.pp-control .pp-exit .pp-control-item {
+    @include transition(color);
+    color: $blue;
+    background-color: $white;
+    cursor: pointer;
+
+    path {
+        @include transition(fill);
+        fill: $blue;
+    }
+
+    &:hover {
+        background-color: $white;
+        color: rgba($blue, .8);
+
+        path {
+            fill: rgba($blue, .8);
+        }
+    }
+}
 
 .b-area-plan {
     background-color: $bg-map;
