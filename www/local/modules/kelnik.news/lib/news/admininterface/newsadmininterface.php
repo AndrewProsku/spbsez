@@ -126,11 +126,11 @@ class NewsAdminInterface extends AdminInterface
             'CONTENT' => [
                 'NAME' => Loc::getMessage('KELNIK_NEWS_TAB_CONTENT'),
                 'FIELDS' => [
-                    'IMAGE' => [
-                        'WIDGET' => new FileWidget(),
-                        'IMAGE' => true,
-                        'HEADER' => false
-                    ],
+//                    'IMAGE' => [
+//                        'WIDGET' => new FileWidget(),
+//                        'IMAGE' => true,
+//                        'HEADER' => false
+//                    ],
                     'IMAGES' => [
                         'WIDGET' => new FileWidget(),
                         'IMAGE' => true,
