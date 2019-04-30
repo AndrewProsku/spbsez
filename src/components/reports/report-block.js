@@ -66,6 +66,7 @@ class ReportBlock {
 
         const numericInputs = this.target.querySelectorAll(`.${this.numericInputClass}`);
 
+
         if (numericInputs.length) {
             inputmask({
                 alias         : 'numeric',
