@@ -15,7 +15,7 @@ class ApiProcessLogin extends ApiProcessAbstract
 {
     public function execute(array $request): bool
     {
-        global $USER;
+        global $USER, $APPLICATION;
 
         $fields = [
             'email',
@@ -64,6 +64,7 @@ class ApiProcessLogin extends ApiProcessAbstract
         }
 
         if (true === $this->data['auth']) {
+            $APPLICATION->SetAuthResult($this->data['auth']);
             $this->data['backUrl'] = '/cabinet/';
         } else {
             $this->data['error'] = $this->errors[] = strip_tags(ArrayHelper::getValue($this->data['auth'], 'MESSAGE'));
