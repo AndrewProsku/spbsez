@@ -11,3 +11,7 @@
 .b-input-text[data-date="true"] {
     cursor: pointer;
 }
+
+.b-input-text_is_inactive {
+    pointer-events: none;
+}
