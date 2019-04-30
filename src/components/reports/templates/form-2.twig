@@ -11,8 +11,7 @@
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-all",
                     name: "taxes-all",
-                    modify: "b-input-text_type_numeric j-taxes-total-all",
-                    disabled: true
+                    modify: "b-input-text_type_numeric b-input-text_is_inactive j-taxes-total-all"
                 } %}
                 <label class="b-input-block__label" for="taxes-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
             </div>
@@ -20,8 +19,7 @@
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-year",
                     name: "taxes-year",
-                    modify: "b-input-text_type_numeric j-taxes-total-year",
-                    disabled: true
+                    modify: "b-input-text_type_numeric b-input-text_is_inactive j-taxes-total-year"
                 } %}
                 <label class="b-input-block__label" for="taxes-year">С начала текущего года,&#160;млн&#160;₽</label>
             </div>
@@ -137,7 +135,7 @@
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-breaks-all",
                     name: "taxes-breaks-all",
-                    modify: "b-input-text_type_numeric j-taxes-total-all"
+                    modify: "b-input-text_type_numeric b-input-text_is_inactive j-taxes-total-all"
                 } %}
                 <label class="b-input-block__label" for="taxes-breaks-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
             </div>
@@ -145,7 +143,7 @@
                 {% include "../../forms/input-text/input-text.twig" with {
                     id: "taxes-breaks-year",
                     name: "taxes-breaks-year",
-                    modify: "b-input-text_type_numeric j-taxes-total-year"
+                    modify: "b-input-text_type_numeric b-input-text_is_inactive j-taxes-total-year"
                 } %}
                 <label class="b-input-block__label" for="taxes-breaks-year">С начала текущего года,&#160;млн&#160;₽</label>
             </div>
