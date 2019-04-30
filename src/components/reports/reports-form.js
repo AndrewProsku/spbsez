@@ -362,13 +362,9 @@ class ReportForm {
     }
 
     replaceForm(formNumber) {
-        let cachedNode = this.forms[formNumber].template.cloneNode(true);
-
-        Utils.clearHtml(this.target);
+        $(this.target).children()
+            .detach();
         this.insertForm(formNumber);
-
-        this.forms[formNumber].template = cachedNode;
-        cachedNode = null;
     }
 
     insertForm(formNumber) {
