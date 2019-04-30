@@ -362,7 +362,8 @@ class ReportForm {
     }
 
     replaceForm(formNumber) {
-        Utils.clearHtml(this.target);
+        $(this.target).children()
+            .detach();
         this.insertForm(formNumber);
     }
 
