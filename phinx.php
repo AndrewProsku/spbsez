@@ -50,7 +50,7 @@ $res = [
     'version_order' => 'creation'
 ];
 
-if (is_readable('env.lock') && $envName = file_get_contents('env.lock')) {
+if (is_readable('env.lock') && $envName = trim(file_get_contents('env.lock'))) {
     $res['environments']['default_database'] = $envName;
 }
 
