@@ -222,8 +222,24 @@ class NewsTable extends DataManager
         }
 
         try {
-            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:newsList_' . ArrayHelper::getValue($event->getParameters(), 'fields.CAT_ID', 0));
-            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:newsRow_' . ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0));
+
+            $catId     = ArrayHelper::getValue($event->getParameters(), 'fields.CAT_ID', false);
+            $primaryId = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
+
+            if ($primaryId && false === $catId) {
+                $catId = ArrayHelper::getValue(
+                    self::getRow([
+                        'select' => ['CAT_ID'],
+                        'filter' => [
+                            '=ID' => $primaryId
+                        ]
+                    ]),
+                    'CAT_ID'
+                );
+            }
+
+            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:newsList_' . (int)$catId);
+            Application::getInstance()->getTaggedCache()->clearByTag('kelnik:newsRow_' . $primaryId);
         } catch (\Exception $e) {
         }
     }
