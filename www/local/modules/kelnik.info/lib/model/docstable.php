@@ -109,9 +109,23 @@ class DocsTable extends DataManager
         }
 
         try {
-            Main\Application::getInstance()->getTaggedCache()->clearByTag(
-                'kelnik:infoDocsList_' . ArrayHelper::getValue($event->getParameters(), 'fields.TYPE_ID', 0)
-            );
+
+            $primaryId = ArrayHelper::getValue($event->getParameters(), 'primary.ID', 0);
+            $typeId    = ArrayHelper::getValue($event->getParameters(), 'fields.TYPE_ID', false);
+
+            if ($primaryId && false === $typeId) {
+                $typeId = ArrayHelper::getValue(
+                    self::getRow([
+                        'select' => ['TYPE_ID'],
+                        'filter' => [
+                            '=ID' => $primaryId
+                        ]
+                    ]),
+                    'TYPE_ID'
+                );
+            }
+
+            Main\Application::getInstance()->getTaggedCache()->clearByTag('kelnik:infoDocsList_' . (int) $typeId);
         } catch (\Exception $e) {
         }
     }
