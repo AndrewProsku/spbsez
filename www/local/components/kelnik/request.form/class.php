@@ -41,7 +41,7 @@ class RequestForm extends Bbc\Basis
     {
         global $USER;
 
-        if (!$USER->IsAuthorized()) {
+        if ($this->arParams['SUB_TYPE'] === TypeTable::SUB_TYPE_SERVICE || !$USER->IsAuthorized()) {
             return false;
         }
 
