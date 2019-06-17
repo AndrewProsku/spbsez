@@ -16,11 +16,11 @@
     "phpmailer/phpmailer": "^6.0"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "*",
     "sebastian/phpcpd": "*",
     "phpmetrics/phpmetrics": "*",
     "phpmd/phpmd" : "@stable",
-    "symfony/console": "*"
+    "symfony/console": "*",
+    "squizlabs/php_codesniffer": "*"
   },
   "extra": {
     "bitrix-dir": "www/bitrix",

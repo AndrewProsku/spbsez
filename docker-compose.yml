@@ -1,0 +1,50 @@
+version: '3.4'
+
+services:
+  web:
+    container_name: oez_web
+    image: docker.ksdev.ru/php/php-apache:7.1
+    networks:
+      - backend
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - .:/var/www/
+      - ~/.ssh/:/home/developer/.ssh/:ro
+    restart: always
+    user: developer:developer
+    working_dir: /var/www
+
+  node_build:
+    container_name: oez_node_build
+    image: docker.ksdev.ru/nodejs/npm:10.16
+    networks:
+      - frontend
+    volumes:
+      - .:/var/www/
+      - ~/.ssh/:/home/node/.ssh/:ro
+    working_dir: /var/www
+    user: node:node
+    command: >
+      bash -c "if [ ! -d ./node_modules ]; then echo 'Install node modules' && npm i; fi && npm run build"
+
+  node_dev:
+    container_name: oez_node_dev
+    image: docker.ksdev.ru/nodejs/npm:10.16
+    networks:
+      - frontend
+    ports:
+      - 8080:8080
+      - 3001:3001
+    volumes:
+      - .:/var/www/
+      - ~/.ssh/:/home/node/.ssh/:ro
+    working_dir: /var/www
+    user: node:node
+    command: >
+      bash -c "if [ ! -d ./node_modules ]; then echo 'Install node modules' && npm i; fi && npm run dev"
+
+networks:
+  backend:
+  frontend:
