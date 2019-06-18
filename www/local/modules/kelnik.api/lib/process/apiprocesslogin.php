@@ -65,6 +65,7 @@ class ApiProcessLogin extends ApiProcessAbstract
 
         if (true === $this->data['auth']) {
             $APPLICATION->SetAuthResult($this->data['auth']);
+            $USER->CheckAuthActions();
             $this->data['backUrl'] = '/cabinet/';
         } else {
             $this->data['error'] = $this->errors[] = strip_tags(ArrayHelper::getValue($this->data['auth'], 'MESSAGE'));
