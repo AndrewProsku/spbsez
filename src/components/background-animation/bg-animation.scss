@@ -1,3 +1,6 @@
+$ie-none: none;
+$ie-active: active;
+
 .background-particles {
     display: none;
     position: fixed;
@@ -12,5 +15,10 @@
 
     @media #{$laptop} {
         display: block;
+    }
+
+    @media all and (-ms-high-contrast: $ie-none), (-ms-high-contrast: $ie-active) {
+        clip-path: none;
+        clip: rect(0, 0, 0, 0);
     }
 }
