@@ -119,6 +119,10 @@ class Particles {
         this.query = isDesktop.matches;
     }
 
+    isIE(){
+        return document.documentMode || /Edge\//.test(navigator.userAgent);
+    }
+
     init() {
         if (!this.node) {
             return;
@@ -152,8 +156,16 @@ class Particles {
     _clipPath(event) {
         const radius = 120;
         const diameter = 240;
+        const x = event.screenX;
+        const y = event.screenY;
 
-        this.node.style['clip-path'] = `circle(${diameter}px at ${event.screenX}px ${event.screenY - radius}px)`;
+
+        if (this.isIE()) {
+            this.node.style['clip'] = `rect(${y - diameter}px, ${x + radius}px, ${y}px, ${x - radius}px)`;
+        } else {
+            this.node.style['clip-path']         = `circle(${diameter}px at ${x}px ${y - radius}px)`;
+            this.node.style['-webkit-clip-path'] = `circle(${diameter}px at ${x}px ${y - radius}px)`;
+        }
     }
 }
 
