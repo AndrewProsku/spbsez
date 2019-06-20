@@ -123,6 +123,13 @@ class Particles {
         return document.documentMode || /Edge\//.test(navigator.userAgent);
     }
 
+    isSafari(){
+        return navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+            navigator.userAgent &&
+            navigator.userAgent.indexOf('CriOS') === -1 &&
+            navigator.userAgent.indexOf('FxiOS') === -1;
+    }
+
     init() {
         if (!this.node) {
             return;
@@ -162,9 +169,11 @@ class Particles {
 
         if (this.isIE()) {
             this.node.style['clip'] = `rect(${y - diameter}px, ${x + radius}px, ${y}px, ${x - radius}px)`;
-        } else {
-            this.node.style['clip-path']         = `circle(${diameter}px at ${x}px ${y - radius}px)`;
+        } else if (this.isSafari()) {
             this.node.style['-webkit-clip-path'] = `circle(${diameter}px at ${x}px ${y - radius}px)`;
+            this.node.style.webkitTransform = 'scale(1)';
+        } else {
+            this.node.style['clip-path'] = `circle(${diameter}px at ${x}px ${y - radius}px)`;
         }
     }
 }
