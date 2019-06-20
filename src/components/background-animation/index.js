@@ -117,6 +117,7 @@ class Particles {
     constructor(node) {
         this.node = node;
         this.query = isDesktop.matches;
+        this.safariFix = false;
     }
 
     isIE(){
@@ -161,7 +162,6 @@ class Particles {
     }
 
     _clipPath(event) {
-        let safariFix = false;
         const radius = 120;
         const diameter = 240;
         const x = event.screenX;
@@ -171,10 +171,10 @@ class Particles {
         if (this.isIE()) {
             this.node.style['clip'] = `rect(${y - diameter}px, ${x + radius}px, ${y}px, ${x - radius}px)`;
         } else if (this.isSafari()) {
-            safariFix = !safariFix;
+            this.safariFix = !this.safariFix;
 
             this.node.style['-webkit-clip-path'] = `circle(${diameter}px at ${x}px ${y - radius}px)`;
-            this.node.style['-webkit-transform'] = `translateZ(${+safariFix}px)`;
+            this.node.style['-webkit-transform'] = `translateZ(${+this.safariFix}px)`;
         } else {
             this.node.style['clip-path'] = `circle(${diameter}px at ${x}px ${y - radius}px)`;
         }
