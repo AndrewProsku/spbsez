@@ -117,6 +117,18 @@ class Particles {
     constructor(node) {
         this.node = node;
         this.query = isDesktop.matches;
+        this.safariFix = false;
+    }
+
+    isIE(){
+        return document.documentMode || /Edge\//.test(navigator.userAgent);
+    }
+
+    isSafari(){
+        return navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+            navigator.userAgent &&
+            navigator.userAgent.indexOf('CriOS') === -1 &&
+            navigator.userAgent.indexOf('FxiOS') === -1;
     }
 
     init() {
@@ -152,8 +164,20 @@ class Particles {
     _clipPath(event) {
         const radius = 120;
         const diameter = 240;
+        const x = event.screenX;
+        const y = event.screenY;
 
-        this.node.style['clip-path'] = `circle(${diameter}px at ${event.screenX}px ${event.screenY - radius}px)`;
+
+        if (this.isIE()) {
+            this.node.style['clip'] = `rect(${y - diameter}px, ${x + radius}px, ${y}px, ${x - radius}px)`;
+        } else if (this.isSafari()) {
+            this.safariFix = !this.safariFix;
+
+            this.node.style['-webkit-clip-path'] = `circle(${diameter}px at ${x}px ${y - radius}px)`;
+            this.node.style['-webkit-transform'] = `translateZ(${+this.safariFix}px)`;
+        } else {
+            this.node.style['clip-path'] = `circle(${diameter}px at ${x}px ${y - radius}px)`;
+        }
     }
 }
 
