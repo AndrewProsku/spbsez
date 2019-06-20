@@ -174,7 +174,7 @@ class Particles {
             safariFix = !safariFix;
 
             this.node.style['-webkit-clip-path'] = `circle(${diameter}px at ${x}px ${y - radius}px)`;
-            this.node.style.webkitTransform = `translateZ(${!!safariFix}px)`;
+            this.node.style['-webkit-transform'] = `translateZ(${+safariFix}px)`;
         } else {
             this.node.style['clip-path'] = `circle(${diameter}px at ${x}px ${y - radius}px)`;
         }
