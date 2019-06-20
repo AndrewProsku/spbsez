@@ -165,8 +165,6 @@ class Particles {
         } else {
             this.node.style['clip-path']         = `circle(${diameter}px at ${x}px ${y - radius}px)`;
             this.node.style['-webkit-clip-path'] = `circle(${diameter}px at ${x}px ${y - radius}px)`;
-            // eslint-disable-line
-            this.node.offsetWidth; //принудительный триггер reflow, чтобы в прекрасном Сафари триггерился рендер смещения
         }
     }
 }
