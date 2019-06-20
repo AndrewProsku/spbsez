@@ -12,6 +12,7 @@ $ie-active: active;
     left: 0;
     clip-path: circle(0 at 50% 50%);
     pointer-events: none;
+    transform: translateZ(0); // заглушка для нормального перерисовывания в Сафари
 
     @media #{$laptop} {
         display: block;
