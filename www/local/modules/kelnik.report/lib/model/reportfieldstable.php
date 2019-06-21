@@ -553,7 +553,7 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'office-application',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-4'),
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-1-1'),
                                 'type' => 'float'
                             ]
                         ]
@@ -563,7 +563,7 @@ class ReportFieldsTable extends DataManager
                         'fields' => [
                             [
                                 'id' => 'office-rent',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_3-6-4'),
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_4-1-1'),
                                 'type' => 'float'
                             ]
                         ]
