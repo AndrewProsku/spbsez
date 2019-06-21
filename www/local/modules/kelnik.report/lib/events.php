@@ -117,8 +117,19 @@ class Events
                 return true;
             }
 
-            if (!in_array($statusId, [StatusTable::DONE, StatusTable::DECLINED])) {
+            if ($statusId === StatusTable::DONE) {
                 return false;
+            }
+
+            if ($statusId === StatusTable::DECLINED) {
+                // Сообщение резиденту на сайте
+                //
+                NotifyTable::add([
+                    'USER_ID' => $profile->getId(),
+                    'IS_NEW' => NotifyTable::YES,
+                    'NAME' => Loc::getMessage('KELNIK_REPORT_NOTIFY_HEADER_DECLINED', $locParams),
+                    'TEXT' => Loc::getMessage('KELNIK_REPORT_NOTIFY_BODY_DECLINED', $locParams)
+                ]);
             }
 
             // Сообщение резиденту по E-mail
