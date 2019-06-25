@@ -121,17 +121,6 @@ class Events
                 return false;
             }
 
-            if ($statusId === StatusTable::DECLINED) {
-                // Сообщение резиденту на сайте
-                //
-                NotifyTable::add([
-                    'USER_ID' => $profile->getId(),
-                    'IS_NEW' => NotifyTable::YES,
-                    'NAME' => Loc::getMessage('KELNIK_REPORT_NOTIFY_HEADER_DECLINED', $locParams),
-                    'TEXT' => Loc::getMessage('KELNIK_REPORT_NOTIFY_BODY_DECLINED', $locParams)
-                ]);
-            }
-
             // Сообщение резиденту по E-mail
             //
             \Bitrix\Main\Mail\Event::sendImmediate([
@@ -144,6 +133,19 @@ class Events
                     'REPORT_RESIDENT_LINK' => getSiteBaseUrl() . $reportLink
                 ]
             ]);
+
+            if ($statusId === StatusTable::DECLINED) {
+                // Сообщение резиденту на сайте
+                //
+                NotifyTable::add([
+                    'USER_ID' => $profile->getId(),
+                    'IS_NEW' => NotifyTable::YES,
+                    'NAME' => Loc::getMessage('KELNIK_REPORT_NOTIFY_HEADER_DECLINED', $locParams),
+                    'TEXT' => Loc::getMessage('KELNIK_REPORT_NOTIFY_BODY_DECLINED', $locParams)
+                ]);
+
+                return true;
+            }
 
             // Сообщение резиденту на сайте
             //
