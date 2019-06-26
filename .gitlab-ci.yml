@@ -9,7 +9,7 @@ deploy-master:
   script:
   - echo "Deploy master"
   - echo $DEPLOY_PATH
-  - ssh -T oez "cd $DEPLOY_PATH && git pull && php composer.phar install -n --no-dev"
+  - ssh -T oez "cd $DEPLOY_PATH && git pull && php composer.phar install -n --no-dev --no-progress"
   only:
   - master
 
@@ -24,7 +24,7 @@ deploy-dev:
   script:
   - echo "Deploy dev"
   - echo $DEPLOY_PATH
-  - ssh -T ksdev "cd $DEPLOY_PATH && git pull && php7.1 composer.phar install -n"
+  - ssh -T ksdev "cd $DEPLOY_PATH && git pull && php7.1 composer.phar install -n --no-progress"
   only:
   - dev
 
@@ -39,6 +39,6 @@ deploy-test:
   script:
   - echo "Deploy test"
   - echo $DEPLOY_PATH
-  - ssh -T ksdev "cd $DEPLOY_PATH && git pull && php7.1 composer.phar install -n --no-dev"
+  - ssh -T ksdev "cd $DEPLOY_PATH && git pull && php7.1 composer.phar install -n --no-dev --no-progress"
   only:
   - test

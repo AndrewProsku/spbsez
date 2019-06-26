@@ -1,5 +1,11 @@
 version: '3.4'
 
+x-volumes:
+  &project-volumes
+  - .:/var/www/
+  - ~/.ssh/:/home/developer/.ssh/:ro
+
+
 services:
   web:
     container_name: oez_web
@@ -9,9 +15,7 @@ services:
     ports:
       - 80:80
       - 443:443
-    volumes:
-      - .:/var/www/
-      - ~/.ssh/:/home/developer/.ssh/:ro
+    volumes: *project-volumes
     restart: always
     user: developer:developer
     working_dir: /var/www
@@ -21,9 +25,7 @@ services:
     image: docker.ksdev.ru/nodejs/npm:10.16
     networks:
       - frontend
-    volumes:
-      - .:/var/www/
-      - ~/.ssh/:/home/node/.ssh/:ro
+    volumes: *project-volumes
     working_dir: /var/www
     user: node:node
     command: >
@@ -37,9 +39,7 @@ services:
     ports:
       - 8080:8080
       - 3001:3001
-    volumes:
-      - .:/var/www/
-      - ~/.ssh/:/home/node/.ssh/:ro
+    volumes: *project-volumes
     working_dir: /var/www
     user: node:node
     command: >
