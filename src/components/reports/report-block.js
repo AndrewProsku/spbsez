@@ -285,13 +285,13 @@ class ReportBlock {
 
     initInnovationsBlock(data) {
         this.inputsData.fields = [];
-        data.innovations.forEach((innovation) => {
+        data.innovations.forEach((innovation, index) => {
             this.inputsData.fields.push(innovation.fields);
             innovation.fields.forEach((field) => {
                 this.inputsData.fields.push(field);
             });
             // eslint-disable-next-line no-magic-numbers
-            const isInnovationDeletable = data.innovations.length > 1 && !this.isReadonly;
+            const isInnovationDeletable = data.innovations.length > 1 && !this.isReadonly && index;
 
             this.insertInnovationForm(innovation.ID, isInnovationDeletable);
         });
@@ -515,7 +515,11 @@ class ReportBlock {
                             } else if (fieldData.isPreFilled && !input.closest(`.${this.permissionFormClass}`)) {
                                 input.dataset.prefilled = '';
                             }
-                            input.value = fieldData.value;
+
+                            if (fieldData.value) {
+                                input.value = fieldData.value;
+                            }
+
                             break;
                         }
                         case 'file': {
@@ -540,7 +544,11 @@ class ReportBlock {
                                 input.closest('.b-input-block').classList.add(this.untouchedIputClass);
                                 input.dataset.prefilled = '';
                             }
-                            input.value = fieldData.value;
+
+                            if (fieldData.value) {
+                                input.value = fieldData.value;
+                            }
+
                             break;
                         }
                     }
@@ -1096,10 +1104,7 @@ class ReportBlock {
                 delete that.inputsStatus[`innovation[${input.dataset.id}]`];
                 that.setBlockStatus();
 
-                // Если осталась только одна группа - её нельзя удалять
-                const onlyOne = 1;
-
-                if (innovationsBlock.querySelectorAll(`.j-delete-innovation`).length === onlyOne) {
+                if (!innovationsBlock.querySelectorAll(`.j-delete-innovation`).length) {
                     Utils.removeElement(innovationsBlock.querySelector(`.j-delete-innovation`));
                 }
             },
