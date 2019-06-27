@@ -1093,7 +1093,6 @@ class ReportBlock {
 
     removeInnovation(input) {
         const that = this;
-        const innovationsBlock = this.target.querySelector(`.j-innovations-block`);
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
 
         Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.id}`, this.baseUrl, {
@@ -1109,10 +1108,6 @@ class ReportBlock {
                 // Сбрасываем статус блока после удаления стадии
                 delete that.inputsStatus[`innovation[${input.dataset.id}]`];
                 that.setBlockStatus();
-
-                if (!innovationsBlock.querySelectorAll(`.j-delete-innovation`).length) {
-                    Utils.removeElement(innovationsBlock.querySelector(`.j-delete-innovation`));
-                }
             },
             error(error) {
                 console.error(error);
