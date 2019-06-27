@@ -526,8 +526,8 @@ class ReportBlock {
                                 this.handleErrorField(input, fieldData.error);
                             }
 
-                            pseudoInput.textContent = fieldData.value;
                             if (fieldData.value) {
+                                pseudoInput.textContent = fieldData.value;
                                 Utils.hide(fileInputWrapper.querySelector('.b-input-file__add'));
                                 Utils.show(fileInputWrapper.querySelector('.b-input-file__delete'));
                             }
