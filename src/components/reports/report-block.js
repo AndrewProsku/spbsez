@@ -531,7 +531,7 @@ class ReportBlock {
                                 this.handleErrorField(input, fieldData.error);
                             }
 
-                            if (fieldData.value) {
+                            if (fieldData.value && !isUserChanged) {
                                 pseudoInput.textContent = fieldData.value;
                                 Utils.hide(fileInputWrapper.querySelector('.b-input-file__add'));
                                 Utils.show(fileInputWrapper.querySelector('.b-input-file__delete'));
@@ -546,7 +546,7 @@ class ReportBlock {
                                 input.dataset.prefilled = '';
                             }
 
-                            if (fieldData.value) {
+                            if (fieldData.value && !isUserChanged) {
                                 input.value = fieldData.value;
                             }
 
@@ -848,6 +848,10 @@ class ReportBlock {
 
                 // Сбрасываем статус блока после удаления стадии
                 delete that.inputsStatus[`construction-stage[${input.dataset.stageId}]`];
+                delete that.inputsStatus[`construction-permission-date[${input.dataset.stageId}]`];
+                delete that.inputsStatus[`construction-permission-file[${input.dataset.stageId}]`];
+                delete that.inputsStatus[`construction-permission-num[${input.dataset.stageId}]`];
+
                 that.setBlockStatus();
 
                 // Если осталась только одна стадия - её нельзя удалять
