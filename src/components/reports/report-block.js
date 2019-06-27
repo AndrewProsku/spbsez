@@ -91,7 +91,7 @@ class ReportBlock {
         }
 
         this.inputs = Array.from(this.target.querySelectorAll('input, select, textarea'));
-        this._getInputsValues();
+        this._getInputsValues(false);
         this._bindInputsEvents(this.inputs);
 
         if (this.isReadonly) {
@@ -494,8 +494,9 @@ class ReportBlock {
     /* eslint-disable max-lines-per-function, max-statements */
     /**
      * Заполнение инпутов данными с сервера и выставлнеие статуса блоку формы (зеленый фон)
+     * @param {Boolean} isUserChanged - флаг, который определяет, была ли вызвана функция по действию пользователя
      */
-    _getInputsValues() {
+    _getInputsValues(isUserChanged) {
         this.inputs.forEach((input) => {
             this.inputsData.fields.forEach((fieldData) => {
                 if (input.id === fieldData.id) {
@@ -516,7 +517,7 @@ class ReportBlock {
                                 input.dataset.prefilled = '';
                             }
 
-                            if (fieldData.value) {
+                            if (fieldData.value && !isUserChanged) {
                                 input.value = fieldData.value;
                             }
 
@@ -797,6 +798,7 @@ class ReportBlock {
             stageID,
             deletable
         }));
+
         if (hasExtraForm) {
             const stageSelect = this.target.querySelector(`.${this.stageSelectClass}[data-stage-id="${stageID}"]`);
 
@@ -894,7 +896,7 @@ class ReportBlock {
         this.sendNewValue(event.target);
 
         this.inputs = Array.from(this.target.querySelectorAll('input:not(.chosen-search-input), select, textarea'));
-        this._getInputsValues();
+        this._getInputsValues(true);
     }
 
     addStage() {
