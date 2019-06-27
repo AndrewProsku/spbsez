@@ -91,7 +91,7 @@ class ReportBlock {
         }
 
         this.inputs = Array.from(this.target.querySelectorAll('input, select, textarea'));
-        this._getInputsValues();
+        this._getInputsValues(false);
         this._bindInputsEvents(this.inputs);
 
         if (this.isReadonly) {
@@ -285,13 +285,13 @@ class ReportBlock {
 
     initInnovationsBlock(data) {
         this.inputsData.fields = [];
-        data.innovations.forEach((innovation) => {
+        data.innovations.forEach((innovation, index) => {
             this.inputsData.fields.push(innovation.fields);
             innovation.fields.forEach((field) => {
                 this.inputsData.fields.push(field);
             });
             // eslint-disable-next-line no-magic-numbers
-            const isInnovationDeletable = data.innovations.length > 1 && !this.isReadonly;
+            const isInnovationDeletable = data.innovations.length > 1 && !this.isReadonly && index;
 
             this.insertInnovationForm(innovation.ID, isInnovationDeletable);
         });
@@ -494,8 +494,9 @@ class ReportBlock {
     /* eslint-disable max-lines-per-function, max-statements */
     /**
      * Заполнение инпутов данными с сервера и выставлнеие статуса блоку формы (зеленый фон)
+     * @param {Boolean} isUserChanged - флаг, который определяет, была ли вызвана функция по действию пользователя
      */
-    _getInputsValues() {
+    _getInputsValues(isUserChanged) {
         this.inputs.forEach((input) => {
             this.inputsData.fields.forEach((fieldData) => {
                 if (input.id === fieldData.id) {
@@ -515,7 +516,11 @@ class ReportBlock {
                             } else if (fieldData.isPreFilled && !input.closest(`.${this.permissionFormClass}`)) {
                                 input.dataset.prefilled = '';
                             }
-                            input.value = fieldData.value;
+
+                            if (fieldData.value && !isUserChanged) {
+                                input.value = fieldData.value;
+                            }
+
                             break;
                         }
                         case 'file': {
@@ -526,8 +531,8 @@ class ReportBlock {
                                 this.handleErrorField(input, fieldData.error);
                             }
 
-                            pseudoInput.textContent = fieldData.value;
-                            if (fieldData.value) {
+                            if (fieldData.value && !isUserChanged) {
+                                pseudoInput.textContent = fieldData.value;
                                 Utils.hide(fileInputWrapper.querySelector('.b-input-file__add'));
                                 Utils.show(fileInputWrapper.querySelector('.b-input-file__delete'));
                             }
@@ -540,7 +545,11 @@ class ReportBlock {
                                 input.closest('.b-input-block').classList.add(this.untouchedIputClass);
                                 input.dataset.prefilled = '';
                             }
-                            input.value = fieldData.value;
+
+                            if (fieldData.value && !isUserChanged) {
+                                input.value = fieldData.value;
+                            }
+
                             break;
                         }
                     }
@@ -789,6 +798,7 @@ class ReportBlock {
             stageID,
             deletable
         }));
+
         if (hasExtraForm) {
             const stageSelect = this.target.querySelector(`.${this.stageSelectClass}[data-stage-id="${stageID}"]`);
 
@@ -838,6 +848,10 @@ class ReportBlock {
 
                 // Сбрасываем статус блока после удаления стадии
                 delete that.inputsStatus[`construction-stage[${input.dataset.stageId}]`];
+                delete that.inputsStatus[`construction-permission-date[${input.dataset.stageId}]`];
+                delete that.inputsStatus[`construction-permission-file[${input.dataset.stageId}]`];
+                delete that.inputsStatus[`construction-permission-num[${input.dataset.stageId}]`];
+
                 that.setBlockStatus();
 
                 // Если осталась только одна стадия - её нельзя удалять
@@ -886,7 +900,7 @@ class ReportBlock {
         this.sendNewValue(event.target);
 
         this.inputs = Array.from(this.target.querySelectorAll('input:not(.chosen-search-input), select, textarea'));
-        this._getInputsValues();
+        this._getInputsValues(true);
     }
 
     addStage() {
@@ -1079,7 +1093,6 @@ class ReportBlock {
 
     removeInnovation(input) {
         const that = this;
-        const innovationsBlock = this.target.querySelector(`.j-innovations-block`);
         const elementsToDelete = Array.from(this.target.querySelectorAll(`[data-id="${input.dataset.id}"]`));
 
         Utils.send(`a=delGroup&id=${this.reportId}&typeId=${input.dataset.id}`, this.baseUrl, {
@@ -1095,13 +1108,6 @@ class ReportBlock {
                 // Сбрасываем статус блока после удаления стадии
                 delete that.inputsStatus[`innovation[${input.dataset.id}]`];
                 that.setBlockStatus();
-
-                // Если осталась только одна группа - её нельзя удалять
-                const onlyOne = 1;
-
-                if (innovationsBlock.querySelectorAll(`.j-delete-innovation`).length === onlyOne) {
-                    Utils.removeElement(innovationsBlock.querySelector(`.j-delete-innovation`));
-                }
             },
             error(error) {
                 console.error(error);
