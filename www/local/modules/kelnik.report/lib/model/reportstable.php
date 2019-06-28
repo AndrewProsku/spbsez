@@ -401,9 +401,6 @@ class ReportsTable extends DataManager
 
     public static function getCurrentTime()
     {
-        // TODO: remove for production
-        return mktime(0, 0, 0, 4, 2, 2019);
-        
         $envPath = Application::getDocumentRoot() . '/../env.lock';
 
         if (!self::$env && file_exists($envPath)) {

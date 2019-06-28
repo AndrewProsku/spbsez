@@ -5,7 +5,6 @@ x-volumes:
   - .:/var/www/
   - ~/.ssh/:/home/developer/.ssh/:ro
 
-
 services:
   web:
     container_name: oez_web
