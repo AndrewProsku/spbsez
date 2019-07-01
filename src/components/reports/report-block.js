@@ -681,9 +681,9 @@ class ReportBlock {
 
         // Дополнительные поля в блоках "Стадия строительства" не обяательны для заполнения
         // поэтому если в них нет ошибок они считаются заполненными
-        // return input.closest(`.${this.permissionFormClass}`) ? 'filled' : 'empty';
+        return input.closest(`.${this.permissionFormClass}`) ? 'filled' : 'empty';
         // Теперь эти поля обзятельны для заполнения
-        return 'empty';
+        // return 'empty';
     }
 
     /* eslint-disable max-lines-per-function, max-statements */
