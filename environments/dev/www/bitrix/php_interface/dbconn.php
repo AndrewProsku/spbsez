@@ -2,10 +2,10 @@
 define("BX_USE_MYSQLI", true);
 define("DBPersistent", false);
 $DBType = "mysql";
-$DBHost = "ksdev.ru";
-$DBLogin = "oez-d";
-$DBPassword = "q3rSx#16";
-$DBName = "oez-d";
+$DBHost = "dev.ksdev.ru";
+$DBLogin = "c3oez_d";
+$DBPassword = "rct@S8SsUJ4";
+$DBName = "c3oez_d";
 $DBDebug = false;
 $DBDebugToFile = false;
 
