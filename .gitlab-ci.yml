@@ -19,12 +19,13 @@ deploy-dev:
     name: dev
     url: http://oez-d.ksdev.ru
   variables:
-    DEPLOY_PATH : "~/oez.ksdev.ru/dev/"
+    DEPLOY_PATH : "/var/www/oez-d.ksdev.ru/web/"
     GIT_STRATEGY: none
+    BECOME_USER: "sudo -u `stat -c %U ../web`"
   script:
   - echo "Deploy dev"
   - echo $DEPLOY_PATH
-  - ssh -T ksdev "cd $DEPLOY_PATH && git pull && php7.1 composer.phar install -n --no-progress"
+  - ssh -T dev.ksdev.ru "cd $DEPLOY_PATH && $BECOME_USER git remote set-url origin $CI_REPOSITORY_URL && $BECOME_USER git pull && $BECOME_USER php7.1 composer.phar install -n --no-progress"
   only:
   - dev
 
@@ -34,11 +35,12 @@ deploy-test:
     name: test
     url: http://oez-t.ksdev.ru
   variables:
-    DEPLOY_PATH : "~/oez.ksdev.ru/test/"
+    DEPLOY_PATH : "/var/www/oez-t.ksdev.ru/web/"
     GIT_STRATEGY: none
+    BECOME_USER: "sudo -u `stat -c %U ../web`"
   script:
   - echo "Deploy test"
   - echo $DEPLOY_PATH
-  - ssh -T ksdev "cd $DEPLOY_PATH && git pull && php7.1 composer.phar install -n --no-dev --no-progress"
+  - ssh -T dev.ksdev.ru "cd $DEPLOY_PATH && $BECOME_USER git remote set-url origin $CI_REPOSITORY_URL && $BECOME_USER git pull && $BECOME_USER php7.1 composer.phar install -n --no-dev --no-progress"
   only:
   - test

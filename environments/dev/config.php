@@ -3,10 +3,10 @@ return [
     'settings' => [
         'connections' => [
             'default' => [
-                'host' => 'ksdev.ru',
-                'database' => 'oez-d',
-                'login' => 'oez-d',
-                'password' => 'q3rSx#16',
+                'host' => 'dev.ksdev.ru',
+                'database' => 'c3oez_d',
+                'login' => 'c3oez_d',
+                'password' => 'rct@S8SsUJ4',
                 'className' => '\\Bitrix\\Main\\DB\\MysqliConnection',
                 'options' => 2,
             ],
