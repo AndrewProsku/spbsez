@@ -154,36 +154,40 @@ class ReportsExportHelper extends AdminBaseHelper
             <tr>
                 <td>
                     <div class="report-export-wrapper">
-                        <div class="export-block-row">
-                            <div class="export-block">
-                                <label for="residents"><?= Loc::getMessage('KELNIK_REPORT_EXPORT_RESIDENT'); ?></label>
-                                <select id="residents" name="residents[]" multiple="multiple">
-                                    <?php foreach ($this->companies as $residentId => $resident): ?>
-                                        <option value="<?= $residentId; ?>"><?= $resident; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="export-block">
-                                <label for="period"><?= Loc::getMessage('KELNIK_REPORT_EXPORT_PERIOD'); ?></label>
-                                <select id="period" name="period">
-                                    <?php
-                                        $year = (int) current($this->periods)['YEAR'];
-                                    ?>
-                                    <optgroup label="<?= $year; ?>">
-                                        <?php foreach ($this->periods as $period): ?>
-                                            <?php if((int)$period['YEAR'] !== $year): ?>
-                                                </optgroup>
-                                                <optgroup label="<?= $year = (int)$period['YEAR']; ?>">
-                                            <?php endif; ?>
-                                            <option value="<?= $period['ID']; ?>"><?= $period['NAME']; ?></option>
+                        <?php if(!$this->periods): ?>
+                            На данный момент список сданных отчетов пуст
+                        <?php else: ?>
+                            <div class="export-block-row">
+                                <div class="export-block">
+                                    <label for="residents"><?= Loc::getMessage('KELNIK_REPORT_EXPORT_RESIDENT'); ?></label>
+                                    <select id="residents" name="residents[]" multiple="multiple">
+                                        <?php foreach ($this->companies as $residentId => $resident): ?>
+                                            <option value="<?= $residentId; ?>"><?= $resident; ?></option>
                                         <?php endforeach; ?>
-                                    </optgroup>
-                                </select>
+                                    </select>
+                                </div>
+                                <div class="export-block">
+                                    <label for="period"><?= Loc::getMessage('KELNIK_REPORT_EXPORT_PERIOD'); ?></label>
+                                    <select id="period" name="period">
+                                        <?php
+                                            $year = (int) current($this->periods)['YEAR'];
+                                        ?>
+                                        <optgroup label="<?= $year; ?>">
+                                            <?php foreach ($this->periods as $period): ?>
+                                                <?php if((int)$period['YEAR'] !== $year): ?>
+                                                    </optgroup>
+                                                    <optgroup label="<?= $year = (int)$period['YEAR']; ?>">
+                                                <?php endif; ?>
+                                                <option value="<?= $period['ID']; ?>"><?= $period['NAME']; ?></option>
+                                            <?php endforeach; ?>
+                                        </optgroup>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="export-block-row adm-detail-content-btns">
-                            <input class="adm-btn-save" type="submit" value="<?= Loc::getMessage('KELNIK_REPORT_EXPORT_BTN'); ?>">
-                        </div>
+                            <div class="export-block-row adm-detail-content-btns">
+                                <input class="adm-btn-save" type="submit" value="<?= Loc::getMessage('KELNIK_REPORT_EXPORT_BTN'); ?>">
+                            </div>
+                    <?php endif; ?>
                     </div>
                 </td>
             </tr>
