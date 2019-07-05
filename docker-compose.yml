@@ -1,9 +1,8 @@
 version: '3.4'
 
 x-volumes:
-  &project-volumes
-  - .:/var/www/
-  - ~/.ssh/:/home/developer/.ssh/:ro
+  - &project .:/var/www/
+  - &node-ssh ~/.ssh/:/home/node/.ssh/:ro
 
 services:
   web:
@@ -14,7 +13,9 @@ services:
     ports:
       - 80:80
       - 443:443
-    volumes: *project-volumes
+    volumes:
+      - *project
+      -  ~/.ssh/:/home/developer/.ssh/:ro
     restart: always
     user: developer:developer
     working_dir: /var/www
@@ -24,7 +25,9 @@ services:
     image: docker.ksdev.ru/nodejs/npm:10.16
     networks:
       - frontend
-    volumes: *project-volumes
+    volumes:
+      - *project
+      - *node-ssh
     working_dir: /var/www
     user: node:node
     command: >
@@ -38,7 +41,9 @@ services:
     ports:
       - 8080:8080
       - 3001:3001
-    volumes: *project-volumes
+    volumes:
+      - *project
+      - *node-ssh
     working_dir: /var/www
     user: node:node
     command: >
