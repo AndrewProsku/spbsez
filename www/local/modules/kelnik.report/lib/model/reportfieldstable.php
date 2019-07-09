@@ -823,7 +823,7 @@ class ReportFieldsTable extends DataManager
             ],
             'stage4' => [
                 'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE4'),
-                'extra' => true
+                'extra' => false
             ],
             'stage5' => [
                 'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE5'),
@@ -831,7 +831,7 @@ class ReportFieldsTable extends DataManager
             ],
             'stage6' => [
                 'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE6'),
-                'extra' => true
+                'extra' => false
             ],
             'stage7' => [
                 'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE7'),
