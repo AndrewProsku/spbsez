@@ -771,8 +771,8 @@ class ReportFieldsTable extends DataManager
     public static function getFieldTypes()
     {
         return [
-            'float' => function($val) {
-                return (float) round(self::normalizeDigital($val), 2);
+            'float' => function ($val) {
+                return self::normalizeFloat($val);
             },
             'int' => function ($val) {
                 return (int) self::normalizeDigital($val);
@@ -823,7 +823,7 @@ class ReportFieldsTable extends DataManager
             ],
             'stage4' => [
                 'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE4'),
-                'extra' => true
+                'extra' => false
             ],
             'stage5' => [
                 'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE5'),
@@ -831,7 +831,7 @@ class ReportFieldsTable extends DataManager
             ],
             'stage6' => [
                 'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE6'),
-                'extra' => true
+                'extra' => false
             ],
             'stage7' => [
                 'name' => Loc::getMessage('KELNIK_REPORT_FIELDS_STAGE7'),
@@ -843,5 +843,12 @@ class ReportFieldsTable extends DataManager
     public static function normalizeDigital($val)
     {
         return str_replace([' ', ','], ['', '.'], $val);
+    }
+
+    public static function normalizeFloat($val)
+    {
+        $val = self::normalizeDigital($val);
+
+        return bcadd($val, 0, 4);
     }
 }

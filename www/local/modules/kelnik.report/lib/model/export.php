@@ -217,7 +217,7 @@ class Export
                 } elseif ($valueName === 'investors-countries' && !$val) {
                     $val = 'Россия';
                 } else {
-                    $val = self::normalizeFloat($val);
+                    $val = ReportFieldsTable::normalizeFloat($val);
                 }
 
                 $sheet->setCellValue($colName . $rowNum, $val);
@@ -284,12 +284,12 @@ class Export
                     $k = 1;
                 }
 
-                $total[$k] += (float) ArrayHelper::getValue($company, 'FIELDS.0.' . $sumField);
+                $total[$k] = bcadd($total[$k], ArrayHelper::getValue($company, 'FIELDS.0.' . $sumField), 4);
             }
 
             foreach ($valueToCell as $cellName => $valueName) {
                 $val = trim(ArrayHelper::getValue($company, 'FIELDS.0.' . $valueName));
-                $val = self::normalizeFloat($val);
+                $val = ReportFieldsTable::normalizeFloat($val);
 
                 $sheet->setCellValue($cellName . $rowNum, $val);
             }
@@ -343,7 +343,7 @@ class Export
 
             foreach ($valueToCell as $cellName => $valueName) {
                 $val = trim(ArrayHelper::getValue($company, 'FIELDS.0.' . $valueName));
-                $val = self::normalizeFloat($val);
+                $val = ReportFieldsTable::normalizeFloat($val);
 
                 $sheet->setCellValue($cellName . $rowNum, $val);
             }
@@ -386,7 +386,7 @@ class Export
 
             foreach ($valueToCell as $cellName => $valueName) {
                 $val = trim(ArrayHelper::getValue($company, 'FIELDS.0.' . $valueName));
-                $val = self::normalizeFloat($val);
+                $val = ReportFieldsTable::normalizeFloat($val);
 
                 $sheet->setCellValue($cellName . $rowNum, $val);
             }
@@ -448,7 +448,7 @@ class Export
                 if ($valueName == 'high-tech-production') {
                     $val = $val == 'yes' ? 'да' : 'нет';
                 } else {
-                    $val = self::normalizeFloat($val);
+                    $val = ReportFieldsTable::normalizeFloat($val);
                 }
 
                 $sheet->setCellValue($cellName . $rowNum, $val);
@@ -496,7 +496,7 @@ class Export
 
             foreach ($valueToCell as $cellName => $valueName) {
                 $val = trim(ArrayHelper::getValue($company, 'FIELDS.0.' . $valueName));
-                $val = self::normalizeFloat($val);
+                $val = ReportFieldsTable::normalizeFloat($val);
 
                 $sheet->setCellValue($cellName . $rowNum, $val);
             }
@@ -688,11 +688,6 @@ class Export
         return '«' . date('d') . '» ' .
                 mb_strtolower(FormatDate('F')) . ' ' .
                 date('Y') . ' года';
-    }
-
-    protected static function normalizeFloat($val)
-    {
-        return str_replace(',', '.', $val);
     }
 
     /**
