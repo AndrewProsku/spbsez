@@ -27,3 +27,7 @@
         <button class="button b-vacancy__button j-message-submit"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_FORM_SEND'); ?></button>
     </form>
 </div>
+
+<div id="#error" class="b-message-popup">
+    <h3 class="b-message-popup__header"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_WRITE_MESSAGES'); ?></h3>
+</div>

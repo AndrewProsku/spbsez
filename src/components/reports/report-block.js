@@ -11,6 +11,10 @@ import templateStageForm from './templates/stage-block.twig';
 import templateTooltip from 'components/tooltip/custom-tooltip.twig';
 import Tooltip from 'components/tooltip/';
 import Utils from '../../common/scripts/utils';
+import Popup from "components/popup";
+import vacanciesPopupTemplate from "components/popup/popup-vacancies.twig";
+import Vacancy from "components/vacancy";
+import Service from "components/service-popup";
 
 const mediator = new Mediator();
 
@@ -66,13 +70,19 @@ class ReportBlock {
 
         const numericInputs = this.target.querySelectorAll(`.${this.numericInputClass}`);
 
-
         if (numericInputs.length) {
             inputmask({
-                alias         : 'numeric',
+                regex: '[0-9,]*',
+                alias: 'numeric',
                 rightAlign    : false,
                 autoGroup     : true,
-                groupSeparator: ' '
+                groupSeparator: ' ',
+                radixPoint: ',',
+                onBeforeWrite: function (event, buffer, caretPos, opts) {
+                    if (buffer.indexOf(',') != -1) {
+                        buffer[buffer.indexOf(',')] = '.';
+                    }
+                }
             }).mask(numericInputs);
         }
 
@@ -774,6 +784,14 @@ class ReportBlock {
                     }
 
                     that.setBlockStatus();
+
+                    const data = {
+                        id: '#error'
+                    };
+                    mediator.publish('successRequest', data);
+
+                    console.log(response);
+
                 },
                 error(error) {
                     console.error(error);

@@ -13,6 +13,9 @@ import Language from '../language';
 import Mediator from 'common/scripts/mediator';
 import template from 'components/popup/popup.twig';
 import Utils from 'common/scripts/utils';
+import Message from "components/message-popup";
+import Service from "components/service-popup";
+import servicePopupTemplate from "components/service-popup/service-popup.twig";
 
 const Lang = new Language();
 
@@ -26,6 +29,7 @@ class Popup {
         this.target = options.target;
         this.closeButtonAriaLabel = options.closeButtonAriaLabel || Lang.get('popup.closeAriaLabel');
         this.stateClass = 'b-popup_state_open';
+
         this.bindEvents();
     }
 
@@ -33,16 +37,27 @@ class Popup {
      * Вешаем слушателей событий
      */
     bindEvents() {
-        this.target.addEventListener('click', (event) => {
-            event.preventDefault();
-            this.id = this.target.dataset.href;
-            this.slug = this.target.dataset.id || '';
+        if(this.target) {
+            this.target.addEventListener('click', (event) => {
+                event.preventDefault();
+                this.id = this.target.dataset.href;
+                this.slug = this.target.dataset.id || '';
+                this.makeOpen();
 
-            this.makeOpen();
-        });
+                console.log(this);
+            });
+        }
 
         document.addEventListener('keyup', (element) => {
             this.closeOnPressButton(element);
+        });
+
+        mediator.subscribe('successRequest', (data) => {
+            this.id = data.id;
+            this.slug = '';
+
+            this.makeOpen();
+            console.log(this);
         });
     }
 
