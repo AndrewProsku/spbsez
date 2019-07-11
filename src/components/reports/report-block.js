@@ -46,7 +46,7 @@ class ReportBlock {
         this.textInputTimeout = 0;
     }
 
-    /* eslint-disable max-statements, max-lines-per-function */
+    /* eslint-disable */
     init(options) {
         this.target = options.target;
         this.formID = options.formID;
@@ -66,13 +66,18 @@ class ReportBlock {
 
         const numericInputs = this.target.querySelectorAll(`.${this.numericInputClass}`);
 
-
         if (numericInputs.length) {
             inputmask({
                 alias         : 'numeric',
                 rightAlign    : false,
                 autoGroup     : true,
-                groupSeparator: ' '
+                groupSeparator: ' ',
+                radixPoint    : ',',
+                onBeforeWrite : function(event, buffer) {
+                    if (buffer.indexOf(',') !== -1) {
+                        buffer[buffer.indexOf(',')] = '.';
+                    }
+                }
             }).mask(numericInputs);
         }
 
@@ -103,7 +108,7 @@ class ReportBlock {
         // Инициализация тултипов
         this.initTooltips();
     }
-    /* eslint-enable max-statements, max-lines-per-function */
+    /* eslint-enable */
 
     approveFormHandler(formID) {
         if (formID !== this.formID) {
