@@ -37,27 +37,15 @@ class Popup {
      * Вешаем слушателей событий
      */
     bindEvents() {
-        if(this.target) {
-            this.target.addEventListener('click', (event) => {
-                event.preventDefault();
-                this.id = this.target.dataset.href;
-                this.slug = this.target.dataset.id || '';
-                this.makeOpen();
-
-                console.log(this);
-            });
-        }
+        this.target.addEventListener('click', (event) => {
+            event.preventDefault();
+            this.id = this.target.dataset.href;
+            this.slug = this.target.dataset.id || '';
+            this.makeOpen();
+        });
 
         document.addEventListener('keyup', (element) => {
             this.closeOnPressButton(element);
-        });
-
-        mediator.subscribe('successRequest', (data) => {
-            this.id = data.id;
-            this.slug = '';
-
-            this.makeOpen();
-            console.log(this);
         });
     }
 
@@ -97,10 +85,13 @@ class Popup {
      * Проверка типа попапа - статика/ajax.
      */
     contentTypeCheck() {
+        console.log(this.target);
         const dataAttributeHref = this.target.dataset.href;
         const dataAttributeAjax = this.target.dataset.ajax;
         const dataAttributeAjaxData = $.param(this.target.dataset);
         let dataAttributeJson = this.target.dataset.json;
+
+        console.log(dataAttributeHref, dataAttributeAjax, dataAttributeAjaxData, dataAttributeJson);
 
         if (dataAttributeJson) {
             dataAttributeJson = atob(dataAttributeJson);

@@ -12,9 +12,7 @@ import templateTooltip from 'components/tooltip/custom-tooltip.twig';
 import Tooltip from 'components/tooltip/';
 import Utils from '../../common/scripts/utils';
 import Popup from "components/popup";
-import vacanciesPopupTemplate from "components/popup/popup-vacancies.twig";
-import Vacancy from "components/vacancy";
-import Service from "components/service-popup";
+import warningPopupTemplate from "components/warning-popup/warning-popup.twig";
 
 const mediator = new Mediator();
 
@@ -70,19 +68,13 @@ class ReportBlock {
 
         const numericInputs = this.target.querySelectorAll(`.${this.numericInputClass}`);
 
+
         if (numericInputs.length) {
             inputmask({
-                regex: '[0-9,]*',
-                alias: 'numeric',
+                alias         : 'numeric',
                 rightAlign    : false,
                 autoGroup     : true,
-                groupSeparator: ' ',
-                radixPoint: ',',
-                onBeforeWrite: function (event, buffer, caretPos, opts) {
-                    if (buffer.indexOf(',') != -1) {
-                        buffer[buffer.indexOf(',')] = '.';
-                    }
-                }
+                groupSeparator: ' '
             }).mask(numericInputs);
         }
 
@@ -785,10 +777,22 @@ class ReportBlock {
 
                     that.setBlockStatus();
 
-                    const data = {
-                        id: '#error'
-                    };
-                    mediator.publish('successRequest', data);
+                    /**
+                     * Инициализация попапа для страницы услуг
+                     */
+
+                    const warningPopupButton = document.querySelector('.j-error-button');
+
+                    if (warningPopupButton) {
+                        const warning = new Popup();
+
+                        warning.init({
+                            target              : warningPopupButton,
+                            template            : warningPopupTemplate,
+                            closeButtonAriaLabel: 'Закрыть'
+                        });
+                    }
+                    warningPopupButton.click();
 
                     console.log(response);
 
