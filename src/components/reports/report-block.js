@@ -791,11 +791,9 @@ class ReportBlock {
                             template            : warningPopupTemplate,
                             closeButtonAriaLabel: 'Закрыть'
                         });
+
+                        warning.makeOpen();
                     }
-                    warningPopupButton.click();
-
-                    console.log(response);
-
                 },
                 error(error) {
                     console.error(error);

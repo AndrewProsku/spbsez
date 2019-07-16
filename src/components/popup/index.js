@@ -13,9 +13,9 @@ import Language from '../language';
 import Mediator from 'common/scripts/mediator';
 import template from 'components/popup/popup.twig';
 import Utils from 'common/scripts/utils';
-import Message from "components/message-popup";
+/*import Message from "components/message-popup";
 import Service from "components/service-popup";
-import servicePopupTemplate from "components/service-popup/service-popup.twig";
+import servicePopupTemplate from "components/service-popup/service-popup.twig";*/
 
 const Lang = new Language();
 
@@ -85,13 +85,10 @@ class Popup {
      * Проверка типа попапа - статика/ajax.
      */
     contentTypeCheck() {
-        console.log(this.target);
         const dataAttributeHref = this.target.dataset.href;
         const dataAttributeAjax = this.target.dataset.ajax;
         const dataAttributeAjaxData = $.param(this.target.dataset);
         let dataAttributeJson = this.target.dataset.json;
-
-        console.log(dataAttributeHref, dataAttributeAjax, dataAttributeAjaxData, dataAttributeJson);
 
         if (dataAttributeJson) {
             dataAttributeJson = atob(dataAttributeJson);
