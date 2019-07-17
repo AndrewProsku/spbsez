@@ -2,7 +2,7 @@ version: '3.4'
 
 x-volumes:
   - &project .:/var/www/
-  - &node-ssh ~/.ssh/:/home/node/.ssh/:ro
+  - &ssh ~/.ssh/:/root/.ssh/:ro
 
 services:
   web:
@@ -15,7 +15,7 @@ services:
       - 443:443
     volumes:
       - *project
-      -  ~/.ssh/:/home/developer/.ssh/:ro
+      - *ssh
     restart: always
     user: developer:developer
     working_dir: /var/www
@@ -27,7 +27,7 @@ services:
       - frontend
     volumes:
       - *project
-      - *node-ssh
+      - *ssh
     working_dir: /var/www
     user: node:node
     command: >
@@ -43,7 +43,7 @@ services:
       - 3001:3001
     volumes:
       - *project
-      - *node-ssh
+      - *ssh
     working_dir: /var/www
     user: node:node
     command: >
