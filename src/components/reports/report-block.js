@@ -2,6 +2,7 @@ import $ from 'jquery';
 import InputFile from 'components/forms/file';
 import inputmask from 'inputmask';
 import Mediator from 'common/scripts/mediator';
+import Popup from 'components/popup';
 import Select from 'components/forms/select';
 import templateError from './templates/input-error.twig';
 import templateExportForm from './templates/export-countries.twig';
@@ -11,9 +12,9 @@ import templateStageForm from './templates/stage-block.twig';
 import templateTooltip from 'components/tooltip/custom-tooltip.twig';
 import Tooltip from 'components/tooltip/';
 import Utils from '../../common/scripts/utils';
-import Popup from "components/popup";
-import warningPopupTemplate from "components/warning-popup/warning-popup.twig";
+import warningPopupTemplate from 'components/warning-popup/warning-popup.twig';
 
+const warningPopupButton = document.querySelector('.j-warning-button');
 const mediator = new Mediator();
 
 class ReportBlock {
@@ -759,9 +760,12 @@ class ReportBlock {
         const that = this;
 
         Utils.send(`a=update&id=${this.reportId}&formNum=${this.formID}&field=${input.name}&val=${input.value}`,
-            '/api/report/', {
+            '/api/report', {
+            // '/tests/reports/input-update.json', {
                 success(response) {
                     if (response.request.status !== that.SUCCESS_STATUS) {
+                        that.warningPopup(response);
+
                         return;
                     }
 
@@ -776,24 +780,6 @@ class ReportBlock {
                     }
 
                     that.setBlockStatus();
-
-                    /**
-                     * Инициализация попапа для страницы услуг
-                     */
-
-                    const warningPopupButton = document.querySelector('.j-error-button');
-
-                    if (warningPopupButton) {
-                        const warning = new Popup();
-
-                        warning.init({
-                            target              : warningPopupButton,
-                            template            : warningPopupTemplate,
-                            closeButtonAriaLabel: 'Закрыть'
-                        });
-
-                        warning.makeOpen();
-                    }
                 },
                 error(error) {
                     console.error(error);
@@ -1029,7 +1015,6 @@ class ReportBlock {
                 elementsToDelete.forEach((element) => {
                     Utils.removeElement(element);
                 });
-
                 // Сбрасываем статус блока после удаления стадии
                 delete that.inputsStatus[`export-countries[${input.dataset.id}]`];
                 delete that.inputsStatus[`export-code[${input.dataset.id}]`];
@@ -1048,9 +1033,9 @@ class ReportBlock {
         });
     }
 
-    // ///
+    //
     // Методы для блока добавлнеия технологических инноваций
-    // ///
+    //
 
     /**
      * Подстановка формы для блока со странами экспорта
@@ -1133,6 +1118,29 @@ class ReportBlock {
                 console.error(error);
             }
         });
+    }
+
+    /**
+     * Инициализация попапа для страницы услуг
+     * @param {json} response текст ошибки
+     */
+    warningPopup(response) {
+        if (!response.request.errors) {
+            return;
+        }
+        warningPopupButton.dataset.warning = response.request.errors[0];
+
+        if (warningPopupButton) {
+            const warning = new Popup();
+
+            warning.init({
+                target              : warningPopupButton,
+                template            : warningPopupTemplate,
+                closeButtonAriaLabel: 'Закрыть'
+            });
+
+            warning.makeOpen();
+        }
     }
 }
 

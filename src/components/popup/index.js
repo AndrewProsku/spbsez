@@ -13,9 +13,6 @@ import Language from '../language';
 import Mediator from 'common/scripts/mediator';
 import template from 'components/popup/popup.twig';
 import Utils from 'common/scripts/utils';
-/*import Message from "components/message-popup";
-import Service from "components/service-popup";
-import servicePopupTemplate from "components/service-popup/service-popup.twig";*/
 
 const Lang = new Language();
 
@@ -89,13 +86,17 @@ class Popup {
         const dataAttributeAjax = this.target.dataset.ajax;
         const dataAttributeAjaxData = $.param(this.target.dataset);
         let dataAttributeJson = this.target.dataset.json;
+        const dataAttributeWarning = this.target.dataset.warning;
 
         if (dataAttributeJson) {
             dataAttributeJson = atob(dataAttributeJson);
             dataAttributeJson = JSON.parse(dataAttributeJson);
         }
 
-        if (dataAttributeHref) {
+        if (dataAttributeWarning) {
+            this.outputOnDisplay(dataAttributeWarning);
+            this.open();
+        } else if (dataAttributeHref) {
             const contentId = document.getElementById(dataAttributeHref);
 
             if (!contentId) {
