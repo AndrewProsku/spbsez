@@ -761,7 +761,6 @@ class ReportBlock {
 
         Utils.send(`a=update&id=${this.reportId}&formNum=${this.formID}&field=${input.name}&val=${input.value}`,
             '/api/report', {
-            // '/tests/reports/input-update.json', {
                 success(response) {
                     if (response.request.status !== that.SUCCESS_STATUS) {
                         that.warningPopup(response);
