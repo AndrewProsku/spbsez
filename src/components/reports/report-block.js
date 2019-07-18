@@ -49,7 +49,7 @@ class ReportBlock {
         this.textInputTimeout = 0;
     }
 
-    /* eslint-disable max-statements, max-lines-per-function */
+    /* eslint-disable */
     init(options) {
         this.target = options.target;
         this.formID = options.formID;
@@ -75,7 +75,13 @@ class ReportBlock {
                 alias         : 'numeric',
                 rightAlign    : false,
                 autoGroup     : true,
-                groupSeparator: ' '
+                groupSeparator: ' ',
+                radixPoint    : ',',
+                onBeforeWrite : function(event, buffer) {
+                    if (buffer.indexOf(',') !== -1) {
+                        buffer[buffer.indexOf(',')] = '.';
+                    }
+                }
             }).mask(numericInputs);
         }
 
@@ -106,7 +112,7 @@ class ReportBlock {
         // Инициализация тултипов
         this.initTooltips();
     }
-    /* eslint-enable max-statements, max-lines-per-function */
+    /* eslint-enable */
 
     approveFormHandler(formID) {
         if (formID !== this.formID) {
@@ -218,13 +224,16 @@ class ReportBlock {
             previousValue = event.target.value;
         });
         currentInput.addEventListener('keyup', (event) => {
-            const newNumericValue = Number(event.target.value.replace(/ /gu, ''));
+            // eslint-disable-next-line
+            const RegExpNum = /[^\d\.,]/gu;
+            const RegExpDot = /,/gu;
+            const newNumericValue = Number(event.target.value.replace(RegExpNum, '').replace(RegExpDot, '.'));
 
             if ($.isNumeric(newNumericValue)) {
                 let newValue = 0;
 
                 allInputs.forEach((input) => {
-                    newValue += Number(input.value.replace(/ /gu, ''));
+                    newValue += Number(input.value.replace(RegExpNum, '').replace(RegExpDot, '.'));
                 });
                 resultInput.value = Math.round(newValue * 1000000) / 1000000;
                 this.checkTaxesIsZero(resultInput);
