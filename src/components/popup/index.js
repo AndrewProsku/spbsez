@@ -26,6 +26,7 @@ class Popup {
         this.target = options.target;
         this.closeButtonAriaLabel = options.closeButtonAriaLabel || Lang.get('popup.closeAriaLabel');
         this.stateClass = 'b-popup_state_open';
+
         this.bindEvents();
     }
 
@@ -37,7 +38,6 @@ class Popup {
             event.preventDefault();
             this.id = this.target.dataset.href;
             this.slug = this.target.dataset.id || '';
-
             this.makeOpen();
         });
 
@@ -86,13 +86,17 @@ class Popup {
         const dataAttributeAjax = this.target.dataset.ajax;
         const dataAttributeAjaxData = $.param(this.target.dataset);
         let dataAttributeJson = this.target.dataset.json;
+        const dataAttributeWarning = this.target.dataset.warning;
 
         if (dataAttributeJson) {
             dataAttributeJson = atob(dataAttributeJson);
             dataAttributeJson = JSON.parse(dataAttributeJson);
         }
 
-        if (dataAttributeHref) {
+        if (dataAttributeWarning) {
+            this.outputOnDisplay(dataAttributeWarning);
+            this.open();
+        } else if (dataAttributeHref) {
             const contentId = document.getElementById(dataAttributeHref);
 
             if (!contentId) {
