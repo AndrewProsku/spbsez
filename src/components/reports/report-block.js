@@ -76,7 +76,7 @@ class ReportBlock {
                 rightAlign    : false,
                 autoGroup     : true,
                 groupSeparator: ' ',
-                radixPoint    : ',',
+                radixPoint    : '.',
                 onBeforeWrite : function(event, buffer) {
                     if (buffer.indexOf(',') !== -1) {
                         buffer[buffer.indexOf(',')] = '.';
