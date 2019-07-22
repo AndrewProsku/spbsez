@@ -309,7 +309,7 @@ class ReportFieldsTable extends DataManager
                             [
                                 'id' => 'salary',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-7'),
-                                'type' => 'int'
+                                'type' => 'float'
                             ]
                         ]
                     ]
