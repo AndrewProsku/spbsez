@@ -41,8 +41,9 @@ function custom_mail($to, $subject, $message, $additionalHeaders = '', $addition
 
     if (\Bitrix\Main\Loader::includeModule('kelnik.multisites')) {
         $curSite = CurrentSite::getInstance();
+        $curSite->getData();
 
-        if ($curSite->getField('USE_SMTP') == \Kelnik\Multisites\Settings\SitesTable::YES) {
+        if ($curSite->getField('USE_SMTP') === \Kelnik\Multisites\Settings\SitesTable::YES) {
             $phpMailer->isSMTP();
             $phpMailer->Port = 465;
             $phpMailer->SMTPOptions = [
