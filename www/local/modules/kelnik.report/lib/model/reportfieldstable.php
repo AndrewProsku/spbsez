@@ -795,7 +795,7 @@ class ReportFieldsTable extends DataManager
                 return ((string)$val) === 'yes' ? 'yes' : 'no';
             },
             'date' => function ($val) {
-                return date('d.m.y', strtotime((string)$val));
+                return preg_replace('![^0-9\.]!si', '', (string)$val);
             }
         ];
     }
