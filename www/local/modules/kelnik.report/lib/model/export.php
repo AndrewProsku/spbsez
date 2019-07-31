@@ -142,7 +142,6 @@ class Export
                 ]
             ]);
         } catch (\Exception $e) {
-            die($e->getMessage());
             $res = [];
         }
 
