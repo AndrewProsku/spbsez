@@ -28,8 +28,14 @@ class ReportFieldsTable extends DataManager
     public const FIELD_CONSTRUCTION_DATE = 'construction-permission-date';
 
     public static $defaultValues = [
-        'foreign-investors' => 'no',
-        'high-tech-production' => 'no'
+        'foreign-investors'    => [
+            'VALUE'    => 'no',
+            'FORM_NUM' => self::FORM_COMMON
+        ],
+        'high-tech-production' => [
+            'VALUE'    => 'no',
+            'FORM_NUM' => self::FORM_INDICATORS
+        ]
     ];
 
     /**
@@ -101,17 +107,18 @@ class ReportFieldsTable extends DataManager
         $values = [];
         $sqlHelper = Application::getConnection()->getSqlHelper();
 
-        foreach (self::$defaultValues as $field => $val) {
+        foreach (self::$defaultValues as $field => $params) {
             $values[] = '(' .
                             $sqlHelper->convertToDbInteger($reportId) . ', ' .
                             $sqlHelper->convertToDbString($field) . ', ' .
-                            $sqlHelper->convertToDbString($val) .
+                            $sqlHelper->convertToDbInteger($params['FORM_NUM']) . ', ' .
+                            $sqlHelper->convertToDbString($params['VALUE']) .
                         ')';
         }
 
         try {
             Application::getConnection()->query(
-                'INSERT INTO `' . self::getTableName() . '` (`REPORT_ID`, `NAME`, `VALUE`) '.
+                'INSERT INTO `' . self::getTableName() . '` (`REPORT_ID`, `NAME`, `FORM_NUM`, `VALUE`) '.
                 'VALUES ' . implode(', ', $values)
             );
         } catch (\Exception $e) {
