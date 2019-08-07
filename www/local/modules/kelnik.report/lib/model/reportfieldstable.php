@@ -27,6 +27,8 @@ class ReportFieldsTable extends DataManager
     public const FIELD_CONSTRUCTION_FILE = 'construction-permission-file';
     public const FIELD_CONSTRUCTION_DATE = 'construction-permission-date';
 
+    public const FLOAT_SCALE = 6;
+
     public static $defaultValues = [
         'foreign-investors'    => [
             'VALUE'    => 'no',
@@ -856,6 +858,6 @@ class ReportFieldsTable extends DataManager
     {
         $val = self::normalizeDigital($val);
 
-        return bcadd($val, 0, 6);
+        return bcadd($val, 0, self::FLOAT_SCALE);
     }
 }
