@@ -283,7 +283,7 @@ class Export
                     $k = 1;
                 }
 
-                $total[$k] = bcadd($total[$k], ArrayHelper::getValue($company, 'FIELDS.0.' . $sumField), 6);
+                $total[$k] = bcadd($total[$k], ArrayHelper::getValue($company, 'FIELDS.0.' . $sumField), ReportFieldsTable::FLOAT_SCALE);
             }
 
             foreach ($valueToCell as $cellName => $valueName) {
