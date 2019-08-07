@@ -856,6 +856,6 @@ class ReportFieldsTable extends DataManager
     {
         $val = self::normalizeDigital($val);
 
-        return bcadd($val, 0, 4);
+        return bcadd($val, 0, 6);
     }
 }
