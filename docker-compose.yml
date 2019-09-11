@@ -22,7 +22,7 @@ services:
 
   node_build:
     container_name: oez_node_build
-    image: docker.ksdev.ru/nodejs/npm:10.16
+    image: docker.ksdev.ru/nodejs/node:10
     networks:
       - frontend
     volumes:
@@ -30,12 +30,11 @@ services:
       - *ssh
     working_dir: /var/www
     user: node:node
-    command: >
-      bash -c "if [ ! -d ./node_modules ]; then echo 'Install node modules' && npm i; fi && npm run build"
+    command: npm run build
 
   node_dev:
     container_name: oez_node_dev
-    image: docker.ksdev.ru/nodejs/npm:10.16
+    image: docker.ksdev.ru/nodejs/node:10
     networks:
       - frontend
     ports:
@@ -46,8 +45,7 @@ services:
       - *ssh
     working_dir: /var/www
     user: node:node
-    command: >
-      bash -c "if [ ! -d ./node_modules ]; then echo 'Install node modules' && npm i; fi && npm run dev"
+    command: npm run dev
 
 networks:
   backend:
