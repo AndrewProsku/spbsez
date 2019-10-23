@@ -77,7 +77,7 @@ class ReportBlock {
                 autoGroup     : true,
                 groupSeparator: ' ',
                 radixPoint    : ',',
-                onBeforeMask: (value) => value.replace(/[.]/g, ','),
+                onBeforeMask: (value) => `${value}`.replace(/[.]/g, ','),
                 onBeforeWrite : function(event, buffer) {
                     if (~buffer.indexOf(',')) {
                         buffer[buffer.indexOf(',')] = '.';
