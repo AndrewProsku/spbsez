@@ -6,6 +6,7 @@ use Bex\Bbc;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ORM\Objectify\Collection;
 use Kelnik\Helpers\ArrayHelper;
+use Kelnik\Report\CompanyRequiredException;
 use Kelnik\Report\Model\Report;
 use Kelnik\Report\Model\ReportsTable;
 use Kelnik\Report\Model\Status;
@@ -41,6 +42,7 @@ class ReportList extends Bbc\Basis
 
         $this->addCacheAdditionalId($USER->GetID());
         $this->addCacheAdditionalId(date('Y-m-d'));
+        $this->setResultCacheKeys(['ERROR', 'ERROR_MSG']);
 
         $this->profile = Profile::getInstance((int)$USER->GetID());
 
@@ -58,15 +60,32 @@ class ReportList extends Bbc\Basis
     {
         $this->arResult['REPORTS']  = [];
         $this->arResult['YEAR']     = date('Y');
+        $this->arResult['ERROR']    = false;
 
         self::registerCacheTag('kelnik:reportList_' . $this->profile->getCompanyId());
 
-        $this->arResult['REPORTS'] = $this->getReports();
+        try {
+            $this->arResult['REPORTS'] = $this->getReports();
+        } catch (CompanyRequiredException $e) {
+            $this->arResult['ERROR'] = true;
+            $this->arResult['ERROR_MSG'] = $e->getMessage();
+
+            $this->abortCache();
+            $this->clearResultCache();
+
+            return;
+        }
         //$this->arResult['DISABLED'] = !count($this->arResult['REPORTS']);
     }
 
     protected function getReports()
     {
+        if (!$this->profile->getCompanyId()) {
+            throw new CompanyRequiredException(
+                Loc::getMessage('KELNIK_COMPANY_REQUIRED_EXCEPTION')
+            );
+        }
+
         try {
             $reports = ReportsTable::getList([
                 'select' => [

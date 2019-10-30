@@ -13,6 +13,16 @@
     <?php return; ?>
 <?php endif; ?>
 
+<?php if($arResult['ERROR']): ?>
+    <div class="b-title b-reports-title">
+        <h1>Ошибка сервиса</h1>
+    </div>
+    <div class="b-reports-empty">
+        <?= $arResult['ERROR_MSG']; ?>
+    </div>
+    <?php return; ?>
+<?php endif; ?>
+
 <div class="b-title b-reports-title">
     <h1>Отчет&nbsp;о&nbsp;деятельности резидента</h1>
 </div>

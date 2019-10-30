@@ -8,8 +8,6 @@ services:
   web:
     container_name: oez_web
     image: docker.ksdev.ru/php/php-apache:7.1
-    networks:
-      - backend
     ports:
       - 80:80
       - 443:443
@@ -20,33 +18,16 @@ services:
     user: developer:developer
     working_dir: /var/www
 
-  node_build:
-    container_name: oez_node_build
+  node:
+    container_name: amgrad_node
     image: docker.ksdev.ru/nodejs/node:10
-    networks:
-      - frontend
-    volumes:
-      - *project
-      - *ssh
-    working_dir: /var/www
-    user: node:node
-    command: npm run build
-
-  node_dev:
-    container_name: oez_node_dev
-    image: docker.ksdev.ru/nodejs/node:10
-    networks:
-      - frontend
     ports:
       - 8080:8080
+      - 3000:3000
       - 3001:3001
     volumes:
       - *project
       - *ssh
-    working_dir: /var/www
     user: node:node
-    command: npm run dev
-
-networks:
-  backend:
-  frontend:
+    command: nodejs /home/node/http_server.js
+    working_dir: /var/www
