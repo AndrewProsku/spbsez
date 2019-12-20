@@ -41,7 +41,8 @@
         .b-logo__link {
             height: 55px;
             margin-top: 0;
-            background-image: url("/images/home/logo-color.svg");
+            background-image: url("/images/home/logo-color-two.svg");
+            background-size: contain;
 
             @media #{$laptop} {
                 height: 67px;
@@ -130,7 +131,8 @@
         .b-logo__link {
             height: 55px;
             margin-top: 0;
-            background-image: url("/images/home/logo-color.svg");
+            background-image: url("/images/home/logo-color-two.svg");
+            background-size: contain;
 
             @media #{$laptop} {
                 height: 67px;
@@ -254,7 +256,6 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 90%;
-
     margin-top: -13px;
 
     @media #{$laptop} {
