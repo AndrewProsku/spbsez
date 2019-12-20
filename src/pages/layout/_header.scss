@@ -41,7 +41,7 @@
         .b-logo__link {
             height: 55px;
             margin-top: 0;
-            background-image: url("/images/home/logo-color-two.svg");
+            background-image: url("/images/home/logo-color.png");
             background-size: contain;
 
             @media #{$laptop} {
@@ -131,7 +131,7 @@
         .b-logo__link {
             height: 55px;
             margin-top: 0;
-            background-image: url("/images/home/logo-color-two.svg");
+            background-image: url("/images/home/logo-color.png");
             background-size: contain;
 
             @media #{$laptop} {
@@ -242,7 +242,7 @@
         overflow: hidden;
 
         .b-logo__link {
-            margin-left: -20px;
+            margin-left: -14px;
         }
     }
 }
@@ -255,17 +255,19 @@
     background-image: url("/images/home/logo-two.png");
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 90%;
-    margin-top: -13px;
+    background-size: 86%;
+    margin-top: -6px;
 
     @media #{$laptop} {
         max-width: 100%;
+        background-size: 96%;
         margin-top: 0;
     }
 
     @media #{$fullhd} {
         height: 97px;
-        margin-top: -10px;
+        background-size: 94%;
+        margin-top: -3px;
     }
 
     &.lang-en {
