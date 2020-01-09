@@ -25,6 +25,7 @@ import ReportForm from '../../components/reports/reports-form';
 import Residents from '../../components/residents/';
 import reviewPopupContentTemplate from '../../components/popup/review-popup-content.twig';
 import reviewPopupTemplate from '../../components/popup/review-popup.twig';
+import Search from '../../components/search';
 import Select from '../../components/forms/select/';
 import Service from '../../components/service-popup';
 import servicePopupTemplate from '../../components/service-popup/service-popup.twig';
@@ -919,5 +920,22 @@ if (inputDateElement.length) {
 
             syncCalendar.dateIncreaseCheck(calendar.date, calendar.time);
         }
+    });
+}
+
+/**
+ * Строка поиска
+ */
+const SearchHeader = new Search();
+const searchHeader = document.querySelector('.j-search-header');
+
+if (searchHeader) {
+    SearchHeader.init({
+        search      : searchHeader,
+        searchModify: `is-result`,
+        debounce    : 300,
+        minLetters  : 3,
+        ajaxUrl     : '/ajax/globalSearch.php',
+        template    : 'search'
     });
 }
