@@ -928,6 +928,10 @@ if (inputDateElement.length) {
  */
 const SearchHeader = new Search();
 const searchHeader = document.querySelector('.j-search-header');
+const searchMainContainer = document.querySelector('.j-global-search');
+
+const searchIcon = document.querySelector('.j-globalSearch-icon');
+const searchCloseIcon = document.querySelector('.j-search-close');
 
 if (searchHeader) {
     SearchHeader.init({
@@ -937,5 +941,17 @@ if (searchHeader) {
         minLetters  : 3,
         ajaxUrl     : '/ajax/globalSearch.php',
         template    : 'search'
+    });
+
+    searchIcon.addEventListener('click', () => {
+        $(document.querySelector('.l-home__header-center')).hide(400);
+        $(searchIcon).hide(400);
+        $(searchMainContainer).show(300);
+    });
+
+    searchCloseIcon.addEventListener('click', () => {
+        $(document.querySelector('.l-home__header-center')).show(400);
+        $(searchIcon).show(400);
+        $(searchMainContainer).hide(300);
     });
 }

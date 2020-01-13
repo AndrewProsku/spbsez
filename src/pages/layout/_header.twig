@@ -30,6 +30,9 @@
         Добавляем на класс b-account__link
             1. is-auth - сменится иконка на авторизованную
         -->
+        <div class="b-globalSearch__icon j-globalSearch-icon">
+            {% include '../../components/search/media/search.svg' %}
+        </div>
         <a href="#" class="b-account__link is-auth">
             <span class="b-account__link-icon">
                 <span class="b-account__messages">2</span>
@@ -68,7 +71,7 @@
     </div>
 </div>
 
-<div class="b-search__mainContainer is-active">
+<div class="b-search__mainContainer j-global-search">
 
     <div class="b-search__overlay">
     </div>
@@ -78,12 +81,23 @@
               class="j-search-header">
         <div class="b-search__autocomplete-wrap">
             <div class="b-search__input-wrap">
-                <input type="search" name="q" class="b-search__input" placeholder="Название или артикул">
+                <div class="b-search__close j-search-close" aria-label="закрыть поиск"></div>
+                <input type="search" name="q" class="b-search__input" placeholder="Поиск по сайту">
                 <div class="b-search__icon">
+                    {% include '../../components/search/media/search.svg' %}
                 </div>
             </div>
-            <div class="b-search__result j-globalSearch-result">
-                <ul class="b-search__result-list">
+            <div class="b-search__result j-globalSearch-result is-result">
+                <ul class="b-search__result-wrapp">Популярные запросы
+                    <li class="b-search__result-item">
+                        <a href="#" class="b-search__result-text j-search-link">Скачать документы бесплатно без смс</a>
+                    </li>
+                    <li class="b-search__result-item">
+                        <a href="#" class="b-search__result-text j-search-link">Как стать резидентом</a>
+                    </li>
+                    <li class="b-search__result-item">
+                        <a href="#" class="b-search__result-text j-search-link">Какие услуги предоставляет РОСОЭЗ</a>
+                    </li>
                 </ul>
             </div>
         </div>

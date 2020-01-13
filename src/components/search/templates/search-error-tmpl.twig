@@ -1,0 +1,17 @@
+
+    <li class="b-search__result-item b-search__result-error">
+        <div class="b-search__result-text j-search-link">{{ searchError }}</div>
+    </li>
+
+<br>
+<hr class="b-search__line">
+<ul class="b-search__result-wrapp">Популятрые запросы:
+    {% for item in items %}
+            <li class="b-search__result-item">
+                <a href="{{ item.LINK }}" class="b-search__result-text j-search-link">{{ item.NAME }}</a>
+            </li>
+    {% endfor %}
+</ul>
+
+
+

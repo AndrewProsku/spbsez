@@ -1,0 +1,16 @@
+<form autocomplete="off"
+      class="b-search{% if modify %} {{modify}}{% endif %}"
+      data-action="{{ action }}">
+    <div class="b-search__autocomplete-wrap">
+        <div class="b-search__input-wrap">
+            <input type="search" name="{{ inputName }}" class="b-search__input" placeholder="Название или артикул">
+            <div class="b-search__icon">
+                {% include './media/search.svg' %}
+            </div>
+        </div>
+        <div class="b-search__result">
+            <ul class="b-search__result-list">
+            </ul>
+        </div>
+    </div>
+</form>

@@ -9,25 +9,25 @@
     "items": [
       {
         "page": "news",
-        "section": "Новости",
+        "section": "новости о какой-нибудь штуке",
         "NAME": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
         "LINK": "#"
       },
       {
         "page": "about",
-        "section": "О нас",
+        "section": "222233333",
         "NAME": "Pack my box with five dozen liquor jugs.",
         "LINK": "#"
       },
       {
         "page": "sale",
-        "section": "Может быть название страницы или заголовок новости",
+        "section": "что-то там продали, мы довольны",
         "NAME": "Jackdaws love my big sphinx of quartz.",
         "LINK": "#"
       },
       {
         "page": "кони в навозе",
-        "section": "Резидентам",
+        "section": "новости о какой-нибудь шляпе",
         "NAME": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
         "LINK": "#"
       },
@@ -52,7 +52,8 @@
         "LINK": "#",
         "TARGET": "documents"
       }
-    ]
+    ],
+    "searchError": "По вашему запросу ничего не найдено. Убедитесь, что все слова написаны без ошибок или попробуйте использовать другие ключевые слова"
   }
 }
 
