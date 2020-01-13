@@ -85,13 +85,14 @@
     "stylelint": "^9.10.1",
     "stylelint-scss": "^3.5.3",
     "stylelint-selector-bem-pattern": "^2.0.0",
-    "twig": "^1.13.2",
+    "twig": "^1.10.5",
     "twig-loader": "^0.4.1",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
+    "ajv": "^6.10.2",
     "array-includes": "^3.0.3",
     "body-scroll-lock": "^2.6.1",
     "chosen-js": "^1.8.7",

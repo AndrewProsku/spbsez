@@ -1,0 +1,8 @@
+{% for city in items %}
+    <li class="b-delivery-form__dropdown-item">
+        <a href="#"
+           data-id="{{ city.ID }}"
+           data-postal-code="{{ city.POSTAL_CODE }}"
+           class="b-delivery-form__dropdown-text j-search-link">{{ city.NAME }}</a>
+    </li>
+{% endfor %}

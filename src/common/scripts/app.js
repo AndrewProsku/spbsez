@@ -25,6 +25,7 @@ import ReportForm from '../../components/reports/reports-form';
 import Residents from '../../components/residents/';
 import reviewPopupContentTemplate from '../../components/popup/review-popup-content.twig';
 import reviewPopupTemplate from '../../components/popup/review-popup.twig';
+import Search from '../../components/search';
 import Select from '../../components/forms/select/';
 import Service from '../../components/service-popup';
 import servicePopupTemplate from '../../components/service-popup/service-popup.twig';
@@ -919,5 +920,38 @@ if (inputDateElement.length) {
 
             syncCalendar.dateIncreaseCheck(calendar.date, calendar.time);
         }
+    });
+}
+
+/**
+ * Строка поиска
+ */
+const SearchHeader = new Search();
+const searchHeader = document.querySelector('.j-search-header');
+const searchMainContainer = document.querySelector('.j-global-search');
+
+const searchIcon = document.querySelector('.j-globalSearch-icon');
+const searchCloseIcon = document.querySelector('.j-search-close');
+
+if (searchHeader) {
+    SearchHeader.init({
+        search      : searchHeader,
+        searchModify: `is-result`,
+        debounce    : 300,
+        minLetters  : 3,
+        ajaxUrl     : '/ajax/globalSearch.php',
+        template    : 'search'
+    });
+
+    searchIcon.addEventListener('click', () => {
+        $(document.querySelector('.l-home__header-center')).hide(400);
+        $(searchIcon).hide(400);
+        $(searchMainContainer).show(300);
+    });
+
+    searchCloseIcon.addEventListener('click', () => {
+        $(document.querySelector('.l-home__header-center')).show(400);
+        $(searchIcon).show(400);
+        $(searchMainContainer).hide(300);
     });
 }
