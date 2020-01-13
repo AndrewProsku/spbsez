@@ -1,0 +1,60 @@
+{
+  "request": {
+    "status": 1,
+    "errors": [
+      "Ошибка!"
+    ]
+  },
+  "data": {
+    "items": [
+      {
+        "page": "news",
+        "section": "новости о какой-нибудь штуке",
+        "NAME": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "LINK": "#"
+      },
+      {
+        "page": "about",
+        "section": "222233333",
+        "NAME": "Pack my box with five dozen liquor jugs.",
+        "LINK": "#"
+      },
+      {
+        "page": "sale",
+        "section": "что-то там продали, мы довольны",
+        "NAME": "Jackdaws love my big sphinx of quartz.",
+        "LINK": "#"
+      },
+      {
+        "page": "кони в навозе",
+        "section": "новости о какой-нибудь шляпе",
+        "NAME": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "LINK": "#"
+      },
+      {
+        "page": "news",
+        "section": "123",
+        "NAME": "Cozy sphinx waves quart jug of bad milk. ",
+        "LINK": "#",
+        "TARGET": "documents"
+      },
+      {
+        "page": "about",
+        "section": "321",
+        "NAME": "The jay, pig, fox, zebra and my wolves quack!",
+        "LINK": "#",
+        "TARGET": "documents"
+      },
+      {
+        "page": "rare",
+        "section": "новости о какой-нибудь штуке",
+        "NAME": "Crazy Fredrick bought many very exquisite opal jewels. ",
+        "LINK": "#",
+        "TARGET": "documents"
+      }
+    ],
+    "searchError": "По вашему запросу ничего не найдено. Убедитесь, что все слова написаны без ошибок или попробуйте использовать другие ключевые слова"
+  }
+}
+
+
