@@ -52,7 +52,7 @@ class ReportDetail extends Bbc\Basis
             $arParams['CREATE_ELEMENT_TYPE'] = 0;
         }
 
-        $this->arParams['PREV_REQUIRED'] = false;
+        $arParams['PREV_REQUIRED'] = false;
 
         return parent::onPrepareComponentParams($arParams);
     }
@@ -90,6 +90,8 @@ class ReportDetail extends Bbc\Basis
 
             return true;
         }
+
+        die('xxx');
 
         $this->show404();
     }
@@ -161,7 +163,7 @@ class ReportDetail extends Bbc\Basis
             ArrayHelper::getValue($this->getParent()->arParams, 'SEF_URL_TEMPLATES.detail', '')
         );
 
-        $year = (int) date('Y');
+        $year = (int) date('Y', ReportsTable::getCurrentTime());
 
         if (in_array($elementType, [ReportsTable::TYPE_ANNUAL, ReportsTable::TYPE_PRELIMINARY_ANNUAL])) {
             $year--;
