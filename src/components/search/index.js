@@ -219,9 +219,17 @@ class Search {
      * совпадения с введенным пользователем значением
      */
     setResultString() {
-        this.searchData.items.forEach((item) => {
-            item.NAME = this._getEntryString(item.NAME);
-        });
+        for (const item in this.searchData) {
+            const obj = this.searchData[item];
+
+            for (const result in obj) {
+                if (result === 'items') {
+                    obj[result].forEach((limk) => {
+                        limk.NAME = this._getEntryString(limk.NAME);
+                    });
+                }
+            }
+        }
     }
 
     /**
@@ -257,7 +265,7 @@ class Search {
      * Обновляем результаты поисковой выдачи
      */
     refreshResult() {
-        if (!this.searchData.items.length) {
+        if (!this.searchData.length) {
             this._hideResult();
 
             return;
@@ -286,6 +294,67 @@ class Search {
     }
 
     /**
+     * Заполняем шаблоны, чтобы потом добавить в результат
+     * @param {object} data - данные полученные с сервера
+     * @returns {string}  - результат из шаблонов
+     * @private
+     */
+    _addExtendResult(data) {
+        let miniTemplate = '';
+        let miniDocTemplate = '';
+
+        for (const object in data) {
+            const dataObj = data[object];
+
+            for (const items in dataObj) {
+                // для обычных результатов
+                if (items === 'items') {
+                    dataObj[items].forEach((item) => {
+                        miniTemplate += this.template(item);
+                    });
+                    if (dataObj.linkMore) {
+                        miniTemplate +=
+                            `<li class="b-search__result-item">
+                                <a href="${dataObj.linkMore}" 
+                                class="b-search__result-text j-search-link" 
+                                style="text-align: center">
+                                    <span class="b-search__result-title">
+                                        Посмотреть еще
+                                    </span>
+                                </a>
+                            </li>`;
+                    }
+                }
+
+                // для документов
+                if (items === 'documents') {
+                    dataObj[items].forEach((item) => {
+                        miniDocTemplate += this.template(item);
+                    });
+                    if (dataObj.linkMore) {
+                        miniDocTemplate +=
+                            `<li class="b-search__result-item">
+                                <a href="${dataObj.linkMore}" 
+                                class="b-search__result-text j-search-link" 
+                                style="text-align: center">
+                                    <span class="b-search__result-title">
+                                        Посмотреть еще
+                                    </span>
+                                </a>
+                            </li>`;
+                    }
+                }
+            }
+        }
+        miniTemplate = `<ul class="b-search__result-wrapp">Поиск по сайту:${miniTemplate}</ul>`;
+        miniDocTemplate = `<br><hr class="b-search__line">
+                            <ul class="b-search__result-wrapp">Поиск по документам:${miniDocTemplate}</ul>`;
+
+
+        return miniTemplate + miniDocTemplate;
+    }
+
+    /**
      * Добавляем на страницу список с вариантами поиска. Навешиваем обработчики событий
      */
     addResult() {
@@ -294,7 +363,9 @@ class Search {
         if (this.searchData.searchError) {
             Utils.insetContent(this.resultWrap, this.errorTemplate(this.searchData));
         } else {
-            Utils.insetContent(this.resultWrap, this.template(this.searchData));
+            const insertResult = this._addExtendResult(this.searchData);
+
+            Utils.insetContent(this.resultWrap, insertResult);
         }
         this._initLinksEvents();
     }
@@ -341,6 +412,7 @@ class Search {
         //             that._hidePreloader();
         //
         //             that.searchData = req.data;
+        //             console.log(that.searchData);
         //
         //             that.refreshResult();
         //             that.addResult();
