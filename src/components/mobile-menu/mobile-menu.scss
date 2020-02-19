@@ -90,7 +90,7 @@
     }
 
     .b-language {
-        @include column(4, 8);
+        @include column(2, 8);
         display: block;
 
         .b-language__list {

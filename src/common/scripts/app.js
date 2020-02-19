@@ -950,7 +950,9 @@ if (searchHeader) {
     });
 
     searchCloseIcon.addEventListener('click', () => {
-        $(document.querySelector('.l-home__header-center')).show(400);
+        if (!window.matchMedia('(max-width: 1279px)').matches) {
+            $(document.querySelector('.l-home__header-center')).show(400);
+        }
         $(searchIcon).show(400);
         $(searchMainContainer).hide(300);
     });

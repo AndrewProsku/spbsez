@@ -303,7 +303,7 @@ $brand-white: #ffffff;
         position: absolute;
         content: "";
         background: #000000;
-        opacity: 0.8;
+        opacity: 0.9;
     }
 }
 
@@ -328,7 +328,14 @@ $brand-white: #ffffff;
     height: inherit;
 
     form {
-        width: 50%;
+        width: 95%;
+
+        @media #{$tablet-portrait} {
+            width: 85%;
+        }
+        @media #{$laptop} {
+            width: 60%;
+        }
     }
 }
 
@@ -422,16 +429,24 @@ $brand-white: #ffffff;
 }
 
 .b-globalSearch__icon {
+    position: absolute;
+    top: 50%;
+    left: -45px;
     width: 24px;
     height: 24px;
     margin: 0 auto;
     cursor: pointer;
+    transform: translateY(-50%);
 
     &:hover {
-        transform: scale(1.05);
+        transform: scale(1.05) translateY(-50%);
     }
 
     svg {
         fill: #d3d4e0;
+    }
+
+    @media #{$mobile-only} {
+        left: -20px;
     }
 }
