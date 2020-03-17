@@ -30,7 +30,6 @@ class kelnik_multisites extends CModule
 
         $this->MODULE_NAME = Loc::getMessage('KELNIK_MULTISITES_NAME');
         $this->MODULE_DESCRIPTION = Loc::getMessage('KELNIK_MULTISITES_DESCRIPTION');
-        $this->MODULE_GROUP_RIGHTS = 'N';
         $this->PARTNER_NAME = Loc::getMessage('KELNIK_MULTISITES_PARTNER_NAME');
         $this->PARTNER_URI = '';
     }
