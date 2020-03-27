@@ -71,6 +71,7 @@ class kelnik_multisites extends CModule
             `ADDRESS` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SOCIAL_INST` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SOCIAL_FACEBOOK` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+            `SOCIAL_YOUTUBE` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `TEMPLATE_ID` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SEO_TITLE` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SEO_DESCRIPTION` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
