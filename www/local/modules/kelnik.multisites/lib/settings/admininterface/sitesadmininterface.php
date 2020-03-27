@@ -88,6 +88,12 @@ class SitesAdminInterface extends AdminInterface
                         'HEADER' => false,
                         'FILTER' => false
                     ],
+                    'SOCIAL_YOUTUBE' => [
+                        'WIDGET' => new StringWidget(),
+                        'SIZE'   => '60',
+                        'HEADER' => false,
+                        'FILTER' => false
+                    ],
 
                     'MAIN_VIDEO_MP4'  => [
                         'WIDGET' => new FileWidget(),
