@@ -3,7 +3,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class MultiSitesSocialYouTube extends AbstractMigration
+class MultisiteFieldSocialYoutube extends AbstractMigration
 {
     public function change()
     {
