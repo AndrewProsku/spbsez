@@ -431,7 +431,6 @@ $brand-white: #ffffff;
 .b-globalSearch__icon {
     position: absolute;
     top: 50%;
-    left: -45px;
     width: 24px;
     height: 24px;
     margin: 0 auto;
@@ -448,5 +447,9 @@ $brand-white: #ffffff;
 
     @media #{$mobile-only} {
         left: -20px;
+    }
+
+    @media #{$tablet-portrait} {
+        left: -60px;
     }
 }
