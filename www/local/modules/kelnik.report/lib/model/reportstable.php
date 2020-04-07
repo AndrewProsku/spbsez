@@ -251,6 +251,8 @@ class ReportsTable extends DataManager
             $year = date('Y');
         }
 
+        $nextYear = $year + 1;
+
         return [
             self::TYPE_QUARTER_1 => [
                 'start' => mktime(0, 0, 0, 4, 1, $year),
@@ -265,12 +267,12 @@ class ReportsTable extends DataManager
                 'end' => mktime(23, 59, 59, 11, 8, $year)
             ],
             self::TYPE_PRELIMINARY_ANNUAL => [
-                'start' => mktime(0, 0, 0, 1, 8, $year + 1),
-                'end' => mktime(23, 59, 59, 1, 31, $year + 1)
+                'start' => mktime(0, 0, 0, 1, 8, $nextYear),
+                'end' => mktime(23, 59, 59, 1, 31, $nextYear)
             ],
             self::TYPE_ANNUAL => [
-                'start' => mktime(0, 0, 0, 4, 1, $year + 1),
-                'end' => mktime(23, 59, 59, 4, 31, $year + 1)
+                'start' => mktime(0, 0, 0, 4, 1, $nextYear),
+                'end' => mktime(23, 59, 59, 4, 31, $nextYear)
             ]
         ];
     }
