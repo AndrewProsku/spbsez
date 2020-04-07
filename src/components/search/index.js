@@ -220,13 +220,15 @@ class Search {
      */
     setResultString() {
         for (const item in this.searchData) {
-            const obj = this.searchData[item];
+            if ({}.hasOwnProperty.call(this.searchData, item)) {
+                const obj = this.searchData[item];
 
-            for (const result in obj) {
-                if (result === 'items') {
-                    obj[result].forEach((limk) => {
-                        limk.NAME = this._getEntryString(limk.NAME);
-                    });
+                for (const result in obj) {
+                    if (result === 'items') {
+                        obj[result].forEach((limk) => {
+                            limk.NAME = this._getEntryString(limk.NAME);
+                        });
+                    }
                 }
             }
         }
@@ -299,22 +301,25 @@ class Search {
      * @returns {string}  - результат из шаблонов
      * @private
      */
+    /* eslint-disable */
     _addExtendResult(data) {
         let miniTemplate = '';
         let miniDocTemplate = '';
 
         for (const object in data) {
-            const dataObj = data[object];
+            if ({}.hasOwnProperty.call(data, object)) {
+                const dataObj = data[object];
 
-            for (const items in dataObj) {
-                // для обычных результатов
-                if (items === 'items') {
-                    dataObj[items].forEach((item) => {
-                        miniTemplate += this.template(item);
-                    });
-                    if (dataObj.linkMore) {
-                        miniTemplate +=
-                            `<li class="b-search__result-item">
+                for (const items in dataObj) {
+                    if ({}.hasOwnProperty.call(dataObj, items)) {
+                        // для обычных результатов
+                        if (items === 'items') {
+                            dataObj[items].forEach((item) => {
+                                miniTemplate += this.template(item);
+                            });
+                            if (dataObj.linkMore) {
+                                miniTemplate +=
+                                    `<li class="b-search__result-item">
                                 <a href="${dataObj.linkMore}" 
                                 class="b-search__result-text j-search-link" 
                                 style="text-align: center">
@@ -323,17 +328,17 @@ class Search {
                                     </span>
                                 </a>
                             </li>`;
-                    }
-                }
+                            }
+                        }
 
-                // для документов
-                if (items === 'documents') {
-                    dataObj[items].forEach((item) => {
-                        miniDocTemplate += this.template(item);
-                    });
-                    if (dataObj.linkMore) {
-                        miniDocTemplate +=
-                            `<li class="b-search__result-item">
+                        // для документов
+                        if (items === 'documents') {
+                            dataObj[items].forEach((item) => {
+                                miniDocTemplate += this.template(item);
+                            });
+                            if (dataObj.linkMore) {
+                                miniDocTemplate +=
+                                    `<li class="b-search__result-item">
                                 <a href="${dataObj.linkMore}" 
                                 class="b-search__result-text j-search-link" 
                                 style="text-align: center">
@@ -342,6 +347,8 @@ class Search {
                                     </span>
                                 </a>
                             </li>`;
+                            }
+                        }
                     }
                 }
             }
@@ -353,6 +360,7 @@ class Search {
 
         return miniTemplate + miniDocTemplate;
     }
+    /* eslint-enable */
 
     /**
      * Добавляем на страницу список с вариантами поиска. Навешиваем обработчики событий
