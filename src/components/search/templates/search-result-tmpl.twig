@@ -1,28 +1,8 @@
-<ul class="b-search__result-wrapp">Поиск по сайту:
-    {% for item in items %}
-        {% if item.TARGET != 'documents' %}
-            <li class="b-search__result-item">
-                <a href="{{ item.LINK }}" class="b-search__result-text j-search-link">{{ item.NAME }}</a>
-                {% if item.section %}
-                    <span class="b-search__result-title">
-                        {{ item.section }}
-                    </span>
-                {% endif %}
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
-<br>
-<hr class="b-search__line">
-<ul class="b-search__result-wrapp">Поиск по документам:
-    {% for item in items %}
-        {% if item.TARGET == 'documents' %}
-            <li class="b-search__result-item">
-                <a href="{{ item.LINK }}" class="b-search__result-text j-search-link">{{ item.NAME }}</a>
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
-
-
-
+<li class="b-search__result-item b-search__result-more">
+    <a href="{{ LINK }}" class="b-search__result-text j-search-link">{{ NAME }}</a>
+    {% if section %}
+        <span class="b-search__result-title">
+            {{ section }}
+        </span>
+    {% endif %}
+</li>
