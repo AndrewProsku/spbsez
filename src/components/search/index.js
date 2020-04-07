@@ -219,19 +219,9 @@ class Search {
      * совпадения с введенным пользователем значением
      */
     setResultString() {
-        for (const item in this.searchData) {
-            if ({}.hasOwnProperty.call(this.searchData, item)) {
-                const obj = this.searchData[item];
-
-                for (const result in obj) {
-                    if (result === 'items') {
-                        obj[result].forEach((limk) => {
-                            limk.NAME = this._getEntryString(limk.NAME);
-                        });
-                    }
-                }
-            }
-        }
+        this.searchData.items.forEach((item) => {
+            item.NAME = this._getEntryString(item.NAME);
+        });
     }
 
     /**
@@ -267,7 +257,7 @@ class Search {
      * Обновляем результаты поисковой выдачи
      */
     refreshResult() {
-        if (!this.searchData.length) {
+        if (!this.searchData.items.length) {
             this._hideResult();
 
             return;
@@ -296,73 +286,6 @@ class Search {
     }
 
     /**
-     * Заполняем шаблоны, чтобы потом добавить в результат
-     * @param {object} data - данные полученные с сервера
-     * @returns {string}  - результат из шаблонов
-     * @private
-     */
-    /* eslint-disable */
-    _addExtendResult(data) {
-        let miniTemplate = '';
-        let miniDocTemplate = '';
-
-        for (const object in data) {
-            if ({}.hasOwnProperty.call(data, object)) {
-                const dataObj = data[object];
-
-                for (const items in dataObj) {
-                    if ({}.hasOwnProperty.call(dataObj, items)) {
-                        // для обычных результатов
-                        if (items === 'items') {
-                            dataObj[items].forEach((item) => {
-                                miniTemplate += this.template(item);
-                            });
-                            if (dataObj.linkMore) {
-                                miniTemplate +=
-                                    `<li class="b-search__result-item">
-                                <a href="${dataObj.linkMore}" 
-                                class="b-search__result-text j-search-link" 
-                                style="text-align: center">
-                                    <span class="b-search__result-title">
-                                        Посмотреть еще
-                                    </span>
-                                </a>
-                            </li>`;
-                            }
-                        }
-
-                        // для документов
-                        if (items === 'documents') {
-                            dataObj[items].forEach((item) => {
-                                miniDocTemplate += this.template(item);
-                            });
-                            if (dataObj.linkMore) {
-                                miniDocTemplate +=
-                                    `<li class="b-search__result-item">
-                                <a href="${dataObj.linkMore}" 
-                                class="b-search__result-text j-search-link" 
-                                style="text-align: center">
-                                    <span class="b-search__result-title">
-                                        Посмотреть еще
-                                    </span>
-                                </a>
-                            </li>`;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        miniTemplate = `<ul class="b-search__result-wrapp">Поиск по сайту:${miniTemplate}</ul>`;
-        miniDocTemplate = `<br><hr class="b-search__line">
-                            <ul class="b-search__result-wrapp">Поиск по документам:${miniDocTemplate}</ul>`;
-
-
-        return miniTemplate + miniDocTemplate;
-    }
-    /* eslint-enable */
-
-    /**
      * Добавляем на страницу список с вариантами поиска. Навешиваем обработчики событий
      */
     addResult() {
@@ -371,9 +294,7 @@ class Search {
         if (this.searchData.searchError) {
             Utils.insetContent(this.resultWrap, this.errorTemplate(this.searchData));
         } else {
-            const insertResult = this._addExtendResult(this.searchData);
-
-            Utils.insetContent(this.resultWrap, insertResult);
+            Utils.insetContent(this.resultWrap, this.template(this.searchData));
         }
         this._initLinksEvents();
     }
@@ -395,8 +316,25 @@ class Search {
 
         this._showPreloader();
 
-        Utils.send(data,
-            that.ajaxUrl,
+        // Utils.send(data,
+        //     that.ajaxUrl,
+        //     {
+        //         success(req) {
+        //             // Скрываем прелоадер
+        //             that._hidePreloader();
+        //
+        //             that.searchData = req.data;
+        //
+        //             that.refreshResult();
+        //             that.addResult();
+        //         },
+        //         error(err) {
+        //             console.error(`ошибка на сервере: ${err}`);
+        //         }
+        //     },
+        //     'POST');
+
+        Utils.send(data, '/tests/globalSearch.json',
             {
                 success(req) {
                     // Скрываем прелоадер
@@ -411,25 +349,7 @@ class Search {
                     console.error(`ошибка на сервере: ${err}`);
                 }
             },
-            'POST');
-
-        // Utils.send(data, '/tests/globalSearch.json',
-        //     {
-        //         success(req) {
-        //             // Скрываем прелоадер
-        //             that._hidePreloader();
-        //
-        //             that.searchData = req.data;
-        //             console.log(that.searchData);
-        //
-        //             that.refreshResult();
-        //             that.addResult();
-        //         },
-        //         error(err) {
-        //             console.error(`ошибка на сервере: ${err}`);
-        //         }
-        //     },
-        //     'GET');
+            'GET');
     }
 
     /**
