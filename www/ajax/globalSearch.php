@@ -36,7 +36,7 @@ $json = BitrixHelper::getDefaultJson();
 class Search
 {
     private $needle;
-    private $json;
+    public $json;
     private $type;
     private $key;
 
