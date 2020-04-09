@@ -26,9 +26,6 @@ class QuestionsList extends Bbc\Basis
 
     protected function executeMain()
     {
-//        $this->setResultCacheKeys(['YEAR', 'YEARS', 'ELEMENTS', 'TYPE_NAME']);
-//        self::registerCacheTag('kelnik:infoDocsList_' . $this->arParams['SECTION']);
-
         try {
             $filter = [
                 '=ACTIVE' => 'Y',
