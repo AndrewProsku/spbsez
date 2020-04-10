@@ -74,6 +74,13 @@ class Search
 
     private function searchNews()
     {
+        global $DB;
+
+        $queryString = '';
+
+
+        $dbOption = $DB->Query($queryString, true);
+
         $news = NewsTable::getList(
             [
                 'select' => ['ID', 'NAME', 'CAT', 'CODE',
@@ -86,7 +93,7 @@ class Search
                     )
                 ],
                 'filter' => [
-                    'ACTIVE' => NewsTable::YES,
+                    '=ACTIVE' => NewsTable::YES,
                     '!=SEARCH_TEXT' => false
                 ],
                 'group' => ['ID'],
