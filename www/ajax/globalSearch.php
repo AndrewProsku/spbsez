@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_be
 use Bitrix\Main\Entity\ExpressionField;
 use Kelnik\Helpers\BitrixHelper;
 use Kelnik\Info\Model\DocsTable as InfoDocsTable;
+use Kelnik\News\Categories\CategoriesTable;
 use Kelnik\News\News\NewsTable;
 use Kelnik\Refbook\Model\DocsTable as RefDocsTable;
 use Kelnik\Refbook\Model\ResidentTable;
@@ -75,37 +76,31 @@ class Search
     private function searchNews()
     {
         global $DB;
+        $newsTable = NewsTable::getTableName();
+        $categoryTable = CategoriesTable::getTableName();
+        $queryString = "SELECT 
+        `{$newsTable}`.`ID`,
+        `{$newsTable}`.`NAME`,
+        `{$categoryTable}`.`NAME` AS `CATEGORY_NAME`,
+        `{$newsTable}`.`CODE` AS `CODE`,
+        CASE
+            WHEN TEXT LIKE '%{$this->needle}%' THEN TEXT
+            WHEN TEXT_PREVIEW LIKE '%{$this->needle}%' THEN TEXT_PREVIEW
+            END AS `SEARCH_TEXT`
+        FROM `{$newsTable}` 
+        LEFT JOIN `{$categoryTable}` ON `{$newsTable}`.`CAT_ID` = `{$categoryTable}`.`ID`
+        WHERE `{$newsTable}`.`ACTIVE` = 'Y'
+        AND ( `TEXT` LIKE '%{$this->needle}%' OR `TEXT_PREVIEW` LIKE '%{$this->needle}%') 
+        LIMIT 6";
+        $query = $DB->Query($queryString, true);
 
-        $queryString = '';
-
-
-        $dbOption = $DB->Query($queryString, true);
-
-        $news = NewsTable::getList(
-            [
-                'select' => ['ID', 'NAME', 'CAT', 'CODE',
-                    new ExpressionField(
-                        'SEARCH_TEXT',
-                        'CASE
-                    WHEN TEXT LIKE "' . $this->needle . '" THEN TEXT
-                    WHEN TEXT_PREVIEW LIKE "' . $this->needle . '" THEN TEXT_PREVIEW
-                    END'
-                    )
-                ],
-                'filter' => [
-                    '=ACTIVE' => NewsTable::YES,
-                    '!=SEARCH_TEXT' => false
-                ],
-                'group' => ['ID'],
-                'order' => ['ID' => 'desc'],
-                'limit' => 6
-            ]
-        )->FetchAll();
-
-        foreach ($news as $count => $oneNews) {
+        $count = 0;
+        while ($oneNews = $query->fetch())
+        {
+            $count++;
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'news',
-                'section' => $oneNews['KELNIK_NEWS_NEWS_NEWS_CAT_NAME'],
+                'section' => $oneNews['CATEGORY_NAME'],
                 'NAME' => $this->getPreviewText($oneNews['SEARCH_TEXT']),
                 'LINK' => $_SERVER['HTTP_ORIGIN'] . '/media/news/' . $oneNews['CODE'] . '/'
             ];
@@ -149,24 +144,26 @@ class Search
 
     private function searchResidents()
     {
-        $residents = ResidentTable::getList(
-            [
-                'select' => ['ID', 'NAME', 'TEXT'],
-                'filter' => [
-                    'ACTIVE' => ResidentTable::YES,
-                    '%TEXT' => $this->needle
-                ],
-                'group' => ['ID'],
-                'order' => ['ID' => 'desc'],
-                'limit' => 6
-            ]
-        )->FetchAll();
+        global $DB;
+        $residentTable = ResidentTable::getTableName();
+        $queryString = "SELECT
+        CASE
+            WHEN `TEXT` LIKE '%{$this->needle}%' THEN `TEXT`
+            WHEN `NAME` LIKE '%{$this->needle}%' THEN `NAME`
+            END AS `SEARCH_TEXT`
+        FROM `{$residentTable}`
+        WHERE `ACTIVE` = 'Y'
+        AND (`TEXT` LIKE '%{$this->needle}%' OR `NAME` LIKE '%{$this->needle}%' )
+        LIMIT 6";
+        $query = $DB->Query($queryString, true);
 
-        foreach ($residents as $count => $resident) {
+        $count = 0;
+        while ($resident = $query->fetch())
+        {
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'residents',
                 'section' => 'Резиденты',
-                'NAME' => $this->getPreviewText($resident['TEXT']),
+                'NAME' => $this->getPreviewText($resident['SEARCH_TEXT']),
                 'LINK' => $_SERVER['HTTP_ORIGIN'] . '/residents/'
             ];
             if ($count >= 5 && !$this->type) {
@@ -179,30 +176,27 @@ class Search
 
     private function searchVacancies()
     {
-        $vacancies = VacancyTable::getList(
-            [
-                'select' => ['ID', 'NAME',
-                    new ExpressionField(
-                        'SEARCH_TEXT',
-                        'CASE
-                    WHEN DESCR LIKE "' . $this->needle . '" THEN DESCR
-                    WHEN DUTIES LIKE "' . $this->needle . '" THEN DUTIES
-                    WHEN REQUIREMENTS LIKE "' . $this->needle . '" THEN REQUIREMENTS
-                    WHEN CONDITIONS LIKE "' . $this->needle . '" THEN CONDITIONS
-                    END'
-                    )
-                ],
-                'filter' => [
-                    'ACTIVE' => VacancyTable::YES,
-                    '!=SEARCH_TEXT' => false
-                ],
-                'group' => ['ID'],
-                'order' => ['ID' => 'desc'],
-                'limit' => 6
-            ]
-        )->FetchAll();
+        global $DB;
+        $vacancyTable = VacancyTable::getTableName();
+        $queryString = "SELECT 
+        CASE
+            WHEN DESCR LIKE '%{$this->needle}%' THEN DESCR
+            WHEN DUTIES LIKE '%{$this->needle}%' THEN DUTIES
+            WHEN REQUIREMENTS LIKE '%{$this->needle}%' THEN REQUIREMENTS
+            WHEN CONDITIONS LIKE '%{$this->needle}%' THEN CONDITIONS
+            END AS `SEARCH_TEXT`
+        FROM `{$vacancyTable}`  
+        WHERE `ACTIVE` = 'Y'
+        AND ( DESCR LIKE '%{$this->needle}%' 
+            OR DUTIES LIKE '%{$this->needle}%' 
+            OR REQUIREMENTS LIKE '%{$this->needle}%' 
+            OR CONDITIONS LIKE '%{$this->needle}%')
+        LIMIT 6";
+        $query = $DB->Query($queryString, true);
 
-        foreach ($vacancies as $count => $vacancy) {
+        $count = 0;
+        while ($vacancy = $query->fetch())
+        {
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'vacancies',
                 'section' => 'Вакансии',
