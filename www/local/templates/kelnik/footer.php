@@ -132,6 +132,6 @@
 
     <? $APPLICATION->ShowHeadStrings(); ?>
     <? $APPLICATION->ShowHeadScripts(); ?>
-    <script async src="/scripts/app.js"></script>
+    <script async src="/scripts/app.js?v1"></script>
 </body>
 </html>
