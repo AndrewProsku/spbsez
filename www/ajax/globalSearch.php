@@ -118,7 +118,7 @@ class Search
             [
                 'select' => ['ID', 'ACTIVE', 'CATEGORY', 'BODY'],
                 'filter' => [
-                    'ACTIVE' => BlocksTable::YES,
+                    '=ACTIVE' => BlocksTable::YES,
                     '%BODY' => $this->needle,
                 ],
                 'group' => ['ID'],
@@ -217,7 +217,7 @@ class Search
             [
                 'select' => ['ID', 'NAME', 'FILE_ID'],
                 'filter' => [
-                    'ACTIVE' => RefDocsTable::YES,
+                    '=ACTIVE' => RefDocsTable::YES,
                     '%NAME' => $this->needle
                 ],
                 'group' => ['ID'],
@@ -230,7 +230,7 @@ class Search
             [
                 'select' => ['ID', 'NAME', 'FILE_ID'],
                 'filter' => [
-                    'ACTIVE' => InfoDocsTable::YES,
+                    '=ACTIVE' => InfoDocsTable::YES,
                     '%NAME' => $this->needle
                 ],
                 'group' => ['ID'],
