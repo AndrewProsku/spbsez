@@ -27,16 +27,14 @@ class QuestionsList extends Bbc\Basis
     protected function executeMain()
     {
         try {
-            $filter = [
-                '=ACTIVE' => 'Y',
-            ];
-
             $this->arResult['QUESTIONS'] = QuestionsTable::getList([
                 'select' => [
                     'NAME',
                     'URL'
                 ],
-                'filter' => $filter,
+                'filter' => [
+                    '=ACTIVE' => 'Y',
+                ],
                 'order' => [
                     'SORT' => 'ASC'
                 ]
