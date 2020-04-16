@@ -1,7 +1,7 @@
 .l-report-form {
     @include prefix(2, 36);
     @include suffix(2, 36);
-    @include padding-level(bottom, pink);
+    @include padding-level(bottom, blue);
 
     h1 {
         @include font-size("h1-inner");
@@ -772,3 +772,6 @@ label .b-help {
     }
 }
 
+.b-reports-item-back {
+    @include margin-level(top, green);
+}
