@@ -307,18 +307,19 @@ class Search {
         let miniDocTemplate = '';
 
         for (const object in data) {
-            if ({}.hasOwnProperty.call(object, data)) {
+            if ({}.hasOwnProperty.call(data, object)) {
                 const dataObj = data[object];
 
                 for (const items in dataObj) {
-                    // для обычных результатов
-                    if (items === 'items') {
-                        dataObj[items].forEach((item) => {
-                            miniTemplate += this.template(item);
-                        });
-                        if (dataObj.linkMore) {
-                            miniTemplate +=
-                                `<li class="b-search__result-item">
+                    if ({}.hasOwnProperty.call(dataObj, items)) {
+                        // для обычных результатов
+                        if (items === 'items') {
+                            dataObj[items].forEach((item) => {
+                                miniTemplate += this.template(item);
+                            });
+                            if (dataObj.linkMore) {
+                                miniTemplate +=
+                                    `<li class="b-search__result-item">
                                 <a href="${dataObj.linkMore}" 
                                 class="b-search__result-text j-search-link" 
                                 style="text-align: center">
@@ -327,17 +328,17 @@ class Search {
                                     </span>
                                 </a>
                             </li>`;
+                            }
                         }
-                    }
 
-                    // для документов
-                    if (items === 'documents') {
-                        dataObj[items].forEach((item) => {
-                            miniDocTemplate += this.template(item);
-                        });
-                        if (dataObj.linkMore) {
-                            miniDocTemplate +=
-                                `<li class="b-search__result-item">
+                        // для документов
+                        if (items === 'documents') {
+                            dataObj[items].forEach((item) => {
+                                miniDocTemplate += this.template(item);
+                            });
+                            if (dataObj.linkMore) {
+                                miniDocTemplate +=
+                                    `<li class="b-search__result-item">
                                 <a href="${dataObj.linkMore}" 
                                 class="b-search__result-text j-search-link" 
                                 style="text-align: center">
@@ -346,6 +347,7 @@ class Search {
                                     </span>
                                 </a>
                             </li>`;
+                            }
                         }
                     }
                 }

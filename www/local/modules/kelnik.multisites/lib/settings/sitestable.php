@@ -82,6 +82,9 @@ class SitesTable extends DataManager
             new StringField('SOCIAL_FACEBOOK', [
                 'title' => Loc::getMessage('KELNIK_MULTISITE_SOCIAL_FACEBOOK')
             ]),
+            new StringField('SOCIAL_YOUTUBE', [
+                'title' => Loc::getMessage('KELNIK_MULTISITE_SOCIAL_YOUTUBE')
+            ]),
             new StringField('TEMPLATE_ID', [
                 'title' => Loc::getMessage('KELNIK_MULTISITE_TEMPLATE_ID'),
             ]),

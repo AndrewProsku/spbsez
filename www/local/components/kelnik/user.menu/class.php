@@ -33,7 +33,6 @@ class UserMenuList extends Bbc\Basis
 
         if ($this->arResult['IS_AUTHORIZED']) {
             $profile = Profile::getInstance((int)$USER->GetID());
-
             if ($profile->canMessages()) {
                 $this->arResult['MESSAGES'] = MessageService::getInstance($profile)->calcCount()->getCountNew();
             }

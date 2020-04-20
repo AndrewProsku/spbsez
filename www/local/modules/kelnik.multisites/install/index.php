@@ -30,7 +30,6 @@ class kelnik_multisites extends CModule
 
         $this->MODULE_NAME = Loc::getMessage('KELNIK_MULTISITES_NAME');
         $this->MODULE_DESCRIPTION = Loc::getMessage('KELNIK_MULTISITES_DESCRIPTION');
-        $this->MODULE_GROUP_RIGHTS = 'N';
         $this->PARTNER_NAME = Loc::getMessage('KELNIK_MULTISITES_PARTNER_NAME');
         $this->PARTNER_URI = '';
     }
@@ -72,6 +71,7 @@ class kelnik_multisites extends CModule
             `ADDRESS` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SOCIAL_INST` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SOCIAL_FACEBOOK` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+            `SOCIAL_YOUTUBE` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `TEMPLATE_ID` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SEO_TITLE` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
             `SEO_DESCRIPTION` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
