@@ -434,8 +434,8 @@ $brand-white: #ffffff;
     width: 24px;
     height: 24px;
     margin: 0 auto;
-    cursor: pointer;
     transform: translateY(-50%);
+    cursor: pointer;
 
     &:hover {
         transform: scale(1.05) translateY(-50%);
@@ -450,7 +450,12 @@ $brand-white: #ffffff;
     }
 
     @media #{$tablet-portrait} {
-        left: -60px;
+        left: 60px;
     }
+
+    @media #{$laptop} {
+        left: -20px;
+    }
+
 }
 /* stylelint-enable */
