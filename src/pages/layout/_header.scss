@@ -196,10 +196,6 @@
         .b-language,
         .b-burger-wrap {
             height: 100%;
-
-            @media #{$laptop} {
-                //box-shadow: -1px 0 0 #efeff4;
-            }
         }
 
         .b-account__tooltip-block {
