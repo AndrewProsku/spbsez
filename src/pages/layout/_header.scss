@@ -196,10 +196,6 @@
         .b-language,
         .b-burger-wrap {
             height: 100%;
-
-            @media #{$laptop} {
-                box-shadow: -1px 0 0 #efeff4;
-            }
         }
 
         .b-account__tooltip-block {
@@ -464,6 +460,10 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
+
+    @media #{$mobile-only} {
+        display: none;
+    }
 }
 
 .b-account__messages {
@@ -495,7 +495,7 @@
 }
 
 .b-language {
-    @include column(2, 6);
+    @include column(1.5, 6);
     display: none;
     position: relative;
     text-align: center;
