@@ -335,7 +335,7 @@ class ReportsTable extends DataManager
                     '=COMPANY_ID' => $companyId
                 ],
                 'order' => [
-                    'TYPE' => 'ASC'
+                    'TYPE' => 'DESC'
                 ]
             ])->fetchCollection();
         } catch (\Exception $e) {
@@ -346,17 +346,11 @@ class ReportsTable extends DataManager
             return self::$completeYear[$companyId . '_' . $year] = true;
         }
 
-        if ($reports->count() < count(self::getTypes())) {
-            return self::$completeYear[$companyId . '_' . $year] = false;
-        }
+        $reports->rewind();
+        $lastReport = $reports->current();
+        $isYearComplete = ($lastReport->getType() == self::TYPE_ANNUAL && $lastReport->isComplete());
 
-        foreach ($reports as $report) {
-            if (!$report->isComplete()) {
-                return self::$completeYear[$companyId . '_' . $year] = false;
-            }
-        }
-
-        return self::$completeYear[$companyId . '_' . $year] = true;
+        return self::$completeYear[$companyId . '_' . $year] = $isYearComplete;
     }
 
     /**
