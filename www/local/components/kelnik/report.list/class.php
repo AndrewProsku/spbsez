@@ -164,52 +164,45 @@ class ReportList extends Bbc\Basis
     {
         $types = array_keys(ReportsTable::getTypes());
         $curYear = (int)date('Y');
+        $prevYear = $curYear - 1;
         $curTime = ReportsTable::getCurrentTime();
         $defStatus = StatusTable::getByPrimary(StatusTable::NEW)->fetchObject();
         $unActiveStatus = new Status();
-
-        $reportsByYear = [];
 
         $reports = $reports->getAll();
 
         if (count($reports)) {
             foreach ($reports as $k => $report) {
-                $reportsByYear[$report->getYear()][$report->getType()] = $report->getType();
                 $reports[$k] = $report->getArray();
             }
         }
 
-        if (!isset($reportsByYear[$curYear])) {
-            $reportsByYear[$curYear] = $curYear;
-        }
-
-        foreach ($reportsByYear as $year => $yearTypes) {
+        foreach ([$prevYear, $curYear] as $year) {
             $typePeriod = ReportsTable::getTypePeriod($year);
 
             foreach ($types as $type) {
-                if (isset($yearTypes[$type])) {
+                if ($curTime > $typePeriod[$type]['end']) {
                     continue;
                 }
-                if ($curTime > $typePeriod[$type]['end']
-                    || $curTime < $typePeriod[$type]['start']
-                ) {
+
+                if ($curTime < $typePeriod[$type]['start']) {
                     $reports[] = (new Report())
-                                    ->setId(0)
-                                    ->setYear($year)
-                                    ->setType($type)
-                                    ->setStatus($unActiveStatus)
-                                    ->setStatusId(-1)
-                                    ->getArray();
+                        ->setId(0)
+                        ->setYear($year)
+                        ->setType($type)
+                        ->setStatus($unActiveStatus)
+                        ->setStatusId(-1)
+                        ->getArray();
 
                     continue;
                 }
 
                 $reports[] = (new Report())
-                                ->setId(0)
-                                ->setYear($year)
-                                ->setType($type)
-                                ->setStatus($defStatus)
-                                ->getArray();
+                    ->setId(0)
+                    ->setYear($year)
+                    ->setType($type)
+                    ->setStatus($defStatus)
+                    ->getArray();
             }
         }
 
