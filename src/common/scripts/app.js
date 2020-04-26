@@ -927,11 +927,23 @@ if (inputDateElement.length) {
  * Строка поиска
  */
 const SearchHeader = new Search();
-const searchHeader = document.querySelector('.j-search-header');
-const searchMainContainer = document.querySelector('.j-global-search');
+const documentSelector = document;
+const searchHeader = documentSelector.querySelector('.j-search-header');
+const searchMainContainer = documentSelector.querySelector('.j-global-search');
 
-const searchIcon = document.querySelector('.j-globalSearch-icon');
-const searchCloseIcon = document.querySelector('.j-search-close');
+const searchIcon = documentSelector.querySelector('.j-globalSearch-icon');
+const searchCloseIcon = documentSelector.querySelector('.j-search-close');
+// форма с поиском
+const searchForm = documentSelector.querySelector('.j-search-header');
+const searchOverlay = documentSelector.querySelector('.b-search__overlay');
+
+const closeEvent = function() {
+    if (!window.matchMedia('(max-width: 1279px)').matches) {
+        $(document.querySelector('.l-home__header-center')).show(400);
+    }
+    $(searchIcon).show(400);
+    $(searchMainContainer).hide(300);
+};
 
 if (searchHeader) {
     SearchHeader.init({
@@ -947,13 +959,16 @@ if (searchHeader) {
         $(document.querySelector('.l-home__header-center')).hide(400);
         $(searchIcon).hide(400);
         $(searchMainContainer).show(300);
+        $(searchForm).find('input')
+            .focus();
     });
 
+
     searchCloseIcon.addEventListener('click', () => {
-        if (!window.matchMedia('(max-width: 1279px)').matches) {
-            $(document.querySelector('.l-home__header-center')).show(400);
-        }
-        $(searchIcon).show(400);
-        $(searchMainContainer).hide(300);
+        closeEvent();
+    });
+
+    searchOverlay.addEventListener('click', () => {
+        closeEvent();
     });
 }
