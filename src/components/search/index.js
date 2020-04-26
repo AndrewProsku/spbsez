@@ -165,30 +165,15 @@ class Search {
             return;
         }
 
-        if (this.resultWrap.firstElementChild && this.linkTransition) {
-            const linksArray = Array.from(this.resultWrap.querySelectorAll(this.linkClass));
-            const hrefLink = linksArray[this.resultFocus].getAttribute('href');
+        event.preventDefault();
 
-            window.location.href = hrefLink;
+        setTimeout(() => {
+            const link = this.resultWrap.querySelector('.j-look-more');
 
-            return;
-        }
-
-        if (!this.closeResultClickLink && this.searchInput.value.length > this.minLetters) {
-            event.preventDefault();
-            window.location.href = `/catalog/search/?q=${this.searchInput.value}`;
-
-            return;
-        }
-
-        if (this.resultWrap.firstElementChild) {
-            event.preventDefault();
-            const link = this.resultWrap.firstElementChild.querySelector(this.linkClass);
-
-            this._fillingInput(link.innerText, link);
-            this._removeResult();
-            this._hideResult();
-        }
+            if (link) {
+                window.open(link.href, '_blank');
+            }
+        }, 400);
     }
 
     /**
@@ -321,7 +306,7 @@ class Search {
                                 miniTemplate +=
                                     `<li class="b-search__result-item">
                                 <a href="${dataObj.linkMore}" 
-                                class="b-search__result-text j-search-link" 
+                                class="b-search__result-text j-search-link j-look-more" 
                                 style="text-align: center">
                                     <span class="b-search__result-title">
                                         Посмотреть еще
@@ -340,7 +325,7 @@ class Search {
                                 miniDocTemplate +=
                                     `<li class="b-search__result-item">
                                 <a href="${dataObj.linkMore}" 
-                                class="b-search__result-text j-search-link" 
+                                class="b-search__result-text j-search-link j-look-more" 
                                 style="text-align: center">
                                     <span class="b-search__result-title">
                                         Посмотреть еще
@@ -420,7 +405,6 @@ class Search {
         //             that._hidePreloader();
         //
         //             that.searchData = req.data;
-        //             console.log(that.searchData);
         //
         //             that.refreshResult();
         //             that.addResult();
