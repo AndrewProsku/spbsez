@@ -22,7 +22,7 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__wrap">
-        <section class="b-offers">
+        <section class="b-offers" id="office-rental">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -36,7 +36,7 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__wrap">
-        <section class="b-offers">
+        <section class="b-offers" id="conference-rooms-rental">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -50,7 +50,7 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__wrap">
-        <section class="b-offers">
+        <section class="b-offers" id="data-processing-center">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -64,7 +64,7 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__advantage">
-        <section class="b-advantages b-advantages_theme_gradient b-advantages_theme_security">
+        <section class="b-advantages b-advantages_theme_gradient b-advantages_theme_security" id="security">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -78,7 +78,7 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__advantage">
-        <section class="b-advantages b-advantages_theme_parking">
+        <section class="b-advantages b-advantages_theme_parking" id="parking">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -92,7 +92,7 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__advantage">
-        <section class="b-advantages b-advantages_theme_gradient">
+        <section class="b-advantages b-advantages_theme_gradient" id="customs-post">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -106,7 +106,7 @@ $APPLICATION->SetTitle("Услуги");
     </div>
 
     <div class="l-services__advantage">
-        <section class="b-advantages ">
+        <section class="b-advantages" id="events-for-residents">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
