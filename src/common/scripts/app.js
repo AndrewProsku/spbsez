@@ -943,6 +943,8 @@ const closeEvent = function() {
     }
     $(searchIcon).show(400);
     $(searchMainContainer).hide(300);
+    $(document.querySelector('body').classList.remove('disable-hover'));
+    $(window).unbind('wheel');
 };
 
 if (searchHeader) {
@@ -957,6 +959,14 @@ if (searchHeader) {
 
     searchIcon.addEventListener('click', () => {
         $(document.querySelector('.l-home__header-center')).hide(400);
+        $(document.querySelector('body').classList.add('disable-hover'));
+        $(window).on('wheel', (event) => {
+            const scroll = $(document).find('.j-globalSearch-result')
+                .scrollTop();
+
+            $(document).find('.j-globalSearch-result')
+                .scrollTop(scroll + event.originalEvent.deltaY);
+        });
         $(searchIcon).hide(400);
         $(searchMainContainer).show(300);
         $(searchForm).find('input')

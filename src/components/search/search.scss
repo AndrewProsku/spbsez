@@ -456,6 +456,11 @@ $brand-white: #ffffff;
     @media #{$laptop} {
         left: -20px;
     }
+}
 
+body {
+    &.disable-hover {
+        overflow: hidden;
+    }
 }
 /* stylelint-enable */

@@ -172,6 +172,8 @@ class Search {
 
             if (link) {
                 window.open(link.href, '_blank');
+            } else {
+                window.open('/404', '_blank');
             }
         }, 400);
     }
@@ -290,6 +292,8 @@ class Search {
     _addExtendResult(data) {
         let miniTemplate = '';
         let miniDocTemplate = '';
+        // флаг наличия документов в ответе
+        let documents = false;
 
         for (const object in data) {
             if ({}.hasOwnProperty.call(data, object)) {
@@ -318,6 +322,7 @@ class Search {
 
                         // для документов
                         if (items === 'documents') {
+                            documents = true;
                             dataObj[items].forEach((item) => {
                                 miniDocTemplate += this.template(item);
                             });
@@ -339,8 +344,13 @@ class Search {
             }
         }
         miniTemplate = `<ul class="b-search__result-wrapp">Поиск по сайту:${miniTemplate}</ul>`;
-        miniDocTemplate = `<br><hr class="b-search__line">
+        if (documents) {
+            miniDocTemplate = `<br><hr class="b-search__line">
                             <ul class="b-search__result-wrapp">Поиск по документам:${miniDocTemplate}</ul>`;
+        } else {
+            miniDocTemplate = '';
+        }
+
 
 
         return miniTemplate + miniDocTemplate;
@@ -380,25 +390,8 @@ class Search {
 
         this._showPreloader();
 
-        Utils.send(data,
-            that.ajaxUrl,
-            {
-                success(req) {
-                    // Скрываем прелоадер
-                    that._hidePreloader();
-
-                    that.searchData = req.data;
-
-                    that.refreshResult();
-                    that.addResult();
-                },
-                error(err) {
-                    console.error(`ошибка на сервере: ${err}`);
-                }
-            },
-            'POST');
-
-        // Utils.send(data, '/tests/globalSearch.json',
+        // Utils.send(data,
+        //     that.ajaxUrl,
         //     {
         //         success(req) {
         //             // Скрываем прелоадер
@@ -413,7 +406,24 @@ class Search {
         //             console.error(`ошибка на сервере: ${err}`);
         //         }
         //     },
-        //     'GET');
+        //     'POST');
+
+        Utils.send(data, '/tests/globalSearch.json',
+            {
+                success(req) {
+                    // Скрываем прелоадер
+                    that._hidePreloader();
+
+                    that.searchData = req.data;
+
+                    that.refreshResult();
+                    that.addResult();
+                },
+                error(err) {
+                    console.error(`ошибка на сервере: ${err}`);
+                }
+            },
+            'GET');
     }
 
     /**
