@@ -102,6 +102,7 @@
     "inputmask": "^4.0.6",
     "ion-rangeslider": "^2.2.0",
     "jquery": "^3.3.1",
+    "jquery-mousewheel": "^3.1.13",
     "lodash": "^4.17.11",
     "node-js-marker-clusterer": "^1.0.0",
     "object-fit-images": "^3.2.4",
