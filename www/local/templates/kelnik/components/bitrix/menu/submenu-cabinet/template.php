@@ -27,5 +27,8 @@
             </a>
         </li>
         <?php endforeach; ?>
+        <li class="b-lk-nav__item">
+            <a href="https://dopusk.spbsez.ru/resident/sign-in" target ="_blank" class="b-lk-nav__link b-link-line">Оформление пропусков</a>
+        </li>
     </ul>
 </div>
