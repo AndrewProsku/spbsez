@@ -28,8 +28,8 @@ class UserMenuList extends Bbc\Basis
 
         $this->arResult['MESSAGES'] = 0;
         $this->arResult['IS_AUTHORIZED'] = !empty($USER) && $USER instanceof \CUser
-                                            ? $USER->IsAuthorized()
-                                            : false;
+            ? $USER->IsAuthorized()
+            : false;
 
         if ($this->arResult['IS_AUTHORIZED']) {
             $profile = Profile::getInstance((int)$USER->GetID());
@@ -37,5 +37,8 @@ class UserMenuList extends Bbc\Basis
                 $this->arResult['MESSAGES'] = MessageService::getInstance($profile)->calcCount()->getCountNew();
             }
         }
+
+        $uri = explode('/', $_SERVER['REQUEST_URI']);
+        $_SESSION['lang'] = $uri[1] == 'en' ?: 'ru';
     }
 }
