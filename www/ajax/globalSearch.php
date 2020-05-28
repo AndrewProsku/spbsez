@@ -72,7 +72,7 @@ class Search
             $this->searchVacancies();
             $this->searchDocs();
             $this->searchTextCategories();
-            $this->searchTextInfrastructure();
+            $this->searchPlatformInfrastructure();
         }
         BitrixHelper::jsonResponse($this->json);
     }
@@ -327,7 +327,7 @@ class Search
         }
     }
 
-    private function searchTextInfrastructure()
+    private function searchPlatformInfrastructure()
     {
         \Bitrix\Main\Loader::includeModule('kelnik.infrastructure');
         $name = $_SESSION['lang'] == 'en' ? '%NAME_EN' : '%NAME_RU';
