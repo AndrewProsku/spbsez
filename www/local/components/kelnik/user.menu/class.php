@@ -22,8 +22,9 @@ class UserMenuList extends Bbc\Basis
 
     protected function executeMain()
     {
-        global $USER;
+        $_SESSION['lang'] = LANGUAGE_ID;
 
+        global $USER;
         $this->abortResultCache();
 
         $this->arResult['MESSAGES'] = 0;
@@ -38,7 +39,5 @@ class UserMenuList extends Bbc\Basis
             }
         }
 
-        $uri = explode('/', $_SERVER['REQUEST_URI']);
-        $_SESSION['lang'] = $uri[1] == 'en' ?: 'ru';
     }
 }
