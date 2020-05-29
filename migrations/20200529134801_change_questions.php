@@ -11,5 +11,6 @@ class ChangeQuestions extends AbstractMigration
        $this->execute('UPDATE kelnik_questions SET URL = "https://www.spbsez.ru/services/#rental-of-meeting-rooms" WHERE ID = 3');
        $this->execute('UPDATE kelnik_questions SET URL = "https://www.spbsez.ru/#benefits-and-preferences" WHERE ID = 5');
     }
+
 }
 
