@@ -22,14 +22,15 @@ class UserMenuList extends Bbc\Basis
 
     protected function executeMain()
     {
-        global $USER;
+        $_SESSION['lang'] = LANGUAGE_ID;
 
+        global $USER;
         $this->abortResultCache();
 
         $this->arResult['MESSAGES'] = 0;
         $this->arResult['IS_AUTHORIZED'] = !empty($USER) && $USER instanceof \CUser
-                                            ? $USER->IsAuthorized()
-                                            : false;
+            ? $USER->IsAuthorized()
+            : false;
 
         if ($this->arResult['IS_AUTHORIZED']) {
             $profile = Profile::getInstance((int)$USER->GetID());
@@ -37,5 +38,6 @@ class UserMenuList extends Bbc\Basis
                 $this->arResult['MESSAGES'] = MessageService::getInstance($profile)->calcCount()->getCountNew();
             }
         }
+
     }
 }
