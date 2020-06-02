@@ -299,6 +299,7 @@ class Search
     {
         \Bitrix\Main\Loader::includeModule('kelnik.infrastructure');
         $name = $this->language == 'en' ? '%NAME_EN' : '%NAME_RU';
+        $linkLanguage = $this->language == 'en' ? '/en' : '';
         $textBlocks = PlatformTable::getList(
             [
                 'select' => ['ID', 'NAME_RU', 'NAME_EN', 'ALIAS'],
@@ -316,7 +317,7 @@ class Search
                 'page' => 'infrastructurePlatform',
                 'section' => $this->language == 'en' ? 'Infrastructure' : 'Инфраструктура',
                 'NAME' => $this->language == 'en' ? $textBlock['NAME_EN'] : $textBlock['NAME_RU'],
-                'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->language == 'en' ? '/en' : '' . '/infrastructure/' . $textBlock['ALIAS'] . '/'
+                'LINK' => $_SERVER['HTTP_ORIGIN'] . $linkLanguage . '/infrastructure/' . $textBlock['ALIAS'] . '/'
             ];
             if ($count >= 6 && !$this->type) {
                 $this->json['data'][$this->key]['linkMore'] = '/search/?type=TextBlocks&q=' . $this->needle;
