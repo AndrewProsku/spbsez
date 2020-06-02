@@ -65,7 +65,15 @@ class QuestionsTable extends DataManager
             ),
             new StringField(
                 'TEXT_TEXT_TYPE'
-            )
+            ),
+
+            new StringField(
+                'LANG',
+                [
+                    'values' => ['ru', 'en'],
+                    'title' => Loc::getMessage('KELNIK_QUESTIONS_LANG')
+                ]
+            ),
         ];
     }
 }
