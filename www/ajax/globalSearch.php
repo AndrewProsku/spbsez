@@ -42,6 +42,7 @@ class Search
     public $json;
     private $type;
     private $key;
+    private $language;
 
     public function __construct($request)
     {
@@ -56,6 +57,8 @@ class Search
         if ($request['type']) {
             $this->type = 'search' . $request['type'];
         }
+
+        $this->language = $_SESSION['lang'];
     }
 
     public function doSearch()
@@ -150,14 +153,18 @@ class Search
     {
         global $DB;
         $residentTable = ResidentTable::getTableName();
+        $text = $this->language == 'en' ? 'TEXT_EN' : 'TEXT';
+        $name = $this->language == 'en' ? 'NAME_EN' : 'NAME';
+        $linkLanguage = $this->language == 'en' ? '/en' : '';
+
         $queryString = "SELECT
         CASE
-            WHEN `TEXT` LIKE '%{$this->needle}%' THEN `TEXT`
-            WHEN `NAME` LIKE '%{$this->needle}%' THEN `NAME`
+            WHEN `{$text}` LIKE '%{$this->needle}%' THEN `{$text}`
+            WHEN `{$name}` LIKE '%{$this->needle}%' THEN `{$name}`
             END AS `SEARCH_TEXT`
         FROM `{$residentTable}`
         WHERE `ACTIVE` = 'Y'
-        AND (`TEXT` LIKE '%{$this->needle}%' OR `NAME` LIKE '%{$this->needle}%' )
+        AND (`{$text}` LIKE '%{$this->needle}%' OR `{$name}` LIKE '%{$this->needle}%' )
         LIMIT 6";
         $query = $DB->Query($queryString, true);
 
@@ -166,9 +173,9 @@ class Search
         {
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'residents',
-                'section' => 'Резиденты',
+                'section' => $this->language == 'en' ? 'Residents' : 'Резиденты',
                 'NAME' => $this->getPreviewText($resident['SEARCH_TEXT']),
-                'LINK' => $_SERVER['HTTP_ORIGIN'] . '/residents/'
+                'LINK' => $_SERVER['HTTP_ORIGIN'] . $linkLanguage . '/residents/'
             ];
             if ($count >= 5 && !$this->type) {
                 $this->json['data'][$this->key]['linkMore'] = '/search/?type=Residents&q=' . $this->needle;
@@ -259,6 +266,66 @@ class Search
         }
     }
 
+    private function searchTextCategories()
+    {
+        $textBlocks = CategoriesTextTable::getList(
+            [
+                'select' => ['ID', 'TITLE', 'ALIAS'],
+                'filter' => [
+                    '%TITLE' => $this->needle,
+                ],
+                'group' => ['ID'],
+                'order' => ['ID' => 'desc'],
+                'limit' => 6
+            ]
+        )->FetchAll();
+
+        foreach ($textBlocks as $count => $textBlock) {
+            $this->json['data'][$this->key]['items'] [] = [
+                'page' => 'textCategory',
+                'section' => $textBlock['TITLE'],
+                'NAME' => $textBlock['TITLE'],
+                'LINK' => $_SERVER['HTTP_ORIGIN'] .  $textBlock['ALIAS'] . '/'
+            ];
+            if ($count >= 5 && !$this->type) {
+                $this->json['data'][$this->key]['linkMore'] = '/search/?type=TextBlocks&q=' . $this->needle;
+                $this->key++;
+                break;
+            }
+        }
+    }
+
+    private function searchPlatformInfrastructure()
+    {
+        \Bitrix\Main\Loader::includeModule('kelnik.infrastructure');
+        $name = $this->language == 'en' ? '%NAME_EN' : '%NAME_RU';
+        $textBlocks = PlatformTable::getList(
+            [
+                'select' => ['ID', 'NAME_RU', 'NAME_EN', 'ALIAS'],
+                'filter' => [
+                    $name => $this->needle,
+                ],
+                'group' => ['ID'],
+                'order' => ['ID' => 'desc'],
+                'limit' => 6
+            ]
+        )->FetchAll();
+
+        foreach ($textBlocks as $count => $textBlock) {
+            $this->json['data'][$this->key]['items'] [] = [
+                'page' => 'infrastructurePlatform',
+                'section' => $this->language == 'en' ? 'Infrastructure' : 'Инфраструктура',
+                'NAME' => $this->language == 'en' ? $textBlock['NAME_EN'] : $textBlock['NAME_RU'],
+                'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->language == 'en' ? '/en' : '' . '/infrastructure/' . $textBlock['ALIAS'] . '/'
+            ];
+            if ($count >= 6 && !$this->type) {
+                $this->json['data'][$this->key]['linkMore'] = '/search/?type=TextBlocks&q=' . $this->needle;
+                $this->key++;
+                break;
+            }
+        }
+    }
+
     private function getPreviewText(string $text): string
     {
         $text = str_replace('&nbsp;', ' ', strip_tags($text));
@@ -296,66 +363,6 @@ class Search
         }
 
         return $text;
-    }
-
-    private function searchTextCategories()
-    {
-        $textBlocks = CategoriesTextTable::getList(
-            [
-                'select' => ['ID', 'TITLE', 'ALIAS'],
-                'filter' => [
-                    '%TITLE' => $this->needle,
-                ],
-                'group' => ['ID'],
-                'order' => ['ID' => 'desc'],
-                'limit' => 6
-            ]
-        )->FetchAll();
-
-        foreach ($textBlocks as $count => $textBlock) {
-            $this->json['data'][$this->key]['items'] [] = [
-                'page' => 'textCategory',
-                'section' => $textBlock['TITLE'],
-                'NAME' => $textBlock['TITLE'],
-                'LINK' => $_SERVER['HTTP_ORIGIN'] .  $textBlock['ALIAS'] . '/'
-            ];
-            if ($count >= 5 && !$this->type) {
-                $this->json['data'][$this->key]['linkMore'] = '/search/?type=TextBlocks&q=' . $this->needle;
-                $this->key++;
-                break;
-            }
-        }
-    }
-
-    private function searchPlatformInfrastructure()
-    {
-        \Bitrix\Main\Loader::includeModule('kelnik.infrastructure');
-        $name = $_SESSION['lang'] == 'en' ? '%NAME_EN' : '%NAME_RU';
-        $textBlocks = PlatformTable::getList(
-            [
-                'select' => ['ID', 'NAME_RU', 'NAME_EN', 'ALIAS'],
-                'filter' => [
-                    $name => $this->needle,
-                ],
-                'group' => ['ID'],
-                'order' => ['ID' => 'desc'],
-                'limit' => 6
-            ]
-        )->FetchAll();
-
-        foreach ($textBlocks as $count => $textBlock) {
-            $this->json['data'][$this->key]['items'] [] = [
-                'page' => 'infrastructurePlatform',
-                'section' => $_SESSION['lang'] == 'en' ? 'Infrastructure' : 'Инфраструктура',
-                'NAME' => $_SESSION['lang'] == 'en' ? $textBlock['NAME_EN'] : $textBlock['NAME_RU'],
-                'LINK' => $_SERVER['HTTP_ORIGIN'] . '/infrastructure/' . $textBlock['ALIAS'] . '/'
-            ];
-            if ($count >= 6 && !$this->type) {
-                $this->json['data'][$this->key]['linkMore'] = '/search/?type=TextBlocks&q=' . $this->needle;
-                $this->key++;
-                break;
-            }
-        }
     }
 
 }
