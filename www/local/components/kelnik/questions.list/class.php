@@ -34,7 +34,7 @@ class QuestionsList extends Bbc\Basis
                 ],
                 'filter' => [
                     '=ACTIVE' => 'Y',
-                    '=LANG' => LANGUAGE_ID,
+                    '=LANG' => LANGUAGE_ID ?? 'ru',
                 ],
                 'order' => [
                     'SORT' => 'ASC'
