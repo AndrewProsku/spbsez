@@ -34,7 +34,7 @@ class QuestionsList extends Bbc\Basis
                 ],
                 'filter' => [
                     '=ACTIVE' => 'Y',
-                    '=LANG' => $_SESSION['lang'] == 'en' ? 'en' : 'ru',
+                    '=LANG' => strpos($_SERVER['HTTP_REFERER'], 'en') ? 'en' : 'ru',
                 ],
                 'order' => [
                     'SORT' => 'ASC'
