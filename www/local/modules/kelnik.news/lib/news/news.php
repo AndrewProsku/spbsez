@@ -179,7 +179,15 @@ class NewsTable extends DataManager
                 [
                     'ID'
                 ]
-            )
+            ),
+
+            new DatetimeField(
+                'LANG',
+                [
+                    'title' => Loc::getMessage('KELNIK_NEWS_LANG'),
+                    'default_value' => 'ru'
+                ]
+            ),
         ];
     }
 

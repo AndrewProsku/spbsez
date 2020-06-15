@@ -18,3 +18,4 @@ $MESS['KELNIK_NEWS_DATE_ACTION_FINISH'] = 'Дата окончания акци�
 $MESS['KELNIK_NEWS_DATE_MODIFY'] = 'Дата изменения';
 $MESS['KELNIK_NEWS_CAT_NAME'] = 'Категория';
 $MESS['KELNIK_NEWS_OBJECT'] = 'Объект';
+$MESS['KELNIK_NEWS_LANG'] = 'Язык';
