@@ -5,15 +5,6 @@ require($_SERVER['DOCUMENT_ROOT'] . '/search/Search.php');
 use Bex\Bbc;
 use Bitrix\Main\Entity\ExpressionField;
 use Kelnik\Helpers\BitrixHelper;
-use Kelnik\Info\Model\DocsTable as InfoDocsTable;
-use Kelnik\News\Categories\CategoriesTable;
-use Kelnik\News\News\NewsTable;
-use Kelnik\Refbook\Model\DocsTable as RefDocsTable;
-use Kelnik\Refbook\Model\ResidentTable;
-use Kelnik\Text\Blocks\BlocksTable;
-use Kelnik\Text\Blocks\CategoriesTable as CategoriesTextTable;
-use Kelnik\Vacancy\Model\VacancyTable;
-use Kelnik\Infrastructure\Model\PlatformTable;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
