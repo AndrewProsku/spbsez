@@ -181,7 +181,7 @@ class NewsTable extends DataManager
                 ]
             ),
 
-            new DatetimeField(
+            new StringField(
                 'LANG',
                 [
                     'title' => Loc::getMessage('KELNIK_NEWS_LANG'),
