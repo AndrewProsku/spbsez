@@ -67,14 +67,14 @@ class Search
         `{$categoryTable}`.`NAME` AS `CATEGORY_NAME`,
         `{$newsTable}`.`CODE` AS `CODE`,
         CASE
-            WHEN TEXT LIKE '{$needle}' THEN TEXT
-            WHEN TEXT_PREVIEW LIKE '{$needle}' THEN TEXT_PREVIEW
+            WHEN `TEXT` LIKE '{$needle}' THEN `TEXT`
+            WHEN `TEXT_PREVIEW` LIKE '{$needle}' THEN `TEXT_PREVIEW`
             END AS `SEARCH_TEXT`
         FROM `{$newsTable}` 
         LEFT JOIN `{$categoryTable}` ON `{$newsTable}`.`CAT_ID` = `{$categoryTable}`.`ID`
         WHERE `{$newsTable}`.`ACTIVE` = 'Y'
         AND ( `TEXT` LIKE '{$needle}' OR `TEXT_PREVIEW` LIKE '{$needle}') 
-        AND LANG = '{$this->getLanguage()}'
+        AND `LANG` = '{$this->getLanguage()}'
         LIMIT 6";
         $query = $DB->Query($queryString, true);
 
@@ -128,10 +128,12 @@ class Search
     private function searchResidents()
     {
         global $DB;
+        $connection = Bitrix\Main\Application::getConnection();
+        $sqlHelper = $connection->getSqlHelper();
         $residentTable = ResidentTable::getTableName();
-        $text = $this->conditionByLanguage('text');
-        $name = $this->conditionByLanguage('name');
-        $needle = '%' . addCslashes($this->needle, '\%_') . '%';
+        $text = $sqlHelper->forSql($this->conditionByLanguage('text'));
+        $name = $sqlHelper->forSql($this->conditionByLanguage('name'));
+        $needle = '%' . $sqlHelper->forSql($this->needle) . '%';
         $linkLanguage = $this->conditionByLanguage('link');
 
         $queryString = "SELECT
@@ -368,4 +370,21 @@ class Search
         return $text;
     }
 
+    public function executeSearch($needModules = [])
+    {
+        foreach ($needModules as $needModule) {
+            if (!CModule::IncludeModule($needModule)) {
+                die(json_encode([
+                    'request' => [
+                        'status' => 0,
+                        'errors' => [
+                            'Internal error'
+                        ]
+                    ]
+                ]));
+            }
+        }
+
+        $this->doSearch();
+    }
 }

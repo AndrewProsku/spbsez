@@ -29,22 +29,14 @@ class SearchList extends Bbc\Basis
 
     protected function executeMain()
     {
+       $this->SetResultCacheKeys($_REQUEST['q'] ?: 1);
+    }
 
-        foreach ($this->needModules as $needModule) {
-            if (!CModule::IncludeModule($needModule)) {
-                die(json_encode([
-                    'request' => [
-                        'status' => 0,
-                        'errors' => [
-                            'Internal error'
-                        ]
-                    ]
-                ]));
-            }
-        }
-
+    protected function executeEpilog()
+    {
         $search = new Search($_REQUEST);
-        $search->doSearch();
+        $search->executeSearch($this->needModules);
+
     }
 
 }
