@@ -1,4 +1,5 @@
-<?
+<?php
+
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 require($_SERVER['DOCUMENT_ROOT']. '/ajax/globalSearch.php');
 $APPLICATION->SetPageProperty("title", "Результаты поиска");
