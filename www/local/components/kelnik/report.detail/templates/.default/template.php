@@ -62,5 +62,12 @@
     <?php include 'tabs.php'; ?>
 
     <button class="button button_without_icon b-report-submit j-report-submit" type="button" disabled="">Отправить отчет</button>
+
+    <div class="b-reports-item-back">
+        <a href="<?=$_SERVER['HTTP_REFERER']?>" class="b-profile-message-item-back__button theme_transparent">
+            Вернуться назад
+        </a>
+    </div>
+
 </div>
 <?php $APPLICATION->IncludeFile('inc_account_logout.php'); ?>
