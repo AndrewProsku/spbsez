@@ -17,6 +17,7 @@ class Search
     private $needle;
     private $type;
     private $key;
+    private $language;
     public $json;
 
     public function __construct($request)
@@ -37,6 +38,8 @@ class Search
 
     public function doSearch()
     {
+        $cache = \Bitrix\Main\Application::getInstance()->getManagedCache();
+
         if ($this->type) {
             if (method_exists($this, $this->type)) {
                 $this->{$this->type}();
@@ -52,15 +55,27 @@ class Search
         $this->searchTextCategories();
         $this->searchPlatformInfrastructure();
 
-        BitrixHelper::jsonResponse($this->json);
+        $data = BitrixHelper::jsonResponse($this->json);
+        $cacheTtl = 'search';
+        $cacheId = 'globalSearch';
+
+        if ($cache->read($cacheTtl, $cacheId)) {
+            $result = $cache->get($cacheId);
+        } else {
+            $cache->set($cacheId, array("key" => $data));
+        }
+
+        return $result;
     }
 
     private function searchNews()
     {
         global $DB;
+        $connection = Bitrix\Main\Application::getConnection();
+        $sqlHelper = $connection->getSqlHelper();
+        $needle = '%' . $sqlHelper->forSql($this->needle) . '%';
         $newsTable = NewsTable::getTableName();
         $categoryTable = CategoriesTable::getTableName();
-        $needle = '%' . addCslashes($this->needle, '\%_') . '%';
         $queryString = "SELECT 
         `{$newsTable}`.`ID`,
         `{$newsTable}`.`NAME`,
@@ -74,7 +89,7 @@ class Search
         LEFT JOIN `{$categoryTable}` ON `{$newsTable}`.`CAT_ID` = `{$categoryTable}`.`ID`
         WHERE `{$newsTable}`.`ACTIVE` = 'Y'
         AND ( `TEXT` LIKE '{$needle}' OR `TEXT_PREVIEW` LIKE '{$needle}') 
-        AND `LANG` = '{$this->getLanguage()}'
+        AND `LANG` = '{$this->language}'
         LIMIT 6";
         $query = $DB->Query($queryString, true);
 
@@ -151,7 +166,7 @@ class Search
         while ($resident = $query->fetch()) {
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'residents',
-                'section' => $this->getLanguage() == 'en' ? 'Residents' : 'Резиденты',
+                'section' => $this->language == 'en' ? 'Residents' : 'Резиденты',
                 'NAME' => $this->getPreviewText($resident['SEARCH_TEXT']),
                 'LINK' => $_SERVER['HTTP_ORIGIN'] . $linkLanguage . '/residents/'
             ];
@@ -167,19 +182,22 @@ class Search
     {
         global $DB;
         $vacancyTable = VacancyTable::getTableName();
+        $connection = Bitrix\Main\Application::getConnection();
+        $sqlHelper = $connection->getSqlHelper();
+        $needle = '%' . $sqlHelper->forSql($this->needle) . '%';
         $queryString = "SELECT 
         CASE
-            WHEN DESCR LIKE '%{$this->needle}%' THEN DESCR
-            WHEN DUTIES LIKE '%{$this->needle}%' THEN DUTIES
-            WHEN REQUIREMENTS LIKE '%{$this->needle}%' THEN REQUIREMENTS
-            WHEN CONDITIONS LIKE '%{$this->needle}%' THEN CONDITIONS
+            WHEN DESCR LIKE '{$needle}' THEN DESCR
+            WHEN DUTIES LIKE '{$needle}' THEN DUTIES
+            WHEN REQUIREMENTS LIKE '{$needle}' THEN REQUIREMENTS
+            WHEN CONDITIONS LIKE '{$needle}' THEN CONDITIONS
             END AS `SEARCH_TEXT`
         FROM `{$vacancyTable}`  
         WHERE `ACTIVE` = 'Y'
-        AND ( DESCR LIKE '%{$this->needle}%' 
-            OR DUTIES LIKE '%{$this->needle}%' 
-            OR REQUIREMENTS LIKE '%{$this->needle}%' 
-            OR CONDITIONS LIKE '%{$this->needle}%')
+        AND ( DESCR LIKE '{$needle}' 
+            OR DUTIES LIKE '{$needle}' 
+            OR REQUIREMENTS LIKE '{$needle}' 
+            OR CONDITIONS LIKE '{$needle}')
         LIMIT 6";
         $query = $DB->Query($queryString, true);
 
@@ -276,6 +294,7 @@ class Search
     {
         \Bitrix\Main\Loader::includeModule('kelnik.infrastructure');
         $name = $this->conditionByLanguage('likeName');
+        $extraConditionForName = $this->language === 'ru' ? '_RU' : '';
         $textBlocks = PlatformTable::getList(
             [
                 'select' => ['ID', 'NAME_RU', 'NAME_EN', 'ALIAS'],
@@ -291,8 +310,8 @@ class Search
         foreach ($textBlocks as $count => $textBlock) {
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'infrastructurePlatform',
-                'section' => $this->getLanguage() == 'en' ? 'Infrastructure' : 'Инфраструктура',
-                'NAME' => $this->getLanguage() == 'en' ? $textBlock['NAME_EN'] : $textBlock['NAME_RU'],
+                'section' => $this->language == 'en' ? 'Infrastructure' : 'Инфраструктура',
+                'NAME' => $textBlock[$this->conditionByLanguage('name') . $extraConditionForName],
                 'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/infrastructure/' . $textBlock['ALIAS'] . '/'
             ];
             if ($count >= 6 && !$this->type) {
@@ -301,34 +320,6 @@ class Search
                 break;
             }
         }
-    }
-
-    private function getLanguage()
-    {
-        $language = 'ru';
-        if (strpos($_SERVER['HTTP_REFERER'], 'en')) {
-            $language = 'en';
-        }
-        return $language;
-    }
-
-    private function conditionByLanguage($condition)
-    {
-        switch ($condition) {
-            case 'likeName' :
-                $condition = $this->getLanguage() == 'en' ? '%NAME_EN' : '%NAME_RU';
-                break;
-            case 'text' :
-                $condition = $this->getLanguage() == 'en' ? 'TEXT_EN' : 'TEXT';
-                break;
-            case 'name' :
-                $condition = $this->getLanguage() == 'en' ? 'NAME_EN' : 'NAME';
-                break;
-            case 'link' :
-                $condition = $this->getLanguage() == 'en' ? '/en' : '';
-                break;
-        }
-        return $condition;
     }
 
     private function getPreviewText(string $text): string
@@ -370,21 +361,33 @@ class Search
         return $text;
     }
 
-    public function executeSearch($needModules = [])
+    private function conditionByLanguage($condition)
     {
-        foreach ($needModules as $needModule) {
-            if (!CModule::IncludeModule($needModule)) {
-                die(json_encode([
-                    'request' => [
-                        'status' => 0,
-                        'errors' => [
-                            'Internal error'
-                        ]
-                    ]
-                ]));
-            }
+        $this->language = 'ru';
+        if (strpos($_SERVER['HTTP_REFERER'], 'en')) {
+            $this->language = 'en';
         }
 
-        $this->doSearch();
+        $conditionByLanguageArray = [
+            'likeName' => [
+                'en' => '%NAME_EN',
+                'ru' => '%NAME_RU'
+            ],
+            'text' => [
+                'en' => 'TEXT_EN',
+                'ru' => 'TEXT',
+            ],
+            'name' => [
+                'en' => 'NAME_EN',
+                'ru' => 'NAME'
+            ],
+            'link' => [
+                'en' => '/en',
+                'ru' => '',
+            ],
+        ];
+
+        return $conditionByLanguageArray[$condition][$this->language];
     }
+
 }
