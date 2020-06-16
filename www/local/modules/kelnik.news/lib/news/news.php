@@ -179,7 +179,7 @@ class NewsTable extends DataManager
                 [
                     'ID'
                 ]
-            )
+            ),
         ];
     }
 
