@@ -263,6 +263,7 @@ class Search
 
     private function searchTextCategories()
     {
+        $sectionName = $this->language === 'ru' ? 'Разделы' : 'Sections';
         $textBlocks = CategoriesTextTable::getList(
             [
                 'select' => ['ID', 'TITLE', 'ALIAS'],
@@ -278,7 +279,7 @@ class Search
         foreach ($textBlocks as $count => $textBlock) {
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'textCategory',
-                'section' => $textBlock['TITLE'],
+                'section' => $sectionName,
                 'NAME' => $textBlock['TITLE'],
                 'LINK' => $_SERVER['HTTP_ORIGIN'] . $textBlock['ALIAS'] . '/'
             ];
