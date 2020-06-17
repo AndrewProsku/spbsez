@@ -34,7 +34,8 @@ class QuestionsList extends Bbc\Basis
                 ],
                 'filter' => [
                     '=ACTIVE' => 'Y',
-                    '=LANG' => LANGUAGE_ID,
+                    //#68492 Костыль, который нужно убрать
+                    '=LANG' => LANGUAGE_ID == 'en' ? 'en' : '',
                 ],
                 'order' => [
                     'SORT' => 'ASC'
