@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class AddFieldsForNews extends AbstractMigration
+class AddFieldForNews extends AbstractMigration
 {
     public function change()
     {
