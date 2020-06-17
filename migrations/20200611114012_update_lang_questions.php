@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class UpdateQuestions extends AbstractMigration
+class UpdateLangQuestions extends AbstractMigration
 {
     public function change()
     {
