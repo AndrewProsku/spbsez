@@ -18,6 +18,7 @@ class Search
     private $type;
     private $key;
     private $language;
+    private $linkForEmptyRequest;
     public $json;
 
     public function __construct($request)
@@ -33,6 +34,12 @@ class Search
 
         if ($request['type']) {
             $this->type = 'search' . $request['type'];
+        }
+
+        $this->language = 'ru';
+
+        if (strpos($_SERVER['HTTP_REFERER'], 'en')) {
+            $this->language = 'en';
         }
     }
 
@@ -150,7 +157,7 @@ class Search
         $name = $sqlHelper->forSql($this->conditionByLanguage('name'));
         $needle = '%' . $sqlHelper->forSql($this->needle) . '%';
         $linkLanguage = $this->conditionByLanguage('link');
-
+        $section = $this->language == 'en' ? 'Residents' : 'Резиденты';
         $queryString = "SELECT
         CASE
             WHEN `{$text}` LIKE '{$needle}' THEN `{$text}`
@@ -160,13 +167,14 @@ class Search
         WHERE `ACTIVE` = 'Y'
         AND (`{$text}` LIKE '{$needle}' OR `{$name}` LIKE '{$needle}')
         LIMIT 6";
+
         $query = $DB->Query($queryString, true);
 
         $count = 0;
         while ($resident = $query->fetch()) {
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'residents',
-                'section' => $this->language == 'en' ? 'Residents' : 'Резиденты',
+                'section' => $section,
                 'NAME' => $this->getPreviewText($resident['SEARCH_TEXT']),
                 'LINK' => $_SERVER['HTTP_ORIGIN'] . $linkLanguage . '/residents/'
             ];
@@ -174,6 +182,28 @@ class Search
                 $this->json['data'][$this->key]['linkMore'] = '/search/?type=Residents&q=' . $this->needle;
                 $this->key++;
                 break;
+            }
+        }
+        if (empty($resident)) {
+            $allResidents = ResidentTable::getList(
+                [
+                    'select' => [$name],
+                    'filter' => [
+                        '=ACTIVE' => ResidentTable::YES,
+                    ],
+                    'group' => ['ID'],
+                    'order' => ['ID' => 'desc'],
+                ]
+            )->FetchAll();
+
+            $typos = $this->searchByTypos($this->needle, $name, $allResidents);
+            if ($typos) {
+                $this->json['data'][$this->key]['items'][] = [
+                    'page' => 'residents',
+                    'section' => $section,
+                    'NAME' => $typos,
+                    'LINK' => $_SERVER['HTTP_ORIGIN'] . $linkLanguage . '/residents/',
+                ];
             }
         }
     }
@@ -259,12 +289,34 @@ class Search
                 break;
             }
         }
+
+        if (empty($docs)) {
+            $allDocks = InfoDocsTable::getList(
+                [
+                    'select' => ['NAME', 'FILE_ID'],
+                    'filter' => [
+                        '=ACTIVE' => InfoDocsTable::YES,
+                    ],
+                    'group' => ['ID'],
+                    'order' => ['ID' => 'desc'],
+                ]
+            )->FetchAll();
+
+            $typos = $this->searchByTypos($this->needle, 'NAME', $allDocks);
+            if ($typos) {
+                $this->json['data'][$this->key]['items'][] = [
+                    'page' => 'docs',
+                    'NAME' => $typos,
+                    'LINK' => CFile::GetFileArray($this->linkForEmptyRequest)['SRC'],
+                ];
+            }
+        }
     }
 
     private function searchTextCategories()
     {
         $sectionName = $this->language === 'ru' ? 'Разделы' : 'Sections';
-        $textBlocks = CategoriesTextTable::getList(
+        $textCategories = CategoriesTextTable::getList(
             [
                 'select' => ['ID', 'TITLE', 'ALIAS'],
                 'filter' => [
@@ -276,7 +328,7 @@ class Search
             ]
         )->FetchAll();
 
-        foreach ($textBlocks as $count => $textBlock) {
+        foreach ($textCategories as $count => $textBlock) {
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'textCategory',
                 'section' => $sectionName,
@@ -284,9 +336,29 @@ class Search
                 'LINK' => $_SERVER['HTTP_ORIGIN'] . $textBlock['ALIAS'] . '/'
             ];
             if ($count >= 5 && !$this->type) {
-                $this->json['data'][$this->key]['linkMore'] = '/search/?type=TextBlocks&q=' . $this->needle;
+                $this->json['data'][$this->key]['linkMore'] = '/search/?type=TextCategories&q=' . $this->needle;
                 $this->key++;
                 break;
+            }
+        }
+
+        if (empty($textCategories)) {
+            $allTextCategories = CategoriesTextTable::getList(
+                [
+                    'select' => ['TITLE', 'ALIAS'],
+                    'group' => ['ID'],
+                    'order' => ['ID' => 'desc'],
+                ]
+            )->FetchAll();
+
+            $typos = $this->searchByTypos($this->needle, 'TITLE', $allTextCategories);
+            if ($typos) {
+                $this->json['data'][$this->key]['items'][] = [
+                    'page' => 'textCategory',
+                    'section' => $sectionName,
+                    'NAME' => $typos,
+                    'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->linkForEmptyRequest . '/',
+                ];
             }
         }
     }
@@ -294,13 +366,14 @@ class Search
     private function searchPlatformInfrastructure()
     {
         \Bitrix\Main\Loader::includeModule('kelnik.infrastructure');
-        $name = $this->conditionByLanguage('likeName');
+        $nameLike = $this->conditionByLanguage('likeName');
         $extraConditionForName = $this->language === 'ru' ? '_RU' : '';
+        $name = $this->conditionByLanguage('name') . $extraConditionForName;
         $textBlocks = PlatformTable::getList(
             [
                 'select' => ['ID', 'NAME_RU', 'NAME_EN', 'ALIAS'],
                 'filter' => [
-                    $name => $this->needle,
+                    $nameLike => $this->needle,
                 ],
                 'group' => ['ID'],
                 'order' => ['ID' => 'desc'],
@@ -312,7 +385,7 @@ class Search
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'infrastructurePlatform',
                 'section' => $this->language == 'en' ? 'Infrastructure' : 'Инфраструктура',
-                'NAME' => $textBlock[$this->conditionByLanguage('name') . $extraConditionForName],
+                'NAME' => $textBlock[$name],
                 'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/infrastructure/' . $textBlock['ALIAS'] . '/'
             ];
             if ($count >= 6 && !$this->type) {
@@ -321,6 +394,28 @@ class Search
                 break;
             }
         }
+
+        if ($this->key === 0) {
+            $allTextBlocks = PlatformTable::getList(
+                [
+                    'select' => [$name, 'ALIAS'],
+                    'group' => ['ID'],
+                    'order' => ['ID' => 'desc'],
+                ]
+            )->FetchAll();
+
+            $typos = $this->searchByTypos($this->needle, $name, $allTextBlocks);
+
+            if ($typos) {
+                $this->json['data'][$this->key]['items'][] = [
+                    'page' => 'infrastructurePlatform',
+                    'section' => $this->language == 'en' ? 'Infrastructure' : 'Инфраструктура',
+                    'NAME' => $typos,
+                    'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/infrastructure/' . $this->linkForEmptyRequest . '/'
+                ];
+            }
+        }
+
     }
 
     private function getPreviewText(string $text): string
@@ -364,11 +459,6 @@ class Search
 
     private function conditionByLanguage($condition)
     {
-        $this->language = 'ru';
-        if (strpos($_SERVER['HTTP_REFERER'], 'en')) {
-            $this->language = 'en';
-        }
-
         $conditionByLanguageArray = [
             'likeName' => [
                 'en' => '%NAME_EN',
@@ -389,6 +479,38 @@ class Search
         ];
 
         return $conditionByLanguageArray[$condition][$this->language];
+    }
+
+    private function searchByTypos($typo, $findByField, $library = [])
+    {
+        $distance = -1;
+        foreach ($library as $sentence) {
+            $replaceSentence = str_replace(['.', ',', '"', "'", "«", "»", 'ЗАО ', 'ООО ', 'АО ', ''], [''], $sentence[$findByField]);
+            $expression = levenshtein($typo, $replaceSentence);
+
+            if ($expression == 0) {
+                $result = $sentence[$findByField];
+                $distance = 0;
+                break;
+            }
+
+            if ($expression <= $distance || $distance < 0) {
+
+                foreach (['ALIAS', 'FILE_ID'] as $fieldForLink) {
+                    if (array_key_exists($fieldForLink, $sentence)) {
+                        $this->linkForEmptyRequest = $sentence[$fieldForLink];
+                    }
+                }
+
+                $result = $sentence[$findByField];
+                $distance = $expression;
+            }
+        }
+
+        if ($distance != 0 && $distance <= 5) {
+            $textOutput = $this->language == 'ru' ? 'Возможно вы имели в виду:' : 'Maybe you mean:';
+            return "$textOutput $result?\n";
+        }
     }
 
 }
