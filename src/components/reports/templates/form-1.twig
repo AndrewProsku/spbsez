@@ -248,3 +248,32 @@
         </div>
     </div>
 </section>
+{# 8 #}
+<section class="b-report-block j-report-block" id="block-8">
+    <div class="b-report-block__header" data-number="8">
+        <h3 class="b-report-block__title">
+            Объем выручки от продажи товаров, продукции, работ, услуг (в денежном выражении,&#160;млн&#160;₽)(тест)
+            <span class="b-help j-help">(тест)Объем выручки от продажи товаров, продукции, работ, услуг за вычетом налога на добавленную стоимость, акцизов (в соответствии с отчетом о финансовых результатах бухгалтерской отчетности резидентов, применяющих общую систему налогообложения) и (или) сумма доходов (в соответствии с налоговой декларацией по налогу, уплачиваемому в связи с применением упрощенной системы налогообложения, резидентов, применяющих упрощенную систему налогообложения), полученных резидентами в результате реализации соглашений об осуществлении деятельности в особой экономической зоне.</span>
+        </h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-inputs-row">
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "revenue-all",
+                    name: "revenue-all",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="revenue-all">С начала деятельности в качестве резидента,&#160;млн&#160;₽</label>
+            </div>
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "revenue-year",
+                    name: "revenue-year",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="revenue-year">С начала текущего года,&#160;млн&#160;₽</label>
+            </div>
+        </div>
+    </div>
+</section>
