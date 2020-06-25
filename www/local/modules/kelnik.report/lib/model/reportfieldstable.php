@@ -321,7 +321,24 @@ class ReportFieldsTable extends DataManager
                                 'type' => 'float'
                             ]
                         ]
-                    ]
+                    ],
+
+                    [
+                        'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-8'),
+                        'fields' => [
+                            [
+                                'id' => 'test-all',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-8-1'),
+                                'type' => 'float'
+                            ],
+                            [
+                                'id' => 'test-year',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-8-2'),
+                                'type' => 'float'
+                            ]
+                        ]
+                    ],
+
                 ]
             ],
             self::FORM_TAXES => [

@@ -195,7 +195,9 @@ class Export
             'S' => 'revenue-year',
             'T' => 'produce-all',
             'U' => 'produce-year',
-            'V' => 'salary'
+            'V' => 'salary',
+            'W' => 'salary-new',
+
         ];
 
         $rowNum = $start = 10;
