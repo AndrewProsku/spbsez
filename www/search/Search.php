@@ -3,6 +3,7 @@
 use Bitrix\Main\Entity\ExpressionField;
 use Kelnik\Helpers\BitrixHelper;
 use Kelnik\Info\Model\DocsTable as InfoDocsTable;
+use Kelnik\Infrastructure\Model\PlatformTable;
 use Kelnik\News\Categories\CategoriesTable;
 use Kelnik\News\News\NewsTable;
 use Kelnik\Refbook\Model\DocsTable as RefDocsTable;
@@ -10,7 +11,6 @@ use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Text\Blocks\BlocksTable;
 use Kelnik\Text\Blocks\CategoriesTable as CategoriesTextTable;
 use Kelnik\Vacancy\Model\VacancyTable;
-use Kelnik\Infrastructure\Model\PlatformTable;
 
 class Search
 {
@@ -19,6 +19,10 @@ class Search
     private $key;
     private $language;
     private $linkForEmptyRequest;
+    private $emptyQuery;
+    private $stringForEmptyQuery = [];
+    private $connection;
+    private $sqlHelper;
     public $json;
 
     public function __construct($request)
@@ -41,6 +45,9 @@ class Search
         if (strpos($_SERVER['HTTP_REFERER'], 'en')) {
             $this->language = 'en';
         }
+
+        $this->connection = Bitrix\Main\Application::getConnection();
+        $this->sqlHelper = $this->connection->getSqlHelper();
     }
 
     public function doSearch()
@@ -78,9 +85,7 @@ class Search
     private function searchNews()
     {
         global $DB;
-        $connection = Bitrix\Main\Application::getConnection();
-        $sqlHelper = $connection->getSqlHelper();
-        $needle = '%' . $sqlHelper->forSql($this->needle) . '%';
+        $needle = '%' . $this->sqlHelper->forSql($this->needle) . '%';
         $newsTable = NewsTable::getTableName();
         $categoryTable = CategoriesTable::getTableName();
         $queryString = "SELECT 
@@ -115,16 +120,18 @@ class Search
                 break;
             }
         }
+
     }
 
     private function searchTextBlocks()
     {
+        $needle = str_replace(' ', '|', $this->sqlHelper->forSql($this->needle));
         $textBlocks = BlocksTable::getList(
             [
                 'select' => ['ID', 'ACTIVE', 'CATEGORY', 'BODY'],
                 'filter' => [
                     '=ACTIVE' => BlocksTable::YES,
-                    '%BODY' => $this->needle,
+                    '?BODY' => $needle,
                 ],
                 'group' => ['ID'],
                 'order' => ['ID' => 'desc'],
@@ -150,12 +157,10 @@ class Search
     private function searchResidents()
     {
         global $DB;
-        $connection = Bitrix\Main\Application::getConnection();
-        $sqlHelper = $connection->getSqlHelper();
         $residentTable = ResidentTable::getTableName();
-        $text = $sqlHelper->forSql($this->conditionByLanguage('text'));
-        $name = $sqlHelper->forSql($this->conditionByLanguage('name'));
-        $needle = '%' . $sqlHelper->forSql($this->needle) . '%';
+        $text = $this->sqlHelper->forSql($this->conditionByLanguage('text'));
+        $name = $this->sqlHelper->forSql($this->conditionByLanguage('name'));
+        $needle = '%' . $this->sqlHelper->forSql($this->needle) . '%';
         $linkLanguage = $this->conditionByLanguage('link');
         $section = $this->language == 'en' ? 'Residents' : 'Резиденты';
         $queryString = "SELECT
@@ -212,9 +217,7 @@ class Search
     {
         global $DB;
         $vacancyTable = VacancyTable::getTableName();
-        $connection = Bitrix\Main\Application::getConnection();
-        $sqlHelper = $connection->getSqlHelper();
-        $needle = '%' . $sqlHelper->forSql($this->needle) . '%';
+        $needle = '%' . $this->sqlHelper->forSql($this->needle) . '%';
         $queryString = "SELECT 
         CASE
             WHEN DESCR LIKE '{$needle}' THEN DESCR
@@ -249,12 +252,14 @@ class Search
 
     private function searchDocs()
     {
+        $needle = str_replace(' ', '|', $this->sqlHelper->forSql($this->needle));
+
         $docs = RefDocsTable::getList(
             [
                 'select' => ['ID', 'NAME', 'FILE_ID'],
                 'filter' => [
                     '=ACTIVE' => RefDocsTable::YES,
-                    '%NAME' => $this->needle
+                    '?NAME' => $needle
                 ],
                 'group' => ['ID'],
                 'order' => ['ID' => 'desc'],
@@ -267,7 +272,7 @@ class Search
                 'select' => ['ID', 'NAME', 'FILE_ID'],
                 'filter' => [
                     '=ACTIVE' => InfoDocsTable::YES,
-                    '%NAME' => $this->needle
+                    '?NAME' => $needle
                 ],
                 'group' => ['ID'],
                 'order' => ['ID' => 'desc'],
@@ -315,12 +320,13 @@ class Search
 
     private function searchTextCategories()
     {
+        $needle = str_replace(' ', '|', $this->sqlHelper->forSql($this->needle));
         $sectionName = $this->language === 'ru' ? 'Разделы' : 'Sections';
         $textCategories = CategoriesTextTable::getList(
             [
                 'select' => ['ID', 'TITLE', 'ALIAS'],
                 'filter' => [
-                    '%TITLE' => $this->needle,
+                    '?TITLE' => $needle,
                 ],
                 'group' => ['ID'],
                 'order' => ['ID' => 'desc'],
@@ -421,17 +427,20 @@ class Search
     private function getPreviewText(string $text): string
     {
         $text = str_replace('&nbsp;', ' ', strip_tags($text));
+        $this->emptyQuery = false;
+        $position = $this->checkPosition($text, $this->needle);
 
-        $position = stripos($text, $this->needle);
-        $start = $position - 20;
-        $lenght = 70;
+        $start = $position - 30;
+        $lenght = 80;
+
         if ($start < 0) {
             $start = 0;
             $lenght = $lenght - $start;
         }
-        $text = substr($text, $start, $lenght);
 
-        $position = stripos($text, $this->needle);
+        $text = substr($text, $start, $lenght);
+        $position = $this->checkPosition($text, $this->needle);
+
         $first = substr($text, 0, 1);
         if (!($position <= 1 || $first === strtoupper($first))) {
             $text = ltrim($text);
@@ -450,8 +459,13 @@ class Search
         if ($first !== strtoupper($first)) {
             $text = '...' . $text;
         }
+
         if (!in_array(substr($text, -1), ['!', '.', '?', ';', ':'])) {
             $text .= '...';
+        }
+
+        if ($this->emptyQuery) {
+            $text = str_replace([$this->stringForEmptyQuery[0], $this->stringForEmptyQuery[1]], ['<em>' . $this->stringForEmptyQuery[0] . '</em>', '<em>' . $this->stringForEmptyQuery[1] . '</em>'], $text);
         }
 
         return $text;
@@ -511,6 +525,23 @@ class Search
             $textOutput = $this->language == 'ru' ? 'Возможно вы имели в виду:' : 'Maybe you mean:';
             return "$textOutput $result?\n";
         }
+    }
+
+    private function checkPosition($text, $needle)
+    {
+        $this->stringForEmptyQuery = explode(' ', $needle);
+        $position = stripos($text, $needle);
+
+        if (!$position) {
+            $this->emptyQuery = true;
+            $position = stripos($text, $this->stringForEmptyQuery[1] . ' ' . $this->stringForEmptyQuery[0]);
+
+            if (!$position) {
+                $position = stripos($text, $this->stringForEmptyQuery[0]) ?: $position = stripos($text, $this->stringForEmptyQuery[1]);
+            }
+        }
+
+        return $position;
     }
 
 }
