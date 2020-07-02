@@ -120,7 +120,6 @@ class Search
                 break;
             }
         }
-
     }
 
     private function searchTextBlocks()
@@ -421,7 +420,6 @@ class Search
                 ];
             }
         }
-
     }
 
     private function getPreviewText(string $text): string
@@ -509,7 +507,6 @@ class Search
             }
 
             if ($expression <= $distance || $distance < 0) {
-
                 foreach (['ALIAS', 'FILE_ID'] as $fieldForLink) {
                     if (array_key_exists($fieldForLink, $sentence)) {
                         $this->linkForEmptyRequest = $sentence[$fieldForLink];
@@ -533,6 +530,10 @@ class Search
         $position = stripos($text, $needle);
 
         if (!$position) {
+           $position = $this->checkRegister($needle, $text);
+        }
+
+        if (!$position) {
             $this->emptyQuery = true;
             $position = stripos($text, $this->stringForEmptyQuery[1] . ' ' . $this->stringForEmptyQuery[0]);
 
@@ -544,4 +545,15 @@ class Search
         return $position;
     }
 
+    private function checkRegister($needle, $text)
+    {
+        $arrayNeedle = explode(' ', $needle);
+        foreach ($arrayNeedle as $word) {
+            if (ctype_lower($word)) {
+                $word = ucfirst($word);
+                $sentence .= ' ' . $word;
+            }
+        }
+        return stripos($text, $sentence);
+    }
 }
