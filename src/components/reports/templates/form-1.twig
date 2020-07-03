@@ -205,6 +205,28 @@
             </div>
         </div>
     </div>
+    <div class="b-report-block__body">
+        <div class="b-report-block__subtitle">В т.ч. от
+            экспорта несырьевых неэнргетических товаров и оказываемых услуг</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "revenue-year-extra",
+                    name: "revenue-year-extra",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="revenue-all">За год</label>
+            </div>
+            <div class="b-input-block ">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "revenue-all-extra",
+                    name: "revenue-all-extra",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="revenue-year">Накопленным итогом</label>
+            </div>
+        </div>
+    </div>
 </section>
 {# 6 #}
 <section class="b-report-block j-report-block" id="block-6">
@@ -245,36 +267,6 @@
                 modify: "b-input-text_type_numeric"
             } %}
             <label class="b-input-block__label" for="salary">З/п сотрудников,&#160;₽</label>
-        </div>
-    </div>
-</section>
-{# 8 #}
-<section class="b-report-block j-report-block" id="block-8">
-    <div class="b-report-block__header" data-number="8">
-        <h3 class="b-report-block__title">
-            В т.ч. от
-            экспорта несырьевых неэнргетических товаров и оказываемых услуг
-            <span class="b-help j-help">тест</span>
-        </h3>
-    </div>
-    <div class="b-report-block__body">
-        <div class="b-inputs-row">
-            <div class="b-input-block ">
-                {% include "../../forms/input-text/input-text.twig" with {
-                    id: "test-all",
-                    name: "test-all",
-                    modify: "b-input-text_type_numeric"
-                } %}
-                <label class="b-input-block__label" for="revenue-all">За год</label>
-            </div>
-            <div class="b-input-block ">
-                {% include "../../forms/input-text/input-text.twig" with {
-                    id: "test-year",
-                    name: "test-year",
-                    modify: "b-input-text_type_numeric"
-                } %}
-                <label class="b-input-block__label" for="revenue-year">Накопленным итогом</label>
-            </div>
         </div>
     </div>
 </section>
