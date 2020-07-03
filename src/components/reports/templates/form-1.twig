@@ -205,28 +205,25 @@
             </div>
         </div>
     </div>
-    <div class="b-report-block__header">
-        <h3 class="b-report-block__title">
-            В т.ч. от экспорта несырьевых неэнргетических товаров и оказываемых услуг (в денежном выражении,&#160;млн&#160;₽)
-        </h3>
-    </div>
     <div class="b-report-block__body">
+        <div class="b-report-block__subtitle">В т.ч. от
+            экспорта несырьевых неэнргетических товаров и оказываемых услуг</div>
         <div class="b-inputs-row">
             <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
-                    id: "revenue-all-export",
-                    name: "revenue-all-export",
+                    id: "revenue-year-extra",
+                    name: "revenue-year-extra",
                     modify: "b-input-text_type_numeric"
                 } %}
-                <label class="b-input-block__label" for="revenue-all">Накопленным итогом,&#160;млн&#160;₽</label>
+                <label class="b-input-block__label" for="revenue-all">За год</label>
             </div>
             <div class="b-input-block ">
                 {% include "../../forms/input-text/input-text.twig" with {
-                    id: "revenue-year-export",
-                    name: "revenue-year-export",
+                    id: "revenue-all-extra",
+                    name: "revenue-all-extra",
                     modify: "b-input-text_type_numeric"
                 } %}
-                <label class="b-input-block__label" for="revenue-year">За год,&#160;млн&#160;₽</label>
+                <label class="b-input-block__label" for="revenue-year">Накопленным итогом</label>
             </div>
         </div>
     </div>
@@ -273,5 +270,3 @@
         </div>
     </div>
 </section>
-{# 8 #}
-
