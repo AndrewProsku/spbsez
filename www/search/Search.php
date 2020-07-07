@@ -36,7 +36,8 @@ class Search
             $this->json['errors'][] = 'Нет строки поиска';
         }
 
-        $this->needle = $request['q'];
+        $this->needle = trim($request['q']);
+        $this->needle = str_replace('  ', ' ', $this->needle);
 
         if ($request['type']) {
             $this->type = 'search' . $request['type'];
