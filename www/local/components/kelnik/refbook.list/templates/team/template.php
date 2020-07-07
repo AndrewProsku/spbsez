@@ -8,6 +8,7 @@
         <h2><?= $arResult['HEADER']; ?></h2>
     </div>
     <div class="b-team__wrapper">
+        <div id="company-team"></div>
         <?php foreach ($arResult['ELEMENTS'] as $element): ?>
             <div class="b-team__item">
                 <?php if(!empty($element['IMAGE_ID_PATH'])): ?>
