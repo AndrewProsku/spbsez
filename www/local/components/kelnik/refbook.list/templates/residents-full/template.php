@@ -18,6 +18,7 @@
 
 <div class="b-filters j-filters">
     <?php foreach ($arResult['TYPES'] as $type): ?>
+        <div id="types-residents"></div>
     <div class="b-filters__item" data-category-id="<?= $type['ID']; ?>"><?= $type['NAME']; ?><span class="b-filters__counter"><?= $type['CNT']; ?></span></div>
     <?php endforeach; ?>
 </div>
@@ -27,6 +28,7 @@
     <?php foreach ($arResult['ELEMENTS'] as $element): ?>
         <article class="b-resident b-resident_category_<?= $element['TYPE_ID']; ?>">
             <div class="b-resident__inner">
+                <div id="residents-description"></div>
                 <?php if(!empty($element['IMAGE_ID_PATH'])): ?>
                     <img src="<?= $element['IMAGE_ID_PATH']; ?>" alt="<?= htmlentities($element['NAME'], ENT_QUOTES, 'UTF-8'); ?>" class="b-resident__logo">
                 <?php endif; ?>
