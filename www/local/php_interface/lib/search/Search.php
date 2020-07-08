@@ -37,6 +37,7 @@ class Search
         }
 
         $this->needle = preg_replace('/[^ a-zа-яё\d]/ui', '', $request['q']);
+        $this->needle = preg_replace("/\s{2,}/"," ", $this->needle);
         $this->needle = trim($this->needle);
 
         if ($request['type']) {
