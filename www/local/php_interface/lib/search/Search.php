@@ -8,6 +8,8 @@ use Kelnik\News\Categories\CategoriesTable;
 use Kelnik\News\News\NewsTable;
 use Kelnik\Refbook\Model\DocsTable as RefDocsTable;
 use Kelnik\Refbook\Model\ResidentTable;
+use Kelnik\Refbook\Model\TeamTable;
+use Kelnik\Refbook\Model\ResidentTypesTable;
 use Kelnik\Text\Blocks\BlocksTable;
 use Kelnik\Text\Blocks\CategoriesTable as CategoriesTextTable;
 use Kelnik\Vacancy\Model\VacancyTable;
@@ -34,7 +36,9 @@ class Search
             $this->json['errors'][] = 'Нет строки поиска';
         }
 
-        $this->needle = $request['q'];
+        $this->needle = preg_replace('/[^ a-zа-яё\d]/ui', '', $request['q']);
+        $this->needle = preg_replace("/\s{2,}/"," ", $this->needle);
+        $this->needle = trim($this->needle);
 
         if ($request['type']) {
             $this->type = 'search' . $request['type'];
@@ -68,6 +72,10 @@ class Search
         $this->searchDocs();
         $this->searchTextCategories();
         $this->searchPlatformInfrastructure();
+        $this->searchTeam();
+        $this->searchResedentsDescription();
+        $this->searchTeamDescription();
+        $this->searchResidentsTypes();
 
         $data = BitrixHelper::jsonResponse($this->json);
         $cacheTtl = 'search';
@@ -422,6 +430,218 @@ class Search
         }
     }
 
+    private function searchTeam()
+    {
+        $needle = str_replace(' ', '|', $this->sqlHelper->forSql($this->needle));
+        $nameIsRegular = $this->conditionByLanguage('nameRegular');
+        $name = $this->conditionByLanguage('name');
+        $companyTeam = TeamTable::getList(
+            [
+                'select' => ['ID', 'NAME', 'NAME_EN'],
+                'filter' => [
+                    $nameIsRegular => $needle,
+                ],
+                'group' => ['ID'],
+                'order' => ['ID' => 'desc'],
+                'limit' => 6
+            ]
+        )->FetchAll();
+
+        foreach ($companyTeam as $count => $team) {
+            $this->json['data'][$this->key]['items'] [] = [
+                'page' => 'companyTeam',
+                'section' => $this->language == 'en' ? 'Team' : 'Команда',
+                'NAME' => $team[$name],
+                'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/about/management-company/#company-team'
+            ];
+            if ($count >= 6 && !$this->type) {
+                $this->json['data'][$this->key]['linkMore'] = '/search/?type=CompanyTeam&q=' . $this->needle;
+                $this->key++;
+                break;
+            }
+        }
+
+        if ($this->key === 0) {
+            $companyTeamAll = TeamTable::getList(
+                [
+                    'select' => [$name],
+                    'group' => ['ID'],
+                    'order' => ['ID' => 'desc'],
+                ]
+            )->FetchAll();
+
+            $typos = $this->searchByTypos($this->needle, $name, $companyTeamAll);
+
+            if ($typos) {
+                $this->json['data'][$this->key]['items'][] = [
+                    'page' => 'companyTeam',
+                    'section' => $this->language == 'en' ? 'Team' : 'Команда',
+                    'NAME' => $typos,
+                    'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/about/management-company/#company-team'
+                ];
+            }
+        }
+    }
+
+    private function searchTeamDescription()
+    {
+        $needle = str_replace(' ', '|', $this->sqlHelper->forSql($this->needle));
+        $textIsRegular = $this->conditionByLanguage('textRegular');
+        $text = $this->conditionByLanguage('text');
+        $companyTeamDescription = TeamTable::getList(
+            [
+                'select' => ['ID', 'TEXT', 'TEXT_EN'],
+                'filter' => [
+                    $textIsRegular => $needle,
+                ],
+                'group' => ['ID'],
+                'order' => ['ID' => 'desc'],
+                'limit' => 6
+            ]
+        )->FetchAll();
+
+        foreach ($companyTeamDescription as $count => $teamDecr) {
+            $this->json['data'][$this->key]['items'] [] = [
+                'page' => 'descriptionTeam',
+                'section' => $this->language == 'en' ? 'Participants description' : 'Описание сотрудников',
+                'NAME' => $teamDecr[$text],
+                'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/about/management-company/#company-team'
+            ];
+            if ($count >= 6 && !$this->type) {
+                $this->json['data'][$this->key]['linkMore'] = '/search/?type=DescriptionTeam&q=' . $this->needle;
+                $this->key++;
+                break;
+            }
+        }
+
+        if ($this->key === 0) {
+            $teamDesrAll = TeamTable::getList(
+                [
+                    'select' => [$text],
+                    'group' => ['ID'],
+                    'order' => ['ID' => 'desc'],
+                ]
+            )->FetchAll();
+
+            $typos = $this->searchByTypos($this->needle, $text, $teamDesrAll);
+
+            if ($typos) {
+                $this->json['data'][$this->key]['items'][] = [
+                    'page' => 'descriptionTeam',
+                    'section' => $this->language == 'en' ? 'Participants description' : 'Описание сотрудников',
+                    'NAME' => $typos,
+                    'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/about/management-company/#company-team'
+                ];
+            }
+        }
+    }
+
+    private function searchResidentsTypes()
+    {
+        $needle = str_replace(' ', '|', $this->sqlHelper->forSql($this->needle));
+        $nameIsRegular = $this->conditionByLanguage('nameRegular');
+        $name = $this->conditionByLanguage('name');
+        $residentsTypes = ResidentTypesTable::getList(
+            [
+                'select' => ['ID', 'NAME', 'NAME_EN'],
+                'filter' => [
+                    $nameIsRegular => $needle,
+                ],
+                'group' => ['ID'],
+                'order' => ['ID' => 'desc'],
+                'limit' => 6
+            ]
+        )->FetchAll();
+
+        foreach ($residentsTypes as $count => $residentType) {
+            $this->json['data'][$this->key]['items'] [] = [
+                'page' => 'typesResidents',
+                'section' => $this->language == 'en' ? 'Categories residents' : 'Категории резидентов',
+                'NAME' => $residentType[$name],
+                'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/residents/#types-residents'
+            ];
+            if ($count >= 6 && !$this->type) {
+                $this->json['data'][$this->key]['linkMore'] = '/search/?type=ResidentsTypes&q=' . $this->needle;
+                $this->key++;
+                break;
+            }
+        }
+
+        if ($this->key === 0) {
+            $residentsTypesAll = TeamTable::getList(
+                [
+                    'select' => [$name],
+                    'group' => ['ID'],
+                    'order' => ['ID' => 'desc'],
+                ]
+            )->FetchAll();
+
+            $typos = $this->searchByTypos($this->needle, $name, $residentsTypesAll);
+
+            if ($typos) {
+                $this->json['data'][$this->key]['items'][] = [
+                    'page' => 'typesResidents',
+                    'section' => $this->language == 'en' ? 'Categories residents' : 'Категории резидентов',
+                    'NAME' => $typos,
+                    'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/residents/#types-residents'
+                ];
+            }
+        }
+    }
+
+    private function searchResedentsDescription()
+    {
+        $needle = str_replace(' ', '|', $this->sqlHelper->forSql($this->needle));
+        $textIsRegular = $this->conditionByLanguage('textRegular');
+        $text = $this->conditionByLanguage('text');
+        $residentsDescription = ResidentTable::getList(
+            [
+                'select' => ['ID', 'TEXT', 'TEXT_EN'],
+                'filter' => [
+                    $textIsRegular => $needle,
+                ],
+                'group' => ['ID'],
+                'order' => ['ID' => 'desc'],
+                'limit' => 6
+            ]
+        )->FetchAll();
+
+        foreach ($residentsDescription as $count => $resDesc) {
+            $this->json['data'][$this->key]['items'] [] = [
+                'page' => 'residentsDescription',
+                'section' => $this->language == 'en' ? 'Description residents' : 'Описание резидентов',
+                'NAME' => $resDesc[$text],
+                'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/residents/#residents-description'
+            ];
+            if ($count >= 6 && !$this->type) {
+                $this->json['data'][$this->key]['linkMore'] = '/search/?type=DescriptionResidents&q=' . $this->needle;
+                $this->key++;
+                break;
+            }
+        }
+
+        if ($this->key === 0) {
+            $resDescAll = ResidentTable::getList(
+                [
+                    'select' => [$text],
+                    'group' => ['ID'],
+                    'order' => ['ID' => 'desc'],
+                ]
+            )->FetchAll();
+
+            $typos = $this->searchByTypos($this->needle, $text, $resDescAll);
+
+            if ($typos) {
+                $this->json['data'][$this->key]['items'][] = [
+                    'page' => 'residentsDescription',
+                    'section' => $this->language == 'en' ? 'Description residents' : 'Описание резидентов',
+                    'NAME' => $typos,
+                    'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/residents/#residents-description'
+                ];
+            }
+        }
+    }
+
     private function getPreviewText(string $text): string
     {
         $text = str_replace('&nbsp;', ' ', strip_tags($text));
@@ -487,6 +707,14 @@ class Search
             'link' => [
                 'en' => '/en',
                 'ru' => '',
+            ],
+            'nameRegular' => [
+                'en' => '?NAME_EN',
+                'ru' => '?NAME'
+            ],
+            'textRegular' => [
+                'en' => '?TEXT_EN',
+                'ru' => '?TEXT',
             ],
         ];
 

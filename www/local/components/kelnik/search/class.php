@@ -1,6 +1,7 @@
 <?php
 
-require($_SERVER['DOCUMENT_ROOT'] . '/search/Search.php');
+require_once($_SERVER["DOCUMENT_ROOT"]
+    . "/local/php_interface/lib/search/Search.php");
 
 use Bex\Bbc;
 use Bitrix\Main\Entity\ExpressionField;
