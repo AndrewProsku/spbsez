@@ -488,9 +488,10 @@ class Search
         $needle = str_replace(' ', '|', $this->sqlHelper->forSql($this->needle));
         $textIsRegular = $this->conditionByLanguage('textRegular');
         $text = $this->conditionByLanguage('text');
+        $name = $this->conditionByLanguage('name');
         $companyTeamDescription = TeamTable::getList(
             [
-                'select' => ['ID', 'TEXT', 'TEXT_EN'],
+                'select' => ['ID', 'TEXT', 'TEXT_EN', 'NAME', 'NAME_EN'],
                 'filter' => [
                     $textIsRegular => $needle,
                 ],
@@ -504,7 +505,7 @@ class Search
             $this->json['data'][$this->key]['items'] [] = [
                 'page' => 'descriptionTeam',
                 'section' => $this->language == 'en' ? 'Participants description' : 'Описание сотрудников',
-                'NAME' => $teamDecr[$text],
+                'NAME' => $teamDecr[$name],
                 'LINK' => $_SERVER['HTTP_ORIGIN'] . $this->conditionByLanguage('link') . '/about/management-company/#company-team'
             ];
             if ($count >= 6 && !$this->type) {
