@@ -259,8 +259,8 @@ class ReportsTable extends DataManager
                 'end' => mktime(23, 59, 59, 4, 31, $year)
             ],
             self::TYPE_QUARTER_2 => [
-                'start' => mktime(0, 0, 0, 7, 1, $year),
-                'end' => mktime(23, 59, 59, 7, 31, $year)
+                'start' => mktime(0, 0, 0, 8, 1, $year),
+                'end' => mktime(23, 59, 59, 9, 31, $year)
             ],
             self::TYPE_QUARTER_3 => [
                 'start' => mktime(0, 0, 0, 10, 1, $year),
