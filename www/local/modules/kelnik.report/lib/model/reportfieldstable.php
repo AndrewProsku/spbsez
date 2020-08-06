@@ -290,12 +290,19 @@ class ReportFieldsTable extends DataManager
                                 'type' => 'float'
                             ],
                             [
-                                'id' => 'revenue-year',
+                                'id' => 'revenue-year-extra',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-2'),
                                 'type' => 'float'
                             ],
+
                             [
-                                'id' => 'revenue-year-extra',
+                                'id' => 'extra-title-for-revenue',
+                                'extra-title' => true,
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-5'),
+                            ],
+
+                            [
+                                'id' => 'revenue-year',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-3'),
                                 'type' => 'float'
                             ],
