@@ -26,6 +26,7 @@ $i = 1;
             <h3 class="b-report-block__title"><?= $i . '. ' . $block['title']; ?></h3>
         </div>
         <div class="b-report-block__body">
+
         <?php foreach ($block['fields'] as $field): ?>
             <?php
                 if (!isset($field['id']) || !empty($field['excludeAdmin'])):
@@ -38,6 +39,13 @@ $i = 1;
                     $val = $val == 'yes' ? 'Да' : 'Нет';
                 }
             ?>
+        <?php if($field['extra-title']) :?>
+                <div class="b-report-block__header__extra" style="height: 36px">
+                    <h3 class="b-report-block__title__extra"><?=$field['title']?></h3>
+                </div>
+            <?php continue; ?>
+        <?endif; ?>
+
             <div class="b-input-block">
                 <div class="row-header"><?= $field['title']; ?></div>
                 <div class="row-value"><?= mb_strlen($val) ? $val : '&nbsp;'; ?></div>
