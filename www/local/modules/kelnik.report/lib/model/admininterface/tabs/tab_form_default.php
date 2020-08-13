@@ -40,7 +40,7 @@ $i = 1;
                 }
             ?>
         <?php if($field['extra-title']) :?>
-                <div class="b-report-block__header__extra" style="height: 36px">
+                <div class="b-report-block__header__extra" style="height: 36px;flex: 0 0 100%;">
                     <h3 class="b-report-block__title__extra"><?=$field['title']?></h3>
                 </div>
             <?php continue; ?>
