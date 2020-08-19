@@ -1,4 +1,5 @@
 <?php
+
 namespace Kelnik\Report\Model\AdminInterface;
 
 use Bitrix\Main\Localization\Loc;
@@ -11,6 +12,8 @@ use Kelnik\Report\Model\ReportFieldsTable;
 use Kelnik\Report\Model\ReportsTable;
 use Kelnik\Report\Model\StatusTable;
 use Kelnik\Userdata\Profile\Profile;
+
+ini_set('max_execution_time', 900);
 
 Loc::loadMessages(__FILE__);
 

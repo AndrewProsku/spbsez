@@ -1,5 +1,5 @@
 <?php
-ini_set('max_execution_time', 900);
+
 $requiredModules = include 'require.php';
 
 
