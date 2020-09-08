@@ -1,5 +1,0 @@
-<?
-$MESS["LANDING_TABLE_FIELD_SITE_ID"] = "ID der Website24";
-$MESS["LANDING_TABLE_FIELD_TYPE"] = "Seitentyp";
-$MESS["LANDING_TABLE_FIELD_LANDING_ID"] = "Landing-ID";
-?>

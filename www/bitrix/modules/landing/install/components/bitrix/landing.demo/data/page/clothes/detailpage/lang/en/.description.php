@@ -1,3 +1,0 @@
-<?
-$MESS["LANDING_DEMO_STORE_CLOTHES-DETAILPAGE--NAME"] = "Product details";
-?>

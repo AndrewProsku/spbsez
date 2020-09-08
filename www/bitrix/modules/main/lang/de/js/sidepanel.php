@@ -1,3 +1,0 @@
-<?
-$MESS["MAIN_SIDEPANEL_CLOSE"] = "Schließen";
-$MESS["MAIN_SIDEPANEL_PRINT"] = "Drucken";

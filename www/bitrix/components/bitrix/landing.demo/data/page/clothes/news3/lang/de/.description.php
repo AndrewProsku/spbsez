@@ -1,3 +1,0 @@
-<?
-$MESS["LANDING_DEMO_STORE_CLOTHES-NEWS3--NAME"] = "News 3";
-?>
