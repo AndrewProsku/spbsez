@@ -24,7 +24,7 @@ $MESS['KELNIK_TMPL_PROFILE_SIGN_OUT'] = 'Sign out of personal account';
 
 $MESS['KELNIK_TMPL_SITES_LOCATION'] = 'Location of zones';
 $MESS['KELNIK_TMPL_SITES_NOVOORLOVSKAYA'] = 'Novoorlovskaya';
-$MESS['KELNIK_TMPL_SITES_NOIDORF'] = 'Noidorf';
+$MESS['KELNIK_TMPL_SITES_NOIDORF'] = 'Noydorf';
 $MESS['KELNIK_TMPL_SITES_SEA_PORT'] = 'Sea port';
 $MESS['KELNIK_TMPL_SITES_RAILWAY_BALT'] = 'Baltic Railway Station';
 $MESS['KELNIK_TMPL_SITES_CENTER'] = 'City center';
@@ -39,7 +39,7 @@ $MESS['KELNIK_TMPL_SITES_TO_CENTER'] = 'to the city center';
 $MESS['KELNIK_TMPL_SITES_SW'] = 'South-West of St. Petersburg';
 $MESS['KELNIK_TMPL_SITES_STRELNA'] = 'Strelna';
 $MESS['KELNIK_TMPL_SITES_SITE_NOVOORLOVSKAYA'] = 'Novoorlovskaya site';
-$MESS['KELNIK_TMPL_SITES_SITE_NOIDORF'] = 'Noidorf site';
+$MESS['KELNIK_TMPL_SITES_SITE_NOIDORF'] = 'Noydorf site';
 $MESS['KELNIK_TMPL_SITES_DESCR_NOV'] = 'Developed transport infrastructure. Less than 10
                         minutes to the St. Petersburg Ring Road. 30
                         minutes by motor vehicle to the city center. 20
