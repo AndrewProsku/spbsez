@@ -1,8 +1,9 @@
 *.DS_Store
 vendor
 node_modules
-www/bitrix
-www/upload
+#www/bitrix
+www/bitrix/backup
+#www/upload
 *.idea
 *.sublime-project
 *.sublime-workspace
