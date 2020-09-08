@@ -1,0 +1,25 @@
+{
+  "name": "bitrix-expert/tools",
+  "description": "Helpers for developers on Bitrix",
+  "keywords": ["bitrix", "iblock", "tools"],
+  "type": "library",
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/bitrix-expert/tools/issues",
+    "source": "https://github.com/bitrix-expert/tools/",
+    "wiki": "https://github.com/bitrix-expert/tools/wiki"
+  },
+  "authors": [
+    {
+      "name": "Nik Samokhvalov",
+      "email": "nik@samokhvalov.info"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "psr-4": {"Bex\\Tools\\": "src/"},
+    "files": ["src/bootstrap.php"]
+  }
+}
