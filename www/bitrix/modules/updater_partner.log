@@ -1,0 +1,607 @@
+2018-12-25 14:34:49 -  - exec CUpdateClientPartner::__CollectRequestData
+2018-12-25 14:34:49 -  - exec CUpdateClientPartner::GetHTTPPage
+2018-12-25 14:34:49 -  - exec CUpdateClientPartner::ParseServerData
+2018-12-25 14:34:49 -  - exec CUpdateClientPartner::GetUpdatesList
+2018-12-25 14:34:49 -  - exec CUpdateClientPartner::__CollectRequestData
+2018-12-25 14:34:49 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=1&SUPD_URS=0&SUPD_URSA=7&TYPENC=F&CLIENT_PHPVER=7.1.25&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.helpers%2C3.1.2%2CN%3Bkelnik.admin_helper%2C3.1.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.2%2CN%3Bkelnik.news%2C3.0.1%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.helpers%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.news&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2018-12-25 14:34:49 -  - exec CUpdateClientPartner::GetHTTPPage
+2018-12-25 14:34:49 -  - TIME GetUpdatesList(request) 0.261 sec
+2018-12-25 14:34:49 -  - exec CUpdateClientPartner::ParseServerData
+2018-12-25 14:34:49 -  - exec CUpdateClientPartner::__CollectRequestData
+2018-12-25 14:34:49 -  - exec CUpdateClientPartner::GetHTTPPage
+2018-12-25 14:34:49 -  - exec CUpdateClientPartner::ParseServerData
+2019-01-09 17:58:15 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-01-09 17:58:15 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-01-09 17:58:15 -  - exec CUpdateClientPartner::ParseServerData
+2019-01-09 17:58:15 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-01-09 17:58:15 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-01-09 17:58:15 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=1&SUPD_URS=0&SUPD_URSA=7&TYPENC=F&CLIENT_PHPVER=7.1.25&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.helpers%2C3.1.2%2CN%3Bkelnik.admin_helper%2C3.1.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.2%2CN%3Bkelnik.news%2C3.0.1%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.helpers%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.news&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-01-09 17:58:15 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-01-09 17:58:15 -  - TIME GetUpdatesList(request) 0.239 sec
+2019-01-09 17:58:15 -  - exec CUpdateClientPartner::ParseServerData
+2019-01-09 17:58:15 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-01-09 17:58:15 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-01-09 17:58:15 -  - exec CUpdateClientPartner::ParseServerData
+2019-01-18 15:58:13 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-01-18 15:58:13 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-01-18 15:58:14 -  - exec CUpdateClientPartner::ParseServerData
+2019-01-18 15:58:14 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-01-18 15:58:14 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-01-18 15:58:14 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=1&SUPD_URS=0&SUPD_URSA=7&TYPENC=F&CLIENT_PHPVER=7.1.25&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.helpers%2C3.1.2%2CN%3Bkelnik.admin_helper%2C3.1.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.2%2CN%3Bkelnik.news%2C3.0.1%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.helpers%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.news&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-01-18 15:58:14 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-01-18 15:58:14 -  - TIME GetUpdatesList(request) 0.23 sec
+2019-01-18 15:58:14 -  - exec CUpdateClientPartner::ParseServerData
+2019-01-18 15:58:14 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-01-18 15:58:14 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-01-18 15:58:14 -  - exec CUpdateClientPartner::ParseServerData
+2019-01-25 18:16:04 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-01-25 18:16:04 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-01-25 18:16:04 - ERRCONN - Error connecting 2 www.bitrixsoft.com: [0] php_network_getaddresses: getaddrinfo failed: Name or service not known
+2019-01-25 18:16:04 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-01-25 18:16:04 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-01-25 18:16:04 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=1&SUPD_URS=0&SUPD_URSA=7&TYPENC=F&CLIENT_PHPVER=7.1.26&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.helpers%2C3.1.2%2CN%3Bkelnik.admin_helper%2C3.1.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.2%2CN%3Bkelnik.news%2C3.0.1%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.helpers%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.news&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-01-25 18:16:04 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-01-25 18:16:04 - ERRCONN - Error connecting 2 www.bitrixsoft.com: [0] php_network_getaddresses: getaddrinfo failed: Name or service not known
+2019-01-25 18:16:04 -  - TIME GetUpdatesList(request) 0.001 sec
+2019-01-25 18:16:04 - GUL02 - Ошибка соединения с сервером обновлений: [0] php_network_getaddresses: getaddrinfo failed: Name or service not known. Нет соединения с сервером обновлений. 
+2019-01-25 18:16:04 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-01-25 18:16:04 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-01-25 18:16:04 - ERRCONN - Error connecting 2 www.bitrixsoft.com: [0] php_network_getaddresses: getaddrinfo failed: Name or service not known
+2019-02-08 18:24:50 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-02-08 18:24:50 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-02-08 18:24:50 -  - exec CUpdateClientPartner::ParseServerData
+2019-02-08 18:24:50 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-02-08 18:24:50 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-02-08 18:24:50 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=1&SUPD_URS=0&SUPD_URSA=7&TYPENC=F&CLIENT_PHPVER=7.1.26&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.helpers%2C3.1.2%2CN%3Bkelnik.admin_helper%2C3.2.3%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.2%2CN%3Bkelnik.news%2C3.0.1%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.helpers%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.news&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-02-08 18:24:50 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-02-08 18:24:51 -  - TIME GetUpdatesList(request) 0.224 sec
+2019-02-08 18:24:51 -  - exec CUpdateClientPartner::ParseServerData
+2019-02-08 18:24:51 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-02-08 18:24:51 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-02-08 18:24:51 -  - exec CUpdateClientPartner::ParseServerData
+2019-02-18 11:56:49 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-02-18 11:56:49 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-02-18 11:56:49 -  - exec CUpdateClientPartner::ParseServerData
+2019-02-18 11:56:49 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-02-18 11:56:49 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-02-18 11:56:49 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=1&SUPD_URS=0&SUPD_URSA=7&TYPENC=F&CLIENT_PHPVER=7.1.26&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.helpers%2C3.1.2%2CN%3Bkelnik.admin_helper%2C3.2.3%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.2%2CN%3Bkelnik.news%2C3.0.1%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.helpers%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.news&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-02-18 11:56:49 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-02-18 11:56:49 -  - TIME GetUpdatesList(request) 0.268 sec
+2019-02-18 11:56:49 -  - exec CUpdateClientPartner::ParseServerData
+2019-02-18 11:56:49 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-02-18 11:56:49 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-02-18 11:56:50 -  - exec CUpdateClientPartner::ParseServerData
+2019-03-11 12:32:51 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-03-11 12:32:51 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-03-11 12:32:51 -  - exec CUpdateClientPartner::ParseServerData
+2019-03-11 12:32:51 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-03-11 12:32:51 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-03-11 12:32:51 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=9&TYPENC=F&CLIENT_PHPVER=7.1.26&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.helpers%2C3.1.2%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.helpers%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.imageresizer&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-03-11 12:32:51 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-03-11 12:32:52 -  - TIME GetUpdatesList(request) 0.387 sec
+2019-03-11 12:32:52 -  - exec CUpdateClientPartner::ParseServerData
+2019-03-11 12:32:52 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-03-11 12:32:52 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-03-11 12:32:52 -  - exec CUpdateClientPartner::ParseServerData
+2019-03-18 12:33:09 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-03-18 12:33:09 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-03-18 12:33:09 -  - exec CUpdateClientPartner::ParseServerData
+2019-03-18 12:33:09 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-03-18 12:33:09 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-03-18 12:33:09 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=12&TYPENC=F&CLIENT_PHPVER=7.1.26&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.helpers%2C3.1.2%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.helpers%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.imageresizer&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-03-18 12:33:09 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-03-18 12:33:10 -  - TIME GetUpdatesList(request) 0.493 sec
+2019-03-18 12:33:10 -  - exec CUpdateClientPartner::ParseServerData
+2019-03-18 12:33:10 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-03-18 12:33:10 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-03-18 12:33:10 -  - exec CUpdateClientPartner::ParseServerData
+2019-03-21 14:55:46 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-03-21 14:55:46 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-03-21 14:55:46 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=12&TYPENC=F&CLIENT_PHPVER=7.1.27&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.imageresizer%2Ckelnik.helpers&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-03-21 14:55:46 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-03-21 14:55:46 -  - TIME GetUpdatesList(request) 0.518 sec
+2019-03-21 14:55:46 -  - exec CUpdateClientPartner::ParseServerData
+2019-03-25 16:04:27 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-03-25 16:04:27 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-03-25 16:04:28 -  - exec CUpdateClientPartner::ParseServerData
+2019-03-25 16:04:28 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-03-25 16:04:28 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-03-25 16:04:28 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=13&TYPENC=F&CLIENT_PHPVER=7.1.27&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.imageresizer%2Ckelnik.helpers&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-03-25 16:04:28 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-03-25 16:04:29 -  - TIME GetUpdatesList(request) 0.871 sec
+2019-03-25 16:04:29 -  - exec CUpdateClientPartner::ParseServerData
+2019-03-25 16:04:29 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-03-25 16:04:29 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-03-25 16:04:29 -  - exec CUpdateClientPartner::ParseServerData
+2019-04-01 16:13:43 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-04-01 16:13:43 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-04-01 16:13:44 -  - exec CUpdateClientPartner::ParseServerData
+2019-04-01 16:13:44 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-04-01 16:13:44 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-04-01 16:13:44 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=oez-d.ksdev.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=15&TYPENC=F&CLIENT_PHPVER=7.1.27&NGINX=Y&dbv=5.5.60&instm=main%2C18.1.3%2CN%3Bb24connector%2C18.0.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bcalendar%2C18.0.0%2CN%3Bclouds%2C18.0.0%2CN%3Bcompression%2C16.0.0%2CN%3Bfileman%2C18.0.4%2CN%3Bform%2C18.0.0%2CN%3Bforum%2C18.0.3%2CN%3Bhighloadblock%2C18.5.0%2CN%3Biblock%2C18.5.4%2CN%3Bim%2C18.1.5%2CN%3Blanding%2C18.4.31%2CN%3Bmobileapp%2C18.0.2%2CN%3Bperfmon%2C18.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Brest%2C18.5.2%2CN%3Bscale%2C17.5.0%2CN%3Bsearch%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bseo%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bsubscribe%2C17.5.0%2CN%3Btranslate%2C16.5.0%2CN%3Bui%2C18.0.1%2CN%3Bvote%2C17.5.1%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN&reqm=bitrix.sitecorporate%2Cbitrix.siteinfoportal%2Cbitrix.sitepersonal%2Ckelnik.admin_helper%2Cbex.bbc%2Ckelnik.text%2Ckelnik.imageresizer%2Ckelnik.helpers&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-04-01 16:13:44 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-04-01 16:13:44 -  - TIME GetUpdatesList(request) 0.242 sec
+2019-04-01 16:13:44 -  - exec CUpdateClientPartner::ParseServerData
+2019-04-01 16:13:44 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-04-01 16:13:44 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-04-01 16:13:44 -  - exec CUpdateClientPartner::ParseServerData
+2019-04-26 15:01:23 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-04-26 15:01:23 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-04-26 15:01:23 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=22&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-04-26 15:01:23 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-04-26 15:01:24 -  - TIME GetUpdatesList(request) 0.348 sec
+2019-04-26 15:01:24 -  - exec CUpdateClientPartner::ParseServerData
+2019-04-26 15:01:25 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-04-26 15:01:25 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-04-26 15:01:25 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=22&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&SUPD_SRS=RU&SUPD_CMP=N
+2019-04-26 15:01:25 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-04-26 15:01:26 -  - TIME GetUpdatesList(request) 0.382 sec
+2019-04-26 15:01:26 -  - exec CUpdateClientPartner::ParseServerData
+2019-04-30 07:16:53 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-04-30 07:16:53 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-04-30 07:16:54 -  - exec CUpdateClientPartner::ParseServerData
+2019-04-30 07:16:54 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-04-30 07:16:54 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-04-30 07:16:54 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=22&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-04-30 07:16:54 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-04-30 07:16:54 -  - TIME GetUpdatesList(request) 0.702 sec
+2019-04-30 07:16:54 -  - exec CUpdateClientPartner::ParseServerData
+2019-04-30 07:16:54 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-04-30 07:16:54 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-04-30 07:16:55 -  - exec CUpdateClientPartner::ParseServerData
+2019-05-06 11:32:14 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-05-06 11:32:14 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-05-06 11:32:14 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=22&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-05-06 11:32:14 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-05-06 11:32:14 -  - TIME GetUpdatesList(request) 0.433 sec
+2019-05-06 11:32:14 -  - exec CUpdateClientPartner::ParseServerData
+2019-05-07 09:05:35 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-05-07 09:05:35 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-05-07 09:05:35 -  - exec CUpdateClientPartner::ParseServerData
+2019-05-07 09:05:35 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-05-07 09:05:35 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-05-07 09:05:35 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=24&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-05-07 09:05:35 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-05-07 09:05:35 -  - TIME GetUpdatesList(request) 0.325 sec
+2019-05-07 09:05:35 -  - exec CUpdateClientPartner::ParseServerData
+2019-05-07 09:05:35 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-05-07 09:05:35 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-05-07 09:05:36 -  - exec CUpdateClientPartner::ParseServerData
+2019-05-15 05:52:12 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-05-15 05:52:12 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-05-15 05:52:13 -  - exec CUpdateClientPartner::ParseServerData
+2019-05-15 05:52:13 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-05-15 05:52:13 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-05-15 05:52:13 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=24&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.4%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-05-15 05:52:13 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-05-15 05:52:13 -  - TIME GetUpdatesList(request) 0.286 sec
+2019-05-15 05:52:13 -  - exec CUpdateClientPartner::ParseServerData
+2019-05-15 05:52:13 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-05-15 05:52:13 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-05-15 05:52:13 -  - exec CUpdateClientPartner::ParseServerData
+2019-05-24 09:58:31 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-05-24 09:58:31 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-05-24 09:58:32 -  - exec CUpdateClientPartner::ParseServerData
+2019-05-24 09:58:32 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-05-24 09:58:32 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-05-24 09:58:32 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=24&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-05-24 09:58:32 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-05-24 09:58:32 -  - TIME GetUpdatesList(request) 0.37 sec
+2019-05-24 09:58:32 -  - exec CUpdateClientPartner::ParseServerData
+2019-05-24 09:58:32 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-05-24 09:58:32 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-05-24 09:58:32 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:16:33 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:16:33 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:16:33 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:16:33 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:16:34 -  - TIME GetUpdatesList(request) 0.17 sec
+2019-09-25 11:16:34 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:16:47 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:16:47 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:16:47 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:16:47 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:16:48 -  - TIME GetUpdatesList(request) 0.162 sec
+2019-09-25 11:16:48 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:19:44 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:19:44 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:19:44 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:19:44 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:19:44 -  - TIME GetUpdatesList(request) 0.223 sec
+2019-09-25 11:19:44 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:19:48 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:19:48 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:19:48 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:19:48 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:19:48 -  - TIME GetUpdatesList(request) 0.166 sec
+2019-09-25 11:19:48 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:19:49 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:19:49 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:19:49 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:19:49 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:19:49 -  - TIME GetUpdatesList(request) 0.164 sec
+2019-09-25 11:19:49 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:19:50 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:19:50 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:19:50 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:19:50 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:19:50 -  - TIME GetUpdatesList(request) 0.175 sec
+2019-09-25 11:19:50 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:19:54 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:19:54 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:19:54 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:19:54 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:19:54 -  - TIME GetUpdatesList(request) 0.159 sec
+2019-09-25 11:19:54 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:19:57 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:19:57 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:19:57 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:19:57 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:19:57 -  - TIME GetUpdatesList(request) 0.17 sec
+2019-09-25 11:19:57 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:24:58 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:24:58 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:24:58 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:24:58 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:24:58 -  - TIME GetUpdatesList(request) 0.157 sec
+2019-09-25 11:24:58 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:46:42 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:46:42 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:46:42 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:46:42 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:46:42 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:46:42 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:46:42 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:46:42 -  - TIME GetUpdatesList(request) 0.179 sec
+2019-09-25 11:46:42 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:46:42 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:46:42 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:46:42 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:47:03 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:47:03 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:47:03 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:47:03 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:47:03 -  - TIME GetUpdatesList(request) 0.185 sec
+2019-09-25 11:47:03 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:47:04 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:47:04 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:47:04 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:47:04 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:47:05 -  - TIME GetUpdatesList(request) 0.191 sec
+2019-09-25 11:47:05 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:47:42 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:47:42 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:47:42 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:47:42 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:47:42 -  - TIME GetUpdatesList(request) 0.228 sec
+2019-09-25 11:47:42 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:49:26 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:49:26 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:49:26 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:49:26 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:49:26 -  - TIME GetUpdatesList(request) 0.164 sec
+2019-09-25 11:49:26 -  - exec CUpdateClientPartner::ParseServerData
+2019-09-25 11:49:28 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-09-25 11:49:28 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-09-25 11:49:28 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=29&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&SUPD_SRS=RU&SUPD_CMP=N
+2019-09-25 11:49:28 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-09-25 11:49:28 -  - TIME GetUpdatesList(request) 0.172 sec
+2019-09-25 11:49:28 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-04 16:03:08 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-04 16:03:08 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-04 16:03:08 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-04 16:03:08 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-10-04 16:03:08 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-04 16:03:08 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=34&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-10-04 16:03:08 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-04 16:03:08 -  - TIME GetUpdatesList(request) 0.239 sec
+2019-10-04 16:03:08 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-04 16:03:08 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-04 16:03:08 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-04 16:03:08 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-14 14:20:47 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-14 14:20:47 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-14 14:20:47 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-14 14:20:47 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-10-14 14:20:47 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-14 14:20:47 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=35&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-10-14 14:20:47 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-14 14:20:47 -  - TIME GetUpdatesList(request) 0.262 sec
+2019-10-14 14:20:47 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-14 14:20:47 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-14 14:20:47 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-14 14:20:47 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-23 14:58:47 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-23 14:58:47 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-23 14:58:47 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-23 14:58:47 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-10-23 14:58:47 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-23 14:58:47 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=35&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-10-23 14:58:47 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-23 14:58:47 -  - TIME GetUpdatesList(request) 0.224 sec
+2019-10-23 14:58:47 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-23 14:58:47 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-23 14:58:47 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-23 14:58:47 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-31 12:36:26 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-31 12:36:26 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-31 12:36:26 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-31 12:36:26 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-10-31 12:36:26 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-31 12:36:26 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=36&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-10-31 12:36:26 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-31 12:36:27 -  - TIME GetUpdatesList(request) 0.217 sec
+2019-10-31 12:36:27 -  - exec CUpdateClientPartner::ParseServerData
+2019-10-31 12:36:27 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-10-31 12:36:27 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-10-31 12:36:27 -  - exec CUpdateClientPartner::ParseServerData
+2019-11-28 11:26:34 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-11-28 11:26:34 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-11-28 11:26:34 -  - exec CUpdateClientPartner::ParseServerData
+2019-11-28 11:26:34 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-11-28 11:26:34 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-11-28 11:26:34 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=37&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-11-28 11:26:34 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-11-28 11:26:34 -  - TIME GetUpdatesList(request) 0.237 sec
+2019-11-28 11:26:34 -  - exec CUpdateClientPartner::ParseServerData
+2019-11-28 11:26:34 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-11-28 11:26:34 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-11-28 11:26:35 -  - exec CUpdateClientPartner::ParseServerData
+2019-12-27 12:17:27 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-12-27 12:17:27 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-12-27 12:17:27 -  - exec CUpdateClientPartner::ParseServerData
+2019-12-27 12:17:27 -  - exec CUpdateClientPartner::GetUpdatesList
+2019-12-27 12:17:27 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-12-27 12:17:27 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=37&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2019-12-27 12:17:27 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-12-27 12:17:27 -  - TIME GetUpdatesList(request) 0.243 sec
+2019-12-27 12:17:27 -  - exec CUpdateClientPartner::ParseServerData
+2019-12-27 12:17:27 -  - exec CUpdateClientPartner::__CollectRequestData
+2019-12-27 12:17:27 -  - exec CUpdateClientPartner::GetHTTPPage
+2019-12-27 12:17:27 -  - exec CUpdateClientPartner::ParseServerData
+2020-01-09 10:59:19 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-01-09 10:59:19 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-01-09 10:59:19 -  - exec CUpdateClientPartner::ParseServerData
+2020-01-09 10:59:19 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-01-09 10:59:19 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-01-09 10:59:19 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=37&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-01-09 10:59:19 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-01-09 10:59:19 -  - TIME GetUpdatesList(request) 0.247 sec
+2020-01-09 10:59:19 -  - exec CUpdateClientPartner::ParseServerData
+2020-01-09 10:59:19 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-01-09 10:59:19 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-01-09 10:59:19 -  - exec CUpdateClientPartner::ParseServerData
+2020-01-17 14:37:35 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-01-17 14:37:35 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-01-17 14:37:36 -  - exec CUpdateClientPartner::ParseServerData
+2020-01-17 14:37:36 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-01-17 14:37:36 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-01-17 14:37:36 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=37&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-01-17 14:37:36 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-01-17 14:37:36 -  - TIME GetUpdatesList(request) 0.234 sec
+2020-01-17 14:37:36 -  - exec CUpdateClientPartner::ParseServerData
+2020-01-17 14:37:36 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-01-17 14:37:36 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-01-17 14:37:36 -  - exec CUpdateClientPartner::ParseServerData
+2020-01-29 16:15:25 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-01-29 16:15:25 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-01-29 16:15:25 -  - exec CUpdateClientPartner::ParseServerData
+2020-01-29 16:15:25 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-01-29 16:15:25 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-01-29 16:15:25 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=38&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-01-29 16:15:25 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-01-29 16:15:26 -  - TIME GetUpdatesList(request) 0.239 sec
+2020-01-29 16:15:26 -  - exec CUpdateClientPartner::ParseServerData
+2020-01-29 16:15:26 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-01-29 16:15:26 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-01-29 16:15:26 -  - exec CUpdateClientPartner::ParseServerData
+2020-02-18 15:09:58 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-02-18 15:09:58 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-02-18 15:09:58 -  - exec CUpdateClientPartner::ParseServerData
+2020-02-18 15:09:58 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-02-18 15:09:58 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-02-18 15:09:58 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=38&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-02-18 15:09:58 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-02-18 15:09:58 -  - TIME GetUpdatesList(request) 0.232 sec
+2020-02-18 15:09:58 -  - exec CUpdateClientPartner::ParseServerData
+2020-02-18 15:09:58 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-02-18 15:09:58 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-02-18 15:09:58 -  - exec CUpdateClientPartner::ParseServerData
+2020-02-26 10:10:51 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-02-26 10:10:51 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-02-26 10:10:51 -  - exec CUpdateClientPartner::ParseServerData
+2020-02-26 10:10:51 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-02-26 10:10:51 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-02-26 10:10:51 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=38&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-02-26 10:10:51 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-02-26 10:10:52 -  - TIME GetUpdatesList(request) 0.239 sec
+2020-02-26 10:10:52 -  - exec CUpdateClientPartner::ParseServerData
+2020-02-26 10:10:52 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-02-26 10:10:52 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-02-26 10:10:52 -  - exec CUpdateClientPartner::ParseServerData
+2020-03-04 10:12:28 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-03-04 10:12:28 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-03-04 10:12:29 -  - exec CUpdateClientPartner::ParseServerData
+2020-03-04 10:12:29 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-03-04 10:12:29 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-03-04 10:12:29 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=38&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-03-04 10:12:29 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-03-04 10:12:29 -  - TIME GetUpdatesList(request) 0.229 sec
+2020-03-04 10:12:29 -  - exec CUpdateClientPartner::ParseServerData
+2020-03-04 10:12:29 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-03-04 10:12:29 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-03-04 10:12:29 -  - exec CUpdateClientPartner::ParseServerData
+2020-03-13 15:22:58 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-03-13 15:22:58 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-03-13 15:22:58 -  - exec CUpdateClientPartner::ParseServerData
+2020-03-13 15:22:58 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-03-13 15:22:58 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-03-13 15:22:58 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=38&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-03-13 15:22:58 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-03-13 15:22:58 -  - TIME GetUpdatesList(request) 0.231 sec
+2020-03-13 15:22:58 -  - exec CUpdateClientPartner::ParseServerData
+2020-03-13 15:22:58 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-03-13 15:22:58 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-03-13 15:22:58 -  - exec CUpdateClientPartner::ParseServerData
+2020-03-17 15:37:17 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-03-17 15:37:17 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-03-17 15:37:17 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=40&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-03-17 15:37:17 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-03-17 15:37:17 -  - TIME GetUpdatesList(request) 0.366 sec
+2020-03-17 15:37:17 -  - exec CUpdateClientPartner::ParseServerData
+2020-03-26 15:46:38 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-03-26 15:46:38 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-03-26 15:46:38 -  - exec CUpdateClientPartner::ParseServerData
+2020-03-26 15:46:38 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-03-26 15:46:38 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-03-26 15:46:38 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=42&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-03-26 15:46:38 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-03-26 15:46:38 -  - TIME GetUpdatesList(request) 0.233 sec
+2020-03-26 15:46:38 -  - exec CUpdateClientPartner::ParseServerData
+2020-03-26 15:46:38 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-03-26 15:46:38 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-03-26 15:46:38 -  - exec CUpdateClientPartner::ParseServerData
+2020-04-06 13:37:04 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-04-06 13:37:04 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-04-06 13:37:04 -  - exec CUpdateClientPartner::ParseServerData
+2020-04-06 13:37:04 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-04-06 13:37:04 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-04-06 13:37:04 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=43&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-04-06 13:37:04 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-04-06 13:37:04 -  - TIME GetUpdatesList(request) 0.239 sec
+2020-04-06 13:37:04 -  - exec CUpdateClientPartner::ParseServerData
+2020-04-06 13:37:04 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-04-06 13:37:04 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-04-06 13:37:04 -  - exec CUpdateClientPartner::ParseServerData
+2020-04-06 13:38:51 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-04-06 13:38:51 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-04-06 13:38:51 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=43&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-04-06 13:38:51 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-04-06 13:38:51 -  - TIME GetUpdatesList(request) 0.317 sec
+2020-04-06 13:38:51 -  - exec CUpdateClientPartner::ParseServerData
+2020-04-09 13:15:41 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-04-09 13:15:41 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-04-09 13:15:41 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=51&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-04-09 13:15:41 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-04-09 13:15:42 -  - TIME GetUpdatesList(request) 0.393 sec
+2020-04-09 13:15:42 -  - exec CUpdateClientPartner::ParseServerData
+2020-04-09 13:15:48 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-04-09 13:15:48 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-04-09 13:15:48 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=51&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-04-09 13:15:48 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-04-09 13:15:49 -  - TIME GetUpdatesList(request) 0.611 sec
+2020-04-09 13:15:49 -  - exec CUpdateClientPartner::ParseServerData
+2020-04-09 13:15:49 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-04-09 13:15:49 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-04-09 13:15:49 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=51&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-04-09 13:15:49 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-04-09 13:15:49 -  - TIME GetUpdatesList(request) 0.243 sec
+2020-04-09 13:15:49 -  - exec CUpdateClientPartner::ParseServerData
+2020-04-30 16:48:22 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-04-30 16:48:22 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-04-30 16:48:22 -  - exec CUpdateClientPartner::ParseServerData
+2020-04-30 16:48:22 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-04-30 16:48:22 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-04-30 16:48:22 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=75&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-04-30 16:48:22 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-04-30 16:48:22 -  - TIME GetUpdatesList(request) 0.192 sec
+2020-04-30 16:48:22 -  - exec CUpdateClientPartner::ParseServerData
+2020-04-30 16:48:22 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-04-30 16:48:22 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-04-30 16:48:22 -  - exec CUpdateClientPartner::ParseServerData
+2020-05-13 16:29:03 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-05-13 16:29:03 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-05-13 16:29:03 -  - exec CUpdateClientPartner::ParseServerData
+2020-05-13 16:29:03 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-05-13 16:29:03 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-05-13 16:29:03 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=75&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-05-13 16:29:03 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-05-13 16:29:03 -  - TIME GetUpdatesList(request) 0.193 sec
+2020-05-13 16:29:03 -  - exec CUpdateClientPartner::ParseServerData
+2020-05-13 16:29:03 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-05-13 16:29:03 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-05-13 16:29:03 -  - exec CUpdateClientPartner::ParseServerData
+2020-05-28 15:37:11 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-05-28 15:37:11 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-05-28 15:37:11 -  - exec CUpdateClientPartner::ParseServerData
+2020-05-28 15:37:11 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-05-28 15:37:11 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-05-28 15:37:11 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=76&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-05-28 15:37:11 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-05-28 15:37:11 -  - TIME GetUpdatesList(request) 0.233 sec
+2020-05-28 15:37:11 -  - exec CUpdateClientPartner::ParseServerData
+2020-05-28 15:37:11 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-05-28 15:37:11 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-05-28 15:37:12 -  - exec CUpdateClientPartner::ParseServerData
+2020-06-17 17:49:04 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-06-17 17:49:04 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-06-17 17:49:05 -  - exec CUpdateClientPartner::ParseServerData
+2020-06-17 17:49:05 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-06-17 17:49:05 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-06-17 17:49:05 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=75&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-06-17 17:49:05 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-06-17 17:49:05 -  - TIME GetUpdatesList(request) 0.256 sec
+2020-06-17 17:49:05 -  - exec CUpdateClientPartner::ParseServerData
+2020-06-17 17:49:05 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-06-17 17:49:05 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-06-17 17:49:05 -  - exec CUpdateClientPartner::ParseServerData
+2020-06-30 16:49:31 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-06-30 16:49:31 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-06-30 16:49:31 -  - exec CUpdateClientPartner::ParseServerData
+2020-06-30 16:49:31 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-06-30 16:49:31 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-06-30 16:49:31 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=75&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-06-30 16:49:31 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-06-30 16:49:31 -  - TIME GetUpdatesList(request) 0.364 sec
+2020-06-30 16:49:31 -  - exec CUpdateClientPartner::ParseServerData
+2020-06-30 16:49:31 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-06-30 16:49:31 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-06-30 16:49:32 -  - exec CUpdateClientPartner::ParseServerData
+2020-07-14 10:56:57 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-07-14 10:56:57 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-07-14 10:56:57 -  - exec CUpdateClientPartner::ParseServerData
+2020-07-14 10:56:57 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-07-14 10:56:57 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-07-14 10:56:57 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=80&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bcompression%2C16.0.0%2CN%3Brest%2C18.5.2%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bui%2C18.0.1%2CN%3Bperfmon%2C18.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bseo%2C18.5.0%2CN%3Bim%2C18.1.5%2CN%3Bb24connector%2C18.0.0%2CN%3Bcalendar%2C18.0.0%2CN%3Btranslate%2C16.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bmobileapp%2C18.0.2%2CN%3Bfileman%2C18.0.4%2CN%3Bsearch%2C18.5.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Bvote%2C17.5.1%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Biblock%2C18.5.4%2CN%3Bscale%2C17.5.0%2CN&reqm=bitrix.siteinfoportal%2Ckelnik.helpers%2Ckelnik.imageresizer%2Ckelnik.text%2Cbex.bbc%2Cbitrix.sitecorporate%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-07-14 10:56:57 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-07-14 10:56:58 -  - TIME GetUpdatesList(request) 0.263 sec
+2020-07-14 10:56:58 -  - exec CUpdateClientPartner::ParseServerData
+2020-07-14 10:56:58 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-07-14 10:56:58 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-07-14 10:56:58 -  - exec CUpdateClientPartner::ParseServerData
+2020-08-06 22:15:17 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-08-06 22:15:17 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-08-06 22:15:17 -  - exec CUpdateClientPartner::ParseServerData
+2020-08-06 22:15:17 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-08-06 22:15:17 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-08-06 22:15:17 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=80&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bcalendar%2C18.0.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bim%2C18.1.5%2CN%3Bfileman%2C18.0.4%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bvote%2C17.5.1%2CN%3Btranslate%2C16.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bperfmon%2C18.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Biblock%2C18.5.4%2CN%3Bsearch%2C18.5.0%2CN%3Bb24connector%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bui%2C18.0.1%2CN%3Bmobileapp%2C18.0.2%2CN%3Bcompression%2C16.0.0%2CN%3Bscale%2C17.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Bseo%2C18.5.0%2CN%3Brest%2C18.5.2%2CN&reqm=kelnik.imageresizer%2Cbitrix.siteinfoportal%2Cbitrix.sitecorporate%2Ckelnik.helpers%2Cbex.bbc%2Ckelnik.text%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-08-06 22:15:17 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-08-06 22:15:18 -  - TIME GetUpdatesList(request) 0.32 sec
+2020-08-06 22:15:18 -  - exec CUpdateClientPartner::ParseServerData
+2020-08-06 22:15:18 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-08-06 22:15:18 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-08-06 22:15:18 -  - exec CUpdateClientPartner::ParseServerData
+2020-08-20 09:30:44 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-08-20 09:30:44 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-08-20 09:30:45 -  - exec CUpdateClientPartner::ParseServerData
+2020-08-20 09:30:45 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-08-20 09:30:45 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-08-20 09:30:45 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=80&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bcalendar%2C18.0.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bim%2C18.1.5%2CN%3Bfileman%2C18.0.4%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bvote%2C17.5.1%2CN%3Btranslate%2C16.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bperfmon%2C18.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Biblock%2C18.5.4%2CN%3Bsearch%2C18.5.0%2CN%3Bb24connector%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bui%2C18.0.1%2CN%3Bmobileapp%2C18.0.2%2CN%3Bcompression%2C16.0.0%2CN%3Bscale%2C17.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Bseo%2C18.5.0%2CN%3Brest%2C18.5.2%2CN&reqm=kelnik.imageresizer%2Cbitrix.siteinfoportal%2Cbitrix.sitecorporate%2Ckelnik.helpers%2Cbex.bbc%2Ckelnik.text%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-08-20 09:30:45 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-08-20 09:30:45 -  - TIME GetUpdatesList(request) 0.356 sec
+2020-08-20 09:30:45 -  - exec CUpdateClientPartner::ParseServerData
+2020-08-20 09:30:45 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-08-20 09:30:45 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-08-20 09:30:45 -  - exec CUpdateClientPartner::ParseServerData
+2020-09-07 17:35:31 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-09-07 17:35:31 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-09-07 17:35:32 -  - exec CUpdateClientPartner::ParseServerData
+2020-09-07 17:35:32 -  - exec CUpdateClientPartner::GetUpdatesList
+2020-09-07 17:35:32 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-09-07 17:35:32 -  - utf=Y&lang=ru&stable=Y&CANGZIP=Y&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&LICENSE_KEY=X&SUPD_STS=3&SUPD_URS=0&SUPD_URSA=80&TYPENC=F&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&NGINX=Y&dbv=10.0.38&instm=main%2C18.1.3%2CN%3Bcalendar%2C18.0.0%2CN%3Bkelnik.imageresizer%2C3.2.0%2CN%3Bim%2C18.1.5%2CN%3Bfileman%2C18.0.4%2CN%3Bhighloadblock%2C18.5.0%2CN%3Bsubscribe%2C17.5.0%2CN%3Bforum%2C18.0.3%2CN%3Bbitrix.siteinfoportal%2C15.5.0%2CN%3Bvote%2C17.5.1%2CN%3Btranslate%2C16.5.0%2CN%3Bbitrixcloud%2C18.5.0%2CN%3Bbitrix.sitecorporate%2C15.5.0%2CN%3Bkelnik.helpers%2C3.2.0%2CN%3Bsecurity%2C18.5.0%2CN%3Bperfmon%2C18.5.0%2CN%3Bclouds%2C18.0.0%2CN%3Bsocialservices%2C18.0.3%2CN%3Biblock%2C18.5.4%2CN%3Bsearch%2C18.5.0%2CN%3Bb24connector%2C18.0.0%2CN%3Bform%2C18.0.0%2CN%3Bui%2C18.0.1%2CN%3Bmobileapp%2C18.0.2%2CN%3Bcompression%2C16.0.0%2CN%3Bscale%2C17.5.0%2CN%3Bphotogallery%2C18.0.0%2CN%3Bbex.bbc%2C0.0.1%2CN%3Bkelnik.text%2C3.0.5%2CN%3Bbitrix.sitepersonal%2C15.5.0%2CN%3Blanding%2C18.4.31%2CN%3Bkelnik.admin_helper%2C3.3.1%2CN%3Bseo%2C18.5.0%2CN%3Brest%2C18.5.2%2CN&reqm=kelnik.imageresizer%2Cbitrix.siteinfoportal%2Cbitrix.sitecorporate%2Ckelnik.helpers%2Cbex.bbc%2Ckelnik.text%2Cbitrix.sitepersonal%2Ckelnik.admin_helper&fullmoduleinfo=Y&SUPD_SRS=RU&SUPD_CMP=N
+2020-09-07 17:35:32 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-09-07 17:35:32 -  - TIME GetUpdatesList(request) 0.376 sec
+2020-09-07 17:35:32 -  - exec CUpdateClientPartner::ParseServerData
+2020-09-07 17:35:32 -  - exec CUpdateClientPartner::__CollectRequestData
+2020-09-07 17:35:32 -  - exec CUpdateClientPartner::GetHTTPPage
+2020-09-07 17:35:32 -  - exec CUpdateClientPartner::ParseServerData
