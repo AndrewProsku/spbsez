@@ -6,6 +6,7 @@ $MESS['KELNIK_INFRA_GENERAL_INFO'] = 'General information';
 $MESS['KELNIK_INFRA_COMP_ON_MAP'] = 'Map';
 $MESS['KELNIK_INFRA_COMP_PLACEMENT'] = 'Location';
 $MESS['KELNIK_INFRA_COMP_TERRITORY'] = 'Territory planning';
+$MESS['KELNIK_INFRA_COMP_TERRITORY_SUB'] = 'unoccupied areas.';
 $MESS['KELNIK_INFRA_COMP_SEZ'] = 'SEZ';
 $MESS['KELNIK_INFRA_COMP_FOLDER'] = 'Infrastructure';
 

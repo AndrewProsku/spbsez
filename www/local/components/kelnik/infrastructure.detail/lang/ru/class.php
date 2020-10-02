@@ -6,6 +6,7 @@ $MESS['KELNIK_INFRA_GENERAL_INFO'] = 'Общая информация';
 $MESS['KELNIK_INFRA_COMP_ON_MAP'] = 'На карте';
 $MESS['KELNIK_INFRA_COMP_PLACEMENT'] = 'Расположение';
 $MESS['KELNIK_INFRA_COMP_TERRITORY'] = 'Планировка территории';
+$MESS['KELNIK_INFRA_COMP_TERRITORY_SUB'] = 'свободные участки с возможностью межевания. Минимальный размер участка не менее 1 га.';
 $MESS['KELNIK_INFRA_COMP_SEZ'] = 'АООЭЗ';
 $MESS['KELNIK_INFRA_COMP_FOLDER'] = 'Инфраструктура';
 

@@ -14,8 +14,12 @@
             <?php foreach ($arResult['ELEMENTS'] as $arItem): ?>
                 <li class="b-page-submenu__item">
                     <a href="<?= $arItem['DETAIL_PAGE_URL']; ?>" class="b-page-submenu__link b-link-line">
+                    <?if($arItem['NAME'] == 'Инновационный центр'){?>
+                        <?= $arItem['NAME']; ?>
+                    <?}else{?>
                         <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?> «<?= $arItem['NAME']; ?>»
-                    </a>
+                    <?}?>
+                </a>
                 </li>
             <?php endforeach; ?>
         </ul>
@@ -38,7 +42,7 @@
             <h1><?= $APPLICATION->ShowTitle(false); ?></h1>
         </div>
         <div class="b-infrastructure-map__content">
-            <div class="b-infrastructure-map__yandex-map j-yandex-map" data-lang="<?= LANGUAGE_ID; ?>" data-json="<?= base64_encode(json_encode($arResult['MAP_DATA'])); ?>">
+            <div class="b-infrastructure-map__yandex-map j-yandex-map" id="map_list" data-lang="<?= LANGUAGE_ID; ?>" data-json="<?= base64_encode(json_encode($arResult['MAP_DATA'])); ?>">
                 <div id="first" class="b-yandex-map__base"></div>
             </div>
         </div>

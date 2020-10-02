@@ -20,7 +20,11 @@
                 <?php foreach ($arResult['ELEMENTS'] as $arItem): ?>
                     <li class="b-page-submenu__item<?php if($arItem['ID'] == $arResult['ELEMENT']['ID']): ?> is-active<?php endif; ?>">
                         <a href="<?= $arItem['DETAIL_PAGE_URL']; ?>" class="b-page-submenu__link b-link-line">
-                            <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?> «<?= $arItem['NAME']; ?>»
+                            <?if($arItem['NAME'] == 'Инновационный центр'){?>
+                                <?= $arItem['NAME']; ?>
+                            <?}else{?>
+                                <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?> «<?= $arItem['NAME']; ?>»
+                            <?}?>
                         </a>
                     </li>
                 <?php endforeach; ?>
@@ -28,13 +32,19 @@
         </div>
     </div>
     <div class="b-area-main-screen__title">
-        <h1><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?> «<?= $arResult['ELEMENT']['NAME']; ?>»</h1>
+        <h1>
+            <?if($arResult['ELEMENT']['NAME'] == 'Инновационный центр'){?>
+                <?= $arResult['ELEMENT']['NAME']; ?>
+            <?}else{?>
+                <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?> «<?= $arResult['ELEMENT']['NAME']; ?>»
+            <?}?>            
+        </h1>
     </div>
     <div class="b-area-background">
         <?= $arResult['ELEMENT']['TEXT_FEATURES']; ?>
         <?= $arResult['ELEMENT']['TEXT_TRAITS']; ?>
         <?= $arResult['ELEMENT']['TEXT_AREA']; ?>
-        <div class="b-area-map">
+        <div class="b-area-map" id="area_map">
             <div class="b-area-map__title">
                 <h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLACEMENT'); ?></h2>
             </div>
@@ -50,9 +60,17 @@
             </div>
         </div>
         <?php if(!empty($arResult['ELEMENT']['AREA_BG_ID']['SRC'])): ?>
-            <div class="b-area-plan">
-                <div class="b-area-plan__title"><h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_TERRITORY'); ?></h2></div>
-                <div class="b-visual<?php if($arResult['ELEMENT']['SHOW_TITLE'] != \Kelnik\Infrastructure\Model\PlatformTable::YES): ?> b-visual_theme_points<?php endif; ?>" data-area="<?= $arResult['ELEMENT']['ALIAS']; ?>">
+            <div class="b-area-plan" id="area_plan">
+                <div class="b-area-plan__title">
+                    <h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_TERRITORY'); ?></h2>
+                    <div class="b-offers__text">
+                        <p>
+                            <span class="b-visual__point is-empty b-area-plan__point"></span> &mdash;
+                            <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_TERRITORY_SUB'); ?>
+                        </p>
+                    </div>
+                </div>
+                <div class="b-visual<?php if($arResult['ELEMENT']['SHOW_TITLE'] != \Kelnik\Infrastructure\Model\PlatformTable::YES): ?> b-visual_theme_points<?php endif; ?>" data-area="<?= $arResult['ELEMENT']['ALIAS']; ?>" id="area_plan_center">
                     <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 1920 1080">
                         <image
                             class="b-visual__image"
