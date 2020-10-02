@@ -10,7 +10,9 @@ use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\BitrixHelper;
 use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Refbook\Model\ResidentTypesTable;
+use Kelnik\Refbook\Model\ImageToResidentTable;
 use Kelnik\Refbook\Types;
+use Kelnik\UserData\Model\ContactTable;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -159,6 +161,7 @@ class RefBookList extends Bbc\Basis
 
         $this->arResult['TYPES'] = [];
 
+        $itemsID = [];
         foreach ($this->arResult['ELEMENTS'] as &$v) {
             if (!isset($this->arResult['TYPES'][$v['TYPE_ID']])) {
                 $this->arResult['TYPES'][$v['TYPE_ID']] = [
@@ -175,7 +178,37 @@ class RefBookList extends Bbc\Basis
             }
             $v['PLACE_NAME'] = ResidentTable::getPlaceName($v['PLACE']);
             $v['PLACE_LINK'] = ResidentTable::getPlaceLink($v['PLACE']);
+
+            $itemsID[] = $v["ID"];
+
+            $this->arResult['ELEMENTS'][$v['ID']]['IMAGES'] = [];
         }
+
+        //select images
+        if(count($itemsID) > 0){            
+            $imagesResident = ImageToResidentTable::getAssoc([
+                'select' => [
+                    'ID',
+                    'VALUE',
+                    'ENTITY_ID'
+                ],
+                'filter' => [
+                    '=ENTITY_ID' => $itemsID,
+                ],
+                'order' => [
+                    'ID' => 'ASC'
+                ]
+            ], 'ID');
+            $arAssocImageToEntity = [];
+            foreach($imagesResident as $arImage){
+                $this->arResult['ELEMENTS'][$arImage['ENTITY_ID']]['IMAGES'][] = \CFile::GetPath($arImage['VALUE']);
+            }
+         
+        }
+
+        //TODO select contact user
+       
+        unset($itemsID);
         unset($v);
 
         $langId = strtoupper(Context::getCurrent()->getLanguage());

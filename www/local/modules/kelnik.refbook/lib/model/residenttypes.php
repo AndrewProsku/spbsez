@@ -41,8 +41,8 @@ class ResidentTypesTable extends DataManager
             new Main\Entity\StringField(
                 'ACTIVE',
                 [
-                    'values' => [self::NO, self::YES],
-                    'default_value' => self::YES,
+                    'values' => ['N', 'Y'],
+                    'default_value' => 'Y',
                     'title' => Loc::getMessage('KELNIK_RESIDENT_ACTIVE'),
                 ]
             ),

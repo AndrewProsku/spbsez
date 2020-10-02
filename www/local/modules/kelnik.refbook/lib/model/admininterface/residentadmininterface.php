@@ -10,6 +10,7 @@ use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\AdminHelper\Widget\CheckboxWidget;
 use Kelnik\AdminHelper\Widget\VisualEditorWidget;
+use Kelnik\AdminHelper\Widget\DateTimeWidget;
 use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Refbook\Model\ResidentTypesTable;
 
@@ -69,10 +70,40 @@ class ResidentAdminInterface extends AdminInterface
                         'HEADER' => false,
                         'FILTER' => false
                     ],
+                    'STATUS_DATE' => [
+                        'WIDGET' => new DateTimeWidget(),
+                        'HEADER' => true
+                    ],
+                    'PHONE'     => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 40,
+                        'FILTER'   => '%',
+                        'REQUIRED' => false
+                    ],
+                    'ADDRESS'     => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 80,
+                        'FILTER'   => '%',
+                        'REQUIRED' => false
+                    ],
+                    'PROJECT_STAGE'     => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 40,
+                        'FILTER'   => '%',
+                        'REQUIRED' => false
+                    ],
                     'TEXT' => [
                         'WIDGET' => new VisualEditorWidget(),
                         'HEADER' => false,
                         'FILTER' => false
+                    ],
+                    'IMAGES' => [
+                        'WIDGET' => new FileWidget(),
+                        'IMAGE' => true,
+                        'DESCRIPTION_FIELD' => true,
+                        'HEADER' => false,
+                        'MULTIPLE' => true,
+                        'TITLE' => Loc::getMessage('KELNIK_FIELDS_IMAGES')
                     ]
                 ]
             ],
@@ -90,6 +121,18 @@ class ResidentAdminInterface extends AdminInterface
                         'IMAGE' => true,
                         'HEADER' => false,
                         'FILTER' => false
+                    ],
+                    'ADDRESS_EN'     => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 80,
+                        'FILTER'   => '%',
+                        'REQUIRED' => false
+                    ],
+                    'PROJECT_STAGE_EN' => [
+                        'WIDGET'   => new StringWidget(),
+                        'SIZE'     => 40,
+                        'FILTER'   => '%',
+                        'REQUIRED' => false
                     ],
                     'TEXT_EN' => [
                         'WIDGET' => new VisualEditorWidget(),

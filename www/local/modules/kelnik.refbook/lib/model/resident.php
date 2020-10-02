@@ -5,6 +5,7 @@ namespace Kelnik\Refbook\Model;
 use Bitrix\Main;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\ArrayHelper;
+use Bitrix\Main\Type\DateTime;
 
 Loc::loadMessages(__FILE__);
 
@@ -113,6 +114,57 @@ class ResidentTable extends DataManager
                 [
                     '=this.TYPE_ID' => 'ref.ID'
                 ]
+            ),
+
+            new Main\Entity\DatetimeField(
+                'STATUS_DATE',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_STATUS_DATE'),
+                    'default_value' => new DateTime()
+                ]
+            ),
+
+            new Main\Entity\StringField(
+                'PROJECT_STAGE',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_PROJECT_STAGE'),
+                ]
+            ),
+
+            new Main\Entity\StringField(
+                'PHONE',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_PHONE'),
+                ]
+            ),
+
+            new Main\Entity\StringField(
+                'ADDRESS',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_ADDRESS'),
+                ]
+            ),
+
+            new Main\Entity\StringField(
+                'ADDRESS_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_ADDRESS_EN'),
+                ]
+            ),
+
+            new Main\Entity\StringField(
+                'PROJECT_STAGE_EN',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_PROJECT_STAGE_EN'),
+                ]
+            ),
+            
+            new Main\Entity\ReferenceField(
+                'IMAGES',
+                ImageToResidentTable::class,
+                [
+                    '=this.ID' => 'ref.ENTITY_ID',
+                ]
             )
         ];
     }
@@ -134,8 +186,8 @@ class ResidentTable extends DataManager
     {
         return ArrayHelper::getValue(
             [
-                self::PLACE_NEUDORF => '/contacts/#neudorf',
-                self::PLACE_NOVOORLOVSKAYA => '/contacts/#novoorlovskaya'
+                self::PLACE_NEUDORF => '/infrastructure/noidorf/',
+                self::PLACE_NOVOORLOVSKAYA => '/infrastructure/novoorlovskaya/'
             ],
             $id
         );

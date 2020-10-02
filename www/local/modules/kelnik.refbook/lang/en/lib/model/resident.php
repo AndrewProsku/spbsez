@@ -13,3 +13,6 @@ $MESS['KELNIK_RESIDENT_BODY'] = 'Full description';
 $MESS['KELNIK_RESIDENT_NEUDORF'] = 'Noydorf';
 $MESS['KELNIK_RESIDENT_NOVOORLOVSKAYA'] = 'Novoorlovskaya';
 $MESS['KELNIK_RESIDENT_SITE'] = 'Site';
+$MESS['KELNIK_RESIDENT_STATUS_DATE'] = 'Resident status recieved date';
+$MESS['KELNIK_RESIDENT_PROJECT_STAGE'] = 'Project stage';
+$MESS['KELNIK_RESIDENT_PROJECT_STAGE_EN'] = 'Project stage (eng.)';
