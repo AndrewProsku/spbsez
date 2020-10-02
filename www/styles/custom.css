@@ -772,7 +772,7 @@ ymaps.ymaps-2-1-77-balloon{
 [data-popup^="#resident"] .b-popup__close{
 	z-index: 2;
 }
-[data-popup^="#resident"] .b-popup__close:after, .b-popup__close:before{
+[data-popup^="#resident"] .b-popup__close:after, [data-popup^="#resident"] .b-popup__close:before{
 	background-color: #fff;
 }
 .resident-popup-open__image{
