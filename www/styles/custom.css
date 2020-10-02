@@ -208,7 +208,7 @@ ul.l-home__advantages-text-block{
     bottom: 40px;
     width: 70px;
     height: 70px;
-    background-image: url(/icons/custom/letter.svg);
+    background-image: url(/images/custom/letter.svg);
     background-size: 100%;
     cursor: pointer;
     z-index: 10;
@@ -349,7 +349,7 @@ ymaps.ymaps-2-1-77-balloon{
 	display: block;	
 	width: 40px;
 	height: 40px;
-	background-image: url('/icons/custom/glass.svg');
+	background-image: url('/images/custom/glass.svg');
 	background-size: cover;
 	position: absolute;
 	right: 20px;
@@ -841,7 +841,7 @@ ymaps.ymaps-2-1-77-balloon{
 	position: absolute;
 	left: 0;
 	top: 0;
-	background-image: url('/icons/custom/clock.svg'); 
+	background-image: url('/images/custom/clock.svg'); 
 	background-size: cover;
 	background-repeat: no-repeat;
 	left: 12px;
@@ -979,7 +979,7 @@ ymaps.ymaps-2-1-77-balloon{
 	position: absolute;
 	width: 30px;
 	height: 43px;
-	background-image: url('/icons/custom/map_point.svg');
+	background-image: url('/images/custom/map_point.svg');
 	background-size: contain;
 	background-repeat: no-repeat;
 	left: 0;
@@ -1035,7 +1035,7 @@ ymaps.ymaps-2-1-77-balloon{
 	width: 20px;
 	height: 20px;
 	position: absolute;
-	background-image: url('/icons/custom/contact_closer.svg');
+	background-image: url('/images/custom/contact_closer.svg');
 	background-size: contain;
 	background-repeat: no-repeat;
 	top: 20px;
@@ -1062,7 +1062,7 @@ ymaps.ymaps-2-1-77-balloon{
     border-radius: 30px;
 }
 .scrollbar-thumb.scrollbar-thumb-y{
-	background: url('/icons/custom/scroll_bg.svg') no-repeat center center, linear-gradient(180deg, #DADADA 0%, rgba(255, 255, 255, 1) 100%);
+	background: url('/images/custom/scroll_bg.svg') no-repeat center center, linear-gradient(180deg, #DADADA 0%, rgba(255, 255, 255, 1) 100%);
 	border-radius: 30px;
 	width: 17px;
 }
