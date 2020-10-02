@@ -129,9 +129,13 @@
         </div>
     </div>
     </div>
+    <div class="open-feedback j-message-button" data-href="#message"><div class="open-feedback__ring"></div></div>
 
     <? $APPLICATION->ShowHeadStrings(); ?>
     <? $APPLICATION->ShowHeadScripts(); ?>
-    <script async src="/scripts/app.js?v1"></script>
+    <script defer src="/scripts/app.js?v1"></script>
+    <script defer src="/scripts/smooth-scrollbar.js"></script>
+    <script defer src="/scripts/custom.js"></script>
+
 </body>
 </html>

@@ -12,6 +12,7 @@ define("PATH_TO_404", '/404.php');
     <title><?php $APPLICATION->ShowTitle(); ?> | <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_TITLE_SUFFIX'); ?></title>
     <?php
         $APPLICATION->SetAdditionalCSS("/styles/app.css");
+        $APPLICATION->SetAdditionalCSS("/styles/custom.css");
         $isRegularPage = !in_array($APPLICATION->GetCurDir(), [LANG_DIR]) || defined('ERROR_404');
         $showAnimation = $APPLICATION->GetProperty('showAnimation') === true || defined('ERROR_404');
 
