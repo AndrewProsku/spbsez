@@ -37,7 +37,8 @@
                     'PAGER_DESC_NUMBERING_CACHE_TIME' => $arParams['PAGER_DESC_NUMBERING_CACHE_TIME'],
                     'PAGER_SHOW_ALL' => $arParams['PAGER_SHOW_ALL'],
                     'SEF_FOLDER' => $arParams['SEF_FOLDER'],
-                    'USE_ADVANCE_FILTER' => $arParams['USE_ADVANCE_FILTER']
+                    'USE_ADVANCE_FILTER' => $arParams['USE_ADVANCE_FILTER'],
+                    'SHOW_MORE_TEXT' => $arParams['SHOW_MORE_TEXT']
                 ),
                 $component
             );?>

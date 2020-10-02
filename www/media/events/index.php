@@ -1,7 +1,7 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetPageProperty('title', "Новости");
-$APPLICATION->SetTitle("Новости");
+$APPLICATION->SetPageProperty('title', "Мероприятия");
+$APPLICATION->SetTitle("Мероприятия");
 ?>
 
 <?$APPLICATION->IncludeComponent(
@@ -31,8 +31,8 @@ $APPLICATION->SetTitle("Новости");
         "CACHE_TIME" => "3600",
         "CACHE_TYPE" => "A",
         "ELEMENTS_COUNT" => "6",
-        "SECTION_ID" => "1",
-        "SEF_FOLDER" => "/media/news/",
+        "SECTION_ID" => "5",
+        "SEF_FOLDER" => "/media/events/",
         "SEF_MODE" => "Y",
         "SEF_URL_TEMPLATES" => Array("detail"=>"#ELEMENT_CODE#/","index"=>"","section"=>""),
         "SET_404" => "Y",
@@ -42,7 +42,9 @@ $APPLICATION->SetTitle("Новости");
         "SORT_BY_2" => "ID",
         "SORT_ORDER_2" => "ASC",
         "USE_AJAX" => "N",
-        "USE_ADVANCE_FILTER" => "Y"
+        "USE_ADVANCE_FILTER" => "Y",
+        "SHOW_MORE_TEXT" => "Загрузить ещё мероприятия",
+        "BACK_TO_TEXT" => "Назад к мероприятиям"
     )
 );?>
 

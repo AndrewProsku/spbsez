@@ -1,7 +1,13 @@
 <?if(!defined('B_PROLOG_INCLUDED')||B_PROLOG_INCLUDED!==true)die();?>
-
+<?php
+if($arParams["BACK_TO_TEXT"]){
+    $btt = $arParams["BACK_TO_TEXT"];
+}else{
+    $btt = "Назад к новостям";
+}
+?>
 <div class="l-news-single">
-    <div class="l-news-single__back"><a href="<?= $arParams['SEF_FOLDER']; ?>"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="13" viewBox="0 0 8 13"><defs><path id="prgga" d="M214.44 194.5l-.94 1.074 4.977 4.927-4.977 4.925.94 1.074 6.06-5.999z"/></defs><g><g transform="rotate(180 110.5 103.5)"><use fill="#30409a" xlink:href="#prgga"/></g></g></svg> Назад к новостям</a></div>
+    <div class="l-news-single__back"><a href="<?= $arParams['SEF_FOLDER']; ?>"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="13" viewBox="0 0 8 13"><defs><path id="prgga" d="M214.44 194.5l-.94 1.074 4.977 4.927-4.977 4.925.94 1.074 6.06-5.999z"/></defs><g><g transform="rotate(180 110.5 103.5)"><use fill="#30409a" xlink:href="#prgga"/></g></g></svg> <?=$btt?></a></div>
     <div class="l-news-single__title b-title"><h1><?= $arResult['NAME']; ?></h1></div>
     <div class="l-news-single__tags">
         <ul class="b-news-tags">
@@ -67,7 +73,7 @@
         <div class="l-news-single__actions-wrap">
 
             <div class="l-news-single__button">
-                <a href="<?= $arParams['SEF_FOLDER']; ?>" class="button button_reserve_icon button_theme_gray">Назад к новостям</a>
+                <a href="<?= $arParams['SEF_FOLDER']; ?>" class="button button_reserve_icon button_theme_gray"><?=$btt?></a>
             </div>
             <div class="l-news-single__share">
                 <div class="b-share">

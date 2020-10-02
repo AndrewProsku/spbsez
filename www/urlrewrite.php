@@ -40,6 +40,14 @@ $arUrlRewrite=array (
     'PATH' => '/en/infrastructure/index.php',
     'SORT' => 100,
   ),
+  9 => 
+  array (
+    'CONDITION' => '#^/en/media/events/#',
+    'RULE' => '',
+    'ID' => 'kelnik:news',
+    'PATH' => '/en/media/events/index.php',
+    'SORT' => 100,
+  ),
   3 => 
   array (
     'CONDITION' => '#^/media/articles/#',
@@ -62,6 +70,14 @@ $arUrlRewrite=array (
     'RULE' => '',
     'ID' => 'kelnik:news',
     'PATH' => '/en/media/news/index.php',
+    'SORT' => 100,
+  ),
+  10 => 
+  array (
+    'CONDITION' => '#^/media/events/#',
+    'RULE' => '',
+    'ID' => 'kelnik:news',
+    'PATH' => '/media/events/index.php',
     'SORT' => 100,
   ),
   2 => 

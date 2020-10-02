@@ -70,6 +70,40 @@ $APPLICATION->SetTitle("News");
         ); ?>
     </div>
 
+    <div class="l-news__main">
+        <h2 class="b-useful__title b-title">Events</h2>
+        <? $APPLICATION->IncludeComponent(
+            "kelnik:news.list",
+            "media-news",
+            array(
+                "COMPONENT_TEMPLATE" => "media-news",
+                "SECTION_ID" => "6",
+                "SECTION_CODE" => "",
+                "SORT_BY_1" => "DATE_SHOW",
+                "SORT_ORDER_1" => "DESC",
+                "SORT_BY_2" => "ID",
+                "SORT_ORDER_2" => "ASC",
+                "ELEMENTS_COUNT" => "6",
+                "CACHE_GROUPS" => "N",
+                "CACHE_TYPE" => "A",
+                "CACHE_TIME" => "3600",
+                "USE_AJAX" => "N",
+                "AJAX_TYPE" => "DEFAULT",
+                "AJAX_TEMPLATE_PAGE" => "",
+                "AJAX_COMPONENT_ID" => "",
+                "SET_SEO_TAGS" => "N",
+                "SET_404" => "N",
+                "SEF_URL_TEMPLATES" => array(
+                    "detail" => "#ELEMENT_CODE#/"
+                ),
+                "SEF_FOLDER" => "/en/media/events/",
+                "USE_ADVANCE_FILTER" => "N",
+                "SHOW_MORE_TEXT" => "Show all events"
+            ),
+            array()
+        ); ?>
+    </div>
+
     <div class="l-news-presentations">
         <div class="b-presentations">
             <? $APPLICATION->IncludeComponent(

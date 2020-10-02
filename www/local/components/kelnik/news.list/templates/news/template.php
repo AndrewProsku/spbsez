@@ -76,7 +76,13 @@
         </div>
     <?php endforeach; ?>
 </div>
-
+<?php
+if($arParams["SHOW_MORE_TEXT"]){
+    $smt = $arParams["SHOW_MORE_TEXT"];
+}else{
+    $smt = "Загрузить еще новости";
+}
+?>
 <div class="b-news__button"<?php if(!$arResult['MORE']): ?> style="display:none;"<?php endif; ?>>
-    <a href="#" class="button button_theme_gray button_icon_refresh j-news-load-more">Загрузить еще новости</a>
+    <a href="#" class="button button_theme_gray button_icon_refresh j-news-load-more"><?=$smt?></a>
 </div>

@@ -26,6 +26,13 @@
         <?php endforeach; ?>
     </div>
     <div class="b-news__button">
-        <a href="<?= $arParams['SEF_FOLDER']; ?>" class="button button_theme_gray">Посмотреть все новости</a>
+        <?php
+        if($arParams["SHOW_MORE_TEXT"]){
+            $smt = $arParams["SHOW_MORE_TEXT"];
+        }else{
+            $smt = "Посмотреть все новости";
+        }
+        ?>
+        <a href="<?= $arParams['SEF_FOLDER']; ?>" class="button button_theme_gray"><?=$smt?></a>
     </div>
 </div>

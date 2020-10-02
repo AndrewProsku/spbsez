@@ -1,24 +1,8 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetPageProperty('title', "Новости");
-$APPLICATION->SetTitle("Новости");
+$APPLICATION->SetPageProperty('title', "Events");
+$APPLICATION->SetTitle("Events");
 ?>
-
-<?$APPLICATION->IncludeComponent(
-    "bitrix:menu",
-    "submenu-about",
-    Array(
-        "ALLOW_MULTI_SELECT" => "N",
-        "DELAY" => "N",
-        "MAX_LEVEL" => "1",
-        "MENU_CACHE_GET_VARS" => array(""),
-        "MENU_CACHE_TIME" => "3600",
-        "MENU_CACHE_TYPE" => "A",
-        "MENU_CACHE_USE_GROUPS" => "Y",
-        "ROOT_MENU_TYPE" => "left",
-        "USE_EXT" => "N"
-    )
-);?>
 
 <?$APPLICATION->IncludeComponent(
     "kelnik:news",
@@ -31,8 +15,8 @@ $APPLICATION->SetTitle("Новости");
         "CACHE_TIME" => "3600",
         "CACHE_TYPE" => "A",
         "ELEMENTS_COUNT" => "6",
-        "SECTION_ID" => "1",
-        "SEF_FOLDER" => "/media/news/",
+        "SECTION_ID" => "6",
+        "SEF_FOLDER" => "/en/media/events/",
         "SEF_MODE" => "Y",
         "SEF_URL_TEMPLATES" => Array("detail"=>"#ELEMENT_CODE#/","index"=>"","section"=>""),
         "SET_404" => "Y",
@@ -42,7 +26,9 @@ $APPLICATION->SetTitle("Новости");
         "SORT_BY_2" => "ID",
         "SORT_ORDER_2" => "ASC",
         "USE_AJAX" => "N",
-        "USE_ADVANCE_FILTER" => "Y"
+        "USE_ADVANCE_FILTER" => "Y",
+        "SHOW_MORE_TEXT" => "Show more events",
+        "BACK_TO_TEXT" => "Back to events"
     )
 );?>
 

@@ -13,7 +13,8 @@
         'SET_404' => $arParams['SET_404'],
         'DATE_FORMAT' => $arParams['DETAIL_DATE_FORMAT'],
         'SET_SEO_TAGS' => $arParams['SET_SEO_TAGS'],
-        'SEF_FOLDER' => $arParams['SEF_FOLDER']
+        'SEF_FOLDER' => $arParams['SEF_FOLDER'],
+        'BACK_TO_TEXT' => $arParams['BACK_TO_TEXT']
     ),
     $component
 );?>
