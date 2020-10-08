@@ -119,6 +119,94 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
+                            <div class="l-contacts__block">                                    
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "contacts_block_5"
+                                    )
+                                );?>
+                            </div>
+                            <div class="l-contacts__block">                                    
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "contacts_block_6"
+                                    )
+                                );?>
+                            </div>
+                            <div class="l-contacts__block">                                    
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "contacts_block_7"
+                                    )
+                                );?>
+                            </div>
+                            <div class="l-contacts__block">                                    
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "contacts_block_8"
+                                    )
+                                );?>
+                            </div>
+                            <div class="l-contacts__block">                                    
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "contacts_block_9"
+                                    )
+                                );?>
+                            </div>
+                            <div class="l-contacts__block">                                    
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "contacts_block_10"
+                                    )
+                                );?>
+                            </div>
+                            <div class="l-contacts__block">                                    
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "contacts_block_11"
+                                    )
+                                );?>
+                            </div>
+                            <div class="l-contacts__block">                                    
+                                <?$APPLICATION->IncludeComponent(
+                                    "kelnik:textblocks",
+                                    "",
+                                    Array(
+                                        "CACHE_TIME" => "360000",
+                                        "CACHE_TYPE" => "A",
+                                        "CODE" => "contacts_block_12"
+                                    )
+                                );?>
+                            </div>
                         </div>
                     </div>
                 </div>

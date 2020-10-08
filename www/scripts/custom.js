@@ -69,7 +69,7 @@ sezApp = {
 		document.querySelector("#land_cost_rent").innerText = land_cost_rent;
 		document.querySelector("#land_cost_buy").innerText = land_cost_buy;
 		document.querySelector("#min_invest").innerText = min_invest;
-		document.querySelector(".investors-calc-result").style.maxHeight = "800px";
+		document.querySelector(".investors-calc__result").style.maxHeight = "800px";
 	},
 	generateMap: function(){
 		let mapWrapperList = document.querySelector('#map_list');
