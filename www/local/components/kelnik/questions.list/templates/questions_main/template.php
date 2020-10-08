@@ -5,6 +5,7 @@
     <div class="b-search__result j-globalSearch-result is-result">
         <ul class="b-search__result-wrapp">Популярные запросы
             <?php foreach ($arResult['QUESTIONS'] as $element): ?>
+                <?if(!$element['URL']) continue;?>
                 <li class="b-search__result-item">
                     <a href="<?=$element['URL']?>" class="b-search__result-text j-search-link"><?=$element['NAME']?></a>
                 </li>

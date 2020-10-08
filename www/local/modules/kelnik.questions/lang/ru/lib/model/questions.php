@@ -5,3 +5,5 @@ $MESS['KELNIK_QUESTIONS_ACTIVE'] = 'Активен';
 $MESS['KELNIK_QUESTIONS_NAME'] = 'Название';
 $MESS['KELNIK_QUESTIONS_TEXT'] = 'Описание';
 $MESS['KELNIK_QUESTIONS_URL'] = 'Ссылка';
+$MESS['KELNIK_QUESTIONS_TYPE'] = 'Категория';
+$MESS['KELNIK_QUESTIONS_LANG'] = 'Язык';

@@ -6,6 +6,7 @@ use Bitrix\Main\Entity\DataManager;
 use Bitrix\Main\Entity\IntegerField;
 use Bitrix\Main\Entity\StringField;
 use Bitrix\Main\Entity\TextField;
+use Bitrix\Main\Entity\ReferenceField;
 use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
@@ -74,6 +75,21 @@ class QuestionsTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_QUESTIONS_LANG')
                 ]
             ),
+
+            new IntegerField(
+                'TYPE_ID',
+                [
+                    'title'  => Loc::getMessage('KELNIK_QUESTIONS_TYPE')
+                ]
+            ),
+
+            new ReferenceField(
+                'TYPE',
+                QuestionsTypesTable::class,
+                [
+                    '=this.TYPE_ID' => 'ref.ID'
+                ]
+            )
         ];
     }
 }

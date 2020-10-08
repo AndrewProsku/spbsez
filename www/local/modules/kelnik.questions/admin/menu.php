@@ -27,5 +27,16 @@ return [
     'url' => QuestionsListHelper::getUrl(),
     'more_url' => [
         QuestionsEditHelper::getUrl(),
+    ],
+    "items" => [
+        [
+            'parent_menu' => 'kelnik_questions',
+            'sort' => 180,
+            'text' => Loc::getMessage('KELNIK_QUESTIONS_TYPES_MENU'),
+            'url' => \Kelnik\Questions\Model\AdminInterface\QuestionsTypesListHelper::getUrl(),
+            'more_url' => [
+                \Kelnik\Questions\Model\AdminInterface\QuestionsTypesEditHelper::getUrl()
+            ]
+        ]
     ]
 ];

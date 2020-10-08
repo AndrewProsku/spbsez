@@ -399,11 +399,15 @@ ymaps.ymaps-2-1-77-balloon{
 .b-faq-title h1{
 	font-size: 64px;
 }
+.faq-group__title{
+	cursor: pointer;
+}
 .faq-group__title h3{
 	width: 100%;
     margin: 0;
-    padding-left: 11.11111%;
+    padding-left: 26.11111%;
    	padding-right: 11.11111%;
+   	line-height: 220%
 }
 .faq-group__items{
 	margin-top: 60px;
@@ -422,18 +426,22 @@ ymaps.ymaps-2-1-77-balloon{
 	color: #443997;
 	display: flex;
 	align-items: center;
+	position: relative;	
 }
 .faq-group__item{
 	position: relative;
+    padding-top: 10px;
 }
 .faq-group__item-title{
 	font-size: 34px;
-	padding-left: 47px;
+	padding-left: 80px;
 	position: relative;
+	color: #30409A;
+	cursor: pointer;
 }
 .faq-group__item-title span{
     position: absolute;
-    left: -20px;
+    left: 0;
     width: 50px;
     height: 50px;
     display: flex;
@@ -449,11 +457,11 @@ ymaps.ymaps-2-1-77-balloon{
   	border-color: #313F9A;
 }
 .faq-group__item-content{
-	margin-top: 60px;
+	margin-top: 80px;
     font-size: 20px;
     line-height: 130%;
     margin-bottom: 60px;
-    padding-left: 205px;
+    padding-left: 82px;
     position: relative;
     max-height: 2000px;
     transition: .3s;
@@ -474,8 +482,8 @@ ymaps.ymaps-2-1-77-balloon{
 	height: 2px;
 	width: 107px;
 	position: absolute;
-    left: -160px;
-    top: 14px;
+    left: 0;
+    top: -23px;
 	background: linear-gradient(90deg, #3F3F99 0%, #7F51A3 100%);
 }
 .faq-group__items hr{
@@ -485,7 +493,7 @@ ymaps.ymaps-2-1-77-balloon{
 	border: none;
 	margin-bottom: 46px;
 }
-.faq-group__item-open{
+.faq-group__item-open, .faq-group-open{
 	position: absolute;
     width: 56px;
     height: 56px;
@@ -497,11 +505,21 @@ ymaps.ymaps-2-1-77-balloon{
     transition: .5s;
     z-index: 10;
 }
+.faq-group-open{
+	right: auto;
+	left: 8%;
+	top: 15px;
+}
 .faq-group__item-open_open{
 	top: auto;
     bottom: 0;
 }
-.faq-group__item-open::before{
+.faq-group-open_open{
+	top: 15px;
+	bottom: auto;
+	transform: rotate(180deg);
+}
+.faq-group__item-open::before, .faq-group-open::before{
 	content: "";
 	width: 20px;
 	height: 20px;
@@ -519,17 +537,33 @@ ymaps.ymaps-2-1-77-balloon{
 	left: 33%;
     top: 43%;
 }
+.faq-group__items{
+	max-height: 3000px;
+	transition: .3s;
+	overflow: hidden;
+}
+.faq-group__items_close{
+	max-height: 0;	
+	margin-top: 20px;
+}
+
 @media only screen and (min-width: 670px) {
     .l-faq {
         padding-top: 40px;
         padding-bottom: 48px;
     }
+    .faq-group__title h3{
+		padding-left: 15%;
+	}
 }
 @media only screen and (min-width: 960px) {
     .l-faq {
         padding-top: 40px;
         padding-bottom: 48px;
     }
+    .faq-group__title h3{
+		padding-left: 15%;
+	}
 }
 @media only screen and (min-width: 1280px) {
     .l-faq {
@@ -541,7 +575,7 @@ ymaps.ymaps-2-1-77-balloon{
 	   	padding-right: 8.33333%;
 	}
 	.faq-group__title h3{
-		padding-left: 8.33333%;
+		padding-left: 13.5%;
 	   	padding-right: 8.33333%;
 	}
 	.faq-group__item{
@@ -554,7 +588,11 @@ ymaps.ymaps-2-1-77-balloon{
     .l-faq {
         padding-top: 80px;
         padding-bottom: 120px;
-    }    
+    }  
+    .faq-group__title h3{
+		padding-left: 12.5%;
+	   	padding-right: 8.33333%;
+	}  
 }
 @media only screen and (min-width: 1920px) {
     .l-faq {
@@ -566,12 +604,15 @@ ymaps.ymaps-2-1-77-balloon{
 	   	padding-right: 11.11111%;
 	}
 	.faq-group__title h3{
-		padding-left: 11.11111%;
+		padding-left: 15.11111%;
 	   	padding-right: 11.11111%;
 	}
 	.faq-group__item{
 		padding-left: 11.11111%;
 	   	padding-right: 11.11111%;
+	}
+	.faq-group-open{
+		left: 10.5%;
 	}
 }
 @media only screen and (min-width: 2560px) {
@@ -591,33 +632,33 @@ ymaps.ymaps-2-1-77-balloon{
 	    top: 16px;
 	}
 	.faq-group__item-title{
-		padding-left: 11.11111%;
+		padding-left: 15.11111%;
 	   	padding-right: 11.11111%;
 	}
 	.faq-group__item-content{
 		max-width: 80%;
+		padding-left: 156px;
 	}
 	.faq-group__item-content ul{
 		font-size: 16px;
 	}
 	.faq-group__item-content p._marked::before{
 		width: 60px;
-   		left: -85px;
-    	top: 11px;
 	}
 	.faq-group__item-title span{
-		left: 40px;
+		left: 9%;
 	}
 }
 @media only screen and (max-width: 768px) {
 	.faq-group__item-title {
 	    font-size: 28px;
+	    padding-left: 20%;
 	}
 	.faq-group__item-title span {
-	    left: 20px;
+
 	}
 	.faq-group__item-content{
-		padding-left: 176px;
+
 	}
 }
 @media only screen and (max-width: 480px) {
@@ -633,8 +674,6 @@ ymaps.ymaps-2-1-77-balloon{
 	}
 	.faq-group__item-content p._marked::before {
 	    width: 25px;
-	    left: -45px;
-	    top: 9px;
 	}
 	.faq-group__item-content {
 	    padding-left: 88px;

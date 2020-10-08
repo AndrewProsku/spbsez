@@ -2,19 +2,27 @@ window.onload = function(){
 	sezApp.loadScrollTo();
 	sezApp.generateMap();	
 	sezApp.faqSearch('.faq-search__field');
-	sezApp.faqSlide(
-		{
-			opener: 'faq-group__item-open',
-			openerMod: 'faq-group__item-open_open',
-			openPosition: '.faq-group__item-content',
-			closePosition: 'faq-group__item-content_close',
-			parentblock: '.faq-group__item'
-		}
-	);
+	sezApp.faqSlide({
+		opener: 'faq-group__item-title',
+		openerMod: 'faq-group__item-open_open',
+		openPosition: '.faq-group__item-content',
+		closePosition: 'faq-group__item-content_close',
+		parentblock: '.faq-group__item',
+		openerIco: '.faq-group-open'
+	});
+	sezApp.faqSlide({
+		opener: 'faq-group-open-trigger',
+		openerMod: 'faq-group-open_open',
+		openPosition: '.faq-group__items',
+		closePosition: 'faq-group__items_close',
+		parentblock: '.faq-group',
+		openerIco: '.faq-group-open'
+	});
 	sezApp.closeBanner({
 		closer: '.banner__closer',
 		banner: '.banner'
 	});
+
 	Scrollbar.initAll();
 	//sezApp.loadResident();
 	
@@ -198,9 +206,12 @@ sezApp = {
 	faqSlide: function(options){
 		document.addEventListener("click", function(e){
 			if(!e.target.classList.contains(options.opener)) return;
-					
-			e.target.classList.toggle(options.openerMod);
+
+			if(e.target.closest(options.parentblock).querySelector(options.openerIco)){
+				e.target.closest(options.parentblock).querySelector(options.openerIco).classList.toggle(options.openerMod);
+			}			
 			e.target.closest(options.parentblock).querySelector(options.openPosition).classList.toggle(options.closePosition);
+
 		});		
 	},
 	closeBanner: function(options){

@@ -8,6 +8,8 @@ use Kelnik\AdminHelper\Widget\CheckboxWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\AdminHelper\Widget\VisualEditorWidget;
+use Kelnik\AdminHelper\Widget\ComboBoxWidget;
+use Kelnik\Questions\Model\QuestionsTypesTable;
 
 Loc::loadMessages(__FILE__);
 
@@ -33,6 +35,11 @@ class QuestionsAdminInterface extends AdminInterface
                         'FILTER' => false,
                         'DEFAULT' => 500
                     ],
+                    'TYPE_ID' => [
+                        'WIDGET' => new ComboBoxWidget(),
+                        'VARIANTS' => QuestionsTypesTable::getAdminAssocList(),
+                        'DEFAULT' => 0
+                    ],
                     'NAME' => [
                         'WIDGET' => new StringWidget(),
                         'SIZE' => '60',
@@ -42,6 +49,10 @@ class QuestionsAdminInterface extends AdminInterface
                     ],
                     'URL' => [
                         'WIDGET' => new StringWidget(),
+                    ],
+                    'LANG' => [
+                        'WIDGET' => new StringWidget(),
+                        'DEFAULT' => LANGUAGE_ID
                     ],
                     'TEXT' => [
                         'WIDGET' => new VisualEditorWidget(),
