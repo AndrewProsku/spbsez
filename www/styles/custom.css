@@ -1,17 +1,18 @@
 @keyframes envelope {
 	0% {
-		background-size: 100%;
+		transform: scale(1);
 	}
 	30%{
-		background-size: 120%;
+		transform: scale(1.1);
 	}
 	60%{
-		background-size: 100%;
+		transform: scale(1);
 	}
 	100% {
-		background-size: 100%;
+		transform: scale(1);
 	}
 }
+
 .b-area-plan__title h2{
 	margin-bottom: revert;
 }
@@ -231,7 +232,7 @@ ul.l-home__advantages-text-block{
     right: 70px;
     bottom: 40px;
     width: 70px;
-    height: 70px;
+    height: 71px;
     background-image: url(/images/custom/letter.svg);
     background-size: 100%;
     cursor: pointer;
@@ -244,11 +245,15 @@ ul.l-home__advantages-text-block{
 }
 .open-feedback__ring{
 	display: block;
-	width: 70px;
-    height: 70px;
-	border: 5px solid #fff;
+	width: 68px;
+    height: 68px;
+	border: 6px solid #fff;
 	border-radius: 50%;
-	transform: scale(1.1);
+	transform: scale(1.15);
+	position: fixed;
+    right: 71px;
+    bottom: 41px;
+    z-index: 10;
 }
 
 .investors-calc label{
@@ -434,6 +439,19 @@ ymaps.ymaps-2-1-77-balloon{
 .faq-group__item{
 	position: relative;
     padding-top: 10px;
+}
+.faq-group__item ol, .faq-group__item ul{
+	padding-bottom: 20px;	
+}
+.faq-group__item ol{
+	list-style: decimal inside;
+}
+.faq-group__item ul{
+	list-style: disc inside;
+}
+.faq-group__item ol li, .faq-group__item ul li{
+    padding-left: 20px;
+    line-height: 150%;
 }
 .faq-group__item-title{
 	font-size: 34px;
