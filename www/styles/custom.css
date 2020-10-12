@@ -3,7 +3,7 @@
 		transform: scale(1);
 	}
 	30%{
-		transform: scale(1.1);
+		transform: scale(1.2);
 	}
 	60%{
 		transform: scale(1);
@@ -227,29 +227,35 @@ ul.l-home__advantages-text-block{
     left: 10px;
     margin-right: 10px;
 }
-.open-feedback{
-    position: fixed;
-    right: 70px;
-    bottom: 40px;
+.open-feedback{    
     width: 70px;
     height: 71px;
     background-image: url(/images/custom/letter.svg);
-    background-size: 100%;
-    cursor: pointer;
+    background-size: 100%;    
     z-index: 10;
-    box-shadow: 0 11px 24px 5px rgba(0,0,0,0.10);
     border-radius: 50%;
     background-repeat: no-repeat;
     background-position: center;
     animation: envelope 3.5s infinite ease-out;
 }
+.open-feedback-round{
+	width: 70px;
+    height: 70px;
+    overflow: hidden;
+    position: fixed;
+    right: 70px;
+    bottom: 40px;
+    border-radius: 50%;
+    box-shadow: 0 11px 24px 5px rgba(0,0,0,0.10);
+    cursor: pointer;
+}
 .open-feedback__ring{
 	display: block;
 	width: 68px;
     height: 68px;
-	border: 6px solid #fff;
+	border: 5px solid #fff;
 	border-radius: 50%;
-	transform: scale(1.15);
+	transform: scale(1.1);
 	position: fixed;
     right: 71px;
     bottom: 41px;

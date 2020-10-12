@@ -435,3 +435,15 @@
 2020-09-07 17:35:31 -  - exec CUpdateClient::GetHTTPPage
 2020-09-07 17:35:31 -  - TIME GetUpdatesList(request) 0.329 sec
 2020-09-07 17:35:31 -  - exec CUpdateClient::ParseServerData
+2020-10-02 16:04:36 -  - exec CUpdateClient::GetUpdatesList
+2020-10-02 16:04:36 -  - exec CUpdateClient::CollectRequestData
+2020-10-02 16:04:36 -  - LICENSE_KEY=X&lang=ru&SUPD_VER=18.1.3&VERSION=18.1.3&TYPENC=F&SUPD_STS=3&SUPD_URS=0&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&CHHB=www.spbsez.ru&CSAB=127.0.0.1&SUID=df2485f0460456c574493e35326b704b&CANGZIP=Y&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&stable=Y&NGINX=Y&rerere=Y&bitm_main=18.1.3&bitm_calendar=18.0.0&bitm_im=18.1.5&bitm_fileman=18.0.4&bitm_highloadblock=18.5.0&bitm_subscribe=17.5.0&bitm_forum=18.0.3&bitm_vote=17.5.1&bitm_translate=16.5.0&bitm_bitrixcloud=18.5.0&bitm_security=18.5.0&bitm_perfmon=18.5.0&bitm_clouds=18.0.0&bitm_socialservices=18.0.3&bitm_iblock=18.5.4&bitm_search=18.5.0&bitm_b24connector=18.0.0&bitm_form=18.0.0&bitm_ui=18.0.1&bitm_mobileapp=18.0.2&bitm_compression=16.0.0&bitm_scale=17.5.0&bitm_photogallery=18.0.0&bitm_landing=18.4.31&bitm_seo=18.5.0&bitm_rest=18.5.2&bitl_en=&bitl_de=20140526&bitl_ru=&bitl_ch=&SUPD_SRS=RU&SUPD_CMP=N&SALE_15=Y&LICENSE_SIGNED=%7Enew_license18_0_sign-Y
+2020-10-02 16:04:36 -  - exec CUpdateClient::GetHTTPPage
+2020-10-02 16:04:36 -  - TIME GetUpdatesList(request) 0.332 sec
+2020-10-02 16:04:36 -  - exec CUpdateClient::ParseServerData
+2020-10-12 14:13:46 -  - exec CUpdateClient::GetUpdatesList
+2020-10-12 14:13:46 -  - exec CUpdateClient::CollectRequestData
+2020-10-12 14:13:46 -  - LICENSE_KEY=X&lang=ru&SUPD_VER=18.1.3&VERSION=18.1.3&TYPENC=F&SUPD_STS=3&SUPD_URS=0&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=www.spbsez.ru&CHHB=www.spbsez.ru&CSAB=127.0.0.1&SUID=df2485f0460456c574493e35326b704b&CANGZIP=Y&CLIENT_PHPVER=7.1.28-1%2Bubuntu16.04.1%2Bdeb.sury.org%2B3&stable=Y&NGINX=Y&rerere=Y&bitm_main=18.1.3&bitm_calendar=18.0.0&bitm_im=18.1.5&bitm_fileman=18.0.4&bitm_highloadblock=18.5.0&bitm_subscribe=17.5.0&bitm_forum=18.0.3&bitm_vote=17.5.1&bitm_translate=16.5.0&bitm_bitrixcloud=18.5.0&bitm_security=18.5.0&bitm_perfmon=18.5.0&bitm_clouds=18.0.0&bitm_socialservices=18.0.3&bitm_iblock=18.5.4&bitm_search=18.5.0&bitm_b24connector=18.0.0&bitm_form=18.0.0&bitm_ui=18.0.1&bitm_mobileapp=18.0.2&bitm_compression=16.0.0&bitm_scale=17.5.0&bitm_photogallery=18.0.0&bitm_landing=18.4.31&bitm_seo=18.5.0&bitm_rest=18.5.2&bitl_en=&bitl_de=20140526&bitl_ru=&bitl_ch=&SUPD_SRS=RU&SUPD_CMP=N&SALE_15=Y&LICENSE_SIGNED=%7Enew_license18_0_sign-Y
+2020-10-12 14:13:46 -  - exec CUpdateClient::GetHTTPPage
+2020-10-12 14:13:46 -  - TIME GetUpdatesList(request) 0.336 sec
+2020-10-12 14:13:46 -  - exec CUpdateClient::ParseServerData

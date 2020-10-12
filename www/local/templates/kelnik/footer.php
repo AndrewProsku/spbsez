@@ -129,7 +129,7 @@
         </div>
     </div>
     </div>
-    <div class="open-feedback j-message-button" data-href="#message"></div><div class="open-feedback__ring"></div>
+    <div class="open-feedback-round j-message-button" data-href="#message"><div class="open-feedback"></div><div class="open-feedback__ring"></div></div>
 
     <? $APPLICATION->ShowHeadStrings(); ?>
     <? $APPLICATION->ShowHeadScripts(); ?>
