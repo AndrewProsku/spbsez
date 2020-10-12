@@ -1,17 +1,18 @@
 @keyframes envelope {
 	0% {
-		background-size: 100%;
+		transform: scale(1);
 	}
 	30%{
-		background-size: 120%;
+		transform: scale(1.2);
 	}
 	60%{
-		background-size: 100%;
+		transform: scale(1);
 	}
 	100% {
-		background-size: 100%;
+		transform: scale(1);
 	}
 }
+
 .b-area-plan__title h2{
 	margin-bottom: revert;
 }
@@ -226,29 +227,39 @@ ul.l-home__advantages-text-block{
     left: 10px;
     margin-right: 10px;
 }
-.open-feedback{
-    position: fixed;
-    right: 70px;
-    bottom: 40px;
+.open-feedback{    
     width: 70px;
     height: 70px;
     background-image: url(/images/custom/letter.svg);
-    background-size: 100%;
-    cursor: pointer;
+    background-size: 100%;    
     z-index: 10;
-    box-shadow: 0 11px 24px 5px rgba(0,0,0,0.10);
     border-radius: 50%;
     background-repeat: no-repeat;
     background-position: center;
     animation: envelope 3.5s infinite ease-out;
 }
-.open-feedback__ring{
-	display: block;
+.open-feedback-round{
 	width: 70px;
     height: 70px;
+    overflow: hidden;
+    position: fixed;
+    right: 70px;
+    bottom: 40px;
+    border-radius: 50%;
+    box-shadow: 0 11px 24px 5px rgba(0,0,0,0.10);
+    cursor: pointer;
+}
+.open-feedback__ring{
+	display: block;
+	width: 68px;
+    height: 68px;
 	border: 5px solid #fff;
 	border-radius: 50%;
 	transform: scale(1.1);
+	position: fixed;
+    right: 71px;
+    bottom: 41px;
+    z-index: 10;
 }
 
 .investors-calc label{
@@ -434,6 +445,19 @@ ymaps.ymaps-2-1-77-balloon{
 .faq-group__item{
 	position: relative;
     padding-top: 10px;
+}
+.faq-group__item ol, .faq-group__item ul{
+	padding-bottom: 20px;	
+}
+.faq-group__item ol{
+	list-style: decimal inside;
+}
+.faq-group__item ul{
+	list-style: disc inside;
+}
+.faq-group__item ol li, .faq-group__item ul li{
+    padding-left: 20px;
+    line-height: 150%;
 }
 .faq-group__item-title{
 	font-size: 34px;
