@@ -51,7 +51,21 @@ $APPLICATION->SetTitle("Главная");
         </div>
     </div>
 
+    
+
     <div class="l-home__block_bg_fixed">
+        <div class="l-home__advantages l-home__block">
+            <?$APPLICATION->IncludeComponent(
+                "kelnik:textblocks",
+                "",
+                Array(
+                    "CACHE_TIME" => "360000",
+                    "CACHE_TYPE" => "A",
+                    "CODE" => "main_screen_5"
+                )
+            );?>
+        </div>
+    
         <div class="l-home__privileges l-home__block">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -62,6 +76,15 @@ $APPLICATION->SetTitle("Главная");
                     "CODE" => "main_screen_3"
                 )
             );?>
+            <?/*$APPLICATION->IncludeComponent(
+                "kelnik:textblocks",
+                "",
+                Array(
+                    "CACHE_TIME" => "360000",
+                    "CACHE_TYPE" => "A",
+                    "CODE" => "banner_privileges"
+                )
+            );*/?>
         </div>
 
         <? $APPLICATION->IncludeComponent(
@@ -93,7 +116,7 @@ $APPLICATION->SetTitle("Главная");
             ),
             array()
         ); ?>
-
+        
         <div class="l-home-resident l-home__block">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",

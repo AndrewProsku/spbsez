@@ -37,7 +37,7 @@ $APPLICATION->SetTitle("Main page");
                         "CACHE_TYPE" => "A",
                         "CODE" => "main_screen_en_1"
                     )
-                );?>
+                );?>                
             </div>
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -51,6 +51,17 @@ $APPLICATION->SetTitle("Main page");
         </div>
     </div>
 <div class="l-home__block_bg_fixed">
+    <div class="l-home__advantages l-home__block">
+        <?$APPLICATION->IncludeComponent(
+            "kelnik:textblocks",
+            "",
+            Array(
+                "CACHE_TIME" => "360000",
+                "CACHE_TYPE" => "A",
+                "CODE" => "main_screen_en_5"
+            )
+        );?>
+    </div>
     <div class="l-home__privileges l-home__block">
         <?$APPLICATION->IncludeComponent(
             "kelnik:textblocks",
