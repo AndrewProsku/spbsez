@@ -73,6 +73,7 @@
             </div>
         </div>
         <?php include 'inc_message_form.php'; ?>
+        <?php include 'inc_calc_form.php'; ?>
     </footer>
     <div class="b-mobile-menu j-mobile-menu">
         <? $APPLICATION->IncludeComponent(
@@ -130,6 +131,7 @@
     </div>
     </div>
     <div class="open-feedback-round j-message-button" data-href="#message"><div class="open-feedback"></div><div class="open-feedback__ring"></div></div>
+    <div class="j-message-button open-calcres" data-href="#calcres" style="display:none"></div>
 
     <? $APPLICATION->ShowHeadStrings(); ?>
     <? $APPLICATION->ShowHeadScripts(); ?>

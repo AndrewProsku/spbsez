@@ -155,6 +155,67 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
+    <div class="l-investors__conditions" id="investors-calc">
+        <div class="b-invest-conditions ">            
+            <h2 class="b-invest-conditions__title">Калькулятор затрат на реализацию инвестиционного проекта</h2>           
+            <form action="" class="investors-calc">
+            	<div class="investors-calc__fields">
+	                <label for="offices">Офисы (кв.м)
+	                    <input type="text" id="offices" name="offices" class="investors-calc__fields-field" placeholder="введите значение">
+	                </label>
+	                <label for="production">Производственные помещения (кв.м)
+	                    <input type="text" id="production" name="production" class="investors-calc__fields-field" placeholder="введите значение">
+	                </label>
+	                <label for="land">Земельный участок (минимум 1 га)
+	                    <input type="text" id="land" name="land" class="investors-calc__fields-field" placeholder="введите значение">
+	                </label>
+	                <p>Объекты капитального строительства:</p>
+	                <label for="light">Легковозводимый (кв.м)
+	                    <input type="text" id="light" name="light" class="investors-calc__fields-field" placeholder="введите значение">
+	                </label>
+	                <label for="administrative">Административно-производственный (кв.м)
+	                    <input type="text" id="administrative" name="administrative" class="investors-calc__fields-field" placeholder="введите значение">
+	                </label>
+	                <label for="science">Научно-производственный высокой сложности (кв.м)
+	                    <input type="text" id="science" name="science" class="investors-calc__fields-field" placeholder="введите значение">
+	                </label>
+	                <label for="full_area">Общая площадь объектов (минимум 40% от площади ЗУ)
+	                    <input type="text" disabled id="full_area" name="full_area" class="investors-calc__fields-field" placeholder="">
+	                </label>
+	                <p class="investors-calc__error"></p>
+	                <button type="submit" class="investors-calc__fields-button button">Рассчитать</button>
+            	</div>
+                <div class="investors-calc__result">
+                    <h4>Затраты на реализацию проекта:</h4>
+                    <div class="investors-calc__result-item">
+                        <p>Стоимость аренды офиса в год от: </p><span id="office_cost_rent"></span>
+                    </div>
+                    <div class="investors-calc__result-item">
+                        <p>Стоимость аренды производственных помещений в год от: </p><span id="production_cost_rent"></span>
+                    </div>
+                    <div class="investors-calc__result-item">
+                        <p>Стоимость аренды ЗУ в год от: </p><span id="land_cost_rent"></span>
+                    </div>
+                    <div class="investors-calc__result-item">
+                        <p>Стоимость выкупа ЗУ в год от: </p><span id="land_cost_buy"></span>
+                    </div>
+                    <div class="investors-calc__result-item">
+                        <p>Минимальный объем капитальных вложений на строительство в год: </p><span id="min_invest"></span>
+                    </div>
+                    <div class="investors-calc__result-item">
+                        <p>Плата за технологическое присоединение к инженерным сетям: </p><span>-</span>
+                    </div>
+                </div>
+            </form>
+            <?
+			$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."hl_inc.php", Array(), Array(
+			    "MODE" => "php",                                       
+			    "NAME" => "Опции калькулятора"   
+			));			
+			?>                   
+        </div>
+    </div>
+
     <div class="l-investors__benefits">
         <div class="b-invest-benefits">
             <div class="b-invest-benefits__content">

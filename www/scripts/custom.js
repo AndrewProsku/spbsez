@@ -57,13 +57,22 @@ sezApp = {
 			return;
 		}
 		//request
-		let offices = parseInt(document.querySelector("#offices").value) > 0 ? parseInt(document.querySelector("#offices").value) : 0, 
-			production = parseInt(document.querySelector("#production").value) > 0 ? parseInt(document.querySelector("#production").value) : 0, 
-			land = parseInt(document.querySelector("#land").value) > 0 ? parseInt(document.querySelector("#land").value) : 0, 
-			light = parseInt(document.querySelector("#light").value) > 0 ? parseInt(document.querySelector("#light").value) : 0, 
-			administrative = parseInt(document.querySelector("#administrative").value) > 0 ? parseInt(document.querySelector("#administrative").value) : 0, 
-			science = parseInt(document.querySelector("#science").value) > 0 ? parseInt(document.querySelector("#science").value) : 0;
-		document.querySelector("#full_area").value = parseInt(light) + parseInt(administrative) + parseInt(science);
+		let offices = Math.round(parseFloat(document.querySelector("#offices").value.replace(',', '.'))) > 0 ? Math.round(parseFloat(document.querySelector("#offices").value.replace(',', '.'))) : 0, 
+			production = Math.round(parseFloat(document.querySelector("#production").value.replace(',', '.'))) > 0 ? Math.round(parseFloat(document.querySelector("#production").value.replace(',', '.'))) : 0, 
+			land = this.decimalAdjust('round', parseFloat(document.querySelector("#land").value.replace(',', '.')), -1) > 0 ? this.decimalAdjust('round', parseFloat(document.querySelector("#land").value.replace(',', '.')), -1) : 0, 
+			light = Math.round(parseInt(document.querySelector("#light").value)) > 0 ? Math.round(parseInt(document.querySelector("#light").value)) : 0, 
+			administrative = Math.round(parseInt(document.querySelector("#administrative").value)) > 0 ? Math.round(parseInt(document.querySelector("#administrative").value)) : 0, 
+			science = Math.round(parseInt(document.querySelector("#science").value)) > 0 ? Math.round(parseInt(document.querySelector("#science").value)) : 0;
+
+		let fullArea = parseInt(light) + parseInt(administrative) + parseInt(science);
+		if(fullArea > 0 && (land * 100 * 40) > fullArea){
+			document.querySelector('.investors-calc__error').innerHTML = 'Площадь построек должна занимать более 40% площади земельного участка';
+			return;
+		}else{
+			document.querySelector('.investors-calc__error').innerHTML = '';
+		}
+
+		document.querySelector("#full_area").value = fullArea;
 
 		//response
 		let office_cost_rent = offices*options.rate1,
@@ -77,7 +86,72 @@ sezApp = {
 		document.querySelector("#land_cost_rent").innerText = land_cost_rent;
 		document.querySelector("#land_cost_buy").innerText = land_cost_buy;
 		document.querySelector("#min_invest").innerText = min_invest;
-		document.querySelector(".investors-calc__result").style.maxHeight = "800px";
+		//document.querySelector(".investors-calc__result").style.maxHeight = "1000px";
+
+		let requestString = "offices="+offices+
+			"&production="+production+
+			"&land="+land+
+			"&light="+light+
+			"&administrative="+administrative+
+			"&science="+science+
+			"&fullArea="+fullArea+
+			"&office_cost_rent="+office_cost_rent+
+			"&production_cost_rent="+production_cost_rent+
+			"&land_cost_rent="+land_cost_rent+
+			"&land_cost_buy="+land_cost_buy+
+			"&min_invest="+min_invest;
+		this.sendRequest(
+			requestString,
+			'/ajax/sendCalcResults.php',
+			'POST',
+			function(data, params){}
+		);
+		document.querySelector('#calcdata').value = requestString;
+
+		let event = new Event("click");
+		let trigger = document.querySelector('.open-calcres');
+  		trigger.dispatchEvent(event);
+	},
+	sendCalcForm: function(form){
+		let calcdata = document.querySelector('#calcdata').value;
+		let email = document.querySelector('#message-email-calc').value;
+		let requestString = calcdata+'&email='+email;
+		this.sendRequest(
+			requestString,
+			'/ajax/sendCalcResults.php',
+			'POST',
+			function(data, params){
+				document.querySelector('.b-popup__content .calcres-form').innerText = 'Расчёт отправлен на указанный почтовый адрес';
+			}
+		);
+	},
+	decimalAdjust: function(type, value, exp) {
+	    // Если степень не определена, либо равна нулю...
+	    if (typeof exp === 'undefined' || +exp === 0) {
+	      return Math[type](value);
+	    }
+	    value = +value;
+	    exp = +exp;
+	    // Если значение не является числом, либо степень не является целым числом...
+	    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+	      return NaN;
+	    }
+	    // Сдвиг разрядов
+	    value = value.toString().split('e');
+	    value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+	    // Обратный сдвиг
+	    value = value.toString().split('e');
+
+	    //round to 0.5
+	    let result = 0;
+	    if(value[0][value.length] <= 5 && value[0][value.length] > 0){
+	    	value[0] = value[0].substring(0, value[0].length-1) + '5';	    	
+	    	result = +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+	    }else{
+	    	result = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp)));
+	    }
+
+	    return result;
 	},
 	generateMap: function(){
 		let mapWrapperList = document.querySelector('#map_list');

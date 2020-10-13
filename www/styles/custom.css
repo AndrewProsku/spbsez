@@ -248,6 +248,7 @@ ul.l-home__advantages-text-block{
     border-radius: 50%;
     box-shadow: 0 11px 24px 5px rgba(0,0,0,0.10);
     cursor: pointer;
+    z-index: 10;
 }
 .open-feedback__ring{
 	display: block;
@@ -259,7 +260,6 @@ ul.l-home__advantages-text-block{
 	position: fixed;
     right: 71px;
     bottom: 41px;
-    z-index: 10;
 }
 
 .investors-calc label{
@@ -1216,6 +1216,9 @@ ymaps.ymaps-2-1-77-balloon__close+.ymaps-2-1-77-balloon__content{
 	margin-top: 70px;
 	overflow: hidden;
 }
+#investors-calc .b-invest-conditions{
+	padding-bottom: 0;
+}
 .investors-calc__fields{
 	padding-left: 80px;
     width: 60%;
@@ -1263,22 +1266,79 @@ ymaps.ymaps-2-1-77-balloon__close+.ymaps-2-1-77-balloon__content{
 }
 .investors-calc__fields-button{
 	outline: none;
-	margin-top: 90px;
 }
 .investors-calc__result{
-	float: right;
-	width: 35%;
+	float: left;
+	width: 38%;
+	background: linear-gradient(306.61deg, #662E91 19.38%, rgba(101, 45, 145, 0) 69.68%), #313F9A;
+    margin-top: 20px;
+    padding: 30px;
+    color: #fff;
 }
 .investors-calc__result h4{
-	
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 42px;
+    margin-bottom: 0;
+    margin-top: -4px;
+    width: 80%;
+}
+.investors-calc__result-item{
+	border-bottom: 1px solid #fff;
+    margin-bottom: 20px;
+    margin-top: 0;
+    padding-bottom: 25px;
+    overflow: hidden;
+    position: relative;
+    padding-top: 35px;
 }
 .investors-calc__result p{
-	
+	width: 70%;
+	float: left;
 }
 .investors-calc__result span{
-	
+	font-weight: bold;
+    font-size: 34px;
+    float: right;
+    line-height: 40px;
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
 }
 
+@media only screen and (max-width: 1440px){
+	.investors-calc__fields label{
+		font-size: 18px;
+	}
+	.investors-calc__fields{
+		padding-left: 0;
+	}
+	.investors-calc__fields-field{
+		width: 150px;
+		font-size: 16px;
+		padding-left: 10px;
+	}
+	.investors-calc__result span{
+		font-size: 30px;
+	}
+}
+@media only screen and (max-width: 768px){
+	.investors-calc__fields, .investors-calc__result{
+		float: none;
+		width: 100%;
+	}
+	.investors-calc__fields label{
+		font-size: 16px;
+	}
+	.investors-calc__fields-field{
+		width: 170px;
+	}
+	.investors-calc__fields-button{
+		margin-top: 30px;
+    	margin-bottom: 100px;
+	}
+}
 
 @media only screen and (min-width: 1366px){
 	.l-home__advantages-text.l-home__advantages-left-side{

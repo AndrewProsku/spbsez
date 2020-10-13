@@ -18,10 +18,12 @@ try {
     foreach ($elements as $v) {
         $v = \Kelnik\Infrastructure\Model\PlatformTable::replaceFieldsByLang($v, LANGUAGE_ID);
         if($v['NAME'] == 'Инновационный центр'){
-            $prefix = '';
+            $name = $v['NAME'];
+        }else{
+            $name = $prefix . '«' . $v['NAME'] . '»';
         }
         $aMenuLinks[] = [
-            $prefix . '«' . $v['NAME'] . '»',
+            $name,
             LANG_DIR . 'infrastructure/' . $v['ALIAS'] . '/',
             [],
             [],
