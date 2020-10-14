@@ -463,7 +463,6 @@ ymaps.ymaps-2-1-77-balloon{
 	font-size: 34px;
 	padding-left: 80px;
 	position: relative;
-	color: #30409A;
 	cursor: pointer;
 }
 .faq-group__item-title span{
@@ -619,7 +618,10 @@ ymaps.ymaps-2-1-77-balloon{
     .faq-group__title h3{
 		padding-left: 12.5%;
 	   	padding-right: 8.33333%;
-	}  
+	}
+	h3.faq-group-open-trigger{
+		font-size: 36px;
+	}
 }
 @media only screen and (min-width: 1920px) {
     .l-faq {

@@ -12,3 +12,4 @@ if(!empty($arResult["QUESTIONS"]) && $arParams["USE_TYPES"] == "Y"){
 		}
 	}
 }
+ksort($arResult["QUESTIONS_TYPES"]);
