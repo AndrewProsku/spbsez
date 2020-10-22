@@ -154,7 +154,7 @@ $APPLICATION->SetTitle("Инвесторам");
             ); ?>
         </div>
     </div>
-
+<?if($_GET['calc'] == 1){?>
     <div class="l-investors__conditions" id="investors-calc">
         <div class="b-invest-conditions ">            
             <h2 class="b-invest-conditions__title">Калькулятор затрат на реализацию инвестиционного проекта</h2>           
@@ -215,7 +215,7 @@ $APPLICATION->SetTitle("Инвесторам");
 			?>                   
         </div>
     </div>
-
+<?}?>
     <div class="l-investors__benefits">
         <div class="b-invest-benefits">
             <div class="b-invest-benefits__content">
