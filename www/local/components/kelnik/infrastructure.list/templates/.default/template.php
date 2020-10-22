@@ -15,10 +15,11 @@
             <li class="b-page-submenu__item">
                 <a href="<?= $arItem['DETAIL_PAGE_URL']; ?>" class="b-page-submenu__link b-link-line">
                     <?if($arItem['NAME'] == 'Инновационный центр'){?>
-                        <?= $arItem['NAME']; ?>
+                        <? $name = $arItem['NAME']; ?>
                     <?}else{?>
-                        <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?> «<?= $arItem['NAME']; ?>»
+                        <? $name = \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM')." «".$arItem['NAME']."»"?>
                     <?}?>
+                    <?=$name;?>
                 </a>
             </li>
             <?php endforeach; ?>
@@ -49,12 +50,18 @@
                     <img src="<?= $arItem['IMAGE_ID_PATH']; ?>" alt="<?= htmlentities($arItem['NAME'], ENT_QUOTES, SITE_CHARSET); ?>">
                 </div>
                 <?php endif; ?>
-                <div class="b-infrastructure-place__title">
-                    <?if($arItem['NAME'] != 'Инновационный центр'){?>
-                        <h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?></h2>       
-                    <?}?>                    
+                <div class="b-infrastructure-place__title">              
+
+                    <?if($arItem['NAME'] !== 'Инновационный центр'){?>
+                        <h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?></h2>
+                        
+                        <? $name = "«".$arItem['NAME']."»"?>
+                    <?}else{?>
+                        <? $name = $arItem['NAME']; ?>
+                    <?}?>
+                    
                 </div>
-                <h3 class="b-infrastructure-place__name"><a class="b-link-line" href="<?= $arItem['DETAIL_PAGE_URL']; ?>"><span>«<?= $arItem['NAME']; ?>»</span></a></h3>
+                <h3 class="b-infrastructure-place__name"><a class="b-link-line" href="<?= $arItem['DETAIL_PAGE_URL']; ?>"><span><?= $name; ?></span></a></h3>
                 <div class="b-icons-list">
                     <?= $arItem['TEXT']; ?>
                 </div>
