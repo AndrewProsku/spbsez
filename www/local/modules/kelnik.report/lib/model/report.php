@@ -179,6 +179,14 @@ class Report extends EO_Reports
                 if (isset($block['fields'])) {
                     if (!self::checkFilledFields($block['fields'])) {
                         if (!isset($block['type']) || $block['type'] !== 'foreign-investors') {
+
+                            //игнорируем поле extra-title-for-revenue, которое
+                            //является подзаголовком, а не инпутом
+                            $extraTitle = array_search('extra-title-for-revenue', array_column($block['fields'], 'id'));
+                            if(isset($block['fields'][$extraTitle]['value'])){
+                                continue;
+                            }   
+                                                    
                             return false;
                         }
 
