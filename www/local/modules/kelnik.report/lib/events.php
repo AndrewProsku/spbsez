@@ -118,7 +118,19 @@ class Events
             }
 
             if ($statusId === StatusTable::DONE) {
-                return false;
+
+                // Сообщение резиденту на сайте
+                //
+                NotifyTable::add([
+                    'USER_ID' => $profile->getId(),
+                    'IS_NEW' => NotifyTable::YES,
+                    'NAME' => Loc::getMessage('KELNIK_REPORT_NOTIFY_HEADER_ACCEPT', $locParams),
+                    'TEXT' => Loc::getMessage('KELNIK_REPORT_NOTIFY_BODY_ACCEPT', $locParams)
+                ]);
+
+                return true;
+
+                //return false;
             }
 
             // Сообщение резиденту по E-mail

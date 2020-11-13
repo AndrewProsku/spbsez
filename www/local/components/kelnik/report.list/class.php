@@ -177,11 +177,37 @@ class ReportList extends Bbc\Basis
             }
         }
 
+        //массив отчётов из БД за текущий год для проверки статуса
+        $arStatuses = [];
+        if(count($reports) > 0){
+            foreach($reports as $report){
+                if($report['YEAR'] < $curYear){
+                    continue;
+                }
+                $arStatuses[$report['TYPE']] = $report['STATUS_ID'];
+            }
+        }
+
         foreach ([$prevYear, $curYear] as $year) {
             $typePeriod = ReportsTable::getTypePeriod($year);
 
             foreach ($types as $type) {
+
+                //если отчётный период кончился, то виртуальный отчёт не создаётся
                 if ($curTime > $typePeriod[$type]['end']) {
+                    continue;
+                }
+
+                //если есть созданный отчёт за текущий период, то виртуальный отчёт не создаётся
+                if(
+                    isset($arStatuses[$type]) && 
+                    (
+                    	$arStatuses[$type] == StatusTable::DONE || 
+                    	$arStatuses[$type] == StatusTable::CHECKING || 
+                    	$arStatuses[$type] == StatusTable::DECLINED ||
+                    	$arStatuses[$type] == StatusTable::NEW
+                    )
+                ){
                     continue;
                 }
 
@@ -204,7 +230,7 @@ class ReportList extends Bbc\Basis
                     ->setStatus($defStatus)
                     ->getArray();
             }
-        }
+        }               
 
         return $reports;
     }

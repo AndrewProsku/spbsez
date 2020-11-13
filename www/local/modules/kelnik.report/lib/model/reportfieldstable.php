@@ -30,14 +30,14 @@ class ReportFieldsTable extends DataManager
     public const FLOAT_SCALE = 6;
 
     public static $defaultValues = [
-        'foreign-investors'    => [
+        /*'foreign-investors'    => [
             'VALUE'    => 'no',
             'FORM_NUM' => self::FORM_COMMON
         ],
         'high-tech-production' => [
             'VALUE'    => 'no',
             'FORM_NUM' => self::FORM_INDICATORS
-        ]
+        ]*/
     ];
 
     /**

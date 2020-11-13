@@ -416,6 +416,10 @@ class Report extends EO_Reports
 
                 if (!$val && $field['VALUE']) {
                     $val = $field['VALUE'];
+                }else if($field['VALUE'] == null){
+                    $val = null;
+                }else{
+                    $val = 0;
                 }
 
                 if (in_array(

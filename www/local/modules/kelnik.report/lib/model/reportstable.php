@@ -256,15 +256,15 @@ class ReportsTable extends DataManager
         return [
             self::TYPE_QUARTER_1 => [
                 'start' => mktime(0, 0, 0, 4, 1, $year),
-                'end' => mktime(23, 59, 59, 4, 31, $year)
+                'end' => mktime(23, 59, 59, 4, 30, $year)
             ],
             self::TYPE_QUARTER_2 => [
                 'start' => mktime(0, 0, 0, 8, 1, $year),
-                'end' => mktime(23, 59, 59, 9, 31, $year)
+                'end' => mktime(23, 59, 59, 9, 30, $year)
             ],
             self::TYPE_QUARTER_3 => [
                 'start' => mktime(0, 0, 0, 10, 1, $year),
-                'end' => mktime(23, 59, 59, 11, 8, $year)
+                'end' => mktime(23, 59, 59, 11, 30, $year)
             ],
             self::TYPE_PRELIMINARY_ANNUAL => [
                 'start' => mktime(0, 0, 0, 1, 8, $nextYear),
@@ -272,7 +272,7 @@ class ReportsTable extends DataManager
             ],
             self::TYPE_ANNUAL => [
                 'start' => mktime(0, 0, 0, 4, 1, $nextYear),
-                'end' => mktime(23, 59, 59, 4, 31, $nextYear)
+                'end' => mktime(23, 59, 59, 4, 30, $nextYear)
             ]
         ];
     }

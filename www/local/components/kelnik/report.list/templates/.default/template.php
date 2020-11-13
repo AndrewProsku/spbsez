@@ -27,7 +27,7 @@
     <h1>Отчет&nbsp;о&nbsp;деятельности резидента</h1>
 </div>
 <?php
-    $hasArchive = false;
+    $hasArchive = false;    
 ?>
 <?php foreach ($arResult['REPORTS'] as $year): ?>
     <?php

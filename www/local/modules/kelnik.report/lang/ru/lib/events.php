@@ -8,3 +8,6 @@ $MESS['KELNIK_REPORT_NOTIFY_BODY_CHECKING'] = 'Ваш отчет <a href="#LINK#
 
 $MESS['KELNIK_REPORT_NOTIFY_HEADER_DECLINED'] = 'Ваш отчет "#TYPE_NAME#" отклонен';
 $MESS['KELNIK_REPORT_NOTIFY_BODY_DECLINED'] = 'Ваш отчет <a href="#LINK#">#TYPE_NAME#</a> отклонен';
+
+$MESS['KELNIK_REPORT_NOTIFY_HEADER_ACCEPT'] = 'Ваш отчет "#TYPE_NAME#" принят';
+$MESS['KELNIK_REPORT_NOTIFY_BODY_ACCEPT'] = 'Ваш отчет <a href="#LINK#">#TYPE_NAME#</a> принят';
