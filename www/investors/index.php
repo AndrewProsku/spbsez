@@ -160,52 +160,70 @@ $APPLICATION->SetTitle("Инвесторам");
             <h2 class="b-invest-conditions__title">Калькулятор затрат на реализацию инвестиционного проекта</h2>           
             <form action="" class="investors-calc">
             	<div class="investors-calc__fields">
-	                <label for="offices">Офисы (кв.м)
-	                    <input type="text" id="offices" name="offices" class="investors-calc__fields-field" placeholder="введите значение">
+                    <div class="investors-calc__fields-subtitle">Выберите, что необходимо Вам  для реализации проекта</div>
+	                <label for="offices">
+                        <input type="checkbox" data-name="offices">
+                        <span>Аренда офисов</span>
+	                    <input type="text" disabled id="offices" name="offices" class="investors-calc__fields-field" placeholder="Площадь офиса, кв.м.">
 	                </label>
-	                <label for="production">Производственные помещения (кв.м)
-	                    <input type="text" id="production" name="production" class="investors-calc__fields-field" placeholder="введите значение">
+	                <label for="production">
+                        <input type="checkbox" data-name="production">
+                        <span>Аренда производственных помещений</span>
+	                    <input type="text" disabled id="production" name="production" class="investors-calc__fields-field" placeholder="Площадь производства, кв.м.">
 	                </label>
-	                <label for="land">Земельный участок (минимум 1 га)
-	                    <input type="text" id="land" name="land" class="investors-calc__fields-field" placeholder="введите значение">
+	                <label for="land">
+                        <input type="checkbox" data-name="land" onchange="sezApp.showLandRelated(this)">
+                        <span>Аренда земельного участка</span>
+	                    <input type="text" disabled id="land" name="land" class="investors-calc__fields-field" placeholder="Площадь земельного участка, Га">
 	                </label>
-	                <p>Объекты капитального строительства:</p>
-	                <label for="light">Легковозводимый (кв.м)
-	                    <input type="text" id="light" name="light" class="investors-calc__fields-field" placeholder="введите значение">
+	                <p class="investors-calc__subtitle land-related">
+	                	Планируемые объекты капитального строительства общей площадью не меньше 40% площади земельного участка (1га = 10000кв.м.):
+	                </p>
+	                <label for="light" class="land-related">
+                        <input type="checkbox" data-name="light">
+                        <span>Из легковозводимых конструкций</span>
+	                    <input type="text" disabled id="light" name="light" class="investors-calc__fields-field" placeholder="Площадь производства, кв.м.">
 	                </label>
-	                <label for="administrative">Административно-производственный (кв.м)
-	                    <input type="text" id="administrative" name="administrative" class="investors-calc__fields-field" placeholder="введите значение">
+	                <label for="administrative" class="land-related">
+                        <input type="checkbox" data-name="administrative">
+                        <span>Административно-производственный корпус</span>
+	                    <input type="text" disabled id="administrative" name="administrative" class="investors-calc__fields-field" placeholder="Площадь производства, кв.м.">
 	                </label>
-	                <label for="science">Научно-производственный высокой сложности (кв.м)
-	                    <input type="text" id="science" name="science" class="investors-calc__fields-field" placeholder="введите значение">
+	                <label for="science" class="land-related">
+                        <input type="checkbox" data-name="science">
+                        <span>Научно-производственный объект высокой сложности</span>
+	                    <input type="text" disabled id="science" name="science" class="investors-calc__fields-field" placeholder="Площадь производства, кв.м.">
 	                </label>
-	                <label for="full_area">Общая площадь объектов (минимум 40% от площади ЗУ)
-	                    <input type="text" disabled id="full_area" name="full_area" class="investors-calc__fields-field" placeholder="">
+	                <label for="full_area" class="land-related">
+                        <input type="checkbox" data-name="full_area" checked disabled>
+                        <span class="investors-calc__utilities">Подключение к инженерным сетям</span>
+	                    <span class="investors-calc__utilities-description">Технологическое присоединение к инженерным сетям осуществляется <b>без отдельной платы за присоединение</b></span>
 	                </label>
 	                <p class="investors-calc__error"></p>
 	                <button type="submit" class="investors-calc__fields-button button">Рассчитать</button>
             	</div>
                 <div class="investors-calc__result">
-                    <h4>Затраты на реализацию проекта:</h4>
-                    <div class="investors-calc__result-item">
-                        <p>Стоимость аренды офиса в год от: </p><span id="office_cost_rent"></span>
+                    <h4>Затраты на реализацию проекта включают:</h4>
+                    <div class="investors-calc__result-item _hidden">
+                        <p>Стоимость аренды офиса от: </p><span id="office_cost_rent"></span><span class="investors-calc__result-measure">млн руб/год</span>
                     </div>
-                    <div class="investors-calc__result-item">
-                        <p>Стоимость аренды производственных помещений в год от: </p><span id="production_cost_rent"></span>
+                    <div class="investors-calc__result-item _hidden">
+                        <p>Стоимость аренды производственных помещений от: </p><span id="production_cost_rent"></span><span class="investors-calc__result-measure">млн руб/год</span>
                     </div>
-                    <div class="investors-calc__result-item">
-                        <p>Стоимость аренды ЗУ в год от: </p><span id="land_cost_rent"></span>
+                    <div class="investors-calc__result-item _hidden">
+                        <p>Стоимость аренды ЗУ от: </p><span id="land_cost_rent"></span><span class="investors-calc__result-measure">млн руб/год</span>
                     </div>
-                    <div class="investors-calc__result-item">
-                        <p>Стоимость выкупа ЗУ в год от: </p><span id="land_cost_buy"></span>
+                    <div class="investors-calc__result-item _hidden">
+                        <p>Стоимость выкупа ЗУ от: </p><span id="land_cost_buy"></span><span class="investors-calc__result-measure">млн руб</span>
                     </div>
-                    <div class="investors-calc__result-item">
-                        <p>Минимальный объем капитальных вложений на строительство в год: </p><span id="min_invest"></span>
+                    <div class="investors-calc__result-item _hidden">
+                        <p>Минимальный объем капитальных вложений на строительство: </p><span id="min_invest"></span><span class="investors-calc__result-measure">млн руб</span>
                     </div>
                     <div class="investors-calc__result-item">
                         <p>Плата за технологическое присоединение к инженерным сетям: </p><span>-</span>
-                    </div>
+                    </div>                    
                 </div>
+                <a href="" class="investors-calc__fields-button button j-message-button open-calcres" data-href="#calcres">Отправить результат расчета на e-mail</a>
             </form>
             <?
 			$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."hl_inc.php", Array(), Array(

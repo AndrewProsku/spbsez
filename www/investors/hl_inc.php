@@ -24,7 +24,7 @@ while($arData = $rsData->Fetch()){
    $arCalcOptions[$arData["UF_KEY"]] = $arData["UF_VALUE"];
 }
 ?>
-<script>
+<script>    
     document.querySelector('#investors-calc').onsubmit = function(){
         sezApp.investCalcOptions = {
             "t1": <?=$arCalcOptions['light_rate']?>,

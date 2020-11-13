@@ -262,15 +262,6 @@ ul.l-home__advantages-text-block{
     bottom: 41px;
 }
 
-.investors-calc label{
-	display: block;
-	margin-bottom: 20px;
-}
-.investors-calc-result{
-	max-height: 0;
-	transition: all .5s;
-	overflow: hidden;
-}
 .b-area-main-feature__value {
     font-size: 70px;
 }
@@ -411,7 +402,7 @@ ymaps.ymaps-2-1-77-balloon{
    	padding-right: 11.11111%;
 }
 .b-faq-title h1{
-	font-size: 64px;
+	font-size: 26px;
 }
 .faq-group__title{
 	cursor: pointer;
@@ -475,11 +466,11 @@ ymaps.ymaps-2-1-77-balloon{
     justify-content: center;
     border-radius: 50%;
     border: 2px solid;
-    top: -5px;
+    top: 0;
     color: #313F9A;
-	background: -webkit-linear-gradient(306.61deg, #662E91 19.38%, rgba(101, 45, 145, 0) 69.68%), #313F9A;
+	/*background: -webkit-linear-gradient(306.61deg, #662E91 19.38%, rgba(101, 45, 145, 0) 69.68%), #313F9A;
   	-webkit-background-clip: text;
-  	-webkit-text-fill-color: transparent;
+  	-webkit-text-fill-color: transparent;*/
   	border-color: #313F9A;
 }
 .faq-group__item-content{
@@ -573,6 +564,12 @@ ymaps.ymaps-2-1-77-balloon{
 	margin-top: 20px;
 }
 
+@media only screen and (min-width: 480px) {
+	.faq-group__item-title span{
+		top: -5px;
+	}
+}
+
 @media only screen and (min-width: 670px) {
     .l-faq {
         padding-top: 40px;
@@ -581,6 +578,10 @@ ymaps.ymaps-2-1-77-balloon{
     .faq-group__title h3{
 		padding-left: 15%;
 	}
+	.b-faq-title h1{
+		font-size: 30px;
+	}
+	
 }
 @media only screen and (min-width: 960px) {
     .l-faq {
@@ -589,6 +590,13 @@ ymaps.ymaps-2-1-77-balloon{
     }
     .faq-group__title h3{
 		padding-left: 15%;
+	}
+	.b-faq-title h1{
+		font-size: 50px;
+	}
+	.faq-group__item {
+	    padding-left: 8.33333%;
+    	padding-right: 8.33333%;
 	}
 }
 @media only screen and (min-width: 1280px) {
@@ -607,6 +615,9 @@ ymaps.ymaps-2-1-77-balloon{
 	.faq-group__item{
 		padding-left: 8.33333%;
 	   	padding-right: 8.33333%;
+	}
+	.b-faq-title h1{
+		font-size: 64px;
 	}
 }
 
@@ -661,12 +672,12 @@ ymaps.ymaps-2-1-77-balloon{
 	    top: 16px;
 	}
 	.faq-group__item-title{
-		padding-left: 15.11111%;
-	   	padding-right: 11.11111%;
+		/*padding-left: 15.11111%;
+	   	padding-right: 11.11111%;*/
 	}
 	.faq-group__item-content{
 		max-width: 80%;
-		padding-left: 156px;
+		padding-left: 90px;
 	}
 	.faq-group__item-content ul{
 		font-size: 16px;
@@ -675,7 +686,7 @@ ymaps.ymaps-2-1-77-balloon{
 		width: 60px;
 	}
 	.faq-group__item-title span{
-		left: 9%;
+		/*left: 9%;*/
 	}
 }
 @media only screen and (max-width: 768px) {
@@ -684,7 +695,7 @@ ymaps.ymaps-2-1-77-balloon{
 	    padding-left: 20%;
 	}
 	.faq-group__item-title span {
-
+		left: 9%;
 	}
 	.faq-group__item-content{
 
@@ -1221,11 +1232,12 @@ ymaps.ymaps-2-1-77-balloon__close+.ymaps-2-1-77-balloon__content{
 #investors-calc .b-invest-conditions{
 	padding-bottom: 0;
 }
+
 .investors-calc__fields{
-	padding-left: 80px;
-    width: 60%;
+	padding-left: 0;
+    width: 56%;
     padding-right: 35px;
-    float: left;    
+  	float: left;
 }
 .investors-calc__fields label{
 	color: #30409A;
@@ -1236,66 +1248,102 @@ ymaps.ymaps-2-1-77-balloon__close+.ymaps-2-1-77-balloon__content{
 	width: 100%;
 	text-align: left;
 	line-height: 250%;
+	border-bottom: 1px solid #30409A;
+    padding-bottom: 20px;
+    overflow: hidden;
 }
-.investors-calc__fields p{
-	margin-top: 70px;
-    font-weight: 700;
-    margin-bottom: 30px;
+p.investors-calc__error{
+    margin-top: 40px;
+    font-weight: 400;
+    margin-bottom: 40px;
+    margin-left: 30px;
+    color: #d23636;
+}
+p.investors-calc__subtitle{	
+	font-size: 24px;
+	line-height: 30px;
+	color: #443997;
+	margin: 30px 0;
 }
 .investors-calc__fields label::after{
-	content: "";
+/*	content: "";*/
 	display: block;
 	height: 12px;
 	width: 100%;
 	background: linear-gradient(90deg, rgba(63, 63, 153, 0.12) 0%, rgba(127, 81, 163, 0.12) 100%);
 	clear: both;
 }
+.investors-calc__fields label span{
+    width: 56%;
+    float: left;
+    line-height: 150%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
 .investors-calc__fields-field{
 	display: block;
 	float: right;
-	width: 232px;
-	height: 47px;
+	width: 265px;
+	height: 40px;
 	background: #FFFFFF;
-	box-shadow: inset 0px 4px 5px rgba(102, 46, 145, 0.2);
-	border: none;
+	border: 1px solid #E0E0E0;
 	outline: none;
-	font-size: 20px;
+	font-size: 16px;
     line-height: 150%;
-    padding-left: 20px;
+    padding-left: 10px;
+}
+.investors-calc__fields-field[disabled]{
+	background-color: #eee;
 }
 .investors-calc__fields-field::placeholder{
 	color: #BDBDBD;
 }
+.investors-calc__fields [type="checkbox"]{
+	margin-top: 13px;
+	float: left;
+	margin-right: 20px;
+	margin-left: 0;
+}
 .investors-calc__fields-button{
 	outline: none;
+	margin-left: 30px;
 }
 .investors-calc__result{
-	float: left;
-	width: 38%;
-	background: linear-gradient(306.61deg, #662E91 19.38%, rgba(101, 45, 145, 0) 69.68%), #313F9A;
+	width: 43%;
     margin-top: 20px;
-    padding: 30px;
-    color: #fff;
+    padding: 0;    
+	transition: all .5s;
+	overflow: hidden;
+	background: linear-gradient(306.61deg, #662E91 19.38%, rgba(101, 45, 145, 0) 69.68%), #313F9A;
+	color: #fff;
+	float: right;
+	max-height: 0;
+}
+.investors-calc__result.open{
+	max-height: 1000px;
+	padding: 30px;
 }
 .investors-calc__result h4{
-    font-weight: bold;
+	font-weight: 700;
     font-size: 30px;
-    line-height: 42px;
-    margin-bottom: 0;
-    margin-top: -4px;
-    width: 80%;
+    margin-bottom: 20px;
+    color: #fff;
 }
 .investors-calc__result-item{
 	border-bottom: 1px solid #fff;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     margin-top: 0;
     padding-bottom: 25px;
     overflow: hidden;
     position: relative;
-    padding-top: 35px;
+    padding-top: 30px;
+}
+.investors-calc__result-item._hidden{
+	display: none;
 }
 .investors-calc__result p{
-	width: 70%;
+	width: 64%;
 	float: left;
 }
 .investors-calc__result span{
@@ -1305,27 +1353,156 @@ ymaps.ymaps-2-1-77-balloon__close+.ymaps-2-1-77-balloon__content{
     line-height: 40px;
     display: block;
     position: absolute;
-    right: 0;
+    right: 100px;
     bottom: 20px;
+}
+.investors-calc__result span.investors-calc__result-measure{
+	font-size: 12px;
+    float: right;
+    display: block;
+    right: 0;
+}
+label.land-related, .land-related{
+	display: none;
+}
+label.land-related.open, .land-related.open{
+	display: block;
+}
+.open-calcres{
+	float: right;
+    margin-top: 35px;
+    width: 43%;
+    margin-left: 0;
+    clear: right;
+}
+.land-related .investors-calc__utilities-description {
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 400;
+    color: #828282;
+    float: right;
+    width: 55%;
+    text-align: center;
+    display: block;
+    height: auto;
+}
+.investors-calc__fields label span.investors-calc__utilities{
+	width: 40%;	
+}
+.open-calcres{
+	display: none;
+}
+.investors-calc__fields-subtitle{
+	font-size: 36px;
+    line-height: 44px;
+    color: #443997;
+    width: 70%;
+    margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 1440px){
 	.investors-calc__fields label{
-		font-size: 18px;
+		font-size: 14px;
 	}
 	.investors-calc__fields{
 		padding-left: 0;
 	}
 	.investors-calc__fields-field{
-		width: 150px;
+		width: 210px;
 		font-size: 16px;
 		padding-left: 10px;
 	}
 	.investors-calc__result span{
 		font-size: 30px;
 	}
+	p.investors-calc__subtitle{
+		font-size: 20px;
+	}
+	.investors-calc__fields-subtitle{
+		font-size: 30px;
+	}
+	.investors-calc__fields [type="checkbox"] {
+	    margin-top: 14px;
+	}
+	.land-related .investors-calc__utilities-description{
+		width: 50%;
+	}
+	.investors-calc__result p{
+		font-size: 16px;
+	}
+	.investors-calc__fields label span{
+		width: 58%;
+	}
+	.investors-calc__fields-field::placeholder{
+		font-size: 12px;
+	}
 }
-@media only screen and (max-width: 768px){
+
+@media only screen and (max-width: 1366px){
+	.investors-calc__result span {
+	    font-size: 24px;
+	}
+}
+
+@media only screen and (max-width: 1280px){
+	.investors-calc__fields label span {
+	    width: 50%;
+	    line-height: 150%;
+	    height: 40px;
+	    display: flex;
+	    align-items: center;
+	}
+	.investors-calc__fields [type="checkbox"] {
+	    margin-top: 13px;
+	}
+	.land-related .investors-calc__utilities-description {
+	    line-height: 130%;
+	    font-size: 13px;
+	}
+	.investors-calc__result span {
+	    font-size: 24px;
+	    right: 90px;
+	}
+}
+/*@media only screen and (max-width: 1024px){
+	.investors-calc{
+		margin-top: 40px;
+	}
+	.investors-calc__result p{
+		width: 54%;
+    	font-size: 14px;
+    	line-height: 160%;
+	}
+	.investors-calc__fields-subtitle{
+		font-size: 22px;
+		line-height: 34px;
+	}
+	.investors-calc__result h4{
+		font-size: 24px;
+	}
+	.investors-calc__fields label span {
+	    width: 50%;
+	    line-height: 150%;
+	}
+	.investors-calc__fields-field {
+	    width: 176px;
+	    font-size: 12px;
+	    padding-left: 5px;
+	}
+	.investors-calc__result span {
+	    font-size: 24px;
+	    right: 90px;
+	}
+	.land-related .investors-calc__utilities-description {
+    	font-size: 12px;
+    	line-height: 16px;
+	}
+	.investors-calc__fields-button{
+		font-size: 14px;
+	}
+
+}*/
+@media only screen and (max-width: 1024px){
 	.investors-calc__fields, .investors-calc__result{
 		float: none;
 		width: 100%;
@@ -1334,11 +1511,88 @@ ymaps.ymaps-2-1-77-balloon__close+.ymaps-2-1-77-balloon__content{
 		font-size: 16px;
 	}
 	.investors-calc__fields-field{
-		width: 170px;
+		width: 200px;
 	}
 	.investors-calc__fields-button{
-		margin-top: 30px;
-    	margin-bottom: 100px;
+    	margin-bottom: 20px;
+    	margin-left: 0;
+	}
+	.investors-calc__fields-subtitle{
+		font-size: 22px;
+	}
+	.investors-calc__result p {
+	    width: 65%;
+	    font-size: 16px;
+	}
+	.open-calcres{
+		width: 56%;
+	}
+}
+@media only screen and (max-width: 480px){
+	.investors-calc__fields-subtitle {
+	    font-size: 16px;
+    	margin-bottom: 0;
+    	line-height: 30px;
+	}
+	.investors-calc__fields-field {
+	    width: 100%;
+	    margin-top: 15px;
+	}
+	.investors-calc__fields label span{
+		width: 85%;
+	}
+	p.investors-calc__subtitle{
+		font-size: 16px;
+		margin-bottom: 0;
+	}
+	.investors-calc__fields label span.investors-calc__utilities{
+		width: 85%;
+	}
+	.land-related .investors-calc__utilities-description{
+    	width: 100%;
+	}
+	.investors-calc__result p{
+		width: 100%;
+	}
+	.investors-calc__result span {
+	    font-size: 24px;
+	    position: static;
+	    float: left;
+	}
+	.investors-calc__result span.investors-calc__result-measure {	   
+	    float: left;
+	    margin-left: 20px;
+	}
+	.open-calcres{
+		width: 100%;
+		
+	}
+	.open-calcres .button:after{
+		right: 4%;
+	}
+	@media only screen and (max-width: 320px){
+		.open-calcres{
+			padding: 0 10px;
+		}
+		.open-calcres .button:after{
+			display: none;
+		}
+		.investors-calc__result h4{
+			font-size: 20px;			
+		}
+		p.investors-calc__subtitle{
+			line-height: 150%;
+		}
+		.land-related .investors-calc__utilities-description {
+		    margin-top: 10px;
+		    text-align: left;
+		}
+		.investors-calc__fields-subtitle{
+			line-height: 150%;
+		}
+		.investors-calc{
+			margin-top: 30px;
+		}
 	}
 }
 

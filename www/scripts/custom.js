@@ -22,7 +22,7 @@ window.onload = function(){
 		closer: '.banner__closer',
 		banner: '.banner'
 	});
-
+	sezApp.investCalcFields();
 	Scrollbar.initAll();
 	//sezApp.loadResident();
 	
@@ -50,12 +50,36 @@ sezApp = {
 		});
 	},
 	investCalcOptions: {},
+	investCalcFields: function(){
+		let calc = document.querySelector('#investors-calc');
+		if(calc){
+			let checks = calc.querySelectorAll('[type=checkbox]');
+			checks.forEach(function(chb){
+				chb.onclick = function(){
+					if(this.checked){					
+						this.closest('label').querySelector('.investors-calc__fields-field').disabled = false;
+					}else{
+						this.closest('label').querySelector('.investors-calc__fields-field').disabled = true;
+						this.closest('label').querySelector('.investors-calc__fields-field').value = 0;
+					}
+					
+				}
+			});
+		}
+	},
+	showLandRelated: function(chb){
+		let lr = document.querySelectorAll('.land-related');
+		lr.forEach(function(item){
+			item.classList.toggle('open');
+		});
+	},
 	investCalc: function(){
 		let options = this.investCalcOptions;
 		if(Object.keys(options).length < 1){
 			console.log('Не установлены опции калькулятора');
 			return;
-		}
+		}	
+
 		//request
 		let offices = Math.round(parseFloat(document.querySelector("#offices").value.replace(',', '.'))) > 0 ? Math.round(parseFloat(document.querySelector("#offices").value.replace(',', '.'))) : 0, 
 			production = Math.round(parseFloat(document.querySelector("#production").value.replace(',', '.'))) > 0 ? Math.round(parseFloat(document.querySelector("#production").value.replace(',', '.'))) : 0, 
@@ -65,28 +89,67 @@ sezApp = {
 			science = Math.round(parseInt(document.querySelector("#science").value)) > 0 ? Math.round(parseInt(document.querySelector("#science").value)) : 0;
 
 		let fullArea = parseInt(light) + parseInt(administrative) + parseInt(science);
-		if(fullArea > 0 && (land * 100 * 40) > fullArea){
-			document.querySelector('.investors-calc__error').innerHTML = 'Площадь построек должна занимать более 40% площади земельного участка';
+		if(offices + production + land == 0){
+			document.querySelector('.investors-calc__error').innerHTML = 'Введите данные для расчёта';
+			document.querySelector(".investors-calc__result").classList.remove('open');
+			document.querySelector('.open-calcres').style.display = 'none';
+			return;
+		}else if(fullArea > 0 && land <= 0 && !document.querySelector("#land").disabled){
+			document.querySelector('.investors-calc__error').innerHTML = 'Введите общую площадь земельного участка';
+			return;
+		}else if(fullArea > 0 && (land * 100 * 40) > fullArea){
+			document.querySelector('.investors-calc__error').innerHTML = 'Площадь построек должна занимать не менее 40% площади земельного участка';
 			return;
 		}else{
 			document.querySelector('.investors-calc__error').innerHTML = '';
 		}
 
-		document.querySelector("#full_area").value = fullArea;
+		//document.querySelector("#full_area").value = fullArea;
 
 		//response
-		let office_cost_rent = offices*options.rate1,
-			production_cost_rent = production*options.rate2,
-			land_cost_rent = land*options.rate3,
-			land_cost_buy = land*options.rate4,
-			min_invest = light*options.t1 + administrative*options.t2 + science*options.t3;
+		let office_cost_rent = Math.round(((offices*options.rate1) / 1000000)*100)/100,
+			production_cost_rent = Math.round(((production*options.rate2) / 1000000)*100)/100,
+			land_cost_rent = Math.round(((land*options.rate3) / 1000000)*100)/100,
+			land_cost_buy = Math.round(((land*options.rate4) / 1000000)*100)/100,
+			min_invest = (light*options.t1 + administrative*options.t2 + science*options.t3) / 1000000;
+
+		//если отключен чекбокс ЗУ, то обнуляем расчёты по застройке
+		if(document.querySelector("#land").disabled){
+			min_invest = 0;
+		}
 
 		document.querySelector("#office_cost_rent").innerText = office_cost_rent;
 		document.querySelector("#production_cost_rent").innerText = production_cost_rent;
 		document.querySelector("#land_cost_rent").innerText = land_cost_rent;
 		document.querySelector("#land_cost_buy").innerText = land_cost_buy;
 		document.querySelector("#min_invest").innerText = min_invest;
-		//document.querySelector(".investors-calc__result").style.maxHeight = "1000px";
+		document.querySelector(".investors-calc__result").classList.add('open');
+
+		if(office_cost_rent > 0){
+			document.querySelector("#office_cost_rent").closest('.investors-calc__result-item').classList.remove('_hidden');
+		}else{
+			document.querySelector("#office_cost_rent").closest('.investors-calc__result-item').classList.add('_hidden');
+		}
+		if(production_cost_rent > 0){
+			document.querySelector("#production_cost_rent").closest('.investors-calc__result-item').classList.remove('_hidden');
+		}else{
+			document.querySelector("#production_cost_rent").closest('.investors-calc__result-item').classList.add('_hidden');
+		}
+		if(land_cost_rent > 0){
+			document.querySelector("#land_cost_rent").closest('.investors-calc__result-item').classList.remove('_hidden');
+		}else{
+			document.querySelector("#land_cost_rent").closest('.investors-calc__result-item').classList.add('_hidden');
+		}
+		if(land_cost_buy > 0){
+			document.querySelector("#land_cost_buy").closest('.investors-calc__result-item').classList.remove('_hidden');
+		}else{
+			document.querySelector("#land_cost_buy").closest('.investors-calc__result-item').classList.add('_hidden');
+		}
+		if(min_invest > 0){
+			document.querySelector("#min_invest").closest('.investors-calc__result-item').classList.remove('_hidden');
+		}else{
+			document.querySelector("#min_invest").closest('.investors-calc__result-item').classList.add('_hidden');
+		}
 
 		let requestString = "offices="+offices+
 			"&production="+production+
@@ -107,10 +170,12 @@ sezApp = {
 			function(data, params){}
 		);
 		document.querySelector('#calcdata').value = requestString;
+		document.querySelector('.open-calcres').style.display = 'block';
 
-		let event = new Event("click");
-		let trigger = document.querySelector('.open-calcres');
-  		trigger.dispatchEvent(event);
+		//how to trigger event
+		//let event = new Event("click");
+		//let trigger = document.querySelector('.open-calcres');
+  		//trigger.dispatchEvent(event);
 	},
 	sendCalcForm: function(form){
 		let calcdata = document.querySelector('#calcdata').value;
@@ -143,9 +208,9 @@ sezApp = {
 	    value = value.toString().split('e');
 
 	    //round to 0.5
-	    let result = 0;
-	    if(value[0][value.length] <= 5 && value[0][value.length] > 0){
-	    	value[0] = value[0].substring(0, value[0].length-1) + '5';	    	
+	    let result = 0;	    
+	    if(value[0][value[0].length - 1] <= 5 && value[0][value[0].length - 1] > 0){
+	    	value[0] = value[0].substring(0, value[0].length-1) + '5';	   	
 	    	result = +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
 	    }else{
 	    	result = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp)));
