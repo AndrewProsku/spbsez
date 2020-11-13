@@ -742,6 +742,9 @@ ymaps.ymaps-2-1-77-balloon{
 	.faq-group__item-content {
 	    padding-left: 64px;
 	}
+	.faq-group__title h3{
+		line-height: 120%;
+	}
 }
 .banner{
 	width: 1015px;
