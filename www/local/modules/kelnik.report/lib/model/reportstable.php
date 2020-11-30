@@ -19,6 +19,12 @@ use Kelnik\Helpers\Database\DataManager;
 use Kelnik\Report\Events;
 use Kelnik\UserData\Profile\Profile;
 
+use Bitrix\Main\Loader;
+use Bitrix\Highloadblock as HL; 
+use Bitrix\Main\Entity;
+
+Loader::includeModule('highloadblock'); 
+
 Loc::loadMessages(__FILE__);
 
 class ReportsTable extends DataManager
@@ -253,26 +259,94 @@ class ReportsTable extends DataManager
 
         $nextYear = $year + 1;
 
+        //settings from HLIB for report periods
+        $hlbl = 2;
+        $hlblock = HL\HighloadBlockTable::getById($hlbl)->fetch();
+        $entity = HL\HighloadBlockTable::compileEntity($hlblock); 
+        $entity_data_class = $entity->getDataClass(); 
+        $rsData = $entity_data_class::getList(array(
+           'select' => array('*'),
+           'order' => array('ID' => 'ASC'),
+           'filter' => array()
+        ));
+        $arPeriods = array();
+        while ($arData = $rsData->Fetch()) {
+           $arPeriods[$arData['UF_CODE']] = [
+                'START' => $arData['UF_DATE_START'],
+                'END' => $arData['UF_DATE_END']
+           ];
+        }
+
+        if (!empty($arPeriods['FIRST_QUARTER']['START']) && !empty($arPeriods['FIRST_QUARTER']['END'])) {
+            $arStart = explode('.', $arPeriods['FIRST_QUARTER']['START']);
+            $arEnd = explode('.', $arPeriods['FIRST_QUARTER']['END']);
+            $firstQuarterStart = mktime(0, 0, 0, $arStart[1], $arStart[0], $year);
+            $firstQuarterEnd = mktime(0, 0, 0, $arEnd[1], $arEnd[0], $year);
+        } else {
+            $firstQuarterStart = mktime(0, 0, 0, 4, 1, $year);
+            $firstQuarterEnd = mktime(23, 59, 59, 4, 30, $year);
+        }
+
+        if (!empty($arPeriods['SECOND_QUARTER']['START']) && !empty($arPeriods['SECOND_QUARTER']['END'])) {
+            $arStart = explode('.', $arPeriods['SECOND_QUARTER']['START']);
+            $arEnd = explode('.', $arPeriods['SECOND_QUARTER']['END']);
+            $secondQuarterStart = mktime(0, 0, 0, $arStart[1], $arStart[0], $year);
+            $secondQuarterEnd = mktime(0, 0, 0, $arEnd[1], $arEnd[0], $year);
+        } else {
+            $secondQuarterStart = mktime(0, 0, 0, 8, 1, $year);
+            $secondQuarterEnd = mktime(23, 59, 59, 9, 30, $year);
+        }
+
+        if (!empty($arPeriods['THIRD_QUARTER']['START']) && !empty($arPeriods['THIRD_QUARTER']['END'])) {
+            $arStart = explode('.', $arPeriods['THIRD_QUARTER']['START']);
+            $arEnd = explode('.', $arPeriods['THIRD_QUARTER']['END']);
+            $thirdQuarterStart = mktime(0, 0, 0, $arStart[1], $arStart[0], $year);
+            $thirdQuarterEnd = mktime(0, 0, 0, $arEnd[1], $arEnd[0], $year);
+        } else {
+            $thirdQuarterStart = mktime(0, 0, 0, 10, 1, $year);
+            $thirdQuarterEnd = mktime(23, 59, 59, 11, 30, $year);
+        }
+
+        if (!empty($arPeriods['PRE_ANNUAL']['START']) && !empty($arPeriods['PRE_ANNUAL']['END'])) {
+            $arStart = explode('.', $arPeriods['PRE_ANNUAL']['START']);
+            $arEnd = explode('.', $arPeriods['PRE_ANNUAL']['END']);            
+            $preAnnualStart = mktime(0, 0, 0, $arStart[1], $arStart[0], $nextYear);
+            $preAnnualEnd = mktime(0, 0, 0, $arEnd[1], $arEnd[0], $nextYear);
+        } else {
+            $preAnnualStart = mktime(0, 0, 0, 1, 8, $nextYear);
+            $preAnnualEnd = mktime(23, 59, 59, 1, 31, $nextYear);
+        }
+
+        if (!empty($arPeriods['ANNUAL']['START']) && !empty($arPeriods['ANNUAL']['END'])) {
+            $arStart = explode('.', $arPeriods['ANNUAL']['START']);
+            $arEnd = explode('.', $arPeriods['ANNUAL']['END']);
+            $annualStart = mktime(0, 0, 0, $arStart[1], $arStart[0], $nextYear);
+            $annualEnd = mktime(0, 0, 0, $arEnd[1], $arEnd[0], $nextYear);
+        } else {
+            $annualStart = mktime(0, 0, 0, 4, 1, $nextYear);
+            $annualEnd = mktime(23, 59, 59, 4, 30, $nextYear);
+        }
+
         return [
             self::TYPE_QUARTER_1 => [
-                'start' => mktime(0, 0, 0, 4, 1, $year),
-                'end' => mktime(23, 59, 59, 4, 30, $year)
+                'start' => $firstQuarterStart,
+                'end' => $firstQuarterEnd
             ],
             self::TYPE_QUARTER_2 => [
-                'start' => mktime(0, 0, 0, 8, 1, $year),
-                'end' => mktime(23, 59, 59, 9, 30, $year)
+                'start' => $secondQuarterStart,
+                'end' => $secondQuarterEnd
             ],
             self::TYPE_QUARTER_3 => [
-                'start' => mktime(0, 0, 0, 10, 1, $year),
-                'end' => mktime(23, 59, 59, 11, 30, $year)
+                'start' => $thirdQuarterStart,
+                'end' => $thirdQuarterEnd
             ],
             self::TYPE_PRELIMINARY_ANNUAL => [
-                'start' => mktime(0, 0, 0, 1, 8, $nextYear),
-                'end' => mktime(23, 59, 59, 1, 31, $nextYear)
+                'start' => $preAnnualStart,
+                'end' => $preAnnualEnd
             ],
             self::TYPE_ANNUAL => [
-                'start' => mktime(0, 0, 0, 4, 1, $nextYear),
-                'end' => mktime(23, 59, 59, 4, 30, $nextYear)
+                'start' => $annualStart,
+                'end' => $annualEnd
             ]
         ];
     }
