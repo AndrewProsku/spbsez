@@ -33,6 +33,11 @@ class Export
     protected $companies = [];
 
     /**
+     * @var array
+     */
+    protected $statuses = [];
+
+    /**
      * @var \PhpOffice\PhpSpreadsheet\Spreadsheet
      */
     protected $spreadsheet;
@@ -42,15 +47,20 @@ class Export
      */
     protected $data = [];
 
-    public function __construct(int $year, int $type, array $companies = [])
+    public function __construct(int $year, int $type, array $companies = [], array $statuses = [])
     {
         $this->year = $year;
         $this->type = $type;
         $this->companies = $companies;
+        $this->statuses = $statuses;
 
         $this->companies = array_map(function ($el) {
             return (int)$el;
         }, $this->companies);
+
+        $this->statuses = array_map(function ($el) {
+            return (int)$el;
+        }, $this->statuses);
 
         if (!$this->companies || !$this->year || !array_key_exists($this->type, ReportsTable::getTypes())) {
             throw new \Exception(Loc::getMessage('KELNIK_REPORT_EXPORT_INVALID_PARAMS'));
@@ -118,9 +128,20 @@ class Export
         $this->data = [];
 
         try {
+        	$filter = [
+                '=COMPANY_ID' => $this->companies,
+                '=TYPE' => $this->type,
+                '=YEAR' => $this->year,
+                '=FIELDS.FORM_NUM' => $formNum
+            ];
+
+            if (count($this->statuses) > 0) {
+            	$filter['=STATUS_ID'] = $this->statuses;
+            }
+
             $res = ReportsTable::getAssoc([
                 'select' => [
-                    'COMPANY_ID', 'YEAR', 'TYPE', 'NAME', 'NAME_SEZ',
+                    'COMPANY_ID', 'YEAR', 'TYPE', 'NAME', 'NAME_SEZ', 'STATUS_ID',
                     'REPORT_FIELD_' => 'FIELDS',
                     'REPORT_FIELD_GROUP_' => 'FIELDS.GROUP'
                 ],
@@ -131,12 +152,7 @@ class Export
                         'COMPANY_ID'
                     ))
                 ],
-                'filter' => [
-                    '=COMPANY_ID' => $this->companies,
-                    '=TYPE' => $this->type,
-                    '=YEAR' => $this->year,
-                    '=FIELDS.FORM_NUM' => $formNum
-                ],
+                'filter' => $filter,
                 'order' => [
                     'COMPANY_ORIG_NAME' => 'ASC'
                 ]

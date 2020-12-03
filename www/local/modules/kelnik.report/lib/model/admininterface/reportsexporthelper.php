@@ -31,11 +31,22 @@ class ReportsExportHelper extends AdminBaseHelper
      */
     protected $periods = [];
 
+    /**
+     * @var array
+     */
+    protected $statuses = [];
+
     public function __construct(array $fields, array $tabs = [], $module = "")
     {
         parent::__construct($fields, $tabs, $module);
 
         $this->companies = Profile::getAdminCompanyList();
+
+        $this->statuses = [
+            StatusTable::DONE => Loc::getMessage('KELNIK_REPORT_STATUS_DONE'),
+            StatusTable::CHECKING => Loc::getMessage('KELNIK_REPORT_STATUS_CHECKING'),            
+            StatusTable::DECLINED => Loc::getMessage('KELNIK_REPORT_STATUS_DECLINED')    
+        ];
 
         try {
             $tmp = ReportsTable::getAssoc([
@@ -44,7 +55,7 @@ class ReportsExportHelper extends AdminBaseHelper
                 ],
                 'filter' => [
                     '=COMPANY_ID' => array_keys($this->companies),
-                    '=STATUS_ID' => StatusTable::DONE
+                    '=STATUS_ID' => array_keys($this->statuses)
                 ],
                 'order' => [
                     'YEAR' => 'DESC',
@@ -68,7 +79,7 @@ class ReportsExportHelper extends AdminBaseHelper
                 'YEAR' => $v['YEAR'],
                 'NAME' => ArrayHelper::getValue(ReportsTable::getTypes(), $v['TYPE'], '-')
             ];
-        }
+        }        
     }
 
     public function show()
@@ -93,7 +104,8 @@ class ReportsExportHelper extends AdminBaseHelper
                 $export = new Export(
                     $year,
                     $type,
-                    (array) $request->getPost('residents')
+                    (array) $request->getPost('residents'),
+                    (array) $request->getPost('statuses')
                 );
                 $export->getFile();
             } catch (\Exception $e) {
@@ -181,6 +193,14 @@ class ReportsExportHelper extends AdminBaseHelper
                                                 <option value="<?= $period['ID']; ?>"><?= $period['NAME']; ?></option>
                                             <?php endforeach; ?>
                                         </optgroup>
+                                    </select>
+                                </div>
+                                <div class="export-block">
+                                    <label for="period"><?= Loc::getMessage('KELNIK_REPORT_EXPORT_STATUS'); ?></label>
+                                    <select id="period" name="statuses[]" multiple>
+                                        <?php foreach ($this->statuses as $statusId => $statusName): ?>                                               
+                                            <option value="<?= $statusId; ?>"><?= $statusName; ?></option>
+                                        <?php endforeach; ?>                                       
                                     </select>
                                 </div>
                             </div>
