@@ -25,6 +25,33 @@ window.onload = function(){
 	sezApp.investCalcFields();
 	Scrollbar.initAll();
 	//sezApp.loadResident();
+
+	sezApp.reportCompareField({
+		fieldsPairs: [
+			['jobs-plan-all', 'jobs-plan-year'],
+			['jobs-actual-all', 'jobs-actual-year'],
+			['invests-plan-all', 'invests-plan-year'],
+			['capital-invests-plan-all', 'capital-invests-plan-year'],
+			['invests-all', 'invests-year'],
+			['capital-invests-all', 'capital-invests-year'],
+			['revenue-all', 'revenue-year'],
+			['revenue-year-extra', 'revenue-all-extra'],
+			['produce-all', 'produce-year'],
+			['taxes-all', 'taxes-year'],
+			['taxes-federal-all', 'taxes-federal-year'],
+			['taxes-regional-all', 'taxes-regional-year'],
+			['taxes-local-all', 'taxes-local-year'],
+			['taxes-offbudget-all', 'taxes-offbudget-year'],
+			['taxes-nds-all', 'taxes-nds-year'],
+			['taxes-breaks-all', 'taxes-breaks-year'],
+			['taxes-breaks-federal-all', 'taxes-breaks-federal-year'],
+			['taxes-breaks-local-all', 'taxes-breaks-local-year'],
+			['taxes-breaks-offbudget-all', 'taxes-breaks-offbudget-year'],
+			['custom-duties-all', 'custom-duties-year'],
+			['custom-duties-breaks-all', 'custom-duties-breaks-year'],
+			['export-volume-all', 'export-volume-year']
+		]		
+	});
 	
 };
 
@@ -405,6 +432,39 @@ sezApp = {
 		}else{
 			images[0].classList.add('visible-image');
 		}
+	},
+	reportCompareField: function(objectFields){
+		document.addEventListener("change", function(e){
+			objectFields.fieldsPairs.forEach(function(arFields){
+				if(arFields.indexOf(e.target.id) < 0) return;
+
+				let fieldGtVal = parseFloat(document.querySelector('#'+arFields[0]).value.replace(/\s+/g, ''));
+				let fieldLsVal = parseFloat(document.querySelector('#'+arFields[1]).value.replace(/\s+/g, ''));
+
+				if(fieldGtVal < fieldLsVal){
+					e.target.closest('.b-input-block').classList.add('error-field');
+					let popupError = document.createElement('div');
+					e.target.closest('.b-input-block').append(popupError);
+					popupError.classList.add('popup-error');
+					popupError.innerText = 'Проверьте данные, сумма с начала деятельности в качестве резидента должна быть больше или равна сумме с начала текущего года';
+					setTimeout(function(){
+						e.target.closest('.b-report-block').classList.remove('b-report-block_status_approved');
+					}, 500);
+				}else{
+					let inputBlocks = e.target.closest('.b-inputs-row').querySelectorAll('.b-input-block');
+					inputBlocks.forEach(function(inputBlock){
+						inputBlock.classList.remove('error-field');	
+					});									
+
+					let errorPopups = e.target.closest('.b-inputs-row').querySelectorAll('.popup-error');
+					if(errorPopups){
+						errorPopups.forEach(function(errorPopup){
+							errorPopup.remove();
+						});
+					}					
+				}
+			});
+		});
 	}
 }
 
