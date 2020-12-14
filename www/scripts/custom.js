@@ -447,9 +447,9 @@ sezApp = {
 					e.target.closest('.b-input-block').append(popupError);
 					popupError.classList.add('popup-error');
 					popupError.innerText = 'Проверьте данные, сумма с начала деятельности в качестве резидента должна быть больше или равна сумме с начала текущего года';
-					setTimeout(function(){
-						e.target.closest('.b-report-block').classList.remove('b-report-block_status_approved');
-					}, 500);
+					
+					e.target.closest('.b-report-block').classList.add('b-report-block_status_approved__hidden');
+					
 				}else{
 					let inputBlocks = e.target.closest('.b-inputs-row').querySelectorAll('.b-input-block');
 					inputBlocks.forEach(function(inputBlock){
@@ -461,7 +461,13 @@ sezApp = {
 						errorPopups.forEach(function(errorPopup){
 							errorPopup.remove();
 						});
-					}					
+					}
+
+					let errorPopupsAll = e.target.closest('.b-report-block__body').querySelectorAll('.popup-error');
+					console.log(errorPopupsAll.length);
+					if(errorPopupsAll.length == 0){
+						e.target.closest('.b-report-block').classList.remove('b-report-block_status_approved__hidden');
+					}										
 				}
 			});
 		});
