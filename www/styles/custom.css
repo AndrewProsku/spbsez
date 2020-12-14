@@ -414,9 +414,6 @@ ymaps.ymaps-2-1-77-balloon{
    	padding-right: 11.11111%;
    	line-height: 220%
 }
-.faq-group__items{
-	margin-top: 60px;
-}
 .faq-list{
 
 }
@@ -555,9 +552,10 @@ ymaps.ymaps-2-1-77-balloon{
     top: 43%;
 }
 .faq-group__items{
-	max-height: 3000px;
+	max-height: 10000px;
 	transition: .3s;
 	overflow: hidden;
+	margin-top: 60px;
 }
 .faq-group__items_close{
 	max-height: 0;	
@@ -1651,4 +1649,7 @@ label.land-related.open, .land-related.open{
     border: 1px solid #d6d6d6;
     padding: 8px 12px;
     border-radius: 5px;
+}
+.b-report-block_status_approved.b-report-block_status_approved__hidden .b-report-block__header:after{
+	visibility: hidden;
 }
