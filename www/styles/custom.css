@@ -293,7 +293,11 @@ ul.l-home__advantages-text-block{
 	font-size: 20px;
     line-height: 170%;
 }
-ymaps.ymaps-2-1-77-balloon__layout{
+ymaps[class*="balloon_layout_normal"]{
+	padding: 0;
+	box-shadow: none; 
+}
+ymaps[class$="balloon__layout"]{
 	position: relative;
     display: inline-table;
     width: 100%;
@@ -308,7 +312,7 @@ ymaps.ymaps-2-1-77-balloon__layout{
     box-shadow: none;
     border: none;
 }
-ymaps.ymaps-2-1-77-balloon__content{
+ymaps[class$="balloon__content"]{
 	font-family: Brutal-bold,sans-serif;
 	background: #30409a;
     color: #fff;
@@ -316,10 +320,10 @@ ymaps.ymaps-2-1-77-balloon__content{
 ymaps .map-cluster-list a{
 	color: #fff;
 }
-.ymaps-2-1-77-balloon__close-button{
+ymaps[class$="balloon__close-button"]{
 	filter: invert(1);
 }
-ymaps.ymaps-2-1-77-balloon__tail:after{
+ymaps[class$="balloon__tail"]:after{
 	background-color: #30409a;
 }
 .b-infrastructure-place{	
@@ -328,10 +332,7 @@ ymaps.ymaps-2-1-77-balloon__tail:after{
     padding: 40px;
     border-radius: 10px;
 }
-ymaps.ymaps-2-1-77-balloon{
-	padding: 0;
-	box-shadow: none; 
-}
+
 @media only screen and (min-width: 1024px){
 	.b-infrastructure-place{
 		flex-basis: 30%;
@@ -1223,7 +1224,7 @@ ymaps.ymaps-2-1-77-balloon{
 	    top: 340px;
 	}
 }
-ymaps.ymaps-2-1-77-balloon__close+.ymaps-2-1-77-balloon__content{
+ymaps[class$="balloon__close"]+[class$="balloon__content"]{
 	margin-right: 0;
 }
 .investors-calc{
@@ -1652,4 +1653,8 @@ label.land-related.open, .land-related.open{
 }
 .b-report-block_status_approved.b-report-block_status_approved__hidden .b-report-block__header:after{
 	visibility: hidden;
+}
+.b-report-block_status_approved.b-report-block_status_approved__hidden {
+    border-color: transparent;
+    background-color: #efeff4;
 }

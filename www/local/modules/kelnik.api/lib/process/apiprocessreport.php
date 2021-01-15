@@ -170,6 +170,60 @@ class ApiProcessReport extends ApiProcessAbstract
             'VALUE' => $val
         ];
 
+        //для указанных полей годовая цифра должна быть не больше общей
+        $fieldsPairs = [
+            ['jobs-plan-all', 'jobs-plan-year'],
+            ['jobs-actual-all', 'jobs-actual-year'],
+            ['invests-plan-all', 'invests-plan-year'],
+            ['capital-invests-plan-all', 'capital-invests-plan-year'],
+            ['invests-all', 'invests-year'],
+            ['capital-invests-all', 'capital-invests-year'],
+            ['revenue-all', 'revenue-year'],
+            ['revenue-year-extra', 'revenue-all-extra'],
+            ['produce-all', 'produce-year'],
+            ['taxes-all', 'taxes-year'],
+            ['taxes-federal-all', 'taxes-federal-year'],
+            ['taxes-regional-all', 'taxes-regional-year'],
+            ['taxes-local-all', 'taxes-local-year'],
+            ['taxes-offbudget-all', 'taxes-offbudget-year'],
+            ['taxes-nds-all', 'taxes-nds-year'],
+            ['taxes-breaks-all', 'taxes-breaks-year'],
+            ['taxes-breaks-federal-all', 'taxes-breaks-federal-year'],
+            ['taxes-breaks-local-all', 'taxes-breaks-local-year'],
+            ['taxes-breaks-offbudget-all', 'taxes-breaks-offbudget-year'],
+            ['custom-duties-all', 'custom-duties-year'],
+            ['custom-duties-breaks-all', 'custom-duties-breaks-year'],
+            ['export-volume-all', 'export-volume-year']
+        ];
+        foreach ($fieldsPairs as $pairKey => $fieldsPair) {
+            if (array_search($data['NAME'], $fieldsPair)) {
+                $flippedPair = array_flip($fieldsPair);
+                $dataKey = $flippedPair[$data['NAME']];
+                unset($flippedPair[$data['NAME']]);
+                $arFieldCompareName = array_keys($flippedPair);
+                $fieldCompareName = $arFieldCompareName[0];
+
+                $reportField = ReportFieldsTable::getRow([
+                    'select' => ['NAME', 'VALUE'],
+                    'filter' => [
+                        '=REPORT_ID' => $this->id,
+                        '=NAME'      => $fieldCompareName
+                    ]
+                ]);
+
+                if ($dataKey == 0 && $data['VALUE'] < $reportField['VALUE'] && $data['VALUE'] > 0) {
+                    //$this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+                    return false;
+                }
+
+                if ($dataKey == 1 && $data['VALUE'] > $reportField['VALUE']) {
+                    //$this->errors[] = Loc::getMessage('KELNIK_API_INTERNAL_ERROR');
+                    return false;
+                }
+            }
+        }
+        //END
+        
         if (isset($request['clearComment'])) {
             $data['COMMENT'] = null;
         }

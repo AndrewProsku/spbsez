@@ -170,8 +170,8 @@ class Export
 
             if (empty($this->data[$v['COMPANY_ID']])) {
                 $this->data[$v['COMPANY_ID']] = [
-                    'NAME' => $v['NAME'],
-                    'NAME_SEZ' => $v['NAME_SEZ'],
+                    'NAME' => htmlspecialchars_decode($v['NAME']),
+                    'NAME_SEZ' => htmlspecialchars_decode($v['NAME_SEZ']),
                     'GROUPS' => [],
                     'FIELDS' => []
                 ];
@@ -209,10 +209,12 @@ class Export
             'Q' => 'capital-invests-year',
             'R' => 'revenue-all',
             'S' => 'revenue-year',
-            'T' => 'produce-all',
-            'U' => 'produce-year',
-            'V' => 'salary',
-            'W' => 'salary-new',
+            'T' => 'revenue-year-extra',
+            'U' => 'revenue-all-extra',
+            'V' => 'produce-all',
+            'W' => 'produce-year',
+            'X' => 'salary',
+           // 'Y' => 'salary-new',
 
         ];
 

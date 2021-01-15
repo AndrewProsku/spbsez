@@ -51,8 +51,7 @@ window.onload = function(){
 			['custom-duties-breaks-all', 'custom-duties-breaks-year'],
 			['export-volume-all', 'export-volume-year']
 		]		
-	});
-	
+	});	
 };
 
 sezApp = {
