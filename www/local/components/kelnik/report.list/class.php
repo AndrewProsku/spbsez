@@ -177,14 +177,11 @@ class ReportList extends Bbc\Basis
             }
         }
 
-        //массив отчётов из БД за текущий год для проверки статуса
+        //массив отчётов из БД по годам для проверки статуса
         $arStatuses = [];
-        if(count($reports) > 0){
-            foreach($reports as $report){
-                if($report['YEAR'] < $curYear){
-                    continue;
-                }
-                $arStatuses[$report['TYPE']] = $report['STATUS_ID'];
+        if (count($reports) > 0) {
+            foreach ($reports as $report) {               
+                $arStatuses[$report['YEAR']][$report['TYPE']] = $report['STATUS_ID'];                
             }
         }
 
@@ -198,16 +195,16 @@ class ReportList extends Bbc\Basis
                     continue;
                 }
 
-                //если есть созданный отчёт за текущий период, то виртуальный отчёт не создаётся
-                if(
-                    isset($arStatuses[$type]) && 
+                //если есть созданный отчёт за каккой-либо период, то виртуальный отчёт не создаётся
+                if (
+                    isset($arStatuses[$year][$type]) && 
                     (
-                    	$arStatuses[$type] == StatusTable::DONE || 
-                    	$arStatuses[$type] == StatusTable::CHECKING || 
-                    	$arStatuses[$type] == StatusTable::DECLINED ||
-                    	$arStatuses[$type] == StatusTable::NEW
+                    	$arStatuses[$year][$type] == StatusTable::DONE || 
+                    	$arStatuses[$year][$type] == StatusTable::CHECKING || 
+                    	$arStatuses[$year][$type] == StatusTable::DECLINED ||
+                    	$arStatuses[$year][$type] == StatusTable::NEW
                     )
-                ){
+                ) {
                     continue;
                 }
 
@@ -230,7 +227,7 @@ class ReportList extends Bbc\Basis
                     ->setStatus($defStatus)
                     ->getArray();
             }
-        }               
+        }      
 
         return $reports;
     }
