@@ -792,6 +792,31 @@ class ReportFieldsTable extends DataManager
         return false;
     }
 
+    public static function getFormBlockTitle($fieldName, $formNum)
+    {
+        $blocks = ArrayHelper::getValue(self::getFormConfig(), $formNum . '.blocks', []);
+
+        foreach ($blocks as $block) {
+
+            $fields = !empty($block['multiple']['fields'])
+                        ? $block['multiple']['fields']
+                        : ArrayHelper::getValue($block, 'fields', []);
+
+            if (!$fields) {
+                continue;
+            }
+
+            foreach ($fields as $field) {
+                if ($field['id'] === $fieldName) {
+                    return ArrayHelper::getValue($block, 'title', 'text');
+                }
+            }
+
+        }
+
+        return false;
+    }
+
     public static function getFieldTypes()
     {
         return [

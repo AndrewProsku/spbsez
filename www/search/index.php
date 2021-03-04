@@ -22,9 +22,16 @@ $search->doSearch();
                 <?foreach ($search->json['data'] as $category):?>
                     <?foreach (current($category) as $item):?>
                         <div class="b-message-block__item">
-                            <div class="b-message-block__item-title">
-                                <a href="<?=$item['LINK']?>" class="b-link-line"><?=$item['NAME']?></a>
-                            </div>
+                            <?if (isset($item['ARTICLE_NAME'])) {?>
+                                <div class="b-message-block__item-title">                                
+                                    <a href="<?=$item['LINK']?>" class="b-link-line"><?=$item['ARTICLE_NAME']?></a>
+                                </div>
+                                <span class="b-message-block__item-searched"><?=$item['NAME']?></span>
+                            <?} else {?>
+                                <div class="b-message-block__item-title">                                
+                                    <a href="<?=$item['LINK']?>" class="b-link-line"><?=$item['NAME']?></a>
+                                </div>
+                            <?}?>
                           <!--  <div class="b-message-block__item-desc">
                                 <span class="b-message-block__item-time">11:30</span>
                                 <time datetime="2017-12-26" class="b-message-block__item-date">26.12.2017</time>

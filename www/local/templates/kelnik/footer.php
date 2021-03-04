@@ -47,6 +47,7 @@
         </div>
         <?php include 'inc_message_form.php'; ?>
         <?php include 'inc_calc_form.php'; ?>
+        <?php include 'inc_chat.php'; ?>
     </footer>
     <div class="b-mobile-menu j-mobile-menu">
         <? $APPLICATION->IncludeComponent(

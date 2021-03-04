@@ -15,7 +15,7 @@
     			<?php foreach ($arResult['QUESTIONS_BY_TYPES'][$k] as $n => $question): ?>
 	    			<div class="faq-group__item">
                         <!--<div class="faq-group__item-open"></div>-->
-	    				<div class="faq-group__item-title"><span><?=$n+1?></span><?=$question['NAME']?></div>
+	    				<div class="faq-group__item-title"><span class="faq-group__item-title-num"><?=$n+1?></span><?=$question['NAME']?></div>
 	    				<div class="faq-group__item-content faq-group__item-content_close">
                             <p class="_marked"></p>
                             <?=$question['TEXT']?>                                

@@ -1,0 +1,12 @@
+<?php
+
+$MESS['KELNIK_MESSAGES_CHAT_ID'] = 'ID';
+$MESS['KELNIK_MESSAGES_CHAT_USER_ID'] = 'Резидент';
+$MESS['KELNIK_MESSAGES_CHAT_REPORT_ID'] = 'Отчёт';
+$MESS['KELNIK_MESSAGES_CHAT_PARENT_ID'] = 'Сообщение для ответа';
+$MESS['KELNIK_MESSAGES_CHAT_FIELD_ID'] = 'Поле отчёта';
+$MESS['KELNIK_MESSAGES_CHAT_DATE_CREATED'] = 'Дата создания';
+$MESS['KELNIK_MESSAGES_CHAT_DATE_MODIFIED'] = 'Дата изменения';
+$MESS['KELNIK_MESSAGES_CHAT_IS_ADMIN'] = 'Отправлено администратором';
+$MESS['KELNIK_MESSAGES_CHAT_IS_NEW'] = 'Новое';
+$MESS['KELNIK_MESSAGES_CHAT_TEXT'] = 'Сообщение';

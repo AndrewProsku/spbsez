@@ -47,3 +47,4 @@ $MESS['KELNIK_TMPL_SITES_DESCR_NOIDORF'] = 'В окружении развит�
 $MESS['KELNIK_TMPL_SITES_PRIM'] = '<strong>Приморский район</strong> <span>север Петербурга</span>';
 
 $MESS['KELNIK_TMPL_CALC_TITLE'] = 'Отправить результат расчёта на email';
+$MESS['KELNIK_TMPL_CHAT_TITLE'] = 'Чат с администратором';

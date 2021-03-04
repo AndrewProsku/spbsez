@@ -82,3 +82,9 @@ class SezLang
         return isset($res['DIR']) ? $res['DIR'] : '/';
     }
 }
+
+function pre($array) {
+    echo '<pre>';
+    print_r($array);
+    echo '</pre>';
+}

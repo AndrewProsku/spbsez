@@ -31,6 +31,8 @@
 
     <h2 class="b-reports-subtitle"><?= $arResult['REPORT']['TYPE_NAME']; ?>, <?= $arResult['REPORT']['YEAR']; ?></h2>
 
+    <label class="b-reports-button j-message-button" data-href="#chat"  onclick="sezApp.loadChat(<?= $arResult['REPORT']['ID']; ?>)">Чат с администратором</label>
+
     <div class="b-inputs-row b-report-oez">
         <div class="b-input-block j-report-resident-name">
             <input id="resident-name" class="b-input-text" type="text" name="residentName" maxlength="" autocomplete="" value="" placeholder="">

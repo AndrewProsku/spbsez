@@ -89,3 +89,41 @@
     -webkit-font-smoothing: antialiased;
     padding: 0 13px 2px;
 }
+
+.b-input-group__message {
+    list-style: none;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 20px;
+}
+.b-input-group__message-date {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #8a8a8a;
+}
+.b-input-group__message-author {
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #383838;
+}
+.b-input-group__message-parent {
+    padding: 8px;
+    border: 1px solid #d7d7d7;
+    background: #e2ebed;
+    margin: 15px 0 15px 0px;
+}
+.b-input-group__header-id {
+    color: #6571ff;
+    text-decoration: underline;
+    display: inline-block;
+    padding-right: 10px;
+    cursor: pointer;
+}
+.b-input-group__message-text{
+    margin-top: 12px;
+}
+.b-input-group__messages-children{
+    margin-top: 20px;
+    margin-left: 15px;
+}

@@ -7,3 +7,4 @@ $MESS['KELNIK_REPORT_FORM_1_TOTAL_2'] = 'Всего (С начала текущ�
 $MESS['KELNIK_REPORT_FIELD_TYPE'] = 'Отчетный период';
 $MESS['KELNIK_REPORT_FIELD_STATUS'] = 'Статус';
 $MESS['KELNIK_REPORT_TITLE'] = 'Отчет';
+$MESS['KELNIK_TAB_CHAT'] = 'Чат с резидентом';

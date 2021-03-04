@@ -265,6 +265,7 @@ class Report extends EO_Reports
             ksort($list);
 
 
+
             Application::getConnection()->query($sql =
                 'UPDATE `' . ReportFieldsTable::getTableName() . '` ' .
                 'SET `COMMENT` = ELT(FIELD(`ID`, ' . implode(', ', array_keys($list)) . '), ' . implode(', ', array_values($list)) . ') ' .

@@ -11,6 +11,14 @@ window.onload = function(){
 		openerIco: '.faq-group-open'
 	});
 	sezApp.faqSlide({
+		opener: 'faq-group__item-title-num',
+		openerMod: 'faq-group__item-open_open',
+		openPosition: '.faq-group__item-content',
+		closePosition: 'faq-group__item-content_close',
+		parentblock: '.faq-group__item',
+		openerIco: '.faq-group-open'
+	});
+	sezApp.faqSlide({
 		opener: 'faq-group-open-trigger',
 		openerMod: 'faq-group-open_open',
 		openPosition: '.faq-group__items',
@@ -400,8 +408,7 @@ sezApp = {
 						function(data, params){							
 							let el = document.createElement('div');
 							el.innerHTML = data.response;
-							let residentData = el.querySelector('.resident-data').innerHTML;
-							console.log(residentData);
+							let residentData = el.querySelector('.resident-data').innerHTML;							
 							document.querySelector('.resident-data').innerHTML = residentData;
 						}
 					);				
@@ -470,6 +477,43 @@ sezApp = {
 				}
 			});
 		});
+	},
+	loadChat: function(reportId){
+		let _this = this;
+		BX.showWait();
+		_this.sendRequest(
+			'reportId='+reportId,
+			'/ajax/loadChat.php',
+			'POST',
+			function(data, params){
+				document.querySelector('#chat_messages').innerHTML = data.response;
+				BX.closeWait();
+			}
+		);
+	},
+
+	answerChat: function(reportId){
+		let _this = this;
+		let answer = document.querySelector('#chat_answer').value;
+
+		_this.sendRequest(
+			'reportId='+reportId+'&sendAnswer=Y&answer='+answer,
+			'/ajax/loadChat.php',
+			'POST',
+			function(data, params){
+				_this.loadChat(reportId);
+			}
+		);
+
+	},
+
+	copyChat: function(el, targetIns){
+		let _this = this;
+		let text = el.dataset.id;
+		let targetText = document.querySelector(targetIns).value;
+		let newTargetText = text + ' ' + targetText;
+
+		document.querySelector(targetIns).value = newTargetText;
 	}
 }
 

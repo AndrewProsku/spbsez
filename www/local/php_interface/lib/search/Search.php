@@ -28,7 +28,7 @@ class Search
     public $json;
 
     public function __construct($request)
-    {
+    {        
         $this->key = 0;
         $this->json = BitrixHelper::getDefaultJson();
         if (!$request) {
@@ -93,13 +93,14 @@ class Search
     private function searchNews()
     {
         global $DB;
-        $needle = '%' . $this->sqlHelper->forSql($this->needle) . '%';
+        $needle = '%' . $this->sqlHelper->forSql($this->needle) . '%';        
         $newsTable = NewsTable::getTableName();
         $categoryTable = CategoriesTable::getTableName();
         $queryString = "SELECT 
         `{$newsTable}`.`ID`,
         `{$newsTable}`.`NAME`,
         `{$categoryTable}`.`NAME` AS `CATEGORY_NAME`,
+        `{$categoryTable}`.`CODE` AS `CATEGORY_CODE`,
         `{$newsTable}`.`CODE` AS `CODE`,
         CASE
             WHEN `TEXT` LIKE '{$needle}' THEN `TEXT`
@@ -110,9 +111,12 @@ class Search
         WHERE `{$newsTable}`.`ACTIVE` = 'Y'
         AND ( `TEXT` LIKE '{$needle}' OR `TEXT_PREVIEW` LIKE '{$needle}') 
         AND `LANG` = '{$this->language}'
-        LIMIT 6";
+        ORDER BY `{$newsTable}`.`ID` DESC
+        ";
+        if (!$this->type) {
+            $queryString .= " LIMIT 6";
+        }
         $query = $DB->Query($queryString, true);
-
         $count = 0;
         while ($oneNews = $query->fetch()) {
             $count++;
@@ -120,7 +124,8 @@ class Search
                 'page' => 'news',
                 'section' => $oneNews['CATEGORY_NAME'],
                 'NAME' => $this->getPreviewText($oneNews['SEARCH_TEXT']),
-                'LINK' => $_SERVER['HTTP_ORIGIN'] . '/media/news/' . $oneNews['CODE'] . '/'
+                'LINK' => $_SERVER['HTTP_ORIGIN'] . '/media/'.$oneNews['CATEGORY_CODE'].'/' . $oneNews['CODE'] . '/',
+                'ARTICLE_NAME' => $oneNews['NAME']
             ];
             if ($count >= 5 && !$this->type) {
                 $this->json['data'][$this->key]['linkMore'] = '/search/?type=News&q=' . $this->needle;
@@ -133,18 +138,20 @@ class Search
     private function searchTextBlocks()
     {
         $needle = str_replace(' ', '|', $this->sqlHelper->forSql($this->needle));
-        $textBlocks = BlocksTable::getList(
-            [
-                'select' => ['ID', 'ACTIVE', 'CATEGORY', 'BODY'],
-                'filter' => [
-                    '=ACTIVE' => BlocksTable::YES,
-                    '?BODY' => $needle,
-                ],
-                'group' => ['ID'],
-                'order' => ['ID' => 'desc'],
-                'limit' => 6
-            ]
-        )->FetchAll();
+        $queryOptions = [
+            'select' => ['ID', 'ACTIVE', 'CATEGORY', 'BODY'],
+            'filter' => [
+                '=ACTIVE' => BlocksTable::YES,
+                '?BODY' => $needle,
+            ],
+            'group' => ['ID'],
+            'order' => ['ID' => 'desc']
+        ];
+        if (!$this->type) {
+            $queryOptions['limit'] = 6;
+        }
+
+        $textBlocks = BlocksTable::getList($queryOptions)->FetchAll();
 
         foreach ($textBlocks as $count => $textBlock) {
             $this->json['data'][$this->key]['items'] [] = [
@@ -644,20 +651,24 @@ class Search
     }
 
     private function getPreviewText(string $text): string
-    {
+    {      
+
         $text = str_replace('&nbsp;', ' ', strip_tags($text));
         $this->emptyQuery = false;
         $position = $this->checkPosition($text, $this->needle);
 
         $start = $position - 30;
-        $lenght = 80;
+        $lenght = 120;
 
         if ($start < 0) {
             $start = 0;
             $lenght = $lenght - $start;
         }
+        
+        $textStripped = substr($text, $start, $lenght);
+        $textStripped = mb_substr($textStripped, 1, -1);
+        $text = $textStripped;
 
-        $text = substr($text, $start, $lenght);
         $position = $this->checkPosition($text, $this->needle);
 
         $first = substr($text, 0, 1);
@@ -665,7 +676,7 @@ class Search
             $text = ltrim($text);
             $position = stripos($text, ' ');
             $text = substr($text, $position + 1);
-        }
+        }       
 
         $end = substr($text, -1);
         if (strtolower($end) !== strtoupper($end)) {
@@ -675,7 +686,7 @@ class Search
         }
 
         $first = substr($text, 0, 1);
-        if ($first !== strtoupper($first)) {
+        if ($first !== mb_strtoupper($first)) {
             $text = '...' . $text;
         }
 
