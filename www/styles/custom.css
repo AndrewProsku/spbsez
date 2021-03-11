@@ -1743,8 +1743,13 @@ label.land-related.open, .land-related.open{
     margin-top: 20px;
 }
 
-
 .b-slider-reviews__person-img {
-	height: 308px;
-    overflow: hidden;
+	background-position: top;
+	min-height: 300px;
+}
+
+@media only screen and (min-width: 768px){
+	.b-slider-reviews__person-img {
+	    min-height: 380px;
+	}
 }

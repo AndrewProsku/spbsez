@@ -12,10 +12,10 @@
                         <div class="b-slider-reviews__item">
                             <?php if($element['IMAGE_BG_ID_PATH']): ?><img src="<?= $element['IMAGE_BG_ID_PATH']; ?>" alt="" class="b-slider-reviews__item-image"><?php endif; ?>
                             <div class="b-slider-reviews__person">
-                                <div class="b-slider-reviews__person-img">
-                                    <?php if($element['IMAGE_ID_PATH']): ?>
+                                <div class="b-slider-reviews__person-img" style="background-image:url(<?= $element['IMAGE_ID_PATH']; ?>)">
+                                    <?php/* if($element['IMAGE_ID_PATH']): ?>
                                     <img src="<?= $element['IMAGE_ID_PATH']; ?>" alt="<?= htmlentities($element['NAME'], ENT_QUOTES, 'UTF-8'); ?>">
-                                    <?php endif; ?>
+                                    <?php endif; */?>
                                     <div class="b-slider-reviews__person-name-wrap">
                                         <div class="b-slider-reviews__person-name"><?= $element['NAME']; ?></div>
                                         <?php if(!empty($element['COMMENT'])): ?><p><?= $element['COMMENT']; ?></p><?php endif; ?>
