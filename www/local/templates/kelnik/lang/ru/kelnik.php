@@ -21,7 +21,7 @@ $MESS['KELNIK_TMPL_FORM_SEND'] = 'Отправить';
 $MESS['KELNIK_TMPL_PHONE_MASK'] = '+7 ___ ___-__-__';
 $MESS['KELNIK_TMPL_PROFILE_SIGN_OUT'] = 'Выйти из личного кабинета';
 
-$MESS['KELNIK_TMPL_SITES_LOCATION'] = 'Расположение зон';
+$MESS['KELNIK_TMPL_SITES_LOCATION'] = 'Расположение площадок ОЭЗ';
 $MESS['KELNIK_TMPL_SITES_NOVOORLOVSKAYA'] = 'Новоорловская';
 $MESS['KELNIK_TMPL_SITES_NOIDORF'] = 'Нойдорф';
 $MESS['KELNIK_TMPL_SITES_SEA_PORT'] = 'Порт';

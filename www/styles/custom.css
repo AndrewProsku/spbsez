@@ -1742,3 +1742,9 @@ label.land-related.open, .land-related.open{
 	margin-left: 40px;
     margin-top: 20px;
 }
+
+
+.b-slider-reviews__person-img {
+	height: 308px;
+    overflow: hidden;
+}
