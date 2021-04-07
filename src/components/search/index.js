@@ -175,7 +175,7 @@ class Search {
             } else {
                 window.open('/404', '_blank');
             }
-        }, 400);
+        }, 1500);
     }
 
     /**

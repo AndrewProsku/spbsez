@@ -52,7 +52,7 @@
                 <?php endif; ?>
                 <div class="b-infrastructure-place__title">              
 
-                    <?if($arItem['NAME'] !== 'Инновационный центр'){?>
+                    <?if ($arItem['NAME'] !== 'Инновационный центр' && $arItem['NAME'] !== 'Innovational center') { ?>
                         <h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?></h2>
                         
                         <? $name = "«".$arItem['NAME']."»"?>

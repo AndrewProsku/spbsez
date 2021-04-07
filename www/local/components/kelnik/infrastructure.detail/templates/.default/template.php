@@ -20,9 +20,9 @@
                 <?php foreach ($arResult['ELEMENTS'] as $arItem): ?>
                     <li class="b-page-submenu__item<?php if($arItem['ID'] == $arResult['ELEMENT']['ID']): ?> is-active<?php endif; ?>">
                         <a href="<?= $arItem['DETAIL_PAGE_URL']; ?>" class="b-page-submenu__link b-link-line">
-                            <?if($arItem['NAME'] == 'Инновационный центр'){?>
+                            <?if ($arItem['NAME'] == 'Инновационный центр' || $arItem['NAME'] == 'Innovational center') { ?>
                                 <?= $arItem['NAME']; ?>
-                            <?}else{?>
+                            <?} else {?>
                                 <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?> «<?= $arItem['NAME']; ?>»
                             <?}?>
                         </a>
@@ -33,9 +33,9 @@
     </div>
     <div class="b-area-main-screen__title">
         <h1>
-            <?if($arResult['ELEMENT']['NAME'] == 'Инновационный центр'){?>
+            <?if ($arResult['ELEMENT']['NAME'] == 'Инновационный центр' || $arResult['ELEMENT']['NAME'] == 'Innovational center') {?>
                 <?= $arResult['ELEMENT']['NAME']; ?>
-            <?}else{?>
+            <?} else {?>
                 <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?> «<?= $arResult['ELEMENT']['NAME']; ?>»
             <?}?>            
         </h1>

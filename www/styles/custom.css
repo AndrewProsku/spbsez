@@ -1753,3 +1753,7 @@ label.land-related.open, .land-related.open{
 	    min-height: 380px;
 	}
 }
+
+.b-footer__copyright-link{
+	line-height: inherit;
+}

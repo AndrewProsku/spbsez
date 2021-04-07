@@ -2,6 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Контакты");
 $APPLICATION->SetPageProperty('title', 'Контакты');
+
 $yMapJson = [
     "center" => [59.942099, 31.186182],
     "scrollwheel" => false,
