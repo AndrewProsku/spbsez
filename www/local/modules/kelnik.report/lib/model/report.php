@@ -358,6 +358,7 @@ class Report extends EO_Reports
 
         $res['LINK'] = $this->getLink();
         $res['TYPE_NAME'] = $this->getTypeName();
+        $res['NAME'] = htmlspecialchars_decode($res['NAME']);
 
         if ($this->getStatus()) {
             $res['STATUS_NAME'] = $this->getStatus()->getName();

@@ -116,7 +116,7 @@ class ApiProcessReport extends ApiProcessAbstract
 
     protected function processGet(array $request)
     {
-        $this->data['NAME'] = $this->report->getName();
+        $this->data['NAME'] = htmlspecialchars_decode($this->report->getName());
         $this->data['NAME_SEZ'] = $this->report->getNameSez();
         $this->data['forms'] = $this->report->getForms();
 

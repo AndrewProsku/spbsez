@@ -17,7 +17,7 @@ $fieldTitle = \Bitrix\Main\Localization\Loc::getMessage('KELNIK_REPORT_FIELD_' .
             ?>
             <div class="b-input-block">
                 <div class="row-header"><?= $fieldTitle; ?></div>
-                <div class="row-value"><?= mb_strlen($val) ? $val : '&nbsp;'; ?></div>
+                <div class="row-value"><?= mb_strlen($val) ? htmlspecialchars_decode($val) : '&nbsp;'; ?></div>
                 <?/*<div><input type="text" name="commentMain[<?= $field; ?>]" value="<?= $this->getComment($field); ?>" placeholder="Комментарий" size="40"></div>*/?>
             </div>
         <?php endforeach; ?>
