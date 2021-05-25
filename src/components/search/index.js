@@ -168,13 +168,13 @@ class Search {
         event.preventDefault();
 
         setTimeout(() => {
-            const link = this.resultWrap.querySelector('.j-look-more');
+           /* const link = this.resultWrap.querySelector('.j-look-more');
 
             if (link) {
                 window.open(link.href, '_blank');
             } else {
                 window.open('/404', '_blank');
-            }
+            }*/
         }, 1500);
     }
 
