@@ -1,3 +1,6 @@
+<?
+use Kelnik\Report\Model\StatusTable;
+?>
 <?if(!defined('B_PROLOG_INCLUDED')||B_PROLOG_INCLUDED!==true)die();?>
 <?php if(!empty($arResult['PREV_REQUIRED'])): ?>
     <div class="l-reports">
@@ -32,6 +35,9 @@
     <h2 class="b-reports-subtitle"><?= $arResult['REPORT']['TYPE_NAME']; ?>, <?= $arResult['REPORT']['YEAR']; ?></h2>
 
     <label class="b-reports-button j-message-button" data-href="#chat"  onclick="sezApp.loadChat(<?= $arResult['REPORT']['ID']; ?>)">Чат с администратором</label>
+    <?php if ($arResult['REPORT']['STATUS_ID'] == StatusTable::CHECKING) { ?>
+        <label class="b-reports-button" data-href="" onclick="sezApp.returnReport(<?= $arResult['REPORT']['ID']; ?>)">Вернуть отчёт на редактирование</label>
+    <?php } ?>
 
     <div class="b-inputs-row b-report-oez">
         <div class="b-input-block j-report-resident-name">

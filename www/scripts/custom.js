@@ -514,6 +514,25 @@ sezApp = {
 		let newTargetText = text + ' ' + targetText;
 
 		document.querySelector(targetIns).value = newTargetText;
-	}
+	},
+
+	returnReport: function(reportId){
+		let _this = this;
+		BX.showWait();
+		_this.sendRequest(
+			'reportId='+reportId,
+			'/ajax/returnReport.php',
+			'POST',
+			function(data, params){
+				let jsonData = JSON.parse(data.response);
+				if (!jsonData.error) {
+					document.location = '/cabinet/report/';
+				} else {
+					alert(jsonData.message);
+				}
+				BX.closeWait();				
+			}
+		);
+	},
 }
 
