@@ -51,6 +51,17 @@ $APPLICATION->SetTitle("Main page");
         </div>
     </div>
 <div class="l-home__block_bg_fixed">
+    <div class="l-home__advantages l-home__banner-1">
+        <?php
+        $APPLICATION->IncludeComponent(
+            'kelnik:banners',
+            '',
+            Array(
+                'POSITION' => 'MAIN_1'
+            )
+        );
+        ?>
+    </div>
     <div class="l-home__advantages l-home__block">
         <?$APPLICATION->IncludeComponent(
             "kelnik:textblocks",
@@ -61,6 +72,17 @@ $APPLICATION->SetTitle("Main page");
                 "CODE" => "main_screen_en_5"
             )
         );?>
+    </div>
+    <div class="l-home__banner-2">
+        <?php
+        $APPLICATION->IncludeComponent(
+            'kelnik:banners',
+            '',
+            Array(
+                'POSITION' => 'MAIN_2'
+            )
+        );
+        ?>
     </div>
     <div class="l-home__privileges l-home__block">
         <?$APPLICATION->IncludeComponent(

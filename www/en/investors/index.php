@@ -7,6 +7,19 @@ $APPLICATION->SetTitle("For Investors");
 <div class="l-investors">
     <div class="l-investors__top">
         <h1 class="b-title"><? $APPLICATION->ShowTitle(false); ?></h1>
+
+        <div class="l-residents-banner">
+            <?php
+            $APPLICATION->IncludeComponent(
+                'kelnik:banners',
+                '',
+                Array(
+                    'POSITION' => 'INVESTORS'
+                )
+            );
+            ?>
+        </div>
+        
         <div class="b-investors-info ">
             <? $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",

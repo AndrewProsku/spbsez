@@ -6,6 +6,18 @@ $APPLICATION->SetPageProperty('title', 'Residents');
 <div class="l-residents j-residents-page <? $APPLICATION->ShowProperty('residentCategory'); ?>">
     <div class="b-title b-residents-title"><h1><?= $APPLICATION->ShowTitle(false); ?></h1></div>
 
+    <div class="l-residents-banner">
+        <?php
+        $APPLICATION->IncludeComponent(
+            'kelnik:banners',
+            '',
+            Array(
+                'POSITION' => 'RESIDENTS'
+            )
+        );
+        ?>
+    </div>
+
     <? $APPLICATION->IncludeComponent(
         "kelnik:refbook.list",
         "residents-full",

@@ -19,6 +19,17 @@ $APPLICATION->SetTitle("Services");
                 "CODE" => "services_block_en_1"
             )
         );?>
+        <div class="l-services-banner">
+            <?php
+            $APPLICATION->IncludeComponent(
+                'kelnik:banners',
+                '',
+                Array(
+                    'POSITION' => 'SERVICES'
+                )
+            );
+            ?>
+        </div>
     </div>
 
     <div class="l-services__wrap">

@@ -22,7 +22,6 @@ $APPLICATION->SetPageProperty('title', 'Особая экономическая 
         <div class="b-title b-about-title">
             <h1><? $APPLICATION->ShowTitle(false); ?></h1>
         </div>
-
         <div class="b-about-desc">
             <div class="b-about-desc__img">
                 <img src="/images/about/about_UK-mission.png" alt="картинка">
@@ -37,7 +36,21 @@ $APPLICATION->SetPageProperty('title', 'Особая экономическая 
                         "CODE" => "about_block_1"
                     )
                 );?>
-            </div>
+
+                
+            </div>            
+        </div>
+
+        <div class="b-about-banner">
+            <?php
+            $APPLICATION->IncludeComponent(
+                'kelnik:banners',
+                '',
+                Array(
+                    'POSITION' => 'ABOUT'
+                )
+            );
+            ?>
         </div>
 
         <div class="b-about-info" id="resident">

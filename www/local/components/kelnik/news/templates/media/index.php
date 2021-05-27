@@ -1,7 +1,21 @@
 <?if(!defined('B_PROLOG_INCLUDED')||B_PROLOG_INCLUDED!==true)die();?>
 
 <div class="l-news">
-    <div class="l-news__title b-title"><h1><? $APPLICATION->ShowTitle(false); ?></h1></div>
+    <div class="l-news__title b-title">
+        <h1><? $APPLICATION->ShowTitle(false); ?></h1>
+
+        <div class="l-news-banner">
+            <?php
+            $APPLICATION->IncludeComponent(
+                'kelnik:banners',
+                '',
+                Array(
+                    'POSITION' => 'NEWS'
+                )
+            );
+            ?>
+        </div>
+    </div>
     <div class="l-news__main">
         <div class="b-news">
             <? $APPLICATION->IncludeComponent(

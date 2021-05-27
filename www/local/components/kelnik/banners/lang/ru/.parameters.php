@@ -1,0 +1,22 @@
+<?php
+$MESS['IBLOCK_TYPE'] = 'Тип инфоблока';
+$MESS['IBLOCK_ID'] = 'ID инфоблока';
+$MESS['SELECT_PROPS'] = 'Выбранные свойства';
+$MESS['SELECT_FIELDS'] = 'Выбранные поля';
+$MESS['ELEMENTS_LIST_SORT_BY_1'] = 'Сортировка 1';
+$MESS['ELEMENTS_LIST_SORT_ORDER_1'] = 'Порядок 1';
+$MESS['ELEMENTS_LIST_SORT_BY_2'] = 'Сортировка 2';
+$MESS['ELEMENTS_LIST_SORT_ORDER_2'] = 'Порядок 2';
+$MESS['ELEMENTS_LIST_SORT_ORDER_ASC'] = 'По возрастанию';
+$MESS['ELEMENTS_LIST_SORT_ORDER_DESC'] = 'По убыванию';
+$MESS['RESIZE'] = 'Переменная с размерами фото';
+$MESS['RESIZE_ARRAY'] = 'Переменная с массивом размеров фото';
+$MESS['FILTER'] = 'Переменная фильтра';
+$MESS['ELEMENTS_COUNT'] = 'Число элементов на странице';
+$MESS['USE_LOCK'] = 'Использовать закрепление материала';
+$MESS['TAG_IB'] = 'Инфоблок тегов';
+$MESS['POSITION'] = 'Позиция';
+$MESS['IBLOCK_BANNER_POSITIONS'] = 'Инфоблок позиций баннеров';
+$MESS['IBLOCK_BRANDING_POSITIONS'] = 'Инфоблок позиций брендирования';
+$MESS['DEVICE'] = 'ID свойства устройства';
+$MESS['TYPE'] = 'ID типа баннера';

@@ -19,9 +19,20 @@ $APPLICATION->SetTitle("Услуги");
                 "CODE" => "services_block_1"
             )
         );?>
-    </div>
+         <div class="l-services-banner">
+            <?php
+            $APPLICATION->IncludeComponent(
+                'kelnik:banners',
+                '',
+                Array(
+                    'POSITION' => 'SERVICES'
+                )
+            );
+            ?>
+        </div>
+    </div>    
 
-    <div class="l-services__wrap">
+    <div class="l-services__wrap">       
         <section class="b-offers" id="office-rental">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",

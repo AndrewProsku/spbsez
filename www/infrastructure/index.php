@@ -17,4 +17,16 @@ $APPLICATION->SetTitle("Площадки особой экономической
     )
 );?>
 
+<div class="b-about-banner">
+    <?php
+    $APPLICATION->IncludeComponent(
+        'kelnik:banners',
+        '',
+        Array(
+            'POSITION' => 'INFRASTRUCTURE'
+        )
+    );
+    ?>
+</div>
+
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

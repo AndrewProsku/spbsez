@@ -27,7 +27,8 @@ $APPLICATION->SetTitle("Главная");
             array()
 
         ); ?>
-        <div class="b-main-screen-content">
+
+        <div class="b-main-screen-content">        	
             <div class="b-main-screen-text">
                 <?$APPLICATION->IncludeComponent(
                     "kelnik:textblocks",
@@ -50,10 +51,20 @@ $APPLICATION->SetTitle("Главная");
             );?>
         </div>
     </div>
-
     
-
     <div class="l-home__block_bg_fixed">
+        <div class="l-home__advantages l-home__banner-1">
+            <?php
+            $APPLICATION->IncludeComponent(
+                'kelnik:banners',
+                '',
+                Array(
+                    'POSITION' => 'MAIN_1'
+                )
+            );
+            ?>
+        </div>
+
         <div class="l-home__advantages l-home__block">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -65,8 +76,20 @@ $APPLICATION->SetTitle("Главная");
                 )
             );?>
         </div>
-    
-        <div class="l-home__privileges l-home__block">
+        
+        <div class="l-home__banner-2">
+            <?php
+            $APPLICATION->IncludeComponent(
+                'kelnik:banners',
+                '',
+                Array(
+                    'POSITION' => 'MAIN_2'
+                )
+            );
+            ?>
+        </div>
+
+        <div class="l-home__privileges l-home__block">            
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -75,16 +98,7 @@ $APPLICATION->SetTitle("Главная");
                     "CACHE_TYPE" => "A",
                     "CODE" => "main_screen_3"
                 )
-            );?>
-            <?/*$APPLICATION->IncludeComponent(
-                "kelnik:textblocks",
-                "",
-                Array(
-                    "CACHE_TIME" => "360000",
-                    "CACHE_TYPE" => "A",
-                    "CODE" => "banner_privileges"
-                )
-            );*/?>
+            );?>            
         </div>
 
         <? $APPLICATION->IncludeComponent(

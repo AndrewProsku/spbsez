@@ -28,11 +28,13 @@ window.onload = function(){
 	});
 	sezApp.closeBanner({
 		closer: '.banner__closer',
-		banner: '.banner'
+		banner: '.banner-wrapper'
 	});
 	sezApp.investCalcFields();
 	Scrollbar.initAll();
 	//sezApp.loadResident();
+
+	sezApp.bannersInit();
 
 	sezApp.reportCompareField({
 		fieldsPairs: [
@@ -389,9 +391,15 @@ sezApp = {
 	},
 	closeBanner: function(options){
 		if(document.querySelector(options.closer) && document.querySelector(options.banner)){
-			document.querySelector(options.closer).onclick = function(){
-				this.closest(options.banner).style.display = 'none';
-			}
+			document.querySelectorAll(options.closer).forEach(function(item){
+				item.onclick = function(){
+					let banner = this.closest(options.banner);
+					banner.style.display = 'none';
+					let bannerId = banner.dataset.id;
+					document.cookie = 'oez_banner_'+bannerId+'=close; path=/; max-age=3600';
+					return false;
+				}
+			});
 		}
 	},
 	loadResident: function(){
@@ -534,5 +542,15 @@ sezApp = {
 			}
 		);
 	},
+
+	bannersInit: function() {
+		let banners = document.querySelectorAll('.banner');
+		setTimeout(function(){
+			banners.forEach(function(item){
+				item.style.display = 'block';
+			});
+		}, 4000);
+		
+	}
 }
 

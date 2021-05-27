@@ -40,6 +40,18 @@ $APPLICATION->SetPageProperty('title', 'Special Economic Zone');
             </div>
         </div>
 
+        <div class="b-about-banner">
+            <?php
+            $APPLICATION->IncludeComponent(
+                'kelnik:banners',
+                '',
+                Array(
+                    'POSITION' => 'ABOUT'
+                )
+            );
+            ?>
+        </div>
+
         <div class="b-about-info" id="resident">
             <div class="b-about-info__item">
                 <div class="b-about-info__text">
