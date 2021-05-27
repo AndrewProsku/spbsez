@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `sportsoft_banner` (
   `DATE_CREATED` datetime NOT NULL,
   `DATE_MODIFIED` datetime NOT NULL,
   PRIMARY KEY (`ID`),
-  KEY `POSITION` (`POSITION`)
+  KEY `POSITION_ID` (`POSITION_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `sportsoft_banner_position`;
