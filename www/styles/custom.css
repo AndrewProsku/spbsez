@@ -863,12 +863,13 @@ ymaps[class$="balloon__tail"]:after{
 .l-services-banner {
 	padding-left: 8%;
     position: absolute;
-    bottom: -160px;
+    bottom: -80px;
     float: left;
     width: 100%;
 }
 .b-services__text {
 	position: relative;
+	padding-bottom: 80px;
 }
 .l-residents-banner {
 	margin-bottom:  60px;
@@ -1811,4 +1812,48 @@ label.land-related.open, .land-related.open{
 
 .b-footer__copyright-link{
 	line-height: inherit;
+}
+
+.l-infrastructure {
+	padding-bottom:  20px;
+}
+
+.b-services__text p {
+    margin-bottom: 50px;
+}
+
+@media only screen and (min-width: 1600px){
+	.l-infrastructure {
+	    padding-bottom:  20px;
+	}
+
+	.b-services__text p {
+	    margin-bottom: 50px;
+	}
+}
+
+@media only screen and (min-width: 1280px){
+	.l-infrastructure {
+	    padding-bottom:  20px;
+	}
+
+	.b-services__text p {
+	    margin-bottom: 50px;
+	}
+}
+
+@media only screen and (min-width: 960px){
+	.l-infrastructure {
+	    padding-bottom:  20px;
+	}
+
+	.b-services__text p {
+	    margin-bottom: 50px;
+	}
+}
+
+@media only screen and (min-width: 670px){
+	.l-infrastructure {
+	    padding-bottom:  20px;
+	}
 }
