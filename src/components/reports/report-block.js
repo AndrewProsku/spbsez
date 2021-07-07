@@ -636,7 +636,8 @@ class ReportBlock {
     getInputStatus(input) {
         switch (input.type) {
             case 'radio': {
-                // const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
+                //проверка на выбранную кнопку
+                const checkboxGroup = input.closest('.b-radio-row').querySelectorAll('input[type="radio"]');
                 if (Utils.keyExist(input.dataset, 'hasError')) {
                     return 'hasError';
                 } else if (Utils.keyExist(input.dataset, 'prefilled')) {
@@ -645,14 +646,16 @@ class ReportBlock {
 
                 // Статус радио-кнопки высталяется как filled предполагая что
                 // в любой момент времени какая-то из кнопок в группе все равно будет выбрана
-                return 'filled';
-                // for (let i = 0; i < checkboxGroup.length; i++) {
-                //     if (checkboxGroup[i].checked) {
-                //         return 'filled';
-                //     }
-                // }
-                //
-                // break;
+                //return 'filled';
+
+                //проверка на выбранную кнопку
+                 for (let i = 0; i < checkboxGroup.length; i++) {
+                     if (checkboxGroup[i].checked) {
+                         return 'filled';
+                     }
+                 }
+                
+                 break;
             }
             case 'select-one': {
                 const selectText = input.parentElement.querySelector('.chosen-single span');
@@ -731,7 +734,7 @@ class ReportBlock {
                         return;
                     }
                     case 'filled': {
-                        if (hasEmpty) {
+                        if (hasEmpty && key != 'foreign-investors-yes' && key != 'foreign-investors-no' && key != 'high-tech-production-yes' && key != 'high-tech-production-no') {
                             break;
                         }
                         delete this.target.dataset.hasError;
