@@ -17,7 +17,7 @@ try {
     $prefix = \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM') . ' ';
     foreach ($elements as $v) {
         $v = \Kelnik\Infrastructure\Model\PlatformTable::replaceFieldsByLang($v, LANGUAGE_ID);
-        if($v['NAME'] == 'Инновационный центр'){
+        if($v['NAME'] == 'Инновационный центр' || $v['NAME'] == 'Innovational center'){
             $name = $v['NAME'];
         }else{
             $name = $prefix . '«' . $v['NAME'] . '»';

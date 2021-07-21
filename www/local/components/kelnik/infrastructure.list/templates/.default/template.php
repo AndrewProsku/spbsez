@@ -14,7 +14,7 @@
             <?php foreach ($arResult['ELEMENTS'] as $arItem): ?>
             <li class="b-page-submenu__item">
                 <a href="<?= $arItem['DETAIL_PAGE_URL']; ?>" class="b-page-submenu__link b-link-line">
-                    <?if($arItem['NAME'] == 'Инновационный центр'){?>
+                    <?if($arItem['NAME'] == 'Инновационный центр' || $arItem['NAME'] == 'Innovational center'){?>
                         <? $name = $arItem['NAME']; ?>
                     <?}else{?>
                         <? $name = \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM')." «".$arItem['NAME']."»"?>
