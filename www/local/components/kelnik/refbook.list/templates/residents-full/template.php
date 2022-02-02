@@ -95,6 +95,9 @@
                         <?php endif; ?>
                     </div>
                 </div>
+                <?if($element["PROJECT_STAGE"]){?>
+                    <div class="resident-popup-open__date"><?=$element["PROJECT_STAGE"]?></div>
+                <?}?>
             </div>
         </div>
     </div>
