@@ -34,7 +34,7 @@ $APPLICATION->SetTitle("For Investors");
     </div>
     <div class="l-investors__priorities" id="investors-priorities">
         <div class="b-priorities-direction">
-            <? $APPLICATION->IncludeComponent(
+            <?/* $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
                 Array(
@@ -42,6 +42,18 @@ $APPLICATION->SetTitle("For Investors");
                     "CACHE_TYPE" => "A",
                     "CODE" => "investors_block_en_2"
                 )
+            ); */?>
+            <? $APPLICATION->IncludeComponent(
+                "kelnik:refbook.list",
+                "priorities-direction",
+                array(
+                    "COMPONENT_TEMPLATE" => "priorities-direction",
+                    "SECTION" => "2",
+                    "CACHE_GROUPS" => "N",
+                    "CACHE_TYPE" => "A",
+                    "CACHE_TIME" => "3600"
+                ),
+                array()
             ); ?>
         </div>
     </div>

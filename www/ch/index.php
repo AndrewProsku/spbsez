@@ -42,7 +42,7 @@ $APPLICATION->SetTitle("經濟特區");
 
     <div class="l-investors__priorities l-investors__priorities_margin_top" id="priorities">
         <div class="b-priorities-direction">
-            <? $APPLICATION->IncludeComponent(
+            <?/* $APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
                 Array(
@@ -50,6 +50,18 @@ $APPLICATION->SetTitle("經濟特區");
                     "CACHE_TYPE" => "A",
                     "CODE" => "investors_block_ch_2"
                 )
+            ); */?>
+            <? $APPLICATION->IncludeComponent(
+                "kelnik:refbook.list",
+                "priorities-direction",
+                array(
+                    "COMPONENT_TEMPLATE" => "priorities-direction",
+                    "SECTION" => "2",
+                    "CACHE_GROUPS" => "N",
+                    "CACHE_TYPE" => "A",
+                    "CACHE_TIME" => "3600"
+                ),
+                array()
             ); ?>
         </div>
     </div>

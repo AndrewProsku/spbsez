@@ -46,16 +46,16 @@ $APPLICATION->SetPageProperty('title', "Раскрытие информации 
 
         <? $APPLICATION->IncludeComponent(
             "kelnik:infodocs.list",
-            "docs",
+            "docs-inner",
             array(
-                "COMPONENT_TEMPLATE" => "docs",
+                "COMPONENT_TEMPLATE" => "docs-inner",
                 "SECTION" => "1",
                 "CACHE_GROUPS" => "N",
                 "CACHE_TYPE" => "A",
                 "CACHE_TIME" => "3600",
-                "SHOW_FILTER" => "N",
-                "USE_AJAX" => "N",
-                "AJAX_TYPE" => "DEFAULT",
+                "SHOW_FILTER" => "Y",
+                "USE_AJAX" => "Y",
+                "AJAX_TYPE" => "JSON",
                 "AJAX_TEMPLATE_PAGE" => "",
                 "AJAX_COMPONENT_ID" => ""
             ),
