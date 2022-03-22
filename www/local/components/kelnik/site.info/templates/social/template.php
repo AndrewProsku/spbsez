@@ -1,5 +1,5 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
-<?php if(empty($arResult['SOCIAL_INST']) && empty($arResult['SOCIAL_FACEBOOK'])): return; endif; ?>
+<?php // if(empty($arResult['SOCIAL_INST']) && empty($arResult['SOCIAL_FACEBOOK'])): return; endif; ?>
 <div class="111 b-social">
     <?php if($arResult['SOCIAL_INST']): ?>
     <a href="<?= $arResult['SOCIAL_INST']; ?>" rel="nofollow" class="b-social__link">
@@ -35,6 +35,24 @@
         </svg>
     </a>
     <?php endif; ?>
+
+    <a href="https://vk.com/spbsez" rel="nofollow" class="b-social__link">
+        <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.48">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.3143 0C10.4379 0 0 10.4366 0 23.3143C0 36.1906 10.4379 46.6286 23.3143 46.6286C36.1906 46.6286 46.6286 36.1906 46.6286 23.3143C46.6286 10.4366 36.1906 0 23.3143 0M23.3143 2.74286C34.6574 2.74286 43.8857 11.9712 43.8857 23.3143C43.8857 34.6574 34.6574 43.8857 23.3143 43.8857C11.9712 43.8857 2.74286 34.6574 2.74286 23.3143C2.74286 11.9712 11.9712 2.74286 23.3143 2.74286" fill="white"/>
+            </g>
+            <path opacity="0.48" d="M23.8931 29.4797C17.0599 29.4797 13.1624 24.7951 13 17H16.4229C16.5353 22.7214 19.0587 25.1449 21.0574 25.6446V17H24.2805V21.9344C26.2543 21.722 28.3277 19.4735 29.0273 17H32.2503C31.7132 20.0481 29.4646 22.2967 27.8656 23.2211C29.4646 23.9706 32.0256 25.9319 33 29.4797H29.4521C28.6901 27.1062 26.7914 25.2698 24.2805 25.02V29.4797H23.8931Z" fill="white"/>
+        </svg>
+    </a>
+    <a href="https://t.me/spbsez" rel="nofollow" class="b-social__link">
+        <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.48">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.3143 0C10.4379 0 0 10.4366 0 23.3143C0 36.1906 10.4379 46.6286 23.3143 46.6286C36.1906 46.6286 46.6286 36.1906 46.6286 23.3143C46.6286 10.4366 36.1906 0 23.3143 0M23.3143 2.74286C34.6574 2.74286 43.8857 11.9712 43.8857 23.3143C43.8857 34.6574 34.6574 43.8857 23.3143 43.8857C11.9712 43.8857 2.74286 34.6574 2.74286 23.3143C2.74286 11.9712 11.9712 2.74286 23.3143 2.74286" fill="white"/>
+            </g>
+            <path opacity="0.48" d="M20.6324 26.083L20.2685 31.2016C20.7892 31.2016 21.0147 30.978 21.2851 30.7094L23.7262 28.3765L28.7843 32.0807C29.712 32.5977 30.3656 32.3255 30.6158 31.2273L33.936 15.6696L33.9369 15.6687C34.2312 14.2974 33.441 13.7611 32.5372 14.0975L13.0213 21.5693C11.6894 22.0863 11.7096 22.8288 12.7949 23.1652L17.7843 24.7171L29.3737 17.4654C29.9192 17.1042 30.4151 17.304 30.0072 17.6652L20.6324 26.083Z" fill="white"/>
+        </svg>
+    </a>
+    
     <?php if($arResult['SOCIAL_YOUTUBE']): ?>
         <a href="<?= $arResult['SOCIAL_YOUTUBE']; ?>" rel="nofollow" class="b-social__link">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
