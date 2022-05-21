@@ -8,6 +8,13 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
+		"Стратегия развития", 
+		"/about/strategy/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
 		"Управляющая компания", 
 		"/about/management-company/", 
 		Array(), 

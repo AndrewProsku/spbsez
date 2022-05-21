@@ -63,7 +63,8 @@ class RefBookList extends Bbc\Basis
             Types::TYPE_DOCS => ['ID', 'NAME', 'FILE_ID'],
             Types::TYPE_PRESENTATION => ['ID', 'NAME', 'FILE_ID'],
             Types::TYPE_TEAM => ['ID', 'NAME', 'IMAGE_ID', 'TEXT', 'NAME_EN', 'TEXT_EN'],
-            Types::TYPE_PARTNER => ['ID', 'NAME', 'IMAGE_ID', 'IMAGE_ID_EN', 'NAME_EN']
+            Types::TYPE_PARTNER => ['ID', 'NAME', 'IMAGE_ID', 'IMAGE_ID_EN', 'NAME_EN'],
+            Types::TYPE_STRATEGY_DOCS => ['ID', 'NAME', 'FILE_ID'],
         ];
 
         $select = ArrayHelper::getValue(
@@ -76,7 +77,7 @@ class RefBookList extends Bbc\Basis
             '=ACTIVE' => $className::YES
         ];
         
-        if (in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION])) {
+        if (in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION, Types::TYPE_STRATEGY_DOCS])) {
             $filter['=SITE_ID'] = SITE_ID;
         }
 
@@ -116,7 +117,7 @@ class RefBookList extends Bbc\Basis
 
                 $v['JSON'] = base64_encode(json_encode($v));
 
-                if (!in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION])) {
+                if (!in_array($this->arParams['SECTION'], [Types::TYPE_DOCS, Types::TYPE_PRESENTATION, Types::TYPE_STRATEGY_DOCS])) {
                     continue;
                 }
 

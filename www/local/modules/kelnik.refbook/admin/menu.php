@@ -105,6 +105,17 @@ return [
                 'sort' => 180,
                 'icon' => 'iblock_menu_icon',
                 'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_REFBOOK_STRATEGY_DOCS_MENU'),
+                'url' => \Kelnik\Refbook\Model\AdminInterface\StrategyDocsListHelper::getUrl(),
+                'more_url' => [
+                    \Kelnik\Refbook\Model\AdminInterface\StrategyDocsEditHelper::getUrl()
+                ]
+            ],
+            [
+                'parent_menu' => 'kelnik_refbook',
+                'sort' => 180,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
                 'text' => Loc::getMessage('KELNIK_REFBOOK_PRES_MENU'),
                 'url' => \Kelnik\Refbook\Model\AdminInterface\PresListHelper::getUrl(),
                 'more_url' => [

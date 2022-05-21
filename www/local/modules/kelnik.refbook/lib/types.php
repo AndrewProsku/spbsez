@@ -9,6 +9,7 @@ use Kelnik\Refbook\Model\PresTable;
 use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Refbook\Model\ReviewTable;
 use Kelnik\Refbook\Model\TeamTable;
+use Kelnik\Refbook\Model\StrategyDocsTable;
 
 class Types
 {
@@ -18,6 +19,7 @@ class Types
     const TYPE_TEAM = 4;
     const TYPE_DOCS = 5;
     const TYPE_PRESENTATION = 6;
+    const TYPE_STRATEGY_DOCS = 7;
 
     public static function getSites()
     {
@@ -53,7 +55,8 @@ class Types
             self::TYPE_REVIEW => ReviewTable::class,
             self::TYPE_TEAM => TeamTable::class,
             self::TYPE_DOCS => DocsTable::class,
-            self::TYPE_PRESENTATION => PresTable::class
+            self::TYPE_PRESENTATION => PresTable::class,
+            self::TYPE_STRATEGY_DOCS => StrategyDocsTable::class
         ];
     }
 }

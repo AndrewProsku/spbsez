@@ -8,3 +8,4 @@ $MESS['KELNIK_REFBOOK_MODULE'] = 'Справочники';
 $MESS['KELNIK_REFBOOK_TEAM_MENU'] = 'Команда';
 $MESS['KELNIK_REFBOOK_DOCS_MENU'] = 'Документы инвесторам';
 $MESS['KELNIK_REFBOOK_PRES_MENU'] = 'Презентации для медиа';
+$MESS['KELNIK_REFBOOK_STRATEGY_DOCS_MENU'] = 'Документы по стратегии';
