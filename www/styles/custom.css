@@ -1820,6 +1820,22 @@ label.land-related.open, .land-related.open{
 	min-height: 300px;
 }
 
+.export_report {
+	font-family: Brutal,sans-serif;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 5px;
+    background: none;
+}
+
+.l-report-form .export_report {
+	font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
 @media only screen and (min-width: 768px){
 	.b-slider-reviews__person-img {
 	    min-height: 380px;
@@ -1872,4 +1888,77 @@ label.land-related.open, .land-related.open{
 	.l-infrastructure {
 	    padding-bottom:  20px;
 	}
+}
+
+.b-page-submenu__item{
+	margin-right: 2.125%;
+}
+
+.b-page-submenu__item:last-child{
+	margin-right:  0;
+}
+
+.b-about-desc__links._strategy {
+	margin-bottom:  40px;
+}
+
+.b-about-desc__title._strategy {
+	font-weight: 500;
+}
+
+.strategy-dev{
+	margin-bottom: 60px;
+}
+.strategy-dev__item-title{
+	padding-left: 45px;
+    position: relative;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+.strategy-dev__item-title-num{
+	position: absolute;
+    left: 0;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid;
+    top: -5px;
+    color: #313F9A;
+    border-color: #313F9A;
+}
+
+.b-invest-post__list_theme-four li{
+	width: 100%;
+}
+@media only screen and (min-width: 425px){
+	.b-invest-post__list_theme-four li{
+		width: 50%;
+	}
+}
+@media only screen and (min-width: 1280px){
+	.b-invest-post__list_theme-four li{
+		width: 25%;
+	}
+}
+
+.b-about-desc__text._strategy{
+	width: 100%;
+}
+@media only screen and (min-width: 1280px){
+	.b-about-desc__text._strategy{
+		width: 80%;
+	}
+}
+
+.b-advantage-location__container._strategy{
+	margin-top: 100px;
+	margin-bottom: 0;
+}
+
+.l-investors__documents._strategy{
+	padding-top: 0;
+    margin-bottom: 100px;
 }
