@@ -957,7 +957,7 @@ ymaps[class$="balloon__tail"]:after{
     z-index: 2;
 }
 [data-popup^="#resident"] .b-popup__close{
-	z-index: 2;
+	z-index: 3;
 }
 [data-popup^="#resident"] .b-popup__close:after, [data-popup^="#resident"] .b-popup__close:before{
 	background-color: #fff;
@@ -1961,4 +1961,71 @@ label.land-related.open, .land-related.open{
 .l-investors__documents._strategy{
 	padding-top: 0;
     margin-bottom: 100px;
+}
+
+@media only screen and (min-width: 670px){
+	.l-home__news-main-content {
+		padding-bottom: 20px;
+		padding-top: 20px;
+	}
+
+	.l-home__news-main-title {
+	    font-size: 16px;
+	    line-height: 24px;
+	    min-height: 50px;
+	}
+}
+
+@media only screen and (min-width: 1280px){
+	.l-home__news-main-title {
+	    font-size: 20px;
+	    min-height: 90px;
+	}
+}
+
+@media only screen and (min-width: 1600px){
+	.l-home__news-main-content {
+		padding-bottom: 40px;
+		padding-top: 40px;
+	}
+
+	.l-home__news-main-title {
+	    font-size: 22px;
+	}
+
+	.l-home__news-date, .l-home__news-subsection {
+		margin-top:  30px;
+	}
+}
+
+.resident-popup-open__pics{
+	height: 370px;
+	position: relative;
+	width: 100%;
+}
+
+@media only screen and (min-width: 670px){
+	.resident-popup-open__logo_no-photo {
+		width: 640px;
+	}
+}
+
+@media only screen and (min-width: 1024px){
+	.resident-popup-open__logo_no-photo {
+		width: 860px;
+	}
+}
+
+.resident-popup-open__logo_no-photo {
+	height: 100%;
+	width:  100%;
+}
+
+.resident-popup-open__logo_no-photo img {
+	margin: auto;
+    display: block;
+}
+
+[data-popup$="_no-photo"] .b-popup__close:after, [data-popup$="_no-photo"] .b-popup__close:before {
+    background-color: #363636;
 }

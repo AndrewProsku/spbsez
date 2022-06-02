@@ -26,13 +26,19 @@
 
 <div class="b-residents-content">
     <?php foreach ($arResult['ELEMENTS'] as $element): ?>
+        <?
+        $data_id = "#resident_" . $element["ID"];
+        if (!$element["IMAGES"]) {
+            $data_id = "#resident_" . $element["ID"] . "_no-photo";
+        }
+        ?>
         <article class="b-resident b-resident_category_<?= $element['TYPE_ID']; ?>">
             <input type="hidden" value="<?=$element["ID"]?>" class="resident-id">
             <div class="b-resident__inner">
                 <div id="residents-description"></div>
           
                 <?php if(!empty($element['IMAGE_ID_PATH'])): ?>
-                    <img src="<?= $element['IMAGE_ID_PATH']; ?>" alt="<?= htmlentities($element['NAME'], ENT_QUOTES, 'UTF-8'); ?>" class="b-resident__logo j-message-button _pointer resident-popup" data-href="#resident_<?=$element["ID"]?>">
+                    <img src="<?= $element['IMAGE_ID_PATH']; ?>" alt="<?= htmlentities($element['NAME'], ENT_QUOTES, 'UTF-8'); ?>" class="b-resident__logo j-message-button _pointer resident-popup" data-href="<?=$data_id?>">
                 <?php endif; ?>
                 <h2 class="b-resident__title j-message-button _pointer resident-popup" data-href="#resident_<?=$element["ID"]?>"><?= $element['NAME']; ?></h2>
                 <div class="b-resident__category j-message-button _pointer resident-popup" data-href="#resident_<?=$element["ID"]?>"><?= $element['TYPE_NAME']; ?></div>
@@ -57,16 +63,26 @@
 </div>
 
 <?php foreach ($arResult['ELEMENTS'] as $element): ?>
-    <div id="#resident_<?=$element["ID"]?>" class="b-message-popup resident-data">
-        <div class="resident-popup-open">            
-            <div class="resident-popup-open__logo"><img src="<?=$element["IMAGE_ID_PATH"]?>" alt="<?=$element["NAME"]?> - лого"></div>
-            <div class="resident-popup-open__image">
-                <?foreach($element["IMAGES"] as $k=>$image){
-                    ?><img src="<?=$image?>" alt="<?=$element["NAME"]?> - рисунок <?=$k+1?>" class="<?=$k==0 ? 'visible-image' : ''?>"><?
-                }?>
-                <?if(count($element["IMAGES"]) > 1){?>
-                    <div class="resident-popup-open__image-next" onclick="sezApp.nextResidentPhoto(this)"></div>
-                <?}?>
+    <?
+    $data_id = "#resident_" . $element["ID"];
+    if (!$element["IMAGES"]) {
+        $data_id = "#resident_" . $element["ID"] . "_no-photo";
+    }
+    ?>
+    <div id="<?=$data_id?>" class="b-message-popup resident-data">
+        <div class="resident-popup-open">
+            <div class="resident-popup-open__pics">         
+                <div class="resident-popup-open__logo <? if(!$element["IMAGES"]){echo "resident-popup-open__logo_no-photo";} ?>">
+                    <img src="<?=$element["IMAGE_ID_PATH"]?>" alt="<?=$element["NAME"]?> - лого">
+                </div>
+                <div class="resident-popup-open__image">
+                    <?foreach($element["IMAGES"] as $k=>$image){
+                        ?><img src="<?=$image?>" alt="<?=$element["NAME"]?> - рисунок <?=$k+1?>" class="<?=$k==0 ? 'visible-image' : ''?>"><?
+                    }?>
+                    <?if(count($element["IMAGES"]) > 1){?>
+                        <div class="resident-popup-open__image-next" onclick="sezApp.nextResidentPhoto(this)"></div>
+                    <?}?>
+                </div>
             </div>
             <div class="resident-popup-open__content">
                 <div class="resident-popup-open__title"><?=$element["NAME"]?></div>
