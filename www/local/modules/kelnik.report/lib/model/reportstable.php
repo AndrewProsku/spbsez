@@ -122,6 +122,11 @@ class ReportsTable extends DataManager
                 Join::on('this.STATUS_ID', 'ref.ID')
             ))->configureJoinType('LEFT'),
 
+            /* ALTER TABLE kelnik_report ADD COLUMN IS_REDACTING INTEGER(1) NOT NULL DEFAULT 0 AFTER IS_LOCKED; */
+            (new IntegerField('IS_REDACTING'))
+                ->configureDefaultValue(0)
+                ->configureTitle(Loc::getMessage('KELNIK_REPORT_IS_REDACTING')),
+
             (new OneToMany('FIELDS', ReportFieldsTable::class, 'REPORT')),
             (new OneToMany('GROUPS', ReportFieldsGroupTable::class, 'REPORT'))
         ];

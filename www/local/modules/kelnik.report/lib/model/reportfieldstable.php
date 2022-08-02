@@ -894,10 +894,10 @@ class ReportFieldsTable extends DataManager
         return str_replace([' ', ','], ['', '.'], $val);
     }
 
-    public static function normalizeFloat($val)
+    public static function normalizeFloat($val, $precision = self::FLOAT_SCALE)
     {
         $val = self::normalizeDigital($val);
 
-        return bcadd($val, 0, self::FLOAT_SCALE);
+        return bcadd($val, 0, $precision);
     }
 }

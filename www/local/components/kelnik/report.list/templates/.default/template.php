@@ -27,7 +27,7 @@
     <h1>Отчет&nbsp;о&nbsp;деятельности резидента</h1>
 </div>
 <?php
-    $hasArchive = false;    
+    $hasArchive = false;
 ?>
 <?php foreach ($arResult['REPORTS'] as $year): ?>
     <?php
@@ -45,8 +45,15 @@
                 <?php if($report['STATUS_ID'] < 0): ?>
                     <div class="b-quarter__description">Отчетный период не&nbsp;наступил</div>
                 <?php else: ?>
-                    <div class="b-quarter__label"><?= $report['STATUS_NAME']; ?></div>
+                    <div class="b-quarter__label"><?= $report['STATUS_NAME']; ?></div>                    
                     <a class="button b-quarter__button button_icon_pen" href="<?= $report['LINK']; ?>"><?= $report['STATUS_BUTTON_NAME']; ?></a>
+                    <?php if ($report['ID'] > 0) { ?>
+                        <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="resident" value="<?php echo $report['COMPANY_ID']?>">
+                            <input type="hidden" name="period" value="<?php echo $report['YEAR'] . '_' . $report['TYPE']?>">
+                            <input type="submit" name="export_report" value="Экспорт в xls" class="export_report">                    
+                        </form>
+                    <?php } ?>
                 <?php endif; ?>
             </section>
         <?php endforeach; ?>

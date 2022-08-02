@@ -88,6 +88,15 @@ class ReportsEditHelper extends AdminEditHelper
             LocalRedirect(ReportsListHelper::getUrl());
         }
 
+        if ($_REQUEST['goBack'] == 'Y') {
+            $this->report->setIsRedacting(false);
+            $this->report->save();
+            LocalRedirect(ReportsListHelper::getUrl());
+        } else {
+            $this->report->setIsRedacting(true);
+            $this->report->save();   
+        }
+
         //Сохраняем сообщение в чате
         $request = Context::getCurrent()->getRequest();
         $chatMessage = $request->getPost("chatMessage");
@@ -176,6 +185,7 @@ class ReportsEditHelper extends AdminEditHelper
         $this->report->setDateModified(new DateTime());
         $this->report->setModifiedBy($USER->GetID());
         $this->report->setIsLocked(false);
+        $this->report->setIsRedacting(false);
 
         if (!empty($_REQUEST['decline'])) {
             $this->report->setStatusId(StatusTable::DECLINED);

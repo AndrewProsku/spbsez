@@ -21,7 +21,15 @@ use Bitrix\Main\Localization\Loc;
 
 <input type="button"
        name="cancel"
-       onClick="top.window.location='<?= htmlspecialcharsbx(CUtil::addslashes(\Kelnik\Report\Model\AdminInterface\ReportsListHelper::getUrl())); ?>'"
+       onClick="backToList()"
        value="<?=GetMessage("admin_lib_edit_cancel") ?>"
        title="<?=Loc::getMessage("admin_lib_edit_cancel") ?>"
 />
+
+<script>
+    backToList = function() {
+        //top.window.location='<?= CUtil::addslashes(\Kelnik\Report\Model\AdminInterface\ReportsListHelper::getUrl()); ?>'
+        top.window.location=top.window.location + '&goBack=Y';
+    }
+
+</script>

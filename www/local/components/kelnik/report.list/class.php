@@ -12,6 +12,8 @@ use Kelnik\Report\Model\ReportsTable;
 use Kelnik\Report\Model\Status;
 use Kelnik\Report\Model\StatusTable;
 use Kelnik\UserData\Profile\Profile;
+use Bitrix\Main\Context;
+use Kelnik\Report\Model\Export;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -39,6 +41,7 @@ class ReportList extends Bbc\Basis
     protected function executeProlog()
     {
         global $USER;
+        global $APPLICATION;
 
         $this->addCacheAdditionalId($USER->GetID());
         $this->addCacheAdditionalId(date('Y-m-d'));
@@ -54,6 +57,23 @@ class ReportList extends Bbc\Basis
             $this->arParams['SEF_FOLDER'] .
             ArrayHelper::getValue($this->getParent()->arParams, 'SEF_URL_TEMPLATES.detail', '')
         );
+
+        $request = Context::getCurrent()->getRequest();
+        if ($request->isPost() && $request->getPost('export_report')) {
+            $APPLICATION->RestartBuffer();         
+            list($year, $type) = explode('_', $request->getPost('period'));
+            $resident = [$request->getPost('resident')];
+            $export = new Export(
+                $year,
+                $type,
+                $resident,
+                [],
+                'tables_single.xlsx',
+                true
+            );
+            $export->getFile();
+            exit;
+        }
     }
 
     protected function executeMain()

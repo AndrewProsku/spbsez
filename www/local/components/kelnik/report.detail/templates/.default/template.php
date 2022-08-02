@@ -34,10 +34,23 @@ use Kelnik\Report\Model\StatusTable;
 
     <h2 class="b-reports-subtitle"><?= $arResult['REPORT']['TYPE_NAME']; ?>, <?= $arResult['REPORT']['YEAR']; ?></h2>
 
+    <?php if ($arResult['REPORT']['ID'] > 0) { ?>
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="resident" value="<?php echo $arResult['REPORT']['COMPANY_ID']?>">
+            <input type="hidden" name="period" value="<?php echo $arResult['REPORT']['YEAR'] . '_' .$arResult['REPORT']['TYPE']?>">
+            <input type="submit" name="export_report" value="Экспорт в xls" class="export_report">                    
+        </form>
+    <?php } ?>
+
     <label class="b-reports-button j-message-button" data-href="#chat"  onclick="sezApp.loadChat(<?= $arResult['REPORT']['ID']; ?>)">Чат с администратором</label>
-    <?php if ($arResult['REPORT']['STATUS_ID'] == StatusTable::CHECKING) { ?>
+    <?php if ($arResult['REPORT']['STATUS_ID'] == StatusTable::CHECKING && $arResult['REPORT']['IS_REDACTING'] == 0) { ?>
         <label class="b-reports-button" data-href="" onclick="sezApp.returnReport(<?= $arResult['REPORT']['ID']; ?>)">Вернуть отчёт на редактирование</label>
     <?php } ?>
+    <?php if ($arResult['REPORT']['STATUS_ID'] == StatusTable::CHECKING && $arResult['REPORT']['IS_REDACTING'] == 1) {
+        ?>
+            <p>Отчёт находится на проверке у администратора ОЭЗ и недоступен для возврата на редактирование.</p><br>
+        <?php
+    } ?>
 
     <div class="b-inputs-row b-report-oez">
         <div class="b-input-block j-report-resident-name">

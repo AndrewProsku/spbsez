@@ -12,6 +12,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Style\Protection;
 use PhpOffice\PhpSpreadsheet\Style\Style;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat as CellFormat;
 
 Loc::loadMessages(__FILE__);
 
@@ -43,11 +44,21 @@ class Export
     protected $spreadsheet;
 
     /**
+     * @var boolean
+     */
+    protected $isSingle;
+
+    /**
+     * @var string
+     */
+    protected $tpl;
+
+    /**
      * @var array
      */
     protected $data = [];
 
-    public function __construct(int $year, int $type, array $companies = [], array $statuses = [])
+    public function __construct(int $year, int $type, array $companies = [], array $statuses = [], $tpl = 'tables.xlsx', $isSingle = false)
     {
         $this->year = $year;
         $this->type = $type;
@@ -74,10 +85,12 @@ class Export
                     '..',
                     '..',
                     'export_tmpl',
-                    'tables.xlsx'
+                    $tpl
                 ]
             )
         ));
+
+        $this->isSingle = $isSingle;
     }
 
     public function getFile()
@@ -190,7 +203,13 @@ class Export
     protected function processForm0()
     {
         $sheet = $this->spreadsheet->getActiveSheet();
-        $sheet->setCellValue('L3', self::getCurrentDate());
+        
+        if ($this->isSingle) {
+            $types = ReportsTable::getTypes();
+            $sheet->setCellValue('L3', $types[$this->type] . ' ' . $this->year . ' года');
+        } else {
+            $sheet->setCellValue('L3', self::getCurrentDate());
+        }
         
         $valueToCell = [
             'D' => 'foreign-investors',
@@ -240,6 +259,11 @@ class Export
                 }
 
                 $sheet->setCellValue($colName . $rowNum, $val);
+
+                //принудительно ставим формат ячеек, если из шаблона не подтягивается
+                if (in_array($colName, ['J', 'K', 'M', 'X'])) {
+                    $sheet->getStyle($colName . $rowNum)->getNumberFormat()->setFormatCode(CellFormat::FORMAT_NUMBER_00);
+                }
             }
 
             $rowNum++;
@@ -249,12 +273,28 @@ class Export
         $valueToCell = array_keys($valueToCell);
 
         $this->setCellSum($valueToCell, $rowNum, $start, $rowNum - 1);
+
+        //принудительно ставим формат ячеек, если из шаблона не подтягивается
+        foreach ($valueToCell as $cellName) {
+            if (in_array($cellName, ['X'])) {
+                $sheet->getStyle($cellName . $rowNum)->getNumberFormat()->setFormatCode(CellFormat::FORMAT_NUMBER_00);
+            }
+            if (in_array($cellName, ['F', 'G', 'H', 'I'])) {
+                $sheet->getStyle($cellName . $rowNum)->getNumberFormat()->setFormatCode(CellFormat::FORMAT_NUMBER);
+            }
+        }
     }
 
     protected function processForm1()
     {
-        $sheet = $this->spreadsheet->getActiveSheet();
-        $sheet->setCellValue('K3', self::getCurrentDate());
+        $sheet = $this->spreadsheet->getActiveSheet();        
+
+        if ($this->isSingle) {
+            $types = ReportsTable::getTypes();
+            $sheet->setCellValue('K3', $types[$this->type] . ' ' . $this->year . ' года');
+        } else {
+            $sheet->setCellValue('K3', self::getCurrentDate());
+        }
 
         $valueToCell = [
             'F' => 'taxes-federal-all',
@@ -284,6 +324,9 @@ class Export
         $sumFields = ArrayHelper::getValue(ReportFieldsTable::getFormConfig(), ReportFieldsTable::FORM_TAXES . '.blocks.0.fields', []);
         $sumFields = array_column($sumFields, 'id');
 
+        $sumFieldsBrakes = ArrayHelper::getValue(ReportFieldsTable::getFormConfig(), ReportFieldsTable::FORM_TAXES . '.blocks.1.fields', []);
+        $sumFieldsBrakes = array_column($sumFieldsBrakes, 'id');
+
         $rowNum = $start = 10;
         foreach ($this->data as $company) {
 
@@ -306,6 +349,16 @@ class Export
                 $total[$k] = bcadd($total[$k], ArrayHelper::getValue($company, 'FIELDS.0.' . $sumField), ReportFieldsTable::FLOAT_SCALE);
             }
 
+            $totalBreaks = [0,0];
+            foreach ($sumFieldsBrakes as $sumField) {
+                $k = 0;
+                if (false !== strpos($sumField, '-year')) {
+                    $k = 1;
+                }
+
+                $totalBreaks[$k] = bcadd($totalBreaks[$k], ArrayHelper::getValue($company, 'FIELDS.0.' . $sumField), ReportFieldsTable::FLOAT_SCALE);
+            }
+
             foreach ($valueToCell as $cellName => $valueName) {
                 $val = trim(ArrayHelper::getValue($company, 'FIELDS.0.' . $valueName));
                 $val = ReportFieldsTable::normalizeFloat($val);
@@ -315,6 +368,8 @@ class Export
 
             $sheet->setCellValue('D' . $rowNum, $total[0]);
             $sheet->setCellValue('E' . $rowNum, $total[1]);
+            $sheet->setCellValue('P' . $rowNum, $totalBreaks[0]);
+            $sheet->setCellValue('Q' . $rowNum, $totalBreaks[1]);
 
             $rowNum++;
         }
@@ -329,7 +384,13 @@ class Export
     protected function processForm2()
     {
         $sheet = $this->spreadsheet->getActiveSheet();
-        $sheet->setCellValue('G4', self::getCurrentDate());
+        
+        if ($this->isSingle) {
+            $types = ReportsTable::getTypes();
+            $sheet->setCellValue('G4', $types[$this->type] . ' ' . $this->year . ' года');
+        } else {
+            $sheet->setCellValue('G4', self::getCurrentDate());
+        }
 
         $valueToCell = [
             'D' => 'area-application',
@@ -384,7 +445,13 @@ class Export
     protected function processForm3()
     {
         $sheet = $this->spreadsheet->getActiveSheet();
-        $sheet->setCellValue('E4', self::getCurrentDate());
+        
+        if ($this->isSingle) {
+            $types = ReportsTable::getTypes();
+            $sheet->setCellValue('E4', $types[$this->type] . ' ' . $this->year . ' года');
+        } else {
+            $sheet->setCellValue('E4', self::getCurrentDate());
+        }
 
         $valueToCell = [
             'D' => 'office-application',
@@ -426,8 +493,14 @@ class Export
 
     protected function processForm4()
     {
-        $sheet = $this->spreadsheet->getActiveSheet();
-        $sheet->setCellValue('G3', self::getCurrentDate());
+        $sheet = $this->spreadsheet->getActiveSheet();        
+
+        if ($this->isSingle) {
+            $types = ReportsTable::getTypes();
+            $sheet->setCellValue('G3', $types[$this->type] . ' ' . $this->year . ' года');
+        } else {
+            $sheet->setCellValue('G3', self::getCurrentDate());
+        }
 
         $valueToCell = [
             'D' => 'export-volume-all',
@@ -471,6 +544,11 @@ class Export
                 }
 
                 $sheet->setCellValue($cellName . $rowNum, $val);
+
+                //принудительно ставим формат ячеек, если из шаблона не подтягивается
+                if (in_array($cellName, ['D', 'E'])) {
+                    $sheet->getStyle($cellName . $rowNum)->getNumberFormat()->setFormatCode(CellFormat::FORMAT_NUMBER_00);
+                }
             }
 
             foreach (['groups', 'innovations'] as $type) {
@@ -493,8 +571,14 @@ class Export
 
     protected function processForm5()
     {
-        $sheet = $this->spreadsheet->getActiveSheet();
-        $sheet->setCellValue('B4', 'по состоянию на ' . self::getCurrentDate());
+        $sheet = $this->spreadsheet->getActiveSheet();        
+
+        if ($this->isSingle) {
+            $types = ReportsTable::getTypes();
+            $sheet->setCellValue('B4', 'за период ' . $types[$this->type] . ' ' . $this->year . ' года');
+        } else {
+            $sheet->setCellValue('B4', 'по состоянию на ' . self::getCurrentDate());
+        }
 
         $valueToCell = [
             'D' => 'intangible-assets',
@@ -527,7 +611,13 @@ class Export
     protected function processForm6()
     {
         $sheet = $this->spreadsheet->getActiveSheet();
-        $sheet->setCellValue('E4', self::getCurrentDate());
+        
+        if ($this->isSingle) {
+            $types = ReportsTable::getTypes();
+            $sheet->setCellValue('E4', $types[$this->type] . ' ' . $this->year . ' года');
+        } else {
+            $sheet->setCellValue('E4', self::getCurrentDate());
+        }
 
         $valueToCell = [
             'D' => 'result-type',
@@ -585,11 +675,11 @@ class Export
             $mergeCells[$companyNum][1] = $rowNum;
         }
 
-        foreach ($mergeCells as $company) {
+        /*foreach ($mergeCells as $company) {
             foreach (['A', 'B', 'C'] as $col) {
                 $sheet->mergeCells($col . $company[0] . ':' . $col . $company[1]);
             }
-        }
+        }*/
     }
 
     /**
