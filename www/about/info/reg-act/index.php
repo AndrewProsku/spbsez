@@ -24,6 +24,22 @@ $APPLICATION->SetPageProperty('title', "Раскрытие информации 
             <h1><?= $APPLICATION->GetDirProperty('title'); ?></h1>
         </div>
 
+        <?$APPLICATION->IncludeComponent(
+            "bitrix:menu",
+            "submenu-info",
+            Array(
+                "ALLOW_MULTI_SELECT" => "N",
+                "DELAY" => "N",
+                "MAX_LEVEL" => "1",
+                "MENU_CACHE_GET_VARS" => array(""),
+                "MENU_CACHE_TIME" => "3600",
+                "MENU_CACHE_TYPE" => "A",
+                "MENU_CACHE_USE_GROUPS" => "Y",
+                "ROOT_MENU_TYPE" => "sub",
+                "USE_EXT" => "N"
+            )
+        );?>
+
         <? $APPLICATION->IncludeComponent(
             "kelnik:infodocs.list",
             "docs-reg",
@@ -41,22 +57,6 @@ $APPLICATION->SetPageProperty('title', "Раскрытие информации 
             ),
             false
         ); ?>
-
-        <?$APPLICATION->IncludeComponent(
-            "bitrix:menu",
-            "submenu-info",
-            Array(
-                "ALLOW_MULTI_SELECT" => "N",
-                "DELAY" => "N",
-                "MAX_LEVEL" => "1",
-                "MENU_CACHE_GET_VARS" => array(""),
-                "MENU_CACHE_TIME" => "3600",
-                "MENU_CACHE_TYPE" => "A",
-                "MENU_CACHE_USE_GROUPS" => "Y",
-                "ROOT_MENU_TYPE" => "sub",
-                "USE_EXT" => "N"
-            )
-        );?>
 
         <? $APPLICATION->IncludeComponent(
             "kelnik:infodocs.list",
