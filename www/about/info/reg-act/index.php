@@ -108,6 +108,23 @@ $APPLICATION->SetPageProperty('title', "Раскрытие информации 
             ),
             false
         ); ?>
+        <? $APPLICATION->IncludeComponent(
+            "kelnik:infodocs.list",
+            "docs-reg",
+            array(
+                "COMPONENT_TEMPLATE" => "docs-reg",
+                "SECTION" => "7",
+                "CACHE_GROUPS" => "N",
+                "CACHE_TYPE" => "A",
+                "CACHE_TIME" => "3600",
+                "SHOW_FILTER" => "Y",
+                "USE_AJAX" => "Y",
+                "AJAX_TYPE" => "JSON",
+                "AJAX_TEMPLATE_PAGE" => "",
+                "AJAX_COMPONENT_ID" => ""
+            ),
+            false
+        ); ?>
     </div>
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
