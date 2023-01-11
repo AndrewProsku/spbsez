@@ -2024,6 +2024,7 @@ label.land-related.open, .land-related.open{
 .resident-popup-open__logo_no-photo img {
 	margin: auto;
     display: block;
+    height: 370px;
 }
 
 [data-popup$="_no-photo"] .b-popup__close:after, [data-popup$="_no-photo"] .b-popup__close:before {
