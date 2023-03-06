@@ -781,14 +781,27 @@ class Export
 
     protected function sendFile()
     {
+        $dir = REPORTS_DIR;
+        $files = glob($dir . "*");
+        $c = count($files);
+        if (count($files) > 0) {
+            foreach ($files as $file) {      
+                if (file_exists($file)) {
+                    unlink($file);
+                }   
+            }
+        }
+
         ob_clean();
         $writer = IOFactory::createWriter($this->spreadsheet, 'Xlsx');
 
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="export_' . date('Y-m-d_H-i') . '.xlsx"');
-        header('Cache-Control: max-age=0');
+        //header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        //header('Content-Disposition: attachment; filename="export_' . date('Y-m-d_H-i') . '.xlsx"');
+        //header('Cache-Control: max-age=0');
 
-        $writer->save('php://output');
+        $writer->save($dir . 'export_' . date('Y-m-d_H-i') . '.xlsx');
+        header('Location: /upload/reports/export_' . date('Y-m-d_H-i') . '.xlsx');
+
         exit;
     }
 
