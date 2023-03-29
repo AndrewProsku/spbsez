@@ -130,7 +130,7 @@ class Api
             }
         }
 
-        Context::getCurrent()->getResponse()->flush();
+        //Context::getCurrent()->getResponse()->flush();
 
         die($this->getResponse());
     }
