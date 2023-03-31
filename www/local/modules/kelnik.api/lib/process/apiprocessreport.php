@@ -407,7 +407,7 @@ class ApiProcessReport extends ApiProcessAbstract
      */
     protected function processConfirm(array $request)
     {
-        if (!$this->report->isFilled()) {
+        if (!$this->report->isFilledReport()) {
             $this->errors[] = Loc::getMessage('KELNIK_API_REPORT_FILL_ERROR');
 
             return false;

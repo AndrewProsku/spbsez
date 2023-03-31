@@ -170,7 +170,7 @@ class Report extends EO_Reports
     /**
      * Отчет полностью заполнен и готов к отправке
      */
-    public function isFilled()
+    public function isFilledReport()
     {
         $forms = $this->getForms();
 
