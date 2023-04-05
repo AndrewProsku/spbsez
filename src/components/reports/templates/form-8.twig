@@ -1,0 +1,503 @@
+<div class="b-report-form__title">Проектная деятельность</div>
+{# 1 #}
+<section class="b-report-block j-report-block" id="block-1">
+    <div class="b-report-block__header" data-number="1">
+        <h3 class="b-report-block__title">Категория проекта</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-category",
+                name: "project-category"
+            } %}
+            <label class="b-input-block__label" for="project-category">Наименование</label>
+        </div>
+    </div>
+</section>
+{# 2 #}
+<section class="b-report-block j-report-block" id="block-2">
+    <div class="b-report-block__header" data-number="2">
+        <h3 class="b-report-block__title">Название проекта</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-name",
+                name: "project-name"
+            } %}
+            <label class="b-input-block__label" for="project-name">Название</label>
+        </div>
+    </div>
+</section>
+{# 3 #}
+<section class="b-report-block j-report-block" id="block-3">
+    <div class="b-report-block__header" data-number="3">
+        <h3 class="b-report-block__title">Описание проекта</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/textarea/textarea.twig" with {
+                id: "project-description",
+                name: "project-description",
+                rows: "3"
+            } %}
+            <label class="b-input-block__label" for="project-description">Описание</label>
+        </div>
+    </div>
+</section>
+{# 4 #}
+<section class="b-report-block j-report-block" id="block-4">
+    <div class="b-report-block__header" data-number="4">
+        <h3 class="b-report-block__title">ИНН организации</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-inn",
+                name: "project-inn",
+                modify: "b-input-text_type_numeric"
+            } %}
+            <label class="b-input-block__label" for="project-inn">ИНН</label>
+        </div>
+    </div>
+</section>
+{# 5 #}
+<section class="b-report-block j-report-block" id="block-5">
+    <div class="b-report-block__header" data-number="5">
+        <h3 class="b-report-block__title">Субъект РФ</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-region",
+                name: "project-region"
+            } %}
+            <label class="b-input-block__label" for="project-region">Название</label>
+        </div>
+    </div>
+</section>
+{# 6 #}
+<section class="b-report-block j-report-block" id="block-6">
+    <div class="b-report-block__header" data-number="6">
+        <h3 class="b-report-block__title">Раздел ОКВЭД</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-okved",
+                name: "project-okved"
+            } %}
+            <label class="b-input-block__label" for="project-okved">Название</label>
+        </div>
+    </div>
+</section>
+{# 7 #}
+<section class="b-report-block j-report-block" id="block-7">
+    <div class="b-report-block__header" data-number="7">
+        <h3 class="b-report-block__title">Группа ОКВЭД</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-group-okved",
+                name: "project-group-okved"
+            } %}
+            <label class="b-input-block__label" for="project-group-okved">Название</label>
+        </div>
+    </div>
+</section>
+{# 8 #}
+<section class="b-report-block j-report-block" id="block-8">
+    <div class="b-report-block__header" data-number="8">
+        <h3 class="b-report-block__title">Код ОКВЭД</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-code-okved",
+                name: "project-code-okved"
+            } %}
+            <label class="b-input-block__label" for="project-code-okved">Код</label>
+        </div>
+    </div>
+</section>
+{# 9 #}
+<section class="b-report-block j-report-block" id="block-9">
+    <div class="b-report-block__header" data-number="9">
+        <h3 class="b-report-block__title">Сфера деятельности</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-code-okved",
+                name: "project-code-okved"
+            } %}
+            <label class="b-input-block__label" for="project-code-okved">Название</label>
+        </div>
+    </div>
+</section>
+{# 10 #}
+<section class="b-report-block j-report-block" id="block-10">
+    <div class="b-report-block__header" data-number="10">
+        <h3 class="b-report-block__title">Курирующий заместитель Министра</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-minister",
+                name: "project-minister"
+            } %}
+            <label class="b-input-block__label" for="project-minister">ФИО</label>
+        </div>
+    </div>
+</section>
+{# 11 #}
+<section class="b-report-block j-report-block" id="block-11">
+    <div class="b-report-block__header" data-number="11">
+        <h3 class="b-report-block__title">Ответственный департамент МЭР</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-department",
+                name: "project-department"
+            } %}
+            <label class="b-input-block__label" for="project-department">Наименование</label>
+        </div>
+    </div>
+</section>
+{# 12 #}
+<section class="b-report-block j-report-block" id="block-12">
+    <div class="b-report-block__header" data-number="12">
+        <h3 class="b-report-block__title">Степень участия МЭР в проекте</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-mer",
+                name: "project-mer"
+            } %}
+            <label class="b-input-block__label" for="project-mer">Наименование</label>
+        </div>
+    </div>
+</section>
+{# 13 #}
+<section class="b-report-block j-report-block" id="block-13">
+    <div class="b-report-block__header" data-number="13">
+        <h3 class="b-report-block__title">Наименование меры поддержки</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-maintain",
+                name: "project-maintain"
+            } %}
+            <label class="b-input-block__label" for="project-maintain">Наименование</label>
+        </div>
+    </div>
+</section>
+{# 14 #}
+<section class="b-report-block j-report-block" id="block-14">
+    <div class="b-report-block__header" data-number="14">
+        <h3 class="b-report-block__title">Эффект от меры поддержки</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-effect",
+                name: "project-effect"
+            } %}
+            <label class="b-input-block__label" for="project-effect">Наименование</label>
+        </div>
+    </div>
+</section>
+{# 15 #}
+<section class="b-report-block j-report-block" id="block-15">
+    <div class="b-report-block__header" data-number="15">
+        <h3 class="b-report-block__title">Эффект от меры поддержки</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/textarea/textarea.twig" with {
+                id: "project-effect",
+                name: "project-effect",
+                rows: "3"
+            } %}
+            <label class="b-input-block__label" for="project-effect">Наименование</label>
+        </div>
+    </div>
+</section>
+{# 16 #}
+<section class="b-report-block j-report-block" id="block-16">
+    <div class="b-report-block__header" data-number="16">
+        <h3 class="b-report-block__title">Измерение, млн руб.</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-measure",
+                name: "project-measure",
+                modify: "b-input-text_type_numeric"
+            } %}
+            <label class="b-input-block__label" for="project-measure">Сумма</label>
+        </div>
+    </div>
+</section>
+{# 17 #}
+<section class="b-report-block j-report-block" id="block-17">
+    <div class="b-report-block__header" data-number="17">
+        <h3 class="b-report-block__title">Плановый год начала реализации инвестиционной стадии проекта</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-year-invest-start",
+                name: "project-year-invest-start",
+                modify: "b-input-text_type_numeric"
+            } %}
+            <label class="b-input-block__label" for="project-year-invest-start">Год</label>
+        </div>
+    </div>
+</section>
+{# 18 #}
+<section class="b-report-block j-report-block" id="block-18">
+    <div class="b-report-block__header" data-number="18">
+        <h3 class="b-report-block__title">Плановый год окончания реализации инвестиционной стадии проекта</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-year-invest-end",
+                name: "project-year-invest-end",
+                modify: "b-input-text_type_numeric"
+            } %}
+            <label class="b-input-block__label" for="project-year-invest-end">Год</label>
+        </div>
+    </div>
+</section>
+{# 19 #}
+<section class="b-report-block j-report-block" id="block-19">
+    <div class="b-report-block__header" data-number="19">
+        <h3 class="b-report-block__title">Плановый год начала эксплуатационной стадии проекта</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-year-start",
+                name: "project-year-start",
+                modify: "b-input-text_type_numeric"
+            } %}
+            <label class="b-input-block__label" for="project-year-start">Год</label>
+        </div>
+    </div>
+</section>
+{# 20 #}
+<section class="b-report-block j-report-block" id="block-20">
+    <div class="b-report-block__header" data-number="20">
+        <h3 class="b-report-block__title">Плановый год выхода на проектную мощность</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-year-power",
+                name: "project-year-power",
+                modify: "b-input-text_type_numeric"
+            } %}
+            <label class="b-input-block__label" for="project-year-power">Год</label>
+        </div>
+    </div>
+</section>
+{# 21 #}
+<section class="b-report-block j-report-block" id="block-21">
+    <div class="b-report-block__header" data-number="21">
+        <h3 class="b-report-block__title">Срок реализации инвестиционной фазы, лет</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-years-realization",
+                name: "project-years-realization",
+                modify: "b-input-text_type_numeric"
+            } %}
+            <label class="b-input-block__label" for="project-years-realization">Число лет</label>
+        </div>
+    </div>
+</section>
+{# 22 #}
+<section class="b-report-block j-report-block" id="block-22">
+    <div class="b-report-block__header" data-number="22">
+        <h3 class="b-report-block__title">Временные новые рабочие места, чел.</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-input-block ">
+            {% include "../../forms/input-text/input-text.twig" with {
+                id: "project-people",
+                name: "project-people",
+                modify: "b-input-text_type_numeric"
+            } %}
+            <label class="b-input-block__label" for="project-people">Число человек</label>
+        </div>
+    </div>
+</section>
+{# 23 #}
+<section class="b-report-block j-report-block" id="block-23">
+    <div class="b-report-block__header" data-number="23">
+        <h3 class="b-report-block__title">Бюджетное финансирование,&#160;млн&#160;₽</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-report-block__subtitle">Всего</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-finance-all",
+                    name: "project-finance-all",
+                    modify: "b-input-text_type_numeric b-input-text_is_inactive j-taxes-total-all"
+                } %}
+                <label class="b-input-block__label" for="project-finance-all">Сумма</label>
+            </div>
+        </div>
+
+        <div class="b-report-block__subtitle"><strong>В том числе</strong></div>
+        <div class="b-report-block__subtitle">Финансирование из федерального бюджета (в т.ч. в рамках мер поддержки),&#160;млн&#160;₽</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block j-taxes-all" >
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-finance-federal",
+                    name: "project-finance-federal",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="project-finance-federal">Сумма</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">Финансирование из региональных бюджетов (в т.ч. в рамках мер поддержки),&#160;млн&#160;₽</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block  j-taxes-all">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-finance-regional",
+                    name: "project-finance-regional",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="project-finance-regional">Сумма</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">Финансирование из муниципальных бюджетов (в т.ч. в рамках мер поддержки),&#160;млн&#160;₽</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block  j-taxes-all">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-finance-local",
+                    name: "project-finance-local",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="project-finance-local">Сумма</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 24 #}
+<section class="b-report-block j-report-block" id="block-24">
+    <div class="b-report-block__header" data-number="24">
+        <h3 class="b-report-block__title">Собственные средства,&#160;млн&#160;₽</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-report-block__subtitle">Всего</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-funds-all",
+                    name: "project-funds-all",
+                    modify: "b-input-text_type_numeric b-input-text_is_inactive j-taxes-total-all"
+                } %}
+                <label class="b-input-block__label" for="project-funds-all">Сумма</label>
+            </div>
+        </div>
+
+        <div class="b-report-block__subtitle"><strong>В том числе</strong></div>
+        <div class="b-report-block__subtitle">Собственные средства частных инвесторов,&#160;млн&#160;₽</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block j-taxes-all" >
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-funds-private",
+                    name: "project-funds-private",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="project-funds-private">Сумма</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">Собственные средства государственных инвесторов, включая госкорпорации, государственные унитарные предприятия, компании со 100% государственным участием,&#160;млн&#160;₽</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block  j-taxes-all">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-funds-federal",
+                    name: "project-funds-federal",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="project-funds-federal">Сумма</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">Собственные средства государственных внебюджетных фондов,&#160;млн&#160;₽</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block  j-taxes-all">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-funds-nonbudget",
+                    name: "project-funds-nonbudget",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="project-funds-nonbudget">Сумма</label>
+            </div>
+        </div>
+    </div>
+</section>
+{# 25 #}
+<section class="b-report-block j-report-block" id="block-25">
+    <div class="b-report-block__header" data-number="25">
+        <h3 class="b-report-block__title">Привлеченные средства,&#160;млн&#160;₽</h3>
+    </div>
+    <div class="b-report-block__body">
+        <div class="b-report-block__subtitle">Всего</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-raised-all",
+                    name: "project-raised-all",
+                    modify: "b-input-text_type_numeric b-input-text_is_inactive j-taxes-total-all"
+                } %}
+                <label class="b-input-block__label" for="project-raised-all">Сумма</label>
+            </div>
+        </div>
+
+        <div class="b-report-block__subtitle"><strong>В том числе</strong></div>
+        <div class="b-report-block__subtitle">Банковские кредиты (в тч в рамках мер поддержки),&#160;млн&#160;₽</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block j-taxes-all" >
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-raised-bank",
+                    name: "project-raised-bank",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="project-raised-bank">Сумма</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">Иные заёмные средства (в тч в рамках мер поддержки),&#160;млн&#160;₽</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block  j-taxes-all">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-raised-loan",
+                    name: "project-raised-loan",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="project-raised-loan">Сумма</label>
+            </div>
+        </div>
+        <div class="b-report-block__subtitle">Иные привлечённые средства, (в тч в рамках мер поддержки),&#160;млн&#160;₽</div>
+        <div class="b-inputs-row">
+            <div class="b-input-block  j-taxes-all">
+                {% include "../../forms/input-text/input-text.twig" with {
+                    id: "project-raised-other",
+                    name: "project-raised-other",
+                    modify: "b-input-text_type_numeric"
+                } %}
+                <label class="b-input-block__label" for="project-raised-other">Сумма</label>
+            </div>
+        </div>
+    </div>
+</section>

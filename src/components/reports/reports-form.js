@@ -9,6 +9,7 @@ import templateForm4 from './templates/form-4.twig';
 import templateForm5 from './templates/form-5.twig';
 import templateForm6 from './templates/form-6.twig';
 import templateForm7 from './templates/form-7.twig';
+import templateForm8 from './templates/form-8.twig';
 import templateFormError from './templates/submit-error.twig';
 import templateResultBlock from './templates/result-block.twig';
 import Utils from '../../common/scripts/utils';
@@ -63,6 +64,9 @@ class ReportForm {
             template  : null
         }, {
             isVisited : false,
+            isApproved: false,
+            template  : null
+        }, {
             isApproved: false,
             template  : null
         }];
@@ -411,6 +415,9 @@ class ReportForm {
                 if (this.type !== 'readonly') {
                     this.createResultFormTemplate(template);
                 }
+                break;
+            case 7:
+                template.innerHTML = templateForm8();
                 break;
             default:
                 template.innerHTML = templateForm1();
