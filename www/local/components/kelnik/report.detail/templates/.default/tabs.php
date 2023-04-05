@@ -37,6 +37,11 @@
                 <input type="radio" name="reports-forms" value="form7" data-text="Ф-7 ТВД и ИД" id="form7-1" class="b-mini-filter__input">
                 <label for="form7-1" class="b-mini-filter__fake" data-scroll-target="#reports-filter-top">Ф-7 ТВД и&nbsp;ИД</label>
             </div>
+
+            <div class="b-mini-filter__item">
+                <input type="radio" name="reports-forms" value="form8" data-text="Ф-8 Проекты" id="form8-1" class="b-mini-filter__input">
+                <label for="form8-1" class="b-mini-filter__fake" data-scroll-target="#reports-filter-top">Ф-8 Проекты</label>
+            </div>
         </div>
     </div>
 </form>

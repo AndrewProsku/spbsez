@@ -109,8 +109,8 @@
     <? $APPLICATION->ShowHeadStrings(); ?>
     <? $APPLICATION->ShowHeadScripts(); ?>
     <script defer src="/scripts/app.js?v1"></script>
-    <script defer src="/scripts/smooth-scrollbar.js"></script>
-    <script defer src="/scripts/custom.js"></script>
+    <script defer src="/local/templates/kelnik/scripts/smooth-scrollbar.js"></script>
+    <script defer src="/local/templates/kelnik/scripts/custom.js"></script>
 
 </body>
 </html>

@@ -14,6 +14,7 @@ $MESS['KELNIK_REPORT_FIELDS_FORM_4'] = 'Ф-4 Аренда';
 $MESS['KELNIK_REPORT_FIELDS_FORM_5'] = 'Ф-5 ППТ, ТВ и ПТ';
 $MESS['KELNIK_REPORT_FIELDS_FORM_6'] = 'Ф-6 ТВ-3';
 $MESS['KELNIK_REPORT_FIELDS_FORM_7'] = 'Ф-7 ТВД и ИД';
+$MESS['KELNIK_REPORT_FIELDS_FORM_8'] = 'Ф-8 Проекты';
 
 $MESS['KELNIK_REPORT_BTN_DONE'] = 'Принять';
 $MESS['KELNIK_REPORT_BTN_DECLINE'] = 'Отклонить';
@@ -148,3 +149,6 @@ $MESS['KELNIK_REPORT_FIELDS_7-1-1'] = 'Вид результата';
 $MESS['KELNIK_REPORT_FIELDS_7-1-2'] = 'Краткое описание результата ИД ';
 $MESS['KELNIK_REPORT_FIELDS_7-1-3'] = 'Дата регистрации результата ИД';
 $MESS['KELNIK_REPORT_FIELDS_7-1-4'] = 'Информация о коммерциализации результатов ИД';
+
+$MESS['KELNIK_REPORT_FIELDS_8-1'] = 'Проектная категория';
+$MESS['KELNIK_REPORT_FIELDS_8-1-1'] = 'Наименование';

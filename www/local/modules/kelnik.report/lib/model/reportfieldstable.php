@@ -23,6 +23,7 @@ class ReportFieldsTable extends DataManager
     public const FORM_INDICATORS = 4;
     public const FORM_ADDITIONAL_INDICATORS = 5;
     public const FORM_RESULT = 6;
+    public const FORM_PROJECTS = 7;
 
     public const FIELD_CONSTRUCTION_FILE = 'construction-permission-file';
     public const FIELD_CONSTRUCTION_DATE = 'construction-permission-date';
@@ -293,12 +294,12 @@ class ReportFieldsTable extends DataManager
                                 'id' => 'revenue-year',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-3'),
                                 'type' => 'float'
-                            ],                            
+                            ],
                             [
                                 'id' => 'extra-title-for-revenue',
                                 'extra-title' => true,
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-5'),
-                            ],                            
+                            ],
                             [
                                 'id' => 'revenue-year-extra',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_1-5-2'),
@@ -761,6 +762,21 @@ class ReportFieldsTable extends DataManager
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_7-1-4'),
                                 'type' => 'longText'
                             ]
+                        ]
+                    ]
+                ]
+            ],
+            self::FORM_PROJECTS => [
+                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_FORM_8'),
+                'blocks' => [
+                    [
+                        'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-1'),
+                        'fields' => [
+                            [
+                                'id' => 'project-category',
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-1-1'),
+                                'type' => 'text'
+                            ],
                         ]
                     ]
                 ]

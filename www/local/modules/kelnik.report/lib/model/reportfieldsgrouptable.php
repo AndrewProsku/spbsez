@@ -18,6 +18,7 @@ class ReportFieldsGroupTable extends DataManager
     public const TYPE_GROUP = 'groups';
     public const TYPE_INNOVATION = 'innovations';
     public const TYPE_RESULTS = 'results';
+    public const TYPE_PROJECTS = 'projects';
 
     /**
      * @return string
@@ -86,6 +87,9 @@ class ReportFieldsGroupTable extends DataManager
             ],
             self::TYPE_RESULTS => [
                 ReportFieldsTable::FORM_RESULT
+            ],
+            self::TYPE_PROJECTS => [
+                ReportFieldsTable::FORM_PROJECTS
             ]
         ];
     }
