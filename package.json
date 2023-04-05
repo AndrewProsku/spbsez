@@ -108,6 +108,7 @@
     "object-fit-images": "^3.2.4",
     "particles.js": "^2.0.0",
     "perfect-scrollbar": "^1.4.0",
+    "postcss-selector-parser": "^6.0.11",
     "screenfull": "^3.3.3"
   }
 }
