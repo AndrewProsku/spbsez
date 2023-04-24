@@ -3,9 +3,9 @@ define("BX_USE_MYSQLI", true);
 define("DBPersistent", false);
 $DBType = "mysql";
 $DBHost = "localhost";
-$DBLogin = "spbsez";
-$DBPassword = "a4e178c1!$90";
-$DBName = "spbsez";
+$DBLogin = "mysql";
+$DBPassword = "mysql";
+$DBName = "spbsez_test";
 $DBDebug = true;
 $DBDebugToFile = false;
 
@@ -26,4 +26,5 @@ define("BX_DIR_PERMISSIONS", 0755);
 @umask(~BX_DIR_PERMISSIONS);
 @ini_set("memory_limit", "512M");
 define("BX_DISABLE_INDEX_PAGE", true);
+define('REPORTS_DIR', 'D:/OpenServer/domains/spbsez/spbsez/www/upload/reports/');
 ?>

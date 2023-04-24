@@ -109,6 +109,9 @@ class SitesTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_MULTISITE_PRESS_CONTACT_EN')
                 ]
             ),
+            new StringField('PROJECT_MINISTER', [
+                'title' => Loc::getMessage('KELNIK_MULTISITE_PROJECT_MINISTER'),
+            ]),
 
             // SEO
 //            new StringField('SEO_TITLE', [

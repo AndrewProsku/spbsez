@@ -26,3 +26,4 @@ $MESS['KELNIK_MULTISITE_SMTP_USE'] = 'Использовать SMTP';
 $MESS['KELNIK_MULTISITE_SMTP_HOST'] = 'Адрес сервера';
 $MESS['KELNIK_MULTISITE_SMTP_USER'] = 'Пользователь';
 $MESS['KELNIK_MULTISITE_SMTP_PWD'] = 'Пароль';
+$MESS['KELNIK_MULTISITE_PROJECT_MINISTER'] = 'Курирующий заместитель Министра';

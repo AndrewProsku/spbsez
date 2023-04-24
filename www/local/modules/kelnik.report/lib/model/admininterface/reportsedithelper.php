@@ -14,7 +14,7 @@ use Kelnik\Report\Model\StatusTable;
 use Kelnik\Userdata\Profile\Profile;
 use Kelnik\Messages\Model\MessagesChatTable;
 use Kelnik\Messages\Model\MessagesChat;
-use Bitrix\Main\Request; 
+use Bitrix\Main\Request;
 use Bitrix\Main\Context;
 
 ini_set('max_execution_time', 900);
@@ -94,16 +94,16 @@ class ReportsEditHelper extends AdminEditHelper
             LocalRedirect(ReportsListHelper::getUrl());
         } else {
             $this->report->setIsRedacting(true);
-            $this->report->save();   
+            $this->report->save();
         }
 
         //Сохраняем сообщение в чате
         $request = Context::getCurrent()->getRequest();
         $chatMessage = $request->getPost("chatMessage");
-        global $USER;        
+        global $USER;
         if (!empty($chatMessage)) {
             $chat = new MessagesChat;
-            //ищем ИД сообщения в тексте ответа 
+            //ищем ИД сообщения в тексте ответа
             preg_match_all("/#(.*)#/U",  $chatMessage, $matches);
             $cleanAnswer = trim(str_replace($matches[0], '', $chatMessage));
             if ($matches[1][0] > 0) {
@@ -124,7 +124,7 @@ class ReportsEditHelper extends AdminEditHelper
                  ->setDateCreated(new DateTime());
             if ($chat->save()) {
                 //отправляем уведомление админу резидента
-                $residentAdmin = \CUser::GetByID($this->report->getUserId())->Fetch();              
+                $residentAdmin = \CUser::GetByID($this->report->getUserId())->Fetch();
                 \Bitrix\Main\Mail\Event::send(array(
                     'EVENT_NAME' => 'CHAT_REPORT_RESIDENT',
                     'LID' => 's1',
@@ -138,23 +138,23 @@ class ReportsEditHelper extends AdminEditHelper
         }
 
         //Получаем сообщения для отчёта
-        $this->messagesChat = MessagesChatTable::getChatMessagesByReport($this->data['ID']); 
+        $this->messagesChat = MessagesChatTable::getChatMessagesByReport($this->data['ID']);
         foreach ($this->messagesChat as $k => &$message) {
             /*if ($message['PARENT_ID']) {
-                $parentMessage = MessagesChatTable::getChatMessageById($message['PARENT_ID']);                
-                $parentMessageUserName = $this->getUserName($parentMessage); 
+                $parentMessage = MessagesChatTable::getChatMessageById($message['PARENT_ID']);
+                $parentMessageUserName = $this->getUserName($parentMessage);
                 $message['PARENT_MESSAGE'] = $parentMessageUserName . ': ' . $parentMessage['TEXT'];
             }*/
 
-            if ($message['FIELD_ID']) {                         
+            if ($message['FIELD_ID']) {
                 $field = ReportFieldsTable::getList()
                     ->fetchCollection()
                     ->getByPrimary($message['FIELD_ID']);
                 $fieldBlockTitle = ReportFieldsTable::getFormBlockTitle($field->getName(), $field->getFormNum());
-                $message['PARENT_MESSAGE'] = 'Ф-' . ($field->getFormNum() + 1) . ', блок ' . $fieldBlockTitle;                  
+                $message['PARENT_MESSAGE'] = 'Ф-' . ($field->getFormNum() + 1) . ', блок ' . $fieldBlockTitle;
             }
 
-            $message['USER_NAME'] = $this->getUserName($message);                                           
+            $message['USER_NAME'] = $this->getUserName($message);
         }
 
         foreach ($this->messagesChat as $k => &$message) {
@@ -209,7 +209,7 @@ class ReportsEditHelper extends AdminEditHelper
                          ->setDateCreated(new DateTime());
                     $chat->save();
                 }
-            }            
+            }
 
             return $this->report->save();
         }
@@ -243,6 +243,10 @@ class ReportsEditHelper extends AdminEditHelper
 
         $formConfig = ReportFieldsTable::getFormConfig();
         $stages = \Kelnik\Report\Model\ReportFieldsTable::getStages();
+        $okvedSections = \Kelnik\Report\Model\ReportFieldsTable::getOkvedSections();
+        $okvedGroups = \Kelnik\Report\Model\ReportFieldsTable::getOkvedGroups();
+        $okvedCodes = \Kelnik\Report\Model\ReportFieldsTable::getOkvedCodes();
+        $projectAreas = \Kelnik\Report\Model\ReportFieldsTable::getProjectAreas();
         $formDefaults = [
             ReportFieldsTable::FORM_TAXES,
             ReportFieldsTable::FORM_RESULT,
@@ -306,7 +310,7 @@ class ReportsEditHelper extends AdminEditHelper
         );
     }
 
-    public function getUserName($message) 
+    public function getUserName($message)
     {
         if ($message['IS_ADMIN'] == 1) {
             return "Администратор";

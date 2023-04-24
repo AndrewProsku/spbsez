@@ -13,7 +13,7 @@ class ProfileInfo {
 
         this.adminInputs = Array.from(this.$adminInfo.querySelectorAll('input'));
         if (this.$companyInfo) {
-            this.companyInputs = Array.from(this.$companyInfo.querySelectorAll('input'));
+            this.companyInputs = Array.from(this.$companyInfo.querySelectorAll('input')).concat(Array.from(this.$companyInfo.querySelectorAll('textarea')));
         }
 
         this.messageInputClass = 'b-form-block__error-text';
@@ -183,6 +183,9 @@ class ProfileInfo {
         if (data.UF_OWNER_FIO) {
             that.$companyInfo.querySelector('#company-ceo').value = data.UF_OWNER_FIO;
         }
+        if (data.WORK_NOTES) {
+            that.$companyInfo.querySelector('#company-notes').value = data.WORK_NOTES;
+        }
     }
 
     bindRemoveContact() {
@@ -227,6 +230,16 @@ class ProfileInfo {
     onChange(input) {
         const dataToSend = `action=update&${$(input).serialize()}`;
         const that = this;
+
+        if (input.id === 'company-inn') {
+            if (input.value && input.value.length !== 10) {
+                that.showErrorMessage(input, 'Значение должно состоять из 10 цифр.');
+
+                return false;
+            } else {
+                that.removeErrorMessage(input);
+            }
+        }
 
         Utils.send(dataToSend, '/api/profile/', {
             success(response) {

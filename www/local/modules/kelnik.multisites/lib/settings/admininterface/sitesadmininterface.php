@@ -76,6 +76,10 @@ class SitesAdminInterface extends AdminInterface
                         'WIDGET' => new StringWidget(),
                         'SIZE'   => '60',
                     ],
+                    'PROJECT_MINISTER'=> [
+                        'WIDGET' => new StringWidget(),
+                        'SIZE'   => '60',
+                    ],
                     'SOCIAL_INST'     => [
                         'WIDGET' => new StringWidget(),
                         'SIZE'   => '60',

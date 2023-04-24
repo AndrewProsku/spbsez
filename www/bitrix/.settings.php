@@ -44,9 +44,9 @@ return array (
       'default' => 
       array (
         'host' => 'localhost',
-        'database' => 'spbsez',
-        'login' => 'spbsez',
-        'password' => 'a4e178c1!$90',
+        'database' => 'spbsez_test',
+        'login' => 'mysql',
+        'password' => 'mysql',
         'className' => '\\Bitrix\\Main\\DB\\MysqliConnection',
         'options' => 2,
       ),

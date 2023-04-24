@@ -29,15 +29,29 @@ $i = 1;
 
         <?php foreach ($block['fields'] as $field): ?>
             <?php
-                if (!isset($field['id']) || !empty($field['excludeAdmin'])):
-                    continue;
-                endif;
+            if (!isset($field['id']) || !empty($field['excludeAdmin'])):
+                continue;
+            endif;
 
-                $val = $this->getValue($field['id'], 0, $formNum);
+            $val = $this->getValue($field['id'], 0, $formNum);
 
-                if (!empty($field['type']) && $field['type'] == 'boolean') {
-                    $val = $val == 'yes' ? 'Да' : 'Нет';
-                }
+            if (!empty($field['type']) && $field['type'] == 'boolean') {
+                $val = $val == 'yes' ? 'Да' : 'Нет';
+            }
+
+            if ($field['id'] == 'project-okved') {
+                $val = \Kelnik\Helpers\ArrayHelper::getValue($okvedSections, $val);
+            }
+            if ($field['id'] == 'project-group-okved') {
+                $val = \Kelnik\Helpers\ArrayHelper::getValue($okvedGroups, $val);
+            }
+            if ($field['id'] == 'project-code-okved') {
+                $val = \Kelnik\Helpers\ArrayHelper::getValue($okvedCodes, $val);
+            }
+            if ($field['id'] == 'project-area') {
+                $val = \Kelnik\Helpers\ArrayHelper::getValue($projectAreas, $val);
+            }
+
             ?>
         <?php if($field['extra-title']) :?>
                 <div class="b-report-block__header__extra" style="height: 36px;flex: 0 0 100%;">

@@ -447,3 +447,23 @@
 2020-10-12 14:13:46 -  - exec CUpdateClient::GetHTTPPage
 2020-10-12 14:13:46 -  - TIME GetUpdatesList(request) 0.336 sec
 2020-10-12 14:13:46 -  - exec CUpdateClient::ParseServerData
+2023-04-10 17:05:44 -  - exec CUpdateClient::GetUpdatesList
+2023-04-10 17:05:44 -  - exec CUpdateClient::CollectRequestData
+2023-04-10 17:05:44 -  - LICENSE_KEY=X&lang=ru&SUPD_VER=18.1.3&VERSION=18.1.3&TYPENC=F&SUPD_STS=3&SUPD_URS=0&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=spbsez.test&CHHB=spbsez.test&CSAB=127.0.0.1&SUID=df2485f0460456c574493e35326b704b&CANGZIP=Y&CLIENT_PHPVER=7.1.33&stable=Y&NGINX=Y&rerere=Y&bitm_main=18.1.3&bitm_b24connector=18.0.0&bitm_bitrixcloud=18.5.0&bitm_calendar=18.0.0&bitm_clouds=18.0.0&bitm_compression=16.0.0&bitm_fileman=18.0.4&bitm_form=18.0.0&bitm_forum=18.0.3&bitm_highloadblock=18.5.0&bitm_iblock=18.5.4&bitm_im=18.1.5&bitm_landing=18.4.31&bitm_mobileapp=18.0.2&bitm_perfmon=18.5.0&bitm_photogallery=18.0.0&bitm_rest=18.5.2&bitm_scale=17.5.0&bitm_search=18.5.0&bitm_security=18.5.0&bitm_seo=18.5.0&bitm_socialservices=18.0.3&bitm_subscribe=17.5.0&bitm_translate=16.5.0&bitm_ui=18.0.1&bitm_vote=17.5.1&bitl_de=20140526&bitl_en=&bitl_ru=&bitl_ch=&SUPD_SRS=RU&SUPD_CMP=N&SALE_15=Y&LICENSE_SIGNED=%7Enew_license18_0_sign-Y
+2023-04-10 17:05:44 -  - exec CUpdateClient::GetHTTPPage
+2023-04-10 17:05:45 -  - TIME GetUpdatesList(request) 0.75 sec
+2023-04-10 17:05:45 -  - exec CUpdateClient::ParseServerData
+2023-04-10 17:05:45 -  - exec CUpdateClient::executeCounters
+2023-04-10 17:05:45 -  - exec CUpdateClient::CollectRequestData
+2023-04-10 17:05:45 -  - LICENSE_KEY=X&lang=ru&SUPD_VER=18.1.3&VERSION=18.1.3&TYPENC=F&SUPD_STS=3&SUPD_URS=0&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=spbsez.test&CHHB=spbsez.test&CSAB=127.0.0.1&SUID=df2485f0460456c574493e35326b704b&CANGZIP=Y&CLIENT_PHPVER=7.1.33&stable=Y&NGINX=Y&rerere=Y&bitm_main=18.1.3&bitm_b24connector=18.0.0&bitm_bitrixcloud=18.5.0&bitm_calendar=18.0.0&bitm_clouds=18.0.0&bitm_compression=16.0.0&bitm_fileman=18.0.4&bitm_form=18.0.0&bitm_forum=18.0.3&bitm_highloadblock=18.5.0&bitm_iblock=18.5.4&bitm_im=18.1.5&bitm_landing=18.4.31&bitm_mobileapp=18.0.2&bitm_perfmon=18.5.0&bitm_photogallery=18.0.0&bitm_rest=18.5.2&bitm_scale=17.5.0&bitm_search=18.5.0&bitm_security=18.5.0&bitm_seo=18.5.0&bitm_socialservices=18.0.3&bitm_subscribe=17.5.0&bitm_translate=16.5.0&bitm_ui=18.0.1&bitm_vote=17.5.1&bitl_de=20140526&bitl_en=&bitl_ru=&bitl_ch=&SUPD_SRS=RU&SUPD_CMP=N&SALE_15=Y&LICENSE_SIGNED=%7Enew_license18_0_sign-Y&query_type=counter&cntr_result[406]=0&cntr_result[408]=0
+2023-04-10 17:05:45 -  - exec CUpdateClient::GetHTTPPage
+2023-04-10 17:05:46 -  - TIME executeCounters 0.336 sec
+2023-04-18 12:42:09 -  - exec CUpdateClient::GetUpdatesList
+2023-04-18 12:42:09 -  - exec CUpdateClient::CollectRequestData
+2023-04-18 12:42:09 -  - LICENSE_KEY=X&lang=ru&SUPD_VER=18.1.3&VERSION=18.1.3&TYPENC=F&SUPD_STS=3&SUPD_URS=0&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=spbsez.test&CHHB=spbsez.test&CSAB=127.0.0.1&SUID=df2485f0460456c574493e35326b704b&CANGZIP=Y&CLIENT_PHPVER=7.1.33&stable=Y&NGINX=Y&rerere=Y&bitm_main=18.1.3&bitm_b24connector=18.0.0&bitm_bitrixcloud=18.5.0&bitm_calendar=18.0.0&bitm_clouds=18.0.0&bitm_compression=16.0.0&bitm_fileman=18.0.4&bitm_form=18.0.0&bitm_forum=18.0.3&bitm_highloadblock=18.5.0&bitm_iblock=18.5.4&bitm_im=18.1.5&bitm_landing=18.4.31&bitm_mobileapp=18.0.2&bitm_perfmon=18.5.0&bitm_photogallery=18.0.0&bitm_rest=18.5.2&bitm_scale=17.5.0&bitm_search=18.5.0&bitm_security=18.5.0&bitm_seo=18.5.0&bitm_socialservices=18.0.3&bitm_subscribe=17.5.0&bitm_translate=16.5.0&bitm_ui=18.0.1&bitm_vote=17.5.1&bitl_de=20140526&bitl_en=&bitl_ru=&bitl_ch=&SUPD_SRS=RU&SUPD_CMP=N&SALE_15=Y&LICENSE_SIGNED=%7Enew_license18_0_sign-Y
+2023-04-18 12:42:09 -  - exec CUpdateClient::GetHTTPPage
+2023-04-18 12:43:12 - ERRCONN - Error connecting 2 www.bitrixsoft.com: [10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера.
+
+2023-04-18 12:43:12 -  - TIME GetUpdatesList(request) 62.837 sec
+2023-04-18 12:43:12 - GUL02 - Ошибка соединения с сервером обновлений: [10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера.
+. 

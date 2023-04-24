@@ -66,7 +66,11 @@
                     <label for="company-resident" class="b-form-block__label">Резидент</label>
                     <span class="b-form-block__error-text">Текст подсказки</span>
                 </div>
-
+                <div class="b-input-block textarea-block">
+                    <textarea id="company-notes" class="b-input-textarea" name="profile[WORK_NOTES]"></textarea>
+                    <label for="company-notes" class="b-form-block__label">Описание компании</label>
+                    <span class="b-form-block__error-text">Текст подсказки</span>
+                </div>
                 <div class="b-form-block">
                     <input id="company-inn"
                             class="b-input-text"

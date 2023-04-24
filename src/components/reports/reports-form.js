@@ -124,6 +124,62 @@ class ReportForm {
                 this.submitReports(that);
             });
         }
+
+        this.registerIsFilledEvent();
+        this.registerChangeEvent();
+    }
+
+    registerIsFilledEvent() {
+        const _this = this;
+        document.addEventListener('isFilled', (e) => {
+            let fieldValue = document.querySelector('#' + e.target.id).value;
+            let errorInfo = {
+                'project-description': 'Описание проекта – полное наименование реализуемого проекта в соответствии с бизнес-планом и соглашением об осуществлении деятельности. Для автоматического заполнения поля добавьте описание проекта в профиле компании.',
+                'project-inn'        : 'Поле обязательно для заполнения. Для автоматического заполнения поля, заполните поле ИНН в профиле компании.'
+            };
+            if (!fieldValue.length) {
+                _this.showErrorPopup(e, errorInfo[e.target.id]);
+            } else {
+                _this.hideErrorPopup(e);
+            }
+        });
+    }
+
+    registerChangeEvent() {
+        const _this = this;
+        document.addEventListener('change', (e) => {
+            let fieldValue = document.querySelector('#' + e.target.id).value;
+            if (e.target.id === 'project-inn') {
+                if (fieldValue.length && fieldValue.length !== 10) {
+                    _this.showErrorPopup(e, 'Значение должно состоять из 10 цифр.');
+                } else {
+                    _this.hideErrorPopup(e);
+                }
+            }
+            if (e.target.id === 'project-description') {
+                if (fieldValue.length) {
+                    _this.hideErrorPopup(e);
+                }
+            }
+        });
+    }
+
+    showErrorPopup(e, text) {
+        e.target.closest('.b-input-block').classList.add('error-field');
+        const popupError = document.createElement('div');
+        e.target.closest('.b-input-block').append(popupError);
+        popupError.classList.add('popup-error');
+        popupError.innerText = text;
+        e.target.closest('.b-report-block').classList.add('b-report-block_status_approved__hidden');
+    }
+
+    hideErrorPopup(e) {
+        e.target.closest('.b-input-block').classList.remove('error-field');
+        const errorPopup = e.target.closest('.b-input-block').querySelector('.popup-error');
+        if (errorPopup) {
+            errorPopup.remove();
+            e.target.closest('.b-report-block').classList.remove('b-report-block_status_approved__hidden');
+        }
     }
 
     initCommentsBlock(formID) {
@@ -163,6 +219,7 @@ class ReportForm {
                 if (response.request.status === that.FAIL_STATUS) {
                     return;
                 }
+
                 const responseForms = response.data.forms;
 
                 if (response.data.NAME) {
@@ -253,10 +310,10 @@ class ReportForm {
         }
     }
 
-    sendNewValues(input) {
+    sendNewValues(input, formId = 0) {
         const that = this;
 
-        Utils.send(`a=update&id=${this.reportId}&field=${input.id}&val=${input.value}`, that.baseUrl, {
+        Utils.send(`a=update&id=${this.reportId}&field=${input.id}&val=${input.value}&formNum=${formId}`, that.baseUrl, {
             success(response) {
                 if (response.request.status === that.SUCCESS_STATUS) {
                     that.toggleSubmitButton();
@@ -328,11 +385,34 @@ class ReportForm {
             this.setFormStatus(formNumber);
         }
 
+        // модификация полей
+        if (formNumber === 7) {
+            const brakes = parseFloat(this.forms[1].template.querySelector('#taxes-breaks-all').value) + parseFloat(this.forms[1].template.querySelector('#custom-duties-breaks-all').value);
+            const measure = this.forms[formNumber].template.querySelector('#project-measure');
+            const employees = this.forms[0].template.querySelector('#jobs-actual-all').value;
+            const people = this.forms[formNumber].template.querySelector('#project-people');
+
+            measure.value = brakes;
+            people.value = employees;
+            measure.closest('.b-report-block').dataset.approved = '';
+            people.closest('.b-report-block').dataset.approved = '';
+            this.sendNewValues(measure, formNumber);
+            this.sendNewValues(people, formNumber);
+
+            this.setFormStatus(formNumber);
+        }
+
         this.replaceForm(formNumber);
 
         const formBlocks = Array.from(this.forms[formNumber].template.querySelectorAll(`.${this.formsBlockClass}`));
 
         this.toggleApproveFormButton(formBlocks, formNumber);
+
+        const description = document.querySelector('#project-description');
+        const inn = document.querySelector('#project-inn');
+        let changeEvent = new Event("isFilled", {bubbles: true});
+        description.dispatchEvent(changeEvent);
+        inn.dispatchEvent(changeEvent);
     }
 
     _setTitlesInSelects() {
@@ -604,6 +684,7 @@ class ReportForm {
                     break;
                 }
                 case 'approved': {
+                    formBlocks[blockNum].classList.add('b-report-block_status_approved');
                     break;
                 }
                 default: {

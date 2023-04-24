@@ -401,7 +401,8 @@ class Profile
             'UF_EMAIL',
             'UF_OWNER_FIO',
             'UF_ADDR_LEGAL',
-            'UF_ADDR_POST'
+            'UF_ADDR_POST',
+            'WORK_NOTES'
         ];
     }
 

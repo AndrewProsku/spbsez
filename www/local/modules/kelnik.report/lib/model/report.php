@@ -185,8 +185,8 @@ class Report extends EO_Reports
                             $extraTitle = array_search('extra-title-for-revenue', array_column($block['fields'], 'id'));
                             if(isset($block['fields'][$extraTitle]['value'])){
                                 continue;
-                            }   
-                                                    
+                            }
+
                             return false;
                         }
 
@@ -752,9 +752,23 @@ class Report extends EO_Reports
 
         $key = array_search($fieldName, array_column($fields, 'NAME', 'ID'));
 
-        return $key
+        $fieldValue = $key
                 ? ArrayHelper::getValue($fields, $key . '.' . $fieldReturn, '')
                 : '';
+
+        if ($fieldReturn == 'VALUE') {
+            global $USER;
+            $profile = Profile::getInstance((int)$USER->GetID());
+            $prefilledValues = [
+                'project-description' => $profile->getField('WORK_NOTES'),
+                'project-inn' => $profile->getField('UF_INN')
+            ];
+            if ($fieldValue == '' && key_exists($fieldName, $prefilledValues)) {
+                $fieldValue = $prefilledValues[$fieldName];
+            }
+        }
+
+        return $fieldValue;
     }
 
     protected static function prepareFiles(array $fields)

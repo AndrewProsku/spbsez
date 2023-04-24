@@ -2,34 +2,25 @@
     <button type="button" class="b-report-form__delete j-delete-stage" data-stage-id="{{ stageID }}"></button>
 {% endif %}
 <div class="b-input-block b-report-stage-select  j-reports-form-select" data-stage-id="{{ stageID }}">
-    {% include "../../forms/select/select.twig" with {
-        id: "construction-stage["~ stageID ~"]",
-        name: "construction-stage["~ stageID ~"]",
-        placeholder: true,
-        placeholderText: " ",
-        options: [{
-            value: 'stage1',
-            text: 'Заключение договора аренды'
-        },{
-            value: 'stage2',
-            text: 'Землеустроительные работы'
-        },{
-            value: 'stage3',
-            text: 'Проектирование'
-        },{
-            value: 'stage4',
-            text: 'Строительство'
-        },{
-            value: 'stage5',
-            text: 'Получение разрешения на ввод в эксплуатацию'
-        },{
-            value: 'stage6',
-            text: 'Операционная деятельность'
-        },{
-            value: 'stage7',
-            text: 'Строительство не предусмотрено'
-        }]
-    } %}
+    <div class="b-select">
+        <div class="b-select__wrapper">
+            <select
+                    id="construction-stage[{{ stageID }}]"
+                    class="b-select__list j-select"
+                    name="construction-stage[{{ stageID }}]"
+                    data-placeholder=" "
+            >
+                <option></option>
+                <option value="stage1">Заключение договора аренды</option>
+                <option value="stage2">Землеустроительные работы</option>
+                <option value="stage3">Проектирование</option>
+                <option value="stage4">Строительство</option>
+                <option value="stage5">Получение разрешения на ввод в эксплуатацию</option>
+                <option value="stage6">Операционная деятельность</option>
+                <option value="stage7">Строительство не предусмотрено</option>
+            </select>
+        </div>
+    </div>
     <label class="b-input-block__label" for="construction-stage[{{ stageID }}]">
         Стадия строительства
     </label>

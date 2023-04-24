@@ -35,6 +35,7 @@ class ReportBlock {
         this.disabledInputClass = 'b-input-block_is_disabled';
         this.numericInputClass = 'b-input-text_type_numeric';
         this.dateInputClass = 'b-input-text_type_date';
+        this.integerInputClass = 'b-input-text_type_integer';
 
         /**
          * Данные о состоянии инпутов блока, полученные от сервера
@@ -64,11 +65,11 @@ class ReportBlock {
             'construction-stage': 'initConstructionStageBlock',
             'export-countries'  : 'initExportCountriesBlock',
             innovations         : 'initInnovationsBlock',
-            results             : 'initResultBlock'
+            results             : 'initResultBlock',
+            finances            : 'initFinancesBlock'
         };
 
         const numericInputs = this.target.querySelectorAll(`.${this.numericInputClass}`);
-
 
         if (numericInputs.length) {
             inputmask({
@@ -84,6 +85,15 @@ class ReportBlock {
                     }
                 }
             }).mask(numericInputs);
+        }
+
+        const integerInputs = this.target.querySelectorAll(`.${this.integerInputClass}`);
+
+        if (integerInputs.length) {
+            inputmask({
+                alias         : 'numeric',
+                rightAlign    : false
+            }).mask(integerInputs);
         }
 
         mediator.subscribe('formApproved', (formID) => {
@@ -186,6 +196,28 @@ class ReportBlock {
         });
     }
 
+    initFinancesBlock(data) {
+        this.inputsData = data;
+        const taxesAllInput = this.target.querySelector('.j-taxes-total-all');
+        let allTaxes = 0;
+        const NOT_FOUND = -1;
+
+        const taxesAllInputs = Array.from(this.target.querySelectorAll('.j-taxes-all input'));
+
+        taxesAllInputs.forEach((input, i, inputs) => {
+            this.calculateTaxes(input, inputs, taxesAllInput);
+        });
+
+        this.inputsData.fields.forEach((field) => {
+            if (field.id.indexOf('-all') !== NOT_FOUND) {
+                allTaxes += Number(field.value);
+            }
+        });
+        taxesAllInput.value = allTaxes;
+
+        this.checkTaxesIsZero(taxesAllInput);
+    }
+
     initTaxesBlock(data) {
         this.inputsData = data;
         const taxesAllInput = this.target.querySelector('.j-taxes-total-all');
@@ -236,8 +268,9 @@ class ReportBlock {
                 allInputs.forEach((input) => {
                     newValue += Number(input.value.replace(RegExpNum, '').replace(RegExpDot, '.'));
                 });
-                resultInput.value = Math.round(newValue * 1000000) / 1000000;
+                resultInput.value = Math.round(newValue * 100) / 100;
                 this.checkTaxesIsZero(resultInput);
+                this.sendNewValue(resultInput);
 
                 return;
             }
@@ -355,7 +388,7 @@ class ReportBlock {
             disableSearch: true
         }).init();
         // eslint-disable-next-line no-magic-numbers
-        if (!this.isReadonly && (input.id.indexOf('construction-stage') !== -1)) {
+        if (!this.isReadonly && ((input.id.indexOf('construction-stage') !== -1) || (input.id.indexOf('project') !== -1))) {
             input.onchange = this.stageSelectHandler.bind(this);
         }
     }
@@ -654,7 +687,7 @@ class ReportBlock {
                          return 'filled';
                      }
                  }
-                
+
                  break;
             }
             case 'select-one': {

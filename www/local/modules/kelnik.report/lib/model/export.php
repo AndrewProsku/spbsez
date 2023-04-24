@@ -13,6 +13,7 @@ use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Style\Protection;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat as CellFormat;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
 
 Loc::loadMessages(__FILE__);
 
@@ -203,14 +204,14 @@ class Export
     protected function processForm0()
     {
         $sheet = $this->spreadsheet->getActiveSheet();
-        
+
         if ($this->isSingle) {
             $types = ReportsTable::getTypes();
             $sheet->setCellValue('L3', $types[$this->type] . ' ' . $this->year . ' года');
         } else {
             $sheet->setCellValue('L3', self::getCurrentDate());
         }
-        
+
         $valueToCell = [
             'D' => 'foreign-investors',
             'E' => 'investors-countries',
@@ -287,7 +288,7 @@ class Export
 
     protected function processForm1()
     {
-        $sheet = $this->spreadsheet->getActiveSheet();        
+        $sheet = $this->spreadsheet->getActiveSheet();
 
         if ($this->isSingle) {
             $types = ReportsTable::getTypes();
@@ -384,7 +385,7 @@ class Export
     protected function processForm2()
     {
         $sheet = $this->spreadsheet->getActiveSheet();
-        
+
         if ($this->isSingle) {
             $types = ReportsTable::getTypes();
             $sheet->setCellValue('G4', $types[$this->type] . ' ' . $this->year . ' года');
@@ -445,7 +446,7 @@ class Export
     protected function processForm3()
     {
         $sheet = $this->spreadsheet->getActiveSheet();
-        
+
         if ($this->isSingle) {
             $types = ReportsTable::getTypes();
             $sheet->setCellValue('E4', $types[$this->type] . ' ' . $this->year . ' года');
@@ -493,7 +494,7 @@ class Export
 
     protected function processForm4()
     {
-        $sheet = $this->spreadsheet->getActiveSheet();        
+        $sheet = $this->spreadsheet->getActiveSheet();
 
         if ($this->isSingle) {
             $types = ReportsTable::getTypes();
@@ -571,7 +572,7 @@ class Export
 
     protected function processForm5()
     {
-        $sheet = $this->spreadsheet->getActiveSheet();        
+        $sheet = $this->spreadsheet->getActiveSheet();
 
         if ($this->isSingle) {
             $types = ReportsTable::getTypes();
@@ -611,7 +612,7 @@ class Export
     protected function processForm6()
     {
         $sheet = $this->spreadsheet->getActiveSheet();
-        
+
         if ($this->isSingle) {
             $types = ReportsTable::getTypes();
             $sheet->setCellValue('E4', $types[$this->type] . ' ' . $this->year . ' года');
@@ -680,6 +681,114 @@ class Export
                 $sheet->mergeCells($col . $company[0] . ':' . $col . $company[1]);
             }
         }*/
+    }
+
+    protected function processForm7()
+    {
+        $sheet = $this->spreadsheet->getActiveSheet();
+
+        $types = ReportsTable::getTypes();
+        $sheet->setCellValue('A4', $types[$this->type] . ' ' . $this->year . ' года');
+
+        $valueToCell = [
+            'B' => 'project-category',
+            'C' => 'project-name',
+            'D' => 'project-description',
+            'E' => 'project-inn',
+            'F' => 'project-region',
+            'G' => 'project-okved',
+            'H' => 'project-group-okved',
+            'I' => 'project-code-okved',
+            'J' => 'project-area',
+            'K' => 'project-minister',
+            'L' => 'project-department',
+            'M' => 'project-mer',
+            'N' => 'project-maintain',
+            'O' => 'project-effect',
+            'P' => 'project-measure',
+            'Q' => 'project-year-invest-start',
+            'R' => 'project-year-invest-end',
+            'S' => 'project-year-start',
+            'T' => 'project-year-power',
+            'U' => 'project-years-realization',
+            'V' => 'project-people',
+            'W' => 'project-finance-all',
+            'X' => 'project-finance-federal',
+            'Y' => 'project-finance-regional',
+            'Z' => 'project-finance-local',
+            'AA' => 'project-funds-all',
+            'AB' => 'project-funds-private',
+            'AC' => 'project-funds-federal',
+            'AD' => 'project-funds-nonbudget',
+            'AE' => 'project-raised-all',
+            'AF' => 'project-raised-bank',
+            'AG' => 'project-raised-loan',
+            'AH' => 'project-raised-other'
+        ];
+
+        $floatCells = ['P', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH'];
+        $stringCells = ['E', 'Q', 'R', 'S', 'T'];
+
+        $okvedSections = \Kelnik\Report\Model\ReportFieldsTable::getOkvedSections();
+        $okvedGroups = \Kelnik\Report\Model\ReportFieldsTable::getOkvedGroups();
+        $okvedCodes = \Kelnik\Report\Model\ReportFieldsTable::getOkvedCodes();
+        $projectAreas = \Kelnik\Report\Model\ReportFieldsTable::getProjectAreas();
+
+        $rowNum = $start = 8;
+
+        foreach ($this->data as $company) {
+
+            if ($rowNum > $start) {
+                $this->copyRow($rowNum - 1, $rowNum);
+            }
+
+            $sheet->getRowDimension($rowNum)->setRowHeight(-1);
+            $sheet->setCellValue('A' . $rowNum, $rowNum - ($start - 1));
+
+            foreach ($valueToCell as $cellName => $valueName) {
+                $val = trim(ArrayHelper::getValue($company, 'FIELDS.0.' . $valueName));
+                if (in_array($cellName, $floatCells)) {
+                    $val = ReportFieldsTable::normalizeFloat($val);
+                }
+                if ($valueToCell[$cellName] == 'project-okved') {
+                    $val = \Kelnik\Helpers\ArrayHelper::getValue($okvedSections, $val);
+                }
+                if ($valueToCell[$cellName] == 'project-group-okved') {
+                    $val = \Kelnik\Helpers\ArrayHelper::getValue($okvedGroups, $val);
+                }
+                if ($valueToCell[$cellName] == 'project-code-okved') {
+                    $val = \Kelnik\Helpers\ArrayHelper::getValue($okvedCodes, $val);
+                }
+                if ($valueToCell[$cellName] == 'project-area') {
+                    $val = \Kelnik\Helpers\ArrayHelper::getValue($projectAreas, $val);
+                }
+
+                if (in_array($cellName, $stringCells)) {
+                    $sheet->setCellValueExplicit(
+                        $cellName . $rowNum,
+                        $val,
+                        DataType::TYPE_STRING
+                    );
+                } else {
+                    $sheet->setCellValue($cellName . $rowNum, $val);
+                }
+
+                //принудительно ставим формат ячеек, если из шаблона не подтягивается
+                if (in_array($cellName, $floatCells)) {
+                    $sheet->getStyle($cellName . $rowNum)->getNumberFormat()->setFormatCode(CellFormat::FORMAT_NUMBER_00);
+                }
+            }
+
+            /*if ($rowValue = self::getStages($company)) {
+                $cell = $sheet->getCell('J' . $rowNum);
+
+                $cell->setValue(implode(", \n", $rowValue));
+                $cell->getStyle()->getAlignment()->setWrapText(true);
+            }*/
+
+            $rowNum++;
+        }
+
     }
 
     /**
@@ -785,10 +894,10 @@ class Export
         $files = glob($dir . "*");
         $c = count($files);
         if (count($files) > 0) {
-            foreach ($files as $file) {      
+            foreach ($files as $file) {
                 if (file_exists($file)) {
                     unlink($file);
-                }   
+                }
             }
         }
 
