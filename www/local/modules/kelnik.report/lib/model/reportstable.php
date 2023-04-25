@@ -20,10 +20,10 @@ use Kelnik\Report\Events;
 use Kelnik\UserData\Profile\Profile;
 
 use Bitrix\Main\Loader;
-use Bitrix\Highloadblock as HL; 
+use Bitrix\Highloadblock as HL;
 use Bitrix\Main\Entity;
 
-Loader::includeModule('highloadblock'); 
+Loader::includeModule('highloadblock');
 
 Loc::loadMessages(__FILE__);
 
@@ -267,8 +267,8 @@ class ReportsTable extends DataManager
         //settings from HLIB for report periods
         $hlbl = 2;
         $hlblock = HL\HighloadBlockTable::getById($hlbl)->fetch();
-        $entity = HL\HighloadBlockTable::compileEntity($hlblock); 
-        $entity_data_class = $entity->getDataClass(); 
+        $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+        $entity_data_class = $entity->getDataClass();
         $rsData = $entity_data_class::getList(array(
            'select' => array('*'),
            'order' => array('ID' => 'ASC'),
@@ -314,7 +314,7 @@ class ReportsTable extends DataManager
 
         if (!empty($arPeriods['PRE_ANNUAL']['START']) && !empty($arPeriods['PRE_ANNUAL']['END'])) {
             $arStart = explode('.', $arPeriods['PRE_ANNUAL']['START']);
-            $arEnd = explode('.', $arPeriods['PRE_ANNUAL']['END']);            
+            $arEnd = explode('.', $arPeriods['PRE_ANNUAL']['END']);
             $preAnnualStart = mktime(0, 0, 0, $arStart[1], $arStart[0], $nextYear);
             $preAnnualEnd = mktime(0, 0, 0, $arEnd[1], $arEnd[0], $nextYear);
         } else {

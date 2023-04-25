@@ -419,7 +419,7 @@ class Report extends EO_Reports
                     $val = $field['VALUE'];
                 }else if($field['VALUE'] == null){
                     $val = null;
-                }else{
+                }else if (!$val) {
                     $val = 0;
                 }
 
