@@ -388,8 +388,11 @@ class ReportBlock {
             disableSearch: true
         }).init();
         // eslint-disable-next-line no-magic-numbers
-        if (!this.isReadonly && ((input.id.indexOf('construction-stage') !== -1) || (input.id.indexOf('project') !== -1))) {
+        if (!this.isReadonly && (input.id.indexOf('construction-stage') !== -1)) {
             input.onchange = this.stageSelectHandler.bind(this);
+        }
+        if (!this.isReadonly && (input.id.indexOf('project') !== -1)) {
+            input.onchange = this.projectSelectHandler.bind(this);
         }
     }
 
@@ -917,6 +920,28 @@ class ReportBlock {
                 console.error(error);
             }
         });
+    }
+
+    projectSelectHandler(event) {
+        if (Utils.keyExist(event.target.dataset, 'prefilled')) {
+            delete event.target.dataset.prefilled;
+            event.target.closest('.b-report-block').dataset.approved = '';
+            delete event.target.closest('.b-report-block').dataset.prefilled;
+        }
+
+        event.target.closest('.b-input-block').classList.remove(this.untouchedIputClass);
+        this.sendNewValue(event.target);
+
+        this.inputs = Array.from(this.target.querySelectorAll('select'));
+        this.inputs.forEach((input) => {
+            this.inputsData.fields.forEach((fieldData) => {
+                if (input.id === fieldData.id) {
+                    fieldData.isPreFilled = false;
+                }
+            });
+        });
+
+        this._getInputsValues(true);
     }
 
     stageSelectHandler(event) {

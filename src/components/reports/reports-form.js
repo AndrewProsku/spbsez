@@ -396,6 +396,8 @@ class ReportForm {
             people.value = employees;
             measure.closest('.b-report-block').dataset.approved = '';
             people.closest('.b-report-block').dataset.approved = '';
+            delete measure.closest('.b-report-block').dataset.prefilled;
+            delete people.closest('.b-report-block').dataset.prefilled;
             this.sendNewValues(measure, formNumber);
             this.sendNewValues(people, formNumber);
 
@@ -410,9 +412,13 @@ class ReportForm {
 
         const description = document.querySelector('#project-description');
         const inn = document.querySelector('#project-inn');
-        let changeEvent = new Event("isFilled", {bubbles: true});
-        description.dispatchEvent(changeEvent);
-        inn.dispatchEvent(changeEvent);
+        const changeEvent = new Event("isFilled", {bubbles: true});
+        if (description.length) {
+            description.dispatchEvent(changeEvent);
+        }
+        if (inn.length) {
+            inn.dispatchEvent(changeEvent);
+        }
     }
 
     _setTitlesInSelects() {
