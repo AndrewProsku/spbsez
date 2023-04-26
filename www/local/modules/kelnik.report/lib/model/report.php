@@ -434,6 +434,17 @@ class Report extends EO_Reports
                     $val = 'NULL';
                 }
 
+                $isPreFilled = (int) $rowId ? ReportFieldsTable::NO : ReportFieldsTable::YES;
+
+                $excludeFromPrefilled = ['project-finance-all', 'project-funds-all', 'project-raised-all'];
+                if (in_array(
+                    $field['NAME'],
+                    $excludeFromPrefilled
+                )
+                ) {
+                    $isPreFilled = ReportFieldsTable::NO;
+                }
+
                 $values[] = '(' .
                             implode(
                                 ', ',
@@ -442,9 +453,7 @@ class Report extends EO_Reports
                                     $sqlHelper->convertToDbInteger($this->getId()),
                                     $sqlHelper->convertToDbInteger($groupId),
                                     $sqlHelper->convertToDbInteger($field['FORM_NUM']),
-                                    $sqlHelper->convertToDbString(
-                                        (int) $rowId ? ReportFieldsTable::NO : ReportFieldsTable::YES
-                                    ),
+                                    $sqlHelper->convertToDbString($isPreFilled),
                                     $sqlHelper->convertToDbString($field['NAME']),
                                     $sqlHelper->convertToDbString($val)
                                 ]
