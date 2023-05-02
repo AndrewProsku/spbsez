@@ -387,7 +387,7 @@ class ReportForm {
 
         // модификация полей
         if (formNumber === 7) {
-            const brakes = parseFloat(this.forms[1].template.querySelector('#taxes-breaks-all').value) + parseFloat(this.forms[1].template.querySelector('#custom-duties-breaks-all').value);
+            const brakes = parseFloat(this.forms[1].template.querySelector('#taxes-breaks-all').value.replace(' ', '')) + parseFloat(this.forms[1].template.querySelector('#custom-duties-breaks-all').value.replace(' ', ''));
             const measure = this.forms[formNumber].template.querySelector('#project-measure');
             const employees = this.forms[0].template.querySelector('#jobs-actual-all').value;
             const people = this.forms[formNumber].template.querySelector('#project-people');
@@ -413,10 +413,10 @@ class ReportForm {
         const description = document.querySelector('#project-description');
         const inn = document.querySelector('#project-inn');
         const changeEvent = new Event("isFilled", {bubbles: true});
-        if (description.length) {
+        if (description && description.length) {
             description.dispatchEvent(changeEvent);
         }
-        if (inn.length) {
+        if (inn && inn.length) {
             inn.dispatchEvent(changeEvent);
         }
     }
