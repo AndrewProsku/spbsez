@@ -1,22 +1,24 @@
 {% for novelty in news %}
+    <!-- в novelty не передаётся значение - было бы неплохо разобраться, в чём дело -->
+    {% set article = news[loop.index0] %}
     <div class="b-news__item b-news-item">
-
         <div class="b-news-item__top">
             <div class="b-news-item__image">
-                <img src="{{ novelty.IMAGE_PREVIEW_PATH }}" alt="{{ novelty.NAME }}">
+                <img src="{{ article.IMAGE_PREVIEW_PATH }}" alt="{{ article.NAME }}">
             </div>
             <div class="b-news-item__title">
-                <a href="{{ novelty.DETAIL_PAGE_URL }}"><span>{{ novelty.NAME }}</span></a>
+                <a href="{{ article.DETAIL_PAGE_URL }}"><span>{{ article.NAME }}</span></a>
             </div>
         </div>
 
         <ul class="b-news-item__tags">
             <li class="b-news-item__date">
                 {% include '../media/time.svg.twig' %}
-                {{ novelty.DATE_SHOW_FORMAT }}
+                {{ article.DATE_SHOW_FORMAT }}
             </li>
 
-            {% for tag in novelty.TAGS %}
+            {% for tag in article.TAGS %}
+                {% set tag = article.TAGS[loop.index0] %}
                 <li><a href="#" class="j-news-tag" data-tag="{{ tag.ID }}">{{ tag.NAME }}</a></li>
             {% endfor %}
         </ul>

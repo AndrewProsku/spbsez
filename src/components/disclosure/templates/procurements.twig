@@ -1,4 +1,6 @@
 {% for procurement in elements %}
+    <!-- не передаётся значение - было бы неплохо разобраться, в чём дело -->
+    {% set procurement = elements[loop.index0] %}
     <div class="b-disclosure-content-item j-disclosure-content-item">
         <div class="b-disclosure-content-item__title">
             <a href="{{ procurement.LINK }}" class="b-link-line">{{ procurement.NAME }}</a>

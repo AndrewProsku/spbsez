@@ -1,4 +1,6 @@
 {% for file in elements %}
+    <!-- не передаётся значение - было бы неплохо разобраться, в чём дело -->
+    {% set file = elements[loop.index0] %}
     <div class="b-profile-document__item b-profile-document__item_ext_{{ file.FILE.EXT }}">
         <div class="b-profile-document__item-title">
             <a href="{{ file.FILE.SRC }}" class="b-profile-document__item-title-link b-link-line">{{ file.NAME }}</a>
