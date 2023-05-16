@@ -12,7 +12,7 @@ namespace Bex\Bbc;
  *
  * @author Nik Samokhvalov <nik@samokhvalov.info>
  */
-abstract class Basis extends \CBitrixComponent
+class Basis extends \CBitrixComponent
 {
     use Traits\Common;
 
@@ -72,10 +72,10 @@ abstract class Basis extends \CBitrixComponent
         if ($this->traitsAutoExecute)
         {
             $calledClass = get_called_class();
-            
+
             $classes = class_parents($calledClass);
             $classes[] = $calledClass;
-            
+
             foreach ($classes as $class)
             {
                 foreach (class_uses($class) as $trait)

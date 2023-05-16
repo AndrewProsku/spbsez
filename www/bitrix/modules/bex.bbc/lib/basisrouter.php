@@ -14,7 +14,7 @@ use Bitrix\Main;
  *
  * @author Nik Samokhvalov <nik@samokhvalov.info>
  */
-abstract class BasisRouter extends \CBitrixComponent
+class BasisRouter extends \CBitrixComponent
 {
     use Traits\Common;
 
