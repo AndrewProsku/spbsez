@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty('title', "Стратегия развития");
-$APPLICATION->SetTitle("Стратегия развития");
+$APPLICATION->SetPageProperty('title', "Стратегия устойчивого развития");
+$APPLICATION->SetTitle("Стратегия устойчивого развития");
 ?>
 
     <?$APPLICATION->IncludeComponent(
@@ -33,7 +33,7 @@ $APPLICATION->SetTitle("Стратегия развития");
                     "CACHE_TYPE" => "A",
                     "CODE" => "s_block_1"
                 )
-            );?>            
+            );?>
         </div>
 
         <div class="l-investors__post" id="principles">
@@ -45,7 +45,7 @@ $APPLICATION->SetTitle("Стратегия развития");
                     "CACHE_TYPE" => "A",
                     "CODE" => "s_block_2"
                 )
-            );?>           
+            );?>
         </div>
 
         <div class="l-investors__advantage" id="industry">
@@ -58,9 +58,9 @@ $APPLICATION->SetTitle("Стратегия развития");
                         "CACHE_TYPE" => "A",
                         "CODE" => "s_block_3"
                     )
-                );?>                
+                );?>
             </div>
-        </div>       
+        </div>
 
         <div class="l-investors__documents _strategy" id="documents">
             <? $APPLICATION->IncludeComponent(
