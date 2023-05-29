@@ -1890,8 +1890,10 @@ label.land-related.open, .land-related.open{
 	}
 }
 
-.b-page-submenu__item{
-	margin-right: 2.125%;
+.b-page-submenu__item {
+	margin-right: 0;
+	max-width: 15%;
+	text-align: center;
 }
 
 .b-page-submenu__item:last-child{
@@ -2040,3 +2042,8 @@ label.land-related.open, .land-related.open{
 .textarea-block .b-input-textarea {
 	border: none;
 }
+
+.b-page-submenu__list {
+	justify-content: space-between;
+}
+
