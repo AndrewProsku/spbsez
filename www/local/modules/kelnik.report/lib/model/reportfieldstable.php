@@ -969,7 +969,7 @@ class ReportFieldsTable extends DataManager
                             [
                                 'id' => 'project-measure',
                                 'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-15-1'),
-                                'type' => 'text'
+                                'type' => 'float'
                             ],
                         ]
                     ],
