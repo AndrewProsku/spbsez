@@ -51,6 +51,9 @@ $i = 1;
             if ($field['id'] == 'project-area') {
                 $val = \Kelnik\Helpers\ArrayHelper::getValue($projectAreas, $val);
             }
+            if ($field['id'] == 'project-measure') {
+                $val = \Kelnik\Report\Model\ReportFieldsTable::normalizeFloat($val);
+            }
 
             ?>
         <?php if($field['extra-title']) :?>
