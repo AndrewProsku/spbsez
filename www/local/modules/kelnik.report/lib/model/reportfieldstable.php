@@ -1070,17 +1070,17 @@ class ReportFieldsTable extends DataManager
                             ],
                             [
                                 'id' => 'project-funds-private',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-22-2'),
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-23-2'),
                                 'type' => 'float'
                             ],
                             [
                                 'id' => 'project-funds-federal',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-22-3'),
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-23-3'),
                                 'type' => 'float'
                             ],
                             [
                                 'id' => 'project-funds-nonbudget',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-22-4'),
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-23-4'),
                                 'type' => 'float'
                             ],
                         ]
@@ -1096,17 +1096,17 @@ class ReportFieldsTable extends DataManager
                             ],
                             [
                                 'id' => 'project-raised-bank',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-22-2'),
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-24-2'),
                                 'type' => 'float'
                             ],
                             [
                                 'id' => 'project-raised-loan',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-22-3'),
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-24-3'),
                                 'type' => 'float'
                             ],
                             [
                                 'id' => 'project-raised-other',
-                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-22-4'),
+                                'title' => Loc::getMessage('KELNIK_REPORT_FIELDS_8-24-4'),
                                 'type' => 'float'
                             ],
                         ]
