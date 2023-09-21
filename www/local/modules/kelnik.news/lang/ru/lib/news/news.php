@@ -19,3 +19,4 @@ $MESS['KELNIK_NEWS_DATE_MODIFY'] = 'Дата изменения';
 $MESS['KELNIK_NEWS_CAT_NAME'] = 'Категория';
 $MESS['KELNIK_NEWS_OBJECT'] = 'Объект';
 $MESS['KELNIK_NEWS_LANG'] = 'Язык';
+$MESS['KELNIK_NEWS_SHOW_SLIDER'] = 'Показывать навигацию слайдера';

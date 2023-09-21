@@ -139,6 +139,9 @@ class NewsAdminInterface extends AdminInterface
                         'MULTIPLE' => true,
                         'TITLE' => Loc::getMessage('KELNIK_NEWS_IMAGES')
                     ],
+                    'SHOW_SLIDER' => [
+                        'WIDGET' => new CheckboxWidget()
+                    ],
                     'TEXT' => [
                         'WIDGET' => new VisualEditorWidget(),
                         'HEADER' => false

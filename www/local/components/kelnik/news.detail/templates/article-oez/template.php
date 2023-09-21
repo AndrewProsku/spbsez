@@ -25,29 +25,31 @@
                         <div class="glide__track" data-glide-el="track">
                             <ul class="glide__slides">
                                 <?php foreach ($arResult['IMAGES'] as $img): ?>
-                                <li class="glide__slide">
-                                    <img src="<?= $img['SRC']; ?>" class="j-glide-slide-img" alt="">
-                                    <span class="glide__slide-description"><?= $img['DESCRIPTION']; ?></span>
-                                </li>
+                                    <li class="glide__slide">
+                                        <img src="<?= $img['SRC']; ?>" class="j-glide-slide-img" alt="">
+                                        <span class="glide__slide-description"><?= $img['DESCRIPTION']; ?></span>
+                                    </li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
 
-                        <div class="glide__arrows" data-glide-el="controls">
-                            <button class="glide__cust-arrow glide__cust-arrow_is_left j-glide-arrow" data-glide-dir="<" type="button">
-                                <img src="/images/home/slide-arrow-white.svg" alt="стрелка влево">
-                            </button>
-                            <button class="glide__cust-arrow glide__cust-arrow_is_right j-glide-arrow" data-glide-dir="&#62;" type="button">
-                                <img src="/images/home/slide-arrow-white.svg" alt="стрелка вправо">
-                            </button>
-                        </div>
+                        <?php if ($arResult['SHOW_SLIDER'] == 'Y') { ?>
+                            <div class="glide__arrows" data-glide-el="controls">
+                                <button class="glide__cust-arrow glide__cust-arrow_is_left j-glide-arrow" data-glide-dir="<" type="button">
+                                    <img src="/images/home/slide-arrow-white.svg" alt="стрелка влево">
+                                </button>
+                                <button class="glide__cust-arrow glide__cust-arrow_is_right j-glide-arrow" data-glide-dir="&#62;" type="button">
+                                    <img src="/images/home/slide-arrow-white.svg" alt="стрелка вправо">
+                                </button>
+                            </div>
 
-                        <div class="glide__cust-dots j-glide-dots" data-glide-el="controls[nav]">
-                            <?php $i = 0; ?>
-                            <?php foreach ($arResult['IMAGES'] as $img): ?>
-                            <button class="glide__cust-dot" data-glide-dir="=<?= $i++; ?>" type="button"></button>
-                            <?php endforeach; ?>
-                        </div>
+                            <div class="glide__cust-dots j-glide-dots" data-glide-el="controls[nav]">
+                                <?php $i = 0; ?>
+                                <?php foreach ($arResult['IMAGES'] as $img): ?>
+                                    <button class="glide__cust-dot" data-glide-dir="=<?= $i++; ?>" type="button"></button>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php } ?>
                     </div>
 
                 </div>

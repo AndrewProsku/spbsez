@@ -147,6 +147,13 @@ class NewsTable extends DataManager
                 ]
             ),
             new StringField('TEXT_TEXT_TYPE'),
+            new StringField(
+                'SHOW_SLIDER',
+                [
+                    'values' => [self::NO, self::YES],
+                    'title' => Loc::getMessage('KELNIK_NEWS_SHOW_SLIDER')
+                ]
+            ),
 
             new ReferenceField(
                 'CAT',
