@@ -6,6 +6,7 @@ use Bex\Bbc;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\FormatHelper;
 use Kelnik\Vacancy\Model\VacancyTable;
+use Kelnik\Vacancy\Model\VacancyResidentsTable;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -30,14 +31,26 @@ class VacancyList extends Bbc\Basis
         $this->arResult['ELEMENTS'] = [];
 
         try {
-            $this->arResult['ELEMENTS'] = VacancyTable::getAssoc([
-                'filter' => [
-                    '=ACTIVE' => VacancyTable::YES
-                ],
-                'order' => [
-                    'SORT' => 'ASC'
-                ]
-            ], 'ID');
+            if ($this->arParams['RESIDENTS'] == "Y") {
+                $this->arResult['ELEMENTS'] = VacancyResidentsTable::getAssoc([
+                    'filter' => [
+                        '=ACTIVE' => VacancyResidentsTable::YES
+                    ],
+                    'order' => [
+                        'SORT' => 'ASC'
+                    ]
+                ], 'ID');
+            } else {
+                $this->arResult['ELEMENTS'] = VacancyTable::getAssoc([
+                    'filter' => [
+                        '=ACTIVE' => VacancyTable::YES
+                    ],
+                    'order' => [
+                        'SORT' => 'ASC'
+                    ]
+                ], 'ID');
+            }
+
         } catch (\Exception $e) {
             $this->arResult['ELEMENTS'] = [];
         }

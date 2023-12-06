@@ -37,7 +37,7 @@
                 <?= $arResult['ELEMENT']['NAME']; ?>
             <?} else {?>
                 <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_PLATFORM'); ?> «<?= $arResult['ELEMENT']['NAME']; ?>»
-            <?}?>            
+            <?}?>
         </h1>
     </div>
     <div class="b-area-background">
@@ -124,8 +124,30 @@
             </script>
         </div>
         <?php endif; ?>
+
         <?= $arResult['ELEMENT']['TEXT_INFRA']; ?>
         <?= $arResult['ELEMENT']['TEXT_CUSTOMS']; ?>
+
+        <?php if ($arResult['SUB_AREA']) {?>
+            <div class="b-area-main-screen__video-wrapper _inner-area">
+                <div class="b-area-overlay"></div>
+                <?php if(!empty($arResult['SUB_AREA']['IMAGE_BG_ID_PATH'])): ?>
+                    <img src='<?= $arResult['SUB_AREA']['IMAGE_BG_ID_PATH']; ?>'>
+                <?php endif; ?>
+                <?php if(!empty($arResult['SUB_AREA']['VIDEO_ID']['SRC'])): ?>
+                    <video class="b-area-main-screen__video" width="100%" height="auto" preload="auto" autoplay="autoplay"
+                           loop="loop" muted>
+                        <source src="<?= $arResult['SUB_AREA']['VIDEO_ID']['SRC']; ?>" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                    </video>
+                <?php endif; ?>
+            </div>
+            <div class="b-area-main-screen__title _inner-area">
+                <h1><?= $arResult['SUB_AREA']['NAME']; ?></h1>
+            </div>
+            <?= $arResult['SUB_AREA']['TEXT_FEATURES']; ?>
+            <?= $arResult['SUB_AREA']['TEXT_AREA']; ?>
+        <?php }?>
+
         <?php if(!empty($arResult['ELEMENT']['IMAGES'])): ?>
             <section class="b-area-centre">
                 <div class="b-area-centre__title">

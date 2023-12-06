@@ -1,8 +1,6 @@
 <?if(!defined('B_PROLOG_INCLUDED')||B_PROLOG_INCLUDED!==true)die();?>
 
-<div class="l-news-single">
-    <div class="l-news-single__back"><a href="<?= $arParams['SEF_FOLDER']; ?>"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="13" viewBox="0 0 8 13"><defs><path id="prgga" d="M214.44 194.5l-.94 1.074 4.977 4.927-4.977 4.925.94 1.074 6.06-5.999z"/></defs><g><g transform="rotate(180 110.5 103.5)"><use fill="#30409a" xlink:href="#prgga"/></g></g></svg> Назад к статьям</a></div>
-    <div class="l-news-single__title b-title"><h1><?= $arResult['NAME']; ?></h1></div>
+<div class="l-news-single l-article">
     <div class="l-news-single__tags">
         <ul class="b-news-tags">
             <li class="b-news-tags__date">
@@ -11,11 +9,14 @@
             </li>
         </ul>
     </div>
-    <div class="l-news-single__top-text">
-        <div class="b-news-single-text">
-            <?= $arResult['TEXT_PREVIEW']; ?>
+    <div class="l-news-single__title b-title"><h1><?= $arResult['NAME']; ?></h1></div>
+    <?php if ($arResult['TEXT_PREVIEW']): ?>
+        <div class="l-news-single__top-text">
+            <div class="b-news-single-text">
+                <?= $arResult['TEXT_PREVIEW']; ?>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
     <?php if($arResult['IMAGES']): ?>
         <div class="l-news-single__slider">
             <div class="b-news-slider">

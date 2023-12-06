@@ -19,6 +19,9 @@ try
         'PARAMETERS' => [
             'CACHE_TIME' => [
                 'DEFAULT' => 3600
+            ],
+            'RESIDENTS' => [
+                'DEFAULT' => 'N'
             ]
         ]
     ];

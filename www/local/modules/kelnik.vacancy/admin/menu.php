@@ -48,6 +48,17 @@ return [
                     \Kelnik\Vacancy\Model\AdminInterface\ResponseEditHelper::getUrl()
                 ]
             ],
+            [
+                'parent_menu' => 'kelnik_vacancy',
+                'sort' => 180,
+                'icon' => 'iblock_menu_icon',
+                'page_icon' => 'iblock_menu_icon',
+                'text' => Loc::getMessage('KELNIK_VACANCY_RESIDENTS'),
+                'url' => \Kelnik\Vacancy\Model\AdminInterface\VacancyResidentsListHelper::getUrl(),
+                'more_url' => [
+                    \Kelnik\Vacancy\Model\AdminInterface\VacancyResidentsEditHelper::getUrl()
+                ]
+            ],
         ]
     ]
 ];

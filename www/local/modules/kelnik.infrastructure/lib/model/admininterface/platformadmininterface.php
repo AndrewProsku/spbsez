@@ -86,6 +86,10 @@ class PlatformAdminInterface extends AdminInterface
                         'HEADER' => false,
                         'FILTER' => false
                     ],
+                    'SUB_AREA' => [
+                        'WIDGET' => new NumberWidget(),
+                        'FILTER' => false
+                    ],
                     'IMAGE_ID' => [
                         'WIDGET' => new FileWidget(),
                         'IMAGE' => true,

@@ -2047,3 +2047,73 @@ label.land-related.open, .land-related.open{
 	justify-content: space-between;
 }
 
+.b-offers__list {
+	margin-bottom: 0;
+}
+
+.b-offers {
+	padding-bottom: 80px;
+}
+
+._inner-area {
+	position: relative;
+	z-index: auto;
+}
+
+.b-area-main-screen__title._inner-area {
+	padding-top: 10vh;
+}
+
+.b-area-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.b-infrastructure-places {
+	justify-content: space-around;
+}
+
+.b-income-tax, .b-reduced-rates {
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+.l-residents-menu ul {
+	justify-content: start;
+}
+
+.l-residents-menu ul li{
+	max-width: 25%;
+	margin-right: 50px;
+}
+
+.l-residents-menu ul li:last-child {
+	padding-right: 0;
+}
+
+.l-article .l-news-single__title {
+	margin-bottom: 32px;
+	padding-top: 0;
+}
+
+.l-article .l-news-single__tags {
+	margin-bottom: 32px;
+}
+
+.l-article .l-news-single__slider {
+	max-height: 400px;
+}
+
+.l-article .l-news-single__slider img {
+	max-height: 400px;
+	object-fit: cover;
+}
+
+.l-article .b-news-single-text {
+	font-size: 24px;
+	max-width: 100%;
+}

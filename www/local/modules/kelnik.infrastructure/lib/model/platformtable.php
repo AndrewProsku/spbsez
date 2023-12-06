@@ -61,6 +61,9 @@ class PlatformTable extends DataManager
                 ->configureDefaultValue(self::NO)
                 ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_SHOW_TITLE')),
 
+            (new IntegerField('SUB_AREA'))
+                ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_SUB_AREA')),
+
             (new StringField('ALIAS'))
                 ->configureTitle(Loc::getMessage('KELNIK_INFRASTRUCTURE_ALIAS'))
                 ->configureRequired(true)

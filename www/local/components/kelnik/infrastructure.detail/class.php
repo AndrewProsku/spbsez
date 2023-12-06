@@ -86,6 +86,25 @@ class InfrastructureDetail extends Bbc\Basis
                 ]
             ));
 
+            if ($this->arResult['ELEMENT']['SUB_AREA']) {
+                $this->arResult['SUB_AREA'] = PlatformTable::getRow([
+                    'select' => ['*'],
+                    'filter' => ['ID' => $this->arResult['ELEMENT']['SUB_AREA']],
+                    'limit' => 1
+                ]);
+                $this->arResult['SUB_AREA'] = PlatformTable::replaceFieldsByLang($this->arResult['SUB_AREA'], LANGUAGE_ID);
+                $this->arResult['SUB_AREA'] = current(BitrixHelper::prepareFileFields(
+                    [
+                        $this->arResult['SUB_AREA']
+                    ],
+                    [
+                        'VIDEO_ID' => 'full',
+                        'IMAGE_BG_ID' => 'path',
+                        'AREA_BG_ID' => 'full'
+                    ]
+                ));
+            }
+
             $this->arResult['ELEMENTS'] = PlatformTable::getAssoc([
                 'select' => [
                     'ID', 'ALIAS',
