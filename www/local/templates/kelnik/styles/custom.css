@@ -2117,3 +2117,9 @@ label.land-related.open, .land-related.open{
 	font-size: 24px;
 	max-width: 100%;
 }
+
+@media only screen and (min-width: 960px) {
+	.b-services__text p {
+		margin-bottom: 30px;
+	}
+}

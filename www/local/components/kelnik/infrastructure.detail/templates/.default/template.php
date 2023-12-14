@@ -129,7 +129,7 @@
         <?= $arResult['ELEMENT']['TEXT_CUSTOMS']; ?>
 
         <?php if ($arResult['SUB_AREA']) {?>
-            <div class="b-area-main-screen__video-wrapper _inner-area">
+            <div class="b-area-main-screen__video-wrapper _inner-area" id="subarea_<?=$arResult['SUB_AREA']['ID']?>">
                 <div class="b-area-overlay"></div>
                 <?php if(!empty($arResult['SUB_AREA']['IMAGE_BG_ID_PATH'])): ?>
                     <img src='<?= $arResult['SUB_AREA']['IMAGE_BG_ID_PATH']; ?>'>
