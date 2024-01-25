@@ -40,8 +40,9 @@
 	}
 }
 @media only screen and (min-width: 1600px){
-	.l-home__block h2 {
+	.l-home__block h2, .b-invest-resident__title {
 	    font-size: 75px;
+		margin-bottom: 80px;
 	}
 }
 .b-main-screen-text{
@@ -1137,7 +1138,7 @@ ymaps[class$="balloon__tail"]:after{
     right: 0;
     box-shadow: none;
     width: 786px;
-    max-width: 1000px;
+    max-width: 1280px;
     background: linear-gradient(306.61deg, rgb(102 46 145 / 0.86) 19.38%, rgba(101, 45, 145, 0) 69.68%), rgb(49 63 154 / 0.86);
     color: #fff;
 }
@@ -1278,7 +1279,7 @@ ymaps[class$="balloon__tail"]:after{
 	    margin-bottom: 0;
 	}
 }
-@media only screen and (max-width: 1024px){
+@media only screen and (max-width: 1280px){
 	.l-contacts__map-text.l-contacts__map-text-scroll{
 		width: 100%;
 		position: relative;
