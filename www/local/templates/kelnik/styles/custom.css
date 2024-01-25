@@ -2124,3 +2124,18 @@ label.land-related.open, .land-related.open{
 		margin-bottom: 30px;
 	}
 }
+
+.l-home-plots__item:first-child {
+	-webkit-order: 0;
+	order: 0;
+}
+
+.l-home-plots__item, .l-home-plots__item:first-child {
+	margin-bottom: 40px;
+}
+
+@media only screen and (min-width: 1600px) {
+	.l-home-plots__text {
+		margin-bottom: 0;
+	}
+}
