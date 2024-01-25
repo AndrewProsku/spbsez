@@ -349,16 +349,16 @@ ymaps[class$="balloon__tail"]:after{
     border-radius: 10px;
 }
 
-@media only screen and (min-width: 1024px){
+@media only screen and (min-width: 1240px){
 	.b-infrastructure-place{
-		flex-basis: 30%;
-	    max-width: 30%;
-	    min-width: 30%;
+		flex-basis: 25%;
+	    max-width: 25%;
+	    min-width: 25%;
 	}
 }
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 1240px){
 	.b-infrastructure-place{
-	    max-width: 50%;
+	    max-width: 40%;
 	}
 }
 @media only screen and (max-width: 480px){
