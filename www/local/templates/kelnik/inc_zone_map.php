@@ -34,7 +34,13 @@
                         <a href="<?= $noidorfLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
                             <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOIDORF'); ?></span>
                         </a>
-                        <div class="l-home-plots__all-map-icon icon-port">
+                        <a href="<?= $parnasLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-three">
+                            <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_PARNAS'); ?></span>
+                        </a>
+                        <a href="<?= $shusharyLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-four">
+                            <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SHUSHARY'); ?></span>
+                        </a>
+                        <div class="l-home-plots__all-map-icon icon-port icon-port-mobile">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                     viewBox="0 0 80 80" class="plots-icon">
                                 <circle cx="40" cy="40" r="39.5" fill="url(#plots-gradient)"  class="plots-icon-circle"/>
@@ -135,7 +141,13 @@
                         <a href="<?= $noidorfLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
                             <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOIDORF'); ?></span>
                         </a>
-                        <div class="l-home-plots__all-map-icon icon-port">
+                        <a href="<?= $parnasLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-three">
+                            <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_PARNAS'); ?></span>
+                        </a>
+                        <a href="<?= $shusharyLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-four">
+                            <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SHUSHARY'); ?></span>
+                        </a>
+                        <div class="l-home-plots__all-map-icon icon-port icon-port-mobile">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                     viewBox="0 0 80 80" class="plots-icon">
                                 <circle cx="40" cy="40" r="39.5" fill="url(#plots-gradient)"  class="plots-icon-circle"/>
@@ -238,7 +250,13 @@
                         <a href="<?= $noidorfLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
                             <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOIDORF'); ?></span>
                         </a>
-                        <div class="l-home-plots__all-map-icon icon-port">
+                        <a href="<?= $parnasLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-three">
+                            <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_PARNAS'); ?></span>
+                        </a>
+                        <a href="<?= $shusharyLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-four">
+                            <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SHUSHARY'); ?></span>
+                        </a>
+                        <div class="l-home-plots__all-map-icon icon-port icon-port-mobile">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                  viewBox="0 0 80 80" class="plots-icon">
                                 <circle cx="40" cy="40" r="39.5" fill="url(#plots-gradient)"  class="plots-icon-circle"/>
@@ -341,7 +359,13 @@
                         <a href="<?= $noidorfLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-two">
                             <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOIDORF'); ?></span>
                         </a>
-                        <div class="l-home-plots__all-map-icon icon-port">
+                        <a href="<?= $parnasLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-three">
+                            <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_PARNAS'); ?></span>
+                        </a>
+                        <a href="<?= $shusharyLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-four">
+                            <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SHUSHARY'); ?></span>
+                        </a>
+                        <div class="l-home-plots__all-map-icon icon-port icon-port-mobile">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                  viewBox="0 0 80 80" class="plots-icon">
                                 <circle cx="40" cy="40" r="39.5" fill="url(#plots-gradient)"  class="plots-icon-circle"/>
@@ -443,6 +467,12 @@
                 </a>
                 <a href="<?= $noidorfLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-neudorf">
                     <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_NOIDORF'); ?></span>
+                </a>
+                <a href="<?= $parnasLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-parnas">
+                    <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_PARNAS'); ?></span>
+                </a>
+                <a href="<?= $shusharyLink; ?>" class="l-home-plots__all-map-build l-home-plots__all-map-build-shushary">
+                    <span class="b-tooltip"><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SHUSHARY'); ?></span>
                 </a>
                 <div class="l-home-plots__all-map-icon icon-port">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"

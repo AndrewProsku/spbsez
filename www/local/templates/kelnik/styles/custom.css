@@ -2139,3 +2139,235 @@ label.land-related.open, .land-related.open{
 		margin-bottom: 0;
 	}
 }
+
+.l-home-plots__all-map .l-home-plots__all-map-images, .l-home-plots__map .l-home-plots__all-map-images {
+	background-image: url('/images/home/map_new.png');
+}
+
+.l-home-plots__map .l-home-plots__all-map-images {
+	width: 660px;
+	background-position: 75%;
+}
+
+.l-home-plots__all-map-build-parnas {
+	width: 50px;
+	height: 35px;
+	left: 80.1%;
+	top: 7%;
+}
+
+@media only screen and (min-width: 960px) {
+	.l-home-plots__all-map-build-parnas {
+		left: 81%;
+		top: 8%;
+	}
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1280px) {
+	.l-home-plots__all-map {
+		height: 620px;
+	}
+}
+
+@media only screen and (min-width: 1366px) {
+	.l-home-plots__all-map-build-parnas {
+		width: 87px;
+		height: 69px;
+		left: 77.5%;
+		top: 6%;
+	}
+}
+
+@media only screen and (min-width: 1600px) {
+	.l-home-plots__all-map-build-parnas {
+		width: 75px;
+		left: 80.1%;
+		top: 6%;
+	}
+}
+
+@media only screen and (min-width: 1920px) {
+	.l-home-plots__all-map-build-parnas {
+		left: 93.5%;
+		top: 5%;
+	}
+}
+
+@media only screen and (min-width: 2330px) {
+	.l-home-plots__all-map-build-parnas {
+		left: 99%;
+		top: 5%;
+	}
+}
+
+.l-home-plots__all-map-build-shushary {
+	width: 50px;
+	height: 35px;
+	left: 85%;
+	top: 68%;
+}
+
+@media only screen and (min-width: 960px) {
+	.l-home-plots__all-map-build-shushary {
+		left: 85.5%;
+		top: 67%;
+	}
+}
+
+@media only screen and (min-width: 1366px) {
+	.l-home-plots__all-map-build-shushary {
+		width: 87px;
+		height: 69px;
+		left: 82.5%;
+		top: 64%;
+	}
+}
+
+@media only screen and (min-width: 1600px) {
+	.l-home-plots__all-map-build-shushary {
+		width: 75px;
+		left: 85%;
+		top: 65%;
+	}
+}
+
+@media only screen and (min-width: 1920px) {
+	.l-home-plots__all-map-build-shushary {
+		left: 100.5%;
+	}
+}
+
+@media only screen and (min-width: 1920px) and (max-width: 2230px) {
+	.l-home-plots__all-map {
+		height: 950px;
+	}
+}
+
+@media only screen and (min-width: 2330px) {
+	.l-home-plots__all-map-build-shushary {
+		left: 107%;
+	}
+}
+
+@media only screen and (max-width: 1366px) and (min-width: 960px) {
+	.l-home-plots__all-map-images {
+		width: 1450px;
+		background-position: 100%;
+	}
+}
+
+@media only screen and (max-width: 1366px) and (min-width: 1280px) {
+	.l-home-plots__all-map-build-novoorlovskaya {
+		left: 42.5%;
+	}
+
+	.l-home-plots__all-map-build-neudorf {
+		left: 9%;
+	}
+
+	.l-home-plots__all-map-build-parnas {
+		left: 75%;
+		top: 5%;
+	}
+
+	.l-home-plots__all-map-build-shushary {
+		left: 81%;
+		top: 64%;
+	}
+
+	.l-home-plots__all-map-icon.icon-port {
+		left: 27%;
+	}
+
+	.l-home-plots__all-map-icon.icon-rialway-station.icon-rialway-station-one {
+		left: 50%;
+	}
+
+	.l-home-plots__all-map-icon.icon-center-city {
+		left: 56%;
+	}
+
+	.l-home-plots__all-map-icon.icon-rialway-station.icon-rialway-station-two {
+		left: 63%;
+	}
+
+	.l-home-plots__all-map-icon.icon-airport {
+		left: 63%;
+	}
+}
+
+@media only screen and (min-width: 1600px) and (max-width: 1780px) {
+	.l-home-plots__all-map-images {
+		width: 1780px;
+	}
+
+	.l-home-plots__all-map-build-shushary {
+		left: 84%;
+	}
+
+	.l-home-plots__all-map-build-parnas {
+		left: 78.5%;
+	}
+
+	.l-home-plots__all-map-build-novoorlovskaya {
+		left: 50%;
+	}
+
+	.l-home-plots__all-map-build-neudorf {
+		left: 21%;
+	}
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1280px) {
+	.l-home-plots__all-map-build-novoorlovskaya {
+		left: 55.5%;
+		top: 12%;
+	}
+
+	.l-home-plots__all-map-build-neudorf {
+		top: 65%;
+		left: 30%;
+	}
+}
+
+.l-home-plots__map .l-home-plots__all-map-build-one {
+	left: 39.5%;
+	top: 13%;
+}
+
+.l-home-plots__map .l-home-plots__all-map-build-two {
+	left: 10%;
+	top: 66%;
+}
+
+.l-home-plots__map .l-home-plots__all-map-build-three {
+	left: 81%;
+	top: 9%;
+}
+
+.l-home-plots__map .l-home-plots__all-map-build-four {
+	left: 87%;
+	top: 68%;
+}
+
+.l-home-plots__all-map-icon.icon-port-mobile {
+	left: 33%;
+	top: 36%;
+}
+
+.l-home-plots__map .l-home-plots__all-map-icon.icon-rialway-station.icon-rialway-station-one {
+	left: 56%;
+}
+
+.l-home-plots__map .l-home-plots__all-map-icon.icon-center-city {
+	left: 63%;
+}
+
+.l-home-plots__map .l-home-plots__all-map-icon.icon-rialway-station.icon-rialway-station-two {
+	left: 70%;
+}
+
+.l-home-plots__map .l-home-plots__all-map-icon.icon-airport {
+	left: 70%;
+}
+

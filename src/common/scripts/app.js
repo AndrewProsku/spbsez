@@ -607,9 +607,14 @@ const blockMap = document.querySelector('.j-home-plots');
 if (blockMap) {
     const novoorlovskay = document.querySelector('.l-home-plots__map-novoorlovskaya');
     const neudorf = document.querySelector('.l-home-plots__map-neudorf');
+    const parnas = document.querySelector('.l-home-plots__map-parnas');
+    const shushary = document.querySelector('.l-home-plots__map-shushary');
 
     novoorlovskay.scrollLeft += 220;
     neudorf.scrollTop += 150;
+    parnas.scrollLeft += 300;
+    shushary.scrollTop += 150;
+    shushary.scrollLeft += 300;
 }
 
 /**
