@@ -610,7 +610,7 @@ if (blockMap) {
     const parnas = document.querySelector('.l-home-plots__map-parnas');
     const shushary = document.querySelector('.l-home-plots__map-shushary');
 
-    novoorlovskay.scrollLeft += 220;
+    novoorlovskay.scrollLeft += 150;
     neudorf.scrollTop += 150;
     parnas.scrollLeft += 450;
     shushary.scrollTop += 150;

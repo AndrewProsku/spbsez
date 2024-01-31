@@ -2152,14 +2152,36 @@ label.land-related.open, .land-related.open{
 .l-home-plots__all-map-build-parnas {
 	width: 50px;
 	height: 35px;
-	left: 80.1%;
-	top: 7%;
+	left: 70.1%;
+	top: 14%;
+}
+
+.l-home-plots__all-map-build-shushary {
+	width: 50px;
+	height: 35px;
+	left: 78%;
+	top: 68%;
+}
+
+.l-home-plots__all-map-icon.icon-airport {
+	top: 80%;
+	left: 69%;
 }
 
 @media only screen and (min-width: 960px) {
 	.l-home-plots__all-map-build-parnas {
-		left: 81%;
-		top: 8%;
+		left: 71%;
+		top: 15%;
+	}
+
+	.l-home-plots__all-map-icon.icon-airport {
+		top: 80%;
+		left: 68%;
+	}
+
+	.l-home-plots__all-map-build-shushary {
+		left: 78.5%;
+		top: 68%;
 	}
 }
 
@@ -2169,52 +2191,21 @@ label.land-related.open, .land-related.open{
 	}
 }
 
+@media only screen and (min-width: 1280px) {
+	.l-home-plots__all-map-icon.icon-airport {
+		top: 80%;
+		left: 63%;
+	}
+}
+
 @media only screen and (min-width: 1366px) {
 	.l-home-plots__all-map-build-parnas {
 		width: 87px;
 		height: 69px;
-		left: 77.5%;
-		top: 6%;
+		left: 66%;
+		top: 13%;
 	}
-}
 
-@media only screen and (min-width: 1600px) {
-	.l-home-plots__all-map-build-parnas {
-		width: 75px;
-		left: 80.1%;
-		top: 6%;
-	}
-}
-
-@media only screen and (min-width: 1920px) {
-	.l-home-plots__all-map-build-parnas {
-		left: 95.5%;
-		top: 5%;
-	}
-}
-
-@media only screen and (min-width: 2330px) {
-	.l-home-plots__all-map-build-parnas {
-		left: 99%;
-		top: 5%;
-	}
-}
-
-.l-home-plots__all-map-build-shushary {
-	width: 50px;
-	height: 35px;
-	left: 85%;
-	top: 68%;
-}
-
-@media only screen and (min-width: 960px) {
-	.l-home-plots__all-map-build-shushary {
-		left: 85.5%;
-		top: 67%;
-	}
-}
-
-@media only screen and (min-width: 1366px) {
 	.l-home-plots__all-map-build-shushary {
 		width: 87px;
 		height: 69px;
@@ -2224,16 +2215,110 @@ label.land-related.open, .land-related.open{
 }
 
 @media only screen and (min-width: 1600px) {
+	.l-home-plots__all-map-build-parnas {
+		width: 75px;
+		left: 74.5%;
+		top: 13%;
+	}
+
+	.l-home-plots__all-map-icon.icon-airport {
+		top: 80%;
+		left: 60%;
+	}
+
 	.l-home-plots__all-map-build-shushary {
 		width: 75px;
-		left: 85%;
-		top: 65%;
+		left: 77.5%;
+		top: 66%;
+	}
+
+	.l-home-plots__all-map-icon.icon-port {
+		left: 32%;
+	}
+
+	.l-home-plots__all-map-icon.icon-rialway-station.icon-rialway-station-one {
+		left: 52%;
+	}
+
+	.l-home-plots__all-map-icon.icon-center-city {
+		left: 57%;
+	}
+
+	.l-home-plots__all-map-icon.icon-rialway-station.icon-rialway-station-two {
+		left: 63%;
+	}
+
+}
+
+@media only screen and (min-width: 1600px) and (max-width: 1780px) {
+	.l-home-plots__all-map-images {
+		width: 1780px;
+		background-position: 140%;
+	}
+
+	.l-home-plots__all-map-build-shushary {
+		left: 71%;
+	}
+
+	.l-home-plots__all-map-build-parnas {
+		left: 63%;
+	}
+
+	.l-home-plots__all-map-build-novoorlovskaya {
+		left: 46%;
+	}
+
+	.l-home-plots__all-map-build-neudorf {
+		left: 17%;
+	}
+}
+
+@media only screen and (min-width: 1780px) and (max-width: 1920px) {
+	.l-home-plots__all-map-build-parnas {
+		left: 70.5%;
+	}
+
+	.l-home-plots__all-map-icon.icon-airport {
+		left: 67.5%;
 	}
 }
 
 @media only screen and (min-width: 1920px) {
+	.l-home-plots__all-map-build-parnas {
+		left: 82.5%;
+		top: 13%;
+	}
+
 	.l-home-plots__all-map-build-shushary {
-		left: 102.5%;
+		left: 92.5%;
+	}
+
+	.l-home-plots__all-map-icon.icon-port {
+		left: 37%;
+	}
+
+	.l-home-plots__all-map-icon.icon-rialway-station.icon-rialway-station-one {
+		left: 62%;
+	}
+
+	.l-home-plots__all-map-icon.icon-center-city {
+		left: 68%;
+	}
+
+	.l-home-plots__all-map-icon.icon-rialway-station.icon-rialway-station-two {
+		left: 76%;
+	}
+
+	.l-home-plots__all-map-icon.icon-airport {
+		top: 80%;
+		left: 72%;
+	}
+}
+
+@media only screen and (min-width: 2330px) {
+	.l-home-plots__all-map-build-parnas {
+		left: 85%;
+		top: 14%;
 	}
 }
 
@@ -2255,17 +2340,17 @@ label.land-related.open, .land-related.open{
 	}
 
 	.l-home-plots__all-map-build-parnas {
-		left: 89%;
+		left: 76%;
 	}
 
 	.l-home-plots__all-map-build-shushary {
-		left: 96%;
+		left: 86%;
 	}
 }
 
 @media only screen and (min-width: 2330px) {
 	.l-home-plots__all-map-build-shushary {
-		left: 107%;
+		left: 96%;
 	}
 }
 
@@ -2286,13 +2371,13 @@ label.land-related.open, .land-related.open{
 	}
 
 	.l-home-plots__all-map-build-parnas {
-		left: 75%;
-		top: 5%;
+		left: 62%;
+		top: 13%;
 	}
 
 	.l-home-plots__all-map-build-shushary {
-		left: 81%;
-		top: 64%;
+		left: 72%;
+		top: 66%;
 	}
 
 	.l-home-plots__all-map-icon.icon-port {
@@ -2312,30 +2397,8 @@ label.land-related.open, .land-related.open{
 	}
 
 	.l-home-plots__all-map-icon.icon-airport {
-		left: 63%;
-	}
-}
-
-@media only screen and (min-width: 1600px) and (max-width: 1780px) {
-	.l-home-plots__all-map-images {
-		width: 1780px;
-		background-position: 140%;
-	}
-
-	.l-home-plots__all-map-build-shushary {
-		left: 79%;
-	}
-
-	.l-home-plots__all-map-build-parnas {
-		left: 74.5%;
-	}
-
-	.l-home-plots__all-map-build-novoorlovskaya {
-		left: 46%;
-	}
-
-	.l-home-plots__all-map-build-neudorf {
-		left: 17%;
+		left: 59%;
+		top: 80%;
 	}
 }
 
@@ -2362,13 +2425,13 @@ label.land-related.open, .land-related.open{
 }
 
 .l-home-plots__map .l-home-plots__all-map-build-three {
-	left: 81%;
-	top: 9%;
+	left: 68%;
+	top: 16%;
 }
 
 .l-home-plots__map .l-home-plots__all-map-build-four {
-	left: 87%;
-	top: 68%;
+	left: 79%;
+	top: 69%;
 }
 
 .l-home-plots__all-map-icon.icon-port-mobile {
@@ -2389,6 +2452,7 @@ label.land-related.open, .land-related.open{
 }
 
 .l-home-plots__map .l-home-plots__all-map-icon.icon-airport {
-	left: 70%;
+	left: 67%;
+	top: 80%;
 }
 
