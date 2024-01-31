@@ -109,7 +109,7 @@
                 </div>
             </div>
         <?php endif; ?>
-        <?php if(!empty($arResult['ELEMENT']['PLANOPLAN'])): ?>
+        <?php/* if(!empty($arResult['ELEMENT']['PLANOPLAN'])): ?>
         <div class="b-area-planoplan">
             <script src="https://widget.planoplan.com/etc/multiwidget/release/static/js/main.js"></script>
             <div id="planoplan-widget"></div>
@@ -123,7 +123,7 @@
                 window._babelPolyfill = null;
             </script>
         </div>
-        <?php endif; ?>
+        <?php endif; */?>
 
         <?= $arResult['ELEMENT']['TEXT_INFRA']; ?>
         <?= $arResult['ELEMENT']['TEXT_CUSTOMS']; ?>
