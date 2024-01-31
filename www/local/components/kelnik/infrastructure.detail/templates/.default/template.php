@@ -63,12 +63,14 @@
             <div class="b-area-plan" id="area_plan">
                 <div class="b-area-plan__title">
                     <h2><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_TERRITORY'); ?></h2>
-                    <div class="b-offers__text">
-                        <p>
-                            <span class="b-visual__point is-empty b-area-plan__point"></span> &mdash;
-                            <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_TERRITORY_SUB'); ?>
-                        </p>
-                    </div>
+                    <?php if ($arResult['ELEMENT']['NAME'] != 'Парнас' && $arResult['ELEMENT']['NAME'] != 'Шушары'):?>
+                        <div class="b-offers__text">
+                            <p>
+                                <span class="b-visual__point is-empty b-area-plan__point"></span> &mdash;
+                                <?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_INFRA_COMP_TERRITORY_SUB'); ?>
+                            </p>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="b-visual<?php if($arResult['ELEMENT']['SHOW_TITLE'] != \Kelnik\Infrastructure\Model\PlatformTable::YES): ?> b-visual_theme_points<?php endif; ?>" data-area="<?= $arResult['ELEMENT']['ALIAS']; ?>" id="area_plan_center">
                     <svg class="b-visual__svg" width="100%" height="100%" viewBox="0 0 1920 1080">
