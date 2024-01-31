@@ -262,7 +262,7 @@ sezApp = {
 
         let mapContainer = mapWrapperList.querySelector('#first');
         let mapSettings = JSON.parse(atob(mapWrapperList.dataset.json));
-        mapSettings.zoom = 9;
+        mapSettings.zoom = 10;
         mapSettings.minZoom = 8;
         mapSettings.maxZoom = 18;
         mapSettings.zoomStep = 1;
@@ -316,6 +316,7 @@ sezApp = {
                     cursor: 'pointer',
                     hasBalloon: false
                 });
+
                 placemark.events.add('click', function () {
                     if (!element.link) {
                         return;
@@ -323,8 +324,10 @@ sezApp = {
                     window.location = element.link;
                 });
 
-                clusterer.add(placemark);
-                pmLast = placemark;
+                myMap.geoObjects.add(placemark);
+
+                //clusterer.add(placemark);
+                //pmLast = placemark;
             })
 
             let zoomControl = new ymaps.control.ZoomControl({
@@ -338,12 +341,12 @@ sezApp = {
                     }
                 }
             });
-            myMap.geoObjects.add(clusterer);
+            //myMap.geoObjects.add(clusterer);
             myMap.behaviors.disable('scrollZoom');
             myMap.controls.add(zoomControl);
 
-            let objectState = clusterer.getObjectState(pmLast);
-            clusterer.balloon.open(objectState.cluster);
+           // let objectState = clusterer.getObjectState(pmLast);
+            //clusterer.balloon.open(objectState.cluster);
 
         });
     },

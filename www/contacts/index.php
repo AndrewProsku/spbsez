@@ -4,7 +4,7 @@ $APPLICATION->SetTitle("Контакты");
 $APPLICATION->SetPageProperty('title', 'Контакты');
 
 $yMapJson = [
-    "center" => [59.942099, 31.186182],
+    "center" => [59.939092, 30.612133],
     "scrollwheel" => false,
     "fullScreenControl" => false,
     "customZoomControl" => true,
@@ -13,7 +13,8 @@ $yMapJson = [
             "title" => "Новоорловская",
             "layout" => "secondary",
             "coords" => [60.053400, 30.231714],
-            "link" => "/infrastructure/novoorlovskaya/"
+            "link" => "/infrastructure/novoorlovskaya/",
+            "coordShape" => [[-60, -30],[60, -30],[60, 10],[-60, 10]]
         ],
         [
             "title" => "Нойдорф",
@@ -23,11 +24,25 @@ $yMapJson = [
             "coordShape" => [[-60, -30],[60, -30],[60, 10],[-60, 10]]
         ],
         [
+            "title" => "Парнас",
+            "layout" => "secondary",
+            "coords" => [60.084141, 30.369391],
+            "link" => "/infrastructure/parnas/",
+            "coordShape" => [[-60, -30],[60, -30],[60, 10],[-60, 10]]
+        ],
+        [
+            "title" => "Шушары",
+            "layout" => "secondary",
+            "coords" => [59.809591, 30.445522],
+            "link" => "/infrastructure/shushary/",
+            "coordShape" => [[-60, -30],[60, -30],[60, 10],[-60, 10]]
+        ],
+        /*[
             "title" => "Инновационный центр",
             "layout" => "secondary",
             "coords" => [60.053400, 30.231714],
             "link" => "/infrastructure/innocenter/"
-        ]
+        ]*/
     ],
     "markers" => []
 ];
@@ -43,7 +58,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                 <div class="l-contacts__yandex-map b-yandex-map j-yandex-map" id="map_list" data-json="<?= $yMapJson; ?>">
                     <div id="first" class="b-yandex-map__base"></div>
                 </div>
-           
+
                 <!--<div class="l-contacts__map-text">
                     <div class="l-contacts__map-text-item">
                         <div class="l-contacts__map-text-title">
@@ -68,15 +83,15 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                         <div class="l-contacts__map-text-desc">
                             <p>Санкт-Петербург, пос. Стрельна, ул. Связи, д. 34А</p>
                         </div>
-                    </div>                
+                    </div>
                 </div>-->
 
                 <div class="l-contacts__opener" onclick="sezApp.openContacts(this)">Показать контакты</div>
                 <div class="l-contacts__map-text l-contacts__map-text-scroll">
-                    <div class="l-contacts__closer" onclick="sezApp.closeContacts(this)"></div>                    
+                    <div class="l-contacts__closer" onclick="sezApp.closeContacts(this)"></div>
                     <div class="l-contacts__content" id="managment">
                         <div class="l-contacts__content-scroll" data-scrollbar>
-                            <div class="l-contacts__block l-contacts__block-main">                                    
+                            <div class="l-contacts__block l-contacts__block-main">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -85,9 +100,9 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                         "CACHE_TYPE" => "A",
                                         "CODE" => "contacts_block_1"
                                     )
-                                );?>          
+                                );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -98,7 +113,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -109,7 +124,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -120,7 +135,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -131,7 +146,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -142,7 +157,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -153,7 +168,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -164,7 +179,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -175,7 +190,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -186,7 +201,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
@@ -197,7 +212,7 @@ $yMapJson = base64_encode(json_encode($yMapJson));
                                     )
                                 );?>
                             </div>
-                            <div class="l-contacts__block">                                    
+                            <div class="l-contacts__block">
                                 <?$APPLICATION->IncludeComponent(
                                     "kelnik:textblocks",
                                     "",
