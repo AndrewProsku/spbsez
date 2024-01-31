@@ -334,9 +334,9 @@ sezApp = {
                 options: {
                     size: "small",
                     position: {
-                        right: 40,
-                        left: 'auto',
-                        top: 108,
+                        right: 'auto',
+                        left: 40,
+                        top: 50,
                         bottom: 'auto'
                     }
                 }

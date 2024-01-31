@@ -612,9 +612,9 @@ if (blockMap) {
 
     novoorlovskay.scrollLeft += 220;
     neudorf.scrollTop += 150;
-    parnas.scrollLeft += 300;
+    parnas.scrollLeft += 450;
     shushary.scrollTop += 150;
-    shushary.scrollLeft += 300;
+    shushary.scrollLeft += 450;
 }
 
 /**

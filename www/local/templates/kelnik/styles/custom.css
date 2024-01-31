@@ -2188,7 +2188,7 @@ label.land-related.open, .land-related.open{
 
 @media only screen and (min-width: 1920px) {
 	.l-home-plots__all-map-build-parnas {
-		left: 93.5%;
+		left: 95.5%;
 		top: 5%;
 	}
 }
@@ -2233,13 +2233,33 @@ label.land-related.open, .land-related.open{
 
 @media only screen and (min-width: 1920px) {
 	.l-home-plots__all-map-build-shushary {
-		left: 100.5%;
+		left: 102.5%;
 	}
 }
 
 @media only screen and (min-width: 1920px) and (max-width: 2230px) {
 	.l-home-plots__all-map {
 		height: 950px;
+	}
+
+	.l-home-plots__all-map-images {
+		background-position: 70%;
+	}
+
+	.l-home-plots__all-map-build-novoorlovskaya {
+		left: 52%;
+	}
+
+	.l-home-plots__all-map-build-neudorf {
+		left: 17%;
+	}
+
+	.l-home-plots__all-map-build-parnas {
+		left: 89%;
+	}
+
+	.l-home-plots__all-map-build-shushary {
+		left: 96%;
 	}
 }
 
@@ -2299,22 +2319,23 @@ label.land-related.open, .land-related.open{
 @media only screen and (min-width: 1600px) and (max-width: 1780px) {
 	.l-home-plots__all-map-images {
 		width: 1780px;
+		background-position: 140%;
 	}
 
 	.l-home-plots__all-map-build-shushary {
-		left: 84%;
+		left: 79%;
 	}
 
 	.l-home-plots__all-map-build-parnas {
-		left: 78.5%;
+		left: 74.5%;
 	}
 
 	.l-home-plots__all-map-build-novoorlovskaya {
-		left: 50%;
+		left: 46%;
 	}
 
 	.l-home-plots__all-map-build-neudorf {
-		left: 21%;
+		left: 17%;
 	}
 }
 
