@@ -2456,3 +2456,55 @@ label.land-related.open, .land-related.open{
 	top: 80%;
 }
 
+@media only screen and (min-width: 1280px) {
+	.area-parnas .b-area-trait,
+	.area-shushary .b-area-trait {
+		width: 16.68966%;
+	}
+
+	.area-parnas .b-area-trait:first-child,
+	.area-shushary .b-area-trait:first-child {
+		width: 27.68966%;
+	}
+
+	.area-parnas .b-area-main-feature,
+	.area-shushary .b-area-main-feature {
+		width: 16.68966%;
+	}
+
+	.area-parnas .b-area-main-feature:first-child,
+	.area-shushary .b-area-main-feature:first-child{
+		width: 27.68966%;
+	}
+
+	.area-novoorlovskaya .b-area-trait {
+		width: 16.68966%;
+	}
+
+	.area-novoorlovskaya .b-area-trait:first-child {
+		width: 28.68966%;
+	}
+
+	.area-novoorlovskaya .b-area-main-feature {
+		width: 17.68966%;
+	}
+
+	.area-novoorlovskaya .b-area-main-feature:first-child {
+		width: 27.68966%;
+	}
+}
+
+@media only screen and (min-width: 1610px) {
+	.area-novoorlovskaya .b-area-main-feature:first-child {
+		width: 27.68966%;
+	}
+
+	.area-novoorlovskaya .b-area-main-feature {
+		width: 16.68966%;
+	}
+}
+
+.b-area-traits.b-area-traits_three-columns {
+	 padding-bottom: 0;
+ }
+

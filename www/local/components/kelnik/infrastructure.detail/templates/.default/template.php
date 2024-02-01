@@ -1,6 +1,6 @@
 <?if(!defined('B_PROLOG_INCLUDED')||B_PROLOG_INCLUDED!==true)die();?>
 
-<div class="b-area-main-screen j-area-main-screen">
+<div class="b-area-main-screen j-area-main-screen area-<?= $arResult['ELEMENT']['ALIAS']; ?>">
     <div class="b-area-main-screen__video-wrapper"<?php if(!empty($arResult['ELEMENT']['IMAGE_BG_ID_PATH'])): ?> style="background-image: url('<?= $arResult['ELEMENT']['IMAGE_BG_ID_PATH']; ?>');"<?php endif; ?>>
         <?php if(!empty($arResult['ELEMENT']['VIDEO_ID']['SRC'])): ?>
         <video class="b-area-main-screen__video" width="100%" height="auto" preload="auto" autoplay="autoplay"
