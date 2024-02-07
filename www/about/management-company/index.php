@@ -47,6 +47,18 @@ $APPLICATION->SetTitle("Управляющая компания");
                         "CODE" => "mc_block_2"
                     )
                 );?>
+                <? $APPLICATION->IncludeComponent(
+                    "kelnik:refbook.list",
+                    "headmaster",
+                    array(
+                        "COMPONENT_TEMPLATE" => "headmaster",
+                        "SECTION" => "4",
+                        "CACHE_GROUPS" => "N",
+                        "CACHE_TYPE" => "A",
+                        "CACHE_TIME" => "3600"
+                    ),
+                    array()
+                ); ?>
             </div>
         </div>
 
@@ -64,20 +76,6 @@ $APPLICATION->SetTitle("Управляющая компания");
             </div>
         </div>
 
-        <div class="l-management-company__team" id="team">
-            <? $APPLICATION->IncludeComponent(
-                "kelnik:refbook.list",
-                "team",
-                array(
-                    "COMPONENT_TEMPLATE" => "team",
-                    "SECTION" => "4",
-                    "CACHE_GROUPS" => "N",
-                    "CACHE_TYPE" => "A",
-                    "CACHE_TIME" => "3600"
-                ),
-                array()
-            ); ?>
-        </div>
         <div class="l-management-company__ask-for-advice">
             <section class="b-ask-for-advice">
                 <h2 class="b-ask-for-advice__title b-title">Стать резидентом</h2>
