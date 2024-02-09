@@ -6,6 +6,7 @@ use Bitrix\Main;
 use Bitrix\Main\Entity\Event;
 use Bitrix\Main\Localization\Loc;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Refbook\Model\ResidentTable;
 
 Loc::loadMessages(__FILE__);
 
@@ -52,6 +53,13 @@ class VacancyResidentsTable extends DataManager
                 'NAME',
                 [
                     'title' => Loc::getMessage('KELNIK_VACANCY_NAME'),
+                ]
+            ),
+            new Main\Entity\IntegerField(
+                'RESIDENT_ID',
+                [
+                    'title' => Loc::getMessage('KELNIK_RESIDENT_ID'),
+                    'default_value' => 0,
                 ]
             ),
             new Main\Entity\IntegerField(
@@ -118,7 +126,14 @@ class VacancyResidentsTable extends DataManager
                 [
                     'title' => Loc::getMessage('KELNIK_VACANCY_CONDITIONS'),
                 ]
-            )
+            ),
+            new Main\Entity\ReferenceField(
+                'RESIDENT',
+                ResidentTable::class,
+                [
+                    '=this.RESIDENT_ID' => 'ref.ID'
+                ]
+            ),
         ];
     }
 

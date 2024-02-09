@@ -14,3 +14,5 @@ $MESS['KELNIK_VACANCY_DESCR'] = 'Описание';
 $MESS['KELNIK_VACANCY_DUTIES'] = 'Обязанности';
 $MESS['KELNIK_VACANCY_REQUIREMENTS'] = 'Требования';
 $MESS['KELNIK_VACANCY_CONDITIONS'] = 'Условия';
+
+$MESS['KELNIK_RESIDENT_ID'] = 'Резидент';

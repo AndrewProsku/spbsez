@@ -17,5 +17,7 @@ return [
     'kelnik.admin_helper' => null,
     'bex.bbc' => [
         'excludeAdminSection' => true
-    ]
+    ],
+    'kelnik.helpers' => null,
+    'kelnik.refbook' => null
 ];

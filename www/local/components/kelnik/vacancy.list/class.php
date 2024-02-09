@@ -3,8 +3,11 @@
 namespace Kelnik\Refbook\Component;
 
 use Bex\Bbc;
+use Bitrix\Main\Entity\ReferenceField;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
 use Kelnik\Helpers\FormatHelper;
+use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Vacancy\Model\VacancyTable;
 use Kelnik\Vacancy\Model\VacancyResidentsTable;
 
@@ -38,7 +41,13 @@ class VacancyList extends Bbc\Basis
                     ],
                     'order' => [
                         'SORT' => 'ASC'
-                    ]
+                    ],
+                    'runtime' => [new ReferenceField('RESIDENT', ResidentTable::class,
+                        [
+                            "=ref.ID"  => 'this.RESIDENT_ID'
+                        ]
+                    )],
+                    'select' => ['*', 'RESIDENT_NAME' => 'RESIDENT.NAME']
                 ], 'ID');
             } else {
                 $this->arResult['ELEMENTS'] = VacancyTable::getAssoc([
@@ -64,5 +73,20 @@ class VacancyList extends Bbc\Basis
             $v['PRICE_MAX'] = FormatHelper::priceFormat($v['PRICE_MAX']);
         }
         unset($v);
+
+        $this->arResult['ELEMENTS_BY_RESIDENT'] = [];
+        if ($this->arParams['RESIDENTS'] == "Y") {
+            foreach ($this->arResult['ELEMENTS'] as $v) {
+                if ($v['RESIDENT_ID'] > 0) {
+                    $this->arResult['ELEMENTS_BY_RESIDENT'][$v['RESIDENT_ID']]['NAME'] = $v['RESIDENT_NAME'];
+                    $this->arResult['ELEMENTS_BY_RESIDENT'][$v['RESIDENT_ID']]['ITEMS'][] = $v;
+                } else {
+                    $this->arResult['ELEMENTS_BY_RESIDENT'][0]['ITEMS'][] = $v;
+                    $this->arResult['ELEMENTS_BY_RESIDENT'][0]['NAME'] = 'Общие вакансии';
+                }
+
+            }
+        }
+
     }
 }

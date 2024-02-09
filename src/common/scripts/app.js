@@ -637,6 +637,22 @@ if (vacancies.length) {
     });
 }
 
+const vacanciesResidents = Array.from(document.querySelectorAll('.j-vacancy-resident'));
+
+if (vacanciesResidents.length) {
+    vacanciesResidents.forEach((vacancy) => {
+        const accordion = new Accordion();
+
+        accordion.init({
+            target             : vacancy,
+            activeClass        : 'b-vacancy-res_is_open',
+            headerClass        : 'b-vacancy-resident__header',
+            contentWrapperClass: 'b-vacancy-resident__content-wrapper',
+            contentClass       : 'b-vacancy-resident__content'
+        });
+    });
+}
+
 /**
  * Инициализация аккордиона вакансий
  */

@@ -6,8 +6,11 @@ use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminInterface;
 use Kelnik\AdminHelper\Widget\CheckboxWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
+use Kelnik\AdminHelper\Widget\OrmElementWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\AdminHelper\Widget\VisualEditorWidget;
+use Kelnik\Refbook\Model\AdminInterface\ResidentEditHelper;
+use Kelnik\Refbook\Model\AdminInterface\ResidentListHelper;
 use Kelnik\Vacancy\Model\VacancyResidentsTable;
 
 Loc::loadMessages(__FILE__);
@@ -38,12 +41,17 @@ class VacancyResidentsAdminInterface extends AdminInterface
                         'DEFAULT' => 500,
                         'SIZE' => 5
                     ],
-
                     'NAME'     => [
                         'WIDGET'   => new StringWidget(),
                         'SIZE'     => 40,
                         'FILTER'   => '%',
                         'REQUIRED' => true
+                    ],
+                    'RESIDENT_ID' => [
+                        'WIDGET' => new OrmElementWidget(),
+                        'HELPER' => ResidentListHelper::class,
+                        'EDIT_HELPER' => ResidentEditHelper::class,
+                        'TITLE_FIELD_NAME' => 'NAME'
                     ],
                     'PRICE_MIN'     => [
                         'WIDGET'   => new NumberWidget(),
