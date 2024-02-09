@@ -4,7 +4,7 @@ $APPLICATION->SetPageProperty('title', "Новости");
 $APPLICATION->SetTitle("Новости");
 ?>
 
-<?$APPLICATION->IncludeComponent(
+<?/*$APPLICATION->IncludeComponent(
     "bitrix:menu",
     "submenu-about",
     Array(
@@ -18,7 +18,7 @@ $APPLICATION->SetTitle("Новости");
         "ROOT_MENU_TYPE" => "left",
         "USE_EXT" => "N"
     )
-);?>
+);*/?>
 
 <?$APPLICATION->IncludeComponent(
     "kelnik:news",

@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetPageProperty('title', "Медиа");
 $APPLICATION->SetTitle("Новости");
 ?>
-<?$APPLICATION->IncludeComponent(
+<?/*$APPLICATION->IncludeComponent(
     "bitrix:menu",
     "submenu-about",
     Array(
@@ -17,7 +17,7 @@ $APPLICATION->SetTitle("Новости");
         "ROOT_MENU_TYPE" => "left",
         "USE_EXT" => "N"
     )
-);?>
+);*/?>
 
 <div class="l-news">
     <div class="l-news__title b-title"><h1><? $APPLICATION->ShowTitle(false); ?></h1></div>

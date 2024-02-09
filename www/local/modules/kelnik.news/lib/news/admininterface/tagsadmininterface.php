@@ -4,6 +4,7 @@ namespace Kelnik\News\News\AdminInterface;
 
 use Bitrix\Main\Localization\Loc;
 use Kelnik\AdminHelper\Helper\AdminInterface;
+use Kelnik\AdminHelper\Widget\CheckboxWidget;
 use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\News\News\TagsTable;
@@ -37,7 +38,11 @@ class TagsAdminInterface extends AdminInterface
                         'WIDGET' => new NumberWidget(),
                         'DEFAULT' => TagsTable::SORT_DEFAULT,
                         'SIZE' => 5
-                    ]
+                    ],
+                    'ACTIVE' => [
+                        'WIDGET' => new CheckboxWidget(),
+                        'FILTER' => true
+                    ],
                 ]
             ]
         ];

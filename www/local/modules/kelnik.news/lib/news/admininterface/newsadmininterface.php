@@ -39,7 +39,7 @@ class NewsAdminInterface extends AdminInterface
                         'HEADER' => true,
                         'FILTER' => true,
                         'REQUIRED' => true,
-                        'VARIANTS' => CategoriesTable::getAdminAssocList(),
+                        'VARIANTS' => CategoriesTable::getAdminAssocList(['ACTIVE' => 'Y']),
                         'DEFAULT_VARIANT' => null,
                     ],
                     'NAME' => [
@@ -101,7 +101,7 @@ class NewsAdminInterface extends AdminInterface
                     //                    ),
                     'TAGS' => [
                         'WIDGET' => new ComboBoxWidget(),
-                        'VARIANTS' => TagsTable::getAdminAssocList(),
+                        'VARIANTS' => TagsTable::getAdminAssocList(['ACTIVE' => 'Y']),
                         'MULTIPLE' => true,
                         'STYLE' => 'width:250px; height:200px',
                         'TITLE' => Loc::getMessage('KELNIK_NEWS_TAGS'),
