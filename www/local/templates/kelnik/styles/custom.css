@@ -2530,7 +2530,7 @@ label.land-related.open, .land-related.open{
 
 .b-team__photo {
 	max-width: 40%;
-	margin: 0;
+	margin: 0 0 0 30px;
 }
 
 .b-team__description {
