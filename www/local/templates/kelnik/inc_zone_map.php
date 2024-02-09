@@ -322,7 +322,7 @@
                 <div class="l-home-plots__desc">
                     <div class="l-home-plots__desc-item">
                         <p>
-                            <strong>27,59 <?=\Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SITE_AREA_HA'); ?></strong> <span><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SITE_AREA'); ?></span>
+                            <strong>27,58 <?=\Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SITE_AREA_HA'); ?></strong> <span><?= \Bitrix\Main\Localization\Loc::getMessage('KELNIK_TMPL_SITES_SITE_AREA'); ?></span>
                         </p>
                     </div>
                     <div class="l-home-plots__desc-item">
