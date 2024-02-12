@@ -36,6 +36,8 @@ window.onload = function(){
 
     sezApp.bannersInit();
 
+    sezApp.archiveInit();
+
     sezApp.reportCompareField({
         fieldsPairs: [
             ['jobs-plan-all', 'jobs-plan-year'],
@@ -555,6 +557,21 @@ sezApp = {
             });
         }, 4000);
 
+    },
+
+    archiveInit: function() {
+        const archiveButton = document.querySelectorAll('.j-show-archive');
+        if (archiveButton) {
+            document.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('open-archive')) return;
+                const archivedItems = e.target.closest('.b-mini-filter__group-wrap').querySelectorAll('.b-mini-filter__item.__archived');
+                if (archivedItems) {
+                    archivedItems.forEach((item) => {
+                        item.classList.toggle('__archived-visible');
+                    });
+                }
+            });
+        }
     }
 }
 

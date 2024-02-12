@@ -2587,3 +2587,45 @@ label.land-related.open, .land-related.open{
 .b-title {
 	padding-bottom: 32px;
 }
+
+.__archived {
+	width: 0;
+	overflow: hidden;
+	transition: .3s;
+}
+
+.__archived-visible {
+	width: 92px;
+}
+
+.news-tags {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.news-years-group {
+	justify-content: end;
+}
+
+.b-mini-filter__group {
+	margin-right: 0;
+}
+
+@media only screen and (max-width: 1440px) {
+	.news-tags {
+		flex-direction: column;
+	}
+
+	.b-mini-filter__item {
+		order: 2;
+	}
+
+	.b-mini-filter__item.j-show-archive {
+		order: 1;
+	}
+
+	.news-years-group {
+		justify-content: start;
+	}
+}

@@ -7,49 +7,58 @@
     <input type="hidden" name="sect" value="<?= $arParams['SECTION_ID']; ?>">
     <input type="hidden" name="compid" value="<?= $arParams['AJAX_COMPONENT_ID']; ?>">
     <input type="hidden" name="lang" value="<?= LANGUAGE_ID; ?>">
-    <?php if($arResult['YEARS']): ?>
-        <div class="b-mini-filter__group j-news-select-group">
-            <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span
-                        class="j-news-select-title">Все</span></div>
+    <div class="news-tags">
+        <?php if($arResult['TAGS']): ?>
+            <div class="b-mini-filter__group j-news-select-group">
 
-            <div class="b-mini-filter__group-wrap">
-                <?php foreach ($arResult['YEARS'] as $year): ?>
-                    <div class="b-mini-filter__item">
-                        <input type="radio"
-                               name="year[]"
-                               value="<?= $year['NAME']; ?>"
-                               data-text="<?= $year['NAME']; ?>"
-                               id="years<?= $year['NAME']; ?>"
-                               <?php if(!empty($year['SELECTED'])): ?> checked="checked"<?php endif; ?>
-                               class="b-mini-filter__input">
-                        <label for="years<?= $year['NAME']; ?>" class="b-mini-filter__fake"><?= $year['NAME']; ?></label>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    <?php endif; ?>
-    <?php if($arResult['TAGS']): ?>
-    <div class="b-mini-filter__group j-news-select-group">
-
-        <div class="b-mini-filter__values j-news-select" data-title-default="Все"><span
-                    class="j-news-select-title">Все</span></div>
-
-        <div class="b-mini-filter__group-wrap">
-            <?php foreach ($arResult['TAGS'] as $tag): ?>
-                <div class="b-mini-filter__item">
-                    <input type="radio"
-                           name="tag[]"
-                           value="<?= $tag['ID']; ?>"
-                           data-text="<?= $tag['NAME']; ?>"
-                           id="types<?=$tag['ID']; ?>"
-                           <?php if(!empty($tag['SELECTED'])): ?> checked="checked"<?php endif; ?>
-                           class="b-mini-filter__input">
-                    <label for="types<?=$tag['ID']; ?>" class="b-mini-filter__fake"><?= $tag['NAME']; ?></label>
+                <div class="b-mini-filter__values j-news-select" data-title-default="Все">
+                    <span class="j-news-select-title">Все</span>
                 </div>
-            <?php endforeach; ?>
-        </div>
+
+                <div class="b-mini-filter__group-wrap">
+                    <?php foreach ($arResult['TAGS'] as $tag): ?>
+                        <div class="b-mini-filter__item">
+                            <input type="radio"
+                                   name="tag[]"
+                                   value="<?= $tag['ID']; ?>"
+                                   data-text="<?= $tag['NAME']; ?>"
+                                   id="types<?=$tag['ID']; ?>"
+                                   <?php if(!empty($tag['SELECTED'])): ?> checked="checked"<?php endif; ?>
+                                   class="b-mini-filter__input">
+                            <label for="types<?=$tag['ID']; ?>" class="b-mini-filter__fake"><?= $tag['NAME']; ?></label>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <?php if($arResult['YEARS']): ?>
+            <div class="b-mini-filter__group j-news-select-group news-years-group">
+                <div class="b-mini-filter__values j-news-select" data-title-default="Все">
+                    <span class="j-news-select-title">Все</span>
+                </div>
+
+                <div class="b-mini-filter__group-wrap">
+                    <?php foreach ($arResult['YEARS'] as $year): ?>
+                        <div class="b-mini-filter__item __archived">
+                            <input type="radio"
+                                   name="year[]"
+                                   value="<?= $year['NAME']; ?>"
+                                   data-text="<?= $year['NAME']; ?>"
+                                   id="years<?= $year['NAME']; ?>"
+                                <?php if(!empty($year['SELECTED'])): ?> checked="checked"<?php endif; ?>
+                                   class="b-mini-filter__input">
+                            <label for="years<?= $year['NAME']; ?>" class="b-mini-filter__fake"><?= $year['NAME']; ?></label>
+                        </div>
+                    <?php endforeach; ?>
+                    <div class="b-mini-filter__item j-show-archive">
+                        <label class="b-mini-filter__fake open-archive">Архив</label>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
-    <?php endif; ?>
+
 </form>
 
 <div class="b-news__content j-news-container">
