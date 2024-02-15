@@ -2629,3 +2629,8 @@ label.land-related.open, .land-related.open{
 		justify-content: start;
 	}
 }
+
+.b-about-desc__text:before, .b-advantages__place-text p:before, .b-offers__item:before {
+	background: #30409a;
+}
+

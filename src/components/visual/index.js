@@ -44,10 +44,27 @@ export default class Visual {
 
     resizeHandler() {
         this.targetOffsetTop = this.target.getBoundingClientRect().top;
-        const half = 2;
+        let half = 2;
+        let halfY = 2;
 
         this.masks.forEach((path) => {
-            const halfPathHeight = path.getBoundingClientRect().height / half;
+            const intId = path.dataset.id * 1;
+            if (intId === 16) {
+                half = halfY = 2.5;
+            } else if (intId === 65) {
+                half = 2.5;
+                halfY = 1.5;
+            } else if (intId === 70) {
+                half = halfY = 1.75;
+            } else if (intId === 53) {
+                half = halfY = 2.5;
+            } else if (intId === 29) {
+                half = halfY = 1.75;
+            } else {
+                half = halfY = 2;
+            }
+
+            const halfPathHeight = path.getBoundingClientRect().height / halfY;
             const centerY = path.getBoundingClientRect().top + halfPathHeight - this.target.getBoundingClientRect().top;
             const centerX = path.getBoundingClientRect().left + (path.getBoundingClientRect().width / half);
             const titleElement = this.target.querySelector(`#area-${path.dataset.id}`);
@@ -59,10 +76,27 @@ export default class Visual {
 
     insertMaskTitle() {
         window.addEventListener('resize', this.resizeHandler.bind(this));
-        const half = 2;
+        let half = 2;
+        let halfY = 2;
 
         this.masks.forEach((path) => {
-            const halfPathHeight = path.getBoundingClientRect().height / half;
+            const intId = path.dataset.id * 1;
+            if (intId === 16) {
+                half = halfY = 2.5;
+            } else if (intId === 65) {
+                half = 3;
+                halfY = 1.75;
+            } else if (intId === 70) {
+                half = halfY = 1.75;
+            } else if (intId === 53) {
+                half = halfY = 2.5;
+            } else if (intId === 29) {
+                half = halfY = 1.75;
+            } else {
+                half = halfY = 2;
+            }
+
+            const halfPathHeight = path.getBoundingClientRect().height / halfY;
             const centerY = path.getBoundingClientRect().top + halfPathHeight - this.target.getBoundingClientRect().top;
             const centerX = path.getBoundingClientRect().left + (path.getBoundingClientRect().width / half);
             const titleElement = document.createElement('div');
