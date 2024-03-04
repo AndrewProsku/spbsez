@@ -18,6 +18,7 @@ $MESS['KELNIK_REPORT_FIELDS_FORM_8'] = 'Ф-8 Проекты';
 
 $MESS['KELNIK_REPORT_BTN_DONE'] = 'Принять';
 $MESS['KELNIK_REPORT_BTN_DECLINE'] = 'Отклонить';
+$MESS['KELNIK_REPORT_BTN_CHECKING'] = 'Вернуть на проверку';
 
 $MESS['KELNIK_REPORT_FIELDS_1-1'] = 'Участие иностранных инвесторов, в составе акционеров (участников) или прямые иностранные инвестиции';
 $MESS['KELNIK_REPORT_FIELDS_1-1-1'] = 'Да/Нет';

@@ -82,7 +82,7 @@ class ReportsEditHelper extends AdminEditHelper
             strip_tags($companyName[Profile::COMPANY_NAME_FIELD] . ', ' . $this->report->getTypeName() . ' ' . $this->report->getYear())
         );
 
-        if (!empty($_REQUEST['done']) || !empty($_REQUEST['decline'])) {
+        if (!empty($_REQUEST['done']) || !empty($_REQUEST['decline']) || !empty($_REQUEST['checking'])) {
             $this->saveElement($this->data['ID']);
 
             LocalRedirect(ReportsListHelper::getUrl());
@@ -186,6 +186,10 @@ class ReportsEditHelper extends AdminEditHelper
         $this->report->setModifiedBy($USER->GetID());
         $this->report->setIsLocked(false);
         $this->report->setIsRedacting(false);
+
+        if (!empty($_REQUEST['checking'])) {
+            $this->report->setStatusId(StatusTable::CHECKING);
+        }
 
         if (!empty($_REQUEST['decline'])) {
             $this->report->setStatusId(StatusTable::DECLINED);
