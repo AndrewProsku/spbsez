@@ -3,7 +3,7 @@
 if($arParams["BACK_TO_TEXT"]){
     $btt = $arParams["BACK_TO_TEXT"];
 }else{
-    $btt = "Назад к новостям";
+    $btt = \Bitrix\Main\Localization\Loc::getMessage('BACK_TO_TEXT');
 }
 ?>
 <div class="l-news-single">
@@ -82,7 +82,7 @@ if($arParams["BACK_TO_TEXT"]){
                     <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
                     <script src="https://yastatic.net/share2/share.js"></script>
 
-                    <div class="b-share__caption">Поделиться</div>
+                    <div class="b-share__caption"><?=\Bitrix\Main\Localization\Loc::getMessage('SHARE')?></div>
                     <div class="ya-share2" data-services="facebook,vkontakte,odnoklassniki"></div>
                 </div>
             </div>

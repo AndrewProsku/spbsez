@@ -1,3 +1,3 @@
 <?
-$sSectionName="News";
+$sSectionName="Media";
 ?>

@@ -25,6 +25,8 @@ $MESS['KELNIK_TMPL_PROFILE_SIGN_OUT'] = 'Sign out of personal account';
 $MESS['KELNIK_TMPL_SITES_LOCATION'] = 'Location of zones';
 $MESS['KELNIK_TMPL_SITES_NOVOORLOVSKAYA'] = 'Novoorlovskaya';
 $MESS['KELNIK_TMPL_SITES_NOIDORF'] = 'Noydorf';
+$MESS['KELNIK_TMPL_SITES_PARNAS'] = 'Parnas';
+$MESS['KELNIK_TMPL_SITES_SHUSHARY'] = 'Shushary';
 $MESS['KELNIK_TMPL_SITES_SEA_PORT'] = 'Sea port';
 $MESS['KELNIK_TMPL_SITES_RAILWAY_BALT'] = 'Baltic Railway Station';
 $MESS['KELNIK_TMPL_SITES_CENTER'] = 'City center';
@@ -40,6 +42,8 @@ $MESS['KELNIK_TMPL_SITES_SW'] = 'South-West of St. Petersburg';
 $MESS['KELNIK_TMPL_SITES_STRELNA'] = 'Strelna';
 $MESS['KELNIK_TMPL_SITES_SITE_NOVOORLOVSKAYA'] = 'Novoorlovskaya site';
 $MESS['KELNIK_TMPL_SITES_SITE_NOIDORF'] = 'Noydorf site';
+$MESS['KELNIK_TMPL_SITES_SITE_PARNAS'] = 'Parnas site';
+$MESS['KELNIK_TMPL_SITES_SITE_SHUSHARY'] = 'Shushary site';
 $MESS['KELNIK_TMPL_SITES_DESCR_NOV'] = 'Developed transport infrastructure. Less than 10
                         minutes to the St. Petersburg Ring Road. 30
                         minutes by motor vehicle to the city center. 20
@@ -49,3 +53,9 @@ $MESS['KELNIK_TMPL_SITES_DESCR_NOIDORF'] = 'Surrounded by the developed urban in
                         St. Petersburg Ring Road. 20 minutes by motor
                         vehicle to the airport.';
 $MESS['KELNIK_TMPL_SITES_PRIM'] = '<strong>Primorsky District</strong> <span>In Novoorlovsky urban forest</span>';
+
+$MESS['KELNIK_TMPL_SITES_DESCR_PARNAS'] = 'In close proximity to the Ring Road and one of the largest mass transit areas
+                                             housing construction with good transport accessibility.';
+$MESS['KELNIK_TMPL_SITES_DESCR_SHUSHARY'] = 'In close proximity to Pulkovo airport, as well as close to major
+                                              urban highways Ring Road and WHSD.';
+

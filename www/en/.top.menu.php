@@ -3,9 +3,9 @@ $aMenuLinks = Array(
 	Array(
 		"About SEZ",
 		"/en/about/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	),
 	Array(
 		"Infrastructure",
@@ -36,11 +36,11 @@ $aMenuLinks = Array(
         ""
     ),
     Array(
-        "Mass Media",
-        "/en/media/",
+        "Media",
+        "/en/media/news/",
         Array(),
         Array(),
-        "false"
+        ""
     ),
     Array(
         "Contacts",

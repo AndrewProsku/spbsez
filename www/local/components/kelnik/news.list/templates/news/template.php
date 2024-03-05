@@ -7,7 +7,7 @@
     <input type="hidden" name="sect" value="<?= $arParams['SECTION_ID']; ?>">
     <input type="hidden" name="compid" value="<?= $arParams['AJAX_COMPONENT_ID']; ?>">
     <input type="hidden" name="lang" value="<?= LANGUAGE_ID; ?>">
-    <div class="news-tags">
+    <div class="news-tags lang_<?= LANGUAGE_ID; ?>">
         <?php if($arResult['TAGS']): ?>
             <div class="b-mini-filter__group j-news-select-group">
 
@@ -52,7 +52,7 @@
                         </div>
                     <?php endforeach; ?>
                     <div class="b-mini-filter__item j-show-archive">
-                        <label class="b-mini-filter__fake open-archive">Архив</label>
+                        <label class="b-mini-filter__fake open-archive"><?= \Bitrix\Main\Localization\Loc::getMessage('ARCHIVE'); ?></label>
                     </div>
                 </div>
             </div>

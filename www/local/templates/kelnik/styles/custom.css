@@ -2144,6 +2144,10 @@ label.land-related.open, .land-related.open{
 	background-image: url('/images/home/map_new.png');
 }
 
+.l-home-plots__all-map-images.lang-en {
+	background-image: url('/images/home/map_new_eng.png');
+}
+
 .l-home-plots__map .l-home-plots__all-map-images {
 	width: 660px;
 	background-position: 75%;
@@ -2634,3 +2638,6 @@ label.land-related.open, .land-related.open{
 	background: #30409a;
 }
 
+.news-tags.lang_en {
+	display: none;
+}
