@@ -2641,3 +2641,37 @@ label.land-related.open, .land-related.open{
 .news-tags.lang_en {
 	display: none;
 }
+
+@media only screen and (min-width: 1280px) {
+	.l-news-single__slider {
+		max-width: 80%;
+	}
+
+	.glide__slide-description:after {
+		left: 10%;
+	}
+
+	.l-news-single__back,
+	.l-news-single__title,
+	.l-news-single__tags,
+	.l-news-single__top-text,
+	.l-news-single__slider,
+	.l-news-single__bottom-text,
+	.l-news-single__actions,
+	.l-news-single__press-office {
+		padding-left: 15%;
+		padding-right: 15%;
+	}
+
+	.l-news-single {
+		padding-top: 20px;
+	}
+
+	.l-news-single__title {
+		margin-bottom: 12px;
+	}
+
+	.l-news-single__tags {
+		margin-bottom: 12px;
+	}
+}
