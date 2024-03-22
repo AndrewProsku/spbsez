@@ -32,6 +32,14 @@ class TagToNewsTable extends DataManager
                 [
                     'this.ENTITY_ID' => 'ref.ID'
                 ]
+            ),
+
+            new ReferenceField(
+                'TAG',
+                TagsTable::class,
+                [
+                    'this.VALUE' => 'ref.ID'
+                ]
             )
         ];
     }

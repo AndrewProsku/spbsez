@@ -6,6 +6,9 @@ use Bitrix\Main\Entity\IntegerField;
 use Bitrix\Main\Entity\ReferenceField;
 use Bitrix\Main\Entity\StringField;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Fields\Relations\OneToMany;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
+use Bitrix\Main\ORM\Query\Join;
 use Kelnik\Helpers\Database\DataManager;
 
 Loc::loadMessages(__FILE__);
@@ -63,7 +66,9 @@ class TagsTable extends DataManager
                 [
                     '=this.ID' => 'ref.VALUE'
                 ]
-            )
+            ),
+
+            (new OneToMany('NEWS_IDS', TagToNewsTable::class, 'TAG'))->configureJoinType('inner')
         ];
     }
 

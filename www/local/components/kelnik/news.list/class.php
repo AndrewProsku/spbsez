@@ -6,6 +6,8 @@ use Bex\Bbc;
 use Bitrix\Main\Context;
 use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\ORM\Fields\Relations\Reference;
+use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\Page\Asset;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
@@ -13,6 +15,7 @@ use Kelnik\ImageResizer\Resizer;
 use Kelnik\News\Categories\CategoriesTable;
 use Kelnik\News\News\NewsTable;
 use Kelnik\News\News\TagsTable;
+use Kelnik\News\News\TagToNewsTable;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
@@ -108,6 +111,9 @@ class NewsList extends Bbc\Basis
         }
 
         $this->arResult['TAGS'] = self::getTags($activeElements);
+
+        //print_r($activeElements);
+
         $this->arResult['TAGS'] = TagsTable::prepareTags(
             $this->arResult['TAGS'],
             ArrayHelper::getValue($this->arParams, 'SEF_FOLDER', '')
@@ -318,27 +324,34 @@ class NewsList extends Bbc\Basis
         }
 
         try {
-            return TagsTable::getList([
+            $tags = TagsTable::getList([
                 'select' => [
-                    'ID', 'NAME',
-                    new ExpressionField(
-                        'NEWS_IDS',
-                        'GROUP_CONCAT(%s SEPARATOR \',\')',
-                        'NEWS_TAG.ENTITY_ID'
-                    )
+                    'ID', 'NAME', 'NEWS_IDS'
                 ],
                 'filter' => [
                     '=ACTIVE' => TagsTable::YES,
-                    '=NEWS_TAG.ENTITY_ID' => $activeElements
-                ],
-                'group' => [
-                    'ID'
+                    '=NEWS_IDS.ENTITY_ID' => $activeElements
                 ],
                 'order' => [
                     'SORT' => 'ASC',
                     'NAME' => 'ASC'
                 ]
-            ])->fetchAll();
+            ])->fetchCollection();
+
+            $arTags = [];
+            if (count($tags) > 0) {
+                foreach ($tags as $tag) {
+                    $arTags[] = [
+                        'ID' => $tag->getId(),
+                        'NAME' => $tag->getName(),
+                        'NEWS_IDS' => implode(', ', array_map(function($item){
+                            return $item->getEntityId();
+                        }, self::collectionToArray($tag->getNewsIds())))
+                    ];
+                }
+            }
+
+            return $arTags;
         } catch (\Exception $e) {
         }
 
@@ -388,5 +401,12 @@ class NewsList extends Bbc\Basis
                 array_column($years, 'ELEMENTS')
             )
         );
+    }
+
+    public static function collectionToArray(iterable $it): array {
+        if (is_array($it)) return $it;
+        $ret = [];
+        array_push($ret, ...$it);
+        return $ret;
     }
 }
