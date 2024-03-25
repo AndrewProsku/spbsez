@@ -122,19 +122,7 @@ class ReportsEditHelper extends AdminEditHelper
                  ->setIsAdmin(1)
                  ->setDateModified(new DateTime())
                  ->setDateCreated(new DateTime());
-            if ($chat->save()) {
-                //отправляем уведомление админу резидента
-                $residentAdmin = \CUser::GetByID($this->report->getUserId())->Fetch();
-                \Bitrix\Main\Mail\Event::send(array(
-                    'EVENT_NAME' => 'CHAT_REPORT_RESIDENT',
-                    'LID' => 's1',
-                    'C_FIELDS' => array(
-                        'TEXT' => $cleanAnswer,
-                        'REPORT_ID' => $this->data['ID'],
-                        'RESIDENT_EMAIL' => $residentAdmin['EMAIL']
-                    ),
-                ));
-            }
+            $chat->save();
         }
 
         //Получаем сообщения для отчёта

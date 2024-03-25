@@ -14,6 +14,7 @@ use Bitrix\Main\ORM\Fields\TextField;
 use Bitrix\Main\Type\DateTime;
 use Kelnik\Helpers\ArrayHelper;
 use Kelnik\Helpers\Database\DataManager;
+use Kelnik\Messages\Events;
 
 Loc::loadMessages(__FILE__);
 
@@ -88,7 +89,7 @@ class MessagesChatTable extends DataManager
                 [
                     'title' => Loc::getMessage('KELNIK_MESSAGES_CHAT_IS_ADMIN'),
                 ]
-            ),         
+            ),
             new TextField(
                 'TEXT',
                 [
@@ -118,6 +119,14 @@ class MessagesChatTable extends DataManager
         $data['DATE_MODIFIED'] = new DateTime();
 
         return parent::update($primary, $data);
+    }
+
+    public static function onAfterAdd(Event $event)
+    {
+        Events::sendChatEmail($event);
+
+        static::clearComponentCache($event);
+        parent::onAfterAdd($event);
     }
 
     public static function clearComponentCache(Event $event)
@@ -178,7 +187,7 @@ class MessagesChatTable extends DataManager
     }
 
     public static function getChatMessagesByReport(int $reportId)
-    {     
+    {
         if (!$reportId) {
             return false;
         }

@@ -40,7 +40,7 @@ class MessagesList extends Basis
     protected $reportId;
 
     protected function executeProlog()
-    { 
+    {
         $this->userId = \CUser::GetID();
         $this->reportId = $this->arParams['REPORT_ID'];
 
@@ -50,7 +50,7 @@ class MessagesList extends Basis
     }
 
     protected function executeMain()
-    {   
+    {
     	$this->answerHadler();
 
         $this->arResult['REPORT_ID'] = $this->reportId;
@@ -64,15 +64,15 @@ class MessagesList extends Basis
             /*if ($message['PARENT_ID']) {
                 $parentMessage = MessagesChatTable::getChatMessageById($message['PARENT_ID']);
 	            $parentMessageUserName = $this->getUserName($parentMessage);
-                $message['PARENT_MESSAGE'] = $parentMessageUserName . ': ' . $parentMessage['TEXT'];             
+                $message['PARENT_MESSAGE'] = $parentMessageUserName . ': ' . $parentMessage['TEXT'];
             }*/
 
-            if ($message['FIELD_ID']) {          	            
+            if ($message['FIELD_ID']) {
 	           	$field = ReportFieldsTable::getList()
 		       		->fetchCollection()
 		      		->getByPrimary($message['FIELD_ID']);
                 $fieldBlockTitle = ReportFieldsTable::getFormBlockTitle($field->getName(), $field->getFormNum());
-               	$message['PARENT_MESSAGE'] = 'Ф-' . ($field->getFormNum() + 1) . ', блок ' . $fieldBlockTitle;               	
+               	$message['PARENT_MESSAGE'] = 'Ф-' . ($field->getFormNum() + 1) . ', блок ' . $fieldBlockTitle;
             }
         }
 
@@ -81,7 +81,7 @@ class MessagesList extends Basis
         }
 
         $this->arResult['MESSAGES'] = $messages;
-        
+
     }
 
     protected function answerHadler()
@@ -90,9 +90,9 @@ class MessagesList extends Basis
     	if ($request->get("sendAnswer") && $request->get("sendAnswer") == 'Y') {
 	    	$answer = $request->get("answer");
 	    	if ($answer) {
-	    		$chat = new MessagesChat;		        
+	    		$chat = new MessagesChat;
 
-		        //ищем ИД сообщения в тексте ответа 
+		        //ищем ИД сообщения в тексте ответа
 		        preg_match_all("/#(.*)#/U",  $answer, $matches);
 		        $cleanAnswer = trim(str_replace($matches[0], '', $answer));
 		        if ($matches[1][0] > 0) {
@@ -112,17 +112,7 @@ class MessagesList extends Basis
 		            ->setIsAdmin(0)
 		            ->setDateModified(new DateTime())
 		            ->setDateCreated(new DateTime());
-		        if ($chat->save()) {
-					//отправляем уведомление админу				
-					\Bitrix\Main\Mail\Event::send(array(
-					    'EVENT_NAME' => 'CHAT_REPORT_RESIDENT',
-					    'LID' => 's1',
-					    'C_FIELDS' => array(
-					        'TEXT' => $cleanAnswer,
-					        'REPORT_ID' => $this->reportId
-					    ),
-					));
-		        }
+                $chat->save();
 		    } else {
 		    	return false;
 		    }
@@ -131,7 +121,7 @@ class MessagesList extends Basis
 		}
     }
 
-    public function getUserName($message) 
+    public function getUserName($message)
     {
     	if ($message['IS_ADMIN'] == 1) {
             return "Администратор";
