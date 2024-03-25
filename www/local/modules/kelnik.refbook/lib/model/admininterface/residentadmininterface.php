@@ -10,9 +10,9 @@ use Kelnik\AdminHelper\Widget\NumberWidget;
 use Kelnik\AdminHelper\Widget\StringWidget;
 use Kelnik\AdminHelper\Widget\CheckboxWidget;
 use Kelnik\AdminHelper\Widget\VisualEditorWidget;
-use Kelnik\AdminHelper\Widget\DateTimeWidget;
 use Kelnik\Refbook\Model\ResidentTable;
 use Kelnik\Refbook\Model\ResidentTypesTable;
+use Kelnik\Refbook\DateTimeWidgetExt;
 
 Loc::loadMessages(__FILE__);
 
@@ -71,8 +71,9 @@ class ResidentAdminInterface extends AdminInterface
                         'FILTER' => false
                     ],
                     'STATUS_DATE' => [
-                        'WIDGET' => new DateTimeWidget(),
-                        'HEADER' => true
+                        'WIDGET' => new DateTimeWidgetExt(),
+                        'HEADER' => true,
+                        'REQUIRED' => true
                     ],
                     'PHONE'     => [
                         'WIDGET'   => new StringWidget(),

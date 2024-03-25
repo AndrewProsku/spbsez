@@ -13,6 +13,8 @@ class ResidentTable extends DataManager
 {
     const PLACE_NEUDORF = 1;
     const PLACE_NOVOORLOVSKAYA = 2;
+    const PLACE_PARNAS = 4;
+    const PLACE_SHUSHARY = 5;
     /**
      * @return string
      */
@@ -158,7 +160,7 @@ class ResidentTable extends DataManager
                     'title' => Loc::getMessage('KELNIK_RESIDENT_PROJECT_STAGE_EN'),
                 ]
             ),
-            
+
             new Main\Entity\ReferenceField(
                 'IMAGES',
                 ImageToResidentTable::class,
@@ -173,7 +175,9 @@ class ResidentTable extends DataManager
     {
         return [
             self::PLACE_NEUDORF => Loc::getMessage('KELNIK_RESIDENT_NEUDORF'),
-            self::PLACE_NOVOORLOVSKAYA => Loc::getMessage('KELNIK_RESIDENT_NOVOORLOVSKAYA')
+            self::PLACE_NOVOORLOVSKAYA => Loc::getMessage('KELNIK_RESIDENT_NOVOORLOVSKAYA'),
+            self::PLACE_PARNAS => Loc::getMessage('KELNIK_RESIDENT_PARNAS'),
+            self::PLACE_SHUSHARY => Loc::getMessage('KELNIK_RESIDENT_SHUSHARY')
         ];
     }
 
@@ -187,7 +191,9 @@ class ResidentTable extends DataManager
         return ArrayHelper::getValue(
             [
                 self::PLACE_NEUDORF => '/infrastructure/noidorf/',
-                self::PLACE_NOVOORLOVSKAYA => '/infrastructure/novoorlovskaya/'
+                self::PLACE_NOVOORLOVSKAYA => '/infrastructure/novoorlovskaya/',
+                self::PLACE_PARNAS => '/infrastructure/parnas/',
+                self::PLACE_SHUSHARY => '/infrastructure/shushary/'
             ],
             $id
         );
