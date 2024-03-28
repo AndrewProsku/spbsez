@@ -57,13 +57,15 @@
                 $component
             );?>
             <?php
-            $APPLICATION->IncludeComponent(
-                'kelnik:banners',
-                'simple',
-                Array(
-                    'POSITION' => 'NEWS_BOTTOM'
-                )
-            );
+            if (LANG_DIR == SezLang::RUSSIAN_DIR) {
+                $APPLICATION->IncludeComponent(
+                    'kelnik:banners',
+                    'simple',
+                    Array(
+                        'POSITION' => 'NEWS_BOTTOM'
+                    )
+                );
+            }
             ?>
         </div>
     </div>
