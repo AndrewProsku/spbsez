@@ -865,6 +865,23 @@ ymaps[class$="balloon__tail"]:after{
     transform: rotate(-45deg);
     top: 0;
 }
+.banner_simple{
+	max-width: 90%;
+	min-height: 156px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	position: relative;
+	z-index: 10;
+	padding: 0;
+}
+.banner_simple-wrapper {
+	display: flex;
+	justify-content: flex-end;
+}
+.b-news__button {
+	float: left;
+}
 .l-home__banner-1 .banner-wrapper {
 	padding: 90px 12% 0 14%;
 }

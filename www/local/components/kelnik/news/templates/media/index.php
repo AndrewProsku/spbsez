@@ -56,6 +56,15 @@
                 ),
                 $component
             );?>
+            <?php
+            $APPLICATION->IncludeComponent(
+                'kelnik:banners',
+                'simple',
+                Array(
+                    'POSITION' => 'NEWS_BOTTOM'
+                )
+            );
+            ?>
         </div>
     </div>
 </div>
