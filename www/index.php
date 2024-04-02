@@ -28,7 +28,7 @@ $APPLICATION->SetTitle("Главная");
 
         ); ?>
 
-        <div class="b-main-screen-content">        	
+        <div class="b-main-screen-content">
             <div class="b-main-screen-text">
                 <?$APPLICATION->IncludeComponent(
                     "kelnik:textblocks",
@@ -51,7 +51,7 @@ $APPLICATION->SetTitle("Главная");
             );?>
         </div>
     </div>
-    
+
     <div class="l-home__block_bg_fixed">
         <div class="l-home__advantages l-home__banner-1">
             <?php
@@ -76,7 +76,7 @@ $APPLICATION->SetTitle("Главная");
                 )
             );?>
         </div>
-        
+
         <div class="l-home__banner-2">
             <?php
             $APPLICATION->IncludeComponent(
@@ -89,7 +89,7 @@ $APPLICATION->SetTitle("Главная");
             ?>
         </div>
 
-        <div class="l-home__privileges l-home__block">            
+        <div class="l-home__privileges l-home__block">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
                 "",
@@ -98,7 +98,7 @@ $APPLICATION->SetTitle("Главная");
                     "CACHE_TYPE" => "A",
                     "CODE" => "main_screen_3"
                 )
-            );?>            
+            );?>
         </div>
 
         <? $APPLICATION->IncludeComponent(
@@ -130,7 +130,7 @@ $APPLICATION->SetTitle("Главная");
             ),
             array()
         ); ?>
-        
+
         <div class="l-home-resident l-home__block">
             <?$APPLICATION->IncludeComponent(
                 "kelnik:textblocks",
@@ -181,6 +181,18 @@ $APPLICATION->SetTitle("Главная");
             ),
             array()
         ); ?>
+
+        <?php
+        if (LANG_DIR == SezLang::RUSSIAN_DIR) {
+            $APPLICATION->IncludeComponent(
+                'kelnik:banners',
+                'simple',
+                Array(
+                    'POSITION' => 'NEWS_BOTTOM'
+                )
+            );
+        }
+        ?>
     </div>
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
