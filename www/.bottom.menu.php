@@ -1,53 +1,53 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Об ОЭЗ", 
-		"/about/", 
-		Array(), 
-		Array(), 
-		"" 
+		"Об ОЭЗ",
+		"/about/",
+		Array(),
+		Array(),
+		""
 	),
 	Array(
-		"Инфраструктура", 
+		"Инфраструктура",
 		"/infrastructure/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	),
 	Array(
-		"Услуги", 
+		"Услуги",
 		"/services/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	),
 	Array(
-		"Резиденты", 
+		"Резиденты",
 		"/residents/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	),
 	Array(
-		"Инвесторам", 
+		"Инвесторам",
 		"/investors/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	),
 	Array(
-		"Медиа", 
-		"/media/",
-		Array(), 
-		Array(), 
-		"" 
+        "Новости",
+        "/media/news/",
+		Array(),
+		Array(),
+		""
 	),
 	Array(
-		"Контакты", 
-		"/contacts/", 
-		Array(), 
-		Array(), 
-		"" 
+		"Контакты",
+		"/contacts/",
+		Array(),
+		Array(),
+		""
 	)
 );
 ?>

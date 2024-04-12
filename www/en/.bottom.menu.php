@@ -3,23 +3,23 @@ $aMenuLinks = Array(
 	Array(
         "About SEZ",
         "/en/about/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	),
 	Array(
 		"Infrastructure",
 		"/en/infrastructure/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	),
 	Array(
 		"Services",
 		"/en/services/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	),
     Array(
         "Residents",
@@ -31,23 +31,23 @@ $aMenuLinks = Array(
 	Array(
 		"For Investors",
 		"/en/investors/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	),
 	Array(
-		"Mass Media",
-		"/en/media/",
-		Array(), 
-		Array(), 
+        "Media",
+        "/en/media/news/",
+		Array(),
+		Array(),
 		"false"
 	),
 	Array(
 		"Contacts",
 		"/en/contacts/",
-		Array(), 
-		Array(), 
-		"" 
+		Array(),
+		Array(),
+		""
 	)
 );
 ?>
