@@ -2705,3 +2705,7 @@ label.land-related.open, .land-related.open{
 .l-news-single__slider {
 	margin-bottom: 32px;
 }
+
+.ya-share2__item.ya-share2__item_service_telegram {
+	background-image: url('/images/share/tg.png');
+}

@@ -83,7 +83,7 @@ if($arParams["BACK_TO_TEXT"]){
                     <script src="https://yastatic.net/share2/share.js"></script>
 
                     <div class="b-share__caption"><?=\Bitrix\Main\Localization\Loc::getMessage('SHARE')?></div>
-                    <div class="ya-share2" data-services="facebook,vkontakte,odnoklassniki"></div>
+                    <div class="ya-share2" data-services="facebook,vkontakte,odnoklassniki,telegram"></div>
                 </div>
             </div>
 
