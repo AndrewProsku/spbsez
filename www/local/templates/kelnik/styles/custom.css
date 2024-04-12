@@ -2709,3 +2709,34 @@ label.land-related.open, .land-related.open{
 .ya-share2__item.ya-share2__item_service_telegram {
 	background-image: url('/images/share/tg.png');
 }
+
+.area-novoorlovskaya .subarea-innocenter .b-area-main-feature {
+	width: 30%;
+}
+
+@media only screen and (max-width: 1280px) {
+	.subarea-innocenter .b-area-main-feature__value {
+		font-size: 50px;
+	}
+}
+
+@media only screen and (max-width: 1024px) {
+	.subarea-innocenter .b-area-main-feature__value {
+		font-size: 40px;
+	}
+	.subarea-innocenter .b-area-main-feature__description {
+		white-space: normal;
+	}
+}
+
+@media only screen and (max-width: 780px) {
+	.subarea-innocenter .b-area-main-feature__value {
+		font-size: 33px;
+	}
+}
+
+@media only screen and (max-width: 780px) {
+	.area-novoorlovskaya .subarea-innocenter .b-area-main-feature {
+		width: 100%;
+	}
+}
