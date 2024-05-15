@@ -627,6 +627,9 @@ class ReportForm {
             el.querySelectorAll('input[data-prefilled]').forEach((inp) => {
                 inputs.push(inp.name);
             });
+            el.querySelectorAll('select[data-prefilled]').forEach((inp) => {
+                inputs.push(inp.name);
+            });
         });
 
         Utils.send(`a=confirmForm&id=${this.reportId}&fields=${JSON.stringify(inputs)}`, this.baseUrl, {
