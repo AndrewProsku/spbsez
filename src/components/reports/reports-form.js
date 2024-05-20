@@ -387,12 +387,12 @@ class ReportForm {
 
         // модификация полей
         if (formNumber === 7) {
-            const brakes = parseFloat(this.forms[1].template.querySelector('#taxes-breaks-all').value.replace(' ', '')) + parseFloat(this.forms[1].template.querySelector('#custom-duties-breaks-all').value.replace(' ', ''));
+            const breaks = parseFloat(this.forms[1].template.querySelector('#taxes-breaks-all').value.replace(' ', '')) + parseFloat(this.forms[1].template.querySelector('#custom-duties-breaks-all').value.replace(' ', ''));
             const measure = this.forms[formNumber].template.querySelector('#project-measure');
             const employees = this.forms[0].template.querySelector('#jobs-actual-all').value;
             const people = this.forms[formNumber].template.querySelector('#project-people');
 
-            measure.value = brakes;
+            measure.value = Math.round(breaks * 100) / 100;
             people.value = employees;
             measure.closest('.b-report-block').dataset.approved = '';
             people.closest('.b-report-block').dataset.approved = '';

@@ -271,6 +271,7 @@ class ReportBlock {
                 resultInput.value = Math.round(newValue * 100) / 100;
                 this.checkTaxesIsZero(resultInput);
                 this.sendNewValue(resultInput);
+                this.countFormFields(resultInput, this.formID);
 
                 return;
             }
@@ -482,7 +483,47 @@ class ReportBlock {
             delete input.dataset.prefilled;
         }
 
+        this.countFormFields(input, this.formID);
+
         this.sendNewValue(input);
+    }
+
+    countFormFields(input, form) {
+        console.log(input.value);
+
+
+        let sum = 0.00;
+        const formPrefix = 'form';
+        const formTarget = 7;
+        const countedTaxFieldsIds = {
+            form0: {
+                'project-people': ['jobs-actual-all']
+            },
+            form1: {
+                'project-measure': ['custom-duties-breaks-all', 'taxes-breaks-all']
+            }
+        };
+
+        if (countedTaxFieldsIds[`${formPrefix}${form}`]) {
+            for (const targetId in countedTaxFieldsIds[`${formPrefix}${form}`]) {
+                if (countedTaxFieldsIds[`${formPrefix}${form}`][`${targetId}`].indexOf(input.id) >= 0) {
+                    countedTaxFieldsIds[`${formPrefix}${form}`][`${targetId}`].forEach((inputId) => {
+                        // eslint-disable-next-line
+                        const RegExpNum = /[^\d\.,]/gu;
+                        const RegExpDot = /,/gu;
+                        const valueOld = input.closest('.j-report-form').querySelector(`#${inputId}`).value;
+                        const newNumericValue = Number(valueOld.replace(RegExpNum, '').replace(RegExpDot, '.'));
+                        const valueRounded = Math.round(newNumericValue * 100) / 100;
+
+                        sum = sum + valueRounded;
+                    });
+                    this.sendNewValueSilent({
+                        name: targetId,
+                        value: sum
+                    }, formTarget);
+                }
+            }
+        }
     }
 
     initFileInputsEvents(input) {
@@ -829,6 +870,16 @@ class ReportBlock {
 
                     that.setBlockStatus();
                 },
+                error(error) {
+                    console.error(error);
+                }
+            });
+    }
+
+    sendNewValueSilent(input, formNum) {
+        Utils.send(`a=update&id=${this.reportId}&formNum=${formNum}&field=${input.name}&val=${input.value}`,
+            '/api/report', {
+                success(response) {},
                 error(error) {
                     console.error(error);
                 }
