@@ -2500,11 +2500,7 @@ label.land-related.open, .land-related.open{
 	}
 
 	.area-novoorlovskaya .b-area-trait {
-		width: 16.68966%;
-	}
-
-	.area-novoorlovskaya .b-area-trait:first-child {
-		width: 28.68966%;
+		width: 100%;
 	}
 
 	.area-novoorlovskaya .b-area-main-feature {
@@ -2513,6 +2509,12 @@ label.land-related.open, .land-related.open{
 
 	.area-novoorlovskaya .b-area-main-feature:first-child {
 		width: 27.68966%;
+	}
+
+	.area-novoorlovskaya .b-area-traits.b-area-traits_three-columns {
+		display: grid;
+		grid-template-columns: 26% auto auto;
+		column-gap: 21%;
 	}
 }
 
