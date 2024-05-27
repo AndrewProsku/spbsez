@@ -55,7 +55,7 @@ $APPLICATION->SetTitle("Инвесторам");
                     "CACHE_TIME" => "3600"
                 ),
                 array()
-            ); ?>            
+            ); ?>
         </div>
     </div>
 
@@ -87,7 +87,7 @@ $APPLICATION->SetTitle("Инвесторам");
         </div>
     </div>
 
-    <div class="l-investors__taxes">
+    <div class="l-investors__taxes" id="investors-taxes">
         <div class="b-income-tax">
             <div class="b-income-tax__top">
                 <? $APPLICATION->IncludeComponent(
@@ -101,7 +101,7 @@ $APPLICATION->SetTitle("Инвесторам");
                 ); ?>
             </div>
 
-            <div class="b-income-tax__bottom" id="investors-taxes">
+            <div class="b-income-tax__bottom">
                 <? $APPLICATION->IncludeComponent(
                     "kelnik:textblocks",
                     "",
@@ -180,8 +180,8 @@ $APPLICATION->SetTitle("Инвесторам");
     </div>
 
     <div class="l-investors__conditions" id="investors-calc">
-        <div class="b-invest-conditions ">            
-            <h2 class="b-invest-conditions__title">Калькулятор затрат на реализацию инвестиционного проекта</h2>           
+        <div class="b-invest-conditions ">
+            <h2 class="b-invest-conditions__title">Калькулятор затрат на реализацию инвестиционного проекта</h2>
             <form action="" class="investors-calc">
             	<div class="investors-calc__fields">
                     <div class="investors-calc__fields-subtitle">Выберите, что необходимо Вам  для реализации проекта</div>
@@ -245,16 +245,16 @@ $APPLICATION->SetTitle("Инвесторам");
                     </div>
                     <div class="investors-calc__result-item">
                         <p>Плата за технологическое присоединение к инженерным сетям: </p><span>-</span>
-                    </div>                    
+                    </div>
                 </div>
                 <a href="" class="investors-calc__fields-button button j-message-button open-calcres" data-href="#calcres">Отправить результат расчета на e-mail</a>
             </form>
             <?
 			$APPLICATION->IncludeFile($APPLICATION->GetCurDir()."hl_inc.php", Array(), Array(
-			    "MODE" => "php",                                       
-			    "NAME" => "Опции калькулятора"   
-			));			
-			?>                   
+			    "MODE" => "php",
+			    "NAME" => "Опции калькулятора"
+			));
+			?>
         </div>
     </div>
 
