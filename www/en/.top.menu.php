@@ -43,6 +43,13 @@ $aMenuLinks = Array(
         ""
     ),
     Array(
+        "Events",
+        "/en/media/events/",
+        Array(),
+        Array(),
+        ""
+    ),
+    Array(
         "Contacts",
         "/en/contacts/",
         Array(),
