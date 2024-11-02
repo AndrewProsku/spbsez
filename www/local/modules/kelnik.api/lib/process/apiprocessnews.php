@@ -26,7 +26,7 @@ class ApiProcessNews extends ApiProcessAbstract
             $sefFolder = '/' . $lang . $sefFolder;
         };
 
-        $sefFolder .= $isNews ? 'news/' : 'articles/';
+        $sefFolder .= $isNews ? 'news/' : 'events/';
 
         $component = $this->initComponent(
             'kelnik:news.list',
